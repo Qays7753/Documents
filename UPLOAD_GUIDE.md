@@ -20,7 +20,8 @@ Binding rules and procedure for adding deliverables to this repository. This gui
 
 | Situation | Action |
 |---|---|
-| New deliverable | Add the file under `reports/` |
+| New deliverable (single file) | Add the file under `reports/` |
+| New deliverable (multi-artifact package) | Use the dated folder structure `reports/YYYY/YYYY-MM-DD/<delivery-id>/` with subfolders as prescribed by the task (e.g. `en/`, `ar/`, `subagents/`, `supporting/`, plus `metadata.yml` at the folder root). Take the next available sequence number for the day; never overwrite a previous delivery |
 | Updated deliverable | Old file moves to `archive/` with a date prefix (e.g. `2026-09-01_Micro-Target-State-Design-Report.md`); new file takes the stable name in `reports/` |
 | Every upload | Update `INDEX.md` in the same commit (new row + archive log entry if applicable) |
 

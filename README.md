@@ -13,7 +13,17 @@ This repository is the **permanent delivery location** for reports and generated
 
 ## Current deliverables
 
-See `INDEX.md` for the authoritative list. As of 2026-09-02 the repository carries the **Micro target-state design package**:
+See `INDEX.md` for the authoritative list. As of 2026-09-03 the repository carries two packages:
+
+**Zman-to-Micro gap analysis package (2026-09-03)** — `reports/2026/2026-09-03/zaman-to-micro-gap-analysis-001/`:
+
+1. `en/zaman-to-micro-gap-analysis-en.md` — English canonical report (Markdown): one-way comparative discovery Zman → Micro with Outputs A–H — 24-capability Zman catalogue, 22-row gap register plus 10 false-gap warnings, deep dossiers, transfer/navigation map, financial & data contracts, ranked transfer set P0/P1/P2/Reject (TR-01..TR-17), final transfer architecture, implementation-ready handoff.
+2. `ar/zaman-to-micro-gap-analysis-ar.docx` — Arabic RTL Word rendering of the complete analysis (25 pages A4, TOC, all Outputs).
+3. `subagents/` — the five specialized sub-agent reports (Zman capability map, Micro gap comparison, workflow/mobile UX, financial/data integrity, transfer architecture & critical review) with full evidence indexes.
+4. `supporting/` + `metadata.yml` — render-verification preview of the Arabic report and machine-readable delivery manifest (checksums, verification results, findings summary).
+5. Both product repositories (Zman `zman-app` @ `bdd63ab`, Micro @ `4db6a5f`) were inspected strictly read-only.
+
+**Micro target-state design package (2026-09-01)** — flat files under `reports/`:
 
 1. `reports/Micro-Target-State-Design-Report.md` — English canonical report (Markdown): 20% current-state discovery + 80% target-state design, Outputs A–E, five mandatory core task flows, 24-row missing-capabilities register, D1–D14 decision register, 43 external references.
 2. `reports/Micro-Target-State-Design-AR.docx` — Arabic RTL Word document rendered from the finalized English report (48 pages A4, RTL headings and tables preserved).
