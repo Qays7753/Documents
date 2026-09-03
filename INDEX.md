@@ -2,6 +2,21 @@
 
 Master index of every report and generated document delivered to this repository. Current versions live in `reports/`; superseded versions live in `archive/` (date-prefixed) and are logged at the bottom. This file is updated in the same commit as every upload.
 
+## Delivery 3 — 2026-09-03 — Micro Group 1 implementation package (guided financial entry)
+
+Dated-folder delivery (`reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/`). First **implementation** delivery of the transfer program: Group 1 merged to Micro `main` via PR #149 (`761638b`) after green CI and adversarial review; gap-analysis TR-01/TR-02/TR-04 implemented, MIC-1/2/4/7/9 integrity foundation delivered read-only, schema 31 / export 23.
+
+| # | Path | Deliverable | Language / format | Version | Date | Description | Provenance |
+|---|---|---|---|---|---|---|---|
+| 9 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/en/group-1-implementation-report-en.md` | Group 1 Implementation Report | English · Markdown | v1.0 | 2026-09-03 | Complete implementation record: completion-state gate, scope §5.1–5.9, files, migration (30→31 / 22→23), 41 new tests, scenarios A–J, decisions register, defect fixes D-025 + guard fix, final merge verification | Micro `main` @ `761638b` (PR #149, feature `bc2e4c5`, baseline `4db6a5f`) |
+| 10 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/en/group-1-financial-contracts-en.md` | Group 1 Financial Contracts | English · Markdown | v1.0 | 2026-09-03 | Binding contracts: six-dimension concept separation, categoryLabel data contract, guided-journey contract, effect-preview derivation contract, allocation rules, canonical period-result designation, integrity registry (MIC-1..MIC-9 + reserved), test traceability | Mirrors in-repo contract 27 |
+| 11 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/en/group-1-ux-and-flow-review-en.md` | Group 1 UX & Flow Review | English · Markdown | v1.0 | 2026-09-03 | Two complete 18-field screen contracts (FinancialEventEditor, ToolsIntegrity), secondary-surface deltas, Arabic copy register decisions, state inventory, mobile/RTL compliance, live QA transcript (390×844, zero console errors) | Production build live session + jsdom suites |
+| 12 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/en/group-1-test-evidence-en.md` | Group 1 Test Evidence | English · Markdown | v1.0 | 2026-09-03 | Baseline vs final gates, full new-test inventory (41), migration/compatibility evidence, browser/device checks, SA-5 findings & dispositions, known limitations | CI logs + local runs at the stated commits |
+| 13 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/en/group-1-subagent-synthesis-en.md` | Group 1 Sub-Agent Synthesis | English · Markdown | v1.0 | 2026-09-03 | SA-1…SA-5 mandates and findings, adopted changes, conflict table with resolutions by authority order, independent verification layer | Five sub-agent reports consolidated |
+| 14 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/ar/group-1-implementation-report-ar.docx` | تقرير تنفيذ المجموعة الأولى | العربية · Word (.docx, RTL) | v1.0 | 2026-09-03 | Arabic RTL implementation report: 7 pages A4, dark cover with gold accents, TOC (Roman front matter / Arabic body numbering), RTL justified paragraphs and RTL tables, executive summary through final state | Generated from the finalized English report (deliverable #9) |
+| 15 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/supporting/` | Render preview (PDF) + live QA screenshots (2 PNG) | PDF / PNG | v1.0 | 2026-09-03 | LibreOffice render of deliverable #14 proving the .docx opens with RTL preserved; production-build browser evidence (integrity surface after run; payable effect preview) | Rendered / captured during verification |
+| 16 | `reports/2026/2026-09-03/micro-group-1-guided-financial-entry-001/metadata.yml` | Delivery metadata | YAML | v1.0 | 2026-09-03 | Machine-readable manifest: SHA-256 checksums, repo states (Micro `761638b`), verification checklist (all pass incl. token-leak scan), scope implemented/deferred | Generated at delivery time |
+
 ## Delivery 2 — 2026-09-03 — Zman-to-Micro gap analysis package
 
 Dated-folder delivery (task-prescribed structure `reports/YYYY/YYYY-MM-DD/<delivery-id>/`), produced by five specialized read-only sub-agents plus parent consolidation. Both product repositories were strictly read-only.
@@ -30,4 +45,4 @@ Dated-folder delivery (task-prescribed structure `reports/YYYY/YYYY-MM-DD/<deliv
 
 ## Numbering note
 
-Row numbers `1–3` belong to delivery 1 (flat `reports/` names, 2026-09-01); rows `4–8` belong to delivery 2 (dated folder, 2026-09-03). Numbers are append-only and never reused; a superseded file keeps its row and gains an archive-log entry.
+Row numbers `1–3` belong to delivery 1 (flat `reports/` names, 2026-09-01); rows `4–8` belong to delivery 2 (dated folder, 2026-09-03); rows `9–16` belong to delivery 3 (dated folder, 2026-09-03). Numbers are append-only and never reused; a superseded file keeps its row and gains an archive-log entry.
