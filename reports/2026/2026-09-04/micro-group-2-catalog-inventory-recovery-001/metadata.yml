@@ -1,0 +1,132 @@
+# Delivery metadata — micro-group-2-catalog-inventory-recovery-001
+id: micro-group-2-catalog-inventory-recovery-001
+delivery_date: "2026-09-04"
+program: "Zman-to-Micro transfer program — Group 2 (catalog, materials, selective inventory, receiving, safe inventory automation) — recovery delivery"
+
+repositories:
+  micro:
+    url: https://github.com/Qays7753/Micro
+    final_main_commit: "1207a5adc460829322c9e33013e492d3cdb816bd"
+    recovery_snapshot_commit: "811e8ce"
+    sa5_completion_commit: "e40da57"
+    ci_retrigger_commit: "2e8dcab"
+    baseline_commit: "761638b"
+    pull_request: 150
+    merged: true
+    ci: "success (checks + Cloudflare Pages; first run failed on a transient npm-registry audit-endpoint outage — no vulnerability, documented)"
+    files_changed: 49
+    insertions: 5928
+    deletions: 411
+    merged_tree: "622716ae (identical to the CI-verified branch tree)"
+  zman_reference:
+    url: https://github.com/Qays7753/zman-app
+    commit: "bdd63ab"
+    access: read-only
+  documents:
+    url: https://github.com/Qays7753/Documents
+    commit: pending-upload
+
+files:
+  - path: en/group-2-recovery-and-implementation-report-en.md
+    sha256: 05f9f92948c2d1b7851f33e1022a56050a031eaf2bc48b194895f8639018f366
+    bytes: 23052
+  - path: en/group-2-inventory-financial-contracts-en.md
+    sha256: 6d722528b7522d56f7f6508cabb21ad8c9d814ae31be93a6b92b05d242228919
+    bytes: 15371
+  - path: en/group-2-catalog-and-ux-review-en.md
+    sha256: c42fac75bd02b52a8a6ed0c4cff1a5a70e9fc7b7127f102df2e66db72db32ce6
+    bytes: 11994
+  - path: en/group-2-test-evidence-en.md
+    sha256: 332cc8837ca40b722b59ef74242809428f2a5cb248c683f4dea07c463053388d
+    bytes: 11832
+  - path: en/group-2-recovery-subagent-synthesis-en.md
+    sha256: 6498eb9308fbd09efbd44ed8f99fb33432affb8190e72779f4ad45c9b6b59edf
+    bytes: 9443
+  - path: ar/group-2-recovery-and-implementation-report-ar.docx
+    sha256: 18907684fdc6befc94cc07935106698fc174c1c061c969b274b73a6ba905b615
+    bytes: 20607
+  - path: supporting/ar-report-render-preview.pdf
+    sha256: eea25561f2576a51e010ea20193510e3c614a439ba75e110dfe5d5d60686ba1e
+    bytes: 157659
+  - path: supporting/00-setup-complete.png
+    sha256: 7d4125f9ad0f55f75605aaf8bb19624e268633241f1b254e45f6718abca38989
+    bytes: 75191
+  - path: supporting/01-inventory-empty.png
+    sha256: 67829771fde8663bd16acdc721adaabb97d870b9170360737e5fe1271f48a71e
+    bytes: 63369
+  - path: supporting/02-material-tracking-question.png
+    sha256: a332288f6191b1cd32de4c27f66a989fb6c8ecff2c8e052c116f8dc409038a82
+    bytes: 44980
+  - path: supporting/03-material-confirmed-branch.png
+    sha256: b4e36cf7911357e488a768d07a6c8cbd020283debe79756677e0c719090bfa40
+    bytes: 40985
+  - path: supporting/04-material-saved-row.png
+    sha256: a139931b33044621f0b1e5f66933ba40a51357aabd502c126ce630846e6f6fcb
+    bytes: 46097
+  - path: supporting/05-purchase-detail-bridge-cta.png
+    sha256: e1dc364c262a640c47508eee321dd087d1cbe74ab8b726695d220d73b0169e47
+    bytes: 61478
+  - path: supporting/06-bridge-receipt-prefilled.png
+    sha256: 8ab729cc8fe0a8d438c4db3cac2bcac9e859f6acc05c3189cd77d6631c45eead
+    bytes: 52273
+  - path: supporting/07-purchase-partial-received-card.png
+    sha256: ba940f3f4b19a96a8122d62b5e8af6f4fcb82273d616584c9b4f297094e85682
+    bytes: 63978
+  - path: supporting/08-material-position-after-receipt.png
+    sha256: 95482175e9d0fe3a3b31c481cef1d27a11461276e1ce7fc159eb989ed310e55b
+    bytes: 54728
+  - path: supporting/09-waste-editor-preview.png
+    sha256: 30d32466b71145785065c7be870a2ef1893b75696498912ce9e7f070aa995439
+    bytes: 39309
+  - path: supporting/10-finance-period-waste-row.png
+    sha256: e7d2c181a88ec1e75abd269fa50fc5031779dd60506911f2ac5515d0d80e97c0
+    bytes: 55259
+  - path: supporting/11-tools-integrity-mic8.png
+    sha256: 48f98d0383539f0bcb2379560030562f28e1cd0ef61053b8469e163fbf3a4571
+    bytes: 66241
+
+verification:
+  pnpm_check: "pass (exit 0)"
+  typecheck: "pass (root + client)"
+  lint: "0 errors / 37 warnings (baseline ceiling, zero new)"
+  domain_tests: "239 passed / 20 files"
+  prototype_tests: "643 passed / 98 files"
+  text_density: "all caps (Finance 182/182, CostEditor 58/58, InventoryMaterials 56/56, MaterialEditor 39/39, InventoryMovementEditor 54/54, SupplierPurchaseEditor 62/62, ToolsIntegrity 34/34)"
+  design_guards: pass
+  production_build: "pass (PWA, 82 precache entries)"
+  github_actions_ci: "success on tree 622716ae (first run failed on transient npm-registry audit-endpoint outage; retriggered transparently; no vulnerability — local audit clean)"
+  merge_verified: "main = origin/main = 1207a5a, clean tree, merged tree identical to CI-verified branch tree"
+  live_browser_qa: "dev build, 390x844 RTL, 12 screenshots, 0 console errors (guided journey, bridge CTA + prefilled deep-link receipt, partial receipt 30/50, non-cash waste row 2.00, MIC-8 سليم)"
+  ar_docx_postcheck: "0 errors / 2 warnings (accepted patterns: TOC-section page-break separator; table-cell vs body line spacing)"
+  ar_docx_render: "LibreOffice PDF render (7 pages) + VLM visual check: Arabic shaped, RTL correct, tables RTL, cover/TOC/body PASS"
+  token_leak_scan: pass
+
+recovery:
+  interrupted_state: "phases 0-3 fully implemented but uncommitted (49 files in working tree); SA-5 verdict FIX REQUIRED with source fixes landed but verification tests defective (3 failing)"
+  preserved: "100% of interrupted work (snapshot commit 811e8ce before any edit)"
+  falsified_claims: "the interrupted session's 633/633-green claim was stale (639 tests, 3 failing) — all gates re-executed during recovery"
+  newly_implemented: "SA-5 F1/F6/G dom-test repairs, fully-received state test, Finance waste-row dom tests, F2 untracked-guard service test, consumeWithShortage repeat-safety test"
+  ci_outage_record: "npm registry audit endpoint returned HTTP 500 + socket timeouts on CI run 1; token lacks actions:write so re-run via API was impossible; transparent empty commit 2e8dcab retriggered; run 2 green"
+
+scope:
+  implemented:
+    - "Per-material tracked/untracked decision with guided journey and absent-field legacy compatibility"
+    - "Activation with known/unknown/confirmed-zero openings and source knowledge; later confirmation via deep route"
+    - "Purchase→receipt bridge (received/remaining card, prefill once per purchase, partial receipts, caps, duplicate prevention by state)"
+    - "Movement contracts (opening/receipt/manual/consumption/waste/adjustment/reversal) with idempotency and cost-knowledge"
+    - "Shortage policy (reject over-consumption; atomic consume-available + shortage record; explicit resolution; MIC-8 WARN)"
+    - "Non-cash waste with period row and unknown-cost honesty"
+    - "Untracking with stated consequences and preserved history; retrack unconfirmed"
+    - "Estimate material suggestions (Scenario G) with zero inventory/cash effects"
+    - "Schema 32 / export 24 migration with shortages in all snapshot paths"
+    - "MIC-8 integrity check + contract 28 governing docs + D-027/028/029"
+  deferred:
+    - "Order-to-sale deduction workflow (Group 3; contract primitive documented)"
+    - "Richer estimate surfaces"
+    - "MIC-3/5/6/10 (registry reserved for later groups)"
+    - "Snippets/notes library (out of program scope by owner decision)"
+
+findings_summary:
+  sa5_adversarial_review: "FIX REQUIRED (1 MAJOR + 6 MINOR + notes) → all REQUIRED findings implemented and test-verified in the merged state"
+  defects_found_and_fixed_during_recovery: "3 defective dom tests repaired; 2 accepted-pattern postcheck warnings documented"
+  pre_existing_ci_flake: "npm audit-endpoint outage (no vulnerability)"
