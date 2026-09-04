@@ -1,0 +1,39 @@
+delivery_id: micro-group-3-cost-product-order-001
+date: 2026-09-04
+program: zman-to-micro-transfer
+group: 3
+generated_at: 2026-09-04T07:25:37.336784
+micro:
+  repository: https://github.com/Qays7753/Micro
+  main_sha: 67d4e41f98bd63c283053cc2bcfeacd0c6b9a767
+  pull_request: https://github.com/Qays7753/Micro/pull/151
+  baseline_main_sha: 1207a5adc460829322c9e33013e492d3cdb816bd
+tests:
+  domain: 246/246 (21 files)
+  prototype: 660/660 (102 files)
+  lint: 0 errors / 37 baseline warnings
+files:
+  - path: INDEX.md
+    bytes: 1971
+    sha256_prefix: c1ea7b65fcf85aee
+  - path: en/group-3-cost-product-order-contracts-en.md
+    bytes: 5873
+    sha256_prefix: 051ebceb6b1eb236
+  - path: en/group-3-implementation-report-en.md
+    bytes: 7044
+    sha256_prefix: b6ed3aefb8948631
+  - path: en/group-3-sale-deposit-settlement-contracts-en.md
+    bytes: 3979
+    sha256_prefix: da9811a315bcae41
+  - path: en/group-3-subagent-synthesis-en.md
+    bytes: 4014
+    sha256_prefix: 619aa52ab75bcf56
+  - path: en/group-3-test-evidence-en.md
+    bytes: 4861
+    sha256_prefix: 9aebd0036d2a447e
+  - path: en/group-3-ux-and-flow-review-en.md
+    bytes: 3467
+    sha256_prefix: bdebc97c18ad486c
+  - path: ar/group-3-implementation-report-ar.docx
+    bytes: 17950
+    sha256_prefix: fb2b59bc023382e4
