@@ -1,0 +1,85 @@
+id: micro-group-6-parallel-audit-001-agent-2-zman-transfer-audit
+report_id: agent-2-zman-transfer-audit
+date: 2026-09-05
+auditor: Agent 2 — Principal Zman-to-Micro Transfer and Journey Auditor (Group 6, two-stage final closure)
+language: en
+format: markdown-only
+
+repos:
+  micro:
+    url: https://github.com/Qays7753/Micro
+    branch: agent/group-6-zman-transfer-audit
+    sha: 961051f
+    base: 1242aa62b3f81e8db263f4220bcefd3c8827d307   # Agent 1 main (PR #154 merge), verified
+    merge_state: not-merged; PR open; awaiting owner-controlled integration
+  zman_reference:
+    url: https://github.com/Qays7753/zman-app
+    sha: bdd63abb861d6ef41f5c151ddf0d68df158df225
+    mode: read-only
+  documents:
+    url: https://github.com/Qays7753/Documents
+    role: report delivery only
+
+recovery:
+  tags:
+    - recovery/group6-agent2-baseline-2026-09-05        # ad9fc13 (pre-Agent-1)
+    - recovery/group6-agent2-post-agent1-baseline-2026-09-05  # 1242aa6
+  prior_agent2_work: none-unique (branch pointer only; nothing valid discarded)
+
+specialists:
+  - SA-1 Zman Capability Archaeologist
+  - SA-2 Journey and Data-Parity Auditor
+  - SA-3 Transfer UX and Discoverability Auditor
+  - SA-4 Financial Adaptation Auditor
+  - SA-5 Adversarial Integration Auditor
+
+traceability:
+  zman_capabilities: 30
+  brief_drift_rows: 2
+  statuses:
+    ADAPTED: 27
+    MATCHED: 1
+    EXCLUDED_BY_OWNER: 1   # notes/snippets library, per owner instruction
+    NA_ARTIFACT: 1
+    MICRO_ONLY_REVERSE_GAP: 2
+    MISSING: 0
+    REGRESSED: 0
+    DUPLICATED: 0
+    CONTRADICTORY: 0
+    PARTIAL: 0
+
+journey_parity:
+  journeys: 17
+  matched: 5
+  adapted: 11
+  partial: 1        # J6 — intentional credit-sale model difference; mapping decision filed
+  missing_zman_side: 1
+
+findings:
+  p0: 0
+  p1: 3             # all NEEDS_OWNER_DECISION (waste netting; migration bridge + money scale; reconciliation mapping)
+  p2: 10            # 1 fixed on branch (AI-01)
+  p3: 12            # 1 fixed on branch (AI-02)
+  fixed_on_branch:
+    - AI-01 import orphan family-context rejection + MIC-10/11 reverse sweep
+    - AI-02 synchronous in-flight double-submit guards (AssetEditor, LoanEditor, RepaymentSheet)
+
+tests:
+  domain: { files: 23, tests: 277, status: pass }
+  prototype: { files: 124, tests: 794, status: pass }
+  new_regression_tests: 10
+  negative_controls: verified (guard-removal makes tests fail)
+  gates: [typecheck, prototype:check, lint-37w-baseline, format, text-density, design-guards, build, pwa-precache-96]
+  browser_qa:
+    viewports: ["360x800", "390x844"]
+    rtl: true
+    fresh_data: true
+    console_errors: 0
+    page_errors: 0
+    live_checks: [guided-expense, classification, shared-allocation, activity-deep-links, asset-double-submit, integrity-PASS, statement-export-BOM, backup-envelope-v27, tamper-rejection-AI-01, loan-double-submit]
+
+security:
+  tokens_committed: none
+  env_files_committed: none
+  gate_weakening: none
+  lockfile_changes: none
