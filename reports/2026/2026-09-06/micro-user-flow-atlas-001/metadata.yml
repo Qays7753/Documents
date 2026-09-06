@@ -1,0 +1,47 @@
+product: Micro
+analysis: Micro End-to-End User Flow Atlas and Product Surface Map
+repository: https://github.com/Qays7753/Micro
+branch: main
+commit: 4af025d38f04dfb36ee645a4f9ca3345e362bf5b
+commit_date: "2026-09-06T13:21:03+03:00"
+analysis_date: "2026-09-06"
+timezone: "Asia/Amman"
+working_tree: "clean; read-only analysis; no Micro source files modified"
+local_schema_version: 35
+export_envelope_version: 27
+counts:
+  flows: 53
+  flow_steps: 192
+  screens: 57
+  features: 72
+  services: 48
+  entities: 31
+  actors: 7
+  permissions: 20
+  states: 57
+  transitions: 28
+  scenarios: 14
+  gaps: 20
+  decisions: 22
+  traceability_rows: 30
+  diagrams: 26
+  diagram_nodes: 201
+deliverables:
+  html: micro-user-flow-atlas.html
+  json: micro-user-flow-atlas-data.json
+  markdown:
+    - README.md
+    - INDEX.md
+    - metadata.yml
+    - 01-system-overview-and-method-en.md
+    - 02-actors-permissions-and-entities-en.md
+    - 03-end-to-end-user-journeys-en.md
+    - 04-financial-and-operational-state-maps-en.md
+    - 05-screen-navigation-and-feature-catalog-en.md
+    - 06-service-blueprint-and-cross-flow-dependencies-en.md
+    - 07-scenarios-exceptions-and-role-simulation-en.md
+    - 08-contract-to-implementation-traceability-en.md
+    - 09-gaps-conflicts-and-recommendations-en.md
+    - 10-owner-review-decision-register-en.md
+status_vocabulary: [IMPLEMENTED, PARTIALLY_IMPLEMENTED, PLANNED_OR_CONCEPTUAL, NOT_FOUND, CONFLICTING, UNVERIFIABLE_FROM_REPOSITORY]
+secrets_present: false
