@@ -1,0 +1,51 @@
+delivery_id: micro-final-agent-resumption-001
+date: 2026-09-06
+program: micro-final-continuation
+assignment: resume-from-lint-fix-preserve-partial-work
+generated_at: 2026-09-06T10:40:00+03:00
+micro:
+  repository: https://github.com/Qays7753/Micro
+  baseline_main_sha: 1601fd90028b45f307345520b700aed6fe82e4a3
+  merge_commit_sha: 4af025d38f04dfb36ee645a4f9ca3345e362bf5b
+  pull_request: https://github.com/Qays7753/Micro/pull/158
+  final_branch: agent/final-continuation-contract-reconciliation
+  final_branch_sha: bfc41f9f46a0f106a9ba4db5b3caa1617545ad30
+  changed_files: 48
+  insertions: 2950
+  deletions: 499
+  ci:
+    pr_run: 34027069962
+    pr_run_result: success
+    main_push_run: 34027176232
+    main_push_run_result: success
+    failures_this_cycle: none
+  pr157:
+    state: closed_unmerged
+    url: https://github.com/Qays7753/Micro/pull/157
+    failed_run_diagnosed: 33994629352
+    root_cause: date-relative DOM tests vs real clock (Amman week rollover)
+    fix_commit: 464370424169762a40fa7f6f731c43205245ed54
+  issue340:
+    exists: false
+    http_status: 404
+tests:
+  domain: 285/285 (23 files)
+  prototype: 835/835 (125 files)
+  targeted_g2_g5_group2: 28/28
+  lint: 0 errors / 37 warnings (approved ceiling)
+  text_density: all surfaces within caps (Finance cap lowered 277 -> 257)
+browser_qa:
+  mode: production build + real service worker
+  viewports: [360x800, 390x844]
+  rtl: verified
+  digits: English digits verified
+  dates: DD/MM/YYYY verified
+  offline_reload: verified via active service worker
+  console_errors: 0
+  page_errors: 0
+scope:
+  zman: untouched
+  secrets: none in any artifact
+  word_or_pdf: none (Markdown only)
+  history_rewrites: none
+  owner_decisions_reopened: none (Conflicts A-I implemented as approved)
