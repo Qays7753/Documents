@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micro — Visual Product Concept Review</title>
+<style>
+/* ============ review chrome (outside the product) ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rv-bg:#14110f; --rv-panel:#1e1915; --rv-ink:#f3ece6; --rv-mut:#a2938a;
+  --rv-line:rgba(243,236,230,.14); --rv-brand:#cc785c; --rv-accent:#5ec0c1;
+}
+html,body{background:var(--rv-bg);color:var(--rv-ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Tahoma,"Noto Sans Arabic",Arial,sans-serif}
+.review{min-height:100vh;padding:20px 16px 48px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.review-head{text-align:center;max-width:760px}
+.review-head h1{font-size:19px;font-weight:700;letter-spacing:.2px}
+.review-head h1 b{color:var(--rv-brand)}
+.review-head p{color:var(--rv-mut);font-size:12.5px;margin-top:4px}
+.controls{width:100%;max-width:860px;background:var(--rv-panel);border:1px solid var(--rv-line);border-radius:14px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:center}
+.ctl{display:flex;flex-direction:column;gap:5px}
+.ctl>span{font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--rv-mut)}
+.seg{display:inline-flex;background:#120e0c;border:1px solid var(--rv-line);border-radius:9px;padding:3px;gap:3px;flex-wrap:wrap}
+.seg button{appearance:none;border:0;background:transparent;color:var(--rv-mut);font:600 12px/1 inherit;padding:7px 11px;border-radius:7px;cursor:pointer;transition:color .15s,background .15s}
+.seg button:hover{color:var(--rv-ink)}
+.seg button[aria-pressed="true"]{background:var(--rv-brand);color:#fff}
+.seg button.rec{color:#ffd9c7}
+.seg button.rec[aria-pressed="true"]{background:var(--rv-brand);color:#fff;font-weight:700}
+.stage{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+.note{max-width:640px;color:var(--rv-mut);font-size:12px;text-align:center;line-height:1.6}
+.note b{color:var(--rv-ink)}
+.mini-wrap{display:none;flex-direction:column;gap:10px;align-items:center}
+.mini-note{max-width:300px;font-size:12px;color:var(--rv-mut);background:var(--rv-panel);border:1px solid var(--rv-line);border-radius:12px;padding:10px 12px;line-height:1.55}
+.mini-note b{color:var(--rv-ink)}
+.mini-note .verdict{display:inline-block;margin-top:6px;font-weight:700;color:#e8a184;font-size:11px;letter-spacing:.4px;text-transform:uppercase}
+[data-dirview="B"] .device,[data-dirview="B"] .note-main{display:none}
+[data-dirview="B"] .mini-wrap.b{display:flex}
+[data-dirview="C"] .device,[data-dirview="C"] .note-main{display:none}
+[data-dirview="C"] .mini-wrap.c{display:flex}
+[data-dirview="B"] .ctl-screens,[data-dirview="C"] .ctl-screens{opacity:.4;pointer-events:none}
+
+/* ============ device frame ============ */
+.device{--phone-w:390px;--sb-h:30px;--topbar-h:64px;--shell-h:64px;
+  width:var(--phone-w);height:780px;max-width:100%;
+  background:#000;border-radius:44px;padding:10px;position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,.55),0 4px 18px rgba(0,0,0,.4);flex:none}
+.device::after{content:"";position:absolute;inset:0;border-radius:44px;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.07)}
+.screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;
+  background:var(--canvas);color:var(--ink);display:flex;flex-direction:column;
+  font:14px/1.6 system-ui,-apple-system,"Segoe UI",Tahoma,"Noto Sans Arabic","Noto Naskh Arabic",Arial,sans-serif}
+
+/* theme tokens — light */
+.device[data-theme="light"] .screen{
+  --canvas:#faf7f4; --band:#ffffff; --raised:#ffffff;
+  --ink:#1f1a17; --muted:#5c5148; --hair:rgba(31,26,23,.10); --hair-strong:rgba(31,26,23,.16);
+  --brand:#cc785c; --brand-press:#b4613f; --brand-act:#964e33; --brand-soft:#f4e4db; --brand-text:#964e33;
+  --accent:#079fa0; --accent-act:#057b7c; --accent-soft:#e3f5f5; --accent-text:#057b7c;
+  --ok:#1e7a44; --ok-soft:#e6f2ea; --danger:#8c2f27; --danger-soft:#fbe9e7; --warn-text:#6d4a00; --warn-soft:#f9eedb;
+  --spine:#cc785c; --scrim:rgba(31,26,23,.44); --focus:#057b7c; --skeleton:rgba(31,26,23,.07);
+}
+/* theme tokens — dark (deliberate mapping, not inversion) */
+.device[data-theme="dark"] .screen{
+  --canvas:#191512; --band:#201b17; --raised:#292420;
+  --ink:#f1e9e3; --muted:#b9aca2; --hair:rgba(241,233,227,.12); --hair-strong:rgba(241,233,227,.2);
+  --brand:#d59172; --brand-press:#cc785c; --brand-act:#d59172; --brand-soft:#332d27; --brand-text:#8fd5d6;
+  --accent:#5ec0c1; --accent-act:#5ec0c1; --accent-soft:#332d27; --accent-text:#8fd5d6;
+  --ok:#7cc9a0; --ok-soft:#26302a; --danger:#e08a81; --danger-soft:#33221f; --warn-text:#e3b45e; --warn-soft:#332a1e;
+  --spine:#d59172; --scrim:rgba(12,9,7,.58); --focus:#5ec0c1; --skeleton:rgba(241,233,227,.08);
+  --brand-act-ink:#191512; --accent-act-ink:#10201f;
+}
+.device[data-theme="light"] .screen{--brand-act-ink:#ffffff;--accent-act-ink:#ffffff}
+
+/* status bar (device-level, always LTR like a real phone) */
+.statusbar{height:var(--sb-h);flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:11.5px;font-weight:600;color:var(--ink);direction:ltr;background:var(--canvas)}
+.statusbar .icons{display:flex;gap:5px;align-items:center}
+.sig{display:inline-flex;gap:1.5px;align-items:flex-end}
+.sig i{width:3px;background:var(--ink);border-radius:1px;display:block}
+.sig i:nth-child(1){height:4px}.sig i:nth-child(2){height:6px}.sig i:nth-child(3){height:8px}.sig i:nth-child(4){height:10px}
+.batt{width:22px;height:11px;border:1px solid var(--ink);border-radius:3px;position:relative;opacity:.9}
+.batt::before{content:"";position:absolute;inset:1.5px;right:60%;background:var(--ink);border-radius:1px}
+.batt::after{content:"";position:absolute;right:-3px;top:3px;width:2px;height:4px;background:var(--ink);border-radius:0 1px 1px 0}
+
+/* app scroll region + RTL root */
+.app{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;position:relative;display:block;outline:none}
+.app::-webkit-scrollbar{width:0;height:0}
+
+/* top focus shell */
+.tfs{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--canvas) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.tfs.condensed{border-bottom-color:var(--hair)}
+.tfs-row{height:var(--topbar-h);display:flex;align-items:center;gap:10px;padding:0 16px}
+.tfs .tfs-title{font-size:17px;font-weight:700;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tfs .tfs-value{display:none;align-items:baseline;gap:6px;font-weight:700;font-size:15px;white-space:nowrap}
+.tfs.condensed .tfs-value{display:inline-flex}
+.tfs .tfs-value .cap{font-size:11px;color:var(--muted);font-weight:600}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--hair);background:var(--band);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:background .09s}
+.icon-btn:active{background:var(--brand-press);border-color:var(--brand-press);color:var(--brand-act-ink)}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* sync chip row under title (today) */
+.subrow{display:flex;align-items:center;gap:8px;padding:0 16px 8px;color:var(--muted);font-size:12px}
+
+/* bottom shell — five seats, pixel-static */
+.shell{flex:none;height:calc(var(--shell-h) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:var(--band);border-top:1px solid var(--hair);display:flex;z-index:40}
+.shell button{flex:1;appearance:none;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);font:600 10.5px/1 inherit;position:relative;padding-top:8px}
+.shell button svg{width:21px;height:21px}
+.shell button[aria-current="page"]{color:var(--brand-text)}
+.shell button[aria-current="page"]::before{content:"";position:absolute;top:0;inset-inline:26%;height:2.5px;border-radius:0 0 3px 3px;background:var(--spine)}
+.shell button:active{color:var(--brand-text)}
+</style>
+<style>
+/* ============ component layer ============ */
+.pad{padding:0 16px}
+.scr{display:none;min-height:100%;padding-bottom:24px}
+.scr.on{display:block}
+
+/* hero truth block — concentric carve, spine on soft slab */
+.hero{margin:10px 16px 0;background:var(--brand-soft);border-radius:20px;padding:18px 18px 16px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--brand-act)}
+.hero .h-label{font-size:12.5px;font-weight:700;color:var(--brand-text);letter-spacing:.2px}
+.hero .h-value{display:flex;align-items:baseline;gap:8px;margin-top:4px;flex-wrap:wrap}
+.money{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:.2px}
+.hero .h-value .money{font-size:38px;line-height:1.15}
+.hero .h-cur{font-size:14px;font-weight:700;color:var(--ink)}
+.h-delta{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:12.5px;font-weight:600;flex-wrap:wrap}
+.h-delta .money{font-size:12.5px}
+.delta-up{color:var(--ok)} .delta-down{color:var(--danger)}
+.linkish{appearance:none;border:0;background:none;color:var(--accent-text);font:600 12.5px/1.4 inherit;cursor:pointer;padding:2px 4px;border-radius:6px}
+.h-why{margin-top:10px;border-top:1px dashed var(--hair-strong);padding-top:10px;display:none;flex-direction:column;gap:7px}
+.h-why.open{display:flex}
+.h-why .wrow{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--muted)}
+.h-why .wrow .money{font-size:12.5px;color:var(--ink)}
+
+/* bands */
+.band{margin:14px 16px 0;background:var(--band);border:1px solid var(--hair);border-radius:14px;overflow:hidden}
+.band-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:13px 16px 11px}
+.band-h h2{font-size:13.5px;font-weight:700;color:var(--muted);letter-spacing:.1px}
+.band-h .more{font-size:12px;font-weight:600;color:var(--accent-text);text-decoration:none;cursor:pointer}
+.band-b{display:flex;flex-direction:column}
+.band-b.flush{padding:0}
+.band-b.padin{padding:0 16px 14px}
+
+/* rows — finance 64px, secondary 56px */
+.row{display:flex;align-items:center;gap:12px;min-height:64px;padding:8px 16px;border-top:1px solid var(--hair);background:var(--band);position:relative}
+.row:first-child{border-top:0}
+.row.sec{min-height:56px}
+.row .r-ic{width:38px;height:38px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--brand-soft);color:var(--brand-text)}
+.row .r-ic.teal{background:var(--accent-soft);color:var(--accent-text)}
+.row .r-main{flex:1;min-width:0}
+.row .r-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .r-sub{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.row .r-side{flex:none;display:flex;align-items:center;gap:8px}
+.row .r-money{font-size:15px;font-weight:700}
+.row .r-act{flex:none;display:flex;gap:6px}
+.chip-btn{appearance:none;border:1px solid var(--hair-strong);background:var(--raised);color:var(--ink);font:600 12px/1 inherit;border-radius:9px;padding:8px 11px;cursor:pointer;white-space:nowrap}
+.chip-btn:active{background:var(--brand-press);border-color:var(--brand-press);color:var(--brand-act-ink)}
+.chip-btn.acc{color:var(--accent-text);border-color:var(--hair-strong)}
+
+/* status chips — text+icon always */
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:3.5px 8px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.chip svg{width:10px;height:10px}
+.chip.synced{background:var(--ok-soft);color:var(--ok)}
+.chip.pending{background:var(--warn-soft);color:var(--warn-text)}
+.chip.estimated{background:transparent;color:var(--muted);border:1px dashed var(--hair-strong)}
+.chip.offline{background:var(--danger-soft);color:var(--danger)}
+.chip.neutral{background:var(--skeleton);color:var(--muted)}
+.chip.brand{background:var(--brand-soft);color:var(--brand-text)}
+.chip.conflict{background:var(--danger-soft);color:var(--danger)}
+
+/* alert row (conflict) — role=alert style */
+.alert-row{margin:12px 16px 0;border:1px solid var(--hair);border-inline-start:3px solid var(--danger);background:var(--danger-soft);border-radius:12px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start}
+.alert-row .a-t{font-weight:700;font-size:13px;color:var(--danger)}
+.alert-row .a-s{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* buttons */
+.btn{appearance:none;border:0;border-radius:12px;min-height:48px;padding:0 18px;font:700 14.5px/1.2 inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .09s}
+.btn.primary{background:var(--brand-act);color:var(--brand-act-ink)}
+.btn.primary:active{background:var(--brand-press)}
+.btn.primary[disabled]{opacity:.5;cursor:default}
+.btn.quiet{background:var(--raised);color:var(--ink);border:1px solid var(--hair-strong)}
+.btn.quiet:active{background:var(--brand-press);color:var(--brand-act-ink);border-color:var(--brand-press)}
+.btn.acc{background:var(--accent-act);color:var(--accent-act-ink)}
+.btn.acc:active{filter:brightness(.92)}
+.btn-row{display:flex;gap:10px;margin:14px 16px 0}
+.btn-row .btn{flex:1}
+.spinner{width:16px;height:16px;border-radius:50%;border:2px solid color-mix(in srgb,var(--brand-act-ink) 30%,transparent);border-top-color:var(--brand-act-ink);animation:spin .9s linear infinite;display:none}
+.busy .spinner{display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* fields */
+.field{margin:12px 16px 0;display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;font-weight:700;color:var(--muted)}
+.input{min-height:48px;border:1px solid var(--hair-strong);border-radius:12px;background:var(--band);color:var(--ink);padding:0 14px;font:500 14.5px/1.4 inherit;width:100%}
+.input::placeholder{color:var(--muted);opacity:.75}
+.searchrow{display:flex;gap:8px;margin:10px 16px 0}
+.searchrow .input{flex:1}
+.searchrow .icon-btn{width:48px;height:48px}
+
+/* segmented control */
+.segc{display:flex;background:var(--skeleton);border-radius:11px;padding:3px;gap:3px}
+.segc button{flex:1;appearance:none;border:0;background:transparent;color:var(--muted);font:600 12.5px/1 inherit;padding:9px 4px;border-radius:9px;cursor:pointer}
+.segc button[aria-pressed="true"]{background:var(--band);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:700}
+
+/* numeric surface */
+.numsurf{margin:10px 16px 0;background:var(--band);border:1px solid var(--hair);border-radius:16px;padding:16px;touch-action:pan-y}
+.numsurf .n-label{font-size:12.5px;font-weight:700;color:var(--muted)}
+.numsurf .n-value{display:flex;align-items:baseline;justify-content:center;gap:8px;padding:14px 0 6px;user-select:none;cursor:ew-resize}
+.numsurf .n-value .money{font-size:42px;font-weight:800}
+.numsurf .n-value.drift-up .money{animation:driftUp .18s cubic-bezier(.22,1,.36,1)}
+.numsurf .n-value.drift-down .money{animation:driftDown .18s cubic-bezier(.22,1,.36,1)}
+@keyframes driftUp{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes driftDown{from{opacity:.35;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.numsurf .n-hint{text-align:center;font-size:11px;color:var(--muted);margin-bottom:10px}
+.n-steppers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.n-steppers button{appearance:none;border:1px solid var(--hair-strong);background:var(--raised);border-radius:11px;min-height:44px;font:700 15px/1 inherit;color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums}
+.n-steppers button:active{background:var(--brand-press);color:var(--brand-act-ink);border-color:var(--brand-press)}
+
+/* charts */
+.chart{padding:6px 16px 4px}
+.chart svg{width:100%;height:120px;display:block}
+.chart .c-cap{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6}
+.chart .c-int{font-size:12.5px;color:var(--ink);font-weight:600;margin-top:4px;line-height:1.6}
+.legend{display:flex;gap:14px;margin:8px 16px 0;font-size:11.5px;color:var(--muted)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px}
+.aging{display:flex;flex-direction:column;gap:10px;padding:2px 16px 12px}
+.ag-row{display:flex;align-items:center;gap:10px;font-size:12px}
+.ag-row .ag-l{width:86px;flex:none;color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+.ag-track{flex:1;height:14px;background:var(--skeleton);border-radius:7px;position:relative;overflow:hidden}
+.ag-fill{position:absolute;top:0;bottom:0;inset-inline-start:0;background:var(--brand);border-radius:7px}
+.ag-row.hot .ag-fill{background:var(--danger)}
+.ag-row .ag-v{width:86px;flex:none;text-align:end;font-weight:700;font-variant-numeric:tabular-nums}
+.progress{height:6px;background:var(--skeleton);border-radius:3px;overflow:hidden;margin-top:6px}
+.progress i{display:block;height:100%;background:var(--accent);border-radius:3px}
+
+/* banners / toast / sheet */
+.banner{display:none;align-items:flex-start;gap:9px;margin:10px 16px 0;padding:11px 13px;border-radius:12px;background:var(--warn-soft);color:var(--warn-text);font-size:12.5px;font-weight:600;border:1px solid color-mix(in srgb,var(--warn-text) 18%,transparent)}
+.banner.show{display:flex}
+.banner .x{margin-inline-start:auto;appearance:none;border:0;background:none;color:inherit;cursor:pointer;font-size:14px;padding:2px 4px}
+.toast{position:absolute;inset-inline:0;bottom:calc(var(--shell-h) + 14px);display:flex;justify-content:center;pointer-events:none;z-index:60}
+.toast .t-in{display:none;align-items:center;gap:8px;background:var(--raised);color:var(--ink);border:1px solid var(--hair);border-radius:999px;padding:10px 16px;font-size:13px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.toast.show .t-in{display:inline-flex}
+.toast .t-in svg{width:15px;height:15px;color:var(--ok)}
+.sheet-layer{position:absolute;inset:0;z-index:70;display:none}
+.sheet-layer.open{display:block}
+.scrim{position:absolute;inset:0;background:var(--scrim);opacity:0;transition:opacity .2s}
+.sheet-layer.open .scrim{opacity:1}
+.sheet{position:absolute;inset-inline:0;bottom:0;background:var(--band);border-radius:20px 20px 0 0;padding:8px 0 calc(16px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform .28s cubic-bezier(.22,1,.36,1);max-height:78%;overflow-y:auto}
+.sheet-layer.open .sheet{transform:none}
+.sheet .grip{width:40px;height:4.5px;border-radius:3px;background:var(--hair-strong);margin:4px auto 10px}
+.sheet h3{font-size:16px;font-weight:700;padding:2px 20px 10px}
+.sheet .fx{margin:0 20px 12px;background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.7;color:var(--ink)}
+.sheet .fx b{color:var(--accent-text)}
+.sheet .s-actions{display:flex;gap:10px;padding:0 20px}
+.sheet .s-actions .btn{flex:1}
+.sheet .s-close{position:absolute;inset-inline-end:14px;top:12px}
+
+/* skeleton */
+.skel{position:relative;overflow:hidden;background:var(--skeleton);border-radius:8px;min-height:14px}
+.skel::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ink) 6%,transparent),transparent);animation:shimmer 1.3s linear infinite}
+@keyframes shimmer{to{transform:translateX(100%)}}
+
+/* settings vertical rows */
+.set-row{display:flex;align-items:center;gap:12px;min-height:60px;padding:8px 16px;border-top:1px solid var(--hair);cursor:pointer;background:var(--band)}
+.set-row:first-child{border-top:0}
+.set-row .s-ic{width:36px;height:36px;border-radius:10px;background:var(--brand-soft);color:var(--brand-text);display:flex;align-items:center;justify-content:center;flex:none}
+.set-row .s-t{flex:1;min-width:0}
+.set-row .s-t .t{font-weight:600;font-size:14px}
+.set-row .s-t .d{font-size:11.5px;color:var(--muted);margin-top:1px}
+.set-row .s-v{color:var(--muted);font-size:12.5px;font-weight:600;white-space:nowrap}
+.set-row .chev{color:var(--muted);flex:none}
+.switch{width:44px;height:26px;border-radius:13px;background:var(--hair-strong);position:relative;flex:none;transition:background .18s;border:0;cursor:pointer}
+.switch::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:20px;height:20px;border-radius:50%;background:var(--band);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .18s cubic-bezier(.22,1,.36,1)}
+.switch[aria-checked="true"]{background:var(--accent-act)}
+.switch[aria-checked="true"]::after{transform:translateX(-18px)}
+[dir="ltr"] .switch[aria-checked="true"]::after{transform:translateX(18px)}
+
+/* assistant */
+.chat{display:flex;flex-direction:column;gap:10px;padding:12px 16px}
+.msg{max-width:82%;padding:11px 14px;border-radius:16px;font-size:13.5px;line-height:1.7}
+.msg.bot{background:var(--band);border:1px solid var(--hair);border-start-start-radius:6px;align-self:flex-start}
+.msg.me{background:var(--brand-act);color:var(--brand-act-ink);border-end-end-radius:6px;align-self:flex-end}
+.sugg{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 12px}
+.composer{display:flex;gap:8px;margin:8px 16px 14px}
+.composer .input{flex:1}
+.composer .icon-btn{width:48px;height:48px;background:var(--brand-act);color:var(--brand-act-ink);border-color:var(--brand-act)}
+
+/* direction mini previews */
+.mini{width:300px;height:600px;border-radius:36px;background:#000;padding:8px;box-shadow:0 24px 60px rgba(0,0,0,.5);flex:none;overflow:hidden}
+.mini .mscr{width:100%;height:100%;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;font-size:11px;line-height:1.5}
+.mini[data-theme="light"] .mscr{background:#faf7f4;color:#1f1a17}
+.mini[data-theme="dark"] .mscr{background:#191512;color:#f1e9e3}
+.mini .mtop{padding:12px 14px 8px;font-weight:700;font-size:13px}
+.mini .mbody{flex:1;display:flex;flex-direction:column;gap:8px;padding:0 10px;overflow:hidden}
+.mini .mhero{border-radius:16px;padding:12px;font-weight:700}
+.mini .mrow{background:rgba(127,127,127,.08);border-radius:10px;padding:9px 11px;display:flex;justify-content:space-between;gap:8px;font-weight:600;align-items:center}
+.mini .mshell{flex:none;display:flex;justify-content:space-around;padding:9px 4px 13px;font-size:9px;font-weight:700;opacity:.75;border-top:1px solid rgba(127,127,127,.18)}
+.mini.b .mscr{background:#f4e4db}
+.mini.b[data-theme="dark"] .mscr{background:#332d27}
+.mini.b .mhero{background:#fff;color:#1f1a17;border-radius:20px 20px 8px 8px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.mini.b[data-theme="dark"] .mhero{background:#292420;color:#f1e9e3}
+.mini.c .mbody{position:relative;padding-inline-start:18px}
+.mini.c .mbody::before{content:"";position:absolute;inset-inline-start:8px;top:4px;bottom:4px;width:2px;background:#cc785c}
+.mini.c .mrow{position:relative;background:transparent;border-radius:0;padding:5px 2px;border-bottom:1px dashed rgba(127,127,127,.25)}
+.mini.c .mrow::before{content:"";position:absolute;inset-inline-start:-14px;top:12px;width:7px;height:7px;border-radius:50%;background:#cc785c}
+
+/* reduced motion */
+[data-motion="reduced"] *,[data-motion="reduced"] *::before,[data-motion="reduced"] *::after{
+  animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+@media (prefers-reduced-motion:reduce){* ,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</head>
+<body data-motion="normal" data-dirview="A">
+<div class="review">
+  <div class="review-head">
+    <h1><b>Micro</b> — Visual Product Concept Review · Stage 2</h1>
+    <p>Recommended direction <b>A · «السجل الدافئ» — The Warm Ledger</b>. Everything inside the phone frame is the simulated product; all review controls live outside it. Direction previews B and C are shown for comparison only.</p>
+  </div>
+
+  <div class="controls" role="group" aria-label="Review controls">
+    <div class="ctl"><span>Direction</span>
+      <div class="seg" id="seg-dir">
+        <button data-dir="A" aria-pressed="true" class="rec" title="Recommended">A · Warm Ledger</button>
+        <button data-dir="B" aria-pressed="false">B · Quiet Craft</button>
+        <button data-dir="C" aria-pressed="false">C · Fin. Stream</button>
+      </div>
+    </div>
+    <div class="ctl"><span>Language / RTL</span>
+      <div class="seg" id="seg-lang">
+        <button data-lang="ar" aria-pressed="true">العربية RTL</button>
+        <button data-lang="en" aria-pressed="false">English LTR</button>
+      </div>
+    </div>
+    <div class="ctl"><span>Theme</span>
+      <div class="seg" id="seg-theme">
+        <button data-theme="light" aria-pressed="true">Light</button>
+        <button data-theme="dark" aria-pressed="false">Dark</button>
+      </div>
+    </div>
+    <div class="ctl"><span>Motion</span>
+      <div class="seg" id="seg-motion">
+        <button data-motion="normal" aria-pressed="true">Normal</button>
+        <button data-motion="reduced" aria-pressed="false">Reduced</button>
+      </div>
+    </div>
+    <div class="ctl"><span>Width</span>
+      <div class="seg" id="seg-width">
+        <button data-w="320" aria-pressed="false">320</button>
+        <button data-w="360" aria-pressed="false">360</button>
+        <button data-w="390" aria-pressed="true">390</button>
+        <button data-w="430" aria-pressed="false">430</button>
+      </div>
+    </div>
+    <div class="ctl ctl-screens"><span>Jump to screen</span>
+      <div class="seg" id="seg-screen">
+        <button data-scr="today" aria-pressed="true">Today</button>
+        <button data-scr="truth" aria-pressed="false">Truth</button>
+        <button data-scr="capture" aria-pressed="false">Capture</button>
+        <button data-scr="receivables" aria-pressed="false">Receivables</button>
+        <button data-scr="orders" aria-pressed="false">Orders</button>
+        <button data-scr="purchases" aria-pressed="false">Purchases</button>
+        <button data-scr="closing" aria-pressed="false">Closing</button>
+        <button data-scr="settings" aria-pressed="false">Settings</button>
+        <button data-scr="assistant" aria-pressed="false">Assistant</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== rejected direction previews ======== -->
+  <div class="mini-wrap b">
+    <div class="mini b" data-theme="light" aria-hidden="true">
+      <div class="mscr">
+        <div class="mtop">مشروعي الآن</div>
+        <div class="mbody">
+          <div class="mhero"><div style="font-size:10px;color:#964e33">المتاح الآن</div><div style="font-size:24px" class="money">1,245.50 د.أ</div><div style="font-size:9.5px;color:#1e7a44">▲ +312.00 مقارنة بالأمس</div></div>
+          <div class="mrow"><span>تحصيل متأخر — خالد المستودع</span><span class="money">85.00</span></div>
+          <div class="mrow"><span>فاتورة مورد تستحق اليوم</span><span class="money">120.00</span></div>
+          <div class="mrow"><span>إيداع بانتظار التأكيد</span><span class="money">150.00</span></div>
+        </div>
+        <div class="mshell"><span>مشروعي</span><span>العمل</span><span>سجّل</span><span>مالي</span><span>أدواتي</span></div>
+      </div>
+    </div>
+    <div class="mini-note"><b>Direction B — «الحرفة الهادئة» / Quiet Craft.</b> Chunky carved slabs feel warm and crafted, and the hero moment is strong — but only ~6 rows survive per viewport, so operational screens starve. It reads as a beautiful settings product, not an operations control center. <span class="verdict">Not recommended</span></div>
+  </div>
+
+  <div class="mini-wrap c">
+    <div class="mini c" data-theme="light" aria-hidden="true">
+      <div class="mscr">
+        <div class="mtop">مشروعي الآن</div>
+        <div class="mbody">
+          <div class="mrow"><span>تحصيل من خالد المستودع</span><span class="money">+85.00</span></div>
+          <div class="mrow"><span>شراء قماش — سمية</span><span class="money">−120.00</span></div>
+          <div class="mrow"><span>طلب #1042 بانتظار التسليم</span><span>+50.00</span></div>
+          <div class="mrow"><span>مصروف نقل</span><span class="money">−15.00</span></div>
+          <div class="mrow"><span>تحصيل — سمية للتجهيزات</span><span class="money">+320.00</span></div>
+          <div class="mrow"><span>هدر مخزون (غير نقدي)</span><span>−2.50</span></div>
+          <div class="mrow"><span>طلب #1041 قيد التجهيز</span><span>—</span></div>
+          <div class="mrow"><span>إيداع بنكي</span><span class="money">+150.00</span></div>
+          <div class="mrow"><span>فاتورة كهرباء</span><span class="money">−38.00</span></div>
+          <div class="mrow"><span>تحصيل — مؤمن النقير</span><span class="money">+120.00</span></div>
+        </div>
+        <div class="mshell"><span>مشروعي</span><span>العمل</span><span>سجّل</span><span>مالي</span><span>أدواتي</span></div>
+      </div>
+    </div>
+    <div class="mini-note"><b>Direction C — «التيار المالي» / The Financial Stream.</b> The terracotta rail with node dots tells recency beautifully and the density is high — but chronology is the wrong structure for tools, settings, and inventory, and a rail on every screen becomes wallpaper. Truth needs structure, not just a feed. <span class="verdict">Not recommended</span></div>
+  </div>
+<!-- ======== the simulated product (direction A) ======== -->
+<div class="stage">
+ <div class="device" data-theme="light" id="device" dir="ltr">
+  <div class="screen" id="appRoot">
+    <div class="statusbar"><span class="num" id="clock">09:41</span><span class="icons"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="batt"></span></span></div>
+
+    <div class="app" id="appScroll" dir="rtl" lang="ar">
+
+      <!-- ============ TODAY ============ -->
+      <section class="scr on" data-scr="today" aria-label="اليوم">
+        <div class="tfs" id="tfs">
+          <div class="tfs-row">
+            <div class="tfs-title" data-en="My business now">مشروعي الآن</div>
+            <div class="tfs-value"><span class="cap" data-en="Available">المتاح</span><span class="money">1,245.50 د.أ</span></div>
+            <button class="icon-btn" data-goto="assistant" aria-label="المساعد الذكي" data-en-aria="AI assistant">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l1.6 4.6L18 9.2l-4.4 1.6L12 15l-1.6-4.2L6 9.2l4.4-1.6L12 3z"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/></svg>
+            </button>
+          </div>
+          <div class="subrow"><span data-en="Sunday 06/09/2026">الأحد 06/09/2026</span><span>·</span>
+            <span class="chip synced"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg><span data-en="Synced 09:40">مُزامن 09:40</span></span>
+          </div>
+        </div>
+
+        <div class="banner" id="offlineBanner" role="status">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8.5C5 5.8 8.4 4.5 12 4.5s7 1.3 10 4M5 12.2c2.1-1.7 4.4-2.7 7-2.7s4.9 1 7 2.7M8.5 15.8c1-.8 2.2-1.3 3.5-1.3s2.5.5 3.5 1.3M12 19h.01"/></svg>
+          <span data-en="You are offline — changes are saved on the device and will sync automatically when the connection returns.">أنت غير متصل — تُحفظ التغييرات على الجهاز وستتم المزامنة تلقائيًا عند عودة الاتصال.</span>
+          <button class="x" aria-label="إخفاء" data-en-aria="Dismiss" onclick="hideOffline()">✕</button>
+        </div>
+
+        <div id="heroSentinel">
+          <div class="hero">
+            <div class="h-label" data-en="Available now">المتاح الآن</div>
+            <div class="h-value"><span class="money">1,245.50</span><span class="h-cur">د.أ</span></div>
+            <div class="h-delta">
+              <span class="delta-up">▲ <span class="money">+312.00 د.أ</span> <span data-en="vs yesterday">مقارنة بالأمس</span></span>
+              <button class="linkish" id="whyBtn" aria-expanded="false" data-en="Why?">لماذا؟</button>
+            </div>
+            <div class="h-why" id="whyBox">
+              <div class="wrow"><span data-en="Collections received (2)">تحصيلات مُحصَّلة (2)</span><span class="money">+410.00 د.أ</span></div>
+              <div class="wrow"><span data-en="Expenses">مصروفات</span><span class="money">−65.00 د.أ</span></div>
+              <div class="wrow"><span data-en="Supplier invoice due today">فاتورة مورد مستحقة اليوم</span><span class="money">−33.00 د.أ</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="band">
+          <div class="band-h"><h2 data-en="What needs your attention today?">ما الذي يحتاج انتباهك اليوم؟</h2><span class="more" data-goto="truth" data-en="Financial truth">الحقيقة المالية</span></div>
+          <div class="band-b flush">
+            <div class="row">
+              <div class="r-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></svg></div>
+              <div class="r-main"><div class="r-title" data-en="Overdue collection — Khaled Al-Mustawda">تحصيل متأخر — خالد المستودع</div><div class="r-sub"><span data-en="Overdue 12 days">متأخر 12 يومًا</span> · <span class="money">85.00 د.أ</span></div></div>
+              <div class="r-act"><button class="chip-btn" data-goto="receivables" data-en="Remind">تذكير</button></div>
+            </div>
+            <div class="row">
+              <div class="r-ic teal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg></div>
+              <div class="r-main"><div class="r-title" data-en="Deposit awaiting delivery confirmation">إيداع بانتظار تأكيد التسليم</div><div class="r-sub"><span data-en="Liquidity linked to an unfinished obligation">سيولة مرتبطة بالتزام لم يكتمل</span></div></div>
+              <div class="r-side"><span class="money" style="font-size:14.5px">150.00 د.أ</span><span class="chip pending"><span data-en="Pending">قيد الانتظار</span></span></div>
+            </div>
+            <div class="row">
+              <div class="r-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M13 5l-2.5 14"/></svg></div>
+              <div class="r-main"><div class="r-title" data-en="Supplier invoice due today">فاتورة مورد تستحق اليوم</div><div class="r-sub" data-en="Sumia Textiles · due 06/09/2026">سمية للتجهيزات · تستحق 06/09/2026</div></div>
+              <div class="r-side"><span class="money" style="font-size:14.5px">120.00 د.أ</span><button class="chip-btn acc" data-goto="purchases" data-en="Pay">دفع</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="band">
+          <div class="band-h"><h2 data-en="Cash movement — last 14 days">حركة نقدية — آخر 14 يومًا</h2><span class="more" data-goto="truth" data-en="Details">التفاصيل</span></div>
+          <div class="legend"><span><i style="background:var(--accent)"></i><span data-en="Cash in">وارد</span></span><span><i style="background:var(--brand)"></i><span data-en="Cash out">صادر</span></span></div>
+          <div class="chart">
+            <svg viewBox="0 0 320 96" role="img" aria-label="حركة النقدية خلال آخر 14 يومًا: إجمالي الوارد 815 دينارًا وإجمالي الصادر 503 دنانير، وأعلى يوم وارد هو 05/09/2026 بمبلغ 320 دينارًا. لا تتوفر بيانات يوم 29/08/2026." data-en-aria="Cash movement over the last 14 days: total in 815 JOD, total out 503 JOD; highest in-day was 05/09/2026 at 320 JOD. No data for 29/08/2026.">
+              <g id="cashbars"></g>
+              <line x1="6" y1="78" x2="314" y2="78" stroke="var(--hair-strong)" stroke-width="1"/>
+            </svg>
+            <div class="c-cap"><span data-en="Period: 24/08 – 06/09/2026 · Unit: JOD · Source: synced 09:40 · Bar length = share of largest value">الفترة: 24/08 – 06/09/2026 · الوحدة: د.أ · المصدر: مُزامن 09:40 · طول الشريط = نسبة من أكبر قيمة</span></div>
+            <div class="c-int" data-en="Cash grew this week: collections exceeded expenses on 9 of 14 days.">نقدك نما هذا الأسبوع: التحصيلات تجاوزت المصروفات في 9 من 14 يومًا.</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn primary" data-goto="capture" data-en="Quick capture">تسجيل سريع</button>
+          <button class="btn quiet" data-goto="closing" data-en="Close the till">إغلاق الصندوق</button>
+        </div>
+      </section>
+
+      <!-- ============ FINANCIAL TRUTH ============ -->
+      <section class="scr" data-scr="truth" aria-label="الحقيقة المالية">
+        <div class="tfs"><div class="tfs-row"><div class="tfs-title" data-en="Financial truth">الحقيقة المالية</div></div></div>
+        <div class="pad" style="margin-top:10px">
+          <div class="segc" role="group" aria-label="عرض" data-en-aria="View">
+            <button aria-pressed="true" data-en="All">الكل</button>
+            <button aria-pressed="false" data-en="Owed to me">ليّ</button>
+            <button aria-pressed="false" data-en="I owe">عليّ</button>
+          </div>
+        </div>
+        <div class="hero" style="margin-top:14px">
+          <div class="h-label" data-en="Available now">المتاح الآن</div>
+          <div class="h-value"><span class="money">1,245.50</span><span class="h-cur">د.أ</span></div>
+          <div class="h-delta"><span class="delta-up">▲ <span class="money">+312.00 د.أ</span> <span data-en="today">اليوم</span></span></div>
+        </div>
+
+        <div class="band">
+          <div class="band-h"><h2 data-en="Where your money stands">أين يقف مالك</h2></div>
+          <div class="band-b flush">
+            <div class="row" data-goto="receivables" role="button" tabindex="0">
+              <div class="r-ic teal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="9.5" cy="7" r="3.5"/><path d="M20 8v6M23 11h-6"/></svg></div>
+              <div class="r-main"><div class="r-title" data-en="Owed to you — 3 customers">ليّ — 3 عملاء</div><div class="r-sub" data-en="Oldest: 12 days overdue">الأقدم: متأخر 12 يومًا</div></div>
+              <div class="r-side"><span class="r-money">640.00 د.أ</span></div>
+            </div>
+            <div class="row" data-goto="purchases" role="button" tabindex="0">
+              <div class="r-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="9.5" cy="7" r="3.5"/><path d="M17 11l2 2 4-4"/></svg></div>
+              <div class="r-main"><div class="r-title" data-en="You owe — 2 suppliers">عليّ — 2 موردين</div><div class="r-sub" data-en="Nearest due: today">أقرب استحقاق: اليوم</div></div>
+              <div class="r-side"><span class="r-money">420.00 د.أ</span></div>
+            </div>
+            <div class="row sec">
+              <div class="r-ic teal"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg></div>
+              <div class="r-main"><div class="r-title" data-en="Deposits linked to obligations">ودائع مرتبطة بالتزامات</div><div class="r-sub" data-en="Liquidity tied to unfinished orders — not profit yet">سيولة مرتبطة بطلبات لم تكتمل — ليست ربحًا بعد</div></div>
+              <div class="r-side"><span class="r-money">150.00 د.أ</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="band">
+          <div class="band-h"><h2 data-en="How today changed your position">كيف تغيّر مركزك اليوم</h2></div>
+          <div class="aging">
+            <div class="ag-row"><span class="ag-l" data-en="Opening">افتتاحي</span><div class="ag-track"><div class="ag-fill" style="width:76%"></div></div><span class="ag-v">933.50</span></div>
+            <div class="ag-row"><span class="ag-l" data-en="Cash in">وارد</span><div class="ag-track"><div class="ag-fill" style="width:66%;background:var(--accent)"></div></div><span class="ag-v">+815.00</span></div>
+            <div class="ag-row"><span class="ag-l" data-en="Cash out">صادر</span><div class="ag-track"><div class="ag-fill" style="width:41%;background:var(--brand)"></div></div><span class="ag-v">−503.00</span></div>
+            <div class="ag-row"><span class="ag-l" data-en="Closing">إغلاقي</span><div class="ag-track"><div class="ag-fill" style="width:100%"></div></div><span class="ag-v">1,245.50</span></div>
+            <div class="c-cap" data-en="Unit: JOD · Source: synced 09:40 · Non-cash movements excluded from this view">الوحدة: د.أ · المصدر: مُزامن 09:40 · تُستثنى الحركات غير النقدية من هذا العرض</div>
+          </div>
+        </div>
+
+        <div class="alert-row" role="alert">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:2px"><path d="M12 3l9.5 16.5H2.5L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>
+          <div><div class="a-t" data-en="Sync conflict — needs your review">تعارض مزامنة — يلزم مراجعتك</div><div class="a-s" data-en="An offline inventory edit collided with a synced change from your other device. Nothing was lost — review to choose the correct value.">تعديل مخزني دون اتصال التقى تغييرًا مُزامنًا من جهازك الآخر. لم يُفقد شيء — راجِع لاختيار القيمة الصحيحة.</div></div>
+        </div>
+
+        <div class="row sec" style="margin:12px 16px 0;border:1px solid var(--hair);border-radius:12px">
+          <div class="r-main"><div class="r-title" data-en="Orders in progress">طلبات قيد التنفيذ</div><div class="r-sub" data-en="Value cannot be confirmed until materials are priced">لا يمكن تأكيد القيمة قبل تسعير المواد</div></div>
+          <div class="r-side"><span class="chip estimated"><span data-en="Estimated">تقديري</span></span></div>
+        </div>
+      </section>
+
+      <!-- ============ QUICK CAPTURE (سجّل) ============ -->
+      <section class="scr" data-scr="capture" aria-label="سجّل">
+        <div class="tfs"><div class="tfs-row"><div class="tfs-title" data-en="Quick capture">سجّل</div></div></div>
+        <div class="pad" style="margin-top:10px">
+          <div class="segc" role="group" aria-label="نوع العملية">
+            <button aria-pressed="true" data-en="Sale">بيع</button>
+            <button aria-pressed="false" data-en="Expense">مصروف</button>
+            <button aria-pressed="false" data-en="Collection">تحصيل</button>
+          </div>
+        </div>
+        <div class="numsurf" id="numsurf">
+          <div class="n-label" data-en="Amount (JOD)">المبلغ (د.أ)</div>
+          <div class="n-value" id="nvalue" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="99999" aria-valuenow="0" aria-label="المبلغ بالدينار — عدّل بالأزرار أو بالسحب الأفقي" data-en-aria="Amount in JOD — adjust with buttons or horizontal drag">
+            <span class="money" id="namount">0.00</span>
+          </div>
+          <div class="n-hint" data-en="Swipe horizontally for ±1 · or use the buttons">اسحب أفقيًا للتعديل بواحد · أو استخدم الأزرار</div>
+          <div class="n-steppers">
+            <button data-step="-10" aria-label="ناقص عشرة دنانير">−10</button>
+            <button data-step="-1" aria-label="ناقص دينار واحد">−1</button>
+            <button data-step="1" aria-label="زائد دينار واحد">+1</button>
+            <button data-step="10" aria-label="زائد عشرة دنانير">+10</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="party" data-en="Party">الجهة</label>
+          <input class="input" id="party" data-en-ph="Customer or supplier…" placeholder="عميل أو مورّد…" list="partyList">
+          <datalist id="partyList"><option value="خالد المستودع"></option><option value="سمية للتجهيزات"></option><option value="مؤمن النقير"></option></datalist>
+        </div>
+        <div class="field">
+          <label data-en="Date">التاريخ</label>
+          <div class="input" style="display:flex;align-items:center;justify-content:space-between"><span class="num">06/09/2026</span><span class="chip neutral" data-en="Today">اليوم</span></div>
+        </div>
+        <div class="fx-note" style="margin:12px 16px 0;background:var(--accent-soft);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.7">
+          <b style="color:var(--accent-text)" data-en="Effect preview:">معاينة الأثر:</b>
+          <span data-en="This sale will be recorded as uncollected — it is recognized when the order is delivered and completed.">سيُسجَّل هذا البيع غير محصَّل — يُعترف به عند تسليم الطلب واكتماله.</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn primary" id="saveBtn" data-en="Save transaction">حفظ العملية
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="band" style="margin-top:16px">
+          <div class="band-h"><h2 data-en="Saved today">ما سُجّل اليوم</h2></div>
+          <div class="band-b flush" id="recentList">
+            <div class="row sec">
+              <div class="r-main"><div class="r-title" data-en="Sale — Sumia Textiles">بيع — سمية للتجهيزات</div><div class="r-sub num">06/09/2026 · 09:12</div></div>
+              <div class="r-side"><span class="money" style="font-size:14.5px">320.00 د.أ</span><span class="chip estimated"><span data-en="Estimated">تقديري</span></span></div>
+            </div>
+            <div class="row sec">
+              <div class="r-main"><div class="r-title" data-en="Expense — transport">مصروف — نقل</div><div class="r-sub num">06/09/2026 · 08:30</div></div>
+              <div class="r-side"><span class="money" style="font-size:14.5px">15.00 د.أ</span><span class="chip synced"><span data-en="Saved">محفوظ</span></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ RECEIVABLES ============ -->
+      <section class="scr" data-scr="receivables" aria-label="الذمم">
+        <div class="tfs"><div class="tfs-row"><button class="icon-btn" data-goto="truth" aria-label="رجوع" data-en-aria="Back"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6" transform="rotate(180 12 12)"/></svg></button>
+          <div class="tfs-title" data-en="Owed to you">ليّ</div>
+          <div class="tfs-value"><span class="money">640.00 د.أ</span></div></div></div>
+        <div class="band" style="margin-top:10px">
+          <div class="band-h"><h2 data-en="By age">حسب العمر</h2></div>
+          <div class="aging">
+            <div class="ag-row"><span class="ag-l" data-en="1–7 days">1–7 أيام</span><div class="ag-track"><div class="ag-fill" style="width:52%"></div></div><span class="ag-v">235.00</span></div>
+            <div class="ag-row"><span class="ag-l" data-en="8–30 days">8–30 يومًا</span><div class="ag-track"><div class="ag-fill" style="width:100%"></div></div><span class="ag-v">320.00</span></div>
+            <div class="ag-row hot"><span class="ag-l" data-en="Overdue 31–60">متأخر 31–60</span><div class="ag-track"><div class="ag-fill" style="width:0%"></div></div><span class="ag-v">0.00</span></div>
+            <div class="ag-row hot"><span class="ag-l" data-en="Overdue 61+">متأخر 61+</span><div class="ag-track"><div class="ag-fill" style="width:27%"></div></div><span class="ag-v">85.00</span></div>
+            <div class="c-cap" data-en="Unit: JOD · Source: synced 09:40 · Bar length = share of largest bucket">الوحدة: د.أ · المصدر: مُزامن 09:40 · طول الشريط = نسبة من أكبر فئة</div>
+          </div>
+        </div>
+        <div class="band">
+          <div class="band-h"><h2 data-en="By customer">حسب العميل</h2></div>
+          <div class="band-b flush">
+            <div class="row">
+              <div class="r-main"><div class="r-title">مؤسسة النور للتجهيزات الكهربائية والمقاولات ذ.م.م</div><div class="r-sub"><span style="color:var(--warn-text);font-weight:700">● </span><span data-en="Overdue 12 days">متأخر 12 يومًا</span> · <span class="num">06/09/2026</span></div></div>
+              <div class="r-side"><span class="r-money">85.00 د.أ</span></div>
+              <div class="r-act"><button class="chip-btn" data-collect="خالد المستودع|85.00" data-en="Collect">تحصيل</button></div>
+            </div>
+            <div class="row">
+              <div class="r-main"><div class="r-title" data-en="Sumia Textiles">سمية للتجهيزات</div><div class="r-sub"><span data-en="Due">تستحق</span> <span class="num">18/09/2026</span></div></div>
+              <div class="r-side"><span class="r-money">320.00 د.أ</span></div>
+              <div class="r-act"><button class="chip-btn" data-collect="سمية للتجهيزات|320.00" data-en="Collect">تحصيل</button></div>
+            </div>
+            <div class="row">
+              <div class="r-main"><div class="r-title" data-en="Mumen Al-Nuqeir">مؤمن النقير</div><div class="r-sub"><span data-en="Overdue 3 days">متأخر 3 أيام</span></div></div>
+              <div class="r-side"><span class="r-money">235.00 د.أ</span></div>
+              <div class="r-act"><button class="chip-btn" data-collect="مؤمن النقير|235.00" data-en="Collect">تحصيل</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ORDERS (العمل) ============ -->
+      <section class="scr" data-scr="orders" aria-label="الطلبات">
+        <div class="tfs"><div class="tfs-row"><div class="tfs-title" data-en="Work — orders">العمل — الطلبات</div></div></div>
+        <div class="searchrow">
+          <input class="input" id="orderSearch" data-en-ph="Search orders…" placeholder="ابحث في الطلبات…" aria-label="ابحث في الطلبات" data-en-aria="Search orders">
+          <button class="icon-btn" id="filterBtn" aria-haspopup="dialog" aria-label="تصفية" data-en-aria="Filter">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          </button>
+        </div>
+        <div class="band" style="margin-top:12px">
+          <div class="band-h"><h2 data-en="This week's orders">طلبات هذا الأسبوع</h2><span class="chip neutral" id="ordersCount">4</span></div>
+          <div class="band-b flush" id="orderList">
+            <div class="skel" style="height:56px;border-radius:0"></div>
+            <div class="skel" style="height:56px;border-radius:0"></div>
+            <div class="skel" style="height:56px;border-radius:0"></div>
+          </div>
+        </div>
+        <div class="note-in" style="margin:12px 16px 0;font-size:12px;color:var(--muted);line-height:1.7" data-en="Deposits on orders are liquidity linked to an unfinished obligation — they become recognized sales only on completed delivery.">عربون الطلب سيولة مرتبطة بالتزام لم يكتمل — لا يصير بيعًا معترفًا به إلا بالتسليم الكامل.</div>
+      </section>
+
+      <!-- ============ PURCHASES ============ -->
+      <section class="scr" data-scr="purchases" aria-label="المشتريات">
+        <div class="tfs"><div class="tfs-row"><button class="icon-btn" data-goto="truth" aria-label="رجوع" data-en-aria="Back"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6" transform="rotate(180 12 12)"/></svg></button>
+          <div class="tfs-title" data-en="You owe — purchases">عليّ — المشتريات</div>
+          <div class="tfs-value"><span class="money">420.00 د.أ</span></div></div></div>
+        <div class="band" style="margin-top:10px">
+          <div class="band-h"><h2 data-en="Open payables">التزامات مفتوحة</h2></div>
+          <div class="band-b flush">
+            <div class="row">
+              <div class="r-main"><div class="r-title" data-en="Sumia Textiles — fabric">سمية للتجهيزات — قماش</div><div class="r-sub"><span style="color:var(--warn-text);font-weight:700">● </span><span data-en="Due today">تستحق اليوم</span> · <span class="num">06/09/2026</span></div></div>
+              <div class="r-side"><span class="r-money">120.00 د.أ</span><button class="chip-btn acc" data-en="Pay">دفع</button></div>
+            </div>
+            <div class="row">
+              <div class="r-main">
+                <div class="r-title" data-en="Green Line — packaging">جرين لاين — تغليف</div>
+                <div class="r-sub" data-en="Partially received">مستلم جزئيًا</div>
+                <div class="progress" role="img" aria-label="قيمة مستلمة: 60 من 120 دينارًا" data-en-aria="Received value: 60 of 120 JOD"><i style="width:50%"></i></div>
+                <div class="r-sub num" style="margin-top:4px">قيمة مستلمة: 60.00 من 120.00 د.أ</div>
+              </div>
+              <div class="r-side"><span class="r-money">300.00 د.أ</span></div>
+            </div>
+            <div class="row">
+              <div class="r-main"><div class="r-title" data-en="Wared Textiles — new order">وارد للنسيج — طلب جديد</div><div class="r-sub" data-en="Price unknown until supplier confirms">السعر غير معروف قبل تأكيد المورّد</div></div>
+              <div class="r-side"><span class="chip estimated"><span data-en="Unknown">غير محددة</span></span></div>
+            </div>
+            <div class="row sec">
+              <div class="r-main"><div class="r-title" data-en="Ward Cotton — paid">ورد قطن — مدفوع</div><div class="r-sub num">03/09/2026 · <span data-en="Received in full">استُلمت كاملة</span></div></div>
+              <div class="r-side"><span class="chip synced"><span data-en="Paid">مدفوع</span></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CASH CLOSING ============ -->
+      <section class="scr" data-scr="closing" aria-label="إغلاق الصندوق">
+        <div class="tfs"><div class="tfs-row"><button class="icon-btn" data-goto="today" aria-label="رجوع" data-en-aria="Back"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6" transform="rotate(180 12 12)"/></svg></button>
+          <div class="tfs-title" data-en="Close the till">إغلاق الصندوق</div></div></div>
+        <div class="hero" style="margin-top:10px">
+          <div class="h-label" data-en="System balance">رصيد النظام</div>
+          <div class="h-value"><span class="money">1,245.50</span><span class="h-cur">د.أ</span></div>
+          <div class="h-delta"><span class="chip synced"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg><span data-en="Synced 09:40">مُزامن 09:40</span></span></div>
+        </div>
+        <div class="field">
+          <label for="counted" data-en="What you counted in the drawer">ما عَدَّدته في الدرج</label>
+          <input class="input num" id="counted" inputmode="decimal" value="0.00" style="font-size:20px;font-weight:700">
+        </div>
+        <div class="band" id="diffBand" style="display:none">
+          <div class="band-b flush">
+            <div class="row sec">
+              <div class="r-main"><div class="r-title" data-en="Difference">الفرق</div><div class="r-sub" data-en="Recorded and documented — never adjusted silently.">يُسجَّل موثقًا — لا يُعدَّل صامتًا أبدًا.</div></div>
+              <div class="r-side"><span class="r-money" id="diffVal">0.00 د.أ</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn primary" id="closeBtn" data-en="Confirm closing">تأكيد الإغلاق<span class="spinner" aria-hidden="true"></span></button>
+        </div>
+        <div class="note-in" style="margin:14px 16px 0;font-size:12px;color:var(--muted);line-height:1.7" data-en="Closing locks today's cash position. Corrections after closing stay possible through documented reversal.">الإغلاق يثبت مركز نقد اليوم. تظل التصحيحات بعده ممكنة عبر تراجع موثق.</div>
+      </section>
+
+      <!-- ============ SETTINGS (أدواتي) ============ -->
+      <section class="scr" data-scr="settings" aria-label="أدواتي">
+        <div class="tfs"><div class="tfs-row"><div class="tfs-title" data-en="My tools">أدواتي</div></div></div>
+        <div class="band" style="margin-top:10px">
+          <div class="band-b flush">
+            <div class="set-row" data-goto="assistant">
+              <div class="s-ic"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l1.6 4.6L18 9.2l-4.4 1.6L12 15l-1.6-4.2L6 9.2l4.4-1.6L12 3z"/></svg></div>
+              <div class="s-t"><div class="t" data-en="Micro assistant">مساعد Micro</div><div class="d" data-en="Ask about your money in your own words">اسأل عن مالك بكلماتك</div></div>
+              <span class="chev">‹</span>
+            </div>
+            <div class="set-row">
+              <div class="s-ic"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4l2.5 2"/></svg></div>
+              <div class="s-t"><div class="t" data-en="Currency & format">العملة والتنسيق</div></div>
+              <span class="s-v num">JOD · DD/MM/YYYY</span>
+            </div>
+            <div class="set-row">
+              <div class="s-ic"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></div>
+              <div class="s-t"><div class="t" data-en="Sync">المزامنة</div></div>
+              <span class="s-v"><span class="chip synced"><span data-en="Synced">مُزامن</span></span></span>
+            </div>
+            <div class="set-row">
+              <div class="s-ic"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></div>
+              <div class="s-t"><div class="t" data-en="Backup">النسخ الاحتياطي</div></div>
+              <span class="s-v num" data-en="Yesterday 22:00">أمس 22:00</span>
+            </div>
+            <div class="set-row">
+              <div class="s-ic"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8M9 8V5a2 2 0 012-2h2a2 2 0 012 2v3"/></svg></div>
+              <div class="s-t"><div class="t" data-en="Reduce motion">تقليل الحركة</div><div class="d" data-en="Calmer transitions everywhere">حركات أهدأ في كل التطبيق</div></div>
+              <button class="switch" id="motionSwitch" role="switch" aria-checked="false" aria-label="تقليل الحركة" data-en-aria="Reduce motion"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ASSISTANT ============ -->
+      <section class="scr" data-scr="assistant" aria-label="المساعد">
+        <div class="tfs"><div class="tfs-row"><button class="icon-btn" data-goto="today" aria-label="رجوع" data-en-aria="Back"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6" transform="rotate(180 12 12)"/></svg></button>
+          <div class="tfs-title" data-en="Micro assistant">مساعد Micro</div></div></div>
+        <div class="chat" id="chat">
+          <div class="msg bot" data-en="Welcome Abu Omar 👋 Ask me anything about your money — or tap one of the questions.">أهلًا أبو عمر 👋 اسألني عن مالك بأي كلمات — أو اضغط أحد الأسئلة.</div>
+        </div>
+        <div class="sugg">
+          <button class="chip-btn" data-q="0" data-en="Who owes me?">من ليّ عليه؟</button>
+          <button class="chip-btn" data-q="1" data-en="How was this week's cash?">كيف كانت حركة الأسبوع؟</button>
+          <button class="chip-btn" data-q="2" data-en="What deposits are pending?">أي ودائع معلقة؟</button>
+        </div>
+        <div class="composer">
+          <input class="input" id="chatInput" data-en-ph="Write your question…" placeholder="اكتب سؤالك…" aria-label="اكتب سؤالك" data-en-aria="Write your question">
+          <button class="icon-btn" id="chatSend" aria-label="إرسال" data-en-aria="Send">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4 18-7z" transform="scale(-1,1) translate(-24,0)"/></svg>
+          </button>
+        </div>
+      </section>
+
+    </div><!-- /app -->
+
+    <!-- toast -->
+    <div class="toast" id="toast" aria-live="polite"><span class="t-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span id="toastMsg">تم الحفظ</span></span></div>
+
+    <!-- sheet -->
+    <div class="sheet-layer" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="scrim" data-close></div>
+      <div class="sheet">
+        <div class="grip" aria-hidden="true"></div>
+        <button class="icon-btn s-close" data-close aria-label="إغلاق" data-en-aria="Close">✕</button>
+        <h3 id="sheetTitle">تصفية الطلبات</h3>
+        <div id="sheetBody">
+          <div class="segc" style="margin:0 20px 14px;flex-wrap:wrap" id="filterChips">
+            <button aria-pressed="true" style="flex:none;padding:9px 14px" data-f="all" data-en="All">الكل</button>
+            <button aria-pressed="false" style="flex:none;padding:9px 14px" data-f="new" data-en="New">جديد</button>
+            <button aria-pressed="false" style="flex:none;padding:9px 14px" data-f="prep" data-en="Preparing">قيد التجهيز</button>
+            <button aria-pressed="false" style="flex:none;padding:9px 14px" data-f="ready" data-en="Awaiting delivery">بانتظار التسليم</button>
+            <button aria-pressed="false" style="flex:none;padding:9px 14px" data-f="done" data-en="Completed">مكتمل</button>
+          </div>
+        </div>
+        <div class="s-actions"><button class="btn quiet" data-close data-en="Cancel">إلغاء</button><button class="btn primary" id="filterApply" data-en="Show results">عرض النتائج</button></div>
+      </div>
+    </div>
+
+    <!-- bottom shell -->
+    <nav class="shell" aria-label="التنقل الرئيسي" data-en-aria="Main navigation">
+      <button data-goto="today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg><span data-en="Business">مشروعي الآن</span></button>
+      <button data-goto="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="8" width="16" height="12" rx="2.5"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg><span data-en="Work">العمل</span></button>
+      <button data-goto="capture"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/></svg><span data-en="Capture">سجّل</span></button>
+      <button data-goto="truth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="6" width="17" height="13" rx="2.5"/><path d="M3.5 10h17M7 15h4"/></svg><span data-en="Money">مالي</span></button>
+      <button data-goto="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 8h9M18 8h1M5 16h1M10 16h9"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/></svg><span data-en="My tools">أدواتي</span></button>
+    </nav>
+
+  </div><!-- /screen -->
+ </div><!-- /device -->
+</div><!-- /stage -->
+
+<p class="note note-main">Review the <b>recommended direction A</b> through the toggle set above — Arabic RTL is the default, English is an LTR verification mode. Realistic JOD amounts and DD/MM/YYYY dates throughout; honest unknown / estimated / pending / offline / sync states are part of the design, not defects.</p>
+</div><!-- /review -->
+<script>
+(function(){
+"use strict";
+var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var device=$("#device"), appRoot=$("#appRoot"), appScroll=$("#appScroll");
+var state={lang:"ar",theme:"light",motion:"normal",width:390,screen:"today",dirview:"A",ordersRendered:false,ordersFilter:"all"};
+
+/* ---------- segmented review controls ---------- */
+function seg(id,fn){var el=$(id);el.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;$$("button",el).forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});fn(b);});}
+seg("#seg-dir",function(b){state.dirview=b.dataset.dir;document.body.dataset.dirview=state.dirview;});
+seg("#seg-lang",function(b){state.lang=b.dataset.lang;setLang();});
+seg("#seg-theme",function(b){state.theme=b.dataset.theme;device.dataset.theme=state.theme;$$(".mini").forEach(function(m){m.dataset.theme=state.theme});});
+seg("#seg-motion",function(b){state.motion=b.dataset.motion;document.body.dataset.motion=state.motion;var sw=$("#motionSwitch");sw.setAttribute("aria-checked",state.motion==="reduced"?"true":"false");});
+seg("#seg-width",function(b){state.width=+b.dataset.w;device.style.setProperty("--phone-w",state.width+"px");});
+seg("#seg-screen",function(b){go(b.dataset.scr);});
+
+/* ---------- i18n (AR default, EN verification) ---------- */
+function initI18n(){$$("[data-en]").forEach(function(n){if(!n.dataset.ar)n.dataset.ar=n.textContent;});}
+function setLang(){
+  initI18n();
+  var en=state.lang==="en";
+  appScroll.setAttribute("dir",en?"ltr":"rtl");
+  appScroll.setAttribute("lang",en?"en":"ar");
+  $$("[data-en]").forEach(function(n){n.textContent=en?n.dataset.en:n.dataset.ar;});
+  $$("[data-en-aria]").forEach(function(n){n.setAttribute("aria-label",en?n.dataset.enAria:(n.dataset.arAria||n.getAttribute("aria-label")));});
+}
+/* store original arabic aria labels once */
+$$("[data-en-aria]").forEach(function(n){n.dataset.arAria=n.getAttribute("aria-label")||"";});
+initI18n();
+
+/* ---------- navigation ---------- */
+var shellBtns=$$(".shell button");
+function go(name){
+  state.screen=name;
+  $$(".scr").forEach(function(s){s.classList.toggle("on",s.dataset.scr===name);});
+  shellBtns.forEach(function(b){var t=b.dataset.goto;var on=(t===name)|| (name==="receivables"&&t==="truth")||(name==="purchases"&&t==="truth")||(name==="closing"&&t==="today")||(name==="assistant"&&t==="settings");
+    if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
+  $$("#seg-screen button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.scr===name?"true":"false")});
+  appScroll.scrollTop=0;
+  if(name==="orders"&&!state.ordersRendered){setTimeout(renderOrders,1000);}
+}
+document.addEventListener("click",function(e){var t=e.target.closest("[data-goto]");if(t){go(t.dataset.goto);}});
+document.addEventListener("keydown",function(e){var t=e.target.closest&&e.target.closest("[data-goto][role='button']");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();go(t.dataset.goto);}});
+shellBtns.forEach(function(b){b.addEventListener("click",function(){go(b.dataset.goto);});});
+
+/* ---------- today: why disclosure + focus shell ---------- */
+var whyBtn=$("#whyBtn"),whyBox=$("#whyBox");
+whyBtn.addEventListener("click",function(){var open=whyBox.classList.toggle("open");whyBtn.setAttribute("aria-expanded",open?"true":"false");});
+var tfsEl=$("#tfs"),sentinel=$("#heroSentinel");
+function updateTfs(){
+  if(!sentinel||!tfsEl)return;
+  var trigger=sentinel.offsetTop+sentinel.offsetHeight-76; /* condensed once the hero is nearly gone */
+  tfsEl.classList.toggle("condensed",appScroll.scrollTop>trigger);
+}
+appScroll.addEventListener("scroll",updateTfs,{passive:true});
+window.addEventListener("resize",updateTfs);
+updateTfs();
+
+/* offline banner appears once, quietly */
+var banner=$("#offlineBanner");
+setTimeout(function(){if(state.screen==="today"||true)banner.classList.add("show");},3200);
+window.hideOffline=function(){banner.classList.remove("show");};
+
+/* ---------- cash chart (14 days, RTL: oldest right → newest left) ---------- */
+(function(){
+  var g=$("#cashbars");if(!g)return;
+  var IN=[120,60,0,210,95,40,0,130,75,0,220,185,320,90];
+  var OUT=[80,0,35,150,60,55,20,90,0,30,140,120,175,60];
+  var MISS=5; /* index of 29/08 */
+  var MAX=320,base=78,H=54,slot=22,bw=7;
+  var svgns="http://www.w3.org/2000/svg";
+  for(var i=0;i<14;i++){
+    var x=314-slot-(i*slot)-3; /* newest at left */
+    if(i===MISS){
+      var r=document.createElementNS(svgns,"rect");
+      r.setAttribute("x",x-1);r.setAttribute("y",base-H-4);r.setAttribute("width",slot-2);r.setAttribute("height",H+2);
+      r.setAttribute("fill","none");r.setAttribute("stroke","var(--hair-strong)");r.setAttribute("stroke-dasharray","3 3");r.setAttribute("rx","3");
+      g.appendChild(r);continue;
+    }
+    var hIn=IN[i]/MAX*H, hOut=OUT[i]/MAX*H;
+    var b1=document.createElementNS(svgns,"rect");
+    b1.setAttribute("x",x);b1.setAttribute("y",base-hIn);b1.setAttribute("width",bw);b1.setAttribute("height",Math.max(hIn,1.5));b1.setAttribute("rx",2.5);b1.setAttribute("fill","var(--accent)");
+    var b2=document.createElementNS(svgns,"rect");
+    b2.setAttribute("x",x+bw+2);b2.setAttribute("y",base-hOut);b2.setAttribute("width",bw);b2.setAttribute("height",Math.max(hOut,1.5));b2.setAttribute("rx",2.5);b2.setAttribute("fill","var(--brand)");
+    g.appendChild(b1);g.appendChild(b2);
+  }
+})();
+
+/* ---------- numeric surface ---------- */
+var nVal=0, nEl=$("#nvalue"), nAmt=$("#namount");
+function fmt(n){return n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
+function setN(v,dirHint){
+  var old=nVal; nVal=Math.min(99999,Math.max(0,Math.round(v*100)/100));
+  nAmt.textContent=fmt(nVal);
+  nEl.setAttribute("aria-valuenow",String(nVal));
+  if(nVal!==old){
+    nEl.classList.remove("drift-up","drift-down");
+    void nEl.offsetWidth;
+    nEl.classList.add(dirHint==="down"?"drift-down":"drift-up");
+  }
+}
+$$(".n-steppers button").forEach(function(b){
+  var t=null,iv=null;
+  b.addEventListener("click",function(){setN(nVal+parseFloat(b.dataset.step));});
+  b.addEventListener("pointerdown",function(){t=setTimeout(function(){iv=setInterval(function(){setN(nVal+parseFloat(b.dataset.step));},110);},520);});
+  ["pointerup","pointerleave","pointercancel"].forEach(function(ev){b.addEventListener(ev,function(){clearTimeout(t);clearInterval(iv);});});
+});
+nEl.addEventListener("keydown",function(e){
+  if(e.key==="ArrowUp"){e.preventDefault();setN(nVal+1);}
+  else if(e.key==="ArrowDown"){e.preventDefault();setN(nVal-1);}
+});
+(function(){ /* horizontal swipe = ±1 per 26px */
+  var sx=null,acc=0;
+  nEl.addEventListener("pointerdown",function(e){sx=e.clientX;acc=0;nEl.setPointerCapture&&nEl.setPointerCapture(e.pointerId);});
+  nEl.addEventListener("pointermove",function(e){if(sx===null)return;var dx=e.clientX-sx;var steps=Math.trunc(dx/26);if(steps!==acc){var d=steps-acc;acc=steps;setN(nVal+d*(d>0?1:1),d>0?"up":"down");}});
+  nEl.addEventListener("pointerup",function(){sx=null;});
+  nEl.addEventListener("pointercancel",function(){sx=null;});
+})();
+
+/* ---------- save flow: loading → quiet completion ---------- */
+var saveBtn=$("#saveBtn"),toast=$("#toast"),toastMsg=$("#toastMsg"),toastT=null;
+function showToast(msg){toastMsg.textContent=msg;toastMsg.dataset.ar=msg;toast.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){toast.classList.remove("show");},2600);}
+saveBtn.addEventListener("click",function(){
+  if(saveBtn.classList.contains("busy"))return;
+  saveBtn.classList.add("busy");saveBtn.disabled=true;
+  setTimeout(function(){
+    saveBtn.classList.remove("busy");saveBtn.disabled=false;
+    var row=document.createElement("div");row.className="row sec";
+    var party=($("#party").value||"بيع سريع");
+    row.innerHTML='<div class="r-main"><div class="r-title" data-en="Sale — '+party+'">بيع — '+party+'</div><div class="r-sub num">06/09/2026 · '+($("#clock").textContent)+'</div></div><div class="r-side"><span class="money" style="font-size:14.5px">'+fmt(nVal)+' د.أ</span><span class="chip synced"><span data-en="Saved">محفوظ</span></span></div>';
+    row.querySelectorAll("[data-en]").forEach(function(n){n.dataset.ar=n.textContent;});
+    $("#recentList").prepend(row);
+    showToast(state.lang==="en"?"Saved":"تم الحفظ");
+  },1150);
+});
+
+/* ---------- orders: skeleton → rows, search + filter ---------- */
+var ORDERS=[
+ {no:"1042",t:"فستان سهرة",te:"Evening dress",st:"ready",stAr:"بانتظار التسليم",stEn:"Awaiting delivery",sub:"تسليم متوقع 08/09/2026 · ريم العلي",subEn:"Delivery expected 08/09/2026 · Reem Al-Ali",m:"50.00 د.أ",mExtra:"opron"},
+ {no:"1041",t:"طرحة مطرزة",te:"Embroidered scarf",st:"prep",stAr:"قيد التجهيز",stEn:"Preparing",sub:"تسليم متوقع 10/09/2026",subEn:"Delivery expected 10/09/2026",m:"180.00 د.أ"},
+ {no:"1040",t:"جاكيت جينز",te:"Denim jacket",st:"done",stAr:"مكتمل",stEn:"Completed",sub:"تم الاعتراف بالبيع · 04/09/2026",subEn:"Sale recognized · 04/09/2026",m:"95.00 د.أ",done:true},
+ {no:"1039",t:"بدلة رجالية",te:"Men's suit",st:"new",stAr:"جديد",stEn:"New",sub:"مؤمن النقير · السعر غير معروف قبل التسعير",subEn:"Mumen Al-Nuqeir · price unknown until priced",m:null}
+];
+function statusChip(o){
+  if(o.done)return '<span class="chip synced"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg><span data-en="Sale recognized">تم الاعتراف بالبيع</span></span>';
+  if(!o.m)return '<span class="chip estimated"><span data-en="Unknown">قيمة غير محددة</span></span>';
+  if(o.st==="ready")return '<span class="chip pending"><span data-en="Deposit pending">عربون — قيد الانتظار</span></span>';
+  return '<span class="chip neutral"><span>'+o.stAr+'</span></span>';
+}
+var DOT={ready:"var(--accent)",prep:"var(--brand)",done:"var(--ok)",new:"var(--muted)"};
+function renderOrders(){
+  var list=$("#orderList");list.innerHTML="";
+  var q=($("#orderSearch").value||"").trim();
+  ORDERS.forEach(function(o){
+    if(state.ordersFilter!=="all"&&o.st!==state.ordersFilter)return;
+    if(q&&(o.t+" "+o.no+" "+o.te).indexOf(q)===-1)return;
+    var row=document.createElement("div");row.className="row sec";row.dataset.status=o.st;
+    var dot='<span style="width:7px;height:7px;border-radius:50%;flex:none;background:'+(DOT[o.st]||"var(--muted)")+'"></span>';
+    var money=o.m?'<span class="money" style="font-size:14.5px">'+o.m+'</span>':'';
+    row.innerHTML=dot+'<div class="r-main"><div class="r-title"><span class="num">#'+o.no+'</span> — <span data-en="'+o.te+'">'+o.t+'</span></div><div class="r-sub" data-en="'+o.subEn+'">'+o.sub+'</div></div><div class="r-side">'+money+statusChip(o)+'</div>';
+    row.querySelectorAll("[data-en]").forEach(function(n){n.dataset.ar=n.textContent;});
+    list.appendChild(row);
+  });
+  if(!list.children.length){list.innerHTML='<div class="row sec"><div class="r-main"><div class="r-title" data-en="No orders match">لا طلبات مطابقة</div><div class="r-sub" data-en="Try another search or filter">جرّب بحثًا أو تصفية آخر</div></div></div>';list.querySelectorAll("[data-en]").forEach(function(n){n.dataset.ar=n.textContent;});}
+  var c=$("#ordersCount");c.textContent=String(list.children.length);c.dataset.ar=String(list.children.length);
+  state.ordersRendered=true;setLang();
+}
+$("#orderSearch").addEventListener("input",function(){if(state.ordersRendered)renderOrders();});
+
+/* ---------- sheet (filter + collect) ---------- */
+var sheet=$("#sheet"),sheetTitle=$("#sheetTitle"),sheetBody=$("#sheetBody"),lastFocus=null,sheetMode="filter";
+var filterHTML=sheetBody.innerHTML;
+function openSheet(mode,customer,amount){
+  sheetMode=mode;lastFocus=document.activeElement;
+  if(mode==="collect"){
+    var remaining=(640-parseFloat(amount)).toFixed(2);
+    sheetTitle.textContent=state.lang==="en"?"Record collection — "+customer:"تسجيل تحصيل — "+customer;
+    sheetTitle.dataset.ar="تسجيل تحصيل — "+customer;sheetTitle.dataset.en="Record collection — "+customer;
+    sheetBody.innerHTML='<div class="fx"><b data-en="Effect preview:">معاينة الأثر:</b> <span data-en="The amount becomes available cash, and «owed to you» drops to '+remaining+' JOD.">سيتحول <span class="money">'+amount+' د.أ</span> إلى نقد متاح، وينخفض «ليّ» إلى <span class="money">'+remaining+' د.أ</span>.</span></div>';
+    sheetBody.querySelectorAll("[data-en]").forEach(function(n){if(!n.dataset.ar)n.dataset.ar=n.textContent;});
+    $("#filterApply").textContent=state.lang==="en"?"Confirm collection":"تأكيد التحصيل";
+    $("#filterApply").dataset.ar="تأكيد التحصيل";$("#filterApply").dataset.en="Confirm collection";
+    sheetBody.dataset.customer=customer;sheetBody.dataset.amount=amount;
+  }else{
+    sheetTitle.textContent=state.lang==="en"?"Filter orders":"تصفية الطلبات";
+    sheetTitle.dataset.ar="تصفية الطلبات";sheetTitle.dataset.en="Filter orders";
+    sheetBody.innerHTML=filterHTML;
+    bindFilterChips();
+    $("#filterApply").textContent=state.lang==="en"?"Show results":"عرض النتائج";
+    $("#filterApply").dataset.ar="عرض النتائج";$("#filterApply").dataset.en="Show results";
+  }
+  sheet.classList.add("open");
+  $(".s-close",sheet).focus();
+}
+function closeSheet(){sheet.classList.remove("open");if(lastFocus)lastFocus.focus();}
+sheet.addEventListener("click",function(e){if(e.target.closest("[data-close]"))closeSheet();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&sheet.classList.contains("open"))closeSheet();});
+function bindFilterChips(){
+  $$("#filterChips button").forEach(function(b){b.addEventListener("click",function(){$$("#filterChips button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});state.ordersFilter=b.dataset.f;});});
+}
+bindFilterChips();
+$("#filterBtn").addEventListener("click",function(){openSheet("filter");});
+$("#filterApply").addEventListener("click",function(){
+  if(sheetMode==="filter"){if(state.ordersRendered)renderOrders();closeSheet();}
+  else{
+    var c=sheetBody.dataset.customer,a=sheetBody.dataset.amount;
+    closeSheet();
+    setTimeout(function(){
+      showToast(state.lang==="en"?"Collection recorded — documented":"تم تسجيل التحصيل — موثق");
+      $$("[data-collect]").forEach(function(b){
+        if(b.dataset.collect===c+"|"+a){
+          var row=b.closest(".row");
+          var sub=row.querySelector(".r-sub");
+          sub.innerHTML='<span class="chip synced"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg><span data-en="Collected">محصّل</span></span>';
+          sub.querySelectorAll("[data-en]").forEach(function(n){n.dataset.ar=n.textContent;});
+          b.disabled=true;b.style.opacity=".5";
+        }
+      });
+    },160);
+  }
+});
+document.addEventListener("click",function(e){var b=e.target.closest("[data-collect]");if(b&&!b.disabled){var p=b.dataset.collect.split("|");openSheet("collect",p[0],p[1]);}});
+
+/* ---------- cash closing ---------- */
+var counted=$("#counted"),diffBand=$("#diffBand"),diffVal=$("#diffVal"),SYS=1245.50;
+counted.addEventListener("input",function(){
+  var v=parseFloat(String(counted.value).replace(/[,\s]/g,""));
+  if(isNaN(v)||counted.value===""){diffBand.style.display="none";return;}
+  diffBand.style.display="";
+  var d=Math.round((v-SYS)*100)/100;
+  if(d===0){diffVal.textContent="0.00 د.أ";diffVal.style.color="var(--ok)";diffVal.dataset.ar="0.00 د.أ";diffVal.dataset.en="0.00 د.أ";}
+  else{diffVal.textContent=(d>0?"+":"−")+fmt(Math.abs(d))+" د.أ";diffVal.style.color="var(--danger)";diffVal.dataset.ar=diffVal.textContent;diffVal.dataset.en=diffVal.textContent;}
+});
+var closeBtn=$("#closeBtn");
+closeBtn.addEventListener("click",function(){
+  if(closeBtn.classList.contains("busy"))return;
+  closeBtn.classList.add("busy");closeBtn.disabled=true;
+  setTimeout(function(){closeBtn.classList.remove("busy");closeBtn.disabled=false;showToast(state.lang==="en"?"Closing documented":"تم توثيق الإغلاق");},1100);
+});
+
+/* ---------- motion switch (settings) two-way ---------- */
+$("#motionSwitch").addEventListener("click",function(){
+  var next=this.getAttribute("aria-checked")!=="true";
+  this.setAttribute("aria-checked",next?"true":"false");
+  state.motion=next?"reduced":"normal";
+  document.body.dataset.motion=state.motion;
+  $$("#seg-motion button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.motion===state.motion?"true":"false");});
+});
+
+/* ---------- assistant ---------- */
+var ANSWERS=[
+ {a:"عليّك 640.00 د.أ لثلاثة عملاء؛ الأقدم متأخر 12 يومًا: خالد المستودع 85.00 د.أ. أقرب تحصيل مقترح: سمية للتجهيزات 320.00 د.أ بتاريخ 18/09/2026.",ae:"You are owed 640.00 JOD by three customers; the oldest is 12 days overdue: Khaled Al-Mustawda 85.00 JOD. Nearest suggested collection: Sumia Textiles 320.00 JOD on 18/09/2026."},
+ {a:"وارد الأسبوع 815.00 د.أ وصادر 503.00 د.أ — صافي +312.00 د.أ. أعلى يوم: 05/09/2026. يوم 29/08/2026 لا توجد بيانات مسجلة.",ae:"This week: in 815.00 JOD, out 503.00 JOD — net +312.00 JOD. Highest day: 05/09/2026. No data recorded for 29/08/2026."},
+ {a:"يودي واحد معلق: 150.00 د.أ بانتظار تأكيد تسليم الطلب #1042. إنه سيولة مرتبطة بالتزام — لا يُعترف به ربحًا حتى الاكتمال.",ae:"One pending deposit: 150.00 JOD awaiting delivery confirmation of order #1042. It is liquidity linked to an obligation — recognized as profit only on completion."}
+];
+var QS=[["من ليّ عليه؟","Who owes me?"],["كيف كانت حركة الأسبوع؟","How was this week's cash?"],["أي ودائع معلقة؟","What deposits are pending?"]];
+function addMsg(text,me){
+  var m=document.createElement("div");m.className="msg "+(me?"me":"bot");
+  m.textContent=text;m.dataset.ar=text;m.dataset.en=text;
+  $("#chat").appendChild(m);appScroll.scrollTop=appScroll.scrollHeight;
+}
+function ask(i){
+  addMsg(QS[i][0],true);
+  setTimeout(function(){addMsg(state.lang==="en"?ANSWERS[i].ae:ANSWERS[i].a,false);},700);
+}
+$$(".sugg [data-q]").forEach(function(b){b.addEventListener("click",function(){ask(+b.dataset.q);});});
+$("#chatSend").addEventListener("click",function(){
+  var v=$("#chatInput").value.trim();if(!v)return;
+  addMsg(v,true);$("#chatInput").value="";
+  setTimeout(function(){addMsg(state.lang==="en"?"Here is what I can confirm from your records now: available 1,245.50 JOD, owed to you 640.00 JOD, you owe 420.00 JOD.":"هذا ما أستطيع تأكيده من سجلاتك الآن: المتاح 1,245.50 د.أ، ليّ 640.00 د.أ، عليّ 420.00 د.أ.",false);},800);
+});
+})();
+</script>
+</body>
+</html>
