@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Micro — الطاولة · The Counter (direction A)</title>
+<style>
+/* ============ Direction A «الطاولة» — The Counter ============ */
+/* Pinned money band · full-bleed rows · frosted bar · zero containers */
+:root{
+  --bg:#f7f2ec; --band:#f4e4db; --band-ink:#964e33;
+  --ink:#221b15; --ink2:#6f6257; --ink3:#9a8b7d;
+  --hair:rgba(34,27,21,.10); --hair-strong:rgba(34,27,21,.16);
+  --bar-bg:rgba(247,242,236,.86);
+  --action:#964e33; --action-press:#b4613f; --on-action:#ffffff;
+  --pos:#057b7c; --pos-soft:#e3f5f5;
+  --neg:#964e33;
+  --warn:#9a6700; --warn-soft:#f6ecdc;
+  --danger:#b3362e; --danger-soft:#faeae7;
+  --scrim:rgba(20,16,12,.45);
+  --accent-graphics:#079fa0;
+  --w:390px;
+}
+html[data-theme="dark"]{
+  --bg:#18140f; --band:#332d27; --band-ink:#d59172;
+  --ink:#f3eadf; --ink2:#b7a897; --ink3:#8a7c6d;
+  --hair:rgba(243,234,223,.11); --hair-strong:rgba(243,234,223,.18);
+  --bar-bg:rgba(24,20,15,.82);
+  --action:#d59172; --action-press:#cc785c; --on-action:#1c1815;
+  --pos:#8fd5d6; --pos-soft:#233031;
+  --neg:#d59172;
+  --warn:#e6b455; --warn-soft:#2e2820;
+  --danger:#ff9d94; --danger-soft:#3a2320;
+  --accent-graphics:#5ec0c1;
+  --scrim:rgba(0,0,0,.55);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:-apple-system,"SF Arabic","Segoe UI","Noto Sans Arabic",Tahoma,Arial,sans-serif;
+  background:#ecebe8; color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  min-height:100dvh; overflow:hidden;
+}
+html[data-theme="dark"] body{background:#100d0a}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+bdi{unicode-bidi:isolate}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;letter-spacing:0}
+
+/* ---------- stage & app frame (no bezel, no status bar — just a screen) ---------- */
+#stage{position:relative}
+.app{
+  width:var(--w); height:100dvh; background:var(--bg);
+  position:relative; overflow:hidden; direction:rtl;
+}
+@media (min-width:560px) and (min-height:700px){
+  .app{height:min(880px,calc(100dvh - 48px)); border:1px solid var(--hair-strong)}
+}
+
+/* ---------- screens & stack ---------- */
+.viewport{position:absolute; inset:0; overflow:hidden}
+.screen{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  background:var(--bg); will-change:transform; z-index:1;
+}
+.screen.under{z-index:0}
+.screen.anim{transition:transform var(--push-dur,240ms) cubic-bezier(0.32,0.72,0,1), opacity var(--push-dur,240ms) cubic-bezier(0.32,0.72,0,1)}
+.screen.dim::after{
+  content:""; position:absolute; inset:0; background:#000; opacity:0; pointer-events:none;
+  transition:opacity var(--push-dur,240ms) cubic-bezier(0.32,0.72,0,1);
+}
+.screen.dim.dimmed::after{opacity:.14}
+.scroll{flex:1; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+
+/* ---------- pinned money band (structural chrome, never a card) ---------- */
+.band{
+  position:sticky; top:0; z-index:5; background:var(--band);
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 12px;
+  box-shadow:0 .5px 0 var(--hair);
+}
+.band .toprow{display:flex; align-items:center; gap:8px; min-height:36px}
+.band .date{font-size:13px; font-weight:600; color:var(--ink2)}
+.band .sp{flex:1}
+.icbtn{
+  width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  color:var(--ink2); flex:0 0 auto;
+}
+.icbtn:active{background:rgba(0,0,0,.07)}
+.hero{display:flex; align-items:flex-end; justify-content:space-between; gap:8px; padding-top:2px}
+.hero .lbl{font-size:13px; color:var(--ink2); margin-bottom:2px}
+.hero .val{font-size:36px; line-height:1.15; font-weight:700; color:var(--band-ink)}
+.hero .val .unit{font-size:15px; font-weight:600; margin-inline-start:6px}
+.hero .side{text-align:left; padding-bottom:6px; flex:0 0 auto}
+.hero .side .sub{font-size:13px; color:var(--ink2); line-height:1.7}
+.hero .side .sub b{font-weight:600; color:var(--ink)}
+.band .subline{display:flex; align-items:center; gap:10px; margin-top:8px; font-size:13px; color:var(--ink2)}
+.band .subline .sep{width:1px; height:12px; background:var(--hair-strong)}
+.band .syncmeta{display:flex; align-items:center; gap:5px; font-size:13px; color:var(--ink2)}
+.band.band-compact .hero .val{font-size:24px}
+.band.band-compact .hero .lbl{display:none}
+.band.band-compact .subline{display:none}
+.band .band-inner{transition:opacity 160ms ease}
+html.rm .band .band-inner{transition:none}
+.gloss{font-size:13px; color:var(--ink2); margin-top:6px}
+
+/* offline banner — inline structural notice, not a floating card */
+.offline{
+  display:none; align-items:center; gap:8px; padding:8px 16px;
+  background:var(--warn-soft); color:var(--warn); font-size:13px; font-weight:500;
+  box-shadow:0 .5px 0 var(--hair);
+}
+.offline.show{display:flex}
+
+/* ---------- rows (full-bleed, square, hairline separated) ---------- */
+.daysep{
+  display:flex; align-items:center; gap:10px; padding:18px 16px 8px;
+  font-size:13px; font-weight:600; color:var(--ink2);
+}
+.daysep::after{content:""; flex:1; height:1px; background:var(--hair)}
+.row{
+  position:relative; display:flex; align-items:center; gap:12px;
+  min-height:64px; padding:0 16px; width:100%; text-align:start;
+}
+.row.tap:active{background:rgba(0,0,0,.055)}
+html[data-theme="dark"] .row.tap:active{background:rgba(255,255,255,.06)}
+.row + .row::before{
+  content:""; position:absolute; top:0; inset-inline-start:16px; inset-inline-end:0;
+  height:1px; background:var(--hair);
+}
+.row .rt{flex:1; min-width:0}
+.row .rt .t{font-size:15px; line-height:1.5; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.row .rt .m{font-size:13px; line-height:1.6; color:var(--ink2); display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.amt{flex:0 0 auto; min-width:96px; text-align:left; font-size:15px; font-weight:600; direction:ltr}
+.amt .unit{font-size:12px; font-weight:500; color:var(--ink3); margin-inline-start:2px}
+.amt .au{display:block; font-size:13px; line-height:1.4; color:var(--ink3); font-weight:500; direction:rtl; text-align:left}
+.cu{font-size:12px; color:var(--ink3); font-weight:500}
+.viewport{background:#000}
+.stepper{display:flex; gap:6px; padding:14px 16px 4px}
+.stepper .st{flex:1; text-align:center; font-size:13px; color:var(--ink3); position:relative; padding-top:16px}
+.stepper .st::before{content:""; position:absolute; top:4px; inset-inline-start:15%; inset-inline-end:15%; height:2px; border-radius:2px; background:var(--hair)}
+.stepper .st::after{content:""; position:absolute; top:0; inset-inline-start:calc(50% - 7px); width:14px; height:14px; border-radius:999px; background:var(--bg); box-shadow:inset 0 0 0 2px var(--hair-strong)}
+.stepper .st.done::after{background:var(--pos); box-shadow:none}
+.stepper .st.done{color:var(--ink2)}
+.stepper .st.now{color:var(--band-ink); font-weight:600}
+.stepper .st.now::after{box-shadow:inset 0 0 0 2px var(--band-ink)}
+.amt.in{color:var(--pos)} .amt.out{color:var(--neg)}
+.amt.acct{color:var(--ink)}
+.chev{color:var(--ink3); flex:0 0 auto; font-size:18px; line-height:1}
+
+/* state chips — glyph + word, color tertiary */
+.chip{
+  display:inline-flex; align-items:center; gap:4px; font-size:13px; line-height:1.6;
+  padding:1px 8px; border-radius:999px; background:var(--warn-soft); color:var(--warn);
+  white-space:nowrap;
+}
+.chip.neutral{background:transparent; color:var(--ink2); box-shadow:inset 0 0 0 1px var(--hair-strong)}
+.chip.ok{background:transparent; color:var(--ink2)}
+.chip.sync{background:var(--pos-soft); color:var(--pos)}
+.chip.conflict{background:var(--danger-soft); color:var(--danger); font-weight:600}
+.chip.est{background:transparent; color:var(--ink2); box-shadow:inset 0 0 0 1px var(--hair-strong)}
+.row.cancelled .t,.row.cancelled .amt{color:var(--ink3)}
+.row.cancelled .m{color:var(--ink3)}
+
+/* swipe action pan (A signature: flat tonal pans, no buttons in rows) */
+.rowwrap{position:relative; overflow:hidden}
+.rowwrap .pan{
+  position:absolute; top:0; bottom:0; inset-inline-start:0; display:flex; align-items:stretch;
+  transform:translateX(100%); /* hidden beyond the end side */
+}
+.rowwrap .pan button{
+  width:76px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+  font-size:13px; font-weight:600; color:#fff;
+}
+.rowwrap .pan .collect{background:var(--pos)}
+html[data-theme="dark"] .rowwrap .pan .collect{background:#0f6364; color:#dff5f5}
+.rowwrap .pan .edit{background:#8a7c6d; color:#fff}
+
+/* ---------- actions ---------- */
+.primary{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  min-height:52px; padding:0 20px; border-radius:14px; width:100%;
+  background:var(--action); color:var(--on-action); font-size:15px; font-weight:600;
+}
+.primary:active{background:var(--action-press)}
+.textact{color:var(--action); font-weight:600; font-size:15px; min-height:44px; display:inline-flex; align-items:center}
+.actionrow{padding:14px 16px}
+
+/* segmented control */
+.seg{
+  display:flex; background:rgba(0,0,0,.055); border-radius:12px; padding:3px; gap:2px;
+  margin:12px 16px 4px;
+}
+html[data-theme="dark"] .seg{background:rgba(255,255,255,.07)}
+.seg button{
+  flex:1; min-height:40px; border-radius:10px; font-size:14px; font-weight:600; color:var(--ink2);
+}
+.seg button[aria-selected="true"]{background:var(--bg); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.10)}
+
+/* filter chips */
+.fchips{display:flex; gap:8px; padding:10px 16px 6px; overflow-x:auto; scrollbar-width:none}
+.fchips::-webkit-scrollbar{display:none}
+.fchip{
+  flex:0 0 auto; min-height:36px; padding:0 14px; border-radius:999px; font-size:13px; font-weight:600;
+  color:var(--ink2); box-shadow:inset 0 0 0 1px var(--hair-strong); display:inline-flex; align-items:center;
+}
+.fchip[aria-pressed="true"]{background:var(--band); color:var(--band-ink); box-shadow:none}
+
+/* ---------- charts (answer a real question; source caption + text interpretation) ---------- */
+.chart{padding:4px 16px 0}
+.chart svg{width:100%; display:block}
+.chart .gapnote{font-size:13px; color:var(--ink2); margin-top:6px; line-height:1.6}
+.chart .interp{font-size:13px; color:var(--ink2); margin-top:8px; line-height:1.7; padding-top:8px; border-top:1px dashed var(--hair)}
+.srccap{font-size:13px; color:var(--ink3); padding:6px 16px 0; line-height:1.6}
+.hbar{padding:2px 16px}
+.hbar .hb{display:flex; align-items:center; gap:10px; min-height:34px; font-size:13px}
+.hbar .hb .lab{flex:0 0 84px; color:var(--ink2)}
+.hbar .hb .track{flex:1; height:10px; border-radius:999px; background:rgba(0,0,0,.05); position:relative; overflow:hidden}
+html[data-theme="dark"] .hbar .hb .track{background:rgba(255,255,255,.08)}
+.hbar .hb .fill{position:absolute; top:0; bottom:0; inset-inline-start:0; border-radius:999px; background:var(--band-ink)}
+.hbar .hb .v{flex:0 0 64px; text-align:left; font-weight:600}
+
+/* ---------- tab bar (frosted, translucent) ---------- */
+.tabbar{
+  position:absolute; bottom:0; inset-inline:0; z-index:20;
+  display:flex; align-items:stretch;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:var(--bar-bg);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2); backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 -.5px 0 var(--hair-strong);
+}
+.tabbar button{
+  flex:1; min-height:60px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  font-size:12px; font-weight:600; color:var(--ink3);
+}
+.tabbar button .tico{font-size:20px; line-height:1; font-style:normal}
+.tabbar button[aria-current="page"]{color:var(--band-ink)}
+.tabbar .dockslot{flex:1.15; display:flex; align-items:center; justify-content:center}
+.dock{
+  min-width:76px; min-height:44px; padding:0 18px; border-radius:14px;
+  background:var(--action); color:var(--on-action); font-size:15px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+.dock:active{background:var(--action-press)}
+
+/* ---------- bottom sheet ---------- */
+.scrim{
+  position:absolute; inset:0; background:var(--scrim); z-index:40; opacity:0;
+  transition:opacity 200ms cubic-bezier(0.2,0,0,1);
+}
+.scrim.show{opacity:1}
+.sheet{
+  position:absolute; bottom:0; inset-inline:0; z-index:41; background:var(--bg);
+  border-radius:20px 20px 0 0; transform:translateY(100%);
+  transition:transform 240ms cubic-bezier(0.22,1,0.36,1);
+  max-height:88%; display:flex; flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.sheet.show{transform:translateY(0)}
+html.rm .sheet{transition:none}
+.sheet .grab{padding:10px 0 2px; display:flex; justify-content:center; touch-action:none; cursor:grab}
+.sheet .grab i{width:36px; height:4px; border-radius:4px; background:var(--hair-strong); display:block}
+.sheet .sh-title{font-size:17px; font-weight:700; padding:6px 20px 4px; display:flex; align-items:center; gap:8px}
+.sheet .sh-body{overflow-y:auto; padding:4px 20px 20px; scrollbar-width:none}
+.sheet .sh-body::-webkit-scrollbar{display:none}
+
+/* capture form */
+.amount-field{display:flex; align-items:baseline; gap:8px; padding:14px 0 6px; border-bottom:2px solid var(--action); direction:ltr; justify-content:flex-end}
+.amount-field input{
+  border:0; outline:0; background:transparent; width:100%; text-align:right;
+  font-size:32px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink);
+}
+.amount-field .cu{font-size:16px; color:var(--ink2); font-weight:600}
+.flabel{font-size:13px; font-weight:600; color:var(--ink2); margin:16px 0 6px}
+.field{
+  display:flex; align-items:center; gap:8px; min-height:52px; padding:0 14px;
+  border-radius:12px; box-shadow:inset 0 0 0 1px var(--hair-strong); background:var(--bg);
+}
+.field input{border:0; outline:0; background:transparent; width:100%; font-size:15px}
+.pickrow{min-height:52px; display:flex; align-items:center; gap:10px; width:100%; text-align:start; padding:0 4px}
+.pickrow .pt{flex:1; font-size:15px; font-weight:500}
+.pickrow .pv{font-size:14px; font-weight:600; direction:ltr}
+.formerr{display:none; margin-top:12px; padding:10px 14px; border-radius:12px; background:var(--danger-soft); color:var(--danger); font-size:13px; font-weight:500; line-height:1.6}
+.formerr.show{display:block}
+/* receipt / quiet completion */
+.receipt{text-align:center; padding:18px 8px 6px}
+.receipt .mark{
+  width:52px; height:52px; margin:0 auto 12px; border-radius:999px;
+  background:var(--pos-soft); color:var(--pos); display:flex; align-items:center; justify-content:center; font-size:26px;
+}
+.receipt .sent{font-size:16px; line-height:1.7; font-weight:600}
+.receipt .detail{font-size:14px; color:var(--ink2); margin-top:8px; line-height:1.8}
+.receipt .flash{animation:flash 600ms ease 1}
+@keyframes flash{0%{background:var(--pos-soft)}100%{background:transparent}}
+html.rm .receipt .flash{animation:none}
+
+/* ---------- dialog ---------- */
+.dlgwrap{position:absolute; inset:0; z-index:60; display:none; align-items:center; justify-content:center; padding:24px}
+.dlgwrap.show{display:flex}
+.dlg{
+  background:var(--bg); border-radius:20px; padding:20px; width:100%; max-width:340px;
+  transform:scale(.94); opacity:0; transition:transform 180ms cubic-bezier(0.2,0,0,1), opacity 180ms ease;
+}
+.dlgwrap.show .dlg{transform:scale(1); opacity:1}
+html.rm .dlg{transition:none}
+.dlg h3{font-size:16px; font-weight:700; margin-bottom:8px}
+.dlg p{font-size:14px; line-height:1.7; color:var(--ink2)}
+.dlg .fx{margin:12px 0; padding:12px 14px; border-radius:12px; background:var(--band); font-size:13px; line-height:1.9; color:var(--ink)}
+.dlg .btns{display:flex; gap:10px; margin-top:16px}
+.dlg .btns .primary{flex:1; min-height:46px; border-radius:12px; font-size:14px}
+.dlg .btns .ghost{
+  flex:1; min-height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:600; color:var(--ink2); box-shadow:inset 0 0 0 1px var(--hair-strong);
+}
+
+/* ---------- skeleton (first-visit loading) ---------- */
+.skel{padding:0 16px}
+.skel .sk{height:56px; margin:10px 0; border-radius:10px; background:linear-gradient(0deg,rgba(0,0,0,.045),rgba(0,0,0,.045))}
+html[data-theme="dark"] .skel .sk{background:rgba(255,255,255,.05)}
+html:not(.rm) .skel .sk{animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+html.rm .skel .sk{animation:none}
+
+/* empty state — inline, dashed slots, not an illustration card */
+.empty{padding:36px 24px; text-align:center}
+.empty .e1{font-size:15px; font-weight:600; margin-top:10px}
+.empty .e2{font-size:13px; color:var(--ink2); margin-top:6px; line-height:1.7}
+.empty .dashes{display:flex; flex-direction:column; gap:10px; margin-top:18px}
+.empty .dashes i{display:block; height:12px; border-radius:6px; border:1.5px dashed var(--hair-strong)}
+
+/* search */
+.searchbar{display:flex; align-items:center; gap:8px; margin:10px 16px; min-height:48px; padding:0 14px; border-radius:13px; background:rgba(0,0,0,.055)}
+html[data-theme="dark"] .searchbar{background:rgba(255,255,255,.07)}
+.searchbar input{flex:1; border:0; outline:0; background:transparent; font-size:15px}
+.recents{display:flex; gap:8px; padding:4px 16px; flex-wrap:wrap}
+
+/* section block on settings-like lists */
+.mini-h{padding:16px 16px 6px; font-size:13px; font-weight:600; color:var(--ink2)}
+
+/* ---------- review toolbar — OUTSIDE the app surface, review-only ---------- */
+#rv{
+  position:fixed; bottom:10px; inset-inline-start:10px; z-index:999;
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  background:#fff; border:1px solid #d8d2c8; border-radius:999px; padding:6px 10px;
+  font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; color:#57534e;
+  box-shadow:0 4px 16px rgba(0,0,0,.12); max-width:calc(100vw - 20px);
+}
+#rv .rv-tag{font-weight:700; color:#964e33; letter-spacing:0}
+#rv button{
+  border:1px solid #d8d2c8; border-radius:999px; padding:3px 8px; font-size:11px; color:#44403c; background:#faf9f7;
+}
+#rv button[aria-pressed="true"]{background:#964e33; color:#fff; border-color:#964e33}
+#rv .rv-lbl{color:#a8a29e}
+@media (max-width:559px){
+  #rv{display:none; bottom:44px; inset-inline-start:8px; border-radius:14px; max-width:calc(100vw - 16px); flex-direction:column; align-items:flex-start; padding:10px 12px}
+  #rv.open{display:flex}
+  #rvHandle{display:flex}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="app" id="app" aria-label="Micro — واجهة المنتج">
+    <div class="viewport" id="viewport"></div>
+
+    <nav class="tabbar" id="tabbar" aria-label="التنقل الرئيسي">
+      <button data-tab="today" aria-current="page"><i class="tico">☾</i>اليوم</button>
+      <button data-tab="money"><i class="tico">◉</i>المال</button>
+      <div class="dockslot"><button class="dock" id="dock">سجّل</button></div>
+      <button data-tab="people"><i class="tico">☉</i>الناس</button>
+      <button data-tab="work"><i class="tico">≡</i>العمل</button>
+    </nav>
+
+    <div class="scrim" id="scrim"></div>
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true">
+      <div class="grab" id="grab"><i></i></div>
+      <div class="sh-title" id="shTitle"></div>
+      <div class="sh-body" id="shBody"></div>
+    </div>
+    <div class="dlgwrap" id="dlgwrap">
+      <div class="dlg" id="dlg" role="alertdialog" aria-modal="true"></div>
+    </div>
+  </div>
+</div>
+
+<button id="rvHandle" aria-label="أدوات المراجعة">مراجعة ▲</button>
+<div id="rv" aria-label="أدوات مراجعة — ليست من المنتج">
+  <span class="rv-tag">مراجعة</span>
+  <span class="rv-lbl">عرض</span>
+  <button data-w="320">320</button><button data-w="360">360</button><button data-w="390" aria-pressed="true">390</button><button data-w="430">430</button>
+  <span class="rv-lbl">|</span>
+  <button id="rvTheme">داكن</button>
+  <button id="rvMotion">حركة مخففة</button>
+  <a href="../review-index.html" style="text-decoration:none"><button>الفهرس ↗</button></a>
+</div>
+
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+/* ================= Micro — Direction A «الطاولة» The Counter =================
+   Demo prototype for the review gate. In-memory data only. No backend.       */
+
+/* ---------- formatting (bidi contract: digits isolated, unit in RTL flow) ---- */
+const fmt = n => (n < 0 ? '-' : '') + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits: 3, maximumFractionDigits: 3});
+const NUM = n => `<bdi dir="ltr" class="num">${fmt(n)}</bdi>`;
+const NUMS = n => `<bdi dir="ltr" class="num">${n > 0 ? '+' : ''}${fmt(n)}</bdi>`;
+const JOD = n => `${NUM(n)} <span class="cu">د.أ</span>`;
+
+/* ---------- state (in-memory; reconciliation is binding) --------------------
+   07/09/2026: صندوق 431.100 مؤكد (+27.750 بانتظار المزامنة) · لي 664.250 · عليّ 348.500 */
+const S = {
+  cash: 431.1, cashPending: 27.75, openingCash: 412.35,
+  moneyLoaded: false, offline: false, demoError: false, errorShown: false,
+  closingDone: false, conflictOpen: true,
+  parties: {
+    umAhmad:    {name:'أم أحمد (الجوار)',        bal:9.25,  aging:'0–7 يوم',   last:'02/09', kind:'c', lastEv:'دفعة + بيع آجل'},
+    abuMohammad:{name:'أبو محمد',               bal:22.75, aging:'8–30 يوم',  last:'05/09', kind:'c', lastEv:'استلام دفعة'},
+    sham:       {name:'مطعم الشام',             bal:156.0, aging:'8–30 يوم',  last:'06/09', kind:'c', lastEv:'استلام دفعة'},
+    warshah:    {name:'ورشة أبو يوسف',          bal:38.4,  aging:'0–7 يوم',   last:'04/09', kind:'c', lastEv:'بيع آجل'},
+    khaled:     {name:'مطبخ أم خالد (مناسبات)', bal:63.2,  aging:'31–60 يوم', last:'21/08', kind:'c', lastEv:'دفعة 15.000'},
+    nahda:      {name:'كافتيريا مدرسة النهضة',  bal:335.0, aging:'8–30 يوم',  last:'03/09', kind:'c', lastEv:'بيع آجل'},
+    sama:       {name:'كافيه سما',              bal:31.4,  aging:'8–30 يوم',  last:'06/09', kind:'c', lastEv:'دفعة تحت القرار', conflict:true},
+    ghaith:     {name:'أم غيث',                 bal:8.25,  aging:'8–30 يوم',  last:'29/08', kind:'c', lastEv:'بيع آجل'},
+    hasan:      {name:'مخازن الحسن (خضار)',     bal:290.5, aging:'',          last:'06/09', kind:'s', lastEv:'بضاعة آجل'},
+    marai:      {name:'شركة المراعي (ألبان)',   bal:0,     aging:'',          last:'03/09', kind:'s', lastEv:'تسوية كاملة', settled:true},
+    salim:      {name:'توزيعات أبو سليم',       bal:58.0,  aging:'',          last:'24/08', kind:'s', lastEv:'شراء نقدي'},
+    yasmine:    {name:'معمل الياسمين (أكياس)',  bal:0,     aging:'',          last:'19/08', kind:'s', lastEv:'سداد كامل', settled:true}
+  },
+  events: [
+    {id:1,  d:'01/09', day:'الثلاثاء', t:'بيع نقدي',                         cin:24.5,  state:'ok',       time:'09:10'},
+    {id:2,  d:'01/09', day:'الثلاثاء', t:'بيع آجل',       party:'sham',      acct:'li',  av:50,   state:'ok',       time:'11:25'},
+    {id:3,  d:'01/09', day:'الثلاثاء', t:'دفعة لمورد',    party:'hasan',     cout:40,    aalay:-40, state:'ok',     time:'12:40'},
+    {id:4,  d:'01/09', day:'الثلاثاء', t:'كهرباء — فاتورة غشت قبل القراءة',  cout:18,   state:'est',      time:'13:05', note:'قيمة تقديرية حتى وصول الفاتورة'},
+    {id:5,  d:'02/09', day:'الأربعاء', t:'بيع نقدي — زبون عابر',             cin:15.25, state:'unknown',  time:'08:30', note:'الاسم غير محدد بعد — سجّله لاحقاً'},
+    {id:6,  d:'02/09', day:'الأربعاء', t:'استلام دفعة',   party:'umAhmad',   cin:10,     ali:-10,  state:'ok',       time:'10:15'},
+    {id:7,  d:'02/09', day:'الأربعاء', t:'بيع آجل',       party:'umAhmad',   acct:'li',  av:6.75,  state:'ok',       time:'10:20'},
+    {id:8,  d:'03/09', day:'الخميس',   t:'بيع آجل',       party:'nahda',     acct:'li',  av:95,    state:'ok',       time:'09:45'},
+    {id:9,  d:'03/09', day:'الخميس',   t:'تسوية كاملة — دفعة لمورد', party:'marai', cout:96.25, aalay:-96.25, state:'ok', time:'14:00'},
+    {id:10, d:'04/09', day:'الجمعة',   t:'أجرة مندوب',                       cout:5,    state:'ok',       time:'16:30'},
+    {id:11, d:'04/09', day:'الجمعة',   t:'بيع آجل',       party:'warshah',   acct:'li',  av:38.4,  state:'ok',       time:'11:00'},
+    {id:12, d:'04/09', day:'الجمعة',   t:'بيع آجل — تكرار تسجيل', party:'warshah', state:'cancelled', time:'11:02', note:'سجل مكرر لنفس العملية — لا يُحتسب'},
+    {id:13, d:'05/09', day:'السبت',    t:'بيع نقدي',                         cin:31,    state:'ok',       time:'13:20'},
+    {id:14, d:'05/09', day:'السبت',    t:'استلام دفعة',   party:'abuMohammad', cin:25,   ali:-25,  state:'ok',       time:'17:45'},
+    {id:15, d:'05/09', day:'السبت',    t:'تسوية فاتورة كهرباء غشت',          cout:3.3, state:'adjust',   time:'12:00', note:'الفعلي 21.300 مقابل التقديري 18.000'},
+    {id:16, d:'06/09', day:'الأحد',    t:'بضاعة آجل',     party:'hasan',     acct:'alay', av:185, state:'ok',       time:'09:00'},
+    {id:17, d:'06/09', day:'الأحد',    t:'استلام دفعة',   party:'sham',      cin:80,     ali:-80,  state:'ok',       time:'19:30'},
+    {id:18, d:'06/09', day:'الأحد',    t:'دفعة من كافيه سما', party:'sama',  state:'conflict',            time:'18:40', mine:20, theirs:12, note:'سجلتَ 20.000 الساعة 18:40 — سجل الشريك 12.000'},
+    {id:19, d:'07/09', day:'الاثنين',  t:'بيع نقدي — صُبّح بدون إنترنت',     cin:27.75, state:'pending',  time:'07:35'},
+    {id:20, d:'07/09', day:'الاثنين',  t:'بنزين مولّدة (قطع كهرباء)',        cout:4.45, state:'ok',       time:'08:20'}
+  ],
+  orders: [
+    {id:'طلب-1204', party:'sham',      items:12, total:340.25, state:'prep',     d:'07/09', note:'تسليم 4 عصراً — توصيل أبو يوسف'},
+    {id:'طلب-1203', party:'sama',      items:6,  total:96.75,  state:'deliver',  d:'07/09', note:'خروج مع السائق 09:15'},
+    {id:'طلب-1202', party:'nahda',     items:9,  total:214.5,  state:'done',     d:'06/09'},
+    {id:'طلب-1201', party:'warshah',   items:3,  total:38.4,   state:'cancelled',d:'06/09', note:'طلبية مكررة — أُلغيت'},
+    {id:'طلب-1199', party:'khaled',    items:8,  total:152.0,  state:'done',     d:'05/09'}
+  ],
+  purchases: [
+    {d:'06/09', party:'hasan',   total:185.0,  state:'ok', note:'بضاعة آجل — خضار وفواكه'},
+    {d:'03/09', party:'marai',   total:96.25,  state:'ok', note:'حوالة — تسوية كاملة'},
+    {d:'01/09', party:'hasan',   total:40.0,   state:'ok', note:'دفعة نقدية'},
+    {d:'24/08', party:'salim',   total:58.0,   state:'ok', note:'شراء نقدي — مواد بقالة'}
+  ],
+  dayCash: { /* آخر 7 أيام: [دخل مؤكد, خارج مؤكد] — earliest first */
+    '01/09':[24.5,58], '02/09':[25.25,0], '03/09':[0,96.25], '04/09':[0,5],
+    '05/09':[56,3.3], '06/09':[80,0], '07/09':[27.75,4.45]
+  }
+};
+const liTotal  = () => Object.values(S.parties).filter(p => p.kind === 'c').reduce((a, p) => a + p.bal, 0);
+const alayTotal= () => Object.values(S.parties).filter(p => p.kind === 's').reduce((a, p) => a + p.bal, 0);
+
+/* ---------- env: theme / motion / width / demo params ---------- */
+const rootEl = document.documentElement;
+const q = new URLSearchParams(location.search);
+function setTheme(t){ rootEl.dataset.theme = t; try{localStorage.setItem('micro-a-theme', t);}catch(e){} syncRv(); }
+function setMotion(on){ rootEl.classList.toggle('rm', !on); $('#rvMotion').setAttribute('aria-pressed', String(!on)); }
+function setW(w){ rootEl.style.setProperty('--w', w + 'px'); syncRv(); }
+function syncRv(){
+  document.querySelectorAll('#rv [data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === parseInt(getComputedStyle(rootEl).getPropertyValue('--w')))));
+  $('#rvTheme').textContent = rootEl.dataset.theme === 'dark' ? 'فاتح' : 'داكن';
+}
+try{ const t = localStorage.getItem('micro-a-theme'); if(t) rootEl.dataset.theme = t; }catch(e){}
+if(q.get('theme') === 'dark') setTheme('dark');
+if(q.get('motion') === 'off') setMotion(false);
+if(q.get('w')) setW(+q.get('w'));
+if(q.get('demo') === 'offline') S.offline = true;
+if(q.get('demo') === 'error') S.demoError = true;
+const reduced = () => rootEl.classList.contains('rm');
+document.querySelectorAll('#rv [data-w]').forEach(b => b.onclick = () => setW(+b.dataset.w));
+$('#rvTheme').onclick = () => setTheme(rootEl.dataset.theme === 'dark' ? 'light' : 'dark');
+$('#rvMotion').onclick = () => setMotion(reduced());
+$('#rvHandle').onclick = () => $('#rv').classList.toggle('open');
+
+/* ---------- router: per-tab stacks + browser back + RTL push/pop ---------- */
+const viewport = $('#viewport');
+let curTab = 'today';
+const stackByTab = { today:[{id:'today'}], money:[{id:'money'}], people:[{id:'people'}], work:[{id:'work'}] };
+let layers = []; // {el, screen}
+const cur = () => stackByTab[curTab];
+const topScr = () => cur()[cur().length - 1];
+
+let histOK = true; try{ history.replaceState({d:0}, ''); }catch(e){ histOK = false; }
+function pushHist(){ if(histOK) try{ history.pushState({d: cur().length}, ''); }catch(e){ histOK = false; } }
+window.addEventListener('popstate', () => { if(cur().length > 1){ cur().pop(); commitPop(); } });
+function go(id, params){
+  cur().push(Object.assign({id}, params || {}));
+  commitPush(topScr()); pushHist();
+}
+function uiBack(){ if(cur().length > 1){ if(histOK) history.back(); else { cur().pop(); commitPop(); } } }
+function switchTab(t){
+  if(t === curTab){ if(cur().length > 1){ cur().splice(1); commitTab(true); } return; }
+  curTab = t; commitTab(false); pushHist();
+}
+function bindCommon(el){
+  el.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => {
+    const p = b.dataset.params ? JSON.parse(b.dataset.params) : null; go(b.dataset.go, p);
+  }));
+  el.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', uiBack));
+  el.querySelectorAll('[data-tab-go]').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tabGo)));
+  el.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => ACTIONS[b.dataset.act] && ACTIONS[b.dataset.act](b)));
+  const sc = el.querySelector('.scroll');
+  if(sc){ sc.addEventListener('scroll', () => {
+    const band = el.querySelector('.band');
+    if(band) band.classList.toggle('band-compact', sc.scrollTop > 34);
+  }, {passive:true}); }
+}
+function commitPush(screen){
+  const olds = layers.slice();
+  const el = document.createElement('div');
+  el.className = 'screen dim';
+  el.innerHTML = renderScreen(screen.id, screen);
+  viewport.appendChild(el);
+  layers.push({el, screen});
+  bindCommon(el); bindScreen(el);
+  if(!reduced()){
+    el.style.transform = 'translateX(-100%)';
+    void el.getBoundingClientRect();
+    el.classList.add('anim'); el.style.transform = 'translateX(0)';
+    olds.forEach(o => { o.el.classList.add('anim'); o.el.style.transform = 'translateX(28%)'; o.el.classList.add('dimmed'); });
+    setTimeout(() => el.classList.remove('anim'), 280);
+  } else olds.forEach(o => { o.el.style.transform = 'translateX(28%)'; o.el.classList.add('dimmed'); });
+}
+function commitPop(){
+  if(layers.length < 2) return;
+  const tl = layers.pop(); const ul = layers[layers.length - 1];
+  const done = () => { tl.el.remove(); };
+  if(!reduced()){
+    tl.el.classList.add('anim'); tl.el.style.transform = 'translateX(-100%)';
+    ul.el.classList.add('anim'); ul.el.style.transform = 'translateX(0)'; ul.el.classList.remove('dimmed');
+    setTimeout(done, 280);
+  } else { ul.el.style.transform = 'translateX(0)'; ul.el.classList.remove('dimmed'); done(); }
+}
+function commitTab(popToRoot){
+  layers.forEach(l => l.el.remove()); layers = [];
+  const el = document.createElement('div');
+  el.className = 'screen dim';
+  el.innerHTML = renderScreen(topScr().id, topScr());
+  viewport.appendChild(el); layers.push({el, screen: topScr()});
+  bindCommon(el); bindScreen(el);
+  if(!reduced() && popToRoot === false){
+    el.style.opacity = '0'; el.style.transform = 'translateY(8px)';
+    void el.getBoundingClientRect();
+    el.style.transition = 'opacity 160ms cubic-bezier(0.2,0,0,1), transform 160ms cubic-bezier(0.2,0,0,1)';
+    el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+  }
+  document.querySelectorAll('#tabbar [data-tab]').forEach(b => {
+    if(b.dataset.tab === curTab) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
+  });
+}
+document.querySelectorAll('#tabbar [data-tab]').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+$('#dock').addEventListener('click', () => openCapture());
+function rerender(){ // re-render topmost layer in place (after a mutation)
+  const l = layers[layers.length - 1];
+  const sc = l.el.querySelector('.scroll'); const st = sc ? sc.scrollTop : 0;
+  l.el.innerHTML = renderScreen(l.screen.id, l.screen);
+  bindCommon(l.el); bindScreen(l.el);
+  const sc2 = l.el.querySelector('.scroll'); if(sc2) sc2.scrollTop = st;
+}
+
+/* ---------- interactive swipe-back (RTL: from the RIGHT edge) ---------- */
+let sw = null;
+viewport.addEventListener('touchstart', e => {
+  if(cur().length < 2 || reduced()) return;
+  const t = e.touches[0];
+  if(t.clientX < viewport.clientWidth - 30) return;
+  const tl = layers[layers.length - 1], ul = layers[layers.length - 2];
+  sw = {x0: t.clientX, y0: t.clientY, w: viewport.clientWidth, tl: tl.el, ul: ul.el, on: false, t0: Date.now()};
+}, {passive:true});
+viewport.addEventListener('touchmove', e => {
+  if(!sw) return;
+  const t = e.touches[0];
+  const dx = sw.x0 - t.clientX, dy = Math.abs(t.clientY - sw.y0);
+  if(!sw.on){ if(dx > 14 && dy < 24){ sw.on = true; sw.tl.classList.remove('anim'); sw.ul.classList.remove('anim'); } else if(dx < -6 || dy > 24){ sw = null; return; } else return; }
+  const p = Math.min(Math.max(dx / (sw.w * 0.85), 0), 1);
+  sw.p = p; sw.v = dx / Math.max(Date.now() - sw.t0, 1);
+  sw.tl.style.transform = `translateX(${-p * 100}%)`;
+  sw.ul.style.transform = `translateX(${28 * (1 - p)}%)`;
+}, {passive:true});
+viewport.addEventListener('touchend', () => {
+  if(!sw) return;
+  const {tl, ul, p, v, on} = sw; sw = null;
+  if(!on) return;
+  const commit = p > 0.42 || v > 0.55;
+  tl.classList.add('anim'); ul.classList.add('anim');
+  if(commit){
+    tl.style.transform = 'translateX(-100%)'; ul.style.transform = 'translateX(0)'; ul.classList.remove('dimmed');
+    setTimeout(() => { if(cur().length > 1){ cur().pop(); layers.pop(); tl.remove(); } }, 260);
+    if(histOK) history.back();
+  } else {
+    tl.style.transform = 'translateX(0)'; ul.style.transform = 'translateX(28%)';
+  }
+});
+
+/* ---------- sheets / dialogs / receipt ---------- */
+const scrim = $('#scrim'), sheetEl = $('#sheet');
+let sheetCb = null, captureDirty = false;
+function openSheet(title, bodyHtml, onclose){
+  $('#shTitle').innerHTML = title; $('#shBody').innerHTML = bodyHtml;
+  scrim.classList.add('show'); sheetEl.classList.add('show'); sheetCb = onclose || null;
+}
+function closeSheet(force){
+  if(!sheetEl.classList.contains('show')) return;
+  if(!force && captureDirty && sheetEl.dataset.kind === 'capture'){
+    discardGuard(); return;
+  }
+  captureDirty = false; sheetEl.dataset.kind = '';
+  scrim.classList.remove('show'); sheetEl.classList.remove('show');
+  const cb = sheetCb; sheetCb = null; if(cb) cb();
+}
+scrim.addEventListener('click', () => closeSheet());
+(function(){ // grabber drag-to-dismiss
+  let y0 = null, dy = 0;
+  const grab = $('#grab');
+  grab.addEventListener('touchstart', e => { y0 = e.touches[0].clientY; dy = 0; sheetEl.style.transition = 'none'; }, {passive:true});
+  grab.addEventListener('touchmove', e => { if(y0 == null) return; dy = Math.max(0, e.touches[0].clientY - y0); sheetEl.style.transform = `translateY(${dy}px)`; }, {passive:true});
+  grab.addEventListener('touchend', () => {
+    sheetEl.style.transition = ''; sheetEl.style.transform = '';
+    if(dy > 110) closeSheet(true);
+    y0 = null;
+  });
+})();
+const dlgwrap = $('#dlgwrap'), dlgEl = $('#dlg');
+function openDialog(html){ dlgEl.innerHTML = html; dlgwrap.classList.add('show'); }
+function closeDialog(){ dlgwrap.classList.remove('show'); }
+dlgwrap.addEventListener('click', e => { if(e.target === dlgwrap) closeDialog(); });
+function receiptHtml(sent, lines, closeAct){
+  return `<div class="receipt"><div class="mark">✓</div><div class="sent" aria-live="polite">${sent}</div>
+    <div class="detail">${lines.join('<br>')}</div></div>
+    <div class="actionrow"><button class="primary" ${closeAct}>تم</button></div>`;
+}
+function discardGuard(){
+  openDialog(`<h3>في رقم مكتوب</h3><p>تسجّله أو تتجاهله؟ ما كتبته لن يضيع بدون علمك.</p>
+    <div class="btns"><button class="ghost" id="dgKeep">متابعة الكتابة</button><button class="primary" id="dgDrop">تجاهل</button></div>`);
+  $('#dgKeep').onclick = closeDialog;
+  $('#dgDrop').onclick = () => { closeDialog(); captureDirty = false; sheetEl.dataset.kind = ''; closeSheet(true); };
+}
+
+/* ---------- shared band (money is pinned chrome on every root) ---------- */
+function bandHtml(opts){
+  opts = opts || {};
+  const compactable = opts.party ? false : true;
+  const title = opts.title || 'بقالة النور — جبل النصر';
+  const after = S.cash + S.cashPending;
+  return `<header class="band" id="theBand">
+    <div class="toprow">
+      ${opts.back ? `<button class="icbtn" data-back aria-label="رجوع">‹</button>` : `<span class="date">${opts.date || 'الاثنين 07/09/2026'}</span>`}
+      <div class="sp"></div>
+      ${opts.title ? '' : `<button class="icbtn" data-act="openSearch" aria-label="بحث">⌕</button>
+      <button class="icbtn" data-go="settings" aria-label="الإعدادات">⚙</button>`}
+    </div>
+    <div class="band-inner">
+      <div class="hero">
+        <div>
+          <div class="lbl">${opts.heroLbl || 'الصندوق الآن — مؤكد'}</div>
+          <div class="val num">${NUM(opts.partyVal != null ? opts.partyVal : S.cash)} <span class="unit">${opts.partyVal != null ? '' : 'د.أ'}</span></div>
+        </div>
+        <div class="side">
+          ${opts.partyVal != null ? `<div class="sub">${opts.partySub || ''}</div>` :
+          `<div class="sub">بعد المزامنة <b class="num">${NUM(after)}</b></div>
+           <div class="sub"><span class="chip sync">⟳ ${NUMS(S.cashPending)} بانتظار المزامنة</span></div>`}
+        </div>
+      </div>
+      ${opts.party ? `<div class="gloss">${opts.partyGloss || ''}</div>` :
+      `<div class="subline">
+        <button class="textact" data-act="goLi" style="min-height:36px">لي <b class="num">${NUM(liTotal())}</b></button>
+        <span class="sep"></span>
+        <button class="textact" data-act="goAlay" style="min-height:36px">عليّ <b class="num">${NUM(alayTotal())}</b></button>
+        <span class="sep"></span>
+        <span class="syncmeta">متزامن حتى <bdi dir="ltr" class="num">07/09 08:52</bdi></span>
+      </div>`}
+    </div>
+  </header>
+  ${S.offline ? `<div class="offline show" role="status">◌ غير متصل — العمليات تُحفظ محلياً وتُزامَن تلقائياً</div>` : ''}`;
+}
+function evRow(ev){
+  const p = ev.party ? S.parties[ev.party] : null;
+  let amt = '', cls = '';
+  if(ev.state === 'conflict'){ amt = `<span class="num">${fmt(ev.mine)}</span><span class="au">تحت القرار</span>`; }
+  else if(ev.acct){ amt = `${NUMS(ev.av)}<span class="au">${ev.acct === 'li' ? 'لي' : 'عليّ'}</span>`; cls = 'acct'; }
+  else if(ev.cin != null){ amt = `${NUMS(ev.cin)}`; cls = 'in'; }
+  else if(ev.cout != null){ amt = `${NUMS(-ev.cout)}`; cls = 'out'; }
+  let chip = '';
+  if(ev.state === 'pending') chip = `<span class="chip">⟳ بانتظار المزامنة</span>`;
+  if(ev.state === 'est') chip = `<span class="chip est">≈ تقديري</span>`;
+  if(ev.state === 'conflict') chip = `<span class="chip conflict" role="alert">⚠ تعارض — بحاجة لقرار</span>`;
+  if(ev.state === 'cancelled') chip = `<span class="chip neutral">✕ ملغي</span>`;
+  if(ev.state === 'adjust') chip = `<span class="chip neutral">⧉ تسوية</span>`;
+  if(ev.state === 'unknown') chip = `<span class="chip est">؟ الاسم غير محدد</span>`;
+  const t = ev.t + (p ? ` — ${p.name}` : '');
+  const data = encodeURIComponent(JSON.stringify({id: ev.id}));
+  return `<button class="row tap ${ev.state === 'cancelled' ? 'cancelled' : ''}" data-act="evDetail" data-ev="${data}">
+    <span class="rt"><span class="t">${t}</span><span class="m">${ev.time || ev.d} ${chip}</span></span>
+    <span class="amt ${cls}">${amt}</span>
+  </button>`;
+}
+function dayGroups(list){
+  let out = '', lastD = '';
+  list.forEach(ev => {
+    if(ev.d !== lastD){
+      lastD = ev.d;
+      const lbl = ev.d === '07/09' ? 'اليوم 07/09 — الاثنين' : ev.d === '06/09' ? 'أمس 06/09 — الأحد' : `${ev.d} — ${ev.day}`;
+      out += `<div class="daysep">${lbl}</div>`;
+    }
+    out += evRow(ev);
+  });
+  return out;
+}
+function chartHtml(){
+  const days = Object.keys(S.dayCash);
+  const max = Math.max(...days.map(d => Math.max(...S.dayCash[d])), 10);
+  const W = 320, H = 96, bw = 16, gap = 6, gw = (bw * 2 + gap);
+  const x0 = W - 14; // earliest at the RIGHT (RTL time flow), growing leftwards
+  let bars = '', labels = '';
+  days.forEach((d, i) => {
+    const [cin, cout] = S.dayCash[d];
+    const x = x0 - i * (gw + 8) - bw * 2 - gap;
+    const hi = cin / max * 74, ho = cout / max * 74;
+    const isToday = d === '07/09';
+    bars += `<rect x="${x + bw + gap}" y="${74 - hi}" width="${bw}" height="${hi}" rx="3" fill="${isToday ? 'url(#hInP)' : 'var(--pos)'}" ${isToday ? 'opacity="0.45" stroke-dasharray="3 2" stroke="var(--pos)" stroke-width="1"' : ''}/>`;
+    bars += `<rect x="${x}" y="${74 - ho}" width="${bw}" height="${ho}" rx="3" fill="var(--band-ink)" ${isToday ? 'opacity="0.45"' : ''}/>`;
+    labels += `<text x="${x + bw + gap / 2}" y="${H - 8}" font-size="10" fill="var(--ink3)" text-anchor="middle">${d.slice(0, 2)}</text>`;
+  });
+  const gx0 = x0 - 7 * (gw + 8) + 10;
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="أعمدة دخل وخروج الصندوق لآخر 7 أيام">
+    <defs><pattern id="hGap" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.4" height="6" fill="var(--hair-strong)"/></pattern><pattern id="hInP" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="none"/></pattern></defs>
+    <rect x="${x0 + 4}" y="0" width="${W - x0 - 4}" height="74" fill="url(#hGap)" opacity="0.5"/>
+    <text x="${W - 10}" y="12" font-size="10" fill="var(--ink3)" text-anchor="end">قبل 01/09 — غير مسجل</text>
+    <line x1="0" y1="74.5" x2="${W}" y2="74.5" stroke="var(--hair-strong)" stroke-width="1"/>
+    ${bars}${labels}
+  </svg>
+  <div class="gapnote">↑ داخل الصندوق · ↓ خارج منه — اليوم 07/09 معلّم بنمط مفرّغ: فيه دفعة <b class="num">+27.750</b> بانتظار المزامنة</div>
+  <div class="interp">خلال 7 أيام: دخل مؤكد <b class="num">185.750</b> د.أ، وخرج <b class="num">167.000</b> د.أ. الفترة قبل 01/09 غير مسجلة بالتفصيل — ليست صفراً.</div></div>
+  <div class="srccap">المصدر: سجل الصندوق · متزامن حتى <bdi dir="ltr" class="num">07/09 08:52</bdi></div>`;
+}
+function agingHtml(){
+  const buckets = [
+    {l:'0–7 يوم',   v:47.65},
+    {l:'8–30 يوم',  v:553.4},
+    {l:'31–60 يوم', v:63.2},
+    {l:'أكثر من 60', v:null}
+  ];
+  const max = 553.4;
+  return `<div class="hbar">` + buckets.map(b => `<div class="hb">
+    <span class="lab">${b.l}</span>
+    <span class="track">${b.v == null ? `<span style="position:absolute;inset-inline-start:8px;top:-4px;font-size:13px;color:var(--ink3)">لا يوجد</span>` : `<span class="fill" style="width:${Math.max(b.v / max * 100, 2)}%"></span>`}</span>
+    <span class="v num">${b.v == null ? '—' : fmt(b.v)}</span>
+  </div>`).join('') + `</div>
+  <div class="srccap">توزيع المستحقات لي بحسب أقدميتها · د.أ · متزامن حتى <bdi dir="ltr" class="num">07/09 08:52</bdi></div>`;
+}
+/* ---------- screens ---------- */
+let peopleSeg = 'li', workSeg = 'orders', orderFilter = 'all';
+const OPENINGS = {umAhmad:12.5, abuMohammad:47.75, sham:186, warshah:0, khaled:63.2, nahda:240, sama:31.4, ghaith:8.25, hasan:145.5, marai:96.25, salim:58, yasmine:0};
+const ORDER_STATES = {prep:'قيد التجهيز', deliver:'قيد التوصيل', done:'مسلّمة', cancelled:'ملغاة'};
+const PAD = '<div style="height:104px"></div>';
+
+function headerBar(title){
+  return `<header class="band band-compact" style="box-shadow:0 .5px 0 var(--hair)">
+    <div class="toprow"><button class="icbtn" data-back aria-label="رجوع">‹</button>
+    <strong style="font-size:17px">${title}</strong><div class="sp"></div></div>
+  </header>`;
+}
+function partyRow(key){
+  const p = S.parties[key];
+  const amt = p.settled ? `<span class="au" style="margin-top:0">حساب مسدّد</span>` : `<span class="num">${fmt(p.bal)}</span>`;
+  const chip = p.conflict && S.conflictOpen ? `<span class="chip conflict" role="alert">⚠ دفعة تحت القرار</span>` : '';
+  return `<button class="row tap" data-go="party" data-params='{"p":"${key}"}'>
+    <span class="rt"><span class="t">${p.name}</span>
+    <span class="m">${p.aging ? p.aging + ' · ' : ''}آخر حركة ${p.last} ${chip}</span></span>
+    <span class="amt acct">${amt}</span><span class="chev">‹</span></button>`;
+}
+function orderRow(o, i){
+  const p = S.parties[o.party];
+  const chip = o.state === 'cancelled' ? `<span class="chip neutral">✕ ملغاة</span>`
+    : o.state === 'done' ? `<span class="chip sync">✓ مسلّمة</span>`
+    : `<span class="chip neutral">${ORDER_STATES[o.state]}</span>`;
+  return `<button class="row tap ${o.state === 'cancelled' ? 'cancelled' : ''}" data-go="order" data-params='{"i":${i}}'>
+    <span class="rt"><span class="t">${o.id} — ${p.name}</span><span class="m">${o.items} صنف · ${o.d} ${chip}</span></span>
+    <span class="amt acct"><span class="num">${fmt(o.total)}</span></span><span class="chev">‹</span></button>`;
+}
+function renderScreen(id, scr){
+  switch(id){
+    case 'today': return `<div class="scroll">${bandHtml()}${dayGroups(S.events.slice().reverse())}${PAD}</div>`;
+    case 'money': {
+      if(!S.moneyLoaded) return `<div class="scroll">${bandHtml()}
+        <div class="skel" aria-label="جارٍ التحميل"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>${PAD}</div>`;
+      const cashRows = S.events.filter(e => e.cin != null || e.cout != null).reverse();
+      return `<div class="scroll">${bandHtml()}
+      <div class="daysep">آخر 7 أيام — دخل الصندوق وخرجه</div>${chartHtml()}
+      <div class="daysep">المركز حتى الآن</div>
+      <div class="row"><span class="rt"><span class="t">بداية الفترة</span><span class="m">01/09/2026</span></span><span class="amt acct"><span class="num">${fmt(S.openingCash)}</span></span></div>
+      <div class="row"><span class="rt"><span class="t">الآن — مؤكد</span><span class="m">✓ محتسب في الشريط أعلاه</span></span><span class="amt acct"><span class="num">${fmt(S.cash)}</span></span></div>
+      <div class="row"><span class="rt"><span class="t">بانتظار المزامنة</span><span class="m">بيع نقدي الصبح 07:35</span></span><span class="amt in"><span class="num">+${fmt(S.cashPending)}</span></span></div>
+      <div class="row"><span class="rt"><span class="t">بعد المزامنة</span><span class="m">متزامن حتى <bdi dir="ltr" class="num">07/09 08:52</bdi></span></span><span class="amt acct"><span class="num">${fmt(S.cash + S.cashPending)}</span></span></div>
+      <div class="actionrow"><button class="primary" data-go="closing">إغلاق الصندوق</button></div>
+      <div class="daysep">سجل الصندوق</div>${dayGroups(cashRows)}${PAD}</div>`;
+    }
+    case 'people': {
+      const seg = peopleSeg;
+      let body = '';
+      if(seg === 'li'){
+        body = `${agingHtml()}<div class="daysep">الزباين — الأقدم أولاً</div>
+        ${['khaled','nahda','sham','sama','abuMohammad','ghaith','warshah','umAhmad'].map(partyRow).join('')}`;
+      } else {
+        body = `<div class="daysep">الموردون — عليّ</div>
+        ${['hasan','salim','marai','yasmine'].map(partyRow).join('')}
+        <div class="daysep">آخر المشتريات</div>
+        ${S.purchases.map(pu => { const p = S.parties[pu.party]; return `<button class="row tap" data-go="party" data-params='{"p":"${pu.party}"}'>
+          <span class="rt"><span class="t">${p.name}</span><span class="m">${pu.d} · ${pu.note}</span></span>
+          <span class="amt out"><span class="num">-${fmt(pu.total)}</span></span></button>`; }).join('')}`;
+      }
+      return `<div class="scroll">${bandHtml()}
+      <div class="seg" role="tablist">
+        <button role="tab" aria-selected="${seg === 'li'}" data-act="segLi">مستحق لي <b class="num">${NUM(liTotal())}</b></button>
+        <button role="tab" aria-selected="${seg === 'alay'}" data-act="segAlay">عليّ <b class="num">${NUM(alayTotal())}</b></button>
+      </div>${body}${PAD}</div>`;
+    }
+    case 'party': {
+      const p = S.parties[scr.p];
+      const hist = S.events.filter(e => e.party === scr.p).reverse();
+      const open = OPENINGS[scr.p];
+      return `<div class="scroll">${bandHtml({back:true, heroLbl:'الرصيد المفتوح', partyVal:p.bal,
+        partyGloss:`${p.aging ? p.aging + ' · ' : ''}آخر حركة ${p.last} — ${p.lastEv}`,
+        partySub: p.conflict && S.conflictOpen ? `<span class="chip conflict" role="alert">⚠ دفعة تحت القرار</span>` : (p.settled ? `<span class="chip sync">✓ حساب مسدّد</span>` : `<span class="chip neutral">${p.kind === 'c' ? 'زبون' : 'مورد'}</span>`)})}
+      <div class="actionrow"><button class="primary" data-act="collect" data-p="${scr.p}">${p.kind === 'c' ? 'حصّل دفعة' : 'سدّد للمورد'}</button></div>
+      <div class="daysep">السجل</div>
+      ${open ? `<div class="row"><span class="rt"><span class="t">رصيد سابق حتى 31/08</span></span><span class="amt acct"><span class="num">${fmt(open)}</span></span></div>` : ''}
+      ${hist.map(evRow).join('')}${PAD}</div>`;
+    }
+    case 'work': {
+      let body = '';
+      if(workSeg === 'orders'){
+        const list = S.orders.map((o, i) => ({o, i})).filter(({o}) => orderFilter === 'all' || o.state === orderFilter);
+        body = `<div class="fchips" role="group" aria-label="تصفية الحالة">
+          ${['all','prep','deliver','done','cancelled'].map(f => `<button class="fchip" data-act="oFilter" data-f="${f}" aria-pressed="${orderFilter === f}">${f === 'all' ? 'الكل' : ORDER_STATES[f]}</button>`).join('')}</div>
+          ${list.map(({o, i}) => orderRow(o, i)).join('') || `<div class="empty"><div class="e1">لا طلبيات بهذه الحالة</div><div class="dashes"><i></i><i></i></div></div>`}`;
+      } else {
+        body = `${S.purchases.map(pu => { const p = S.parties[pu.party]; return `<button class="row tap" data-go="party" data-params='{"p":"${pu.party}"}'>
+          <span class="rt"><span class="t">${p.name}</span><span class="m">${pu.d} · ${pu.note}</span></span>
+          <span class="amt out"><span class="num">-${fmt(pu.total)}</span></span></button>`; }).join('')}
+        <div class="actionrow"><button class="primary" data-act="openCaptureP">سجّل فاتورة شراء</button></div>`;
+      }
+      return `<div class="scroll">${bandHtml()}
+      <div class="seg" role="tablist">
+        <button role="tab" aria-selected="${workSeg === 'orders'}" data-act="segOrders">الطلبيات</button>
+        <button role="tab" aria-selected="${workSeg === 'purchases'}" data-act="segPurch">المشتريات</button>
+      </div>${body}${PAD}</div>`;
+    }
+    case 'order': {
+      const o = S.orders[scr.i]; const p = S.parties[o.party];
+      const steps = ['prep','deliver','done'];
+      const si = steps.indexOf(o.state);
+      const items = [
+        {n:'زيت دوار الشمس 8 لتر', q:4, p:10.5}, {n:'سكر ناعم 5 كغم', q:6, p:4.75},
+        {n:'أرز أمول 5 كغم', q:5, p:6.9}, {n:'شاي أخضر 200غم', q:8, p:1.85}
+      ].slice(0, Math.min(o.items, 4));
+      const itemsHtml = items.map(it => `<div class="row"><span class="rt"><span class="t">${it.n}</span><span class="m">الكمية ${it.q}</span></span><span class="amt acct"><span class="num">${fmt(it.p * it.q)}</span></span></div>`).join('');
+      return `<div class="scroll">${headerBar(o.id + ' — ' + p.name)}
+      ${o.state !== 'cancelled' ? `<div class="stepper">${steps.map((s, k) => `<span class="st ${k < si ? 'done' : ''} ${k === si ? 'now' : ''}">${k === 0 ? 'مسجّلة' : s === 'deliver' ? 'توصيل' : s === 'done' ? 'تسليم' : 'تجهيز'}</span>`).join('')}</div>` : `<div class="actionrow"><span class="chip neutral" role="alert">✕ طلبية ملغاة — ${o.note || 'طلبية مكررة'}</span></div>`}
+      <button class="row tap" data-go="party" data-params='{"p":"${o.party}"}'><span class="rt"><span class="t">${p.name}</span><span class="m">افتح دفتر الجهة</span></span><span class="chev">‹</span></button>
+      ${o.note && o.state !== 'cancelled' ? `<div class="row"><span class="rt"><span class="t" style="font-weight:400;color:var(--ink2);white-space:normal">${o.note}</span></span></div>` : ''}
+      <div class="daysep">الأصناف (${o.items})</div>${itemsHtml}
+      <div class="row"><span class="rt"><span class="t">الإجمالي</span></span><span class="amt acct"><b class="num">${fmt(o.total)}</b> <span class="au">د.أ</span></span></div>
+      ${o.state === 'prep' || o.state === 'deliver' ? `<div class="actionrow"><button class="primary" data-act="advanceOrder" data-i="${scr.i}">${o.state === 'prep' ? 'ابدأ التوصيل' : 'سجّل التسليم'}</button></div>` : ''}
+      ${PAD}</div>`;
+    }
+    case 'closing': {
+      if(S.closingDone) return `<div class="scroll">${headerBar('إغلاق الصندوق')}
+        <div class="receipt" style="padding-top:32px"><div class="mark">✓</div>
+        <div class="sent">انغلق الصندوق — العدّ مطابق للنظام.</div>
+        <div class="detail">صندوق 07/09: <b class="num">${NUM(S.cash)}</b> د.أ مؤكد</div></div>${PAD}</div>`;
+      return `<div class="scroll">${headerBar('إغلاق الصندوق')}
+      <div class="row"><span class="rt"><span class="t">رصيد النظام — مؤكد</span></span><span class="amt acct"><span class="num">${fmt(S.cash)}</span></span></div>
+      <div class="row"><span class="rt"><span class="t">بانتظار المزامنة</span><span class="m">بيع نقدي 07:35 — يضاف تلقائياً</span></span><span class="amt in"><span class="num">+${fmt(S.cashPending)}</span></span></div>
+      <div class="flabel" style="margin:18px 16px 6px">العدّ الفعلي للدرج</div>
+      <div style="padding:0 16px"><div class="amount-field"><input id="closingIn" inputmode="decimal" dir="ltr" placeholder="0.000" aria-label="العد الفعلي"><span class="cu">د.أ</span></div></div>
+      <div class="row" id="varRow" style="display:none"><span class="rt"><span class="t">الفرق</span><span class="m">العدّ الناقص أو الزائد</span></span><span class="amt out" id="varVal"></span></div>
+      <div class="actionrow"><button class="primary" id="closingGo" disabled style="opacity:.5">متابعة</button></div>
+      <div class="srccap">الإغلاق يقارن عدّك مع سجل النظام — أي فرق يُوثَّق بتسوية، ولا يُخفى.</div>${PAD}</div>`;
+    }
+    case 'settings': {
+      const themeVal = rootEl.dataset.theme === 'dark' ? 'داكن' : 'فاتح';
+      return `<div class="scroll">${headerBar('الإعدادات')}
+      <div class="mini-h">المتجر</div>
+      <div class="row"><span class="rt"><span class="t">بقالة النور</span><span class="m">جبل النصر، عمّان · مالك الحساب</span></span><span class="chev">‹</span></div>
+      <div class="row"><span class="rt"><span class="t">الفريق</span><span class="m">يوسف — موظف (يسجّل بيع فقط)</span></span><span class="chev">‹</span></div>
+      <div class="mini-h">المظهر والتنسيق</div>
+      <button class="row tap" data-act="themeSheet"><span class="rt"><span class="t">المظهر</span><span class="m">حالياً: ${themeVal}</span></span><span class="chev">‹</span></button>
+      <div class="row"><span class="rt"><span class="t">العملة والتواريخ</span><span class="m">دينار أردني · 3 منازل عشرية · DD/MM/YYYY · أرقام لاتينية</span></span></div>
+      <div class="mini-h">أدوات</div>
+      <button class="row tap" data-act="assistant"><span class="rt"><span class="t">مساعد ميكرو</span><span class="m">اسأل: «وين وصلت اليوم؟»</span></span><span class="chip neutral">قريباً</span><span class="chev">‹</span></button>
+      <div class="row"><span class="rt"><span class="t">حول Micro</span><span class="m">نموذج مراجعة — الاتجاه A «الطاولة» · بيانات تجريبية</span></span></div>
+      ${PAD}</div>`;
+    }
+    case 'search': {
+      return `<div class="scroll">${headerBar('البحث')}
+      <div class="searchbar"><span aria-hidden="true">⌕</span><input id="searchIn" placeholder="جهة، عملية، أو طلبية…" aria-label="بحث"></div>
+      <div id="searchRes">
+        <div class="mini-h">أخيراً بحثت عن</div>
+        <div class="recents">${['مطعم الشام','كافيه سما','كهرباء','طلب-1204'].map(r => `<button class="fchip" data-act="setSearch" data-q="${r}">${r}</button>`).join('')}</div>
+      </div>${PAD}</div>`;
+    }
+  }
+  return '<div class="scroll"></div>';
+}
+
+/* ---------- per-screen binding ---------- */
+function bindScreen(el){
+  const id = layers.length ? layers[layers.length - 1].screen.id : 'today';
+  const moneyInp = el.querySelector('#closingIn');
+  if(moneyInp) bindClosing(el);
+  const sIn = el.querySelector('#searchIn');
+  if(sIn){ sIn.focus(); sIn.addEventListener('input', () => renderSearch(el, sIn.value)); }
+  if(id === 'money' && !S.moneyLoaded){
+    setTimeout(() => { S.moneyLoaded = true; const t = topScr(); if(t && t.id === 'money') rerender(); }, 900);
+  }
+}
+function bindClosing(el){
+  const inp = el.querySelector('#closingIn'), vRow = el.querySelector('#varRow'), vVal = el.querySelector('#varVal'), go = el.querySelector('#closingGo');
+  let counted = 0;
+  inp.addEventListener('input', () => {
+    const v = parseFloat(inp.value.replace(/[^\d.]/g, ''));
+    counted = isNaN(v) ? 0 : v;
+    const ok = inp.value.trim() !== '' && !isNaN(v);
+    go.disabled = !ok; go.style.opacity = ok ? '1' : '.5';
+    if(ok){
+      const varr = +(counted - S.cash).toFixed(3);
+      vRow.style.display = 'flex';
+      vVal.innerHTML = varr === 0 ? `<span class="num">0.000</span>` : `<span class="num">${varr > 0 ? '+' : ''}${fmt(varr)}</span>`;
+      vVal.className = 'amt ' + (varr === 0 ? 'acct' : 'out');
+      go.textContent = 'متابعة';
+    } else { vRow.style.display = 'none'; }
+  });
+  go.addEventListener('click', () => {
+    const varr = +(counted - S.cash).toFixed(3);
+    if(Math.abs(varr) < 0.0005){
+      S.closingDone = true; rerender(); return;
+    }
+    openDialog(`<h3>فرق في العدّ — <span class="num" dir="ltr">${fmt(Math.abs(varr))}</span> د.أ</h3>
+      <p>سيُسجَّل سجل <b>تسوية</b> بمقدار الفرق. لا يُخفى ولا يُصحَّح بصمت.</p>
+      <div class="fx">الصندوق الآن: <b class="num">${NUM(S.cash)}</b><br>بعد التسوية: <b class="num">${NUM(counted)}</b> د.أ<br>لا يتغير أي رقم آخر.</div>
+      <div class="btns"><button class="ghost" id="dgReview">مراجعة العدّ</button><button class="primary" id="dgAdjust">تسجيل التسوية</button></div>`);
+    $('#dgReview').onclick = closeDialog;
+    $('#dgAdjust').onclick = () => {
+      closeDialog(); S.cash = counted; S.closingDone = true;
+      S.events.push({id: S.events.length + 1, d:'07/09', day:'الاثنين', t:'تسوية فرق عدّ الصندوق', cout: varr < 0 ? -varr : null, cin: varr > 0 ? varr : null, state:'adjust', time:'الآن', note:'فرق بين العدّ الفعلي وسجل النظام'});
+      rerender();
+    };
+  });
+}
+function renderSearch(el, qy){
+  const box = el.querySelector('#searchRes');
+  qy = (qy || '').trim();
+  if(!qy){ box.innerHTML = `<div class="mini-h">أخيراً بحثت عن</div>
+    <div class="recents">${['مطعم الشام','كافيه سما','كهرباء','طلب-1204'].map(r => `<button class="fchip" data-act="setSearch" data-q="${r}">${r}</button>`).join('')}</div>`; return; }
+  const qs = qy.toLowerCase();
+  const parties = Object.entries(S.parties).filter(([, p]) => p.name.toLowerCase().includes(qs));
+  const orders = S.orders.filter(o => (o.id + S.parties[o.party].name).toLowerCase().includes(qs));
+  const evs = S.events.filter(e => (e.t + (e.party ? S.parties[e.party].name : '')).toLowerCase().includes(qs));
+  let html = '';
+  if(parties.length) html += `<div class="mini-h">جهات</div>` + parties.map(([k, p]) => partyRow(k)).join('');
+  if(orders.length) html += `<div class="mini-h">طلبيات</div>` + orders.map(o => orderRow(o, S.orders.indexOf(o))).join('');
+  if(evs.length) html += `<div class="mini-h">عمليات</div>` + dayGroups(evs);
+  if(!html) html = `<div class="empty"><div class="e1">لا نتائج عن «${qy}»</div><div class="e2">جرّب اسم جهة، نوع عملية، أو رقم طلبية.<br>المبالغ والتواريخ لا تظهر في البحث إلا إذا كانت مسجّلة.</div><div class="dashes"><i></i><i></i></div></div>`;
+  box.innerHTML = html;
+}
+
+/* ---------- actions ---------- */
+const ACTIONS = {
+  openSearch(){ go('search'); },
+  goLi(){ peopleSeg = 'li'; switchTab('people'); },
+  goAlay(){ peopleSeg = 'alay'; switchTab('people'); },
+  segLi(){ peopleSeg = 'li'; rerender(); },
+  segAlay(){ peopleSeg = 'alay'; rerender(); },
+  segOrders(){ workSeg = 'orders'; rerender(); },
+  segPurch(){ workSeg = 'purchases'; rerender(); },
+  oFilter(b){ orderFilter = b.dataset.f; rerender(); },
+  setSearch(b){ const el = layers[layers.length - 1].el; const i = el.querySelector('#searchIn'); i.value = b.dataset.q; renderSearch(el, b.dataset.q); },
+  evDetail(b){
+    const ev = S.events.find(x => x.id === JSON.parse(decodeURIComponent(b.dataset.ev)).id);
+    if(!ev) return;
+    if(ev.party){ go('party', {p: ev.party}); return; }
+    if(ev.state === 'conflict'){ openConflict(); return; }
+    if(ev.state === 'adjust'){ openAdjust(); return; }
+    if(ev.state === 'pending'){ openSheet('بانتظار المزامنة', `<p style="font-size:14px;line-height:1.8;color:var(--ink2)">سُجّل هذا البيع 07:35 بدون إنترنت، محفوظ على الجهاز.<br><br>عند رجوع الاتصال يُضاف تلقائياً: صندوق اليوم يصبح <b class="num">${NUM(S.cash + S.cashPending)}</b> د.أ. لا يحتاج أي خطوة منك.</p><div class="actionrow"><button class="primary" onclick="closeSheet(true)">حسناً</button></div>`); return; }
+    openSheet(ev.t, `<p style="font-size:14px;line-height:1.8;color:var(--ink2)">${ev.note || 'عملية مسجّلة ومحتسبة.'}<br><br>${ev.d}/${'2026'} · ${ev.time || ''}<br>الحالة: ${ev.state === 'est' ? 'تقديري' : ev.state === 'unknown' ? 'الاسم غير محدد' : 'مؤكد'}</p><div class="actionrow"><button class="primary" onclick="closeSheet(true)">إغلاق</button></div>`);
+  },
+  collect(b){ openCollect(b.dataset.p); },
+  openCaptureP(){ openCapture('دفع'); },
+  themeSheet(){
+    openSheet('المظهر', `<div class="seg" role="tablist" style="margin:8px 0 16px">
+      <button role="tab" data-act="thLight" aria-selected="${rootEl.dataset.theme === 'light'}">فاتح</button>
+      <button role="tab" data-act="thDark" aria-selected="${rootEl.dataset.theme === 'dark'}">داكن</button></div>
+      <p style="font-size:13px;color:var(--ink2);line-height:1.7">الوضعان مكتملان — الأرقام والعناوين تُختبر في الاثنين. «النظام» يتبع الجهاز في النسخة الفعلية.</p>`);
+  },
+  thLight(){ setTheme('light'); closeSheet(true); rerender(); },
+  thDark(){ setTheme('dark'); closeSheet(true); rerender(); },
+  assistant(){
+    openSheet('مساعد ميكرو', `<div class="empty" style="padding-top:12px"><div class="e1">خارج نطاق هذه المراجعة</div>
+      <div class="e2">هذه نقطة دخول فقط — في النسخة الفعلية يفتح مسجلاً يحترم حالة كل رقم (مؤكد / تقديري / غير محدد).<br>قرار شكله وموضعه يؤجَّل لمرحلة لاحقة بعد اعتماد الاتجاه البصري.</div></div>
+      <div class="actionrow"><button class="primary" onclick="closeSheet(true)">فهمت</button></div>`);
+  },
+  advanceOrder(b){
+    const o = S.orders[+b.dataset.i];
+    const next = o.state === 'prep' ? 'deliver' : 'done';
+    openSheet(o.id, `<p style="font-size:14px;line-height:1.8;color:var(--ink2)">تحديث حالة الطلبية إلى <b>${ORDER_STATES[next]}</b>.${next === 'done' ? '<br>التسليم لا يغيّر الصندوق — الدفع يُسجَّل كسجل مستقل عند قبضه.' : ''}</p>
+      <div class="btns" style="display:flex;gap:10px;margin-top:16px"><button class="ghost" style="flex:1;min-height:46px;border-radius:12px;font-weight:600" onclick="closeSheet(true)">تراجع</button>
+      <button class="primary" style="flex:1" id="advGo">تأكيد</button></div>`);
+    $('#advGo').onclick = () => { o.state = next; closeSheet(true); rerender(); };
+  }
+};
+window.closeSheet = closeSheet; // used by inline handlers above
+
+function openAdjust(){
+  openSheet('تسوية فاتورة كهرباء غشت', `<div class="row" style="padding:4px 0"><span class="rt"><span class="t">التقديري (01/09)</span><span class="m">≈ قبل وصول الفاتورة</span></span><span class="amt acct"><span class="num">18.000</span></span></div>
+  <div class="row" style="padding:4px 0"><span class="rt"><span class="t">الفعلي (05/09)</span><span class="m">على الفاتورة</span></span><span class="amt acct"><span class="num">21.300</span></span></div>
+  <div class="row" style="padding:4px 0"><span class="rt"><span class="t">فرق سُدِّد بتسوية</span><span class="m">05/09 · ⧉ تسوية</span></span><span class="amt out"><span class="num">-3.300</span></span></div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-top:10px">السجل يحتفظ بالقيمتين — التقديري والفعلي — وما تغيّر هو المركز النهائي، بشفافية وبدون تعديل صامت.</p>
+  <div class="actionrow"><button class="primary" onclick="closeSheet(true)">فهمت</button></div>`);
+}
+function openConflict(){
+  openSheet('تعارض في دفعة كافيه سما', `<p style="font-size:14px;line-height:1.8;color:var(--ink2)">نسختان لنفس الدفعة (06/09):<br>• سجلتَها أنت 18:40 — <b class="num" dir="ltr">20.000</b><br>• سجلها الشريك — <b class="num" dir="ltr">12.000</b><br>لن تُحتسب ولا نسخة حتى تحسمها أنت.</p>
+  <div class="fx">لو قبلت 20.000: الصندوق (بعد المزامنة) <b class="num">478.850</b> · لي <b class="num">644.250</b><br>لو قبلت 12.000: الصندوق (بعد المزامنة) <b class="num">470.850</b> · لي <b class="num">652.250</b></div>
+  <div class="btns" style="display:flex;gap:10px;margin-top:14px">
+    <button class="ghost" style="flex:1;min-height:48px;border-radius:12px;font-weight:600" id="cf12">قبل 12.000</button>
+    <button class="primary" style="flex:1" id="cf20">قبل 20.000</button></div>`);
+  $('#cf20').onclick = () => resolveConflict(20);
+  $('#cf12').onclick = () => resolveConflict(12);
+}
+function resolveConflict(v){
+  S.cash += S.cashPending; S.cashPending = 0; // sync lands with the decision
+  S.parties.sama.bal = +(S.parties.sama.bal - v).toFixed(3);
+  S.parties.sama.conflict = false; S.conflictOpen = false;
+  const ev = S.events.find(e => e.state === 'conflict');
+  if(ev){ ev.state = 'ok'; ev.cin = v; ev.time = '18:40'; ev.note = `حُسم التعارض — قُبلت ${fmt(v)}`; }
+  closeSheet(true); rerender();
+}
+function openCollect(pkey){
+  const p = S.parties[pkey];
+  const full = p.bal;
+  openSheet(p.kind === 'c' ? 'حصّل دفعة — ' + p.name : 'سدّد — ' + p.name, `
+    <div class="amount-field"><input id="colAmt" inputmode="decimal" dir="ltr" value="${full ? fmt(full) : ''}" placeholder="0.000" aria-label="المبلغ"><span class="cu">د.أ</span></div>
+    <div class="fchips" style="padding:10px 0 0">${full ? `<button class="fchip" data-cf="${full}">الكل</button><button class="fchip" data-cf="${+(full / 2).toFixed(3)}">النصف</button>` : ''}<button class="fchip" data-cf="10">10.000</button></div>
+    <div class="formerr" id="colErr">تعذّر الحفظ — تحقق من الاتصال وأعد المحاولة. لم يُسجَّل أي رقم.</div>
+    <div class="actionrow" style="padding:14px 0 4px"><button class="primary" id="colGo">تسجيل القبض</button></div>
+    <p style="font-size:13px;color:var(--ink2);line-height:1.7">تُحدَّث الأرقام فوراً — وتظهر العملية في سجل اليوم.</p>`);
+  sheetEl.dataset.kind = '';
+  const amt = $('#colAmt');
+  amt.addEventListener('input', () => captureDirty = amt.value.trim() !== '');
+  sheetEl.querySelectorAll('[data-cf]').forEach(b => b.onclick = () => { amt.value = fmt(+b.dataset.cf); captureDirty = true; });
+  $('#colGo').onclick = () => {
+    const v = parseFloat((amt.value || '').replace(/[^\d.]/g, ''));
+    const err = $('#colErr'), go = $('#colGo');
+    if(isNaN(v) || v <= 0){ err.textContent = 'اكتب المبلغ أولاً — حتى فلس واحد.'; err.classList.add('show'); return; }
+    if(v > p.bal + 0.0005){ err.textContent = 'المبلغ أكبر من المطلوب (<b class="num" dir="ltr">' + fmt(p.bal) + '</b>). عدّله أو سجّله كما هو فعلاً.'; err.classList.add('show'); return; }
+    if(S.demoError && !S.errorShown){ S.errorShown = true; err.classList.add('show'); return; }
+    go.disabled = true; go.textContent = 'جارٍ الحفظ…';
+    const isC = p.kind === 'c';
+    setTimeout(() => {
+      const before = S.cash;
+      S.cash = +(isC ? S.cash + v : S.cash - v).toFixed(3);
+      p.bal = +(p.bal - v).toFixed(3);
+      if(p.bal <= 0.0005){ p.bal = 0; p.settled = true; p.conflict = false; }
+      S.events.push({id: S.events.length + 1, d:'07/09', day:'الاثنين',
+        t:(isC ? 'استلام دفعة — ' : 'دفعة لمورد — ') + p.name,
+        cin: isC ? v : null, cout: isC ? null : v, party: pkey,
+        state: S.offline ? 'pending' : 'ok', time:'الآن'});
+      captureDirty = false;
+      $('#shTitle').innerHTML = 'تم الحفظ';
+      $('#shBody').innerHTML = receiptHtml(
+        isC ? `قُبضت <span class="num" dir="ltr">${fmt(v)}</span> د.أ من ${p.name}.`
+            : `سُدِّدت <span class="num" dir="ltr">${fmt(v)}</span> د.أ لـ${p.name}.`,
+        [`الصندوق: <b class="num" dir="ltr">${fmt(before)}</b> ← <b class="num" dir="ltr">${fmt(S.cash)}</b> د.أ`,
+         `${p.name}: <b class="num" dir="ltr">${fmt(p.bal)}</b> د.أ ${isC ? 'متبقي' : 'متبقٍ عليك'}`,
+         S.offline ? 'الحالة: محفوظ محلياً — بانتظار المزامنة' : 'الحالة: مؤكد · متزامن'],
+        `onclick="closeSheet(true); rerender()"`);
+      if(!reduced()){ const m = $('#shBody .mark'); m && m.classList.add('flash'); }
+    }, 600);
+  };
+}
+function openCapture(kind){
+  kind = kind || 'قبض';
+  captureDirty = false; sheetEl.dataset.kind = 'capture';
+  openSheet('سجّل عملية', captureFormHtml(kind));
+  bindCapture();
+}
+function captureFormHtml(kind){
+  const who = kind === 'قبض' ? 'من قبضت منه؟' : kind === 'دفع' ? 'لمين دفعت؟' : 'نوع المصروف';
+  const list = kind === 'قبض' ? ['sham','nahda','sama','abuMohammad','umAhmad'] : kind === 'دفع' ? ['hasan','salim'] : [];
+  return `<div class="seg" role="tablist" style="margin:4px 0 8px">
+    ${['قبض','دفع','مصروف'].map(k => `<button role="tab" aria-selected="${k === kind}" data-cap-seg="${k}">${k}</button>`).join('')}</div>
+  <div class="amount-field"><input id="capAmt" inputmode="decimal" dir="ltr" placeholder="0.000" aria-label="المبلغ"><span class="cu">د.أ</span></div>
+  <div class="flabel">${who}</div>
+  ${list.length ? `<div class="recents" style="padding:0">${list.map(k => `<button class="fchip" data-cap-p="${k}">${S.parties[k].name}</button>`).join('')}</div>`
+   : `<div class="recents" style="padding:0">${['كهرباء','بنزين','أجرة','أخرى'].map(c => `<button class="fchip" data-cap-c="${c}">${c}</button>`).join('')}</div>`}
+  <div class="flabel">ملاحظة (اختياري)</div>
+  <div class="field"><input id="capNote" placeholder="مثال: دفعة جزئية بقرش الفلس"></div>
+  <div class="formerr" id="capErr">تعذّر الحفظ — تحقق من الاتصال وأعد المحاولة. ما كتبته محفوظ، ولم يُسجَّل أي رقم.</div>
+  <div class="actionrow" style="padding:14px 0 4px"><button class="primary" id="capGo">حفظ</button></div>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.7">الحفظ يعمل بدون إنترنت — يُزامَن تلقائياً عند رجوع الاتصال.</p>`;
+}
+let capKind = 'قبض', capParty = null, capCat = null;
+function bindCapture(){
+  capKind = 'قبض'; capParty = null; capCat = null;
+  const amt = $('#capAmt'), note = $('#capNote');
+  sheetEl.querySelectorAll('[data-cap-seg]').forEach(b => b.onclick = () => {
+    $('#shBody').innerHTML = captureFormHtml(b.dataset.capSeg); bindCapture();
+  });
+  sheetEl.querySelectorAll('[data-cap-p]').forEach(b => b.onclick = () => {
+    sheetEl.querySelectorAll('[data-cap-p]').forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true'); capParty = b.dataset.capP; captureDirty = true;
+  });
+  sheetEl.querySelectorAll('[data-cap-c]').forEach(b => b.onclick = () => {
+    sheetEl.querySelectorAll('[data-cap-c]').forEach(x => x.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true'); capCat = b.dataset.capC; captureDirty = true;
+  });
+  const dirty = () => captureDirty = captureDirty || (amt && amt.value.trim() !== '');
+  if(amt) amt.addEventListener('input', dirty);
+  if(note) note.addEventListener('input', dirty);
+  const go = $('#capGo'), err = $('#capErr');
+  go.onclick = () => {
+    const v = parseFloat((amt.value || '').replace(/[^\d.]/g, ''));
+    if(isNaN(v) || v <= 0){ err.textContent = 'اكتب المبلغ أولاً — حتى فلس واحد.'; err.classList.add('show'); return; }
+    if(S.demoError && !S.errorShown){
+      S.errorShown = true; err.classList.add('show'); return; // input preserved
+    }
+    go.disabled = true; go.textContent = 'جارٍ الحفظ…';
+    setTimeout(() => {
+      const label = capKind === 'قبض' ? 'استلام دفعة' : capKind === 'دفع' ? 'دفعة لمورد' : 'مصروف — ' + (capCat || 'أخرى');
+      const partyKey = capKind === 'قبض' || capKind === 'دفع' ? capParty : null;
+      S.events.push({id: S.events.length + 1, d:'07/09', day:'الاثنين', t: label + (partyKey ? ' — ' + S.parties[partyKey].name : ''),
+        cin: capKind === 'قبض' ? v : null, cout: capKind === 'قبض' ? null : v,
+        party: partyKey, state: S.offline ? 'pending' : 'ok', time:'الآن'});
+      if(capKind === 'قبض'){ S.cash += v; if(partyKey) S.parties[partyKey].bal = +(S.parties[partyKey].bal - v).toFixed(3); }
+      else { S.cash -= v; if(partyKey) S.parties[partyKey].bal = +(S.parties[partyKey].bal - v).toFixed(3); }
+      const before = capKind === 'قبض' ? S.cash - v : S.cash + v;
+      captureDirty = false; sheetEl.dataset.kind = '';
+      $('#shTitle').innerHTML = 'تم الحفظ';
+      $('#shBody').innerHTML = receiptHtml(
+        capKind === 'قبض' ? `قُبضت <span class="num" dir="ltr">${fmt(v)}</span> د.أ${partyKey ? ' من ' + S.parties[partyKey].name : ''}.`
+        : `سُجّل مخرج <span class="num" dir="ltr">${fmt(v)}</span> د.أ${partyKey ? ' — ' + S.parties[partyKey].name : ''}.`,
+        [`الصندوق: <b class="num" dir="ltr">${fmt(before)}</b> ← <b class="num" dir="ltr">${fmt(S.cash)}</b> د.أ`,
+         S.offline ? 'الحالة: محفوظ محلياً — بانتظار المزامنة' : 'الحالة: مؤكد · متزامن',
+         'يظهر الآن في سجل اليوم.'],
+        `onclick="closeSheet(true); rerender()"`);
+      if(!reduced()){ const m = $('#shBody .mark'); m && m.classList.add('flash'); }
+    }, 600);
+  };
+}
+
+/* ---------- boot ---------- */
+commitTab(false);
+</script>
+</body>
+</html>

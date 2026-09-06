@@ -1,0 +1,78 @@
+# Delivery metadata — micro-native-mobile-direction-002
+delivery_id: micro-native-mobile-direction-002
+date: 2026-09-07
+project: Micro (Arabic-first, RTL-first mobile app for Jordanian micro/small businesses)
+stage: "Stage 0-3 (audit, specialist research, synthesis, three interactive native prototypes) — STOPPED at the owner review gate"
+deliverable_type: native mobile visual product concept — three app-like HTML routes + review apparatus
+recommended_direction: "A — الطاولة The Counter (argued, not finalized; owner decides)"
+documents_repo_commit_baseline: 622af98 (clone point; main)
+parallel_package: "reports/2026/2026-09-07/micro-native-mobile-direction-001 pushed first (Delivery 14, recommends B); this -002 package is an independent parallel execution (Delivery 15, recommends A) — renumbered per never-overwrite rule; neither claims priority"
+source_provenance:
+  - task prompt fixed constraints (authority level 1: fixed Terracotta values, measured role rules, logo restraint, no Jordanian decoration)
+  - reports/2026/2026-09-06/micro-visual-product-concept-001 and -002 (read as rejected-evidence, lessons extracted)
+  - reports/Micro-Target-State-Design-Report.md lineage via repository documentation
+  - ABSENT (documented, not invented): micro-agent-input.zip, micro-recovery-docs.zip, MicroPrimitives-anti-reference.html
+verification:
+  boot_and_render: "pass — headless Chromium: 0 page errors on all three routes; screens render (A 20 rows home / B 9 groups / C 9 blocks)"
+  interactions_exercised: "tab switch, stack push/pop, sheet open+drag+dismiss, dialog, capture->quiet completion with live figure updates, collection, conflict resolution with effect preview, closing variance -> تسوية, search incl. empty state, first-visit skeleton, dark/light, 320px, reduced-motion class"
+  screenshots: 18 headless captures in supporting/qa-screenshots/
+  secret_scan: pending-push-check
+  real_device_testing: not-performed  # keyboard avoidance, safe areas, haptics, screen readers, edge-swipe physics — demonstrated only (V-02..V-04 open)
+corpus_reconciliation:
+  closing_2026_09_07: "صندوق 431.100 مؤكد (+27.750 بانتظار المزامنة) · لي 664.250 · عليّ 348.500"
+  erratum_1: "corpus table listed ورشة أبو يوسف as حساب مسدّد while its reconciliation puts 38.400 on it — reconciliation wins in prototypes"
+  erratum_2: "event 20 بنزين 4.500 -> 4.450 so the week sums exactly to the corpus closing figure"
+items_status:
+  implemented: [intake+lessons, five specialist reports, synthesis, three interactive prototypes, review index, review guide, review request, QA evidence, manifests]
+  designed_only: []
+  unverified: [real-device behavior, screen-reader pronunciation of د.أ, RTL chart time-flow preference with real owners, haptics]
+  deferred_to_stage4_after_approval: [en/05..en/16 final package, prototype/approved-native-concept/, English LTR verification pass, asset inventory, integration handoff]
+  missing_sources: [micro-agent-input.zip, micro-recovery-docs.zip, MicroPrimitives-anti-reference.html]
+files:
+  - path: en/00-previous-work-lessons.md
+    size_bytes: 12635
+    sha256_prefix: 4df5e677b09b22c1
+  - path: en/01-intake-and-previous-work-audit.md
+    size_bytes: 7767
+    sha256_prefix: 2308441595d7a835
+  - path: en/02-native-direction-synthesis.md
+    size_bytes: 15769
+    sha256_prefix: 51b472a70988b010
+  - path: en/03-native-prototype-review-guide.md
+    size_bytes: 6795
+    sha256_prefix: e28df49deca34819
+  - path: en/04-REVIEW-REQUEST.md
+    size_bytes: 7762
+    sha256_prefix: ec278eb2a5b3e6d8
+  - path: INDEX.md
+    size_bytes: 2965
+    sha256_prefix: 164af7b816db86ea
+  - path: subagents/01-native-mobile-architecture.md
+    size_bytes: 29644
+    sha256_prefix: 4eb410395ffd2efe
+  - path: subagents/02-native-art-direction.md
+    size_bytes: 29091
+    sha256_prefix: 583284da58e0b4e5
+  - path: subagents/03-native-motion-and-interaction.md
+    size_bytes: 29690
+    sha256_prefix: 0c6bff589f98b08c
+  - path: subagents/04-arabic-rtl-financial-mobile.md
+    size_bytes: 29505
+    sha256_prefix: af168fb47e5ab520
+  - path: subagents/05-adversarial-native-critique.md
+    size_bytes: 31297
+    sha256_prefix: f944e66072962621
+  - path: prototype/direction-a/index.html
+    size_bytes: 78807
+    sha256_prefix: 13cd561b12286e80
+  - path: prototype/direction-b/index.html
+    size_bytes: 75901
+    sha256_prefix: 7d3b624aa4deadcd
+  - path: prototype/direction-c/index.html
+    size_bytes: 75832
+    sha256_prefix: d54bc9144d482a33
+  - path: prototype/review-index.html
+    size_bytes: 10298
+    sha256_prefix: 06e9b78fd6a6f827
+  - path: supporting/qa-screenshots/
+    note: "18 PNG captures (a/b/c x home/money/dark/push/sheet/320w)"
