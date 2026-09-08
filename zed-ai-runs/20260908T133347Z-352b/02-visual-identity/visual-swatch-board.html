@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>لوحة الاتجاه البصري — دفء الحانوت · The Warm Counter</title>
+<style>
+  /* ============ TOKENS (المصدر الوحيد للألوان — لا قيمة خارج هذه القائمة) ============ */
+  :root{
+    --brand-atmosphere:#CC785C;
+    --brand-tint:#F7EAE4;
+    --brand-ink:#964E33;
+    --on-brand:#FFFFFF;
+    --press-overlay:rgba(31,30,29,0.08);
+    --canvas:#FAF9F5;
+    --surface:#FFFFFF;
+    --sunken:#F0EEE6;
+    --ink-strong:#1F1E1D;
+    --ink:#33322E;
+    --ink-muted:#6E6A60;
+    --ink-subtle:#767265;
+    --ink-disabled:#B7B2A6;
+    --line-soft:#EAE6DC;
+    --line-strong:#DED9CB;
+    --scrim:rgba(31,30,29,0.45);
+    --positive:#2E7D57;
+    --positive-tint:#E7EFE7;
+    --danger:#B42318;
+    --danger-tint:#F7E7E2;
+    --warning:#8A6520;
+    --warning-tint:#F4EDD8;
+    --info:#3E5C76;
+    --info-tint:#E8EDF1;
+    /* spacing */
+    --sp2:2px; --sp4:4px; --sp8:8px; --sp12:12px; --sp16:16px; --sp24:24px; --sp32:32px; --sp40:40px;
+    /* radius */
+    --r6:6px; --r12:12px; --r16:16px; --r24:24px; --rfull:999px;
+    /* type scale */
+    --fs-hero:32px; --fs-label:15px; --fs-qual:13px; --fs-min:14px;
+    --lh-tight:1.15; --lh-label:1.55; --lh-qual:1.4;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:"IBM Plex Sans Arabic","Noto Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;
+    font-variant-numeric:tabular-nums lining-nums;
+    -webkit-font-smoothing:antialiased;
+  }
+  .board{max-width:430px;margin:0 auto;padding:16px 16px 40px}
+
+  /* ============ TYPE ROLES ============ */
+  .lbl{font-size:var(--fs-label);font-weight:400;line-height:var(--lh-label);color:var(--ink);margin:0}
+  .lbl.strong{font-weight:600;color:var(--ink-strong)}
+  .note{font-size:var(--fs-min);font-weight:400;line-height:var(--lh-label);color:var(--ink-muted);margin:8px 0 0}
+  .cap{font-size:var(--fs-qual);font-weight:400;line-height:var(--lh-qual);color:var(--ink-subtle);margin:4px 0 0;font-variant-numeric:tabular-nums lining-nums}
+  h1{font-size:var(--fs-label);font-weight:600;line-height:var(--lh-label);color:var(--ink-strong);margin:0}
+  h2{font-size:var(--fs-label);font-weight:600;line-height:var(--lh-label);color:var(--ink-strong);margin:0}
+
+  /* ============ MONEY (جزيرة LTR معزولة بثلاث منازل) ============ */
+  .money{display:inline-flex;align-items:baseline;direction:rtl;gap:4px;white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+  .money bdi{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums lining-nums}
+  .money .cur{font-size:var(--fs-min);font-weight:500;color:var(--ink-muted);line-height:1}
+  .money.hero bdi{font-size:var(--fs-hero);font-weight:600;line-height:var(--lh-tight);color:var(--ink-strong);letter-spacing:0}
+  .money.hero .cur{font-size:var(--fs-label);font-weight:500;color:var(--ink-muted)}
+  .money.row bdi{font-size:var(--fs-label);font-weight:600;line-height:var(--lh-label);color:var(--ink-strong)}
+  .money.col{flex:0 0 116px;justify-content:flex-start}
+  .money.val-pos bdi{color:var(--positive)}
+  .money.val-neg bdi{color:var(--danger)}
+  .money.val-warn bdi{color:var(--warning)}
+  .money.val-info bdi{color:var(--info)}
+
+  /* ============ SECTIONS & CARDS ============ */
+  .sec{margin-top:var(--sp24)}
+  .sec-head{margin-bottom:var(--sp12)}
+  .card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r12);padding:var(--sp16);margin-top:var(--sp12)}
+
+  /* ============ S1 — STAGE (الأسطح الثلاثة واقعيًا) ============ */
+  .stage{background:var(--canvas);border:1px solid var(--line-soft);border-radius:var(--r16);overflow:hidden;margin-top:var(--sp12)}
+  .stage-body{padding:var(--sp16)}
+  .stage-head{display:flex;justify-content:space-between;align-items:flex-start}
+  .hero-card{margin-top:var(--sp12)}
+  .hero-line{display:flex;align-items:baseline;gap:var(--sp8);margin-top:var(--sp4)}
+  .well{background:var(--sunken);border-radius:var(--r6);padding:0 var(--sp12);margin-top:var(--sp12)}
+  .wrow{display:flex;align-items:center;gap:var(--sp12);padding:var(--sp12) 0}
+  .wrow .texts{flex:1;min-width:0}
+  .wrow.sep{border-top:1px solid var(--line-soft)}
+  .mininav{display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--line-strong);background:var(--surface);height:56px;border-radius:0}
+  .navitem{display:flex;flex-direction:column;align-items:center;gap:var(--sp4)}
+  .navitem svg{width:24px;height:24px;color:var(--ink-muted)}
+  .navitem span{font-size:var(--fs-min);font-weight:500;line-height:var(--lh-qual);color:var(--ink-subtle)}
+  .navitem.active svg{color:var(--brand-ink)}
+  .navitem.active span{color:var(--ink-strong)}
+
+  /* ============ S2 — BRAND FAMILY ============ */
+  .atmo{background:var(--brand-atmosphere);border-radius:var(--r16);padding:var(--sp16);margin-top:var(--sp12);display:flex;justify-content:space-between;align-items:center;gap:var(--sp12);flex-wrap:wrap}
+  .atmo .money bdi{font-size:var(--fs-label);font-weight:600;color:var(--ink-strong)}
+  .atmo .money .cur{color:var(--ink-strong)}
+  .pair-row{display:flex;gap:var(--sp12);margin-top:var(--sp12);align-items:flex-start}
+  .pair-col{display:flex;flex-direction:column;gap:var(--sp8)}
+  .pair-col.grow{flex:1;min-width:0}
+  .pair-col .tile{flex:0 0 92px}
+  .btn{display:flex;align-items:center;justify-content:center;border:0;cursor:pointer;font-family:inherit;width:100%}
+  .btn.primary{background:var(--brand-ink);color:var(--on-brand);height:48px;border-radius:var(--r12);font-size:var(--fs-label);font-weight:600;line-height:1;padding:0 var(--sp16)}
+  .btn.secondary{background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);height:44px;border-radius:var(--r12);font-size:var(--fs-label);font-weight:600;line-height:1;padding:0 var(--sp16)}
+  .action-text{display:flex;align-items:center;justify-content:center;gap:var(--sp4);color:var(--brand-ink);font-size:var(--fs-label);font-weight:600;padding:var(--sp8) 0;margin:0}
+  .action-text svg{width:16px;height:16px}
+
+  /* ============ S3 — INK SCALE PANELS ============ */
+  .panel{border-radius:var(--r12);border:1px solid var(--line-soft);padding:var(--sp16);margin-top:var(--sp12)}
+  .panel.pc{background:var(--canvas)}
+  .panel.ps{background:var(--surface)}
+  .panel.pk{background:var(--sunken)}
+  .inkrow{display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp12);margin-top:var(--sp8)}
+  .inkrow:first-of-type{margin-top:var(--sp12)}
+  .s-strong{font-size:var(--fs-label);font-weight:600;line-height:var(--lh-label);color:var(--ink-strong);margin:0}
+  .s-body{font-size:var(--fs-label);font-weight:400;line-height:var(--lh-label);color:var(--ink);margin:0}
+  .s-muted{font-size:var(--fs-min);font-weight:400;line-height:var(--lh-label);color:var(--ink-muted);margin:0}
+  .s-subtle{font-size:var(--fs-qual);font-weight:400;line-height:var(--lh-qual);color:var(--ink-subtle);margin:0;font-variant-numeric:tabular-nums lining-nums}
+  .s-disabled{font-size:var(--fs-label);font-weight:400;line-height:var(--lh-label);color:var(--ink-disabled);margin:0}
+  .fail-tag{font-size:var(--fs-qual);font-weight:600;color:var(--danger);white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+
+  /* ============ S4 — SEMANTIC FAMILIES ============ */
+  .chip{display:inline-flex;align-items:center;gap:var(--sp4);border-radius:var(--rfull);padding:3px 10px;min-height:26px}
+  .chip svg{width:16px;height:16px;flex:0 0 16px}
+  .chip span{font-size:var(--fs-min);font-weight:500;line-height:var(--lh-qual);color:var(--ink);white-space:nowrap}
+  .chip.pos{background:var(--positive-tint)} .chip.pos svg{color:var(--positive)}
+  .chip.neg{background:var(--danger-tint)}  .chip.neg svg{color:var(--danger)}
+  .chip.warn{background:var(--warning-tint)} .chip.warn svg{color:var(--warning)}
+  .chip.infof{background:var(--info-tint)} .chip.infof svg{color:var(--info)}
+  .trow{display:flex;align-items:center;gap:var(--sp12);padding:var(--sp12) 0}
+  .trow.sep{border-top:1px solid var(--line-soft)}
+  .trow .texts{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--sp4)}
+  .trow .meta{display:flex;align-items:center;flex-wrap:wrap;gap:var(--sp4) var(--sp8)}
+  .total-row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp12);border-top:1px solid var(--line-soft);padding:var(--sp12) 0 2px}
+
+  /* ============ S5 — TYPE SCALE ============ */
+  .type-card .hero-line{margin-top:var(--sp8)}
+  .ledger{background:var(--sunken);border-radius:var(--r6);padding:0 var(--sp12);margin-top:var(--sp12)}
+  .spec-row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp12);padding:var(--sp12) 0 0}
+
+  /* ============ S6 — SPACING & RADIUS ============ */
+  .gaps{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp12)}
+  .gap-item{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r6);padding:var(--sp12);display:flex;flex-direction:column;gap:var(--sp8)}
+  .gap-demo{display:flex;align-items:center;gap:var(--g)}
+  .gap-demo i{width:20px;height:20px;border-radius:var(--r6);background:var(--sunken);border:1px solid var(--line-soft)}
+  .rads{display:flex;flex-wrap:wrap;gap:var(--sp12)}
+  .rad-item{display:flex;flex-direction:column;align-items:center;gap:var(--sp8)}
+  .rad-box{width:56px;height:56px;background:var(--surface);border:1px solid var(--line-soft)}
+  .rad-pill{width:64px;height:28px;background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--rfull)}
+  .r0-bar{margin-top:var(--sp12);background:var(--surface);border:1px solid var(--line-strong);border-radius:0;height:40px;display:flex;align-items:center;justify-content:center}
+
+  /* ============ S7 — QUICK ACTION RAIL ============ */
+  .rail{display:flex;gap:var(--sp8);overflow-x:auto;margin:var(--sp12) -16px 0;padding:4px 16px 8px;
+        scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity;
+        -webkit-mask-image:linear-gradient(to left,#000 82%,transparent 100%);
+        mask-image:linear-gradient(to left,#000 82%,transparent 100%)}
+  .rail::-webkit-scrollbar{display:none}
+  .tile{flex:0 0 88px;width:88px;height:92px;border-radius:var(--r12);background:var(--surface);border:1px solid var(--line-soft);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp8);scroll-snap-align:start}
+  .tile svg{width:24px;height:24px;color:var(--ink-muted)}
+  .tile span{font-size:var(--fs-min);font-weight:500;line-height:var(--lh-qual);color:var(--ink)}
+  .tile.brand{background:var(--brand-tint);border-color:var(--brand-tint)}
+  .tile.brand svg{color:var(--brand-ink)}
+
+  /* ============ S8 — PRESS OVERLAY ============ */
+  .press{transition:box-shadow 80ms cubic-bezier(0.2,0,0,1)}
+  .press:active{box-shadow:inset 0 0 0 999px var(--press-overlay)}
+  .press:focus-visible{outline:2px solid var(--ink-strong);outline-offset:2px}
+  button.trow{width:100%;background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r12);padding:var(--sp12) var(--sp16);cursor:pointer;font-family:inherit;text-align:right}
+  button.trow .trow-inner{display:flex;align-items:center;gap:var(--sp12);width:100%}
+
+  /* ============ FOOTER — TOKEN REFERENCE ============ */
+  .toks{display:flex;flex-direction:column;gap:var(--sp2);margin-top:var(--sp12)}
+  .tok{font-size:var(--fs-qual);line-height:var(--lh-qual);color:var(--ink-muted);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+  .board-foot{margin-top:var(--sp24)}
+</style>
+</head>
+<body>
+<main class="board">
+
+  <!-- ====== رموز الأيقونات (مرجع داخلي — بلا أي ملف خارجي) ====== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="i-check" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></g>
+      <g id="i-down" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></g>
+      <g id="i-warn" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L21 20H3z"/><path d="M12 10v4"/><path d="M12 17.4v.01"/></g>
+      <g id="i-clock" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/></g>
+      <g id="i-plus" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8"/><path d="M8 12h8"/></g>
+      <g id="i-cash" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></g>
+      <g id="i-receipt" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v18l-2.5-2-2.5 2-2.5-2-2.5 2z"/><path d="M10.5 8h3"/><path d="M10.5 12h3"/></g>
+      <g id="i-person" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></g>
+      <g id="i-box" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4.5 7.5L12 12l7.5-4.5"/><path d="M12 12v8.5"/></g>
+      <g id="i-grid" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4z"/><path d="M13 4h7v7h-7z"/><path d="M4 13h7v7H4z"/><path d="M13 13h7v7h-7z"/></g>
+      <g id="i-list" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></g>
+      <g id="i-dots" fill="currentColor" stroke="none"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></g>
+      <g id="i-chev" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l-6 6 6 6"/></g>
+    </defs>
+  </svg>
+
+  <!-- ====== رأس اللوحة ====== -->
+  <header>
+    <h1>لوحة الاتجاه البصري — «دفء الحانوت»</h1>
+    <p class="note">The Warm Counter · مرجع الرموز المعتمدة للمكوّنات، عربي أولًا (RTL)، للهاتف فقط.</p>
+    <p class="cap"><bdi dir="ltr">RUN 20260908T133347Z-352b · 320–430px · LIGHT MODE ONLY</bdi></p>
+  </header>
+
+  <!-- ====== S1 · الأسطح الثلاثة كطبقات واقعية ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>السطوح الثلاثة — طبقات واقعية</h2>
+      <p class="cap"><bdi dir="ltr">canvas / surface / sunken · max 2 nesting levels · 0 resting shadows</bdi></p>
+    </div>
+    <div class="stage">
+      <div class="stage-body">
+        <div class="stage-head">
+          <div>
+            <p class="lbl strong">لوحة اليوم · بقالة النور</p>
+            <p class="cap"><bdi dir="ltr">08/09/2026</bdi></p>
+          </div>
+          <p class="cap"><bdi dir="ltr">3 PLANES</bdi></p>
+        </div>
+        <div class="card hero-card">
+          <p class="lbl">تحصيلات اليوم</p>
+          <div class="hero-line">
+            <span class="money hero"><bdi dir="ltr">431.100</bdi><span class="cur">د.أ</span></span>
+          </div>
+          <p class="cap"><bdi dir="ltr">08/09/2026 · 12:40</bdi></p>
+          <div class="well">
+            <div class="wrow">
+              <div class="texts"><p class="lbl">نقدًا</p></div>
+              <span class="money row col"><bdi dir="ltr">240.000</bdi><span class="cur">د.أ</span></span>
+            </div>
+            <div class="wrow sep">
+              <div class="texts"><p class="lbl">تحويل</p></div>
+              <span class="money row col"><bdi dir="ltr">191.100</bdi><span class="cur">د.أ</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="mininav" aria-label="شريط تنقل تجريبي">
+        <div class="navitem active"><svg viewBox="0 0 24 24"><use href="#i-grid"/></svg><span>اللوحة</span></div>
+        <div class="navitem"><svg viewBox="0 0 24 24"><use href="#i-list"/></svg><span>الحركات</span></div>
+        <div class="navitem"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg><span>المزيد</span></div>
+      </nav>
+    </div>
+    <p class="note">القماش أرض الشاشة، والأبيض حامل بيانات العمل، والبئر يجمّع التفصيل داخل البطاقة. تعشيق بحدّ مستويين، خط شعرة واحد حول البطاقة، والشريط السفلي بنصف قطر 0 بخط علوي أوثق. صفر ظلال في السكون.</p>
+  </section>
+
+  <!-- ====== S2 · عائلة التيراكوتا ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>عائلة التيراكوتا — اقتران النص الصحيح</h2>
+      <p class="cap"><bdi dir="ltr">atmosphere / tint / ink · 1 filled brand moment per viewport</bdi></p>
+    </div>
+    <div class="atmo">
+      <p class="lbl strong">صافي تحصيلات الأسبوع</p>
+      <span class="money"><bdi dir="ltr">1240.500</bdi><span class="cur">د.أ</span></span>
+    </div>
+    <p class="cap"><bdi dir="ltr">ink-strong on #CC785C = 5.08:1 PASS · on-brand (white) = 3.28:1 FAIL — forbidden</bdi></p>
+    <div class="pair-row">
+      <div class="pair-col">
+        <div class="tile brand">
+          <svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>
+          <span>بيع جديد</span>
+        </div>
+        <p class="cap"><bdi dir="ltr">brand-tint tile · icon 5.20:1 · label 10.90:1</bdi></p>
+      </div>
+      <div class="pair-col grow">
+        <button class="btn primary press" type="button">تسجيل تحصيل</button>
+        <p class="action-text">عرض كشف اليوم <svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></p>
+        <p class="cap"><bdi dir="ltr">on-brand on brand-ink = 6.11:1 · brand-ink as text on surface = 6.11:1</bdi></p>
+      </div>
+    </div>
+    <p class="note">لوحة مرجعية فتعرض العائلة كاملة؛ في الشاشة الحقيقية لحظة تيراكوتا واحدة لكل إطار: شريط الغلاف الجوي أو الزر الممتلئ أو بلاطة الصبغة. أما الصبغة فللبلاطة الأولى في ريل الإجراءات فقط — ليست بطاقة وليست نظام أسطح رابعًا.</p>
+  </section>
+
+  <!-- ====== S3 · سلم الحبر ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>سلم الحبر على الأسطح الثلاثة</h2>
+      <p class="cap"><bdi dir="ltr">ink scale on canvas / surface / sunken</bdi></p>
+    </div>
+    <div class="panel pc">
+      <p class="cap"><bdi dir="ltr">ON CANVAS #FAF9F5</bdi></p>
+      <div class="inkrow"><p class="s-strong">المجموع المستحق للوردية المسائية</p></div>
+      <div class="inkrow"><p class="s-body">اسم العميل: مطعم اليمامة</p></div>
+      <div class="inkrow"><p class="s-muted">ملاحظة: الدفع نقدًا عند التسليم</p></div>
+      <div class="inkrow"><p class="s-subtle"><bdi dir="ltr">REF-1042 · 08/09/2026 · 12:40</bdi></p></div>
+      <div class="inkrow"><p class="s-disabled">حقل غير متاح حاليًا</p></div>
+    </div>
+    <div class="panel ps">
+      <p class="cap"><bdi dir="ltr">ON SURFACE #FFFFFF</bdi></p>
+      <div class="inkrow"><p class="s-strong">المجموع المستحق للوردية المسائية</p></div>
+      <div class="inkrow"><p class="s-body">اسم العميل: مطعم اليمامة</p></div>
+      <div class="inkrow"><p class="s-muted">ملاحظة: الدفع نقدًا عند التسليم</p></div>
+      <div class="inkrow"><p class="s-subtle"><bdi dir="ltr">REF-1042 · 08/09/2026 · 12:40</bdi></p></div>
+      <div class="inkrow"><p class="s-disabled">حقل غير متاح حاليًا</p></div>
+    </div>
+    <div class="panel pk">
+      <p class="cap"><bdi dir="ltr">ON SUNKEN #F0EEE6</bdi></p>
+      <div class="inkrow"><p class="s-muted">المؤهّلات داخل الآبار تُكتب بـ ink-muted</p></div>
+      <div class="inkrow"><p class="s-subtle"><bdi dir="ltr">REF-1042 · 08/09/2026</bdi><span class="fail-tag"> 4.14:1 FAIL</span></p></div>
+      <p class="note">ink-subtle فوق البئر يفشل عتبة 4.5:1 — استخدم ink-muted (4.64:1). الحبر المعطَّل مقصود دون AA لأنه غير تفاعلي أصلًا.</p>
+    </div>
+  </section>
+
+  <!-- ====== S4 · العائلات الدلالية كصفوف واقعية ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>العائلات الدلالية — صفوف وشريحات واقعية</h2>
+      <p class="cap"><bdi dir="ltr">tint + icon + ink text · value-in-semantic on white · max 2 families / 2 colored values</bdi></p>
+    </div>
+
+    <div class="card">
+      <p class="lbl strong">تحصيلات اليوم</p>
+      <div class="trow">
+        <div class="texts">
+          <p class="lbl">مطعم اليمامة</p>
+          <div class="meta">
+            <span class="chip pos"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg><span>تم التحصيل</span></span>
+            <span class="cap"><bdi dir="ltr">12:40</bdi></span>
+          </div>
+        </div>
+        <span class="money col val-pos"><bdi dir="ltr">+240.000</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <div class="trow sep">
+        <div class="texts">
+          <p class="lbl">أبو محمد</p>
+          <div class="meta">
+            <span class="chip pos"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg><span>تم التحصيل</span></span>
+            <span class="cap"><bdi dir="ltr">09:15</bdi></span>
+          </div>
+        </div>
+        <span class="money col val-pos"><bdi dir="ltr">+125.500</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <div class="total-row">
+        <p class="lbl strong">المجموع</p>
+        <span class="money col"><bdi dir="ltr">365.500</bdi><span class="cur">د.أ</span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="lbl strong">مصروفات اليوم</p>
+      <div class="trow">
+        <div class="texts">
+          <p class="lbl">فاتورة كهرباء المحل</p>
+          <div class="meta">
+            <span class="chip neg"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span>مصروف مدفوع</span></span>
+            <span class="cap"><bdi dir="ltr">11:05</bdi></span>
+          </div>
+        </div>
+        <span class="money col val-neg"><bdi dir="ltr">-85.250</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <div class="trow sep">
+        <div class="texts">
+          <p class="lbl">نقل بضاعة من السوق</p>
+          <div class="meta">
+            <span class="chip neg"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span>مصروف مدفوع</span></span>
+            <span class="cap"><bdi dir="ltr">13:30</bdi></span>
+          </div>
+        </div>
+        <span class="money col val-neg"><bdi dir="ltr">-40.000</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <div class="total-row">
+        <p class="lbl strong">المجموع</p>
+        <span class="money col"><bdi dir="ltr">-125.250</bdi><span class="cur">د.أ</span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="lbl strong">ذمم العملاء والتسويات</p>
+      <div class="trow">
+        <div class="texts">
+          <p class="lbl">فاتورة <bdi dir="ltr">1042</bdi> — اليمامة</p>
+          <div class="meta">
+            <span class="chip warn"><svg viewBox="0 0 24 24"><use href="#i-warn"/></svg><span>فاتورة متأخرة</span></span>
+            <span class="note" style="margin:0">متأخرة <bdi dir="ltr">12</bdi> يومًا</span>
+          </div>
+        </div>
+        <span class="money col val-warn"><bdi dir="ltr">520.000</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <div class="trow sep">
+        <div class="texts">
+          <p class="lbl">تسوية توصيل — دكان الشمال</p>
+          <div class="meta">
+            <span class="chip infof"><svg viewBox="0 0 24 24"><use href="#i-clock"/></svg><span>بانتظار التسوية</span></span>
+            <span class="cap"><bdi dir="ltr">08/09/2026</bdi></span>
+          </div>
+        </div>
+        <span class="money col val-info"><bdi dir="ltr">1240.500</bdi><span class="cur">د.أ</span></span>
+      </div>
+    </div>
+    <p class="note">كل بطاقة عائلة واحدة عدا الأخيرة: عائلتان (تحذير + معلومات) وقيمتان ملوّنتان — السقف المسموح بالضبط. المجاميع بحبر ink-strong لا بلون، والشريحة تحمل الأيقونة الدلالية مع نص حبري داكن.</p>
+  </section>
+
+  <!-- ====== S5 · مقياس الخط والأرقام ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>مقياس الخط والأرقام الجدولية</h2>
+      <p class="cap"><bdi dir="ltr">32/600 hero · 15 label · 13 qualifier · 14 Arabic floor · tabular-nums lining-nums</bdi></p>
+    </div>
+    <div class="card type-card">
+      <p class="lbl">تحصيلات اليوم</p>
+      <div class="hero-line">
+        <span class="money hero"><bdi dir="ltr">431.100</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <p class="cap"><bdi dir="ltr">08/09/2026 · 12:40</bdi></p>
+      <div class="spec-row">
+        <p class="lbl">فاتورة <bdi dir="ltr">1042</bdi> — مطعم اليمامة</p>
+        <span class="money"><bdi dir="ltr">575.000</bdi><span class="cur">د.أ</span></span>
+      </div>
+      <p class="s-muted" style="margin-top:12px">ملاحظة: الدفع نقدًا عند التسليم.</p>
+      <p class="cap"><bdi dir="ltr">13px = digits/Latin only · Arabic floor = 14px</bdi></p>
+      <div class="ledger">
+        <div class="wrow">
+          <div class="texts"><p class="lbl">مبيعات اليوم</p></div>
+          <span class="money row col"><bdi dir="ltr">431.100</bdi><span class="cur">د.أ</span></span>
+        </div>
+        <div class="wrow sep">
+          <div class="texts"><p class="lbl">تحصيلات الذمم</p></div>
+          <span class="money row col"><bdi dir="ltr">240.000</bdi><span class="cur">د.أ</span></span>
+        </div>
+        <div class="wrow sep">
+          <div class="texts"><p class="lbl">مصروفات مدفوعة</p></div>
+          <span class="money row col"><bdi dir="ltr">-125.250</bdi><span class="cur">د.أ</span></span>
+        </div>
+        <div class="wrow sep">
+          <div class="texts"><p class="lbl">فرق تسوية</p></div>
+          <span class="money row col"><bdi dir="ltr">0.000</bdi><span class="cur">د.أ</span></span>
+        </div>
+      </div>
+      <p class="note">القيم جزائر LTR معزولة بثلاث منازل ثابتة؛ بثبوت عدد الخانات والأرقام الجدولية تصطف الفواصل العشرية عموديًا تلقائيًا على حافة النهاية. الأرقام لا تُقتطع ولا تُلَف أبدًا.</p>
+    </div>
+  </section>
+
+  <!-- ====== S6 · الإيقاع والأنصاف ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>إيقاع المسافات وأنصاف الأقطار</h2>
+      <p class="cap"><bdi dir="ltr">2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 · r = 6 / 12 / 16 / 24 / full · nav r = 0</bdi></p>
+    </div>
+    <div class="gaps">
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">2px</bdi></p><div class="gap-demo" style="--g:var(--sp2)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">4px</bdi></p><div class="gap-demo" style="--g:var(--sp4)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">8px</bdi></p><div class="gap-demo" style="--g:var(--sp8)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">12px</bdi></p><div class="gap-demo" style="--g:var(--sp12)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">16px</bdi></p><div class="gap-demo" style="--g:var(--sp16)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">24px</bdi></p><div class="gap-demo" style="--g:var(--sp24)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">32px</bdi></p><div class="gap-demo" style="--g:var(--sp32)"><i></i><i></i></div></div>
+      <div class="gap-item"><p class="cap"><bdi dir="ltr">40px</bdi></p><div class="gap-demo" style="--g:var(--sp40)"><i></i><i></i></div></div>
+    </div>
+    <div class="rads" style="margin-top:16px">
+      <div class="rad-item"><div class="rad-box" style="border-radius:var(--r6)"></div><p class="cap"><bdi dir="ltr">r6</bdi></p></div>
+      <div class="rad-item"><div class="rad-box" style="border-radius:var(--r12)"></div><p class="cap"><bdi dir="ltr">r12</bdi></p></div>
+      <div class="rad-item"><div class="rad-box" style="border-radius:var(--r16)"></div><p class="cap"><bdi dir="ltr">r16</bdi></p></div>
+      <div class="rad-item"><div class="rad-box" style="border-radius:var(--r24)"></div><p class="cap"><bdi dir="ltr">r24</bdi></p></div>
+      <div class="rad-item"><div class="rad-pill"></div><p class="cap"><bdi dir="ltr">full — chips only</bdi></p></div>
+    </div>
+    <div class="r0-bar"><p class="cap"><bdi dir="ltr">bottom-nav · radius 0 · top line-strong</bdi></p></div>
+    <p class="note">حافة الشاشة 16px؛ داخل المجموعة 4–12px؛ بين الكتل 16px؛ بين الأقسام 24px. الأنصاف: 6 للآبار والحقول، 12 للبطاقات والبلاطات والأزرار، 16 للبطاقات البطلة، 24 للّحظات الكبيرة، والكبسولة للشرائح فقط — لا شيء آخر يصبح حبة.</p>
+  </section>
+
+  <!-- ====== S7 · ريل الإجراءات السريعة ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>ريل الإجراءات السريعة</h2>
+      <p class="cap"><bdi dir="ltr">tiles 88×92 · icon-label gap 8 · first tile brand-tint · scroll + edge fade</bdi></p>
+    </div>
+    <div class="rail">
+      <div class="tile brand"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg><span>بيع جديد</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><use href="#i-cash"/></svg><span>تحصيل</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><use href="#i-receipt"/></svg><span>مصروف</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><use href="#i-person"/></svg><span>عملاء</span></div>
+      <div class="tile"><svg viewBox="0 0 24 24"><use href="#i-box"/></svg><span>مخزون</span></div>
+    </div>
+    <p class="note">بلاطة واحدة فقط مصبوغة بلون العلامة — الفعل الافتراضي. عند 320px تظهر ثلاث بلاطات بالضبط (خطوة 96px)، وعند 430px أربع كاملة وجزء من الخامسة تحت تلاشي الحافة — إشاءة تمرير بلا نص. اسحب أفقيًا.</p>
+  </section>
+
+  <!-- ====== S8 · طبقة الضغط ====== -->
+  <section class="sec">
+    <div class="sec-head">
+      <h2>طبقة الضغط — جرّب النقر</h2>
+      <p class="cap"><bdi dir="ltr">:active · 80ms · rgba(31,30,29,0.08) · targets 44/48px</bdi></p>
+    </div>
+    <button class="trow press" type="button">
+      <span class="trow-inner">
+        <span class="texts" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+          <span class="lbl">أبو محمد — دفعة ذمم</span>
+          <span class="cap"><bdi dir="ltr">09:15 · REF-1042</bdi></span>
+        </span>
+        <span class="money col"><bdi dir="ltr">125.500</bdi><span class="cur">د.أ</span></span>
+      </span>
+    </button>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+      <button class="btn secondary press" type="button">إضافة مصروف</button>
+      <button class="btn primary press" type="button">تسجيل تحصيل</button>
+    </div>
+    <p class="note">الضغط تلوين داكن شفاف واحد للجميع — فوق الأبيض يبقى النص فوق 10.9:1 وفوق صبغة العلامة فوق 9.3:1. لا تحجيم ولا إزاحة: تغيّر لوني خلال 80 مللي ثانية فقط، وحلقة التركيز 2px بلون ink-strong عند التنقل بلوحة المفاتيح.</p>
+  </section>
+
+  <!-- ====== مرجع الرموز ====== -->
+  <footer class="board-foot">
+    <div class="sec-head">
+      <h2>مرجع الرموز الكامل</h2>
+      <p class="cap"><bdi dir="ltr">CSS custom properties · single source of truth</bdi></p>
+    </div>
+    <div class="toks">
+      <span class="tok" dir="ltr">--brand-atmosphere: #CC785C</span>
+      <span class="tok" dir="ltr">--brand-tint: #F7EAE4</span>
+      <span class="tok" dir="ltr">--brand-ink: #964E33</span>
+      <span class="tok" dir="ltr">--on-brand: #FFFFFF</span>
+      <span class="tok" dir="ltr">--press-overlay: rgba(31,30,29,0.08)</span>
+      <span class="tok" dir="ltr">--canvas: #FAF9F5</span>
+      <span class="tok" dir="ltr">--surface: #FFFFFF</span>
+      <span class="tok" dir="ltr">--sunken: #F0EEE6</span>
+      <span class="tok" dir="ltr">--ink-strong: #1F1E1D</span>
+      <span class="tok" dir="ltr">--ink: #33322E</span>
+      <span class="tok" dir="ltr">--ink-muted: #6E6A60</span>
+      <span class="tok" dir="ltr">--ink-subtle: #767265</span>
+      <span class="tok" dir="ltr">--ink-disabled: #B7B2A6</span>
+      <span class="tok" dir="ltr">--line-soft: #EAE6DC</span>
+      <span class="tok" dir="ltr">--line-strong: #DED9CB</span>
+      <span class="tok" dir="ltr">--scrim: rgba(31,30,29,0.45)</span>
+      <span class="tok" dir="ltr">--positive: #2E7D57 · --positive-tint: #E7EFE7</span>
+      <span class="tok" dir="ltr">--danger: #B42318 · --danger-tint: #F7E7E2</span>
+      <span class="tok" dir="ltr">--warning: #8A6520 · --warning-tint: #F4EDD8</span>
+      <span class="tok" dir="ltr">--info: #3E5C76 · --info-tint: #E8EDF1</span>
+    </div>
+    <p class="note">لا تُستخدم أي قيمة لونية خارج هذه القائمة؛ لا وضع ليلي ولا استعلام تفضيل ألوان؛ العملة «د.أ» حصرًا؛ التواريخ DD/MM/YYYY؛ والمبالغ بثلاث منازل بأرقام إنجليزية معزولة.</p>
+  </footer>
+
+</main>
+</body>
+</html>

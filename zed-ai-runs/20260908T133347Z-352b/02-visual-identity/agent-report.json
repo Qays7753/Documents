@@ -1,0 +1,46 @@
+{
+  "agent_id": "02",
+  "task_id": "2-b",
+  "status": "completed",
+  "run_id": "20260908T133347Z-352b",
+  "direction": "دفء الحانوت / The Warm Counter — warm at rest, decisive in figures",
+  "files": [
+    {
+      "path": "visual-direction-report.md",
+      "purpose": "Named visual direction (~1500 words): composition grammar (canvas-first, ink-forward loudness ladder, single filled brand action placement), three-plane surface logic with 2-level nesting and zero resting shadows, five legitimate energy sources, Terracotta usage discipline with per-viewport budget, three anti-drift guardrails (generic SaaS / paper ledger / AI gallery), and a measurable first-glance test (4 answers in ≤3s at 320px)."
+    },
+    {
+      "path": "color-role-map.md",
+      "purpose": "Complete token→role/used/forbidden table for all 24 color tokens, relative luminance table (WCAG formula), 40+ computed contrast rows to 2 decimals with PASS/FAIL vs 4.5:1 and 3:1, press-overlay/scrim composite notes, and 7 safe pairing rules (ink-strong-only on atmosphere 5.08:1; semantic values on white only; positive-on-tint 4.27:1 forbidden as text; ink-subtle banned on sunken 4.14:1; disabled intentionally sub-AA)."
+    },
+    {
+      "path": "type-and-spacing-review.md",
+      "purpose": "Type scale mapped to component roles (32/600 hero, 15/600 row values, 15/400 labels, 14 Arabic floor, 13 digits/Latin-only qualifiers), tabular-nums money rules (LTR bdi islands, 3-decimal fils decimal alignment, width budgets 234px@320), line-height rationale (1.15/1.55/1.4), Arabic long-label wrap strategy (numbers never truncate), spacing rhythm (16 edge / 12 intra / 16 inter / 24 section), density targets (6×48px rows @320, 5–6×70px rows @430, 3 rail tiles @320 / 4.15 @430), press/focus geometry (44/48px, 80ms, focus ring 2px ink-strong)."
+    },
+    {
+      "path": "visual-swatch-board.html",
+      "purpose": "Self-contained RTL Arabic light-mode reference board (max-width 430, no external refs, no JS): realistic layered 3-surface mini-screen with sunken well and r=0 bottom nav; brand family with correct pairings (ink-strong on atmosphere, brand-tint rail tile, brand-ink CTA with white text); full ink scale on canvas/surface/sunken; semantic families as realistic chips+rows (تم التحصيل / مصروف مدفوع / فاتورة متأخرة / بانتظار التسوية) with value-in-semantic-on-white; type scale with bidi-isolated English digits; spacing and radius specimens; 5-tile 88×92 QuickActionRail with brand-tint first tile and edge-fade mask; :active press-overlay demo. All colors via CSS variables matching the exact token set."
+    },
+    {
+      "path": "agent-report.json",
+      "purpose": "This file."
+    }
+  ],
+  "key_decisions": [
+    "Direction named «دفء الحانوت / The Warm Counter»: warmth lives in the ground (canvas + one terracotta moment), decisiveness lives in the figures (ink-strong tabular values) — deliberately not a quiet beige or monochrome-brown system.",
+    "Fixed loudness ladder: 32px/600 money value > 15px labels > one semantic state > the single brand moment > everything muted; hierarchy is typographic/positional, never a grid of colored stat cards.",
+    "Per-viewport terracotta budget made arithmetic: one filled brand-family surface (atmosphere band OR brand-ink CTA OR the one brand-tint rail tile); when an atmosphere band exists the CTA demotes to secondary (surface + line-strong + ink).",
+    "WCAG computed for every required pair: text on brand-atmosphere is ink-strong only (5.08:1; white 3.28:1 and ink 3.92:1 fail); semantic values print on surface/canvas only (positive-on-tint 4.27:1 fails, hence chips use ink text + semantic icon); ink-subtle banned on sunken (4.14:1) with ink-muted (4.64:1) as the in-well meta ink; ink-disabled intentionally sub-AA and non-interactive.",
+    "Money rendering contract: <bdi dir=\"ltr\"> islands, tabular-nums lining-nums, fixed 3-decimal fils, currency «د.أ» flowing after the number in RTL, fixed 116px money cell right-anchored so decimal points column-align automatically; numbers never wrap, truncate, or hyphenate — labels wrap instead.",
+    "Type scale reconciliation rule: 13px is digits/Latin-only (dates, times, refs); any Arabic-script qualifier lifts to the 14px Arabic floor; row values get hierarchy via weight (15/600) not new sizes.",
+    "Density is bought with measurement, not austerity: 48px single-line rows and 6 rows above the fold at 320px; 70px two-line rows at 430px; rail stride 96px shows exactly 3 tiles at 320 and 4.15 at 430 with an alpha-mask edge fade (functional mask, not a decorative gradient).",
+    "Elevation and motion restraint: zero resting drop shadows (plane steps + 1px line-soft/line-strong only; lift = scrim 45% + surface for sheets 240/180ms and dialogs 160/120ms); press is a single rgba(31,30,29,0.08) inset layer at 80ms, no scale, no bounce, no count-up."
+  ],
+  "open_questions": [
+    "Should row-level money values ever allow thousands separators for ≥7-digit sums (corpus shows none, e.g. 431.100)? Current spec: no separators; needs product decision before the final library build.",
+    "The 88×92 QuickActionRail tile is verified at 320/430, but snap behavior under RTL momentum scrolling was only checked structurally — Agent 03 should confirm scroll-snap-align under RTL on real devices.",
+    "brand-atmosphere as a wide hero band and the 32px/600 value both claim 'loudest element' when combined (value ink-strong on atmosphere = 5.08:1 but visually competing) — should the hero value ever sit on atmosphere, or always on surface/canvas?",
+    "Warning/info co-occurrence (e.g. overdue invoice awaiting settlement in one row) hits the two-family cap exactly; Agent 04 should validate that icon+text chips remain distinguishable for color-vision deficiency at 14px/500.",
+    "System Arabic fallback (no IBM Plex Sans Arabic installed) was used for the board rendering check; final build must wire the bundled woff2 fonts from final/fonts and re-verify decimal alignment with real tabular figures."
+  ]
+}
