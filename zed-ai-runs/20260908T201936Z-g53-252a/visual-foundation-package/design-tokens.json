@@ -1,0 +1,1349 @@
+{
+  "meta": {
+    "package": "neutral-mobile-visual-foundation",
+    "run_id": "20260908T201936Z-g53-252a",
+    "generated_utc": "2026-09-08T20:25:49Z",
+    "source_of_truth": "accounting-visual-foundation-source-pack-v1 (read-only evidence pack)",
+    "companion_files": [
+      "design-tokens.css (1:1 parity, verified)",
+      "color-system.md",
+      "decision-log.md"
+    ],
+    "classification_legend": {
+      "inherited": "value and role preserved from source",
+      "normalized": "same intent, cleaned naming or structure",
+      "corrected": "source defect fixed with measured evidence",
+      "proposed": "optional addition not present in source",
+      "unresolved": "requires human decision"
+    },
+    "classification_summary": {
+      "inherited": 69,
+      "normalized": 74,
+      "corrected": 5
+    },
+    "token_count": 148,
+    "measurement_note": "all contrast ratios WCAG 2.1, computed in agents/sub3/contrast-results.json (62 pairs)"
+  },
+  "tokens": [
+    {
+      "name": "color.primary.50",
+      "value": "#FBF3EF",
+      "role": "primary ramp 50",
+      "classification": "inherited",
+      "usage": "lightest tint surface",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.100",
+      "value": "#F4E4DB",
+      "role": "primary ramp 100",
+      "classification": "inherited",
+      "usage": "selected/tint surface",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.200",
+      "value": "#E8C9B8",
+      "role": "primary ramp 200",
+      "classification": "inherited",
+      "usage": "snackbar action on ink",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.300",
+      "value": "#DBAE91",
+      "role": "primary ramp 300",
+      "classification": "inherited",
+      "usage": "graphic accent",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.400",
+      "value": "#D59172",
+      "role": "primary ramp 400",
+      "classification": "inherited",
+      "usage": "border/graphic mid",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.500",
+      "value": "#CC785C",
+      "role": "primary ramp 500",
+      "classification": "inherited",
+      "usage": "IDENTITY: non-text graphics, large text only (3.28:1 w/ white)",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.600",
+      "value": "#B4613F",
+      "role": "primary ramp 600",
+      "classification": "inherited",
+      "usage": "pressed step for non-text uses (4.45:1 w/ white — not AA normal)",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.700",
+      "value": "#964E33",
+      "role": "primary ramp 700",
+      "classification": "inherited",
+      "usage": "text-bearing fills (6.11:1 w/ white), strong primary text",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.800",
+      "value": "#783B28",
+      "role": "primary ramp 800",
+      "classification": "inherited",
+      "usage": "pressed step for text-bearing fills",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.primary.900",
+      "value": "#5A2C1D",
+      "role": "primary ramp 900",
+      "classification": "inherited",
+      "usage": "deepest emphasis",
+      "evidence": "tailwind.config.source.js:23-32"
+    },
+    {
+      "name": "color.accent.50",
+      "value": "#E3F5F5",
+      "role": "accent ramp 50",
+      "classification": "inherited",
+      "usage": "interactive selected surface",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.100",
+      "value": "#C0EAEA",
+      "role": "accent ramp 100",
+      "classification": "inherited",
+      "usage": "graphic tint",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.200",
+      "value": "#8FD5D6",
+      "role": "accent ramp 200",
+      "classification": "inherited",
+      "usage": "light graphic",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.300",
+      "value": "#5EC0C1",
+      "role": "accent ramp 300",
+      "classification": "inherited",
+      "usage": "border/graphic",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.400",
+      "value": "#2DABAD",
+      "role": "accent ramp 400",
+      "classification": "inherited",
+      "usage": "mid graphic",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.500",
+      "value": "#079FA0",
+      "role": "accent ramp 500",
+      "classification": "inherited",
+      "usage": "interactive accent: icons, focus borders, selected check (3.24:1 w/ white — not text fill)",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.600",
+      "value": "#057B7C",
+      "role": "accent ramp 600",
+      "classification": "inherited",
+      "usage": "text-bearing fills (5.08:1 w/ white), links, focus ring, text on accent tint",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.700",
+      "value": "#045E5F",
+      "role": "accent ramp 700",
+      "classification": "inherited",
+      "usage": "pressed accent fill",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.800",
+      "value": "#034142",
+      "role": "accent ramp 800",
+      "classification": "inherited",
+      "usage": "deep",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.accent.900",
+      "value": "#022425",
+      "role": "accent ramp 900",
+      "classification": "inherited",
+      "usage": "deepest",
+      "evidence": "tailwind.config.source.js:37-46"
+    },
+    {
+      "name": "color.positive.50",
+      "value": "#E4F2EA",
+      "role": "positive ramp 50",
+      "classification": "normalized",
+      "usage": "badge/row background",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.100",
+      "value": "#C9E6D5",
+      "role": "positive ramp 100",
+      "classification": "normalized",
+      "usage": "icon-chip background",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.200",
+      "value": "#A7D8BE",
+      "role": "positive ramp 200",
+      "classification": "normalized",
+      "usage": "graphic fill",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.300",
+      "value": "#7FC49E",
+      "role": "positive ramp 300",
+      "classification": "normalized",
+      "usage": "light fill",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.400",
+      "value": "#57B07E",
+      "role": "positive ramp 400",
+      "classification": "normalized",
+      "usage": "mid fill",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.500",
+      "value": "#2E7D57",
+      "role": "positive ramp 500",
+      "classification": "normalized",
+      "usage": "filled positive button (5.02:1 w/ white)",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.600",
+      "value": "#256A48",
+      "role": "positive ramp 600",
+      "classification": "normalized",
+      "usage": "text/icon on white & on tint (6.49 / 5.62)",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.700",
+      "value": "#1C5739",
+      "role": "positive ramp 700",
+      "classification": "normalized",
+      "usage": "strong positive text (7.36 on tint)",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.800",
+      "value": "#13442A",
+      "role": "positive ramp 800",
+      "classification": "normalized",
+      "usage": "deep",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.positive.900",
+      "value": "#0A311B",
+      "role": "positive ramp 900",
+      "classification": "normalized",
+      "usage": "deepest",
+      "evidence": "tailwind.config.source.js:53-62"
+    },
+    {
+      "name": "color.negative.50",
+      "value": "#FBE7E6",
+      "role": "negative ramp 50",
+      "classification": "normalized",
+      "usage": "badge/row background",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.100",
+      "value": "#F5C9C7",
+      "role": "negative ramp 100",
+      "classification": "normalized",
+      "usage": "icon-chip background",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.200",
+      "value": "#EEA19E",
+      "role": "negative ramp 200",
+      "classification": "normalized",
+      "usage": "light fill",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.300",
+      "value": "#E47975",
+      "role": "negative ramp 300",
+      "classification": "normalized",
+      "usage": "mid fill",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.400",
+      "value": "#DB514C",
+      "role": "negative ramp 400",
+      "classification": "normalized",
+      "usage": "graphic fill role",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.500",
+      "value": "#C9322A",
+      "role": "negative ramp 500",
+      "classification": "normalized",
+      "usage": "filled destructive/negative button (5.29:1 w/ white)",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.600",
+      "value": "#B42318",
+      "role": "negative ramp 600",
+      "classification": "normalized",
+      "usage": "text/icon on white & tint (6.57 / 5.53)",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.700",
+      "value": "#911C12",
+      "role": "negative ramp 700",
+      "classification": "normalized",
+      "usage": "strong",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.800",
+      "value": "#6E150C",
+      "role": "negative ramp 800",
+      "classification": "normalized",
+      "usage": "deep",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.negative.900",
+      "value": "#4B0E06",
+      "role": "negative ramp 900",
+      "classification": "normalized",
+      "usage": "deepest",
+      "evidence": "tailwind.config.source.js:69-78"
+    },
+    {
+      "name": "color.operational.50",
+      "value": "#E8EEF3",
+      "role": "operational ramp 50",
+      "classification": "normalized",
+      "usage": "badge/row background",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.100",
+      "value": "#D1DDE6",
+      "role": "operational ramp 100",
+      "classification": "normalized",
+      "usage": "icon-chip background",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.200",
+      "value": "#B0C3D2",
+      "role": "operational ramp 200",
+      "classification": "normalized",
+      "usage": "light fill",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.300",
+      "value": "#8AA5B8",
+      "role": "operational ramp 300",
+      "classification": "normalized",
+      "usage": "mid",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.400",
+      "value": "#68899E",
+      "role": "operational ramp 400",
+      "classification": "normalized",
+      "usage": "mid",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.500",
+      "value": "#5B7C99",
+      "role": "operational ramp 500",
+      "classification": "normalized",
+      "usage": "graphic fill (4.39:1 w/ white — NOT valid text fill)",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.600",
+      "value": "#3E5C76",
+      "role": "operational ramp 600",
+      "classification": "corrected",
+      "usage": "text/icon on white & tint (7.01 / 5.99), filled button [corrected]",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.700",
+      "value": "#2F485B",
+      "role": "operational ramp 700",
+      "classification": "normalized",
+      "usage": "deep",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.800",
+      "value": "#203340",
+      "role": "operational ramp 800",
+      "classification": "normalized",
+      "usage": "deeper",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.operational.900",
+      "value": "#111E25",
+      "role": "operational ramp 900",
+      "classification": "normalized",
+      "usage": "deepest",
+      "evidence": "tailwind.config.source.js:85-94"
+    },
+    {
+      "name": "color.gold.50",
+      "value": "#F6ECCF",
+      "role": "gold ramp 50",
+      "classification": "normalized",
+      "usage": "badge background",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.100",
+      "value": "#EFDAA0",
+      "role": "gold ramp 100",
+      "classification": "normalized",
+      "usage": "chip background",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.200",
+      "value": "#E2C268",
+      "role": "gold ramp 200",
+      "classification": "normalized",
+      "usage": "light fill",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.300",
+      "value": "#D6AB38",
+      "role": "gold ramp 300",
+      "classification": "normalized",
+      "usage": "graphic fill role",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.400",
+      "value": "#C99100",
+      "role": "gold ramp 400",
+      "classification": "normalized",
+      "usage": "status progress",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.500",
+      "value": "#B08532",
+      "role": "gold ramp 500",
+      "classification": "normalized",
+      "usage": "icons/graphics on white only (3.36:1 — never body text)",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.600",
+      "value": "#8A6927",
+      "role": "gold ramp 600",
+      "classification": "normalized",
+      "usage": "gold text on white (5.08:1)",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.700",
+      "value": "#644D1C",
+      "role": "gold ramp 700",
+      "classification": "corrected",
+      "usage": "gold text on gold tint (6.80:1) [corrected]",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.800",
+      "value": "#3E3112",
+      "role": "gold ramp 800",
+      "classification": "normalized",
+      "usage": "deep",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.gold.900",
+      "value": "#1F1809",
+      "role": "gold ramp 900",
+      "classification": "normalized",
+      "usage": "deepest",
+      "evidence": "tailwind.config.source.js:101-110"
+    },
+    {
+      "name": "color.canvas",
+      "value": "#FAF9F5",
+      "role": "app background",
+      "classification": "normalized",
+      "usage": "page background behind surfaces",
+      "evidence": "tailwind.config.source.js:131; SOP_VISUAL_ONLY.md:41"
+    },
+    {
+      "name": "color.recessed",
+      "value": "#F0EEE6",
+      "role": "recessed ivory area / KPI tint / skeleton",
+      "classification": "normalized",
+      "usage": "inset group surfaces, KPI featured cards, skeleton blocks",
+      "evidence": "tailwind.config.source.js:132,134; index.css.source:156-160,187"
+    },
+    {
+      "name": "color.surface",
+      "value": "#FFFFFF",
+      "role": "raised surface",
+      "classification": "normalized",
+      "usage": "cards, sheets, inputs, nav",
+      "evidence": "tailwind.config.source.js:133; index.css.source:58-61"
+    },
+    {
+      "name": "color.border-soft",
+      "value": "#EAE6DC",
+      "role": "quiet edge",
+      "classification": "normalized",
+      "usage": "input borders, card-less edges, quiet separators",
+      "evidence": "tailwind.config.source.js:135; index.css.source:109"
+    },
+    {
+      "name": "color.divider",
+      "value": "#DAD5C8",
+      "role": "strong separator",
+      "classification": "normalized",
+      "usage": "row dividers, sheet drag handle, chip borders",
+      "evidence": "tailwind.config.source.js:136; accounting-sop.source.md:45"
+    },
+    {
+      "name": "color.ink",
+      "value": "#1F1E1D",
+      "role": "primary ink",
+      "classification": "normalized",
+      "usage": "headings, important numbers, snackbar background",
+      "evidence": "tailwind.config.source.js:117; index.css.source:27"
+    },
+    {
+      "name": "color.ink-strong",
+      "value": "#33322E",
+      "role": "body text",
+      "classification": "normalized",
+      "usage": "default body copy",
+      "evidence": "tailwind.config.source.js:118; index.css.source:27"
+    },
+    {
+      "name": "color.ink-secondary",
+      "value": "#6E6A60",
+      "role": "secondary text",
+      "classification": "normalized",
+      "usage": "captions/labels on tint, inactive nav [corrected role]",
+      "evidence": "tailwind.config.source.js:119; index.css.source:122"
+    },
+    {
+      "name": "color.disabled",
+      "value": "#B7B2A6",
+      "role": "disabled surface + placeholder",
+      "classification": "normalized",
+      "usage": "disabled buttons bg, placeholders, inactive marks",
+      "evidence": "tailwind.config.source.js:137,139; accounting-sop.source.md:56"
+    },
+    {
+      "name": "color.positive-ink",
+      "value": "#256A48",
+      "role": "positive text/icon on white or canvas",
+      "classification": "normalized",
+      "usage": "var(--color-positive-600); 6.49:1 on white",
+      "evidence": "SOP_VISUAL_ONLY.md:55; rendered rows"
+    },
+    {
+      "name": "color.positive-on-tint",
+      "value": "#256A48",
+      "role": "positive text/icon on positive.50",
+      "classification": "corrected",
+      "usage": "var(--color-positive-600); 5.62:1 (source 500 step was 4.34:1)",
+      "evidence": "contrast evidence + rendered-reference rows"
+    },
+    {
+      "name": "color.negative-ink",
+      "value": "#B42318",
+      "role": "negative text/icon on white or canvas",
+      "classification": "normalized",
+      "usage": "var(--color-negative-600); 6.57:1",
+      "evidence": "SOP_VISUAL_ONLY.md:56"
+    },
+    {
+      "name": "color.negative-on-tint",
+      "value": "#B42318",
+      "role": "negative text/icon on negative.50",
+      "classification": "normalized",
+      "usage": "var(--color-negative-600); 5.53:1",
+      "evidence": "SOP_VISUAL_ONLY.md:56; rendered rows"
+    },
+    {
+      "name": "color.operational-ink",
+      "value": "#3E5C76",
+      "role": "operational text/icon on white",
+      "classification": "normalized",
+      "usage": "var(--color-operational-600); 7.01:1",
+      "evidence": "SOP_VISUAL_ONLY.md:57"
+    },
+    {
+      "name": "color.operational-on-tint",
+      "value": "#3E5C76",
+      "role": "operational text/icon on operational.50",
+      "classification": "normalized",
+      "usage": "var(--color-operational-600); 5.99:1",
+      "evidence": "SOP_VISUAL_ONLY.md:57; rendered rows"
+    },
+    {
+      "name": "color.gold-ink",
+      "value": "#8A6927",
+      "role": "gold text on white/canvas",
+      "classification": "corrected",
+      "usage": "var(--color-gold-600); 5.08:1 (source 500 was 3.36:1)",
+      "evidence": "contrast evidence"
+    },
+    {
+      "name": "color.gold-on-tint",
+      "value": "#644D1C",
+      "role": "gold text on gold.50 tint",
+      "classification": "corrected",
+      "usage": "var(--color-gold-700); 6.80:1 (source 500 was 2.85:1); precedent color-identity.html:262",
+      "evidence": "index.css:139 + contrast"
+    },
+    {
+      "name": "color.positive-fill",
+      "value": "#A7D8BE",
+      "role": "positive graphic fill",
+      "classification": "normalized",
+      "usage": "var(--color-positive-200); chart segments, progress arcs",
+      "evidence": "SOP_VISUAL_ONLY.md:55"
+    },
+    {
+      "name": "color.negative-fill",
+      "value": "#DB514C",
+      "role": "negative graphic fill",
+      "classification": "normalized",
+      "usage": "var(--color-negative-400); chart segments",
+      "evidence": "SOP_VISUAL_ONLY.md:56"
+    },
+    {
+      "name": "color.operational-fill",
+      "value": "#5B7C99",
+      "role": "operational graphic fill",
+      "classification": "normalized",
+      "usage": "var(--color-operational-500); chart segments",
+      "evidence": "SOP_VISUAL_ONLY.md:57"
+    },
+    {
+      "name": "color.gold-fill",
+      "value": "#D6AB38",
+      "role": "gold graphic fill",
+      "classification": "normalized",
+      "usage": "var(--color-gold-300); chart segments",
+      "evidence": "SOP_VISUAL_ONLY.md:58"
+    },
+    {
+      "name": "color.status-progress",
+      "value": "#C99100",
+      "role": "in-progress status",
+      "classification": "normalized",
+      "usage": "var(--color-gold-400); badge text uses gold-on-tint",
+      "evidence": "tailwind.config.source.js:153,158"
+    },
+    {
+      "name": "color.status-ready",
+      "value": "#079FA0",
+      "role": "ready status",
+      "classification": "normalized",
+      "usage": "var(--color-accent-500); badge bg accent.50 + text accent.600",
+      "evidence": "tailwind.config.source.js:154"
+    },
+    {
+      "name": "color.status-closed",
+      "value": "#6E6A60",
+      "role": "closed status",
+      "classification": "normalized",
+      "usage": "var(--color-ink-secondary); badge bg recessed + ink-secondary text",
+      "evidence": "tailwind.config.source.js:155,157"
+    },
+    {
+      "name": "color.on-primary",
+      "value": "#FFFFFF",
+      "role": "text on primary fills",
+      "classification": "normalized",
+      "usage": "pair with primary.700 (or 800 pressed) only",
+      "evidence": "index.css.source:76"
+    },
+    {
+      "name": "color.on-accent",
+      "value": "#FFFFFF",
+      "role": "text on accent fills",
+      "classification": "normalized",
+      "usage": "pair with accent.600 (or 700 pressed) only",
+      "evidence": "index.css.source:83"
+    },
+    {
+      "name": "color.on-ink",
+      "value": "#FFFFFF",
+      "role": "text on ink snackbar",
+      "classification": "normalized",
+      "usage": "16.64:1",
+      "evidence": "Snackbar.jsx:44"
+    },
+    {
+      "name": "color.on-ink-accent",
+      "value": "#E8C9B8",
+      "role": "snackbar action text",
+      "classification": "normalized",
+      "usage": "var(--color-primary-200); 10.68:1 on ink",
+      "evidence": "Snackbar.jsx:54"
+    },
+    {
+      "name": "color.scrim",
+      "value": "rgba(31,30,29,0.4)",
+      "role": "overlay scrim",
+      "classification": "normalized",
+      "usage": "tokenized from 4 inline usages",
+      "evidence": "index.css.source:70; BottomSheet.jsx:137"
+    },
+    {
+      "name": "color.header-translucent",
+      "value": "rgba(250,249,245,0.88)",
+      "role": "scrolled header veil",
+      "classification": "normalized",
+      "usage": "combine with backdrop-filter blur(12px)",
+      "evidence": "PageHeader.jsx:107-110"
+    },
+    {
+      "name": "font.sans",
+      "value": "IBM Plex Sans Arabic (fallbacks: IBM Plex Sans, Segoe UI, Noto Sans Arabic, system-ui)",
+      "role": "UI text, Arabic + Latin",
+      "classification": "inherited",
+      "usage": "single family for both scripts; preload in production",
+      "evidence": "tailwind.config.source.js:161; accounting-sop.source.md:142"
+    },
+    {
+      "name": "font.mono",
+      "value": "IBM Plex Mono (fallbacks: SFMono-Regular, Roboto Mono, Consolas)",
+      "role": "tabular numerals",
+      "classification": "inherited",
+      "usage": "amounts, dates, KPI numbers, counts",
+      "evidence": "tailwind.config.source.js:162; index.css.source:53"
+    },
+    {
+      "name": "text.title",
+      "value": "1.75rem / 1.3 / 700",
+      "role": "screen title (28px)",
+      "classification": "inherited",
+      "usage": "large title that collapses to title-sm on scroll",
+      "evidence": "tailwind.config.source.js:189; accounting-sop.source.md:147"
+    },
+    {
+      "name": "text.title-sm",
+      "value": "1.25rem / 1.3 / 700",
+      "role": "compact bar title (20px)",
+      "classification": "inherited",
+      "usage": "sheet titles, top-bar collapsed title, home name",
+      "evidence": "tailwind.config.source.js:190; accounting-sop.source.md:148"
+    },
+    {
+      "name": "text.section",
+      "value": "1.0625rem / 1.4 / 600",
+      "role": "section header (17px)",
+      "classification": "inherited",
+      "usage": "section titles above card groups",
+      "evidence": "tailwind.config.source.js:191; accounting-sop.source.md:149"
+    },
+    {
+      "name": "text.card-title",
+      "value": "0.9375rem / 1.4 / 600",
+      "role": "card/row title (15px)",
+      "classification": "inherited",
+      "usage": "list rows, card headings",
+      "evidence": "tailwind.config.source.js:192; accounting-sop.source.md:150"
+    },
+    {
+      "name": "text.body",
+      "value": "0.9375rem / 1.6 / 400",
+      "role": "body text (15px)",
+      "classification": "normalized",
+      "usage": "role existed only as SOP prose; tokenized + rem",
+      "evidence": "accounting-sop.source.md:151"
+    },
+    {
+      "name": "text.label",
+      "value": "0.8125rem / 1.4 / 500",
+      "role": "secondary label (13px)",
+      "classification": "normalized",
+      "usage": "field labels, chip text, KPI labels; SOP prose 13/500 tokenized",
+      "evidence": "accounting-sop.source.md:152; mobile-components:93"
+    },
+    {
+      "name": "text.caption",
+      "value": "0.75rem / 1.5 / 400",
+      "role": "caption (12px)",
+      "classification": "inherited",
+      "usage": "hard 12px floor — never smaller; badges use caption/600",
+      "evidence": "tailwind.config.source.js:194; accounting-sop.source.md:153"
+    },
+    {
+      "name": "text.kpi",
+      "value": "1.5rem / 1.1 / 600 (mono)",
+      "role": "KPI number (24px)",
+      "classification": "normalized",
+      "usage": "SOP 24-28 range fixed at 24 compact step",
+      "evidence": "accounting-sop.source.md:154"
+    },
+    {
+      "name": "text.kpi-hero",
+      "value": "1.75rem / 1.1 / 700 (mono)",
+      "role": "hero KPI number (28px)",
+      "classification": "normalized",
+      "usage": "the 28 step of the SOP 24-28 range",
+      "evidence": "mockup:164,253"
+    },
+    {
+      "name": "text.amount",
+      "value": "0.9375rem / 1.4 / 600 (mono)",
+      "role": "in-row amount (15px)",
+      "classification": "normalized",
+      "usage": "SOP prose row number 15/600 mono tokenized",
+      "evidence": "accounting-sop.source.md:155"
+    },
+    {
+      "name": "text.amount-input",
+      "value": "1.5rem / 1.2 / 700 (mono)",
+      "role": "amount entry field (24px)",
+      "classification": "normalized",
+      "usage": "centered, dir=ltr, inputMode=decimal",
+      "evidence": "AmountInput.jsx:46"
+    },
+    {
+      "name": "space.1",
+      "value": "0.25rem",
+      "role": "4px — icon-text micro gap",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:95"
+    },
+    {
+      "name": "space.2",
+      "value": "0.5rem",
+      "role": "8px — label-field, chip gap, button-search",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "accounting-sop.source.md:103"
+    },
+    {
+      "name": "space.3",
+      "value": "0.75rem",
+      "role": "12px — between cards, control padding, sheet gap",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:97"
+    },
+    {
+      "name": "space.4",
+      "value": "1rem",
+      "role": "16px — screen edge, card padding, row padding",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:98"
+    },
+    {
+      "name": "space.5",
+      "value": "1.25rem",
+      "role": "20px — wide padding (sheet content px-5)",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:99"
+    },
+    {
+      "name": "space.6",
+      "value": "1.5rem",
+      "role": "24px — between major sections",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:100"
+    },
+    {
+      "name": "space.7",
+      "value": "2rem",
+      "role": "32px — opening space",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:101"
+    },
+    {
+      "name": "space.nav-pill",
+      "value": "3.25rem",
+      "role": "52px — bottom-nav active pill width",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "tailwind.config.source.js:199"
+    },
+    {
+      "name": "space.fab",
+      "value": "3.5rem",
+      "role": "56px — FAB size basis",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "tailwind.config.source.js:201"
+    },
+    {
+      "name": "control.height",
+      "value": "3rem",
+      "role": "48px — standard action/input height",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:86; index.css.source:77"
+    },
+    {
+      "name": "control.height-compact",
+      "value": "2.25rem",
+      "role": "36px — chip height",
+      "classification": "inherited",
+      "usage": "hit area still padded to 44",
+      "evidence": "SOP_VISUAL_ONLY.md:87; index.css.source:118"
+    },
+    {
+      "name": "touch.target",
+      "value": "2.75rem",
+      "role": "44px — minimum touch target",
+      "classification": "inherited",
+      "usage": "enforced on all interactive elements [corrected]",
+      "evidence": "SOP_VISUAL_ONLY.md:85; accounting-sop.source.md:121"
+    },
+    {
+      "name": "topbar.height",
+      "value": "3.5rem",
+      "role": "56px — compact sticky top bar",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "accounting-sop.source.md:113; PageHeader.jsx:101"
+    },
+    {
+      "name": "topbar.height-large",
+      "value": "7rem",
+      "role": "112px — large title bar (collapses to 56)",
+      "classification": "inherited",
+      "usage": "112-140 source range fixed at 112",
+      "evidence": "accounting-sop.source.md:114"
+    },
+    {
+      "name": "nav.height-min",
+      "value": "4rem",
+      "role": "64px — bottom navigation min height",
+      "classification": "inherited",
+      "usage": "56-64 source range fixed at 64 + safe area",
+      "evidence": "accounting-sop.source.md:116; BottomNav.jsx:131"
+    },
+    {
+      "name": "actionbar.height",
+      "value": "4.5rem",
+      "role": "72px — bottom action bar",
+      "classification": "inherited",
+      "usage": "64-72 source range fixed at 72 + safe area",
+      "evidence": "accounting-sop.source.md:117"
+    },
+    {
+      "name": "fab.size",
+      "value": "3.5rem",
+      "role": "56px — FAB size",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "accounting-sop.source.md:118; Fab.jsx:39"
+    },
+    {
+      "name": "fab.offset",
+      "value": "5rem",
+      "role": "80px — FAB bottom offset above nav",
+      "classification": "normalized",
+      "usage": "80 (Fab.jsx) chosen over 88 (mockup)",
+      "evidence": "Fab.jsx:39 vs mockup:301"
+    },
+    {
+      "name": "icon.sm",
+      "value": "1.25rem",
+      "role": "20px — small icon",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:88; PageHeader.jsx:139"
+    },
+    {
+      "name": "icon.md",
+      "value": "1.5rem",
+      "role": "24px — default icon",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:89"
+    },
+    {
+      "name": "row.height-min",
+      "value": "3.5rem",
+      "role": "56px — minimum row height",
+      "classification": "inherited",
+      "usage": "content-driven — grows for Arabic/large text",
+      "evidence": "accounting-sop.source.md:224"
+    },
+    {
+      "name": "radius.control",
+      "value": "0.75rem",
+      "role": "12px — buttons, fields, inner tiles",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:99; accounting-sop.source.md:129"
+    },
+    {
+      "name": "radius.card",
+      "value": "1rem",
+      "role": "16px — cards",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:99; accounting-sop.source.md:130"
+    },
+    {
+      "name": "radius.sheet",
+      "value": "1.25rem",
+      "role": "20px — sheet top corners only",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SOP_VISUAL_ONLY.md:99; accounting-sop.source.md:132"
+    },
+    {
+      "name": "radius.segment",
+      "value": "1.125rem",
+      "role": "18px — segmented control track",
+      "classification": "inherited",
+      "usage": "track is 18 so the 12 thumb nests visibly",
+      "evidence": "tailwind.config.source.js:170"
+    },
+    {
+      "name": "radius.full",
+      "value": "9999px",
+      "role": "chips, tags, badges",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "tailwind.config.source.js:168"
+    },
+    {
+      "name": "shadow.e1",
+      "value": "0 1px 2px rgba(60,50,40,.06), 0 4px 12px rgba(60,50,40,.06)",
+      "role": "card elevation",
+      "classification": "inherited",
+      "usage": "never with a border on the same element",
+      "evidence": "tailwind.config.source.js:174; SOP_VISUAL_ONLY.md:73"
+    },
+    {
+      "name": "shadow.e2",
+      "value": "0 6px 20px rgba(60,50,40,.10)",
+      "role": "sheet / scrolled header",
+      "classification": "normalized",
+      "usage": "canonical over rendered 0 -4px 24px variant",
+      "evidence": "tailwind.config.source.js:175; BottomSheet.jsx:152"
+    },
+    {
+      "name": "shadow.e3",
+      "value": "0 16px 40px rgba(60,50,40,.16)",
+      "role": "dialog / FAB / snackbar",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "tailwind.config.source.js:176"
+    },
+    {
+      "name": "shadow.sm",
+      "value": "0 1px 2px rgba(60,50,40,.04)",
+      "role": "segmented thumb micro shadow",
+      "classification": "inherited",
+      "usage": "documented 4th micro level",
+      "evidence": "tailwind.config.source.js:181"
+    },
+    {
+      "name": "motion.press",
+      "value": "120ms",
+      "role": "press feedback duration",
+      "classification": "inherited",
+      "usage": "scale .97",
+      "evidence": "index.css.source:51"
+    },
+    {
+      "name": "motion.fast",
+      "value": "200ms",
+      "role": "fade, scrim, border color",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "tailwind.config.source.js:206; BottomSheet.jsx:136"
+    },
+    {
+      "name": "motion.base",
+      "value": "300ms",
+      "role": "thumbs, snackbar, nav color",
+      "classification": "inherited",
+      "usage": "SOP 150-300ms band ceiling",
+      "evidence": "tailwind.config.source.js:204-208"
+    },
+    {
+      "name": "motion.sheet",
+      "value": "340ms",
+      "role": "sheet slide",
+      "classification": "inherited",
+      "usage": "cubic-bezier(.16,1,.3,1)",
+      "evidence": "tailwind.config.source.js:204; BottomSheet.jsx:151"
+    },
+    {
+      "name": "motion.skeleton",
+      "value": "1.5s",
+      "role": "skeleton pulse (infinite)",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "tailwind.config.source.js:209"
+    },
+    {
+      "name": "snackbar.duration",
+      "value": "5000ms",
+      "role": "snackbar auto-dismiss",
+      "classification": "inherited",
+      "usage": "+250ms exit delay",
+      "evidence": "Snackbar.jsx:9"
+    },
+    {
+      "name": "ease.standard",
+      "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "role": "enter easing",
+      "classification": "inherited",
+      "usage": "decelerating enter",
+      "evidence": "tailwind.config.source.js:204"
+    },
+    {
+      "name": "ease.out",
+      "value": "ease-out",
+      "role": "enter/press easing",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "accounting-sop.source.md:243"
+    },
+    {
+      "name": "ease.in",
+      "value": "ease-in",
+      "role": "exit easing",
+      "classification": "normalized",
+      "usage": "source used ease-out on exits; corrected to enter-out/exit-in",
+      "evidence": "accounting-sop.source.md:243 vs tailwind.config.source.js:205"
+    },
+    {
+      "name": "z.content",
+      "value": "10",
+      "role": "sticky list subheaders",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "SegmentedControl.jsx:109"
+    },
+    {
+      "name": "z.header",
+      "value": "20",
+      "role": "sticky top bar",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "PageHeader.jsx:103"
+    },
+    {
+      "name": "z.fab",
+      "value": "30",
+      "role": "floating action button",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "Fab.jsx:39"
+    },
+    {
+      "name": "z.scrim",
+      "value": "40",
+      "role": "overlay scrim + bottom nav",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "BottomSheet.jsx:136; BottomNav.jsx:131"
+    },
+    {
+      "name": "z.overlay",
+      "value": "50",
+      "role": "sheet surface",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "BottomSheet.jsx:147"
+    },
+    {
+      "name": "z.snackbar",
+      "value": "60",
+      "role": "snackbar",
+      "classification": "inherited",
+      "usage": "",
+      "evidence": "Snackbar.jsx:42"
+    }
+  ],
+  "aliases": [
+    {
+      "source_name": "income",
+      "canonical": "color.positive.*",
+      "decision": "renamed (neutral)",
+      "evidence": "SOURCE_AUDIT_NOTES.md:27-29"
+    },
+    {
+      "source_name": "expense",
+      "canonical": "color.negative.*",
+      "decision": "renamed (neutral)",
+      "evidence": "SOURCE_AUDIT_NOTES.md:27-29"
+    },
+    {
+      "source_name": "withdrawal / withdraw-bg / withdrawal-bg",
+      "canonical": "color.operational.*",
+      "decision": "renamed + aliases deprecated",
+      "evidence": "TW:84,146-148"
+    },
+    {
+      "source_name": "returns / amber / amber-bg",
+      "canonical": "color.gold.*",
+      "decision": "renamed + amber aliases deprecated",
+      "evidence": "TW:100,149-150"
+    },
+    {
+      "source_name": "primary-tint / primary-pill",
+      "canonical": "color.primary.100",
+      "decision": "deprecated (duplicate value)",
+      "evidence": "TW:143-144"
+    },
+    {
+      "source_name": "income-bg / expense-bg",
+      "canonical": "color.positive.50 / color.negative.50",
+      "decision": "deprecated (duplicate value)",
+      "evidence": "TW:145-146"
+    },
+    {
+      "source_name": "text.* / txt.* (primary/secondary/tertiary)",
+      "canonical": "color.ink / ink-strong / ink-secondary / disabled",
+      "decision": "deprecated (parallel trees collapsed)",
+      "evidence": "TW:121-130"
+    },
+    {
+      "source_name": "background / ivory / mute / altRow",
+      "canonical": "color.canvas / color.recessed",
+      "decision": "deprecated (duplicates)",
+      "evidence": "TW:131-134,141"
+    },
+    {
+      "source_name": "faint / sub / placeholder",
+      "canonical": "color.ink-secondary / color.disabled",
+      "decision": "deprecated (duplicates)",
+      "evidence": "TW:138-140"
+    },
+    {
+      "source_name": "border",
+      "canonical": "color.border-soft",
+      "decision": "renamed for clarity",
+      "evidence": "TW:135"
+    },
+    {
+      "source_name": "radius xl / 2xl / 3xl",
+      "canonical": "radius.control / card / sheet",
+      "decision": "deprecated (duplicates)",
+      "evidence": "TW:171"
+    },
+    {
+      "source_name": "shadow card/sheet/header/fab/lg/xl",
+      "canonical": "shadow.e1/e2/e2/e3/e2/e3",
+      "decision": "deprecated (aliases)",
+      "evidence": "TW:177-184"
+    },
+    {
+      "source_name": "shadow.nav (0 -2px 12px -8px rgba(60,50,40,.15))",
+      "canonical": "none",
+      "decision": "deprecated (defined, never used in source)",
+      "evidence": "TW:182 vs BottomNav.jsx:131"
+    },
+    {
+      "source_name": "font cairo / ibm",
+      "canonical": "font.sans",
+      "decision": "deprecated (duplicates)",
+      "evidence": "TW:163-164"
+    },
+    {
+      "source_name": "kpi-card-dark",
+      "canonical": "recessed KPI card",
+      "decision": "renamed (class was ivory, name said dark)",
+      "evidence": "index.css:155-160"
+    }
+  ],
+  "deprecated_source_values": [
+    {
+      "value": "#DC2E2F",
+      "where": "accounting-sop.source.md:65,203; color-identity:246; mobile-components:92",
+      "issue": "off-palette destructive red; white 4.69:1",
+      "resolution": "superseded by negative.500 #C9322A (implemented, 5.29:1)"
+    },
+    {
+      "value": "#E0A200",
+      "where": "accounting-sop.source.md:67; color-identity:260",
+      "issue": "off-palette gold fill; white 2.25:1",
+      "resolution": "superseded by gold.300 #D6AB38"
+    },
+    {
+      "value": "0 -4px 24px rgba(60,50,40,.10)",
+      "where": "color-identity:67; mockup:67",
+      "issue": "sheet shadow divergence",
+      "resolution": "superseded by canonical e2 0 6px 20px"
+    },
+    {
+      "value": "#ECE9E4",
+      "where": "AppLayout.jsx:23",
+      "issue": "untokenized desktop stage color",
+      "resolution": "excluded: presentation chrome, not foundation"
+    },
+    {
+      "value": "0 0 36px rgba(33,36,39,0.08)",
+      "where": "AppLayout.jsx:24",
+      "issue": "untokenized cold page shadow",
+      "resolution": "excluded: presentation chrome, not foundation"
+    },
+    {
+      "value": "#023852 / #F4F7F9 / #E4EAEE / #647680 / #FE8801 / #1F6FE8",
+      "where": "color-identity:95-97",
+      "issue": "explicitly forbidden colors",
+      "resolution": "prohibited (documented for review)"
+    },
+    {
+      "value": "#1F6FE8 / #23C35B",
+      "where": "reference-assets/accounting-icon.svg:3,7",
+      "issue": "brand assets off-palette",
+      "resolution": "flagged: assets need re-coloring before reuse (human decision)"
+    }
+  ]
+}

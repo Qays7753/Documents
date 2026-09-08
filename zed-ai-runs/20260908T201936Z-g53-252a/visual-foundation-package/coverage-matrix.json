@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "run_id": "20260908T201936Z-g53-252a",
+    "gallery_file": "component-gallery.html",
+    "legend": {
+      "verified-rendered": "demonstrated in the gallery and exercised/inspected during offline browser verification at 320/360/390/430 with RTL/LTR, large-text and reduced-motion toggles",
+      "verified-deterministic": "verified by scripts/verify_package.py static/deterministic checks",
+      "verified-both": "rendered in the gallery, verified both deterministically and in the live browser",
+      "specified": "fully specified in contracts (component-contracts.md / component-states.md) but not individually interactive in the gallery",
+      "needs-human": "requires human or on-device review (documented in verification-report.md)"
+    },
+    "viewport_checks": {
+      "320": "pass — no horizontal overflow, scrollWidth == clientWidth, RTL and LTR",
+      "360": "pass — rendered (03-ltr-360-full.png)",
+      "390": "pass — primary verification width, all states exercised",
+      "430": "pass — rendered (04-ltr-430-full.png)"
+    },
+    "render_evidence_dir": "agents/coordinator/renders (18 screenshots, outside the package)"
+  },
+  "families": [
+    {
+      "id": "buttons", "gallery_anchor": "#buttons", "contract": "component-contracts.md §1", "system_doc": "button-system.md",
+      "states": [
+        {"state": "default", "variants": ["primary", "secondary", "outline", "ghost", "destructive", "positive-filled", "operational-filled"], "gallery": "#buttons frame 1", "verification_status": "verified-both"},
+        {"state": "pressed", "note": "hold-to-press live + .is-pressed static demo", "gallery": "#buttons frame 2", "verification_status": "verified-rendered"},
+        {"state": "focused", "note": "static demo with system ring", "gallery": "#buttons frame 2", "verification_status": "verified-both"},
+        {"state": "disabled", "gallery": "#buttons frame 2", "verification_status": "verified-both"},
+        {"state": "loading", "note": "double-submit guard verified: disabled=true during request", "gallery": "#buttons frame 2 (11-button-loading-390.png)", "verification_status": "verified-rendered"},
+        {"state": "quiet-completion", "note": "loading→completion cycle verified live (12-button-completion-390.png)", "gallery": "#buttons frame 2", "verification_status": "verified-rendered"},
+        {"state": "icon-only", "gallery": "#buttons frame 1", "verification_status": "verified-both"},
+        {"state": "full-width", "gallery": "#buttons frame 1", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "inputs", "gallery_anchor": "#inputs", "contract": "component-contracts.md §2", "system_doc": "input-system.md",
+      "states": [
+        {"state": "default", "variants": ["text", "search", "select", "amount", "multiline"], "gallery": "#inputs frame 1", "verification_status": "verified-both"},
+        {"state": "focused", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "error", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "disabled", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "read-only", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "long-content", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "select-open", "note": "menu with selected accent pair; default hidden verified", "gallery": "#inputs frame 1", "verification_status": "verified-rendered"},
+        {"state": "amount-live-grouping", "note": "JS grouping while typing", "gallery": "#inputs frame 1", "verification_status": "specified"}
+      ]
+    },
+    {
+      "id": "chips", "gallery_anchor": "#chips", "contract": "component-contracts.md §3", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "unselected", "gallery": "#chips", "verification_status": "verified-both"},
+        {"state": "selected (one max)", "note": "live single-selection; fill #964E33 + transparent border verified", "gallery": "#chips", "verification_status": "verified-rendered"},
+        {"state": "disabled", "gallery": "#chips", "verification_status": "verified-both"},
+        {"state": "tags (static pills)", "gallery": "#chips tag row", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "segmented", "gallery_anchor": "#segmented", "contract": "component-contracts.md §4", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "pill default/active", "note": "thumb alignment verified 0px/0px delta", "gallery": "#segmented", "verification_status": "verified-rendered"},
+        {"state": "underline variant with counts", "gallery": "#segmented", "verification_status": "verified-both"},
+        {"state": "disabled", "note": "specified in contract", "gallery": "—", "verification_status": "specified"}
+      ]
+    },
+    {
+      "id": "badges", "gallery_anchor": "#badges", "contract": "component-contracts.md §5", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "status set (progress/ready/closed)", "note": "corrected gold pairing rendered live: #F6ECCF/#644D1C", "gallery": "#badges", "verification_status": "verified-both"},
+        {"state": "semantic set (4 families)", "gallery": "#badges", "verification_status": "verified-both"},
+        {"state": "icon/dot cues", "gallery": "#badges", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "cards", "gallery_anchor": "#cards", "contract": "component-contracts.md §6", "system_doc": "surface-system.md",
+      "states": [
+        {"state": "white KPI card", "gallery": "#cards", "verification_status": "verified-both"},
+        {"state": "featured ivory card + inner tiles", "gallery": "#cards", "verification_status": "verified-both"},
+        {"state": "grouped surface rows", "gallery": "#cards", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "rows", "gallery_anchor": "#rows", "contract": "component-contracts.md §7", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "four semantic states", "gallery": "#rows", "verification_status": "verified-both"},
+        {"state": "alternating background", "gallery": "#rows", "verification_status": "verified-both"},
+        {"state": "long-title truncation", "gallery": "#rows row 2", "verification_status": "verified-both"},
+        {"state": "arabic title + bidi-isolated amount", "gallery": "#rows row 3", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "navigation", "gallery_anchor": "#navigation", "contract": "component-contracts.md §8", "system_doc": "navigation-shell.md",
+      "states": [
+        {"state": "top bar at rest", "gallery": "#navigation", "verification_status": "verified-both"},
+        {"state": "top bar scrolled (veil + E2)", "gallery": "#navigation", "verification_status": "verified-both"},
+        {"state": "bottom nav active/inactive", "note": "active destination switching verified; #964E33 label confirmed", "gallery": "#navigation", "verification_status": "verified-rendered"},
+        {"state": "FAB", "note": "end-anchored; RTL geometry verified (visual left in RTL)", "gallery": "#navigation", "verification_status": "verified-rendered"},
+        {"state": "action bar", "gallery": "#navigation", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "overlays", "gallery_anchor": "#overlays", "contract": "component-contracts.md §9", "system_doc": "overlay-system.md",
+      "states": [
+        {"state": "bottom sheet open", "note": "mounted into triggering frame, verified live (08-sheet-open-390.png)", "gallery": "#overlays", "verification_status": "verified-rendered"},
+        {"state": "sheet anatomy (handle/title/rows/destructive row)", "gallery": "#overlays", "verification_status": "verified-both"},
+        {"state": "dialog default", "note": "open/close verified live (09-dialog-open-390.png)", "gallery": "#overlays", "verification_status": "verified-rendered"},
+        {"state": "dialog destructive confirmation", "gallery": "#overlays", "verification_status": "verified-both"},
+        {"state": "dropdown menu open + selected option", "gallery": "#inputs (select)", "verification_status": "verified-rendered"},
+        {"state": "snackbar + undo + auto-dismiss", "note": "5000ms auto-dismiss and undo swap verified live (10-snackbar-390.png)", "gallery": "#overlays", "verification_status": "verified-rendered"},
+        {"state": "scrim + Escape + focus restore", "gallery": "#overlays", "verification_status": "verified-rendered"}
+      ]
+    },
+    {
+      "id": "empty-loading-error", "gallery_anchor": "#empty", "contract": "component-contracts.md §10", "system_doc": "empty-loading-error-states.md",
+      "states": [
+        {"state": "empty with action", "gallery": "#empty", "verification_status": "verified-both"},
+        {"state": "skeleton (card + rows)", "gallery": "#empty", "verification_status": "verified-both"},
+        {"state": "error panel with retry", "note": "retry loading cycle verified live", "gallery": "#empty", "verification_status": "verified-rendered"},
+        {"state": "no-results (distinct from no-data)", "gallery": "#empty", "verification_status": "verified-both"},
+        {"state": "skeleton under reduced motion (static)", "gallery": "#empty + motion toggle", "verification_status": "verified-rendered"}
+      ]
+    },
+    {
+      "id": "icons", "gallery_anchor": "#icons", "contract": "component-contracts.md §11", "system_doc": "iconography.md",
+      "states": [
+        {"state": "26-glyph set at 24px", "gallery": "#icons", "verification_status": "verified-both"},
+        {"state": "20px small size", "gallery": "throughout (row tiles, header actions)", "verification_status": "verified-both"},
+        {"state": "RTL mirror pair demonstration", "gallery": "#icons mirror-demo", "verification_status": "verified-both"}
+      ]
+    }
+  ],
+  "cross_cutting": [
+    {"check": "offline self-containment (file://, zero external requests, zero console/page errors)", "status": "verified-rendered"},
+    {"check": "320/360/390/430 viewport rendering, LTR + RTL, no horizontal overflow", "status": "verified-rendered"},
+    {"check": "large-text mode (root 17px, controls scale 48→51px, no clipping)", "status": "verified-rendered"},
+    {"check": "reduced-motion mode (data-motion=reduced active)", "status": "verified-rendered"},
+    {"check": "evidence panel outside compositions; no hex/token-names/ratios inside frames", "status": "verified-deterministic"},
+    {"check": "corrected color pairings live in render (#964E33 fill, #644D1C gold text, transparent selected-chip border)", "status": "verified-both"},
+    {"check": "gallery opens with fonts unavailable → documented fallback rendering (production must bundle IBM Plex)", "status": "needs-human"},
+    {"check": "on-device safe-area insets, real haptics, screen-reader walkthroughs", "status": "needs-human"}
+  ]
+}
