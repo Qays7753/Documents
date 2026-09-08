@@ -1,0 +1,212 @@
+/* =========================================================================
+   MICRO DESIGN TOKENS — tokens.css
+   Arabic-first · phone-only · portrait-first · LIGHT MODE ONLY
+   Source of truth: run 20260908T133450Z-16d11, SPEC §6 (final values).
+   --------------------------------------------------------------------------
+   NAMING CONVENTION
+   • Every token is prefixed `--mc-` (Micro) so this sheet can be pasted into
+     any third-party project without collisions (extraction safety).
+   • Color tokens are role-named without a group prefix because they are the
+     most-referenced values:
+       --mc-brand-*              brand family
+       --mc-canvas / -surface / -sunken   the ONLY three product surfaces
+       --mc-ink-*                text ink ramp
+       --mc-line-*               structural lines
+       --mc-<semantic> + -tint   positive / danger / warning / info pairs
+       --mc-scrim, --mc-press-overlay     overlays
+   • All other groups carry a category prefix:
+       --mc-space-*     spacing scale
+       --mc-radius-*    corner radius scale
+       --mc-font-*      font stacks
+       --mc-type-*      typography role triads (size / weight / line-height)
+       --mc-motion-*    motion durations (SPEC §6.11, exact)
+       --mc-ease-*      easing curves (documented below)
+       --mc-geometry-*  locked geometry (QuickActionRail, icons, edges, targets)
+       --mc-elevation-* restrained shadows (two levels maximum)
+   --------------------------------------------------------------------------
+   BINDING RULES
+   • Light Mode only: no dark mode, no theme switching, no dark
+     counterparts anywhere downstream. Do not add surfaces, browns, or legacy
+     brand colors.
+   • Values are spec-exact; do not substitute. The press treatment is
+     rgba(31,30,29,.08) (ink at 8%) — never a substitute brown.
+   • Financial values render immediately (no count-up) and use
+     `font-variant-numeric: tabular-nums lining-nums` (see Typography).
+   • Spacing and radius values used by any component must come from these
+     scales; geometry locks must not be tweaked per viewport.
+   ========================================================================= */
+
+:root {
+
+  /* ======================================================================
+     1. BRAND
+     #CC785C = calm visible identity / graphic brand surface (use dark ink
+     over it when text is required). #964E33 = readable brand ink; also the
+     ONLY filled text-bearing primary CTA fill (white text). It is not a
+     general surface, number, border, or status color.
+     ====================================================================== */
+  --mc-brand-atmosphere: #CC785C;
+  --mc-brand-tint:       #F7EAE4;   /* max ONE tinted QuickActionRail tile  */
+  --mc-brand-ink:        #964E33;
+  --mc-on-brand:         #FFFFFF;
+
+  /* Overlays — both cast with the ink tone, never a substitute brown. */
+  --mc-press-overlay:    rgba(31, 30, 29, 0.08);   /* #1F1E1D @ 8%  */
+  --mc-scrim:            rgba(31, 30, 29, 0.45);   /* #1F1E1D @ 45% */
+
+  /* ======================================================================
+     2. PRODUCT SURFACES — exactly three. No paper/quiet/app/atmosphere
+        planes. Semantic tints are roles, not a fourth surface system.
+     ====================================================================== */
+  --mc-canvas:  #FAF9F5;   /* page ground behind everything  */
+  --mc-surface: #FFFFFF;   /* raised content surface          */
+  --mc-sunken:  #F0EEE6;   /* wells, inputs, inactive tracks  */
+
+  /* ======================================================================
+     3. INK AND STRUCTURE
+     ====================================================================== */
+  --mc-ink-strong:   #1F1E1D;   /* main numbers, key headings        */
+  --mc-ink:          #33322E;   /* body labels                       */
+  --mc-ink-muted:    #6E6A60;   /* secondary labels, qualifiers      */
+  --mc-ink-subtle:   #767265;   /* metadata, timestamps              */
+  --mc-ink-disabled: #B7B2A6;   /* disabled text AND its icons       */
+  --mc-line-soft:    #EAE6DC;   /* hairline dividers (max 3 visible) */
+  --mc-line-strong:  #DED9CB;   /* input borders, control edges      */
+
+  /* ======================================================================
+     4. SEMANTIC FAMILIES — base + tint pairs. Semantic color carries
+        operational meaning only (never decoration), is limited to two
+        families per composition, and is ALWAYS paired with a non-color cue.
+        positive: cash received, confirmed, completed, favorable movement.
+        danger:   cash out, negative direction, real failure, destructive.
+        warning:  overdue, threshold, attention required, estimate exceeded.
+        info:     in progress, decision-critical pending, neutral ops info.
+     ====================================================================== */
+  --mc-positive:      #2E7D57;   --mc-positive-tint:      #E7EFE7;
+  --mc-danger:        #B42318;   --mc-danger-tint:        #F7E7E2;
+  --mc-warning:       #8A6520;   --mc-warning-tint:       #F4EDD8;
+  --mc-info:          #3E5C76;   --mc-info-tint:          #E8EDF1;
+
+  /* ======================================================================
+     5. SPACING SCALE — the only allowed spacing values (px).
+        Screen edge is 16px at all target widths (320/360/390/430).
+     ====================================================================== */
+  --mc-space-2:  2px;
+  --mc-space-4:  4px;
+  --mc-space-8:  8px;
+  --mc-space-12: 12px;
+  --mc-space-16: 16px;
+  --mc-space-24: 24px;
+  --mc-space-32: 32px;
+  --mc-space-40: 40px;
+
+  /* ======================================================================
+     6. RADIUS SCALE
+        Do not pill every control. Bottom Navigation is edge-to-edge: 0.
+     ====================================================================== */
+  --mc-radius-6:    6px;      /* chips, compact tiles            */
+  --mc-radius-12:   12px;     /* rows, inputs, small sheets      */
+  --mc-radius-16:   16px;     /* grouped surfaces                */
+  --mc-radius-24:   24px;     /* sheets, dialogs                 */
+  --mc-radius-full: 9999px;   /* switch thumb, indicator dots    */
+
+  /* ======================================================================
+     7. TYPOGRAPHY — role-based triads (SPEC §6.4).
+        Stack: IBM Plex Sans Arabic → Noto Sans Arabic → system sans.
+        Weights in use: 400 / 500 / 600.
+        NOTE (tabular figures): every financial value, date, and percentage
+        must also receive in the component layer:
+            font-variant-numeric: tabular-nums lining-nums;
+        English digits 0–9 in all values; dates DD/MM/YYYY; values isolated
+        with dir="ltr" bidi spans. Arabic text minimum is 14px user-facing.
+     ====================================================================== */
+  --mc-font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", system-ui,
+                    -apple-system, "Segoe UI", sans-serif;
+
+  /* Main numeric value — the hero number of a composition. */
+  --mc-type-value-size:        32px;
+  --mc-type-value-weight:      600;
+  --mc-type-value-line-height: 1.15;
+
+  /* Regular labels and body text. */
+  --mc-type-label-size:        15px;
+  --mc-type-label-weight:      400;
+  --mc-type-label-line-height: 1.55;
+
+  /* Qualifiers and compact metadata. */
+  --mc-type-qualifier-size:        13px;
+  --mc-type-qualifier-weight:      400;
+  --mc-type-qualifier-line-height: 1.4;
+
+  /* Arabic text minimum for user-facing UI. */
+  --mc-type-min-arabic: 14px;
+
+  /* -- rem bridge ---------------------------------------------------------
+     Components consume the *-rem aliases so text scales with the root font
+     size (100% / 130% / 200% verification via html font-size 16 / 20.8 /
+     32px) while the px tokens above remain the declared spec source of
+     truth. Keep each pair in sync: rem = px ÷ 16. Lab chrome and geometry
+     locks stay in px. */
+  --mc-type-value-size-rem:        2rem;        /* 32px */
+  --mc-type-label-size-rem:        0.9375rem;   /* 15px */
+  --mc-type-qualifier-size-rem:    0.8125rem;   /* 13px */
+  --mc-type-min-arabic-rem:        0.875rem;    /* 14px */
+
+  /* ======================================================================
+     8. MOTION — durations are SPEC §6.11 exact. No bounce, no spring,
+        no overshoot, no count-up, no page-wide slide transitions.
+     ====================================================================== */
+  --mc-motion-press:      80ms;   /* press feedback                     */
+  --mc-motion-fast:       120ms;  /* quick state changes, selection     */
+  --mc-motion-normal:     200ms;  /* general UI state transitions       */
+  --mc-motion-sheet-in:   240ms;  /* sheet enter                        */
+  --mc-motion-sheet-out:  180ms;  /* sheet exit                         */
+  --mc-motion-dialog-in:  160ms;  /* dialog enter                       */
+  --mc-motion-dialog-out: 120ms;  /* dialog exit                        */
+  --mc-motion-scrim:      200ms;  /* scrim fade                         */
+
+  /* Easing curves (documented choices):
+     standard — quick start, gentle settle; presses, fades, small transforms.
+     enter    — strong deceleration; sheets/dialogs/scrim arriving on screen
+                (content is visible immediately, then settles into place).
+     exit     — acceleration; surfaces leaving the screen pick up speed out.
+     None of these overshoot 1.0, so no bounce or spring behavior exists. */
+  --mc-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --mc-ease-enter:    cubic-bezier(0.05, 0.7, 0.1, 1);
+  --mc-ease-exit:     cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* ======================================================================
+     9. GEOMETRY LOCKS (SPEC §6.5 / §6.6 / §6.8) — do not tune per viewport.
+        QuickActionRail: tile 88×92, icon 24, label 13px, icon-to-label gap
+        8, tile gap 8, rail padding 16. Touch: 44px minimum, 48px primary.
+     ====================================================================== */
+  --mc-geometry-qar-tile-w:           88px;
+  --mc-geometry-qar-tile-h:           92px;
+  --mc-geometry-qar-tile-label:       13px;
+  --mc-geometry-qar-icon-label-gap:   8px;
+  --mc-geometry-qar-tile-gap:         8px;
+  --mc-geometry-qar-rail-padding:     16px;
+
+  --mc-geometry-icon:        24px;   /* default icon size (rail tiles)   */
+  --mc-geometry-icon-row:    20px;   /* dense row icon size              */
+  --mc-geometry-icon-stroke: 2px;    /* Lucide-style stroke              */
+
+  --mc-geometry-screen-edge: 16px;   /* content inset at all widths      */
+  --mc-geometry-target:      44px;   /* minimum touch target              */
+  --mc-geometry-target-lg:   48px;   /* primary-action touch target       */
+
+  /* ======================================================================
+     10. ELEVATION — exactly two restrained levels, warm-neutral.
+     Shadows are cast in the ink tone (#1F1E1D) with alpha, never pure
+     black, so they read warm on canvas/surface. Level 1: resting raised
+     content (compact tiles, tinted rail tile). Level 2: floating layers
+     (sheet, dialog) over the scrim. A bottom sheet flips ONLY the y sign of
+     level 2 at the component layer (0 -6px 20px …); the values otherwise
+     stay identical — this is the single documented sign exception.
+     ====================================================================== */
+  --mc-elevation-1: 0 1px 2px rgba(31, 30, 29, 0.06);
+  --mc-elevation-2: 0 6px 20px rgba(31, 30, 29, 0.12);
+
+}
+
+/* End of tokens.css — Light Mode only; no dark tokens exist or may be added. */

@@ -1,0 +1,125 @@
+/* =========================================================================
+   MICRO — Tailwind v4 theme mapping · tailwind-v4-theme.css
+   --------------------------------------------------------------------------
+   STATUS: OPTIONAL convenience layer. tokens.css is the SINGLE SOURCE OF
+   TRUTH for every value; this file only re-exposes the same spec-exact
+   values in Tailwind v4's CSS-first `@theme` namespaces so that a Tailwind
+   v4 project can consume them as utilities. If the two files ever disagree,
+   tokens.css wins and this file must be regenerated from it. The lab's own
+   component CSS is framework-neutral and never depends on Tailwind.
+   --------------------------------------------------------------------------
+   LIGHT MODE ONLY — no dark namespace, no .dark, no prefers-color-scheme
+   theming. Do not add a second palette here.
+   --------------------------------------------------------------------------
+   USAGE (Tailwind v4.x, CSS-first, no tailwind.config.js needed):
+
+       @import "tailwindcss";
+       @import "./tokens.css";            (recommended — keeps --mc-* vars live)
+       @import "./tailwind-v4-theme.css";
+
+   Resulting utilities (examples):
+       bg-mc-canvas · text-mc-ink · border-mc-line-soft · bg-mc-brand-ink
+       p-mc-16 · gap-mc-8 · m-mc-24 · rounded-mc-12 · rounded-mc-full
+       font-mc-sans · text-mc-value / text-mc-label / text-mc-qualifier
+       shadow-mc-1 · shadow-mc-2 · ease-mc-enter / ease-mc-exit
+
+   DURATIONS: Tailwind v4 has no `--duration-*` theme namespace; durations
+   are used either as bare numbers (duration-80 / duration-120 / duration-200
+   → ms) or, preferably, by referencing tokens.css directly with the CSS
+   variable shorthand: transition-duration-(--mc-motion-sheet-in), or plain
+   `transition: opacity var(--mc-motion-scrim) var(--ease-mc-standard)` in a
+   small component layer. @theme emits its keys as CSS custom properties on
+   :root, so every `--color-mc-*`, `--ease-mc-*`, … also remains usable as a
+   plain var() even where no utility exists (e.g. geometry locks:
+   size-(--mc-geometry-qar-tile-w)).
+   ========================================================================= */
+
+@theme {
+
+  /* ---- Brand ---------------------------------------------------------- */
+  --color-mc-brand-atmosphere: #CC785C;   /* graphic brand surface          */
+  --color-mc-brand-tint:       #F7EAE4;   /* max one tinted rail tile       */
+  --color-mc-brand-ink:        #964E33;   /* filled primary CTA + ink       */
+  --color-mc-on-brand:         #FFFFFF;
+  --color-mc-press-overlay:    rgba(31, 30, 29, 0.08);  /* NEVER #B4613F   */
+  --color-mc-scrim:            rgba(31, 30, 29, 0.45);
+
+  /* ---- Product surfaces (exactly three) ------------------------------- */
+  --color-mc-canvas:  #FAF9F5;
+  --color-mc-surface: #FFFFFF;
+  --color-mc-sunken:  #F0EEE6;
+
+  /* ---- Ink ramp & lines ----------------------------------------------- */
+  --color-mc-ink-strong:   #1F1E1D;
+  --color-mc-ink:          #33322E;
+  --color-mc-ink-muted:    #6E6A60;
+  --color-mc-ink-subtle:   #767265;
+  --color-mc-ink-disabled: #B7B2A6;
+  --color-mc-line-soft:    #EAE6DC;
+  --color-mc-line-strong:  #DED9CB;
+
+  /* ---- Semantic families (base + tint pairs) --------------------------- */
+  --color-mc-positive:      #2E7D57;  --color-mc-positive-tint:      #E7EFE7;
+  --color-mc-danger:        #B42318;  --color-mc-danger-tint:        #F7E7E2;
+  --color-mc-warning:       #8A6520;  --color-mc-warning-tint:       #F4EDD8;
+  --color-mc-info:          #3E5C76;  --color-mc-info-tint:          #E8EDF1;
+
+  /* ---- Spacing scale (drives p/m/gap utilities) ------------------------ */
+  --spacing-mc-2:  2px;
+  --spacing-mc-4:  4px;
+  --spacing-mc-8:  8px;
+  --spacing-mc-12: 12px;
+  --spacing-mc-16: 16px;
+  --spacing-mc-24: 24px;
+  --spacing-mc-32: 32px;
+  --spacing-mc-40: 40px;
+
+  /* ---- Geometry locks (sizing utilities / var() fallback) -------------- */
+  --spacing-mc-qar-tile-w:  88px;
+  --spacing-mc-qar-tile-h:  92px;
+  --spacing-mc-edge:        16px;   /* screen edge at all widths          */
+  --spacing-mc-target:      44px;   /* minimum touch target               */
+  --spacing-mc-target-lg:   48px;   /* primary-action touch target        */
+  --spacing-mc-icon:        24px;
+  --spacing-mc-icon-row:    20px;
+  /* Remaining locks (label 13px, icon-to-label gap 8, tile gap 8, rail
+     padding 16, icon stroke 2px) are consumed from tokens.css via
+     var(--mc-geometry-*) or utility shorthands such as
+     gap-(--mc-geometry-qar-tile-gap). */
+
+  /* ---- Radius scale ---------------------------------------------------- */
+  --radius-mc-6:    6px;
+  --radius-mc-12:   12px;
+  --radius-mc-16:   16px;
+  --radius-mc-24:   24px;
+  --radius-mc-full: 9999px;   /* Bottom Navigation stays radius 0 (edge)   */
+
+  /* ---- Typography ------------------------------------------------------ */
+  --font-mc-sans: "IBM Plex Sans Arabic", "Noto Sans Arabic", system-ui,
+                  -apple-system, "Segoe UI", sans-serif;
+
+  /* rem-based so root font-size scaling (100/130/200%) works;
+     px equivalents: 32 / 15 / 13 — see tokens.css rem bridge. */
+  --text-mc-value:     2rem;       --text-mc-value--line-height: 1.15;   --text-mc-value--font-weight: 600;
+  --text-mc-label:     0.9375rem;  --text-mc-label--line-height: 1.55;   --text-mc-label--font-weight: 400;
+  --text-mc-qualifier: 0.8125rem;  --text-mc-qualifier--line-height: 1.4; --text-mc-qualifier--font-weight: 400;
+
+  /* Apply `tabular-nums` (or var from tokens) to all financial values. */
+
+  /* ---- Elevation (two restrained, warm-neutral levels) ------------------ */
+  --shadow-mc-1: 0 1px 2px rgba(31, 30, 29, 0.06);
+  --shadow-mc-2: 0 6px 20px rgba(31, 30, 29, 0.12);
+
+  /* ---- Easing (no bounce / spring / overshoot) -------------------------- */
+  --ease-mc-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-mc-enter:    cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-mc-exit:     cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* ---- Motion durations -------------------------------------------------
+     Not a Tailwind v4 theme namespace. Consume from tokens.css:
+     duration-80 / duration-120 / duration-200 / duration-240 / duration-180
+     / duration-160 bare numbers, or transition-duration-(--mc-motion-*). */
+
+}
+
+/* End of tailwind-v4-theme.css — optional mapping; tokens.css is the truth. */
