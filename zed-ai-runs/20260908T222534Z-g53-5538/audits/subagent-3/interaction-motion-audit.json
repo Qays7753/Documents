@@ -1,0 +1,675 @@
+{
+  "meta": {
+    "task_id": "R4-c",
+    "agent": "Subagent 3 — Interaction and Motion Auditor",
+    "target": "/home/z/my-project/repos/Documents/zed-ai-runs/20260908T201936Z-g53-252a/visual-foundation-package/ — offline gallery (component-gallery.html / .css / .js + design-tokens.css) audited against run-authority required behaviors/timings and the source pack (accounting-visual-foundation-source-pack-v1: BottomSheet.jsx, SegmentedControl.jsx, Snackbar.jsx, SOP_VISUAL_ONLY.md, source-reference/accounting-sop.source.md §8.5)",
+    "date": "2026-09-09"
+  },
+  "methodology": [
+    "Read component-gallery.js (317 lines) in full and mapped every bound behavior: gallery controls (viewport/dir/text/motion), evidence panel, chips single-select, segmented pill (RTL-aware thumb placement) and underline variants, search clear, amount live grouping, select menu, overlay mounting/focus-trap/Escape logic, snackbar with 5s timer and undo, loading→completion→reset cycle with double-submit guard, retry, clear filters, bottom-nav switching.",
+    "Read component-gallery.css (621 lines) and design-tokens.css and enumerated every declared transition/animation with duration/easing; confirmed via computed styles that keyframes (slideUp/slideDown/fadeIn/scaleIn/snackbarIn/ghostOut) are defined but referenced nowhere in the gallery.",
+    "Cross-checked claims in motion-interaction.md, button-system.md, overlay-system.md, component-contracts.md, empty-loading-error-states.md and verification-report.md against CSS/JS truth and live behavior.",
+    "Exercised the live gallery with agent-browser CLI (persistent headless Chromium over file://, zero network): programmatic clicks on demo triggers, keyboard Tab / Shift+Tab / Enter / ArrowRight / Escape, computed-style reads (transition/animation/outline), activeElement checks, getBoundingClientRect visibility checks, performance.now timing sampling of the segmented thumb slide, 5s snackbar timer boundary measurement (open at 4.6s, hidden at 5.4s), and a drag attempt on the sheet handle (no-op, proving drag is unimplemented).",
+    "Re-ran key interaction checks at 390px and 320px, in LTR and RTL (using the gallery's own direction control), with data-text-size=large and data-motion=reduced; verified dir/motion attributes inside each eval to guard against state races.",
+    "Classified every required behavior as present / partial / missing with executable evidence, and distinguished works vs documented-but-not-implemented vs implemented-but-undocumented vs missing."
+  ],
+  "timing_matrix": [
+    {
+      "use": "press",
+      "required": "80ms",
+      "tokens": "--motion-press: 120ms (design-tokens.css:184)",
+      "docs_claim": "120ms scale 0.97 (motion-interaction.md:11,24; button-system.md:28; component-contracts.md:14)",
+      "css_actual": ".btn transition transform+background-color 120ms ease-out (component-gallery.css:126); .press utility 120ms (design-tokens.css:240-241); computed 'transform 0.12s ease-out, background-color 0.12s ease-out'",
+      "verdict": "divergent"
+    },
+    {
+      "use": "fast",
+      "required": "120ms",
+      "tokens": "--motion-fast: 200ms (design-tokens.css:185)",
+      "docs_claim": "200ms — scrim fade, border color, header shadow (motion-interaction.md:12)",
+      "css_actual": ".input border-color 200ms (component-gallery.css:191); .chip 200ms cubic-bezier(.16,1,.3,1) (component-gallery.css:260); scrim NOT transitioned at all",
+      "verdict": "divergent"
+    },
+    {
+      "use": "normal",
+      "required": "200ms",
+      "tokens": "--motion-base: 300ms (design-tokens.css:186)",
+      "docs_claim": "300ms — thumbs, snackbar enter/exit, nav color change, ghost-card collapse (motion-interaction.md:13)",
+      "css_actual": ".segctl-thumb 300ms ease-out (component-gallery.css:292); live sampling: thumb slides −15→−82px settling ~320ms; .segctl button color 300ms (component-gallery.css:300); .navpill 300ms (component-gallery.css:448)",
+      "verdict": "divergent"
+    },
+    {
+      "use": "sheet-in",
+      "required": "240ms",
+      "tokens": "--motion-sheet: 340ms (design-tokens.css:187)",
+      "docs_claim": "sheet slides 340ms cubic-bezier(.16,1,.3,1) (motion-interaction.md:14,34; overlay-system.md:16)",
+      "css_actual": "NO motion on .sheet — computed transition 'all 0s ease', animation 'none'; sheet appears instantly via [hidden] toggle (component-gallery.css:469-477); keyframes slideUp/slideDown defined but unused",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "sheet-out",
+      "required": "180ms",
+      "tokens": "none (no exit token)",
+      "docs_claim": "exit reverses: sheet 340ms down (motion-interaction.md:34)",
+      "css_actual": "instant hide via .sheet[hidden] { display: none } (component-gallery.css:477); no exit transition",
+      "verdict": "missing"
+    },
+    {
+      "use": "dialog-in",
+      "required": "160ms",
+      "tokens": "none (docs derive from keyframe duration)",
+      "docs_claim": "scaleIn 200ms 0.95→1 + fade (motion-interaction.md:34; overlay-system.md:24; component-contracts.md:89)",
+      "css_actual": "none — .dialog has no animation/transition (component-gallery.css:503-509); scaleIn keyframe (design-tokens.css:296) referenced nowhere",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "dialog-out",
+      "required": "120ms",
+      "tokens": "none",
+      "docs_claim": "dialog 200ms fade+scale exit (motion-interaction.md:34)",
+      "css_actual": "none — close is an instant hidden toggle that does not even visually hide the dialog (see S3-01)",
+      "verdict": "missing"
+    },
+    {
+      "use": "scrim",
+      "required": "200ms",
+      "tokens": "docs bind scrim to --motion-fast (200ms)",
+      "docs_claim": "scrim fades 200ms (motion-interaction.md:12,34; overlay-system.md:16)",
+      "css_actual": ".scrim has no transition (component-gallery.css:464-468); computed 'all 0s ease' — scrim pops in/out instantly",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "other — snackbar enter/exit",
+      "required": "not in run timing list; docs 300ms slide+fade + 250ms exit delay",
+      "tokens": "docs bind to --motion-base 300ms",
+      "docs_claim": "Enter 300ms slide+fade; auto-dismiss 5000ms + 250ms exit (motion-interaction.md:34; overlay-system.md:36)",
+      "css_actual": "none — .snackbar has no transition/animation (component-gallery.css:518-524); snackbarIn keyframe (design-tokens.css:297) unused; JS hides instantly at 5000ms with no 250ms exit (component-gallery.js:231)",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "other — snackbar hold",
+      "required": "5000ms (documented duration)",
+      "tokens": "--snackbar-duration: 5000ms (design-tokens.css:189)",
+      "docs_claim": "5s auto-dismiss (motion-interaction.md:16; overlay-system.md:36)",
+      "css_actual": "setTimeout 5000ms (component-gallery.js:231); live measured open at 4.6s and hidden-attr at 5.4s — timing correct (but element stays rendered, see S3-02)",
+      "verdict": "pass"
+    },
+    {
+      "use": "other — quiet completion hold",
+      "required": "documented duration (docs: 800ms)",
+      "tokens": "none",
+      "docs_claim": "check-circle 800ms then reset (motion-interaction.md:30; button-system.md:32)",
+      "css_actual": "JS 800ms completion window (component-gallery.js:261-269); live verified: complete state at 1.7s, reset at 2.7s after click",
+      "verdict": "pass"
+    },
+    {
+      "use": "other — menu open/close",
+      "required": "not in run timing list; docs 200ms fade/scale",
+      "tokens": "none",
+      "docs_claim": "opens 200ms fade/scale (overlay-system.md:28)",
+      "css_actual": "none — .menu has no transition (component-gallery.css:226-229); instant toggle",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "other — sheet drag release",
+      "required": "drag-to-dismiss where appropriate (run authority behavior C/G)",
+      "tokens": "docs: .3s transform restored on release",
+      "docs_claim": "drag preserved exactly (motion-interaction.md:36-38, citing BottomSheet.jsx:88-126)",
+      "css_actual": "no pointer/touch/drag handlers exist in component-gallery.js (only keydown at :207); live drag of .sheet-handle is a no-op (transform stays identity)",
+      "verdict": "missing"
+    },
+    {
+      "use": "other — skeleton pulse",
+      "required": "prohibited only as wave/decorative; opacity pulse allowed",
+      "tokens": "--motion-skeleton: 1.5s (design-tokens.css:188)",
+      "docs_claim": "1.5s opacity pulse 1↔0.5 (motion-interaction.md:15)",
+      "css_actual": "animation skeleton 1.5s ease-in-out infinite (component-gallery.css:552); opacity-only, no wave",
+      "verdict": "pass"
+    },
+    {
+      "use": "other — loading spinner",
+      "required": "not in run timing list",
+      "tokens": "none",
+      "docs_claim": "spin keyframe for button loading (motion-interaction.md:20)",
+      "css_actual": "animation spin 0.8s linear infinite (component-gallery.css:175); live '0.8s linear infinite spin'",
+      "verdict": "pass"
+    }
+  ],
+  "behavior_matrix": [
+    {
+      "required_behavior": "A. Button save-state system: six interaction states of ONE button shown together, labeled as states (not six identity colors)",
+      "status": "present",
+      "evidence": "component-gallery.html:136-163 — States frame with state-tags Default / Pressed — hold / Focused / Disabled / Loading — tap / Quiet completion, all on the same 'Save' primary button; variants live in a separate frame (html:117-133)",
+      "notes": "works; satisfies the not-six-terracottas requirement"
+    },
+    {
+      "required_behavior": "A. Default state (primary.700 #964E33 + white, source geometry)",
+      "status": "present",
+      "evidence": "component-gallery.css:134 (.btn-primary background var(--color-primary-700)); computed fill rgb(150,78,51); 48px min-height, 12px radius, 600 weight (css:118-126)",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "A. Pressed-hold (deeper ramp step + press motion, no new permanent identity)",
+      "status": "present",
+      "evidence": "component-gallery.css:135 (.btn-primary:active / .is-pressed → primary-800) + design-tokens.css:240-241 (.press:active scale 0.97, 120ms); gallery demo button uses class is-pressed (html:144)",
+      "notes": "works; press timing 120ms vs required 80ms (S3-05)"
+    },
+    {
+      "required_behavior": "A. Focused (fill unchanged + clear 2px ring with offset)",
+      "status": "present",
+      "evidence": "component-gallery.css:156 (.btn.is-focused outline 2px accent.600 offset 2, fill untouched); live keyboard focus shows outline '2px solid rgb(5,123,124)' offset 2px",
+      "notes": "works; ring color = accent.600 #057B7C"
+    },
+    {
+      "required_behavior": "A. Disabled (neutral fill, no shadow, no press, interaction unavailable)",
+      "status": "present",
+      "evidence": "component-gallery.css:151-154 (disabled fill #B7B2A6, box-shadow none, transform none, cursor not-allowed); html:152 disabled attr",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "A. Loading (button stays in place, icon-slot spinner, label preserved, activation disabled)",
+      "status": "partial",
+      "evidence": "component-gallery.js:243-254 + css:157,172-176; live: disabled=true, is-loading class, spinner visible 1600ms; BUT label changes 'Save'→'Saving' (js:253), the button has no leading icon slot for the spinner to replace (html:156), and no aria-busy (contract §1 claims it)",
+      "notes": "works mechanically; label-preserved and icon-slot criteria not met; aria-busy documented-but-not-implemented"
+    },
+    {
+      "required_behavior": "A. Double-submit guard demonstrated (repeated activation disabled)",
+      "status": "present",
+      "evidence": "component-gallery.js:247-251 (busy flag + btn.disabled); live: repeated clicks at 0ms and 0.5s during the 1600ms load are ignored — cycle completed exactly once; captures/behavior-loading-guard.txt agrees",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "A. Quiet completion (check icon + positive feedback for documented duration, then reset; understandable under reduced motion)",
+      "status": "present",
+      "evidence": "component-gallery.js:255-269: 800ms btn-complete window + check icon + reset + 'Record saved' snackbar; live sampled: complete at ~1.7s, reset at ~2.7s; under data-motion=reduced the color+icon remain (color-only per docs)",
+      "notes": "works; the static demo strip (html:158-161) lacks the check icon — only the loading demo cycle shows it (S3-20)"
+    },
+    {
+      "required_behavior": "C/G. Chips single-select filter row",
+      "status": "present",
+      "evidence": "component-gallery.js:69-77; live: selecting 'Open' then 'Archived' always leaves exactly one .on chip",
+      "notes": "works; no aria-pressed (contract §3 claims it — S3-15)"
+    },
+    {
+      "required_behavior": "G. Chip press + selection tint motion",
+      "status": "present",
+      "evidence": "component-gallery.css:260-266 — transition 200ms cubic-bezier(.16,1,.3,1), :active scale 0.97",
+      "notes": "works; uses transition:all (S3-18)"
+    },
+    {
+      "required_behavior": "G. Segmented pill thumb slides (touch/keyboard selection, RTL aware)",
+      "status": "present",
+      "evidence": "component-gallery.css:288-292 (300ms ease-out inset-inline-start/width) + js:80-106 (RTL-aware logical placement); live: thumb deltas −15→−82px over ~320ms; RTL placement verified aligned to active segment (rect match left/width)",
+      "notes": "works; 300ms vs required normal 200ms (S3-05)"
+    },
+    {
+      "required_behavior": "G. Segmented underline variant indicator",
+      "status": "partial",
+      "evidence": "component-gallery.css:304-311 — per-button border-bottom color swap (instant); source slides a shared 300ms indicator (SegmentedControl.jsx:80-85)",
+      "notes": "selection works; no sliding indicator — implemented-but-divergent from source motion"
+    },
+    {
+      "required_behavior": "Select menu: open, select, update value, close",
+      "status": "present",
+      "evidence": "component-gallery.js:140-158; live: trigger opens menu, aria-expanded toggles, choosing 'Other' updates .sel-value, marks aria-selected, closes menu",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "Select menu: Escape and outside-click close; focus management",
+      "status": "missing",
+      "evidence": "Live: Escape leaves menu open (menuStillOpen:true); clicking elsewhere leaves it open (afterOutsideClick_menuHidden:false); focus never moves into menu; overlayClose (js:171-177) does not include the menu; docs claim 'closes on outside touch or Escape' (overlay-system.md:28)",
+      "notes": "documented-but-not-implemented (S3-12)"
+    },
+    {
+      "required_behavior": "C/G. Sheet opens with scrim, handle, clear title, grouped content",
+      "status": "present",
+      "evidence": "component-gallery.html:488-502; live: sheet.hidden=false with scrim; handle 36×5 (css:479); title 'Add record'; rows 48px; FAB (html:444) and empty-state button (html:528) also trigger it",
+      "notes": "works; content is action rows + one field, NOT grouped filter choices"
+    },
+    {
+      "required_behavior": "Keyboard/focus: focus moves into overlay on open",
+      "status": "present",
+      "evidence": "component-gallery.js:186-188; live: first focusable (sheet Close icon button / dialog Cancel) focused after 60ms",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "Keyboard/focus: Tab containment in overlays",
+      "status": "present",
+      "evidence": "component-gallery.js:209-219; live: 8 consecutive Tabs stay inside sheet; Shift+Tab from first element wraps to last; dialog trap verified (5 Tabs → 'Confirm'); same in RTL",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "Keyboard/focus: Escape closes the top layer",
+      "status": "partial",
+      "evidence": "component-gallery.js:207-208; live: Escape hides sheet+scrim and dialog (LTR and RTL); but Escape does NOT close the select menu or the evidence panel; only one overlay can be open at a time so 'top layer' ordering is untested/unexercised",
+      "notes": "works for sheet/dialog; menu/evidence gap (S3-12)"
+    },
+    {
+      "required_behavior": "Keyboard/focus: focus restored to trigger on close; focus never lost",
+      "status": "missing",
+      "evidence": "Live: after Escape on sheet, document.activeElement = BODY (isTrigger:false); after Escape on dialog, focus stays on the 'closed' dialog's Cancel button; root cause component-gallery.js:181-188 — openOverlay() calls overlayClose() which nulls openTrigger (assigned at js:191/198) before the overlay finishes opening",
+      "notes": "broken in package JS (S3-03); docs claim restore (motion-interaction.md:26, overlay-system.md:20)"
+    },
+    {
+      "required_behavior": "G/C. Sheet entry/exit motion (sheet-in 240ms / sheet-out 180ms required; 340ms claimed)",
+      "status": "missing",
+      "evidence": "Computed on .sheet: transition 'all 0s ease', animation 'none'; .sheet[hidden]{display:none} swaps instantly (component-gallery.css:469-477); docs claim 340ms slide (motion-interaction.md:34, overlay-system.md:16)",
+      "notes": "documented-but-not-implemented (S3-04)"
+    },
+    {
+      "required_behavior": "G/C. Sheet drag-to-dismiss + snap points (collapsed 84vh / expanded 94vh, −50/+130/−44 thresholds)",
+      "status": "missing",
+      "evidence": "No pointer/touch/drag handlers in component-gallery.js (grep: only keydown at :207); live agent-browser drag of .sheet-handle → sheet stays open, transform identity; docs claim 'preserves the geometry and motion exactly' (motion-interaction.md:38)",
+      "notes": "documented-but-not-implemented (S3-06); source logic at BottomSheet.jsx:88-126"
+    },
+    {
+      "required_behavior": "Safe area: sheet respects env(safe-area-inset-bottom)",
+      "status": "missing",
+      "evidence": "Live: computed sheet paddingBottom 0px, sheet-body bottom padding fixed 32px (component-gallery.css:488); no env() anywhere in gallery CSS/HTML; source had paddingBottom env(safe-area-inset-bottom) (BottomSheet.jsx:153); docs claim five surfaces (responsive-geometry.md:26)",
+      "notes": "utilities .safe-area-top/.bottom exist (design-tokens.css:247-248) but are unused — S3-13"
+    },
+    {
+      "required_behavior": "Overlay: body scroll locked while open",
+      "status": "missing",
+      "evidence": "No overflow lock in component-gallery.js; page behind remains scrollable with sheet open; docs claim scroll lock (overlay-system.md:20); source BottomSheet.jsx:33 sets body overflow hidden",
+      "notes": "documented-but-not-implemented (S3-21)"
+    },
+    {
+      "required_behavior": "G. Dialog open, focus, trap, Escape, actions",
+      "status": "present",
+      "evidence": "component-gallery.html:503-509 + js:196-202; live: focus lands on Cancel, Tab trapped, Escape and Confirm/Cancel hide it (attribute level), scrim click closes",
+      "notes": "works at attribute level — but see S3-01"
+    },
+    {
+      "required_behavior": "Dialog actually closes visually (dialog-out)",
+      "status": "missing",
+      "evidence": "BLOCKER — .dialog display:flex (component-gallery.css:503-509) overrides the UA [hidden] rule and no .dialog[hidden] rule exists; live after Escape/scrim/Cancel: hidden=true yet rect 324×194 visible, Cancel still visible and clickable; same in RTL",
+      "notes": "package defect (S3-01); verification-report.md:55 claimed close PASS from attribute check only"
+    },
+    {
+      "required_behavior": "G. Dialog entry motion (dialog-in 160ms required; scaleIn 200ms claimed)",
+      "status": "missing",
+      "evidence": "Computed on .dialog: transition 'all 0s ease', animation 'none'; scaleIn keyframe (design-tokens.css:296) unused",
+      "notes": "documented-but-not-implemented (S3-04)"
+    },
+    {
+      "required_behavior": "G. Scrim motion (200ms fade required/claimed)",
+      "status": "missing",
+      "evidence": "Computed on .scrim: transition 'all 0s ease', animation 'none' (component-gallery.css:464-468); scrim pops instantly",
+      "notes": "documented-but-not-implemented (S3-04)"
+    },
+    {
+      "required_behavior": "G. Snackbar fires with role=status / aria-live=polite",
+      "status": "present",
+      "evidence": "component-gallery.html:483-486 (role=status, aria-live=polite); js:224-232 mounts into triggering screen and swaps message; one snackbar replaces the previous (timer reset)",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "G. Snackbar 5s auto-dismiss (documented duration)",
+      "status": "present",
+      "evidence": "component-gallery.js:231 (setTimeout 5000); live boundary: open at 4.6s, hidden attr set by 5.4s; token --snackbar-duration 5000ms (design-tokens.css:189)",
+      "notes": "timer correct — but see S3-02 for the visibility failure"
+    },
+    {
+      "required_behavior": "Snackbar actually disappears after dismiss / exit motion (300ms + 250ms exit claimed)",
+      "status": "missing",
+      "evidence": "BLOCKER — .snackbar display:flex (component-gallery.css:518-524) overrides [hidden]; live after 5s: hidden=true but rect 254×68 still rendered — once fired, a snackbar stays on screen indefinitely (until replaced); no enter/exit transition or snackbarIn usage",
+      "notes": "package defect (S3-01/02); verification-report.md:56 verified hidden-attr only"
+    },
+    {
+      "required_behavior": "G. Undo affordance that actually restores state (no toast-only proof)",
+      "status": "missing",
+      "evidence": "component-gallery.js:236-240 — undo click merely fires a second snackbar 'Deletion reversed'; no underlying record/list state exists to delete or restore (captures/behavior-undo.txt shows only the message swap)",
+      "notes": "message-swap only (S3-08); required behavior demands real restoration"
+    },
+    {
+      "required_behavior": "C. Filter control: compact Filter trigger (+ active count) opening a staged bottom sheet with grouped choices (status/date/type/sort), Apply/Reset, cancel-without-commit, post-apply summary in parent",
+      "status": "missing",
+      "evidence": "Gallery sheet is an 'Add record' action sheet (html:488-501) — no Filter trigger, no grouping, no staging, no Apply/Reset/Cancel commit semantics, no active-count indicator; the only filter UI is the inline single-select chip row + a 'Clear filters' ghost button (html:548)",
+      "notes": "entire required component absent (S3-07)"
+    },
+    {
+      "required_behavior": "G. Horizontal QuickActionRail / horizontal control with touch drag, proximity snap, visible next-item cue, no vertical scroll hijack",
+      "status": "missing",
+      "evidence": "Only plain overflow-x rows exist (.chip-row css:249-253, .segctl-lines css:303) — no scroll-snap, no next-item cue, no drag physics; grep for snap/rail/cue: no matches",
+      "notes": "S3-09"
+    },
+    {
+      "required_behavior": "G. Short arrow/chevron direction feedback when a row/control opens a new context or loads more",
+      "status": "missing",
+      "evidence": "Only a static chevron-down glyph on the select trigger (html:197); no directional motion feedback anywhere in CSS/JS (no transforms tied to open/load-more)",
+      "notes": "S3-16-related; absent"
+    },
+    {
+      "required_behavior": "G. Local row insertion/update/removal feedback WITHOUT page-wide sliding",
+      "status": "missing",
+      "evidence": "ghostOut keyframe defined (design-tokens.css:300) but referenced nowhere (grep in gallery css: no matches); no demo mutates rows; contracts §6 claims 'ghost-out removal animation for dismissed items'",
+      "notes": "documented-but-not-implemented (S3-10)"
+    },
+    {
+      "required_behavior": "G. Progress/relationship bar movement when meaning changes, final numeric values appearing immediately",
+      "status": "missing",
+      "evidence": "No progress bar element exists in the gallery (grep progress/bar: only tag classes); no animated fill, no count-up (count-up correctly prohibited and absent)",
+      "notes": "S3-11"
+    },
+    {
+      "required_behavior": "G. Error recovery NEAR the failed control preserving user input",
+      "status": "partial",
+      "evidence": "Field-level error demo exists: input.is-error + message below the field (html:221-222) — position is near the control; but it is static — no recovery interaction, no preserved typed value; the only retry interaction is the separate surface error panel (html:539-542)",
+      "notes": "placement present, behavior missing (S3-17)"
+    },
+    {
+      "required_behavior": "G. Retry with busy guard and success feedback",
+      "status": "present",
+      "evidence": "component-gallery.js:278-293; live: 'Retrying' + disabled 1400ms → restored 'Try again' + snackbar 'Connection restored — records loaded'; captures agree",
+      "notes": "works; docs claim 'retry enters loading' (empty-loading-error-states.md:23) — no spinner shown, text-only"
+    },
+    {
+      "required_behavior": "G. Clear filters with feedback",
+      "status": "present",
+      "evidence": "component-gallery.js:296-306; live: chip group resets to 'All' + 'Filters cleared' snackbar",
+      "notes": "works; clears only the first chip group (single group exists)"
+    },
+    {
+      "required_behavior": "G. Nav switching (one active destination)",
+      "status": "present",
+      "evidence": "component-gallery.js:309-316; live: clicking 'Reports' leaves exactly one .on item",
+      "notes": "works; no aria-current on active item (contract §8 claims it — S3-15)"
+    },
+    {
+      "required_behavior": "G. Search clear + refocus",
+      "status": "present",
+      "evidence": "component-gallery.js:120-129; live: clear button appears on input, clears value, hides itself, returns focus to the input",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "G. Amount live grouping (digits, tabular, no currency)",
+      "status": "present",
+      "evidence": "component-gallery.js:132-137; live: '1234567' → '1,234,567'; dir=ltr + inputmode=decimal (html:190)",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "Keyboard: every interactive control reachable and operable by keyboard",
+      "status": "present",
+      "evidence": "All controls are native buttons/inputs; live: Tab reaches them, Enter activates chip ('Recent' selected), Enter opens select menu, Enter opens sheet/dialog from trigger buttons",
+      "notes": "works; segmented has no arrow-key/radiogroup semantics (contract §4 — S3-15)"
+    },
+    {
+      "required_behavior": "Keyboard: focus visible (2px ring) everywhere",
+      "status": "present",
+      "evidence": "design-tokens.css:252-262 + component-gallery.css:128-133; live: keyboard Tab produces outline '2px solid rgb(5,123,124)' offset 2px on buttons/rows/inputs",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "Reduced motion: movement neutralized (data-motion=reduced toggle)",
+      "status": "present",
+      "evidence": "design-tokens.css:283-290 + 275-282 (media query); live with data-motion=reduced: btn/chip/thumb transitionDuration '1e-05s', spinner/skeleton animation '1e-05s/1'",
+      "notes": "works — the only motion that exists (press, chips, thumb, spinner, skeleton) is fully neutralized"
+    },
+    {
+      "required_behavior": "Reduced motion: state meaning and outcome proof preserved",
+      "status": "present",
+      "evidence": "Live under reduced: chip selection fill/weight persist, thumb still lands on active segment (instant), loading shows disabled+label+static ring, completion shows check+positive tint (color-only), snackbar text visible",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "Usable at 320px",
+      "status": "present",
+      "evidence": "Live at 320×740: no horizontal overflow (scrollWidth==clientWidth); open sheet 286px wide inside viewport, rows 48px, title input 246px, close button 44px; evidence panel width min(420px,92vw)=294px",
+      "notes": "works (captures/overflow-320-ltr.txt agrees)"
+    },
+    {
+      "required_behavior": "Usable with large text",
+      "status": "present",
+      "evidence": "Live with data-text-size=large: root 17px, primary button grows 48→51px, chip row scrolls horizontally (scrollWidth 366 > client 254) without overflow",
+      "notes": "works"
+    },
+    {
+      "required_behavior": "RTL interaction parity (re-run of key checks)",
+      "status": "present",
+      "evidence": "Live in RTL (via gallery direction control): sheet opens + focus moves in + Tab trapped + Escape closes; dialog opens/traps/Escape; segmented thumb re-places to the logical position (rect aligned to active button); rows/amounts use logical insets",
+      "notes": "works — and the defects (focus restore, [hidden] visibility) reproduce identically in RTL"
+    },
+    {
+      "required_behavior": "Prohibitions: no bounce/springs/glow/count-up/page-wide slide/skeleton wave/decorative perpetual motion",
+      "status": "present",
+      "evidence": "No spring/bounce easings (only ease-out and cubic-bezier(.16,1,.3,1), which does not overshoot); KPIs are static text; no page-level transitions; skeleton is an opacity pulse (no wave); only perpetual animations are spinner+skeleton, both stateful",
+      "notes": "upheld"
+    }
+  ],
+  "findings": [
+    {
+      "id": "S3-01",
+      "area": "dialog",
+      "severity": "blocker",
+      "evidence": "component-gallery.css:503-509 (.dialog { display:flex } with no .dialog[hidden] rule) vs only .sheet[hidden]/#evidence-panel[hidden] rules at css:477,581; live eval: after Escape/scrim/Cancel — {dialogHiddenAttr:true, display:'flex', w:324, h:194, visible:true}; dialogCancelVisible:true; same in RTL",
+      "criterion": "Dialog-out close path; Escape closes the top layer; focus never lost; every overlay has exactly one obvious close path",
+      "finding": "The dialog NEVER visually closes. The author rule display:flex overrides the user-agent [hidden]{display:none} rule, so hidden=true leaves the dialog fully rendered and interactive on top of the screen. Focus also remains on the 'closed' dialog's Cancel button. The verification-report (line 55) marked close as PASS by checking the hidden attribute only.",
+      "recommendation": "Add '.dialog[hidden], .snackbar[hidden] { display: none; }' to component-gallery.css (or drive open state with a class instead of the hidden attribute). Re-verify closes with getBoundingClientRect/offsetParent, not attribute reads.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-02",
+      "area": "feedback",
+      "severity": "blocker",
+      "evidence": "component-gallery.css:518-524 (.snackbar { display:flex }, no [hidden] rule); live eval after 5s timer: {after5s_hiddenAttr:true, display:'flex', visible:true, rect:[254,68]}; undo click then re-shows it with a new message",
+      "criterion": "Snackbar 5s auto-dismiss then disappear; quiet feedback layer; undo affordance for reversible actions",
+      "finding": "The snackbar never visually dismisses. After the 5000ms timer sets hidden=true, the element remains rendered forever (display:flex overrides [hidden]). Once any snackbar is fired, a snackbar is permanently on screen — the 'Record deleted' prompt with a live Undo button stays visible indefinitely, misrepresenting the 5s contract and the one-snackbar-replaces-old semantics.",
+      "recommendation": "Same CSS fix as S3-01; then implement the documented enter (300ms snackbarIn) and exit (300ms + 250ms delay) so dismissal is visible and graceful.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-03",
+      "area": "focus",
+      "severity": "major",
+      "evidence": "component-gallery.js:181-188 — openOverlay() begins with overlayClose(), which focuses openTrigger then sets openTrigger=null; the click handlers assign openTrigger at js:191/198 BEFORE calling openOverlay, so it is always null when a close later runs; live: sheet Escape → activeElement=BODY, isTrigger:false; dialog Escape → focus stays on the closed dialog's Cancel",
+      "criterion": "Focus containment + restore to trigger on close; focus never lost (run authority keyboard/focus rules; motion-interaction.md:26; overlay-system.md:20)",
+      "finding": "Focus restore on overlay close is completely broken. Closing a sheet drops focus to BODY (focus lost — keyboard users must re-Tab from the page start); closing the dialog leaves focus on the invisible dialog control. The documented 'focus returns to the trigger' behavior is documented-but-not-implemented (the code attempts it but the trigger reference is nulled during open).",
+      "recommendation": "Set openTrigger AFTER overlayClose() inside openOverlay (e.g. openOverlay(el, screen, trigger)), or store the trigger in openOverlay and have overlayClose consume it. Also refocus the trigger in the [data-close-overlay] and scrim paths (they share overlayClose, so one fix covers all).",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-04",
+      "area": "timing",
+      "severity": "major",
+      "evidence": "Live computed styles: .sheet/.dialog/.scrim/.snackbar/.menu all report transition 'all 0s ease' and animation 'none'; keyframes slideUp/slideDown/fadeIn/scaleIn/snackbarIn defined at design-tokens.css:293-300 are referenced nowhere in component-gallery.css (grep: no matches); docs claims at motion-interaction.md:34 (scrim 200ms, sheet 340ms, dialog 200ms scaleIn, snackbar 300ms), overlay-system.md:16,24,28,36",
+      "criterion": "Sheet entry/exit, scrim, dialog-in/out, snackbar/menu motion with measured timings; 'Motion layer must be demonstrable in the offline gallery'",
+      "finding": "ALL overlay motion is documented but not implemented. The gallery's overlays (sheet, dialog, scrim, snackbar, select menu) appear and disappear instantly. The motion-interaction.md 'Overlay choreography' section and overlay-system.md motion rows are false for the shipped gallery; the verification report never asserted transitions. This is the single largest gap between documentation and behavior in the package.",
+      "recommendation": "Wire the existing keyframes/tokens: sheet — animation slideUp var(--motion-sheet) var(--ease-standard) on open, slideDown on close (requires a closing class before display:none); dialog — scaleIn var(--motion-fast); scrim — transition opacity var(--motion-fast); snackbar — snackbarIn var(--motion-base), exit translateY+opacity 300ms with the 250ms JS delay; menu — fadeIn/scaleIn var(--motion-fast). Keep durations tokenized so the timing system can be re-tuned in one place.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-05",
+      "area": "timing",
+      "severity": "major",
+      "evidence": "design-tokens.css:184-189 — --motion-press:120ms, --motion-fast:200ms, --motion-base:300ms, --motion-sheet:340ms; no sheet-out/dialog-in/dialog-out tokens; live computed: 0.12s/0.2s/0.3s (captures/computed-tokens.txt agrees); docs match tokens (motion-interaction.md:11-14) but run authority requires press 80 / fast 120 / normal 200 / sheet-in 240 / sheet-out 180 / dialog-in 160 / dialog-out 120 / scrim 200",
+      "criterion": "Required timing system (run authority): press 80ms; fast 120ms; normal 200ms; sheet-in 240ms; sheet-out 180ms; dialog-in 160ms; dialog-out 120ms; scrim 200ms",
+      "finding": "Four token durations diverge from the required system (press +40ms, fast +80ms, base +100ms, sheet-in +100ms) and three required durations have no token at all (sheet-out, dialog-in, dialog-out). The values faithfully inherit the source (SOP §8.2 150–300ms band, press ~120ms, sheet 340ms exception) and are self-consistently documented — but they do not satisfy the run authority's timing system.",
+      "recommendation": "Normalize the token set to the required system: --motion-press 80ms, --motion-fast 120ms, --motion-normal 200ms, --motion-sheet-in 240ms, --motion-sheet-out 180ms, --motion-dialog-in 160ms, --motion-dialog-out 120ms, --motion-scrim 200ms (keep --motion-base as an alias or map thumb to 200ms). Update motion-interaction.md's token table and the evidence-panel Motion table (html:704-711) in the same change.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S3-06",
+      "area": "sheet",
+      "severity": "major",
+      "evidence": "component-gallery.js contains no pointer/touch/drag handlers (grep pointer|touch|drag: zero matches; the only key listener is keydown at :207); live agent-browser drag of .sheet-handle leaves the sheet open with transform matrix identity; motion-interaction.md:36-38 claims 'This package preserves the geometry and motion exactly' citing BottomSheet.jsx:88-126",
+      "criterion": "Drag-to-dismiss where appropriate; sheet snap points; handle drag behavior; required behaviors C and G",
+      "finding": "Sheet dragging (drag-up expand −50px, drag-down close +130px, −44px collapsed clamp, transition suppression during drag, .3s release) is entirely absent, despite an explicit documentation claim that it is preserved. The handle is purely decorative. Escape-collapses-first-if-expanded and the 84vh/94vh snap points also do not exist.",
+      "recommendation": "Port the source drag model to the gallery sheet: pointerdown/move/up on the handle (touch-action:none), translateY tracking with the −44/+130 thresholds, snap states collapsed(max-height 84%) / expanded(94vh), transition 'none' during drag and 'transform .3s cubic-bezier(.16,1,.3,1), height .32s' on release, Escape collapses before closing.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-07",
+      "area": "filter",
+      "severity": "major",
+      "evidence": "component-gallery.html:488-501 — the only sheet is an 'Add record' action sheet (title field + 3 action rows); no Filter trigger control, no grouped choice groups, no Apply/Reset/Cancel row, no staged state, no active-count badge anywhere in the gallery",
+      "criterion": "Required behavior C: one compact Filter control (+ optional active-count) opening a Bottom Sheet with scrim, handle, clear title, grouped choices (status/date range/type/sort), Apply/Reset; selections staged until Apply; cancel without committing; post-apply active summary in parent",
+      "finding": "The staged filter sheet — a required behavior with explicit commit semantics — is missing entirely. The gallery demonstrates only an inline single-select chip row and a 'Clear filters' action, which cannot show staging, cancel-without-commit, or parent-side active summary.",
+      "recommendation": "Add a Filter composition: compact filter trigger with active-count chip → bottom sheet (scrim, handle, 'Filters' title, grouped single/multi choices for status/date-range/type/sort) with a sticky action row [Reset | Apply]; stage selections in JS state, commit on Apply (update trigger label + count), discard on Cancel/scrim/Escape; snackbar-free (the count is the proof).",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S3-08",
+      "area": "undo",
+      "severity": "major",
+      "evidence": "component-gallery.js:236-240 — the undo handler hides the snackbar and fires a second snackbar 'Deletion reversed'; no data model exists; captures/behavior-undo.txt records only the message swap",
+      "criterion": "Undo affordance for reversible actions — no toast-only proof for important outcomes; undo that actually restores state, not a message swap",
+      "finding": "Undo is a message swap with no state behind it. Nothing is deleted when 'Record deleted' fires, so nothing is restored by Undo — the demo cannot prove the soft-delete + undo pattern the docs describe (motion-interaction.md:46, overlay-system.md:36).",
+      "recommendation": "Pair the snackbar demo with a small live list: delete removes a row locally (with ghostOut removal animation), Undo re-inserts it at the same index (with an insert highlight), and the row count updates — outcome proof beyond the toast.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S3-09",
+      "area": "rail",
+      "severity": "major",
+      "evidence": "No scroll-snap / snap-point / next-item-cue code in CSS or JS (grep scroll-snap|rail|cue: zero matches); the only horizontal scrollers are .chip-row (css:249-253) and .segctl-lines (css:303), both plain overflow-x:auto",
+      "criterion": "Required behavior G: horizontal QuickActionRail or segmented horizontal control with touch drag, proximity snap, visible next-item cue, and NO accidental vertical scroll hijack",
+      "finding": "No horizontal rail with snapping exists. The chip row and underline tabs scroll freely with no snap points, no proximity behavior, no edge cue indicating more items (no fade/peek affordance), so the required rail interaction cannot be evaluated in the gallery.",
+      "recommendation": "Add a QuickActionRail demo: horizontally scrollable action cards with scroll-snap-type:x proximity, snap-align:center, a visible next-item peek (partial card at the inline edge), overscroll-behavior to prevent vertical hijack, and press feedback per card.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S3-10",
+      "area": "rows",
+      "severity": "major",
+      "evidence": "ghostOut keyframe defined at design-tokens.css:300 but referenced nowhere (grep ghostOut in component-gallery.css: no matches); no row insertion/removal/update demonstration exists; component-contracts.md:67 claims 'ghost-out removal animation for dismissed items'; motion-interaction.md:13 claims 'ghost-card collapse' at 300ms",
+      "criterion": "Required behavior G: local row insertion/update/removal feedback WITHOUT page-wide sliding",
+      "finding": "Local row mutation feedback is documented (ghostOut) but not implemented and not demonstrated; there is no interaction in the gallery that adds, updates, or removes a row.",
+      "recommendation": "Wire ghostOut (300ms, height+opacity collapse, no transform on siblings) to a row-dismiss interaction in the sheet or list demo, plus a subtle insert highlight (background-color fade) for additions — both local, no page-level movement.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-11",
+      "area": "feedback",
+      "severity": "major",
+      "evidence": "No progress/relationship bar exists in the gallery (grep progress: only tag/badge classes tag-progress at html:260,306); no animated fill element, no numeric-final-value pattern",
+      "criterion": "Required behavior G: progress/relationship bar movement when meaning changes, with final numeric values appearing immediately",
+      "finding": "The progress/relationship bar behavior is entirely absent — no component, no motion, no immediate-numbers demonstration (which is also the counter-proof for the count-up prohibition).",
+      "recommendation": "Add a compact progress bar demo (e.g. budget used) whose fill transitions width at --motion-normal when the value changes, while the numeric label (mono tabular) jumps to the final value immediately — no count-up.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S3-12",
+      "area": "menu",
+      "severity": "minor",
+      "evidence": "component-gallery.js:171-177 — overlayClose touches only sheet/dialog/scrim; live: Escape with menu open leaves it open (menuStillOpen:true); click on another field leaves it open (afterOutsideClick_menuHidden:false); focus never moves into the menu (focusInMenu:false after Enter-open); overlay-system.md:28 claims 'closes on outside touch or Escape. Same focus containment.'",
+      "criterion": "Menu dismissibility and focus contract (overlay-system.md §Menu; keyboard operability)",
+      "finding": "The select menu ignores Escape and outside clicks, and does not manage focus into the listbox; the documented close paths are not implemented. Keyboard users can still reach options via Tab (they are buttons), so it is operable but non-conforming to its own contract.",
+      "recommendation": "Include the menu in the Escape handler and add a document-level pointerdown-outside close; move focus to the first option (or selected option) on open, restore to the trigger on close; add Arrow-key movement for the listbox pattern.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-13",
+      "area": "safe-area",
+      "severity": "minor",
+      "evidence": "No env(safe-area-inset-*) in component-gallery.css/html (grep env(: only design-tokens.css:247-248 utilities, unused in the gallery); live: sheet computed paddingBottom 0px, sheet-body bottom 32px fixed; .bottomnav padding 8px 12px 16px (css:437); .actionbar padding 12px 16px (css:460); responsive-geometry.md:26 claims five safe-area surfaces",
+      "criterion": "Safe area: sheet/actionbar/nav respect env(safe-area-inset-*) (run authority); overlay-system.md:18 'bottom inset padding'",
+      "finding": "Safe-area insets are claimed on five surfaces but applied on none of the gallery's live components — only dormant utility classes exist. A device with insets would clip the sheet's last row and the nav labels.",
+      "recommendation": "Apply .safe-area-bottom to the sheet body (or padding-bottom: calc(32px + env(safe-area-inset-bottom))), the bottomnav, and the actionbar; add viewport-fit=cover note where the shell is documented. Headless verification limit is acceptable, but the CSS must be present.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S3-14",
+      "area": "buttons",
+      "severity": "minor",
+      "evidence": "component-gallery.js:253 — label.textContent='Saving' during load; html:156 — loading button has no leading icon (spinner is a trailing span); live: btn has no aria-busy at any point (hasAriaBusy:false, duringLoading_ariaBusy:null); button-system.md:31 claims 'spinner replaces the icon slot, label persists'; component-contracts.md:15 claims 'loading announced via aria-busy'",
+      "criterion": "Loading state: label preserved, icon slot replaced by visible spinner, repeated activation disabled; docs contract",
+      "finding": "The loading state works (spinner + disabled + guard) but changes the label instead of preserving it, has no icon slot for the spinner to replace, and omits the promised aria-busy announcement.",
+      "recommendation": "Keep the label constant ('Save'), include a leading 20px icon slot that swaps to the spinner on loading, set aria-busy=true during the request (and aria-live announcement via the snackbar afterwards is already fine).",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-15",
+      "area": "keyboard",
+      "severity": "minor",
+      "evidence": "Live: chip.getAttribute('aria-pressed') = null; nav active item aria-current = null; [data-seg] has no role=radiogroup and ArrowRight does nothing (active stays 'Month', focus stays on 'Day'); contract claims at component-contracts.md:37 (aria-pressed), :48 (radiogroup + arrow keys), :85 (aria-current)",
+      "criterion": "Keyboard/focus contracts in component-contracts.md §3, §4, §8; run authority keyboard rules (controls operable — satisfied via Tab+Enter, but semantics are contractual)",
+      "finding": "Three documented ARIA behaviors are not implemented: chip aria-pressed, nav aria-current, and segmented radiogroup semantics with arrow-key movement. All controls remain reachable/operable by keyboard, so this is a contract-fulfillment gap rather than an operability failure.",
+      "recommendation": "Toggle aria-pressed on chips; set aria-current='page' (or 'true') on the active nav item; give segmented controls role=radiogroup + roving tabindex with Left/Right (mirrored in RTL) arrow handling.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S3-16",
+      "area": "segmented",
+      "severity": "minor",
+      "evidence": "component-gallery.css:304-311 — underline variant active state is a per-button border-bottom color swap (instant); source SegmentedControl.jsx:79-85 uses a shared absolutely-positioned indicator with transition-all 300ms ease-out; component-contracts.md:47 claims 'underline slides same'",
+      "criterion": "Segmented underline variant: sliding indicator (contract §4; source behavior)",
+      "finding": "The underline variant does not slide — the indicator is per-button and swaps instantly, diverging from the source's shared sliding indicator and the contract's 'underline slides same' claim.",
+      "recommendation": "Mirror the source: one absolutely-positioned 4px indicator under the row, positioned with inset-inline-start/width computed like the pill thumb, transitioning at the (normalized) 200ms token.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-17",
+      "area": "error-recovery",
+      "severity": "minor",
+      "evidence": "component-gallery.html:221-222 — static .is-error input (value '12,4o0') + message below the field, no interaction; the only interactive recovery is the surface error panel's retry (html:539-542, js:278-293) which has no input to preserve; empty-loading-error-states.md:23 claims field errors are 'correctable in place'",
+      "criterion": "Required behavior G: error recovery NEAR the failed control preserving user input",
+      "finding": "Field-level error display exists near the control, but there is no in-place recovery interaction demonstrating input preservation (the erroneous value is a frozen demo string; no fix/re-submit path).",
+      "recommendation": "Make the invalid amount demo live: validate on input, show the message under the field, keep the user's typed value editable, and let a corrected value clear the error without losing focus or content.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S3-18",
+      "area": "timing",
+      "severity": "note",
+      "evidence": "component-gallery.css:260 — .chip { transition: all var(--motion-fast) var(--ease-standard) }",
+      "criterion": "motion-interaction.md:5 own principle: 'Every transition moves one property'",
+      "finding": "Chips transition 'all', which can animate unintended properties (e.g. layout-affecting ones) and violates the package's one-property-per-transition principle.",
+      "recommendation": "Restrict to 'background-color, color, border-color, transform'.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S3-19",
+      "area": "buttons",
+      "severity": "note",
+      "evidence": "component-gallery.css:172-175 — .spinner uses fixed white borders (rgba(255,255,255,.35) + #FFFFFF top); button-system.md:31 claims 'currentColor'",
+      "criterion": "Spinner color contract (button-system.md)",
+      "finding": "The spinner is hard-coded white rather than currentColor — correct on the primary/800 loading fill, but non-reusable on light variants as documented.",
+      "recommendation": "Use currentColor with a translucent track (border-color: color-mix or rgba via opacity) so the component ports across variants.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S3-20",
+      "area": "buttons",
+      "severity": "note",
+      "evidence": "component-gallery.html:158-161 — the static 'Quiet completion' state strip is a btn-complete 'Saved' button with no check icon; the check only appears in the loading demo cycle (html:156)",
+      "criterion": "Quiet completion state contract: check icon + positive tint (button-system.md:32)",
+      "finding": "The static state demonstration omits the check glyph, so a reader scanning the states frame sees completion as a recolored button only.",
+      "recommendation": "Add the check-circle icon to the static completion demo (it already exists in the loading demo's markup).",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S3-21",
+      "area": "sheet",
+      "severity": "note",
+      "evidence": "No body/document overflow lock anywhere in component-gallery.js; page behind the sheet remains scrollable (overlays are position:absolute inside the frame); overlay-system.md:20 claims 'body scroll locked while open'; source BottomSheet.jsx:33 does lock it",
+      "criterion": "Overlay contract: body scroll lock (overlay-system.md)",
+      "finding": "Body scroll lock is documented but not implemented; in the gallery context the impact is small (frame-local overlays), but the contract is unfulfilled.",
+      "recommendation": "Lock the frame's (or body's) overflow while an overlay is open, restore on close.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S3-22",
+      "area": "feedback",
+      "severity": "note",
+      "evidence": "verification-report.md:54-58 — dialog/snackbar close and auto-dismiss marked PASS via hidden-attribute assertions; live rendering contradicts the visual outcome (S3-01/S3-02); motion was never asserted",
+      "criterion": "Evidence-based completion claim (verification-report §2)",
+      "finding": "The prior run's browser verification checked state attributes, not rendered visibility or motion, so two blockers and the entire missing motion layer passed unnoticed.",
+      "recommendation": "For the repair run: assert closes with getBoundingClientRect/offsetParent visibility and assert computed transition/animation values (transitionDuration != 0s where motion is claimed).",
+      "classification_suggestion": "unresolved"
+    }
+  ],
+  "summary": {
+    "blockers": 2,
+    "majors": 9,
+    "minors": 6,
+    "notes": 5,
+    "top_5": [
+      "S3-01/S3-02 (blockers): dialog and snackbar never visually close — author display:flex overrides the [hidden] attribute; once opened they stay rendered on screen (dialog 324×194 with live buttons after Escape; snackbar persists after its 5s timer), and the prior verification passed them on attribute checks only.",
+      "S3-04 (major): every overlay motion claim (sheet 340ms slide, scrim 200ms fade, dialog scaleIn 200ms, snackbar 300ms slide+fade + 250ms exit, menu 200ms fade/scale) is documented-but-not-implemented — keyframes exist in design-tokens.css but are referenced nowhere; all overlays toggle instantly.",
+      "S3-03 (major): focus restore to the trigger is broken — openTrigger is nulled by overlayClose() inside openOverlay(); sheet close drops focus to BODY, dialog close leaves it on the hidden dialog's Cancel.",
+      "S3-05 (major): timing tokens diverge from the required system — press 120 vs 80ms, fast 200 vs 120ms, base 300 vs 200ms, sheet 340 vs 240ms; sheet-out/dialog-in/dialog-out tokens do not exist (all four current values are faithful source inheritances).",
+      "S3-06..S3-11 (majors): the required interaction layer is missing — no sheet drag-to-dismiss/snap points, no staged filter sheet with Apply/Reset/Cancel, no state-restoring undo, no quick-action rail with snap + next-item cue, no local row insert/remove feedback (ghostOut unused), no progress bar with immediate final numbers."
+    ]
+  }
+}

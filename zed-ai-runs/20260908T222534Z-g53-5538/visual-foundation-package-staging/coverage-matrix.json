@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "run_id": "20260908T222534Z-g53-5538",
+    "repairs_run_of": "20260908T201936Z-g53-252a",
+    "gallery_file": "component-gallery.html",
+    "coverage_policy": "rebuilt against the repaired DOM (R-31): every entry below maps to a selector that exists in the gallery; 'verified-rendered' items were exercised during offline browser verification at 320/360/390/430 with RTL/LTR, 100/130/200% text scale, and reduced motion",
+    "legend": {
+      "verified-rendered": "demonstrated in the gallery and exercised/inspected during offline browser verification",
+      "verified-deterministic": "verified by static/deterministic checks (verify_package_repair.py)",
+      "verified-both": "rendered in the gallery, verified both deterministically and in the live browser",
+      "specified": "fully specified in contracts (component-contracts.md / component-states.md) but not individually interactive in the gallery",
+      "needs-human": "requires human or on-device review (documented in verification-report.md)"
+    },
+    "viewport_checks": {
+      "320": "pass — no horizontal overflow, scrollWidth == clientWidth, LTR and RTL",
+      "360": "pass — rendered at 360 in both directions",
+      "390": "pass — primary verification width, all behaviors exercised",
+      "430": "pass — rendered at 430 in both directions"
+    },
+    "render_evidence_dir": "agents/coordinator/renders-repair (screenshots, outside the package)"
+  },
+  "families": [
+    {
+      "id": "buttons", "gallery_anchor": "#buttons", "contract": "component-contracts.md §1", "system_doc": "button-system.md",
+      "states": [
+        {"state": "default", "variants": ["primary", "secondary", "outline", "ghost", "destructive", "positive-filled", "operational-filled"], "gallery": "#buttons frame 1", "verification_status": "verified-both"},
+        {"state": "pressed", "note": "hold-to-press live + .is-pressed static demo; 80ms scale + one deeper fill step", "gallery": "#buttons frame 2", "verification_status": "verified-rendered"},
+        {"state": "focused", "note": "static demo with the dual-ring contract; live ring on real focus", "gallery": "#buttons frame 2", "verification_status": "verified-both"},
+        {"state": "disabled", "gallery": "#buttons frame 2", "verification_status": "verified-both"},
+        {"state": "loading", "note": "spinner in the fixed icon slot, label persists, aria-busy, double-submit guard verified (disabled during request)", "gallery": "#buttons frame 2 (data-loading-btn)", "verification_status": "verified-rendered"},
+        {"state": "quiet-completion", "note": "loading→completion cycle verified live (check + label 800ms + reset)", "gallery": "#buttons frame 2", "verification_status": "verified-rendered"},
+        {"state": "icon-only", "gallery": "#buttons frame 1", "verification_status": "verified-both"},
+        {"state": "full-width", "gallery": "#buttons frame 1", "verification_status": "verified-both"},
+        {"state": "six-states-framed-as-states", "note": "strip labeled 'Interaction states — six states of one button' with explanatory note (Repair A)", "gallery": "#buttons frame 2", "verification_status": "verified-deterministic"}
+      ]
+    },
+    {
+      "id": "inputs", "gallery_anchor": "#inputs", "contract": "component-contracts.md §2", "system_doc": "input-system.md",
+      "states": [
+        {"state": "default", "variants": ["text", "search", "select", "amount", "multiline"], "gallery": "#inputs frame 1", "verification_status": "verified-both"},
+        {"state": "focused", "note": "ring now visible on real keyboard focus (outline:none removed, R-04)", "gallery": "#inputs frame 2", "verification_status": "verified-rendered"},
+        {"state": "error", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "disabled", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "read-only", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "long-content", "gallery": "#inputs frame 2", "verification_status": "verified-both"},
+        {"state": "select-open", "note": "menu with selected accent pair; Escape + outside-click close + focus return verified (R-23)", "gallery": "#inputs frame 1", "verification_status": "verified-rendered"},
+        {"state": "error-recovery-loop", "note": "empty submit → inline error at the control, input preserved, aria-invalid, focus → fix → guarded save → completion (R-15)", "gallery": "#inputs frame 3 (data-recovery-form)", "verification_status": "verified-rendered"},
+        {"state": "amount-live-grouping", "note": "JS grouping while typing", "gallery": "#inputs frame 1", "verification_status": "specified"}
+      ]
+    },
+    {
+      "id": "filtering", "gallery_anchor": "#filtering", "contract": "component-contracts.md §3", "system_doc": "data-display-system.md + overlay-system.md",
+      "states": [
+        {"state": "filter-control", "note": "compact trigger + active-count badge + aria-expanded (Repair C)", "gallery": "#filtering (data-filter-open)", "verification_status": "verified-both"},
+        {"state": "sort-dropdown", "note": "single-choice dropdown (the one sanctioned context); selects re-sort the live list", "gallery": "#filtering (data-menu)", "verification_status": "verified-rendered"},
+        {"state": "sheet-open", "note": "240ms enter, scrim 200ms, focus into sheet, body scroll lock", "gallery": "#filtering (data-filter-sheet)", "verification_status": "verified-rendered"},
+        {"state": "staged-selections", "note": "status multi + date single + type multi; staging verified; Apply commits", "gallery": "#filtering sheet (data-fgroup)", "verification_status": "verified-rendered"},
+        {"state": "cancel-discards", "note": "Escape/scrim/close/drag discard staged edits; applied state intact (verified)", "gallery": "#filtering", "verification_status": "verified-rendered"},
+        {"state": "reset-clears-draft", "gallery": "#filtering (data-filter-reset)", "verification_status": "verified-rendered"},
+        {"state": "apply-filters-and-sorts", "note": "count badge, summary line, row filtering (status/type/era) and reordering verified live", "gallery": "#filtering (data-filter-list)", "verification_status": "verified-rendered"},
+        {"state": "reopen-preserves-applied", "note": "staged = last applied on reopen (R-29)", "gallery": "#filtering", "verification_status": "verified-rendered"},
+        {"state": "no-results-on-empty", "note": "empty filter result swaps list for no-results + Clear filters restores (verified)", "gallery": "#filtering (data-filter-empty)", "verification_status": "verified-rendered"},
+        {"state": "chip-anatomy-reference", "note": "36px visual / 44px hit, selected/unselected/disabled", "gallery": "#filtering frame 2", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "segmented", "gallery_anchor": "#segmented", "contract": "component-contracts.md §5", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "pill default/active", "note": "thumb alignment verified; radiogroup + aria-checked", "gallery": "#segmented", "verification_status": "verified-rendered"},
+        {"state": "underline variant with counts", "note": "indicator slides 200ms (R-25); tablist semantics", "gallery": "#segmented", "verification_status": "verified-both"},
+        {"state": "arrow-key-activation", "note": "RTL-aware arrows move selection (R-21)", "gallery": "#segmented", "verification_status": "specified"},
+        {"state": "disabled", "note": "specified in contract", "gallery": "—", "verification_status": "specified"}
+      ]
+    },
+    {
+      "id": "metrics", "gallery_anchor": "#metrics", "contract": "component-contracts.md §6", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "direct primary value", "note": "no fake comparison (Repair D)", "gallery": "#metrics frame 1", "verification_status": "verified-both"},
+        {"state": "summary composition", "note": "total 850,400 = 620,000 + 230,400; 8px relationship bar; parts sum to total (R-09)", "gallery": "#metrics frame 2", "verification_status": "verified-both"},
+        {"state": "bar-movement-immediate-numbers", "note": "simulate update: widths transition 200ms, numbers swap instantly, aria-label updates (R-14) — verified", "gallery": "#metrics (data-metric-update)", "verification_status": "verified-rendered"},
+        {"state": "one-column-below-360", "note": "parts stack at 320 (no clip)", "gallery": "#metrics @320", "verification_status": "verified-rendered"},
+        {"state": "grouped surface", "gallery": "#metrics frame 3", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "rows", "gallery_anchor": "#rows", "contract": "component-contracts.md §7", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "stable-grid", "note": "tile + wrap/clamp text column + trailing value/action; full-width rows (Repair E)", "gallery": "#rows frame 1", "verification_status": "verified-both"},
+        {"state": "long-arabic-wrap", "note": "two-line clamp, never ellipsis-only; value stays on screen", "gallery": "#rows row 2", "verification_status": "verified-rendered"},
+        {"state": "wrapped-qualifier", "gallery": "#rows row 3", "verification_status": "verified-both"},
+        {"state": "status-tag-in-context", "note": "tags under titles inside rows (Repair B/R-22)", "gallery": "#filtering rows", "verification_status": "verified-both"},
+        {"state": "trailing-chevron-feedback", "note": "directional nudge toward the reading end, mirrored in RTL (R-10) — verified live", "gallery": "#rows (data-row-chev)", "verification_status": "verified-rendered"},
+        {"state": "inset-divider-rule", "note": "one rule: 1px border-soft inset 72px to the text column", "gallery": "#rows + #filtering", "verification_status": "verified-deterministic"},
+        {"state": "local-insert", "note": "add row → 600ms tint flash, no page-wide motion (R-13)", "gallery": "#rows (data-add-row)", "verification_status": "verified-rendered"},
+        {"state": "local-remove + real undo", "note": "row collapses 200ms; Undo restores the DOM node at its position — verified (R-13)", "gallery": "#rows (data-remove-row / data-manage-undo)", "verification_status": "verified-rendered"}
+      ]
+    },
+    {
+      "id": "rail", "gallery_anchor": "#rail", "contract": "component-contracts.md §8", "system_doc": "data-display-system.md",
+      "states": [
+        {"state": "snap-scroll", "note": "scroll-snap-type x proximity (computed style verified)", "gallery": "#rail (data-rail)", "verification_status": "verified-both"},
+        {"state": "pointer-drag", "note": "desktop drag-to-scroll; tap vs drag disambiguated", "gallery": "#rail", "verification_status": "verified-rendered"},
+        {"state": "next-item-cue", "note": "peeking card affordance, no arrows/dots", "gallery": "#rail", "verification_status": "verified-rendered"},
+        {"state": "no-vertical-scroll-hijack", "note": "touch-action pan-x pan-y (computed style verified)", "gallery": "#rail", "verification_status": "verified-deterministic"},
+        {"state": "action-card-anatomy", "note": "source Fab-sheet tiles: tinted card + white 48px icon chip + label + caption", "gallery": "#rail", "verification_status": "verified-both"}
+      ]
+    },
+    {
+      "id": "navigation", "gallery_anchor": "#navigation", "contract": "component-contracts.md §9", "system_doc": "navigation-shell.md",
+      "states": [
+        {"state": "top bar at rest", "gallery": "#navigation", "verification_status": "verified-both"},
+        {"state": "top bar scrolled (veil + E2)", "gallery": "#navigation", "verification_status": "verified-both"},
+        {"state": "bottom nav active/inactive", "note": "destination switching + aria-current verified; 24px icons; 4 destinations (3–5 allowed)", "gallery": "#navigation", "verification_status": "verified-rendered"},
+        {"state": "FAB", "note": "identity.500 fill (computed rgb(204,120,92)); 80px above nav via --fab-offset; opens the sheet from any screen", "gallery": "#navigation", "verification_status": "verified-rendered"},
+        {"state": "action bar", "gallery": "#navigation", "verification_status": "verified-both"},
+        {"state": "safe-area-css", "note": "env(safe-area-inset-*) present on nav/actionbar/sheet/FAB; insets are 0 in headless — on-device is needs-human", "gallery": "#navigation + #overlays", "verification_status": "verified-deterministic"}
+      ]
+    },
+    {
+      "id": "overlays", "gallery_anchor": "#overlays", "contract": "component-contracts.md §10", "system_doc": "overlay-system.md",
+      "states": [
+        {"state": "sheet open with real motion", "note": "240ms enter / 180ms exit transitions verified on computed styles (R-02)", "gallery": "#overlays (data-sheet)", "verification_status": "verified-rendered"},
+        {"state": "sheet really closes", "note": "hidden=true + is-open removed after close (the [hidden] guard, R-03)", "gallery": "#overlays", "verification_status": "verified-rendered"},
+        {"state": "drag-to-dismiss", "note": "pointer drag > 130px dismisses (synthetic pointer events verified)", "gallery": "#overlays handle", "verification_status": "verified-rendered"},
+        {"state": "expand snap", "note": "drag up −50px → is-expanded (94%)", "gallery": "#overlays handle", "verification_status": "verified-rendered"},
+        {"state": "dialog centered + real close", "note": "grid anchor centering (bounding box verified); scale 160/120; hidden after close (R-30)", "gallery": "#overlays (data-dialog-anchor)", "verification_status": "verified-rendered"},
+        {"state": "menu open + selected option", "note": "120ms fade; accent.600 check 4.51:1", "gallery": "#inputs (select) + #filtering (sort)", "verification_status": "verified-rendered"},
+        {"state": "snackbar + real undo + auto-dismiss", "note": "200/120ms motion, 5s timer, undo restores DOM (R-13)", "gallery": "#rows + #overlays", "verification_status": "verified-rendered"},
+        {"state": "scrim + Escape stack + focus restore", "note": "focus returns to trigger (activeElement assertion, R-07); top layer closes first", "gallery": "#overlays", "verification_status": "verified-rendered"},
+        {"state": "body scroll lock while open", "note": "documentElement overflow hidden during overlay (R-28)", "gallery": "#overlays", "verification_status": "verified-rendered"}
+      ]
+    },
+    {
+      "id": "empty-loading-error", "gallery_anchor": "#empty", "contract": "component-contracts.md §11", "system_doc": "empty-loading-error-states.md",
+      "states": [
+        {"state": "empty with action", "gallery": "#empty", "verification_status": "verified-both"},
+        {"state": "skeleton (card + rows)", "gallery": "#empty", "verification_status": "verified-both"},
+        {"state": "error panel with retry", "note": "guarded retry cycle verified live", "gallery": "#empty", "verification_status": "verified-rendered"},
+        {"state": "no-results (distinct from no-data)", "note": "wired to the live filter state in the Filtering family", "gallery": "#empty + #filtering", "verification_status": "verified-rendered"},
+        {"state": "skeleton under reduced motion (static)", "gallery": "#empty + motion toggle", "verification_status": "verified-rendered"}
+      ]
+    },
+    {
+      "id": "icons", "gallery_anchor": "#icons", "contract": "component-contracts.md §12", "system_doc": "iconography.md",
+      "states": [
+        {"state": "43-glyph set at 24px with names", "gallery": "#icons", "verification_status": "verified-both"},
+        {"state": "mirror-flag registry visible", "note": "every cell labels its name + mirrors/static (R-11)", "gallery": "#icons grid", "verification_status": "verified-both"},
+        {"state": "20px small size", "gallery": "throughout (row tiles, button slots, filter control)", "verification_status": "verified-both"},
+        {"state": "RTL mirror pair demonstration", "gallery": "#icons mirror-demo", "verification_status": "verified-both"},
+        {"state": "directional icons mirror in context", "note": "chevrons/arrows/truck flagged .mirror — verified in RTL renders", "gallery": "#rows + #rail + #filtering", "verification_status": "verified-rendered"}
+      ]
+    }
+  ],
+  "cross_cutting": [
+    {"check": "offline self-containment (file://, zero external requests, zero console/page errors, fresh session)", "status": "verified-rendered"},
+    {"check": "320/360/390/430 viewport rendering, LTR + RTL, no horizontal overflow", "status": "verified-rendered"},
+    {"check": "text scale 100/130/200% (root 16/20.8/32px, buttons 48/64/108px, reflow without clipping)", "status": "verified-rendered"},
+    {"check": "reduced-motion mode (media query + data-motion=reduced kill-switch; state meaning preserved)", "status": "verified-rendered"},
+    {"check": "motion tokens match the mandated system (80/120/200/240/180/160/120/200) and are actually wired", "status": "verified-both"},
+    {"check": "evidence panel outside compositions; no hex/token-names/ratios inside frames", "status": "verified-deterministic"},
+    {"check": "corrected color pairings live in render (#964E33 fill, #B42318 destructive, #644D1C gold text, identity.500 FAB)", "status": "verified-both"},
+    {"check": "token parity: 155 JSON tokens ↔ 177 CSS custom properties, zero mismatches", "status": "verified-deterministic"},
+    {"check": "29-file contract, flat, exact names, no forbidden artifacts, no credentials, no placeholders", "status": "verified-deterministic"},
+    {"check": "gallery opens with fonts unavailable → documented fallback rendering (production must bundle IBM Plex)", "status": "needs-human"},
+    {"check": "on-device safe-area insets, real haptics, finger-drag feel, screen-reader walkthroughs", "status": "needs-human"}
+  ]
+}

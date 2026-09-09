@@ -1,0 +1,543 @@
+{
+  "meta": {
+    "task_id": "R4-a",
+    "agent": "Subagent 1 — Package and Token Consistency Auditor",
+    "target": "zed-ai-runs/20260908T201936Z-g53-252a/visual-foundation-package",
+    "date": "2026-09-09",
+    "methodology": [
+      "Read the source pack's token evidence in full: source-reference/source-tokens.json (68 canonical hex + 5 shadow rgba), tailwind.config.source.js, index.css.source, SOP_VISUAL_ONLY.md, source-reference/SOURCE_AUDIT_NOTES.md.",
+      "Read all 29 package files end-to-end (23 markdown, design-tokens.json, coverage-matrix.json, design-tokens.css, component-gallery.css/html/js).",
+      "Scripted CSS↔JSON parity (audits/subagent-1/audit_tool.py): parsed all 170 custom properties in design-tokens.css and all 148 token records in design-tokens.json, resolved var() references one level deep, compared values, role names, and classification tags against CSS comment tags.",
+      "Scripted WCAG 2.1 recomputation of every ratio claimed in the evidence panel (component-gallery.html:640-659), color-system.md, accessibility.md, design-tokens.css comments and design-tokens.json usage fields (33 claimed pairs + 14 additional implemented-but-unclaimed pairs); cross-checked against the run's own scripts/sub3-contrast.py and agents/sub3/contrast-results.json (both executed read-only).",
+      "Motion matrix built from the REQUIRED TIMING SYSTEM vs design-tokens.css:184-192 tokens, motion-interaction.md, overlay-system.md, component-contracts.md, the evidence panel (component-gallery.html:702-713), the actual transition/animation declarations in component-gallery.css (6 transitions, 2 animations), component-gallery.js timers, and computed-tokens.txt / behavior-* captures.",
+      "Prohibited-value scan across all 29 files (scripted): hex colors vs source ramp, rgba values, remote URLs, emoji/typographic symbols, TODO/TBD/FIXME/lorem markers, raw px font sizes below 12px.",
+      "Rendered-vs-documented: cross-checked all 25 capture files at audits/captures/ (computed-tokens, computed-structure, computed-fonts, behavior-*, current-ltr/rtl-*, overflow, console, network, page-errors) against documented claims; class-usage cross-check (classes in HTML/JS vs selectors in both CSS files).",
+      "Structure check: exact 29-file contract, flat layout, expected filenames per README file map, no extra artifacts; diffed the repos copy against download/visual-foundation-package-20260908T201936Z-g53-252a (identical).",
+      "Every finding below cites file + line or capture + value. Inferences are labeled (e.g. FAB overlap is CSS-math, not visually confirmed)."
+    ]
+  },
+  "findings": [
+    {
+      "id": "S1-01",
+      "area": "tokens",
+      "severity": "blocker",
+      "evidence": "design-tokens.css:184-192 (--motion-press: 120ms; --motion-fast: 200ms; --motion-base: 300ms; --motion-sheet: 340ms; no dialog or scrim tokens) vs REQUIRED TIMING SYSTEM; corroborated by computed-tokens.txt (motionPress 120ms, motionFast 200ms, motionBase 300ms, motionSheet 340ms) and component-gallery.css:126,191,260,292,300,448",
+      "criterion": "REQUIRED TIMING SYSTEM (run authority): press 80ms; fast 120ms; normal 200ms; sheet-in 240ms / sheet-out 180ms; dialog-in 160ms / dialog-out 120ms; scrim 200ms",
+      "finding": "Every implemented motion duration diverges from the required system: press is 120ms (required 80), fast is 200ms (required 120), normal/base is 300ms (required 200), sheet is a single 340ms token (required 240 in / 180 out), and dialog-in/dialog-out/scrim tokens do not exist at all. The current values are inherited from the source (index.css.source:51, tailwind.config.source.js:204-210, BottomSheet.jsx:150), so the package is source-faithful but run-authority-divergent.",
+      "recommendation": "Retokenize the motion block to the 8 required values (press 80 / fast 120 / normal 200 / sheet-in 240 / sheet-out 180 / dialog-in 160 / dialog-out 120 / scrim 200), retime every transition in component-gallery.css that consumes --motion-press/--motion-fast/--motion-base, and add the missing tokens with classification 'corrected' citing the run authority as evidence.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-02",
+      "area": "gallery",
+      "severity": "blocker",
+      "evidence": "component-gallery.css:464-468 (.scrim — no transition), :469-477 (.sheet — transform: translateY(0) with no transition/animation; [hidden] display:none), :503-509 (.dialog — no motion), :518-531 (.snackbar — no motion); component-gallery.js:171-188,224-232 (openOverlay/overlayClose/fireSnackbar only toggle the hidden attribute); design-tokens.css:293-300 defines @keyframes slideUp/slideDown/fadeIn/scaleIn/snackbarIn/ghostOut that are referenced by zero rules in component-gallery.css; grep confirms --motion-sheet and --snackbar-duration are never consumed anywhere in the gallery; captures behavior-sheet-open.txt / behavior-dialog-open.txt show instant state flips",
+      "criterion": "REQUIRED TIMING SYSTEM (scrim 200ms, sheet 240/180, dialog 160/120) + audit task 3d: 'check whether documented sheet/dialog motion is actually implemented in component-gallery.css (claimed vs actual)'",
+      "finding": "All documented overlay motion is claimed but not implemented. motion-interaction.md:34 ('Scrim fades 200ms; sheet slides 340ms ...; dialog scales in 200ms (scaleIn 0.95→1); snackbar slides+fade 300ms. Exits reverse: snackbar 300ms down+fade, sheet 340ms down, dialog 200ms fade+scale'), overlay-system.md:16,24,28,36, component-contracts.md:89, visual-direction.md:17 ('200–340ms overlay motion') and the evidence panel motion table (component-gallery.html:702-713) all describe motion that never runs: overlays appear and disappear instantly. Only spin (0.8s) and skeleton (1.5s) animations and 6 intra-component transitions actually execute.",
+      "recommendation": "Either implement the required in/out durations (the keyframes already exist in design-tokens.css and can be wired to .sheet/.dialog/.scrim/.snackbar with the new tokens) or retract the motion claims from all six documents and the evidence panel. Do not leave docs claiming motion the gallery never runs — this is the exact 'documented motion that never runs' class the repair run must close.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-03",
+      "area": "docs",
+      "severity": "major",
+      "evidence": "motion-interaction.md:38 ('The source sheet is draggable: two snap points (collapsed 84vh, expanded 94vh) ... This package preserves the geometry and motion exactly'); overlay-system.md:11,17,44 ('Snap points collapsed ≤84vh · expanded 94vh', 'Drag up −50px expands...', 'Sheet (open, expanded snap, ... live drag-handle affordance)'); component-states.md:28 ('✅ open + expanded snap'); contrast: self-critique.md:18 admits 'the gallery sheet opens and closes without a draggable handle'; component-gallery.js contains no drag handlers; component-gallery.css:474 (.sheet max-height 84%, static)",
+      "criterion": "Internal cross-file consistency; rendered-vs-documented (audit task 4: documented behavior that does not run)",
+      "finding": "Two documents claim the package preserves source sheet drag 'exactly' and demonstrates 'live drag' and 'expanded snap', while self-critique.md truthfully states drag is not interactive, and the code confirms it (no pointer/drag handlers, single static 84% max-height, no 94vh expanded state). The drag contract itself is fine as a spec; the claim that it is 'preserved exactly' / demonstrated live is false and contradicted by the package's own self-critique.",
+      "recommendation": "Align motion-interaction.md and overlay-system.md with self-critique.md: describe the drag geometry as specified-from-source, not preserved/demonstrated; remove 'live drag-handle affordance' and 'expanded snap' from the gallery-demonstrations claims (or implement drag).",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-04",
+      "area": "coverage",
+      "severity": "major",
+      "evidence": "coverage-matrix.json:105 marks 'dialog destructive confirmation' as 'verified-both' with gallery '#overlays' — the only dialog is the non-destructive 'Confirm summary?' (component-gallery.html:503-510, confirmed by behavior-sheet-open-snapshot.txt); component-states.md:14 marks Input-search '✅ (trailing spinner)' — no spinner exists in the search field (html:181-187; js has no search-loading code); component-states.md:24 marks Row '✅ (error row variant)' — rows at html:372-416 have no error variant; component-states.md:31 marks Snackbar '✅ (error variant)' — all fired messages are success/info (js:233-240,278-292,296-306); component-states.md:28 '✅ open + expanded snap' (see S1-03); navigation-shell.md:38 claims 'large-title subheader, bottom nav with all five destinations' — the gallery has no large-title demo (grep: --topbar-height-large never consumed) and exactly 4 nav items (html:445-462, confirmed in behavior-sheet-open-snapshot.txt); responsive-geometry.md:22 claims 'the gallery renders them: a 5-segment segmented control ... 5-destination nav' — the gallery segmented control has 3 segments (html:281-286)",
+      "criterion": "Verification evidence must match the DOM (audit task 4: 'documented states that don't exist in the DOM'); coverage-matrix legend defines 'verified-both' as rendered AND verified",
+      "finding": "At least eight documented/✅/verified states do not exist in the gallery DOM: destructive-confirmation dialog, search loading spinner, row error variant, snackbar error variant, sheet expanded snap, large-title subheader, five nav destinations, five-segment control. The coverage matrix labels a nonexistent state 'verified-both', which breaks the evidence chain the package relies on ('measured, not asserted').",
+      "recommendation": "Correct component-states.md ✅ marks and coverage-matrix.json statuses to 'specified' for the nonexistent states, fix the 4/5 destination and 3/5 segment counts, and drop the large-title claim (or add the demo). If states are added during repair, re-verify before relabeling.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-05",
+      "area": "gallery",
+      "severity": "major",
+      "evidence": "component-gallery.html:60,70,77,84 use class 'seg seg-sm' on the four header control groups (Viewport width / Direction / Text size / Motion); grep of component-gallery.css and design-tokens.css finds no '.seg' or '.seg-sm' selector; also dead classes 'has-lead' (html:184) and 'sheet-close' (html:492) with no CSS rules; scripted class-usage cross-check lists exactly ['has-lead','seg','seg-sm','sheet-close'] as undefined",
+      "criterion": "Cross-file consistency: every class consumed by the gallery HTML/JS must be styled (audit task 3b analog for class parity); README:7 presents the header controls as a primary gallery feature",
+      "finding": "The four gallery header controls referenced by README.md ('Use the header controls to switch viewport width, direction, text size, and motion') have no styling — they render as unstyled native button rows in every screenshot. The controls still function (a11y tree and behavior captures prove clicks work), but the chrome is visually broken and two dead classes remain in the markup.",
+      "recommendation": "Add a small '.seg/.seg-sm' pill style for the header chrome (36px, radius-full, ink-secondary/accent-600 states — reusing existing tokens), remove the unused 'has-lead' and 'sheet-close' classes, and re-capture the header region.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-06",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "accessibility.md:15 ('white | primary.800 #783B28 | 8.39'); recomputed WCAG 2.1 ratio = 8.55; the run's own scripts/sub3-contrast.py and agents/sub3/contrast-results.json both record 8.55 for 'white #FFFFFF on primary-800 #783B28'",
+      "criterion": "Contrast claims must survive recomputation (audit task 3e)",
+      "finding": "One wrong ratio in the accessibility table: white on primary.800 is 8.55:1, not 8.39:1. Direction of error is conservative (actual contrast is higher); every other one of the 33 claimed pairs recomputes exactly (15.80/16.64/14.33/12.18/12.83/11.05/5.39/5.12/4.64/6.11/3.28/4.45/5.08/3.24/5.02/5.29/7.01/4.39/5.62/5.53/5.99/6.80/2.85/4.51/10.68/2.11/3.36/3.28/3.24/4.34 all verified).",
+      "recommendation": "Correct 8.39 → 8.55 in accessibility.md (pressed-primary row).",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-07",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "input-system.md:22 ('Focused | border accent.500 ... (150ms color transition)') and component-contracts.md:25 ('Feedback: 150ms border-color transition') vs component-gallery.css:191 (.input transition: border-color var(--motion-fast) = 200ms) and motion-interaction.md:12 (motion.fast 200ms for 'border color')",
+      "criterion": "Documented values must agree with CSS tokens and with each other",
+      "finding": "The input focus-transition is documented as 150ms (source value, index.css.source:111 'transition: border-color 0.15s ease') in two docs, but implemented as 200ms via --motion-fast, and a third doc says 200ms. The 150ms value also exists nowhere in the token system.",
+      "recommendation": "Pick one value: either tokenize 150ms or (more consistent with the current build) update input-system.md and component-contracts.md to the implemented token value. Under the required timing system this transition would become fast=120ms.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-08",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "navigation-shell.md:20-21 ('Active state: ... filled 24px icon in primary.700'; 'Inactive: outline 24px icon (stroke 1.8)') and iconography.md:14 (icon.md 24px — 'navigation, FAB, empty-state glyph, sheet headers') vs component-gallery.css:107 (.ic width/height = --icon-sm = 20px) with no 24px rule for .navitem .ic; gallery nav icons use class 'ic' (20px), not 'ic-lg' (24px)",
+      "criterion": "Geometry: icons 20/24px (audit task 3f); rendered value must match documented value",
+      "finding": "Bottom-nav icons are documented as 24px but render at 20px: the gallery applies the default .ic (20px) class with no override, so all four nav icons and the nav active glyph are 20px. (The FAB icon is correctly 24px via --icon-md at css:433.)",
+      "recommendation": "Either add '.navitem .ic { width: var(--icon-md); height: var(--icon-md); }' to match the documented 24px nav icon, or change navigation-shell.md/iconography.md to document 20px nav icons.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-09",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "iconography.md:20 ('The gallery implements 26 icons' — its own list contains 27 names), decision-log.md D-29 ('26-icon representative sprite'), self-critique.md:19 ('26 of the source's 51 glyphs'), coverage-matrix.json:124 ('26-glyph set at 24px', 'verified-both'), component-contracts.md:100 ('26-glyph sheet') vs scripted count: 34 <symbol> definitions in component-gallery.html:15-48 and 24 icon-grid cells (computed-structure.txt: iconCells 24, symbols 34)",
+      "criterion": "Documented counts must match the artifact",
+      "finding": "The icon count is claimed as 26 in five documents while the sprite actually defines 34 symbols and the grid renders 24 of them at 24px. All counts disagree with each other.",
+      "recommendation": "State the real numbers: 34-glyph sprite, 24 rendered in the icon grid at 24px, the rest used inline at 20px (rows/nav/menus). Update the five locations.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-10",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "component-gallery.css:221 (.clear-btn:active scale(0.95)), :457 (.navitem:active scale(0.95)), :531 (.snackbar-action:active scale(0.95)) vs :262 (.chip:active scale(0.97)), :432 (.fab:active scale(0.97)) and design-tokens.css:241 (.press:active scale(0.97)); motion-interaction.md:24 ('Every tappable surface uses .press — 120ms transform transition, :active scale 0.97'); navigation-shell.md:19 documents navitem as 'active:scale-95'",
+      "criterion": "Press feedback grammar: one scale (0.97 per SOP §10 / source .press); 'Every tappable surface uses .press' claim",
+      "finding": "Press feedback is inconsistent: buttons/chips/FAB use 0.97 via .press, while clear buttons, nav items and snackbar actions use 0.95 with no .press transition at all. motion-interaction.md's universal 'every tappable surface uses .press — 0.97' is false for those three controls (they scale instantly with no transition), and navigation-shell.md documents the 0.95 as intended, so the docs also contradict each other.",
+      "recommendation": "Unify on 0.97 with the .press transition (add .press class or transition to .navitem/.clear-btn/.snackbar-action), or document the 0.95 quiet-scale exception once and fix motion-interaction.md's 'every tappable surface' claim.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-11",
+      "area": "tokens",
+      "severity": "minor",
+      "evidence": "design-tokens.css:23 ('--color-primary-700 ... [corrected role]') vs design-tokens.json primary.700 classification 'inherited'; design-tokens.css:116 ('--color-ink-secondary ... [corrected]') vs JSON 'normalized'; conversely JSON-corrected tokens operational.600 (json:397-402), gold.700 (json:485-490), positive-on-tint (json:589-594), gold-ink (json:629-634) carry no [corrected] tag on their CSS lines (css:70, 83, 90, 95)",
+      "criterion": "Audit task 3a: every custom property must exist in design-tokens.json with the same value, role AND classification",
+      "finding": "Token values are in perfect parity (0 value mismatches after var() resolution), but the classification tags drift between the CSS comments and the JSON records: two CSS tags contradict the JSON classification, and four JSON 'corrected' records are untagged in CSS. The JSON's own summary (69 inherited / 74 normalized / 5 corrected = 148) is internally consistent.",
+      "recommendation": "Sync the CSS comment tags to the JSON classifications (or vice versa) so the '1:1 parity, verified' claim on design-tokens.json meta and README holds for classifications too.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-12",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "overlay-system.md:36 ('optional action 14px/700 primary.200') vs component-gallery.css:528 (.snackbar-action font-size: var(--text-label-size) = 13px, font-weight 700) and typography.md:39 (the package's own off-scale mapping: '14px → text.body 15 (prose) or text.label 13 (chips)')",
+      "criterion": "Documented type values must agree with the implemented scale and the package's own mapping rules",
+      "finding": "overlay-system.md still specifies the off-scale 14px for the snackbar action, which the package's own typography rules (D-08) map to 13/15; the implementation correctly uses the 13px label token. The doc is stale.",
+      "recommendation": "Change '14px/700' to 'label 13px/700' in overlay-system.md.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-13",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "overlay-system.md:24 ('centered card'), surface-system.md:30 ('Dialogs: white, 16px radius, E3, centered'), component-contracts.md:89 ('Dialog: centered 16px-radius E3') vs component-gallery.css:504 (.dialog { position: absolute; inset-block-start: 24%; inset-inline: 16px; margin-inline: auto })",
+      "criterion": "Documented geometry must match the rendered geometry",
+      "finding": "The dialog is documented as centered but is horizontally centered and top-anchored at 24% of the frame. 'Centered' is inaccurate for the vertical axis; the 24% anchor itself is undocumented.",
+      "recommendation": "Document the actual anchor ('horizontally centered, top-anchored at 24%') in overlay-system.md/surface-system.md/component-contracts.md, or center the dialog vertically if that is the intended contract.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-14",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "navigation-shell.md:30 ('80px above the nav + safe-area (D-27)'), spacing-radius-elevation.md:31 (fab.offset 80px), evidence panel (component-gallery.html:671 'FAB 56px, 80px above nav'), design-tokens.css:165 (--fab-offset: 5rem) vs component-gallery.css:425 (.fab { inset-block-end: 20px } anchored to .nav-demo-wrap which contains the ~72px bottomnav) and grep: --fab-offset consumed 0 times. CSS math (labeled inference, not visually confirmed): wrap = 96px demo-space + ~72px nav = 168px; FAB spans 20–76px above wrap bottom while the nav occupies 0–72px, i.e. the FAB overlaps the nav band instead of floating 80px above it.",
+      "criterion": "Geometry: FAB 56px with documented 80px offset; rendered-vs-documented token usage",
+      "finding": "The documented and tokenized 80px FAB offset never renders: the gallery FAB is anchored 20px above the bottom of its wrapper, which per CSS computation places it overlapping the bottom-nav band rather than 80px above it. The --fab-offset token is dead in the gallery.",
+      "recommendation": "Anchor the demo FAB at inset-block-end: calc(nav-height + 80px) (or consume --fab-offset) so the documented offset is actually demonstrated, then re-verify visually; alternatively document the demo placement explicitly as approximate.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-15",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "empty-loading-error-states.md:13 ('Layout | centered block, 48px vertical breathing, 16px side padding') vs component-gallery.css:536 (.empty, .error-panel { padding: 32px 16px })",
+      "criterion": "Documented spacing values must match the CSS",
+      "finding": "Empty/error panels are documented with 48px vertical breathing but implemented with 32px vertical padding (the 16px side padding matches).",
+      "recommendation": "Align the doc to 32px or the CSS to 48px (48 = 2×24 would match the 'opening space' rhythm).",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-16",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "overlay-system.md:36 ('Fixed above the nav (96px offset) ... full-width minus 32px margins') vs component-gallery.css:519 (.snackbar { position: absolute; inset-block-end: 24px; inset-inline: 16px }) — the gallery mounts the snackbar inside the frame (component-gallery.js:226), 24px above the frame bottom",
+      "criterion": "Rendered-vs-documented: system spec vs gallery approximation must be flagged as such",
+      "finding": "The snackbar's system spec (fixed, 96px above nav, 16px margins giving 'minus 32px') differs from the gallery implementation (absolute within the demo frame, 24px from bottom, 16px insets). The doc describes real-app behavior the gallery cannot show; nothing marks the difference.",
+      "recommendation": "Add a note in overlay-system.md that the gallery approximates snackbar placement inside frames (24px), with the 96px offset applying in a real shell; or adjust the demo.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-17",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "component-gallery.css:597 (.ev-ramp span::after { font-size: 10px }) vs typography.md:45 ('The 12px floor is absolute ... no UI text renders below 12px at any setting') and accessibility.md:58 ('12px minimum everywhere'); scripted scan: the only sub-12px font-size in all 29 files",
+      "criterion": "Prohibited values: raw px font sizes below 12px (audit task 3g)",
+      "finding": "The evidence panel renders ramp step labels at 10px, violating the package's own absolute 12px floor. It is documentation chrome (outside compositions), but the rule is stated without a chrome exemption, and the package's own off-scale table (typography.md:36) maps the source's 10px captions to 12px.",
+      "recommendation": "Raise the ramp labels to 12px (or document the evidence-panel chrome exemption explicitly).",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-18",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "iconography.md:16 ('20px is the floor for legible iconography', 'no sub-20px icons' at :40) vs component-contracts.md:53 ('optional leading 12px icon or 6px dot') and data-display-system.md:25 ('a 12px glyph or 6px dot may lead') and component-gallery.css:112 (.ic-dot { width: 12px; height: 12px }) used in tags/badges/kpi-change (html:260,306-314,337)",
+      "criterion": "Cross-file doc consistency; icons 20/24px geometry rule",
+      "finding": "Internal contradiction on the icon floor: iconography.md forbids sub-20px icons while component-contracts.md and data-display-system.md specify (and the gallery implements) 12px badge icons and 6px dots. The 12px indicator is a deliberate, documented cue device — but only in two of the three documents.",
+      "recommendation": "Reconcile: state in iconography.md that the 20px floor applies to interactive/action icons, while badge/tag status cues may use the documented 12px glyph / 6px dot.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-19",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "component-contracts.md:15 ('loading announced via aria-busy'), :37 ('aria-pressed for selection'), :85 ('aria-current on the active item') vs scripted grep of component-gallery.html and component-gallery.js: aria-busy = 0, aria-pressed = 0, aria-current = 0 occurrences",
+      "criterion": "Accessibility contracts must match the DOM (audit task 4)",
+      "finding": "Three a11y attributes specified in the contracts are absent from the gallery DOM: loading buttons never set aria-busy, chips never set aria-pressed, nav items never set aria-current. The a11y tree in the captures confirms no such states.",
+      "recommendation": "Add aria-busy toggling in the loading-button handler, aria-pressed on chips, and aria-current='page' (or 'true') on the active nav item in component-gallery.js — all are one-line changes that make the contracts true.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-20",
+      "area": "coverage",
+      "severity": "minor",
+      "evidence": "grep of var() consumption in component-gallery.css/html/js: --motion-sheet, --snackbar-duration (JS hardcodes 5000 at component-gallery.js:231), --fab-offset, --topbar-height-large, --space-nav-pill (css:446 hardcodes 52px), --row-height-min (css:371 hardcodes 56px), --touch-target, --actionbar-height, --z-header, --z-content, --space-1..7 (gallery css uses raw 4/8/12/16/20/24/32 px), --text-title-size/line/weight (28px role never rendered), --color-status-progress/ready/closed (tags use family pairs directly, css:274-280) are all defined+documented but never consumed",
+      "criterion": "Rendered-vs-documented: documented values that never render (audit task 4)",
+      "finding": "A documented token set is never exercised by the gallery: the sheet motion token, snackbar duration token, FAB offset, large-title bar (112px), nav-pill token, row-height token, touch-target utility, action-bar height, two z-levels, the entire spacing scale (raw px used instead — values agree), the 28px title role, and the three status role tokens. The docs and tokens are coherent with each other; the gallery just never demonstrates them.",
+      "recommendation": "Lowest-risk repair: consume the tokens where raw values currently hardcode the same number (52px→--space-nav-pill, 56px→--row-height-min, 5000→--snackbar-duration, spacing values→--space-*); treat --text-title-*, --topbar-height-large, --motion-sheet as depending on the motion/coverage decisions in S1-01/S1-02/S1-04.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-21",
+      "area": "gallery",
+      "severity": "minor",
+      "evidence": "overlay-system.md:28 ('closes on outside touch or Escape') vs component-gallery.js:207-220 (the keydown Escape handler calls overlayClose() which only hides sheet/dialog/scrim — not the menu; menu has no outside-click listener; only trigger toggle and option click close it, js:140-158)",
+      "criterion": "Documented interaction contract vs implemented behavior",
+      "finding": "The dropdown menu does not close on outside touch and does not close on Escape, contrary to overlay-system.md. It only closes by re-clicking the trigger or selecting an option.",
+      "recommendation": "Add the menu to the Escape handler's overlay set and a document-level outside-click close for the open menu.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-22",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "data-display-system.md:21 ('24px/600 mono number in a state color', '12px change line with trend glyph (\"▲ 12% vs yesterday\")') vs component-gallery.css:334 (.kpi-num color: var(--color-ink)) and html:337 (SVG trending-up icon, not a ▲ character)",
+      "criterion": "Documented values must agree with rendered values",
+      "finding": "The KPI number is documented as rendered 'in a state color' but the gallery renders it in ink; the change line is documented with a ▲ text glyph but rendered with an SVG icon. The icon version is the better a11y choice; the doc describes the source's variant.",
+      "recommendation": "Update data-display-system.md to the implemented anatomy (ink numbers; SVG trend glyph) or state that state-colored KPI numbers are an allowed variant.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-23",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "input-system.md:12 and :43 ('the header icon-expand pattern (44px round button expands into the field, collapses on empty-blur)' listed under 'Gallery demonstrations') vs component-gallery.html:428-440 (top bar has static 44px search/more icon buttons; no expanding field) and js (no expand logic)",
+      "criterion": "Gallery-demonstration claims must exist in the DOM",
+      "finding": "The header icon-expand search pattern is claimed as a gallery demonstration in input-system.md but does not exist in the gallery (the navigation family shows only static icon buttons).",
+      "recommendation": "Remove the icon-expand claim from input-system.md's gallery-demonstrations list (keep it as a specified contract), or add the expanding-search demo to the navigation family.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-24",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "component-contracts.md:42 ('underline variant — labels over 2px divider with a 4px primary indicator') and :47 ('underline slides same [300ms]') vs component-gallery.css:303 (.segctl-lines border-bottom: 1px solid divider), :309-311 (active button border-bottom: 2px solid primary-700; no transition declared on these buttons)",
+      "criterion": "Documented geometry/motion must match the CSS",
+      "finding": "The underline segmented control is documented as a 2px divider with a 4px primary indicator, but the implementation is a 1px container divider with a 2px primary underline; and the documented 300ms underline slide does not exist (the underline appears instantly, no transition).",
+      "recommendation": "Either implement the documented indicator geometry + transition, or correct the contract to the implemented 1px/2px instant-underline values.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-25",
+      "area": "docs",
+      "severity": "minor",
+      "evidence": "empty-loading-error-states.md:19 ('row-shaped strips (44px tile + two lines + trailing amount block) for lists') vs component-gallery.css:557 (.sk-row { height: 56px; width: 100% } — flat strip, no internal anatomy)",
+      "criterion": "Documented skeleton anatomy vs implemented skeleton shapes",
+      "finding": "The documented skeleton row anatomy (tile + two lines + amount block) is not implemented; the gallery renders flat 56px strips. Layout-shift promise ('geometry must match the real content') is therefore only approximately demonstrated.",
+      "recommendation": "Either compose the skeleton row from the documented parts or soften the doc to 'row-height strips approximating list rows'.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-26",
+      "area": "tokens",
+      "severity": "minor",
+      "evidence": "design-tokens.json:749-762 (font.sans value 'IBM Plex Sans Arabic (fallbacks: IBM Plex Sans, Segoe UI, Noto Sans Arabic, system-ui)' — omits -apple-system and the sans-serif generic; font.mono omits the monospace generic) vs design-tokens.css:128-131 (full literal stacks); typography.md:7-8 documents the CSS stacks",
+      "criterion": "Audit task 3a: same value in JSON and CSS",
+      "finding": "The two font tokens are the only records whose JSON 'value' is descriptive prose rather than the literal CSS stack, and the JSON omits two fallback entries. Not a visual divergence, but the JSON is not machine-consumable as a stack and the parity claim ('1:1') holds only semantically for these two records.",
+      "recommendation": "Store the literal stacks in the JSON values (quotes escaped) with the prose moved to usage, so tooling can consume them.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-27",
+      "area": "structure",
+      "severity": "note",
+      "evidence": "find: exactly 29 files, flat directory, no subdirectories or extra artifacts; filenames match README.md:19-49 file map 1:1; smallest file 4,500 bytes (>200); diff vs download/visual-foundation-package-20260908T201936Z-g53-252a = identical; no __pycache__/.env/lockfiles; credential scan 0 matches (verification-report.md:28)",
+      "criterion": "29-file contract (audit task 3h)",
+      "finding": "The 29-file contract is fully satisfied: exact count, exact expected names, flat, no extra artifacts, package copies identical.",
+      "recommendation": "No action; keep the contract during repair (any added file breaks PS-02/PS-03).",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S1-28",
+      "area": "tokens",
+      "severity": "note",
+      "evidence": "audit_tool.py result: 170 CSS custom properties, 148 JSON records, 146 exact value matches, 2 representational (fonts, S1-26), 0 value mismatches after var() resolution; every var() consumed by component-gallery.css/html/js is defined in design-tokens.css and documented in at least one markdown file (consumed set verified against color-system.md, typography.md, spacing-radius-elevation.md, motion-interaction.md, surface-system.md)",
+      "criterion": "Audit tasks 3a/3b",
+      "finding": "Token value parity and consumed-token documentation both PASS: the '148 ↔ 170 (triads resolve), zero value mismatches' claim in verification-report.md:39 is independently reproduced (the 11 typography records expand to 33 CSS props; 170 = 148 + 22 triad sub-fields).",
+      "recommendation": "No action needed for values; fix only the classification-tag drift (S1-11) and font records (S1-26).",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S1-29",
+      "area": "coverage",
+      "severity": "note",
+      "evidence": "recomputation of all 33 claimed pairs + 14 additional implemented pairs (audit_tool.py; scripts/sub3-contrast.py; agents/sub3/contrast-results.json): all pass their stated thresholds; #CC785C appears in gallery code only as meta theme-color (component-gallery.html:6) and ramp documentation — no white-text pairing on primary.500 anywhere (btn-primary uses primary.700 at css:134; computed-tokens.txt btnPrimaryFill rgb(150,78,51)); geometry captures: btnMinHeight 48px, btnRadius 12px, weight 600 (css:124); E1/E2/E3 tokens byte-identical to the required shadows; chips 36px visual + 44px hit (css:255 + chip-row padding 4px css:251)",
+      "criterion": "Required target system colors/geometry; '#CC785C must never pair with normal-size white button text'",
+      "finding": "The five headline contrast corrections and the identity-color restriction are real and rendered: primary button = #964E33, secondary = #057B7C, gold badge = #644D1C on #F6ECCF, operational fill = #3E5C76, nav active = #964E33; #CC785C never carries white button text. Geometry fundamentals (48/12/600 buttons, 36/44 chips, E1–E3, radii 12/16/20, FAB 56) are consistent across CSS, docs, and computed captures.",
+      "recommendation": "Preserve these verified strengths during repair.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S1-30",
+      "area": "docs",
+      "severity": "note",
+      "evidence": "design-tokens.css:81 ('gold.500 ... icons/graphics on white/canvas only (3.36:1)') and iconography.md:40 ('on white/canvas where #B08532 measures 3.36:1') vs recomputation: 3.36:1 on white, 3.19:1 on canvas #FAF9F5 (both ≥ 3.0)",
+      "criterion": "Contrast claim precision",
+      "finding": "The gold.500 non-text ratio is cited as 3.36:1 for both white and canvas; on canvas it is 3.19:1 (still passing 1.4.11). Minor imprecision, no threshold impact.",
+      "recommendation": "Cite both numbers ('3.36 white / 3.19 canvas') for precision.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S1-31",
+      "area": "docs",
+      "severity": "note",
+      "evidence": "overlay-system.md:16 ('height 320ms') — no motion token equals 320ms (design-tokens.css:184-192); source evidence exists (BottomSheet.jsx:150 'height .32s'); component-gallery.css:175 (spinner animation: spin 0.8s) — no document states 0.8s (motion-interaction.md:20 mentions only 'a spin for button loading')",
+      "criterion": "Motion values must be tokenized or documented consistently",
+      "finding": "Two motion values exist only in prose/code: the sheet height snap 320ms (documented, no token, not implemented) and the spinner 0.8s (implemented, not documented). Both are source-faithful (BottomSheet.jsx:150; the source has no spinner duration either).",
+      "recommendation": "When retiming to the required system, decide whether height-snap and spinner durations need tokens; document the spinner duration wherever loading is specified.",
+      "classification_suggestion": "unresolved"
+    },
+    {
+      "id": "S1-32",
+      "area": "docs",
+      "severity": "note",
+      "evidence": "component-gallery.css:24-26 (.gallery-header backdrop-filter: blur(12px) over --color-header-translucent) and :407-409 (.topbar-scrolled same) vs the prohibited list ('glassmorphism') and the package's own carve-outs: surface-system.md:42 ('The scrolled-header veil is the only blur; glassmorphism as a general treatment is prohibited'), visual-direction.md:25, source PageHeader.jsx:107-110",
+      "criterion": "Prohibited: glassmorphism (required target system) vs inherited source behavior",
+      "finding": "The header veil (rgba(250,249,245,0.88) + blur 12px) is inherited from the source and documented as the system's single blur exception, but the run's prohibited list bans glassmorphism without stating an exception. The gallery additionally blurs its documentation header (chrome, outside compositions).",
+      "recommendation": "Needs coordinator decision: ratify the documented single-veil exception (source-inherited, D-18/D-19 lineage) or replace the veil with an opaque header. The gallery-header blur is chrome and can be made opaque at zero visual-system cost.",
+      "classification_suggestion": "unresolved"
+    },
+    {
+      "id": "S1-33",
+      "area": "tokens",
+      "severity": "note",
+      "evidence": "component-gallery.css:145 (.btn-destructive background: var(--color-negative-500) #C9322A, white text 5.29:1) and design-tokens.json:309-315 vs required target 'negative main #B42318 (tint #FBE7E6)'; package documents negative.600 #B42318 as the text/icon role (negative-ink) and 500 as the inherited fill (decision D-03, source ICSS:102 bg-expense-500)",
+      "criterion": "Required color system: 'negative main #B42318'",
+      "finding": "The package splits the negative role: text/icon = #B42318 (matches the required 'main'), filled destructive button = #C9322A (source-inherited, passes AA at 5.29:1). The required target's wording ('main #B42318') does not explicitly assign a fill step, so whether the destructive fill must also move to #B42318 is a coordinator decision (white on #B42318 = 6.57:1, so the deeper fill also passes).",
+      "recommendation": "Coordinator to confirm: keep the documented 500-fill/600-text split (inherited) or move filled destructive actions to negative.600 #B42318. Either choice passes contrast.",
+      "classification_suggestion": "unresolved"
+    },
+    {
+      "id": "S1-34",
+      "area": "gallery",
+      "severity": "note",
+      "evidence": "scripted scan across all 29 files: zero TODO/TBD/FIXME/lorem markers; zero emoji in code files (only ✅/❌ in markdown tables and '↔' in an evidence-panel note, html:724); no gradients; no remote URLs in code (the two 'URL' matches are the SVG xmlns namespace in the sprite and the data-URI check glyph; network-remote-resources.txt = []); off-palette hexes appear only in deprecated/forbidden documentation sections (design-tokens.json deprecated_source_values, source-inventory.md, color-system.md); component-gallery.js:49-55 RAMPS hardcode 60 in-ramp hexes duplicating token values (evidence chrome, values verified identical to the ramp)",
+      "criterion": "Prohibited values scan (audit task 3g)",
+      "finding": "The prohibited-value scan is clean: no placeholder markers, no emoji-as-icons, no gradients, no neon/glow, no colored shadows (all shadows warm rgba(60,50,40,α)), no count-up, no springs, no page-wide slides, no off-palette colors in rendered code, no remote resources. The only scan hits are benign: 10px chrome text (S1-17), untokenized rgba(255,255,255,.35) spinner border and raw #FFFFFF values (in-palette), and hardcoded RAMPS/snackbar-timer values in JS.",
+      "recommendation": "Optionally tokenize the spinner white-alpha and read --snackbar-duration in JS; no other action.",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S1-35",
+      "area": "docs",
+      "severity": "note",
+      "evidence": "component-gallery.html:300 ('Every pairing carries an icon or dot so state never rides on color alone') vs html:316-320 (third badge row: 'Paid', 'Cancelled', 'Returned' — text-only tags); component-gallery.html:114 buttons prose ('0.97 press') vs the 0.95 cases (S1-10); README.md:25 ('all 148 tokens as plain CSS custom properties') vs 170 props / 148 records (verification-report.md:39 states it correctly)",
+      "criterion": "In-file prose accuracy",
+      "finding": "Three small prose inaccuracies: the badges family claims every pairing carries an icon/dot (the word-labels themselves are non-color cues, but the sentence is literally false for the third row); the buttons family prose repeats the 0.97 claim; README's '148 tokens as custom properties' elides the triad expansion.",
+      "recommendation": "Soften the badge sentence ('every status pairing pairs color with a label, icon, or dot'), fix counts as in S1-09/S1-10, and align README's wording with the 170-prop/148-record reality.",
+      "classification_suggestion": "normalized"
+    }
+  ],
+  "token_parity": {
+    "css_count": 170,
+    "json_count": 148,
+    "mismatches": [
+      {
+        "token": "font.sans",
+        "json_value": "IBM Plex Sans Arabic (fallbacks: IBM Plex Sans, Segoe UI, Noto Sans Arabic, system-ui)",
+        "css_value": "\"IBM Plex Sans Arabic\", \"IBM Plex Sans\", \"Segoe UI\", \"Noto Sans Arabic\", system-ui, -apple-system, sans-serif",
+        "kind": "representational — JSON prose omits -apple-system and the sans-serif generic; no visual divergence (typography.md:7 documents the full stack)",
+        "severity": "minor (S1-26)"
+      },
+      {
+        "token": "font.mono",
+        "json_value": "IBM Plex Mono (fallbacks: SFMono-Regular, Roboto Mono, Consolas)",
+        "css_value": "\"IBM Plex Mono\", \"SFMono-Regular\", \"Roboto Mono\", Consolas, monospace",
+        "kind": "representational — JSON prose omits the monospace generic",
+        "severity": "minor (S1-26)"
+      }
+    ],
+    "value_mismatches_after_var_resolution": 0,
+    "css_only": [],
+    "json_only": [],
+    "notes": "All 170 CSS custom properties map to the 148 JSON records (11 typography records expand to 33 size/line/weight props; 148 + 22 = 170 — the 'triads resolve' claim in verification-report.md:39 is reproduced). Classification tags drift on 6 records (S1-11). css_only is empty because triad sub-fields are covered by their parent records; a strict prop-level view would list the 22 line/weight sub-fields as record-covered, not orphaned."
+  },
+  "motion_matrix": [
+    {
+      "use": "press",
+      "required": "80ms",
+      "documented": "120ms ease-out, scale 0.97 — motion-interaction.md:11, button-system.md:28, component-contracts.md:14, evidence panel component-gallery.html:705",
+      "implemented": "120ms — design-tokens.css:184 (--motion-press); component-gallery.css:126 (.btn transition), design-tokens.css:240 (.press); computed-tokens.txt motionPress=120ms",
+      "verdict": "divergent"
+    },
+    {
+      "use": "fast (fades, border color)",
+      "required": "120ms",
+      "documented": "200ms — motion-interaction.md:12, evidence panel html:706; input-system.md:22 and component-contracts.md:25 still say 150ms (contradiction, S1-07)",
+      "implemented": "200ms — design-tokens.css:185 (--motion-fast); component-gallery.css:191 (input border), :260 (chip)",
+      "verdict": "divergent"
+    },
+    {
+      "use": "normal (thumbs, snackbar, nav color)",
+      "required": "200ms",
+      "documented": "300ms 'motion.base' — motion-interaction.md:13, evidence panel html:707",
+      "implemented": "300ms — design-tokens.css:186; component-gallery.css:292 (segctl thumb), :300 (segment color), :448 (navpill); computed-tokens.txt motionBase=300ms",
+      "verdict": "divergent"
+    },
+    {
+      "use": "sheet-in",
+      "required": "240ms",
+      "documented": "340ms cubic-bezier(.16,1,.3,1) — motion-interaction.md:14, overlay-system.md:16, component-contracts.md:89, evidence panel html:708",
+      "implemented": "none — .sheet (component-gallery.css:469-477) has no transition/animation; component-gallery.js:181-188 toggles hidden only; --motion-sheet never consumed; computed-structure.txt sheetTransition 'all' is the CSS initial value (0s duration)",
+      "verdict": "divergent + claimed-not-implemented"
+    },
+    {
+      "use": "sheet-out",
+      "required": "180ms",
+      "documented": "340ms down ('Exits reverse ... sheet 340ms down') — motion-interaction.md:34",
+      "implemented": "none — overlayClose() sets hidden=true instantly (component-gallery.js:171-177)",
+      "verdict": "divergent + claimed-not-implemented"
+    },
+    {
+      "use": "dialog-in",
+      "required": "160ms",
+      "documented": "200ms scaleIn 0.95→1 + fade — overlay-system.md:24, motion-interaction.md:34, component-contracts.md:89",
+      "implemented": "none — .dialog (component-gallery.css:503-509) has no motion; scaleIn keyframes defined (design-tokens.css:296) but unused",
+      "verdict": "divergent + claimed-not-implemented"
+    },
+    {
+      "use": "dialog-out",
+      "required": "120ms",
+      "documented": "200ms fade+scale — motion-interaction.md:34",
+      "implemented": "none",
+      "verdict": "divergent + claimed-not-implemented"
+    },
+    {
+      "use": "scrim",
+      "required": "200ms",
+      "documented": "200ms fade — motion-interaction.md:12,34 ('Scrim fades 200ms'), overlay-system.md:16",
+      "implemented": "none — .scrim (component-gallery.css:464-468) has no transition; behavior-sheet-open.txt shows instant appearance; no dedicated scrim-duration token exists",
+      "verdict": "claimed-not-implemented (documented value matches the required 200ms, but the fade never runs)"
+    },
+    {
+      "use": "snackbar-in",
+      "required": "— (not in required system)",
+      "documented": "300ms slide+fade — motion-interaction.md:34, overlay-system.md:36",
+      "implemented": "none — .snackbar (component-gallery.css:518-524) has no animation; snackbarIn keyframes defined (design-tokens.css:297) but unused",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "snackbar-out",
+      "required": "— (not in required system)",
+      "documented": "300ms down+fade + 250ms exit delay — motion-interaction.md:34, overlay-system.md:36, design-tokens.json:1137",
+      "implemented": "none — fireSnackbar hides instantly at 5000ms (component-gallery.js:231), no exit delay",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "menu open/close",
+      "required": "— (not in required system)",
+      "documented": "200ms fade/scale; closes on outside touch or Escape — overlay-system.md:28",
+      "implemented": "none — .menu (component-gallery.css:226-229) has no transition; Escape and outside-click do not close it (component-gallery.js:207-220, S1-21)",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "skeleton pulse",
+      "required": "— (not in required system)",
+      "documented": "1.5s infinite — motion-interaction.md:15, component-states.md:39",
+      "implemented": "1.5s — component-gallery.css:552 (animation: skeleton var(--motion-skeleton)); kills correctly under both reduced-motion modes",
+      "verdict": "pass"
+    },
+    {
+      "use": "snackbar hold",
+      "required": "— (not in required system)",
+      "documented": "5000ms auto-dismiss — motion-interaction.md:16, overlay-system.md:36",
+      "implemented": "5000ms — component-gallery.js:231 (raw value; --snackbar-duration token unconsumed); behavior-snackbar.txt + capture 10 confirm",
+      "verdict": "pass (value; token not consumed)"
+    },
+    {
+      "use": "segmented thumb / nav color / chip tint",
+      "required": "— (maps to 'normal' 200ms under the required system)",
+      "documented": "300ms / 300ms / 200ms — component-contracts.md:47, motion-interaction.md:13,32",
+      "implemented": "300ms / 300ms / 200ms — component-gallery.css:292, :448, :260",
+      "verdict": "pass vs package docs (thumb/nav 300ms diverges from required normal=200ms)"
+    },
+    {
+      "use": "sheet height snap",
+      "required": "— (not in required system)",
+      "documented": "320ms — overlay-system.md:16 (no token; source BottomSheet.jsx:150 'height .32s')",
+      "implemented": "none — no height animation in the gallery",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "ghost-card collapse / row removal",
+      "required": "— (not in required system)",
+      "documented": "300ms via motion.base — motion-interaction.md:13; component-contracts.md:67 (ghost-out)",
+      "implemented": "none — ghostOut keyframes defined (design-tokens.css:300) but unused; no remove-animation anywhere in the gallery",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "underline segmented slide",
+      "required": "— (not in required system)",
+      "documented": "'underline slides same' 300ms — component-contracts.md:47",
+      "implemented": "none — .segctl-lines buttons have no transition (component-gallery.css:304-311)",
+      "verdict": "claimed-not-implemented"
+    },
+    {
+      "use": "reduced-motion kill-switch",
+      "required": "— (not in required system)",
+      "documented": "media + manual toggle, 0.01ms — motion-interaction.md:42, accessibility.md:66",
+      "implemented": "implemented — design-tokens.css:275-290 (both mechanisms); verification capture 07 + coverage-matrix cross_cutting confirm",
+      "verdict": "pass"
+    }
+  ],
+  "summary": {
+    "blockers": 2,
+    "majors": 3,
+    "minors": 21,
+    "notes": 9,
+    "top_5": [
+      "S1-01 (blocker): the REQUIRED TIMING SYSTEM is implemented nowhere — press 120 (req 80), fast 200 (req 120), normal/base 300 (req 200), sheet 340 single token (req 240/180), no dialog-in/out or scrim tokens; every running transition uses the divergent values.",
+      "S1-02 (blocker): all documented overlay motion (scrim fade, sheet slide, dialog scaleIn, snackbar slide, menu fade, ghost-out) is claimed in six documents + the evidence panel but never implemented — .sheet/.dialog/.scrim/.snackbar have no transitions, six keyframes and --motion-sheet are dead code, overlays pop instantly.",
+      "S1-04 (major): coverage-matrix.json and component-states.md mark at least eight nonexistent states as ✅/verified (destructive dialog 'verified-both', search loading spinner, row error variant, snackbar error variant, sheet expanded snap, large-title subheader, 'five destinations' vs 4, '5-segment control' vs 3).",
+      "S1-03 (major): motion-interaction.md/overlay-system.md claim sheet drag is 'preserved exactly' and demonstrated live, contradicting both the code and the package's own self-critique.md:18.",
+      "S1-05 (major): the gallery's four header controls (viewport/direction/text/motion) use .seg/.seg-sm classes that exist in no stylesheet — the controls render unstyled; plus dead classes has-lead/sheet-close."
+    ],
+    "parity_headline": "Token value parity PASS: 170 CSS properties ↔ 148 JSON records, 0 value mismatches (2 font records representational); 33 claimed contrast ratios recomputed — 32 exact, 1 wrong (8.39 → 8.55, accessibility.md:15); 29-file contract PASS; prohibited-value scan clean (single 10px chrome font hit).",
+    "unresolved_for_coordinator": [
+      "S1-31/S1-02/S1-01: whether overlay motion should be implemented at the required durations or the claims retracted — the repair decision that unblocks three documents, six dead keyframes, and the evidence panel.",
+      "S1-32: header veil blur vs the strict glassmorphism prohibition — ratify the documented single-veil exception (source-inherited) or go opaque.",
+      "S1-33: destructive fill step — keep inherited negative.500 #C9322A or move to required 'main' #B42318 for filled destructive actions.",
+      "S1-08/S1-09/S1-10: pick the canonical values for nav icon size (20 vs 24), icon counts (34/24 vs 26), and press scale (0.97 vs 0.95) before editing docs vs code."
+    ]
+  }
+}

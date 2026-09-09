@@ -1,0 +1,536 @@
+{
+  "meta": {
+    "script": "sub4-visual-critique.py",
+    "method": "WCAG 2.1 relative luminance",
+    "pairs": 51
+  },
+  "pairs": [
+    {
+      "pair": "white / primary.700 (white / #964E33)",
+      "ratio": 6.11,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "primary button, chip selected, seg thumb, FAB, iconbtn-primary, count pill on"
+    },
+    {
+      "pair": "white / primary.800 (white / #783B28)",
+      "ratio": 8.55,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "primary button pressed + loading state"
+    },
+    {
+      "pair": "white / accent.600 (white / #057B7C)",
+      "ratio": 5.08,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "secondary button"
+    },
+    {
+      "pair": "white / accent.700 (white / #045E5F)",
+      "ratio": 7.58,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "secondary button pressed"
+    },
+    {
+      "pair": "ink / surface (ink / #FFFFFF)",
+      "ratio": 16.64,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "outline button text, KPI numbers, row titles"
+    },
+    {
+      "pair": "accent.600 / canvas (accent.600 / #FAF9F5)",
+      "ratio": 4.83,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "ghost button text (btn sits on canvas .screen)"
+    },
+    {
+      "pair": "white / negative.500 (white / #C9322A)",
+      "ratio": 5.29,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "destructive button"
+    },
+    {
+      "pair": "white / negative.600 (white / #B42318)",
+      "ratio": 6.57,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "destructive pressed"
+    },
+    {
+      "pair": "white / positive.500 (white / #2E7D57)",
+      "ratio": 5.02,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "Accept (positive filled quick-action)"
+    },
+    {
+      "pair": "white / positive.600 (white / #256A48)",
+      "ratio": 6.49,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "positive quick-action pressed"
+    },
+    {
+      "pair": "white / operational.600 (white / #3E5C76)",
+      "ratio": 7.01,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "Transfer (operational filled quick-action)"
+    },
+    {
+      "pair": "white / operational.700 (white / #2F485B)",
+      "ratio": 9.55,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "operational quick-action pressed"
+    },
+    {
+      "pair": "white / disabled (white / #B7B2A6)",
+      "ratio": 2.11,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": false,
+      "where": "disabled button (WCAG 1.4.3 exempts inactive)"
+    },
+    {
+      "pair": "positive.600 / positive.50 (positive.600 / #E4F2EA)",
+      "ratio": 5.62,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "btn-complete label, tag-positive, row tile icon t-pos"
+    },
+    {
+      "pair": "ink-secondary / surface (ink-secondary / #FFFFFF)",
+      "ratio": 5.39,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "chip unselected, inactive nav label, search lead icon"
+    },
+    {
+      "pair": "ink-secondary / canvas (ink-secondary / #FAF9F5)",
+      "ratio": 5.12,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "helper text, row-sub on alt rows, demo-space caption"
+    },
+    {
+      "pair": "ink-secondary / recessed (ink-secondary / #F0EEE6)",
+      "ratio": 4.64,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "tag-closed, count pill, state-tags, kpi-label on featured card, empty-tile icon"
+    },
+    {
+      "pair": "gold.700 / gold.50 (gold.700 / #F6ECCF)",
+      "ratio": 6.8,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "tag-progress, tag-gold, row tile t-gold"
+    },
+    {
+      "pair": "accent.600 / accent.50 (accent.600 / #E3F5F5)",
+      "ratio": 4.51,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "tag-ready, menu option selected"
+    },
+    {
+      "pair": "positive.600 / positive.50 (positive.600 / #E4F2EA)",
+      "ratio": 5.62,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "tag-positive / tile t-pos icon (dup verified)"
+    },
+    {
+      "pair": "negative.600 / negative.50 (negative.600 / #FBE7E6)",
+      "ratio": 5.53,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "tag-negative, tile t-neg, error tile icon, sheet-row-danger pressed bg"
+    },
+    {
+      "pair": "operational.600 / operational.50 (operational.600 / #E8EEF3)",
+      "ratio": 5.99,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "tag-operational, tile t-op"
+    },
+    {
+      "pair": "positive.600 / surface (positive.600 / #FFFFFF)",
+      "ratio": 6.49,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount +1,200 on white row; kpi-change"
+    },
+    {
+      "pair": "positive.600 / canvas (positive.600 / #FAF9F5)",
+      "ratio": 6.16,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount +1,200 on ALT (canvas) row"
+    },
+    {
+      "pair": "negative.600 / surface (negative.600 / #FFFFFF)",
+      "ratio": 6.57,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount -450 on white row; error-msg text"
+    },
+    {
+      "pair": "negative.600 / canvas (negative.600 / #FAF9F5)",
+      "ratio": 6.24,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount -450 on ALT row"
+    },
+    {
+      "pair": "operational.600 / surface (operational.600 / #FFFFFF)",
+      "ratio": 7.01,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount -300 on white row"
+    },
+    {
+      "pair": "operational.600 / canvas (operational.600 / #FAF9F5)",
+      "ratio": 6.65,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount -300 on ALT row"
+    },
+    {
+      "pair": "gold.700 / surface (gold.700 / #FFFFFF)",
+      "ratio": 8.01,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount +800 on white row (gold-on-tint step used on white)"
+    },
+    {
+      "pair": "gold.700 / canvas (gold.700 / #FAF9F5)",
+      "ratio": 7.61,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "row amount +800 on ALT row"
+    },
+    {
+      "pair": "white / ink (white / #1F1E1D)",
+      "ratio": 16.64,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "snackbar message"
+    },
+    {
+      "pair": "primary.200 / ink (primary.200 / #1F1E1D)",
+      "ratio": 10.68,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": true,
+      "where": "snackbar Undo action"
+    },
+    {
+      "pair": "disabled / recessed (disabled / #F0EEE6)",
+      "ratio": 1.82,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": false,
+      "where": "disabled chip text + disabled input value"
+    },
+    {
+      "pair": "disabled / surface (disabled / #FFFFFF)",
+      "ratio": 2.11,
+      "role": "text",
+      "threshold": 4.5,
+      "pass": false,
+      "where": "input placeholder"
+    },
+    {
+      "pair": "accent.500 / surface (accent.500 / #FFFFFF)",
+      "ratio": 3.24,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "input focus border (1px) — the ONLY focus cue on real inputs"
+    },
+    {
+      "pair": "accent.600 / surface (accent.600 / #FFFFFF)",
+      "ratio": 5.08,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "focus ring on surface"
+    },
+    {
+      "pair": "accent.600 / canvas (accent.600 / #FAF9F5)",
+      "ratio": 4.83,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "focus ring on canvas (buttons sit on canvas .screen)"
+    },
+    {
+      "pair": "accent.600 / recessed (accent.600 / #F0EEE6)",
+      "ratio": 4.38,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "focus ring on recessed (seg track, snackbar? no — iconbtn-quiet)"
+    },
+    {
+      "pair": "accent.600 / ink (accent.600 / #1F1E1D)",
+      "ratio": 3.27,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "focus ring of snackbar-action against ink snackbar bg"
+    },
+    {
+      "pair": "accent.600 / primary.700 (accent.600 / #964E33)",
+      "ratio": 1.2,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "focus ring adjacent to primary fill (offset-gap geometry)"
+    },
+    {
+      "pair": "accent.600 / accent.600 (accent.600 / #057B7C)",
+      "ratio": 1.0,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "focus ring ON secondary button fill — 1:1 by definition"
+    },
+    {
+      "pair": "primary.100 / surface (primary.100 / #FFFFFF)",
+      "ratio": 1.24,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "nav active pill background vs white nav"
+    },
+    {
+      "pair": "primary.700 / primary.100 (primary.700 / #F4E4DB)",
+      "ratio": 4.94,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "active nav icon on pill; tile-chip-primary icon"
+    },
+    {
+      "pair": "positive.700 / positive.100 (positive.700 / #C9E6D5)",
+      "ratio": 6.38,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "tile-chip-positive icon"
+    },
+    {
+      "pair": "accent.500 / accent.50 (accent.500 / #E3F5F5)",
+      "ratio": 2.88,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "menu check icon (inline SVG stroke #079FA0) on selected row tint"
+    },
+    {
+      "pair": "primary.700 / recessed (primary.700 / #F0EEE6)",
+      "ratio": 5.26,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "segmented thumb vs ivory track"
+    },
+    {
+      "pair": "divider / surface (divider / #FFFFFF)",
+      "ratio": 1.47,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "chip/outline button borders, sheet handle"
+    },
+    {
+      "pair": "border-soft / surface (border-soft / #FFFFFF)",
+      "ratio": 1.25,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "input idle border (context, not focus)"
+    },
+    {
+      "pair": "primary.700 / surface (primary.700 / #FFFFFF)",
+      "ratio": 6.11,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "nav active label + seg underline vs white"
+    },
+    {
+      "pair": "positive.600 / surface (positive.600 / #FFFFFF)",
+      "ratio": 6.49,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": true,
+      "where": "btn-complete check icon on white"
+    },
+    {
+      "pair": "spinner-track / primary.800 (rgba(255,255,255,.35) over primary.800 / #783B28)",
+      "ratio": 2.44,
+      "role": "ui",
+      "threshold": 3.0,
+      "pass": false,
+      "where": "spinner ring rgba(255,255,255,.35) on loading fill"
+    }
+  ],
+  "failures": [
+    "white / disabled (white / #B7B2A6)",
+    "disabled / recessed (disabled / #F0EEE6)",
+    "disabled / surface (disabled / #FFFFFF)",
+    "accent.600 / primary.700 (accent.600 / #964E33)",
+    "accent.600 / accent.600 (accent.600 / #057B7C)",
+    "primary.100 / surface (primary.100 / #FFFFFF)",
+    "accent.500 / accent.50 (accent.500 / #E3F5F5)",
+    "divider / surface (divider / #FFFFFF)",
+    "border-soft / surface (border-soft / #FFFFFF)",
+    "spinner-track / primary.800 (rgba(255,255,255,.35) over primary.800 / #783B28)"
+  ],
+  "grayscale_luminance": {
+    "primary.700": 0.1217,
+    "primary.800": 0.0727,
+    "accent.600": 0.1565,
+    "accent.700": 0.0886,
+    "negative.500": 0.1487,
+    "positive.500": 0.1594,
+    "operational.600": 0.0999,
+    "disabled": 0.4466,
+    "accent.500": 0.2738,
+    "accent.50": 0.8823,
+    "operational.50": 0.8478,
+    "positive.50": 0.8594,
+    "gold.50": 0.8409,
+    "recessed": 0.8539,
+    "primary.100": 0.7983,
+    "canvas": 0.9467,
+    "surface": 1.0,
+    "ink": 0.0131,
+    "ink-secondary": 0.1447
+  },
+  "grayscale_confusability": [
+    {
+      "pair": "accent.600 vs operational.600",
+      "L_a": 0.1565,
+      "L_b": 0.0999,
+      "dL": 0.0566,
+      "ratio": 1.38
+    },
+    {
+      "pair": "accent.700 vs operational.600",
+      "L_a": 0.0886,
+      "L_b": 0.0999,
+      "dL": 0.0113,
+      "ratio": 1.08
+    },
+    {
+      "pair": "accent.50 vs operational.50",
+      "L_a": 0.8823,
+      "L_b": 0.8478,
+      "dL": 0.0345,
+      "ratio": 1.04
+    },
+    {
+      "pair": "primary.700 vs negative.500",
+      "L_a": 0.1217,
+      "L_b": 0.1487,
+      "dL": 0.027,
+      "ratio": 1.16
+    },
+    {
+      "pair": "positive.500 vs accent.500",
+      "L_a": 0.1594,
+      "L_b": 0.2738,
+      "dL": 0.1144,
+      "ratio": 1.55
+    },
+    {
+      "pair": "negative.500 vs primary.800",
+      "L_a": 0.1487,
+      "L_b": 0.0727,
+      "dL": 0.076,
+      "ratio": 1.62
+    },
+    {
+      "pair": "primary.100 vs recessed",
+      "L_a": 0.7983,
+      "L_b": 0.8539,
+      "dL": 0.0556,
+      "ratio": 1.07
+    },
+    {
+      "pair": "positive.50 vs recessed",
+      "L_a": 0.8594,
+      "L_b": 0.8539,
+      "dL": 0.0055,
+      "ratio": 1.01
+    },
+    {
+      "pair": "accent.500 vs positive.500",
+      "L_a": 0.2738,
+      "L_b": 0.1594,
+      "dL": 0.1144,
+      "ratio": 1.55
+    },
+    {
+      "pair": "accent.50 vs gold.50",
+      "L_a": 0.8823,
+      "L_b": 0.8409,
+      "dL": 0.0414,
+      "ratio": 1.05
+    },
+    {
+      "pair": "positive.500 vs negative.500",
+      "L_a": 0.1594,
+      "L_b": 0.1487,
+      "dL": 0.0107,
+      "ratio": 1.05
+    },
+    {
+      "pair": "primary.100 vs gold.50",
+      "L_a": 0.7983,
+      "L_b": 0.8409,
+      "dL": 0.0426,
+      "ratio": 1.05
+    }
+  ]
+}

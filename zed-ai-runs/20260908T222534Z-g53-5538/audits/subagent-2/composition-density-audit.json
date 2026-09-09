@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "task_id": "R4-b",
+    "agent": "Subagent 2 — Mobile Composition and Density Auditor",
+    "target": "/home/z/my-project/repos/Documents/zed-ai-runs/20260908T201936Z-g53-252a/visual-foundation-package/ (component-gallery.html/.css/.js + design-tokens.css + system docs)",
+    "date": "2026-09-09"
+  },
+  "methodology": [
+    "Static composition analysis of component-gallery.html (731 lines), component-gallery.css (620), component-gallery.js (317), design-tokens.css (300): white-space/overflow rules, padding/max-width/margin-auto centering, logical vs physical properties, safe-area usage, zebra/divider rules, grid min-content risks.",
+    "Cross-read of package docs (data-display-system.md, surface-system.md, responsive-geometry.md, content-guidelines.md, component-contracts.md, component-states.md, typography.md, navigation-shell.md, overlay-system.md, self-critique.md) to detect doc-vs-implementation mismatches.",
+    "Live geometry measurement via agent-browser headless CLI (read-only eval) on file:// gallery: document scrollWidth vs clientWidth at 320/360/390/430 x LTR/RTL; .feat-grid scrollWidth-clientWidth overflow; chip/button/row/topbar/nav heights; FAB vs bottomnav rects; sheet composition when open; RTL row trailing-edge rects; ancestor token resolution.",
+    "Text-scale simulation by root font-size override (16 / 20.8 / 32 px = 100 / 130 / 200%) with fresh-element measurement to bypass chip transition caching.",
+    "Evidence triangulation with provided captures: current-{ltr,rtl}-{320,360,390,430}.txt a11y trees, overflow-320-{ltr,rtl}.txt, computed-structure.txt (rowTitleWhiteSpace nowrap / ellipsis, textModes [normal,large]), computed-fonts.txt, computed-tokens.txt.",
+    "Composition precedent comparison against the read-only source pack: accounting-mockup.html and accounting-mobile-components.html (Two-Jars featured card sum relationship, chip row SOP §7.3, row truncate pattern, sheet/FAB/nav geometry)."
+  ],
+  "viewport_matrix": [
+    {"viewport": "320", "dir": "ltr", "overflow": false, "notes": "Page scrollWidth 320 == clientWidth 320 (no horizontal scroll). BUT featured KPI 2-tile grid internally overflows 56px (feat-grid scrollWidth 278 vs clientWidth 222) and is silently clipped by .screen{overflow:hidden} (component-gallery.css:90) — 'Free' tile partially cut off. Large-text mode: overflow 69px."},
+    {"viewport": "320", "dir": "rtl", "overflow": false, "notes": "Same as LTR: no page overflow (captures overflow-320-rtl.txt); featured grid clipped 56px. RTL row order verified correct: leading tile at inline-start (rect 227-271), amount at logical trailing edge (rect 49-103), dir=ltr + unicode-bidi:isolate on amounts/dates."},
+    {"viewport": "360", "dir": "ltr", "overflow": false, "notes": "No page overflow; featured grid overflows 16px (clipped) — second tile loses 16px of content."},
+    {"viewport": "360", "dir": "rtl", "overflow": false, "notes": "Identical measurements to LTR 360 (overflow 16px clipped); a11y tree parity with LTR (current-rtl-360.txt)."},
+    {"viewport": "390", "dir": "ltr", "overflow": false, "notes": "Featured grid fits exactly (tiles 140px vs 133px min-content — 7px headroom only). At simulated 130% text: 47px overflow; at 200%: 189px overflow and kpi-hero '1,250,000' scrollWidth 303 > clientWidth 292."},
+    {"viewport": "390", "dir": "rtl", "overflow": false, "notes": "Same fit as LTR 390; segmented thumb RTL placement handled in JS (component-gallery.js:89-93)."},
+    {"viewport": "430", "dir": "ltr", "overflow": false, "notes": "Featured tiles 160px; fits with headroom. Bottom nav 4 items x 64 min = 256 < 398 content width."},
+    {"viewport": "430", "dir": "rtl", "overflow": false, "notes": "Same as LTR 430; no clipping; RTL logical properties used throughout (inset-inline-end, padding-inline-start, margin-inline-start: auto for menu check)."}
+  ],
+  "findings": [
+    {
+      "id": "S2-01",
+      "area": "filters",
+      "severity": "blocker",
+      "evidence": "component-gallery.html:247-255 'Filters — tap to select one' + .chip-row with All/Recent/Open/Closed/Archived; component-gallery.css:249-266 .chip-row{overflow-x:auto} .chip{min-height:36px}; component-gallery.js:69-77 data-chip-group single-select; empty state 'Clear filters' (html:548, js:296-306) resets the chips; capture current-ltr-320.txt:132-140 'Filters — tap to select one' + buttons All/Recent/Open/Closed/Archived.",
+      "criterion": "Repair C — the package must NOT use a permanent row of filter chips as the filter UI; one compact Filter control + Bottom Sheet (scrim, handle, title, grouped choices, Apply/Reset, staged selections, Cancel, drag-to-dismiss, safe-area, 320px+large text); after applying only the active summary/count shows. Source root: SOP_VISUAL_ONLY.md:87 + accounting-sop.source.md:209-212 (chips as filter buttons, inherited).",
+      "finding": "The chips family IS a permanent, horizontally scrollable filter-chip row acting as the filter UI — exactly what repair C forbids. No compact Filter control exists, no filter bottom sheet (the only sheet is 'Add record'), no grouped choices (status/date range/type/sort), no Apply/Reset, no staged selections, no active-count indicator, no applied-filter summary in the parent. The gallery even wires the empty-state 'Clear filters' action to the chip row, reinforcing the pattern. Status labels (In progress/Ready/Closed/Received/Sent/Moved/Returned) are correctly kept as static tags separate from the filter UI (html:259-267), but the filter interaction itself remains chip-first.",
+      "recommendation": "Replace the chip-row frame with a Filter control: 48px (var(--control-height)), radius 12, outline style, 20px #i-filter icon + 'Filter' label + optional count pill (reuse .count, accent pair). It opens a bottom sheet built on the existing .sheet scaffold: 36x5 handle, title 'Filter', grouped 48px sheet-rows (Status / Date range / Type / Sort) with the selected accent pair + 20px check; a footer with Reset (btn-ghost) + Apply (btn-primary, full width) that stays above the keyboard; Cancel via scrim/Escape without committing. Stage selections in JS state; commit only on Apply; afterwards the parent shows only an active-count/summary chip (e.g. '3 filters active'), not all options. Keep the tags row as a separate, clearly non-interactive status demo.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S2-02",
+      "area": "metrics",
+      "severity": "blocker",
+      "evidence": "component-gallery.html:334-359 — card 1 'Total balance' 850,400; featured card 'Available total' hero 1,250,000 with tiles Reserved 620,000 + Free 230,400 (620,000+230,400 = 850,400 ≠ 1,250,000); capture current-ltr-320.txt:190-204 same numbers. Source precedent: accounting-mobile-components.html:246-289 and accounting-mockup.html:109-153 — hero 850,400 = 620,000 + 230,400 (genuine sum) plus an info footnote row. No progress/relationship bar exists anywhere in the cards family (no 'bar'/'progress' composition in component-gallery.css/html).",
+      "criterion": "Repair D — summary metric composition = total + meaningful progress/relationship bar + two related supporting values that visibly belong to the total (sum relationship); 'Primary Value' treatment when no genuine comparison.",
+      "finding": "The featured KPI card's numbers do NOT form a sum relationship: the hero (1,250,000) does not equal Reserved+Free (850,400), so the two tiles do not visibly belong to the total. The package inherited the source's Two-Jars tiles (which summed to 850,400) but re-labeled the hero with the standalone featured-card demo value 1,250,000 from mobile-components.html:168, breaking the source's genuine relationship. It also placed a competing 'Total balance 850,400' card immediately above, creating two unrelated 'totals' with no grouping logic. No progress/relationship bar is present anywhere — the required summary-metric composition is missing entirely. (Positive: the featured card itself avoids white-card-in-white-card by using the recessed ivory fill with white inner tiles — the source-accepted treatment.)",
+      "recommendation": "Restore the source's coherent numbers: hero 850,400 with tiles 620,000 + 230,400 (or recompute all three consistently). Insert a relationship bar between hero and tiles: 8px-high (2x4px grid) full-width track in --color-recessed with fill segment(s) in --color-primary-500 (Reserved share ≈ 73%) and --color-positive-200, radius full; a caption line '620,000 reserved · 230,400 free' in caption 12px ink-secondary. Optionally restore the source's conditional supporting footnote (12px caption + 16px info icon, centered, margin-top 12). If the adjacent plain KPI card stays, make its relationship explicit (e.g. change vs period) instead of a second total.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S2-03",
+      "area": "metrics",
+      "severity": "blocker",
+      "evidence": "agent-browser eval at 320: .feat-grid scrollWidth 278 vs clientWidth 222 → 56px overflow (clipped by .screen{overflow:hidden}, component-gallery.css:90); at 360: 16px; at 390/430: 0 (tiles 140/160px, min-content measured 133.156px = 32px padding + 101px mono numeral). Large-text at 320: 69px. Simulated 130% (20.8px root) at 390: 47px; 200% (32px): 189px and .kpi-hero scrollWidth 303 > 292. responsive-geometry.md:13 'Two-tile grids calc((100vw − 2×16 − 12)/2) — 138px tiles at 320 … verified no wrap' and :22 'fits with 24px KPI numerals truncating gracefully via tnum end-alignment' — no truncation CSS exists on .tile-num (component-gallery.css:358) and the formula omits the featured card's own 16px padding (real full-bleed tile width would be 122px < 133px min-content).",
+      "criterion": "Repair D + general geometry — no unjustified empty space / content must fit at 320; H — usable at 320px + large text; no horizontal scroll or clipping for main content.",
+      "finding": "The featured KPI two-tile grid is clipped at the 320px accessibility floor (56px of the second tile cut off) and at 360px (16px), because grid-template-columns: 1fr 1fr (component-gallery.css:345) cannot shrink below the tiles' min-content width (mono 24px '620,000' + 2x16px padding = 133px), and .tile-num has no overflow strategy. The clipping worsens under large text (69px at 320) and under the repair-required 130%/200% text scales (47px / 189px at 390; the hero number itself overflows its card at 200%). The documented 'verified no wrap at 138px' claim is arithmetically wrong (it ignores the card's own padding) and is not implemented.",
+      "recommendation": "Make the grid shrink-safe: .feat-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr) } plus .tile { min-width: 0 } and .tile-num { overflow: hidden; text-overflow: ellipsis; min-width: 0 } (or clamp the numeral: font-size: clamp(1.125rem, 4.6cqw, 1.5rem)). Below ~360px (or via container query on the card), collapse to a single column with 12px row gap so both tiles stay fully visible; re-verify at 320/360/390/430 x LTR/RTL x 100/130/200%. Correct responsive-geometry.md's two-tile formula to account for the featured card's 16px padding.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S2-04",
+      "area": "rows",
+      "severity": "major",
+      "evidence": "component-gallery.css:384-388 .row-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }; computed-structure.txt rowTitleWhiteSpace 'nowrap', rowTitleTextOverflow 'ellipsis'; demo row label itself says 'A deliberately long title that truncates gracefully instead of breaking' (component-gallery.html:393); data-display-system.md:10 and content-guidelines.md:23 codify one-line truncation ('line-clamp preferred' — measured webkitLineClamp 'none', never implemented).",
+      "criterion": "Repair E — text column must shrink AND WRAP safely for Arabic without pushing the value off-screen (no truncation-only).",
+      "finding": "Row titles are truncation-ONLY: white-space: nowrap + ellipsis means long Arabic labels can never wrap, and the docs' promised line-clamp fallback does not exist in code. This fails repair E's wrap requirement and contradicts the package's own 'line-clamp preferred' guidance. (Row-main min-width:0 + flex 1 1 auto and the amount's flex:none are correct, so a wrap fix will not push the value off-screen.)",
+      "recommendation": "Switch .row-title to wrapping with an optional ceiling: { white-space: normal; overflow-wrap: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; } — rows already grow (measured 76→148px at 200% text, min-height 56 honored). Keep .row-main { min-width: 0 } so the trailing amount stays pinned to the logical end; update data-display-system.md/component-contracts.md to match the implemented behavior.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S2-05",
+      "area": "arabic",
+      "severity": "major",
+      "evidence": "component-gallery.html:381-414 — rows contain exactly one short Arabic title (html:401 'تحويل داخلي', ~12 chars); no long Arabic label, no wrapped qualifier line (row-sub is only a date), and no trailing action/chevron in any row (grep for chevron/action inside #rows: none); a11y captures (current-ltr-320.txt:224-242) confirm the same four rows.",
+      "criterion": "Repair E — gallery must demonstrate short AND long Arabic labels, wrapped qualifiers, numeric values, dates, and optional trailing actions. Repair H — long Arabic labels verified.",
+      "finding": "Arabic and trailing-action coverage in the rows family is minimal: only one short Arabic title; no long Arabic label to prove wrap behavior (which is impossible anyway per S2-04), no wrapped qualifier second line, and no row with a trailing chevron/action — so the repair's key stress cases are undemonstrated.",
+      "recommendation": "Add demo rows: (1) long Arabic title, e.g. 'تحويل راتب شهري مع علاوة بدل مواصلات وخصم التأمين' to demonstrate the wrap path from S2-04; (2) a wrapped qualifier under the title, e.g. 'الدفعة الثانية من أصل أربع دفعات' in caption 12px ink-secondary; (3) one row with a trailing chevron (#i-chevron-right, .mirror in RTL) and/or a 44px trailing icon action, showing the amount/action coexistence at the logical end. Keep all amounts bidi-isolated (dir=ltr + unicode-bidi:isolate).",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S2-06",
+      "area": "text-scale",
+      "severity": "major",
+      "evidence": "component-gallery.html:75-81 Text control offers only 'A' (normal) / 'A+' (large); component-gallery.css:11 html[data-text-size=large]{font-size:17px} ≈ +6%; computed-structure.txt textModes [\"normal\",\"large\"]; responsive-geometry.md:30-34 documents only 16→17px; design-tokens.css:210 .font-large{font-size:17px}.",
+      "criterion": "Repair H — text scale support at 100/130/200%.",
+      "finding": "Only two text modes ship: 100% and ~106% (17px). The required 130% and 200% modes do not exist in the gallery UI or tokens, so the repair's large-text verification cannot be performed with the package as-is. (Measured positive: rem tokens genuinely scale — fresh chip min-height 36→72px and buttons 48→96px at 32px root; rows 76→148px; no page-level horizontal scroll at 130/200%.)",
+      "recommendation": "Extend the Text segment control to three states (A / A+ / A++) mapping to data-text-size normal/130/200 with root font-size 16 / 20.8 / 32px (all rem tokens then scale automatically, verified). Fix S2-03 first so 130/200% do not clip the featured tiles; verify chip hit areas and sheet actions at 200%; document the three modes in responsive-geometry.md replacing the '+6%' language.",
+      "classification_suggestion": "proposed"
+    },
+    {
+      "id": "S2-07",
+      "area": "surfaces",
+      "severity": "major",
+      "evidence": "grep 'safe-area' in component-gallery.css/html → 0 matches (utilities .safe-area-top/.safe-area-bottom exist unused in design-tokens.css:247-248); computed paddings (agent-browser eval): .bottomnav '8px 12px 16px', .actionbar '12px 16px', .sheet-body '0px 20px 32px'; meta viewport = 'width=device-width, initial-scale=1' (component-gallery.html:5) — no viewport-fit=cover; yet responsive-geometry.md:26 claims 'applied on five surfaces … Viewports use viewport-fit=cover so insets are honored'; navigation-shell.md:17 and spacing-radius-elevation.md:29 also claim '+ safe-area'.",
+      "criterion": "Repair C (sheet safe-area) + H (safe area) + general geometry — safe-area handling in sheet/actionbar/nav/FAB.",
+      "finding": "Safe-area handling is absent from the implementation while three docs claim it is applied on five surfaces. Bottom nav, action bar, sheet body and FAB use fixed paddings/offsets with no env(safe-area-inset-*), and the viewport meta lacks viewport-fit=cover, so insets would never be honored even on notched devices. This is a doc-vs-implementation contradiction, not just a gap.",
+      "recommendation": "Add viewport-fit=cover to the meta tag; apply env() to the four bottom surfaces: .bottomnav { padding-bottom: calc(16px + env(safe-area-inset-bottom)) }, .actionbar { padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) }, .sheet-body { padding: 0 20px calc(32px + env(safe-area-inset-bottom)) }, .fab { inset-block-end: calc(var(--fab-offset) + env(safe-area-inset-bottom)) }, and .topbar { padding-top: calc(8px + env(safe-area-inset-top)) } for the top bar; keep the base values in tokens as documented.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S2-08",
+      "area": "filters",
+      "severity": "major",
+      "evidence": "component-gallery.js contains no pointer/touch/drag handlers (grep pointerdown|touchstart|drag in gallery js: 0); sheet opens/closes by hidden toggle only (js:181-205); self-critique.md:18 'Sheet drag is specified but not interactive in the gallery'; overlay-system.md:17 and motion-interaction.md:38 document the full contract (drag up −50 expands, down +130 closes, −44 clamp, snaps 84/94vh, 340ms suppressed/restored transition); component-gallery.css:474 .sheet { max-height: 84% } with no 94vh expanded snap; measured open sheet: 286x347, handle 36x5, rows 48px, 0 Apply/Reset buttons.",
+      "criterion": "Repair C — filter sheet must support drag-to-dismiss; contract fidelity for sheet snaps.",
+      "finding": "The sheet has no drag-to-dismiss at all (admitted in self-critique.md:18) and no expanded 94vh snap state, so the drag-dismiss requirement of repair C cannot be met by the current overlay. The existing scaffold (scrim, focus trap + restore, Escape, 48px rows, handle geometry) is otherwise sound and reusable.",
+      "recommendation": "Implement pointer-event drag on the handle row: pointerdown → setPointerCapture, track dy; translateY follows the finger with the 340ms transition suppressed; release: dy > +130px → dismiss (scrim fade 200ms), dy < −50px → expand to 94vh snap, otherwise settle to 84vh; clamp upward travel at −44px when collapsed; restore transition on release (300ms). Reuse tokens --motion-sheet, --z-scrim/--z-overlay. Wire this into the new filter sheet (S2-01) and demo it live.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S2-09",
+      "area": "other",
+      "severity": "major",
+      "evidence": "agent-browser eval: FAB rect top 4504.2 vs .bottomnav top 4505.2 — the 56px FAB covers the nav's upper ~55px (FAB bottom = nav bottom − 20); component-gallery.css:424-431 .fab { position: absolute; inset-block-end: 20px } anchored inside .nav-demo-wrap which contains demo-space + bottomnav (html:442-463); token --fab-offset: 5rem (80px) defined in design-tokens.css:165 (computed-tokens.txt confirms) but unused anywhere; navigation-shell.md:30 and component-contracts.md:84 specify '80px above the nav'.",
+      "criterion": "General geometry / navigation-shell contract — FAB 56px, 80px above nav, end-anchored; one-hand reach.",
+      "finding": "In the navigation demo the FAB is anchored 20px above the bottom of a container that includes the bottom nav, so the FAB visually sits ON the nav (overlapping its top 55px, above the labels) instead of floating 80px above it. The documented geometry (80px + safe-area, token --fab-offset) is neither used nor demonstrated; the demo misrepresents the chrome relationship the contract defines.",
+      "recommendation": "Restructure the demo: wrap .demo-space + FAB in a relative container that ends above the nav (FAB inset-block-end: calc(var(--fab-offset) - 56px + 20px) or simply anchor the FAB to the demo-space block: inset-block-end: 20px relative to the space, so it floats above the nav band); use var(--fab-offset) in production CSS with env(safe-area-inset-bottom) added (S2-07). Also anchor the FAB to the phone frame edge (16px from the frame, not 16px inside an already 16px-padded screen) to avoid a double inset in production.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S2-10",
+      "area": "touch",
+      "severity": "major",
+      "evidence": "Measured .chip getBoundingClientRect().height = 36 (agent-browser eval at 320); component-gallery.css:255 .chip { min-height: var(--control-height-compact) } (2.25rem = 36px) with no hit-area extension; .chip-row padding-block: 4px (css:251) pads the CONTAINER, not the button; data-display-system.md:29 'Hit area padded to 44px' and component-contracts.md:32 '44px hit area' — claims not implemented.",
+      "criterion": "General geometry — chips 36 visual / 44 hit; touch ≥ 44.",
+      "finding": "Chip hit area equals the 36px visual box (the container's 4px block padding does not enlarge the tappable button), violating the 44px minimum that both the tokens (--touch-target) and two docs explicitly claim. Every other interactive control measured (buttons 48, iconbtn 44, sheet rows 48, menu options 44, nav items 48+, snackbar action 44) meets the floor — chips are the only offender.",
+      "recommendation": "Give chips a 44px hit box while keeping the 36px visual: .chip { min-height: 44px; padding-block: 4px; background-clip: padding-box } or add a ::before { position:absolute; inset:-4px 0 } overlay within a position:relative chip (row already reserves 4px block padding). If chips survive only as non-interactive choice labels inside the filter sheet's 48px rows (S2-01), the gap dissolves — but the doc claim must then be updated to match reality.",
+      "classification_suggestion": "corrected"
+    },
+    {
+      "id": "S2-11",
+      "area": "metrics",
+      "severity": "minor",
+      "evidence": "Source featured card carries a conditional supporting line — accounting-mobile-components.html:282-287 (info icon + 12px caption 'لا تسحب من \"حق المحل\" إلا لإعادة تعبئة البضاعة'); package featured card (component-gallery.html:339-359) omits it; the adjacent plain card 'Total balance 850,400' (html:334-338) competes with the featured 'Available total 1,250,000' with no shared section header or stated relationship.",
+      "criterion": "Repair D — coherent grouping; supporting copy conditional; clear title + dominant number + only meaningful supporting values.",
+      "finding": "The KPI set lost the source's conditional supporting footnote and presents two unrelated totals adjacent to each other with no grouping logic (no section header, no change/relationship between card 1 and card 2). Grouping coherence across the KPI family is weakened.",
+      "recommendation": "Restore the conditional footnote row inside the featured card (caption 12px, ink-secondary, centered, 16px info icon, margin-top 12) and make the card pair's relationship explicit — e.g. card 1 becomes the period-change companion ('vs last week' change line already exists) or both sit under one 'Summary' group header; remove the competing duplicate-total semantics once S2-02's numbers are fixed.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S2-12",
+      "area": "scrolling",
+      "severity": "minor",
+      "evidence": "component-gallery.css:92 .frame-tall .screen { min-height: 560px } — the overlays frame renders 3 trigger buttons + ~450px of blank canvas until an overlay opens; scrolling ownership inside the sheet is otherwise correct (.sheet-body overflow-y auto, css:488; sheet head/handle pinned).",
+      "criterion": "Repair D — no unjustified empty space; content-driven height; scrolling belongs to content.",
+      "finding": "The overlays demo frame uses a fixed 560px min-height producing a large unjustified blank region at rest (not content-driven), although scrolling ownership within the sheet itself is correct.",
+      "recommendation": "Either label the reserved area ('sheet/dialog mount below' caption) so the blank is justified documentation, or size the frame to content and let the sheet render at 84vh of the viewport in production orientation. Keep .sheet-body as the scroller in the filter sheet with a sticky Apply footer.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S2-13",
+      "area": "surfaces",
+      "severity": "minor",
+      "evidence": "component-gallery.css:534-547 — .empty/.error-panel combine display:flex column gap:4px with per-child margin-bottom (.empty-tile 12px, .empty-body 16px); .kpi-change also uses margin-top: 8 (css:341) while .screen relies on gap:12 (css:89) — two spacing mechanisms coexist in the same compositions.",
+      "criterion": "General geometry — 4px grid with a single coherent spacing model per composition.",
+      "finding": "Empty/error compositions mix flex gap and per-child margins, and the cards family mixes margin-top on .kpi-change with gap on .screen — a double spacing system that risks drift from the 4px grid.",
+      "recommendation": "Standardize on one mechanism per family: gap-based for .empty (row-gap 4px with an 8px row-gap before the action via a wrapper, or margins only with gap:0); convert .kpi-change margin-top to the card's internal rhythm or keep margins everywhere consistently. Map every value to --space-1/2/3 tokens.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S2-14",
+      "area": "filters",
+      "severity": "minor",
+      "evidence": "component-gallery.html:548 empty-state 'Clear filters' button (data-chip-clear); component-gallery.js:296-306 resets [data-chip-group] chips to 'All' — hard-wired to the permanent chip row that repair C removes.",
+      "criterion": "Repair C — after applying, only the active filter summary/count shows; recovery flows target the filter state model.",
+      "finding": "The no-results recovery path is coupled to the chip-row filter model; once the Filter-control + sheet model lands, this action will silently break (it queries .chip inside [data-chip-group]).",
+      "recommendation": "Rewire data-chip-clear to the filter state model: clear staged AND applied filter state, update the Filter control's count indicator to zero/hidden, refresh the row demo, keep the confirmation snackbar. Rename the hook (data-filters-clear) to decouple it from chips.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S2-15",
+      "area": "rows",
+      "severity": "minor",
+      "evidence": "component-gallery.css:224 .sel-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap } — long select labels truncate with no wrap and no full-value affordance; data-display-system.md:39 promises 'overflow degrades to ellipsis + full value on tap' (no tap behavior implemented anywhere).",
+      "criterion": "Repair E — text columns shrink and wrap safely (demo families should show the same discipline); doc-implementation parity.",
+      "finding": "The select trigger truncates long option labels single-line with no wrap/clamp path and no full-value-on-tap affordance, contradicting the documented overflow contract.",
+      "recommendation": "Allow a 2-line clamp in the select trigger (min-height grows 48→~68) or show the full label in the open menu with the trigger capped at one line plus an ellipsis; implement the documented 'full value on tap' as opening the menu at the matching option.",
+      "classification_suggestion": "normalized"
+    },
+    {
+      "id": "S2-16",
+      "area": "text-scale",
+      "severity": "note",
+      "evidence": "agent-browser eval with fresh .chip element at 32px root: computed min-height 72px, font 26px (var-based tokens resolve correctly); .btn 3rem → 96px; rows 76 → 148px; topbar 60→112px; page scrollWidth stays 390 (no horizontal page overflow) at 130% and 200%; design-tokens.css:127-168 all rem.",
+      "criterion": "Repair H — rem scaling foundation for 100/130/200.",
+      "finding": "POSITIVE: the rem token architecture genuinely scales the entire system (the D-08 correction works); the missing 130/200 modes (S2-06) are a UI/mode gap, not a token-architecture gap. Caveat: .chip { transition: all 200ms } animates min-height/font-size, causing stale mid-transition measurements unless read fresh (likely why docs cite 36→38px).",
+      "recommendation": "Keep rem tokens; scope the chip transition to color/background only (transition: background-color var(--motion-fast), color var(--motion-fast)) to avoid layout-property animation artifacts.",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S2-17",
+      "area": "rtl",
+      "severity": "note",
+      "evidence": "agent-browser eval at dir=rtl: row leading tile rect 227-271 (inline start), amount rect 49-103 (logical trailing/left edge, flush to row's inner edge 33+16); .row-amt { text-align: end; unicode-bidi: isolate } (css:390-394); dir=ltr on amounts/dates (html:386-412); logical properties throughout (css:213-216 padding-inline, css:239 margin-inline-start:auto, css:425/519 inset-inline); a11y trees identical LTR vs RTL (captures current-rtl-320.txt vs current-ltr-320.txt).",
+      "criterion": "Repair E/H — numbers/dates/actions align to the logical trailing edge; bidi isolation; RTL correctness.",
+      "finding": "POSITIVE: rows are RTL-correct — leading tile at inline-start, mono amounts/dates at the logical trailing edge with bidi isolation, page content parity in both directions, chevron/menu mirroring handled via logical properties and [dir=rtl] .mirror.",
+      "recommendation": "Preserve this logical-property discipline in the filter sheet (Apply at inline-end, Reset at inline-start; counts and active summary must also use logical anchoring).",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S2-18",
+      "area": "scrolling",
+      "severity": "note",
+      "evidence": "agent-browser eval all 8 combos: documentElement.scrollWidth == clientWidth (320/360/390/430 x ltr/rtl); captures overflow-320-ltr.txt / overflow-320-rtl.txt '{\"scrollWidth\":320,\"clientWidth\":320}'.",
+      "criterion": "General geometry — no horizontal scroll for main content.",
+      "finding": "POSITIVE: no page-level horizontal scroll at any audited viewport or direction; the only horizontal scrollers are the chip row (being replaced by repair C) and the segmented underline row, both component-scoped.",
+      "recommendation": "After the C repair removes the chip row, the gallery will have no horizontally scrolling main-content UI, fully satisfying the rule; keep the underline segmented scroll as an accepted component-scoped pattern or fit its 3 items without scroll.",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S2-19",
+      "area": "arabic",
+      "severity": "note",
+      "evidence": "typography.md:10 + README.md:9 + verification-report.md:92 + self-critique.md:15 explicitly document the offline system-font fallback for IBM Plex Sans Arabic / Mono; computed-fonts.txt shows the declared stacks.",
+      "criterion": "Repair H — real Arabic font or explicitly documented local fallback.",
+      "finding": "POSITIVE: the Arabic font fallback is explicitly documented in four places (allowed by repair H). Rendering quality itself is a declared approximation, out of scope for composition.",
+      "recommendation": "Keep the documentation; when self-hosting becomes possible, bundle IBM Plex Sans Arabic + Mono with preload per typography.md.",
+      "classification_suggestion": "inherited"
+    },
+    {
+      "id": "S2-20",
+      "area": "rows",
+      "severity": "note",
+      "evidence": "component-gallery.css:372-373 .row + .row { border-top: 1px border-soft } AND .row.alt { background: canvas } (zebra); same dual pattern inherited from source (accounting-mobile-components.html:198 divide-y + :213 bg-background); divider rule 'border-top between siblings' is consistent across rowlist (css:372), group-list (css:366), menu (css:236), sheet-rows (css:494,498).",
+      "criterion": "Repair E — dividers follow ONE consistent rule; alternating background consistency.",
+      "finding": "The divider rule itself is consistent everywhere (1px border-soft above each subsequent sibling); zebra alternation is consistent (odd/even) and inherited from the source. Rows+zebra+dividers together is a double-encoded separation system but is the source language, not a repair violation.",
+      "recommendation": "Decide intentionally: if rows keep zebra, dividers may drop to border-soft at 50% alpha or be removed between zebra rows (source kept both — preserving is acceptable); document the single rule in data-display-system.md so downstream apps don't mix.",
+      "classification_suggestion": "inherited"
+    }
+  ],
+  "summary": {
+    "blockers": 3,
+    "majors": 7,
+    "minors": 5,
+    "notes": 5,
+    "top_5": [
+      "S2-01 (Repair C): the filter UI is still a permanent, horizontally scrollable chip row with single-select JS and a 'Clear filters' empty-state wired to it — no compact Filter control, no filter bottom sheet, no grouped choices/Apply/Reset/staged selections, no active-count summary.",
+      "S2-02 (Repair D): the featured KPI card's numbers break the sum relationship (hero 1,250,000 vs tiles 620,000+230,400=850,400) that the source pack's Two-Jars card had exactly (850,400=620,000+230,400), and no progress/relationship bar exists anywhere — the required summary-metric composition is missing.",
+      "S2-03 (Repair D/H): the featured 2-tile grid is silently clipped at 320px (56px) and 360px (16px) by .screen overflow:hidden, worsening to 69px in large text and 47/189px at simulated 130/200% scale — while responsive-geometry.md claims '138px tiles, verified no wrap' (formula omits the card's own padding; no truncation CSS exists on .tile-num).",
+      "S2-04/S2-05 (Repair E): row titles are truncation-ONLY (white-space:nowrap + ellipsis, no line-clamp despite docs preferring it) so long Arabic labels cannot wrap, and the gallery demonstrates no long Arabic label, no wrapped qualifier, and no trailing action/chevron in rows.",
+      "S2-06/S2-07/S2-08 (Repair H/C): only 100%/106% text modes ship (no 130/200); safe-area is absent from nav/actionbar/sheet/FAB and viewport-fit=cover is missing although responsive-geometry.md claims five safe-area surfaces; the sheet has no drag-to-dismiss and no 94vh snap (self-critique admits it), and the FAB demo overlaps the bottom nav instead of floating 80px above it (--fab-offset token unused)."
+    ]
+  }
+}
