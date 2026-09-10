@@ -1,0 +1,77 @@
+{
+  "artifact": "Claude Mobile Visual System Research and Interactive Prototype",
+  "generated": "2026-09-11",
+  "generated_at_utc": "2026-09-10T22:47:00Z",
+  "coordinator": "ZAI GLM (main agent) — one coordinator, five complementary subagents",
+  "target": "Official Claude mobile app by Anthropic (iOS and Android) — visual system and mobile UX only; phone UI as primary source of truth; no model-quality, pricing, or strategy analysis; no product implementation",
+  "disclaimer": "Independent research artifact. Not affiliated with, endorsed by, or produced by Anthropic. No proprietary logos or private assets. Sampled colors are approximations of rasterized official marketing captures and are never official tokens. The HTML prototype is a visual-research demonstration, not an official application.",
+
+  "deliverables": [
+    { "file": "claude-mobile-visual-research-report.md", "bytes": 21173, "description": "Comprehensive study of the official Claude mobile app — method, visual concept, color/typography/component/state/composition summaries, separated Chat and mobile Code-tab sections, limitations, prototype linkage." },
+    { "file": "claude-mobile-theme-color-token-inventory.md", "bytes": 12085, "description": "Role-based color inventory: official gray ramp, accent and semantic swatches, role-based surface table with foreground/surface relationships, evidence type and confidence per row, computed WCAG contrast notes, light/dark architecture, distribution rules." },
+    { "file": "claude-mobile-component-contracts.md", "bytes": 14625, "description": "18 UI component contracts (top bar, drawer, list rows, message pair, code block, artifact card, dark immersive surface, composer, attachment chip, button ladder, icon buttons, model pill, filter chips, badges, sheets/dialogs, state blocks, Code-tab components, settings rows) with anatomy, dimensions, variants, states, accessibility, motion, usage rules." },
+    { "file": "claude-mobile-typography-spacing-elevation-spec.md", "bytes": 6356, "description": "Font families (runtime honesty), labeled reconstruction type scale, measured layout metrics, spacing rhythm, radii, borders, shadows, surfaces and elevation model, keyboard/safe-area/orientation behavior." },
+    { "file": "claude-mobile-interaction-motion-accessibility-spec.md", "bytes": 9045, "description": "Full state matrix (17 rows × 8 states with signal channels), state-signal channel analysis, motion evidence verdict, focus/touch/keyboard behavior, loading/completion/error/retry patterns, documented vs UNVERIFIED accessibility." },
+    { "file": "claude-mobile-composition-patterns.md", "bytes": 6177, "description": "Phone-first composition rules: one-accent rule, filled-surface budget, structural bands, whitespace vs density, alignment grid, six-pattern library, identity/interaction/selection/status separation, message rhythm, cross-size behavior." },
+    { "file": "claude-mobile-source-register.md", "bytes": 11820, "description": "Consolidated source register: every inspected source with tier, URL, date, what it proves and does not prove, verification record, rejected secondary sources, access limitations." },
+    { "file": "claude-mobile-device-frame-validation.md", "bytes": 7516, "description": "Samsung S25/S25+/S25 Ultra official spec table, frame presets from physical-dimension ratios, inner CSS viewport presets (320/360/390/430), safe-area assumptions (UNVERIFIED-labeled), 11 harness checks, hardware-verification limits, validation protocol." },
+    { "file": "claude-mobile-visual-research-prototype.html", "bytes": 105791, "lines": 1496, "description": "Interactive, phone-first, fully offline research prototype: Samsung device-frame harness (S25/S25+/S25 Ultra + width presets + text scale + motion + theme + keyboard + safe-area checks), Chat surface with composer/messages/states, evidence-supported Code-tab surface, external QA harness and evidence panel, visible INFERRED/UNVERIFIED tags on inferred elements." },
+    { "file": "claude-mobile-prototype-qa.md", "bytes": 22376, "lines": 155, "description": "Independent QA review by Agent 4 (phase 2) of the built prototype — 12-point checklist (9 PASS / 2 PARTIAL / 0 boundary FAIL), device-preset results, width×text-scale matrices, interaction fidelity, token/contrast findings, 5 documented issues left unrepaired per protocol." },
+    { "file": "manifest.json", "description": "This manifest (self-referential; byte count therefore not stated)." }
+  ],
+
+  "agents": [
+    { "role": "Coordinator (main agent, ZAI GLM)", "task_ids": ["1", "4", "7", "8"], "responsibilities": "Setup, orchestration, evidence reconciliation, synthesis of the eight research/spec reports and the prototype brief, manifest, upload." },
+    { "role": "Agent 1 — Mobile Claude Interface Researcher", "task_id": "2-a", "responsibilities": "Interface and behavior research across official store listings, launch announcements, 20+ help-center articles, and Claude Code mobile documentation; screenshot URL register.", "note": "Completed in one session." },
+    { "role": "Agent 2 — Mobile Theme, Color, and Component-System Analyst", "task_id": "2-b", "responsibilities": "Official public CSS token extraction (claude.ai / anthropic.com), download of all 9 official iPhone captures, VLM structural analysis, PIL pixel sampling, theme notes.", "note": "Required a continuation session after the first session's tool-execution environment broke mid-task; CSS work from session 1 was preserved and completed in session 2." },
+    { "role": "Agent 3 — Official Source and Alternative-Source Investigator", "task_id": "2-c", "responsibilities": "Source register, dual-region Samsung spec verification, store-listing fact verification, rejected-sources list.", "note": "Session 1 fetched ~120 raw artifacts but its report timed out; a continuation session consolidated the register and filled gaps." },
+    { "role": "Agent 4 — Independent Evidence Verifier and Mobile UX Reviewer", "task_ids": ["3", "6"], "responsibilities": "Phase 1: verified Agents 1–3 evidence (14 checks), rejected the user-bubble alignment claim, resolved 6 contradictions, defined the GREEN/YELLOW/RED prototype boundary. Phase 2: independently tested the built prototype across all device presets, widths, text scales, and modes; wrote the QA report without repairing anything." },
+    { "role": "Agent 5 — Mobile Prototype Builder", "task_id": "5", "responsibilities": "Built the single-file offline HTML prototype (8 chunks), ran static + headless-Chromium runtime verification (45/45 smoke checks), documented deviations." }
+  ],
+
+  "sources_summary": {
+    "tiers": {
+      "T1_official": "Anthropic/Claude pages (anthropic.com, claude.com), support.claude.com help center (sitemap + 21 articles), code.claude.com/docs (4 pages), official iOS App Store + iTunes API + Google Play listings, publicly inspectable official CSS of claude.ai and anthropic.com, Samsung official spec pages (UK + FR) + Samsung global newsroom + Samsung Mobile Press snippet",
+      "T2_official_captures": "9 official iPhone App Store screenshots (392×696 mzstatic) + Play hero tile — analyzed via VLM + PIL; 3 photographic marketing captures excluded from token inference",
+      "T3_secondary": "GSMArena/PhoneArena (S25+ px and release-date triangulation only), rejected sources documented in the source register"
+    },
+    "detail": "See claude-mobile-source-register.md for the complete register with per-source provenance, dates, limitations, verification record, and rejected sources."
+  },
+
+  "evidence_limitations": [
+    "No direct app observation: no authorized device or session was available; T2 evidence is limited to official marketing captures.",
+    "Official captures are Apple-compressed 392×696 marketing composites: ±2–4 RGB sampling precision; three captures are photographic and yield no app-UI tokens; captures may lag the shipped app.",
+    "Full mobile dark-mode palette, mobile runtime fonts/type scale, exact radii/borders/shadows, navigation chrome visuals beyond the documented Code entry, message action rows, in-chat code-block styling, onboarding/login, empty states beyond documented strings, voice-mode UI, widgets, and motion/haptics are UNVERIFIED.",
+    "User-bubble alignment was rejected as an assertion during verification (near-symmetric measured margins) and is labeled UNVERIFIED in all deliverables.",
+    "Store-listing metadata is volatile (a verification re-fetch returned drifted version/rating/size values); listing facts are cited 'as of September 2026'.",
+    "The original May 2024 iOS launch announcement page is removed; the launch date is anchored via the iTunes API.",
+    "Samsung US spec pages are retired; several Samsung pages blocked the fetcher; Samsung values rely on staged dual-region (UK+FR) fetches plus the global newsroom press release. S25+ exact pixel resolution (3120×1440) exists only in Tier-3 sources and is labeled 'QHD+ class (official) / T3-agreed approximate'."
+  ],
+
+  "device_frame_limitations": [
+    "Samsung specifications are used only for outer-frame proportions (from physical mm), display size/aspect reference, and device naming.",
+    "Browser HTML does not and cannot reproduce physical hardware pixels, device pixel ratio, One UI safe areas, touch latency, haptics, 120 Hz refresh, or Samsung font metrics; all such behaviors are labeled UNVERIFIED in the prototype.",
+    "Status-area and gesture-area strips are assumption overlays labeled 'assumed inset (UNVERIFIED)'; aspect ratio 19.5:9 is computed from official pixel dimensions (INFERRED, not printed by Samsung).",
+    "Inner viewport values (320/360/390/430 CSS px; height = width × 2.167) are CSS study boxes, not hardware claims; DPR is never claimed."
+  ],
+
+  "prototype_qa": {
+    "verdict": "COMPLIES with the phase-1 evidence boundary: GREEN items represented with official tokens; YELLOW items carry visible INFERRED/UNVERIFIED tags; RED items absent.",
+    "checklist": "9 PASS / 2 PARTIAL / 0 boundary FAIL (12-point checklist in claude-mobile-prototype-qa.md)",
+    "partial_checks": [
+      "Contrast: dark-mode error text #B53333 on #262624 = 2.52:1 (inherited from the INFERRED dark set; light-mode error text passes AA at 5.72:1).",
+      "Text scaling: Code-mode new-session footer vertically clipped at 200% text scale (all widths); Chat mode passes all 12 width×scale combinations."
+    ],
+    "issues_documented_unrepaired": 5,
+    "repair_policy": "Per protocol, Agent 4 reviewed without repairing; issues are documented with severity and recommendations for a future revision."
+  },
+
+  "no_modification_confirmation": "No existing project, product file, codebase, design-system package, or repository content outside the target folder was modified, deleted, renamed, or overwritten. All work products were newly created under the target folder (deliverables) or under the research workspace (worklog, evidence notes, scripts — not part of the uploaded package). The upload creates a single new dedicated branch and adds only the target folder.",
+
+  "upload": {
+    "repository": "https://github.com/Qays7753/Documents.git",
+    "branch": "claude-mobile-visual-research-v1",
+    "target_folder": "zed-ai-runs/claude-mobile-visual-research-v1/",
+    "commit_strategy": "one dedicated branch, one commit, only the eleven deliverables above"
+  }
+}

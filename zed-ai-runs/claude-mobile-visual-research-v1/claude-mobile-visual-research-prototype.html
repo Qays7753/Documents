@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Mobile Visual System — Independent Research Prototype (unofficial)</title>
+<style>
+/* =====================================================================
+   INDEPENDENT RESEARCH ARTIFACT — NOT an official Anthropic application.
+   Two CSS layers:
+   · HARNESS (header, QA panel, device frame, simulated chrome): px units,
+     never scales with the studied UI's text scale.
+   · STUDIED UI (everything under .studied): rem units only, so the QA
+     "text scale" control (100/130/200%) scales it via the root font-size.
+   Zero external resources: no CDN, no webfonts, no images, no requests.
+   ===================================================================== */
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html{font-size:16px}
+html.ts130{font-size:20.8px}
+html.ts200{font-size:32px}
+body{margin:0;background:#EFEEE8;color:#1F1E1B;font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid #141413;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition-duration:0s!important;animation:none!important}}
+html.rm *{transition-duration:0s!important;animation:none!important}
+
+/* ---------- harness header ---------- */
+.hdr{background:#FFFFFF;border-bottom:1px solid #D8D6CC;padding:12px 18px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.hdr h1{font-size:16px;margin:0;font-weight:700}
+.badge{font-size:11px;font-weight:700;letter-spacing:.04em;background:#141413;color:#FAF9F5;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.disc{font-size:12px;color:#55534D;flex-basis:100%;margin:0;max-width:960px}
+.disc b{color:#1F1E1B}
+
+/* ---------- harness layout ---------- */
+.layout{display:grid;grid-template-columns:minmax(340px,1fr) 408px;gap:16px;padding:16px;align-items:start;max-width:1440px;margin:0 auto}
+@media (max-width:1120px){.layout{grid-template-columns:1fr}}
+.stage{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0;padding:4px 0 24px}
+.frame-caption{font-size:12px;color:#55534D;max-width:680px;text-align:center;line-height:1.5;margin:0}
+.frame-caption b{color:#1F1E1B}
+
+/* ---------- device frame (harness approximation — proportions only) ---------- */
+.device{position:relative;background:#0F0F0E;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(20,20,19,.18),0 0 0 1px #3A3A37}
+.device.s25,.device.s25p{border-radius:28px}
+.device.s25u{border-radius:12px}
+.device::before{content:"";position:absolute;right:-3px;top:21%;width:3px;height:58px;background:#0F0F0E;border-radius:2px}
+.device::after{content:"";position:absolute;left:-3px;top:17%;width:3px;height:86px;background:#0F0F0E;border-radius:2px}
+.viewport{position:relative;overflow:hidden;display:flex;flex-direction:column;background:#FAF9F5;flex:none}
+.viewport[data-apptheme="dark"]{background:#1F1E1D}
+
+/* simulated device chrome (assumed insets — UNVERIFIED) */
+.vp-status{flex:none;height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;font-size:12px;font-weight:600;color:#141413;position:relative}
+.viewport[data-apptheme="dark"] .vp-status{color:#FAF9F5}
+.punch{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:#000;box-shadow:0 0 0 1px rgba(0,0,0,.28)}
+.vp-gesture{flex:none;height:20px;display:flex;align-items:center;justify-content:center;position:relative}
+.home-bar{width:104px;height:4px;border-radius:2px;background:#141413;opacity:.9}
+.viewport[data-apptheme="dark"] .home-bar{background:#FAF9F5;opacity:.9}
+.dtag{display:inline-block;font-size:9px;line-height:1.15;padding:1px 5px;border-radius:8px;border:1px solid rgba(127,126,118,.55);color:#6E6D66;white-space:nowrap;background:rgba(255,255,255,.4)}
+.viewport[data-apptheme="dark"] .dtag{color:#8C8B84;border-color:rgba(140,139,132,.55);background:rgba(31,30,29,.4)}
+
+/* simulated keyboard (QA harness control — not studied UI) */
+.kb{position:absolute;left:0;right:0;bottom:0;height:var(--kb-h,300px);z-index:5;background:#D6D9DE;border-top:1px solid #B9BEC6;display:flex;flex-direction:column;gap:6px;padding:8px 6px 10px}
+.kb-label{font-size:9px;font-weight:700;color:#4A5560;text-align:center;flex:none}
+.kb-row{display:flex;gap:6px;flex:1;min-height:0}
+.kb-key{flex:1;background:#FFFFFF;border-radius:4px;box-shadow:0 1px 0 #A6ACB5}
+.kb-key.space{flex:4.5}
+
+/* safe-area overlay stripes (QA visualization of the assumed insets) */
+.sa{position:absolute;left:0;right:0;z-index:9;pointer-events:none;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;letter-spacing:.06em;color:#25384A;background:repeating-linear-gradient(45deg,rgba(73,122,168,.30) 0 6px,rgba(73,122,168,.12) 6px 12px)}
+.sa-top{top:0;height:28px}
+.sa-bot{bottom:0;height:20px}
+
+/* ---------- QA panel ---------- */
+.qa{background:#FFFFFF;border:1px solid #D8D6CC;border-radius:10px;overflow:hidden;position:sticky;top:12px}
+.qa-title{font-size:12px;font-weight:700;letter-spacing:.05em;background:#141413;color:#FAF9F5;padding:9px 14px;margin:0}
+.qa-title span{font-weight:400;opacity:.75}
+.qa section{padding:12px 14px;border-bottom:1px solid #E7E5DC}
+.qa section:last-child{border-bottom:none}
+.qa h3{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#6E6D66;margin:0 0 8px;font-weight:700}
+.hint{font-size:11.5px;color:#6E6D66;margin:7px 0 0;line-height:1.45}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label{position:relative;display:inline-block}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:inline-block;padding:5px 11px;border:1px solid #C9C7BC;border-radius:999px;font-size:12px;background:#FFFFFF;cursor:pointer;user-select:none}
+.seg label:hover span{border-color:#8F8D82}
+.seg input:checked+span{background:#141413;color:#FAF9F5;border-color:#141413}
+.seg input:focus-visible+span{outline:2px solid #141413;outline-offset:2px}
+.sw{display:flex;align-items:center;gap:10px;font-size:13px;padding:4px 0;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw i{width:34px;height:20px;border-radius:999px;background:#C9C7BC;position:relative;transition:background .15s;display:inline-block;flex:none}
+.sw i::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#FFFFFF;transition:left .15s}
+.sw input:checked+i{background:#2F7D46}
+.sw input:checked+i::after{left:16px}
+.sw input:focus-visible+i{outline:2px solid #141413;outline-offset:2px}
+.btn{font:600 12px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;padding:7px 12px;border-radius:8px;border:1px solid #C9C7BC;background:#FFFFFF;color:#1F1E1B;cursor:pointer}
+.btn:hover{background:#F4F3EF}
+.btn.armed{background:#B53333;border-color:#B53333;color:#FFFFFF}
+.btn.primary{background:#141413;border-color:#141413;color:#FAF9F5}
+.btn.primary:hover{background:#333330}
+#valuesLine{font-size:12px;background:#F4F3EF;border:1px solid #E7E5DC;border-radius:6px;padding:8px 10px;margin:0 0 8px;line-height:1.55;color:#3D3B35}
+.checks{list-style:none;margin:0;padding:0;font-size:12.5px}
+.checks li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed #E7E5DC}
+.checks li:last-child{border-bottom:none}
+.st{flex:none;width:56px;text-align:center;font-size:10px;font-weight:700;padding:2px 0;border-radius:4px;letter-spacing:.03em}
+.st.pass{background:#E4F0E7;color:#2F7D46}
+.st.fail{background:#F7E4E4;color:#B53333}
+.st.info{background:#E9E9E4;color:#6E6D66}
+.st.assume{background:#F5EEDD;color:#8A6D1F}
+.cd{color:#55534D;line-height:1.45}
+.cd b{color:#1F1E1B}
+
+/* evidence panel (research notes) */
+.ev details{border:1px solid #E7E5DC;border-radius:8px;margin:6px 0;background:#FBFAF7}
+.ev summary{cursor:pointer;font-weight:700;font-size:12.5px;padding:8px 10px;color:#33312C}
+.ev summary:hover{background:#F4F3EF}
+.ev .ev-body{padding:2px 12px 10px;font-size:12px;color:#3D3B35;line-height:1.5}
+.ev ul{margin:4px 0;padding-left:16px}
+.ev li{margin:4px 0}
+.ev table{border-collapse:collapse;width:100%;font-size:11.5px;margin:6px 0}
+.ev th,.ev td{border:1px solid #DDD9CC;padding:3px 6px;text-align:left;vertical-align:top}
+.ev th{background:#F4F3EF}
+.sw-chip{display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid rgba(0,0,0,.18);vertical-align:-1px;margin-right:5px}
+.lbl{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:4px;margin-right:4px;vertical-align:1px}
+.lbl.g{background:#E4F0E7;color:#2F7D46}
+.lbl.y{background:#F5EEDD;color:#8A6D1F}
+.lbl.r{background:#F7E4E4;color:#B53333}
+.lbl.m{background:#E9E9E4;color:#6E6D66}
+</style>
+<style>
+/* =====================================================================
+   STUDIED UI — reconstruction of verified mobile visual principles.
+   All sizes in rem (scales with the harness text-scale control).
+   Light values = official claude.ai tokens (DOCUMENTED) unless noted;
+   dark values beyond #262624/#3D3D3A/#575755 are INFERRED (tagged).
+   ===================================================================== */
+.studied{flex:1;min-height:0;position:relative;display:flex;flex-direction:column;overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;
+  --canvas:#FAF9F5;--card:#FFFFFF;--tint:#F0EEE6;--chip:#E8E6DC;--bubble:#D1CFC5;
+  --ink:#141413;--ink2:#30302E;--ink3:#5E5D59;--ph:#87867F;
+  --line:#E8E6DC;--line2:#D1CFC5;--line3:#B0AEA5;
+  --clay:#D97757;--clay2:#C96442;--err:#B53333;--ok:#2F7D46;--blue:#1490FF;--violet:#6E6B96;
+  --code-bg:#262624;--shadow:0 2px 8px rgba(20,20,19,.06);
+  background:var(--canvas);color:var(--ink);font-size:1rem;line-height:1.5}
+.studied[data-theme="dark"]{
+  --canvas:#1F1E1D;--card:#262624;--tint:#3D3D3A;--chip:#3D3D3A;--bubble:#30302E;
+  --ink:#FAF9F5;--ink2:#D1CFC5;--ink3:#B0AEA5;--ph:#87867F;
+  --line:#3D3D3A;--line2:#3D3D3A;--line3:#575755}
+.studied :where(button){cursor:pointer;background:none;border:none;color:inherit;padding:0;font-family:inherit}
+.studied select,.studied input,.studied textarea{font-family:inherit}
+.studied :focus-visible{outline:.125rem solid var(--ink);outline-offset:.125rem}
+.studied .mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+
+/* visible evidence tag chips (YELLOW elements) — px-fixed annotations: they are
+   research overlays, so they deliberately do NOT scale with the studied UI's
+   rem text-scale control (keeps the app layout measurement undistorted). */
+.tag{display:inline-block;font-size:9px;line-height:1.2;padding:1px 5px;border-radius:8px;border:1px solid var(--line2);color:var(--ink3);background:transparent;font-weight:600;letter-spacing:.01em;overflow-wrap:anywhere}
+.tag-block{display:block;font-size:9px;line-height:1.3;color:var(--ink3);margin:4px 0;overflow-wrap:anywhere}
+
+/* ---------- chat mode: top bar ---------- */
+.app-topbar{flex:none;display:flex;align-items:center;gap:.25rem;padding:.5rem .75rem .25rem;min-height:3rem;flex-wrap:wrap}
+.topbar-spacer{flex:1}
+.initials-wrap{display:flex;flex-direction:column;align-items:center;gap:.0625rem;margin-right:.25rem}
+.initials{width:2rem;height:2rem;border-radius:50%;background:var(--tint);color:var(--ink2);display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600}
+.ibtn{width:2rem;height:2rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink2);flex:none}
+.ibtn:hover{background:var(--tint)}
+.ibtn.round{border:.0625rem solid var(--line2)}
+.ibtn.xs{width:1.625rem;height:1.625rem}
+
+/* ---------- conversation ---------- */
+.conv{flex:1;min-height:0;overflow-y:auto;padding:.5rem .875rem 1rem;scrollbar-width:thin}
+.conv::-webkit-scrollbar{width:.25rem}
+.conv::-webkit-scrollbar-thumb{background:var(--line2);border-radius:.1875rem}
+.msg-user-row{display:flex;flex-direction:column;align-items:flex-start;margin:.75rem 0 .125rem}
+.bubble-user{background:var(--bubble);color:var(--ink);border-radius:1.25rem;padding:.625rem .875rem;max-width:72%;font-size:1rem;line-height:1.45;overflow-wrap:anywhere}
+.msg-claude{margin:.875rem 0 .375rem;font-size:1rem;line-height:1.55;overflow-wrap:anywhere}
+.thinking-wrap{display:flex;align-items:center;gap:.375rem;flex-wrap:wrap;margin-bottom:.25rem}
+.thinking{display:inline-flex;align-items:center;gap:.375rem;padding:.25rem .5rem;border-radius:.625rem;font-size:.8125rem;color:var(--ink3)}
+.thinking:hover{background:var(--tint)}
+.thinking-body{color:var(--ink3);font-size:.875rem;line-height:1.55;padding:.375rem .625rem;border-left:.125rem solid var(--line2);margin:.25rem 0 .625rem;overflow-wrap:anywhere}
+.claude-text p{margin:0 0 .625rem}
+.codeblock-wrap{margin:.625rem 0}
+.codeblock-wrap .tag{display:block;text-align:right;margin-bottom:.1875rem}
+.codeblock{background:var(--code-bg);color:#FAF9F5;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:.8125rem;line-height:1.55;border-radius:.75rem;padding:.75rem .875rem;overflow-x:auto;margin:0;white-space:pre;border:.0625rem solid transparent}
+.studied[data-theme="dark"] .codeblock{border-color:#3D3D3A}
+.artifact-card{background:var(--card);border:.0625rem solid var(--line);border-radius:1rem;box-shadow:var(--shadow);padding:.875rem;display:flex;gap:.75rem;align-items:center;margin:.625rem 0;max-width:92%}
+.art-icon{flex:none;width:2.5rem;height:2.5rem;border-radius:.625rem;background:var(--tint);display:inline-flex;align-items:center;justify-content:center;color:var(--ink2)}
+.art-t b{display:block;font-size:.9375rem;line-height:1.3}
+.art-t span{font-size:.8125rem;color:var(--ink3)}
+.dark-note{display:none;font-size:.6875rem;color:var(--ink3);border:.0625rem dashed var(--line2);border-radius:.625rem;padding:.375rem .625rem;margin:0 0 .75rem;text-align:center;line-height:1.5}
+.studied[data-theme="dark"] .dark-note{display:block}
+.thinking-live{display:flex;align-items:center;gap:.375rem;color:var(--ink3);font-size:.8125rem;margin:.5rem 0}
+.err-block{border:.0625rem solid rgba(181,51,51,.4);background:var(--card);border-radius:1rem;padding:.875rem;margin:.75rem 0;max-width:92%;box-shadow:var(--shadow)}
+.err-block .err-text{color:var(--err);font-size:.9375rem;margin:0 0 .625rem;overflow-wrap:anywhere}
+.retry-btn{background:var(--card);border:.0625rem solid var(--line2);border-radius:999px;padding:.4375rem 1rem;font-size:.8125rem;color:var(--ink);font-weight:600}
+.retry-btn:hover{background:var(--tint)}
+
+/* empty state (new-chat landing) */
+.empty-state{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:62%;padding:1rem;text-align:center;gap:.5rem}
+.spark{position:relative;width:2.25rem;height:2.25rem;color:var(--clay);flex:none}
+.spark i{position:absolute;left:50%;top:50%;width:100%;height:.125rem;background:currentColor;border-radius:.0625rem;transform:translate(-50%,-50%) rotate(var(--r,0deg))}
+.greeting{font-family:ui-serif,Georgia,'Times New Roman',serif;font-size:1.875rem;font-weight:400;color:var(--ink);margin:.375rem 0 0;line-height:1.25;overflow-wrap:anywhere}
+
+/* ---------- composer ---------- */
+.composer-region{flex:none;position:relative;z-index:6;padding:.5rem max(.75rem,10%) .5rem;background:transparent}
+.composer-pill{background:var(--card);border:.0625rem solid var(--line);border-radius:999px;box-shadow:var(--shadow);display:flex;align-items:center;flex-wrap:wrap;gap:.25rem;padding:.375rem .5rem;min-height:3rem}
+.composer-pill:focus-within{box-shadow:0 0 0 .125rem var(--ink)}
+.model-pill{background:transparent;border:.0625rem solid var(--line);border-radius:999px;padding:.3125rem .625rem;font-size:.8125rem;color:var(--ink2);display:inline-flex;align-items:center;gap:.25rem;flex:none}
+.model-pill:hover{background:var(--tint)}
+#msgInput{flex:1 1 8rem;min-width:6rem;border:none;background:transparent;font-size:1rem;color:var(--ink);outline:none;padding:.25rem;overflow-wrap:normal}
+#msgInput::placeholder{color:var(--ph)}
+.sendbtn{flex:none;width:2rem;height:2rem;border-radius:50%;background:var(--clay);color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center}
+.sendbtn:hover{background:var(--clay2)}
+.sendbtn:active{background:var(--clay2)}
+.sendbtn.empty .arrow{visibility:hidden}
+.composer-foot{display:flex;justify-content:space-between;align-items:center;margin-top:.375rem;gap:.5rem;flex-wrap:wrap}
+.cf-l,.cf-r{display:inline-flex;align-items:center;gap:.375rem;flex-wrap:wrap}
+.cowork-chip{background:var(--card);border:.0625rem solid var(--line);border-radius:999px;font-size:.75rem;color:var(--ink2);padding:.1875rem .625rem}
+.cowork-chip:hover{background:var(--tint)}
+.attach-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+.attach-chip{background:var(--card);border:.0625rem solid var(--line);border-radius:.875rem;padding:.375rem .5rem;display:flex;gap:.5rem;align-items:center;box-shadow:var(--shadow)}
+.attach-thumb{width:1.75rem;height:1.75rem;border-radius:.375rem;background:var(--tint);display:inline-flex;align-items:center;justify-content:center;color:var(--ink2);flex:none}
+.a-name{font-size:.8125rem;color:var(--ink);max-width:9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{font-size:.5625rem;font-weight:700;border-radius:.3125rem;padding:.125rem .3125rem;background:var(--chip);color:var(--ink2);letter-spacing:.04em}
+.ax{width:1.25rem;height:1.25rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink3);font-size:.875rem;line-height:1}
+.ax:hover{background:var(--tint);color:var(--ink)}
+
+/* ---------- code mode ---------- */
+.code-mode{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.code-head{flex:none;display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-bottom:.0625rem solid var(--line);min-height:3rem;flex-wrap:wrap}
+.code-head h2{font-size:1.0625rem;margin:0;font-weight:600}
+.mode-lab{font-size:.75rem;color:var(--ink3);display:inline-flex;align-items:center;gap:.375rem;margin-left:auto}
+.mode-lab select{background:var(--card);border:.0625rem solid var(--line2);border-radius:.625rem;padding:.3125rem .5rem;font-size:.8125rem;color:var(--ink)}
+.mode-note{font-size:.625rem;color:var(--ink3);margin:.25rem 0 0;flex-basis:100%;line-height:1.4}
+.code-scroll{flex:1;min-height:0;overflow-y:auto;padding:.75rem}
+.code-note{font-size:.625rem;color:var(--ink3);margin:0 0 .5rem;line-height:1.4}
+.session-row{display:flex;gap:.75rem;width:100%;align-items:center;border-bottom:.0625rem solid var(--line);padding:.75rem .25rem;text-align:left}
+.session-row:hover{background:var(--tint)}
+.session-row.sel{background:var(--tint)}
+.comp{position:relative;flex:none;width:1.875rem;height:1.875rem;display:inline-flex;align-items:center;justify-content:center;background:var(--tint);border-radius:50%;color:var(--ink2)}
+.dot{position:absolute;right:0;bottom:0;width:.625rem;height:.625rem;border-radius:50%;background:var(--ok);border:.125rem solid var(--canvas)}
+.dot.off{background:#87867F}
+.s-main{flex:1;min-width:0}
+.s-main b{display:block;font-size:.9375rem;font-weight:600;line-height:1.3}
+.s-main span{font-size:.75rem;color:var(--ink3);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-side{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:.25rem}
+.diff-chip{font-size:.6875rem;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;color:var(--ink2);background:var(--chip);border-radius:.5rem;padding:.125rem .4375rem}
+.ts{font-size:.6875rem;color:var(--ink3)}
+.off-lab{font-size:.625rem;color:var(--ph);font-weight:600}
+.sess-detail h3{margin:.125rem 0 .125rem;font-size:1.0625rem;font-weight:600}
+.s-meta{display:block;font-size:.75rem;color:var(--ink3);margin-bottom:.75rem}
+.back-sm{font-size:.75rem;color:var(--ink3);padding:.25rem .5rem .25rem 0;border-radius:.5rem}
+.back-sm:hover{background:var(--tint);color:var(--ink2)}
+.diff-pane{background:var(--card);border:.0625rem solid var(--line);border-radius:1rem;overflow:hidden;margin:.75rem 0;box-shadow:var(--shadow)}
+.diff-head{display:flex;gap:.5rem;align-items:center;padding:.5rem .75rem;border-bottom:.0625rem solid var(--line);font-size:.75rem;color:var(--ink3);flex-wrap:wrap}
+.diff-head .mono{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.diff-body{font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:.75rem;line-height:1.6;padding:.5rem .75rem;overflow-x:auto}
+.dl{white-space:pre;display:block}
+.dl.add{background:rgba(47,125,70,.14)}
+.dl.del{background:rgba(181,51,51,.12)}
+.dl.hunk{color:var(--ink3)}
+.perm-card{background:var(--card);border:.0625rem solid var(--line);border-radius:1rem;padding:.875rem;margin:.75rem 0;box-shadow:var(--shadow)}
+.perm-card b{display:block;font-size:.9375rem;margin-bottom:.25rem}
+.perm-card p{font-size:.8125rem;color:var(--ink3);margin:0 0 .75rem;overflow-wrap:anywhere}
+.approve-btn{background:var(--card);border:.0625rem solid var(--line2);border-radius:999px;padding:.4375rem 1.125rem;font-size:.875rem;color:var(--ink);font-weight:600}
+.approve-btn:hover{background:var(--tint)}
+.approve-btn.ghost{border-color:var(--line);font-weight:400}
+.approved{font-size:.875rem;color:var(--ok);font-weight:600;margin:0}
+.code-new{flex:none;border-top:.0625rem solid var(--line);padding:.625rem .75rem .75rem;display:flex;flex-direction:column;gap:.5rem;background:var(--canvas)}
+.new-grid{display:flex;gap:.5rem;flex-wrap:wrap}
+.new-grid .field{flex:1 1 9rem}
+.field{display:flex;flex-direction:column;gap:.1875rem}
+.field>span,.field>em{font-size:.6875rem;font-style:normal;color:var(--ink3)}
+.field select,.field textarea{background:var(--card);border:.0625rem solid var(--line);border-radius:.625rem;padding:.4375rem .5rem;font-size:.875rem;color:var(--ink)}
+.field textarea{resize:none;min-height:2.75rem}
+.queue-btn{align-self:flex-start;background:var(--ink);color:var(--canvas);border-radius:999px;padding:.4375rem 1.125rem;font-size:.875rem;font-weight:600}
+.queue-btn:hover{background:var(--ink2)}
+
+/* ---------- sheets / drawer / dialogs ---------- */
+.sheet{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;justify-content:flex-end}
+.sheet.side{flex-direction:row;justify-content:flex-start}
+.sheet.center{justify-content:center;align-items:center;padding:1rem}
+.scrim{position:absolute;inset:0;background:rgba(20,20,19,.34)}
+.sheet-panel{position:relative;background:var(--card);border-radius:1rem 1rem 0 0;max-height:74%;overflow-y:auto;padding:1rem 1rem 1.25rem;transform:translateY(100%);transition:transform .2s ease;box-shadow:0 -.125rem .75rem rgba(20,20,19,.10)}
+.sheet.open .sheet-panel{transform:none}
+.sheet.side .sheet-panel{height:100%;max-height:100%;width:74%;border-radius:0 1rem 1rem 0;transform:translateX(-100%);padding:1rem .875rem}
+.sheet.side.open .sheet-panel{transform:none}
+.sheet.center .sheet-panel{width:100%;max-width:19rem;max-height:none;border-radius:1rem;transform:scale(.96);opacity:0;transition:transform .2s ease,opacity .2s ease}
+.sheet.center.open .sheet-panel{transform:none;opacity:1}
+.sheet-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.sheet-head h3{margin:0;font-size:1rem;font-weight:600;flex:1}
+.sheet-sec{margin:.875rem 0 0}
+.sheet-sec h4{font-size:.6875rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);margin:0 0 .375rem;font-weight:700}
+.opt{display:flex;align-items:center;gap:.5rem;width:100%;padding:.625rem .5rem;border-radius:.625rem;font-size:.9375rem;color:var(--ink);text-align:left;overflow-wrap:anywhere}
+.opt:hover{background:var(--tint)}
+.opt.sel{background:var(--tint)}
+.opt .chk{margin-left:auto;color:var(--ink2);visibility:hidden;flex:none}
+.opt.sel .chk{visibility:visible}
+.mini{margin-left:auto;font-size:.625rem;border:.0625rem solid var(--line2);border-radius:999px;padding:.0625rem .4375rem;color:var(--ink3);overflow-wrap:anywhere}
+.mini+.chk{margin-left:.375rem}
+.row-toggle{display:flex;align-items:center;gap:.5rem;padding:.5rem}
+.row-toggle b{font-weight:600;font-size:.9375rem;flex:1}
+.tswitch{position:relative;display:inline-flex;align-items:center;cursor:pointer}
+.tswitch input{position:absolute;opacity:0;width:1px;height:1px}
+.tswitch i{width:2.625rem;height:1.5rem;border-radius:999px;background:var(--chip);position:relative;transition:background .15s;display:inline-block}
+.tswitch i::after{content:"";position:absolute;top:.125rem;left:.125rem;width:1.25rem;height:1.25rem;border-radius:50%;background:var(--card);transition:left .15s}
+.tswitch input:checked+i{background:var(--clay)}
+.tswitch input:checked+i::after{left:1.25rem}
+.tswitch input:focus-visible+i{outline:.125rem solid var(--ink);outline-offset:.125rem}
+.drawer-nav{display:flex;flex-direction:column;gap:.25rem;margin-top:.5rem}
+.drawer-item{display:flex;align-items:center;gap:.625rem;padding:.6875rem .5rem;border-radius:.625rem;font-size:.9375rem;color:var(--ink);text-align:left}
+.drawer-item:hover{background:var(--tint)}
+.drawer-item.danger{color:var(--err)}
+.drawer-note{font-size:.6875rem;color:var(--ink3);margin:.875rem .25rem 0;line-height:1.5}
+.file-row{display:flex;align-items:center;gap:.625rem;width:100%;padding:.625rem .5rem;border-radius:.625rem;font-size:.9375rem;color:var(--ink);text-align:left}
+.file-row:hover{background:var(--tint)}
+.file-row .badge{margin-left:auto}
+.dlg-h{margin:0 0 .375rem;font-size:1rem;font-weight:600}
+.dlg-p{font-size:.8125rem;color:var(--ink3);margin:0 0 .875rem;overflow-wrap:anywhere}
+.dlg-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.toast{position:absolute;top:3.25rem;left:50%;transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--canvas);font-size:.75rem;line-height:1.45;padding:.5rem .75rem;border-radius:.75rem;max-width:86%;text-align:center;overflow-wrap:anywhere;box-shadow:var(--shadow)}
+.studied[data-theme="dark"] .toast{background:#FAF9F5;color:#141413}
+
+/* keyboard simulation raises the composer above the simulated keyboard */
+.viewport.kb .composer-region{margin-bottom:calc(var(--kb-h,300px) - 20px)}
+.viewport.kb .code-new{margin-bottom:calc(var(--kb-h,300px) - 20px)}
+</style>
+</head>
+<body>
+
+<!-- ============================ HARNESS HEADER (not studied UI) ============================ -->
+<header class="hdr">
+  <h1>Claude Mobile Visual System — Independent Research Prototype</h1>
+  <span class="badge">UNOFFICIAL RESEARCH ARTIFACT — not an official Anthropic application</span>
+  <p class="disc"><b>Independent research prototype — not an official Anthropic product.</b> Visual reconstruction from public evidence (official CSS tokens, official documentation, official store captures). Approximations are marked. Dummy content only; no proprietary logos or assets. Font substitution: offline system stacks stand in for Anthropic Sans / Serif / Mono (mobile type family is INFERRED — the real faces are not embeddable offline). Zero network requests — runs from file://.</p>
+</header>
+
+<main class="layout">
+
+  <!-- ============================ DEVICE STAGE (harness) ============================ -->
+  <section class="stage" aria-label="Device stage (harness — the studied UI lives inside the viewport)">
+    <div class="device s25u" id="device">
+      <div class="viewport" id="viewport" data-apptheme="light" style="width:360px;height:780px">
+
+        <!-- simulated device chrome: status strip (assumed inset — UNVERIFIED) -->
+        <div class="vp-status" id="vpStatus">
+          <span>9:41</span>
+          <span class="punch" aria-hidden="true" title="Punch-hole dot — drawn cosmetic element"></span>
+          <span class="dtag" title="Status strip is an assumed inset (UNVERIFIED) — no One UI safe-area claim">inset UNVERIFIED</span>
+        </div>
+
+        
+        <!-- ==================== STUDIED UI (reconstruction; evidence tags inline) ==================== -->
+        <div class="studied" id="studied" data-theme="light">
+
+          <!-- ============ CHAT MODE ============ -->
+          <div class="chat-mode" id="chatMode" style="display:flex;flex-direction:column;flex:1;min-height:0">
+
+            <header class="app-topbar" id="chatTopbar">
+              <button type="button" class="ibtn" id="btnMenu" aria-label="Open navigation menu" data-evidence="Menu control top-left — OBSERVED in official captures" title="Menu control top-left — OBSERVED in official captures">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+              </button>
+              <div class="topbar-spacer"></div>
+              <div class="initials-wrap" data-evidence="Initials chip — DOCUMENTED entry; placement INFERRED" title="Initials chip — DOCUMENTED entry; placement INFERRED (dummy initials)">
+                <span class="initials">ZD</span>
+                <span class="tag">placement INFERRED</span>
+              </div>
+              <button type="button" class="ibtn round" id="btnNewChat" aria-label="New chat — existence OBSERVED, behavior UNVERIFIED (stub)" data-evidence="Top-right circular '+' — OBSERVED; button style UNVERIFIED" title="Top-right circular '+' — OBSERVED in captures; behavior UNVERIFIED (stub)">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+              </button>
+              <button type="button" class="ibtn" id="btnOverflow" aria-label="Conversation options" data-evidence="Top-right '⋯' — OBSERVED captures; DOCUMENTED on iOS" title="Top-right '⋯' — OBSERVED in captures; DOCUMENTED on iOS ('⋮' on Android)">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="4" cy="10" r="1.7"/><circle cx="10" cy="10" r="1.7"/><circle cx="16" cy="10" r="1.7"/></svg>
+              </button>
+            </header>
+
+            <div class="conv" id="conv" role="log" aria-live="polite" aria-label="Conversation transcript (dummy content)">
+              <div class="dark-note">Dark palette INFERRED — only #262624 / #3D3D3A / #575755 are measured (artifact surface). All other dark values are hypotheses.</div>
+
+              <!-- empty state (new-chat landing) -->
+              <div class="empty-state" id="emptyState" hidden>
+                <div class="spark" aria-hidden="true"><i style="--r:0deg"></i><i style="--r:45deg"></i><i style="--r:90deg"></i><i style="--r:135deg"></i></div>
+                <h2 class="greeting">What are you thinking?</h2>
+                <span class="tag">spark: OBSERVED existence · drawing approximate</span>
+              </div>
+
+              <!-- seeded sample conversation (generic dummy content) -->
+              <div class="msg-user-row">
+                <div class="bubble-user">Can you sketch a two-week study plan for my statistics exam? Mostly practice problems.</div>
+                <span class="tag">alignment UNVERIFIED</span>
+              </div>
+
+              <div class="msg-claude">
+                <div class="thinking-wrap">
+                  <button type="button" class="thinking" aria-expanded="false" aria-controls="thinkBody1">
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6.5V10l2.5 1.5"/></svg>
+                    Thinking · 12s
+                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 8l4 4 4-4"/></svg>
+                  </button>
+                  <span class="tag">visuals INFERRED</span>
+                </div>
+                <div class="thinking-body" id="thinkBody1" hidden>Considering the exam scope: alternating review days with problem-set days, capped session length, and two full practice exams at the end. (Dummy thinking text — the real "rest of the thought process is not available" per documentation.)</div>
+                <div class="claude-text"><p>Here's a compact shape: alternate review days with problem-set days, keep sessions to about 90 minutes, and reserve the final two days for full practice exams.</p></div>
+              </div>
+
+              <div class="msg-user-row">
+                <div class="bubble-user">Could you lay out the daily slots as plain text?</div>
+                <span class="tag">alignment UNVERIFIED</span>
+              </div>
+
+              <div class="msg-claude">
+                <div class="claude-text">
+                  <p>Sure — a minimal text layout:</p>
+                  <div class="codeblock-wrap">
+                    <span class="tag">code-block styling UNVERIFIED — dark values are the measured artifact-surface tokens used as hypothesis</span>
+                    <pre class="codeblock" aria-label="Dummy schedule code block"><code>Mon  review    sampling
+Tue  practice   ch. 3
+Wed  review     inference
+Thu  practice   ch. 4
+Fri  review     distributions
+Sat  practice   mixed set
+Sun  rest / light review</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div class="msg-user-row">
+                <div class="bubble-user">Nice — save that as a document.</div>
+                <span class="tag">alignment UNVERIFIED</span>
+              </div>
+
+              <div class="msg-claude">
+                <div class="claude-text">
+                  <p>Here it is as a document:</p>
+                  <div class="artifact-card" data-evidence="Artifact card anatomy — OBSERVED (icon + bold title + gray subtitle, radius ≈16, hairline border, soft shadow)" title="Artifact card anatomy — OBSERVED in captures; generic dummy content">
+                    <span class="art-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6 3h6l3 3v11H6z"/><path d="M12 3v3h3"/></svg></span>
+                    <span class="art-t"><b>Study plan — statistics exam</b><span>Study plan · DOCX (dummy)</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="composer-region" id="composerRegion">
+              <div class="attach-row" id="attachRow" hidden aria-label="Attachments"></div>
+              <div class="composer-pill">
+                <button type="button" class="ibtn round" id="btnAttach" aria-label="Add files or photos" data-evidence="Composer '+' — OBSERVED in captures; button style UNVERIFIED" title="Composer '+' — OBSERVED in captures; button style (outline vs filled) UNVERIFIED">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+                </button>
+                <button type="button" class="model-pill" id="btnModel" aria-haspopup="dialog" data-evidence="Model pill 'Opus' — OBSERVED in capture; menu contents DOCUMENTED; pill styling INFERRED" title="Model pill — OBSERVED in capture; contents DOCUMENTED; border/chevron styling INFERRED">
+                  <span id="modelPillLabel">Opus</span>
+                  <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 8l4 4 4-4"/></svg>
+                </button>
+                <input id="msgInput" type="text" placeholder="Chat with Claude" autocomplete="off" aria-label="Message input">
+                <button type="button" class="ibtn" id="btnMic" aria-label="Dictation microphone — DOCUMENTED placement, interaction stub" data-evidence="Mic icon — DOCUMENTED right of input; OBSERVED" title="Dictation microphone — DOCUMENTED on the right of the input; stub in this prototype">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="7.5" y="3" width="5" height="10" rx="2.5"/><path d="M5 11a5 5 0 0 0 10 0M10 16v2"/></svg>
+                </button>
+                <button type="button" class="ibtn" id="btnVoice" aria-label="Voice-mode sound-wave icon — existence DOCUMENTED, glyph UNVERIFIED, stub" data-evidence="Sound-wave icon — existence DOCUMENTED; glyph UNVERIFIED" title="Voice-mode sound-wave icon — existence DOCUMENTED next to the mic; glyph UNVERIFIED (stub)">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8v4M7 5.5v9M10 8v4M13 5.5v9M16 8v4"/></svg>
+                </button>
+                <button type="button" class="sendbtn empty" id="btnSend" aria-label="Send message" data-evidence="Send — clay #D97757 (DOCUMENTED token); arrow hidden when empty (OBSERVED capture 09)" title="Send button — clay #D97757 (DOCUMENTED token, pressed #C96442); arrow hidden when input is empty (OBSERVED capture 09)">
+                  <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V4.5M5.5 9 10 4.5 14.5 9"/></svg>
+                </button>
+              </div>
+              <div class="composer-foot">
+                <span class="cf-l">
+                  <button type="button" class="cowork-chip" id="coworkChip" data-evidence="Cowork — DOCUMENTED wording + bottom-left of message box; placement INFERRED" title="Cowork — DOCUMENTED wording and bottom-left placement per article; geometry INFERRED (stub)">Cowork</button>
+                  <span class="tag">placement INFERRED</span>
+                </span>
+                <span class="cf-r">
+                  <span class="tag">glyph UNVERIFIED</span>
+                  <span class="tag">pill styling INFERRED</span>
+                </span>
+              </div>
+            </div>
+          </div><!-- /chat-mode -->
+
+          <!-- ============ CODE MODE ============ -->
+          <div class="code-mode" id="codeMode" hidden>
+            <header class="code-head">
+              <button type="button" class="ibtn" id="btnBackChat" aria-label="Back to chat">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l-6 6 6 6"/></svg>
+              </button>
+              <h2>Code</h2>
+              <span class="tag">chrome INFERRED — structure DOCUMENTED</span>
+              <label class="mode-lab" for="modeSelect">Mode
+                <select id="modeSelect">
+                  <option value="accept">Accept edits</option>
+                  <option value="plan">Plan</option>
+                  <option value="auto">Auto</option>
+                </select>
+              </label>
+              <p class="mode-note">Cloud sessions: Accept edits / Plan / Auto · Remote Control: Manual / Accept edits / Plan — Bypass permissions and Auto are never offered for remote sessions (DOCUMENTED).</p>
+            </header>
+
+            <div class="code-scroll" id="codeScroll">
+              <div id="codeList">
+                <p class="code-note">Session-list visuals INFERRED · green-dot / computer-icon / diff-indicator DOCUMENTED. Dummy sessions.</p>
+                <button type="button" class="session-row" data-sess="s1">
+                  <span class="comp"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M7 17h6M10 14v3"/></svg><span class="dot" title="Online (DOCUMENTED green status dot)"></span></span>
+                  <span class="s-main"><b>api-refactor</b><span>acme/api · main</span></span>
+                  <span class="s-side"><span class="diff-chip">+42 −18</span><span class="ts">2m</span></span>
+                </button>
+                <button type="button" class="session-row" data-sess="s2">
+                  <span class="comp"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M7 17h6M10 14v3"/></svg><span class="dot" title="Online"></span></span>
+                  <span class="s-main"><b>docs-passbuild</b><span>acme/site · docs/passbuild</span></span>
+                  <span class="s-side"><span class="ts">1h</span></span>
+                </button>
+                <button type="button" class="session-row" data-sess="s3">
+                  <span class="comp"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M7 17h6M10 14v3"/></svg><span class="dot off" title="Offline"></span></span>
+                  <span class="s-main"><b>legacy-sync</b><span>acme/legacy · v2-sync</span></span>
+                  <span class="s-side"><span class="off-lab">offline</span><span class="ts">3h</span></span>
+                </button>
+                <button type="button" class="session-row" data-sess="s4">
+                  <span class="comp"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M7 17h6M10 14v3"/></svg><span class="dot" title="Online (Remote Control)"></span></span>
+                  <span class="s-main"><b>laptop — remote</b><span>acme/api · main · Remote Control</span></span>
+                  <span class="s-side"><span class="ts">5m</span></span>
+                </button>
+                <p class="code-note">Remote-Control session "laptop — remote": modes Manual / Accept edits / Plan only (enforced in the control above when opened).</p>
+              </div>
+              <div id="codeDetail" hidden></div>
+            </div>
+
+            <footer class="code-new" id="codeNew">
+              <span class="tag">fields DOCUMENTED · chrome INFERRED</span>
+              <div class="new-grid">
+                <label class="field"><span>Repository</span>
+                  <select id="repoSel"><option>acme/api</option><option>acme/site</option><option>acme/legacy</option></select>
+                </label>
+                <label class="field"><span>Branch</span>
+                  <select id="branchSel"><option>main</option><option>docs/passbuild</option><option>v2-sync</option></select>
+                </label>
+              </div>
+              <label class="field"><span>Task description (dummy)</span>
+                <textarea id="taskDesc" rows="2" placeholder="Describe the task for the new session (dummy)"></textarea>
+              </label>
+              <button type="button" class="queue-btn" id="btnQueue">Queue session (demo)</button>
+            </footer>
+          </div><!-- /code-mode -->
+
+          <!-- ============ SHEETS & MENUS (visuals INFERRED — tagged) ============ -->
+
+          <!-- Drawer (from top-left menu) -->
+          <div class="sheet side" id="sheetDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+            <div class="scrim" data-close="sheetDrawer"></div>
+            <div class="sheet-panel">
+              <div class="sheet-head">
+                <span class="initials" aria-hidden="true">ZD</span>
+                <h3 id="drawerTitle">Claude</h3>
+                <button type="button" class="ibtn xs" data-close="sheetDrawer" aria-label="Close menu" data-autofocus><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+              </div>
+              <span class="tag-block">drawer visuals INFERRED — plain sans wordmark, not a logo</span>
+              <nav class="drawer-nav" aria-label="Navigation">
+                <button type="button" class="drawer-item" id="drawerCode">
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="14" height="10" rx="1.5"/><path d="M7 17h6M10 14v3"/></svg>
+                  Code <span class="tag">DOCUMENTED</span>
+                </button>
+                <button type="button" class="drawer-item" id="drawerChats">Chats <span class="tag">INFERRED</span></button>
+                <button type="button" class="drawer-item" id="drawerSettings">Settings <span class="tag">INFERRED</span></button>
+              </nav>
+              <p class="drawer-note">Drawer contents beyond the Code entry: UNVERIFIED. Chats / Settings entries are INFERRED placeholders.</p>
+            </div>
+          </div>
+
+          <!-- Model sheet (from Opus pill) -->
+          <div class="sheet" id="sheetModel" role="dialog" aria-modal="true" aria-labelledby="modelTitle" hidden>
+            <div class="scrim" data-close="sheetModel"></div>
+            <div class="sheet-panel">
+              <div class="sheet-head">
+                <h3 id="modelTitle">Model</h3>
+                <button type="button" class="ibtn xs" data-close="sheetModel" aria-label="Close model menu" data-autofocus><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+              </div>
+              <span class="tag-block">sheet visuals INFERRED · contents DOCUMENTED (model menu next to the send button)</span>
+              <div class="sheet-sec" role="radiogroup" aria-label="Model">
+                <h4>Model</h4>
+                <button type="button" class="opt sel" data-model="Opus" role="radio" aria-checked="true">Opus<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                <button type="button" class="opt" data-model="Sonnet" role="radio" aria-checked="false">Sonnet<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                <button type="button" class="opt" data-model="__more" role="radio" aria-checked="false">More models<svg class="chk" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 6l4 4-4 4"/></svg></button>
+              </div>
+              <div class="sheet-sec" role="radiogroup" aria-label="Effort">
+                <h4>Effort</h4>
+                <button type="button" class="opt" data-effort="low" role="radio" aria-checked="false">Low<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                <button type="button" class="opt" data-effort="medium" role="radio" aria-checked="false">Medium<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                <button type="button" class="opt sel" data-effort="high" role="radio" aria-checked="true">High<span class="mini">Default</span><svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                <button type="button" class="opt" data-effort="xhigh" role="radio" aria-checked="false">Extra high<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                <button type="button" class="opt" data-effort="max" role="radio" aria-checked="false">Max<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+              </div>
+              <div class="sheet-sec">
+                <h4>Thinking</h4>
+                <div class="row-toggle"><b>Extended</b>
+                  <label class="tswitch"><input type="checkbox" id="thinkingToggle" aria-label="Extended thinking"><i></i></label>
+                </div>
+                <span class="tag-block">"Default" marker is DOCUMENTED to exist; its position here is a dummy placement.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attachment sheet (from composer +) -->
+          <div class="sheet" id="sheetAttach" role="dialog" aria-modal="true" aria-labelledby="attTitle" hidden>
+            <div class="scrim" data-close="sheetAttach"></div>
+            <div class="sheet-panel">
+              <div class="sheet-head">
+                <h3 id="attTitle">Add files or photos</h3>
+                <button type="button" class="ibtn xs" data-close="sheetAttach" aria-label="Close attachment sheet" data-autofocus><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+              </div>
+              <span class="tag-block">wording DOCUMENTED · sheet visuals INFERRED</span>
+              <button type="button" class="file-row" data-file="notes">
+                <span class="attach-thumb" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6 3h6l3 3v11H6z"/><path d="M12 3v3h3"/></svg></span>
+                Course notes.docx <span class="badge doc">DOC</span>
+              </button>
+              <button type="button" class="file-row" data-file="results">
+                <span class="attach-thumb" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6 3h6l3 3v11H6z"/><path d="M12 3v3h3"/></svg></span>
+                Results table.pdf <span class="badge pdf">PDF</span>
+              </button>
+              <span class="tag-block">attachment chips with thumbnail + DOC/PDF badges — OBSERVED in captures</span>
+            </div>
+          </div>
+
+          <!-- Overflow menu (from ⋯) -->
+          <div class="sheet" id="sheetOverflow" role="dialog" aria-modal="true" aria-labelledby="ovTitle" hidden>
+            <div class="scrim" data-close="sheetOverflow"></div>
+            <div class="sheet-panel">
+              <div class="sheet-head">
+                <h3 id="ovTitle">Conversation options</h3>
+                <button type="button" class="ibtn xs" data-close="sheetOverflow" aria-label="Close options menu" data-autofocus><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+              </div>
+              <span class="tag-block">menu visuals INFERRED · Rename / Delete DOCUMENTED</span>
+              <nav class="drawer-nav" aria-label="Conversation options">
+                <button type="button" class="drawer-item" id="ovRename">Rename</button>
+                <button type="button" class="drawer-item danger" id="ovDelete">Delete</button>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Settings sheet -->
+          <div class="sheet" id="sheetSettings" role="dialog" aria-modal="true" aria-labelledby="setTitle" hidden>
+            <div class="scrim" data-close="sheetSettings"></div>
+            <div class="sheet-panel">
+              <div class="sheet-head">
+                <h3 id="setTitle">Settings</h3>
+                <button type="button" class="ibtn xs" data-close="sheetSettings" aria-label="Close settings" data-autofocus><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+              </div>
+              <span class="tag-block">settings sheet visuals INFERRED · color-mode options DOCUMENTED (web-worded) · mobile location UNVERIFIED</span>
+              <div class="sheet-sec">
+                <h4>Appearance — Color mode</h4>
+                <div role="radiogroup" aria-label="Color mode">
+                  <button type="button" class="opt sel" data-cmode="light" role="radio" aria-checked="true">Light<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                  <button type="button" class="opt" data-cmode="system" role="radio" aria-checked="false">Match System<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                  <button type="button" class="opt" data-cmode="dark" role="radio" aria-checked="false">Dark<svg class="chk" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></button>
+                </div>
+                <span class="tag-block">Dark palette: only #262624 / #3D3D3A / #575755 are measured; the rest is INFERRED.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delete confirmation (persists until answered) -->
+          <div class="sheet center persist" id="dlgConfirm" role="dialog" aria-modal="true" aria-labelledby="confTitle" aria-describedby="confDesc" hidden>
+            <div class="scrim"></div>
+            <div class="sheet-panel">
+              <h3 class="dlg-h" id="confTitle">Delete this conversation?</h3>
+              <p class="dlg-p" id="confDesc">Documented behavior: the delete confirmation persists until answered — Esc and scrim taps are disabled for this dialog. (Demo — dummy content.)</p>
+              <div class="dlg-row">
+                <button type="button" class="approve-btn" id="confDelete" data-autofocus>Delete (demo)</button>
+                <button type="button" class="approve-btn ghost" id="confCancel">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- toast (status announcements) -->
+          <div class="toast" id="toast" role="status" hidden></div>
+
+          <!-- templates for dynamic message parts -->
+          <template id="tpl-user"><div class="msg-user-row"><div class="bubble-user"></div><span class="tag">alignment UNVERIFIED</span></div></template>
+          <template id="tpl-claude"><div class="msg-claude"><div class="claude-text"><p></p></div></div></template>
+          <template id="tpl-thinking"><div class="thinking-live"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6.5V10l2.5 1.5"/></svg><span>Thinking · <span class="t-sec">0</span>s</span></div></template>
+          <template id="tpl-error"><div class="err-block"><p class="err-text"></p><button type="button" class="retry-btn">Retry</button><span class="tag" style="margin-left:.375rem">retry-control visual UNVERIFIED</span></div></template>
+
+        </div><!-- /studied -->
+
+
+        <!-- simulated device chrome: gesture strip (assumed inset — UNVERIFIED) -->
+        <div class="vp-gesture" id="vpGesture">
+          <span class="home-bar" aria-hidden="true"></span>
+          <span class="dtag" style="position:absolute;right:10px" title="Gesture strip is an assumed inset (UNVERIFIED) — no One UI safe-area claim">inset UNVERIFIED</span>
+        </div>
+
+        <!-- simulated keyboard (QA harness control — not part of the studied UI) -->
+        <div class="kb" id="kbSim" hidden aria-hidden="true">
+          <div class="kb-label">SIMULATED KEYBOARD — QA HARNESS CONTROL (not studied UI)</div>
+          <div class="kb-row"><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span></div>
+          <div class="kb-row"><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span></div>
+          <div class="kb-row"><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key"></span></div>
+          <div class="kb-row"><span class="kb-key"></span><span class="kb-key"></span><span class="kb-key space"></span><span class="kb-key"></span><span class="kb-key"></span></div>
+        </div>
+
+        <!-- safe-area visualization overlays (QA control — assumed insets) -->
+        <div class="sa sa-top" id="saTop" hidden aria-hidden="true">assumed inset (UNVERIFIED)</div>
+        <div class="sa sa-bot" id="saBot" hidden aria-hidden="true">assumed inset (UNVERIFIED)</div>
+
+      </div>
+    </div>
+    <p class="frame-caption" id="frameCaption" aria-live="polite"></p>
+  </section>
+
+  <!-- ============================ QA PANEL (harness) ============================ -->
+  <aside class="qa" aria-label="QA harness panel">
+    <h2 class="qa-title">QA / HARNESS CONTROLS <span>— not part of the studied UI</span></h2>
+
+    <section>
+      <h3>Device preset (frame)</h3>
+      <div class="seg" role="radiogroup" aria-label="Device preset">
+        <label><input type="radio" name="dev" value="s25"><span>Galaxy S25</span></label>
+        <label><input type="radio" name="dev" value="s25p"><span>Galaxy S25+</span></label>
+        <label><input type="radio" name="dev" value="s25u" checked><span>Galaxy S25 Ultra</span></label>
+      </div>
+      <p class="hint">Outer aspect from official mm (2.084 / 2.090 / 2.098). Frames are proportion studies only — no claim of hardware pixels, DPR, or One UI safe areas.</p>
+    </section>
+
+    <section>
+      <h3>Inner viewport width (CSS px)</h3>
+      <div class="seg" role="radiogroup" aria-label="Inner viewport width in CSS pixels">
+        <label><input type="radio" name="vpw" value="320"><span>320</span></label>
+        <label><input type="radio" name="vpw" value="360" checked><span>360</span></label>
+        <label><input type="radio" name="vpw" value="390"><span>390</span></label>
+        <label><input type="radio" name="vpw" value="430"><span>430</span></label>
+      </div>
+      <p class="hint">Height = width × 2.167 (screen aspect; 19.5:9 computed — INFERRED). Independent of the frame preset.</p>
+    </section>
+
+    <section>
+      <h3>Text scale (studied-UI root, rem)</h3>
+      <div class="seg" role="radiogroup" aria-label="Text scale">
+        <label><input type="radio" name="tscale" value="100" checked><span>100%</span></label>
+        <label><input type="radio" name="tscale" value="130"><span>130%</span></label>
+        <label><input type="radio" name="tscale" value="200"><span>200%</span></label>
+      </div>
+    </section>
+
+    <section>
+      <h3>Motion</h3>
+      <div class="seg" role="radiogroup" aria-label="Motion mode">
+        <label><input type="radio" name="motion" value="normal" checked><span>Normal</span></label>
+        <label><input type="radio" name="motion" value="reduced"><span>Reduced</span></label>
+      </div>
+      <p class="hint">prefers-reduced-motion is honored by default. The thinking timer is numeric text in both modes (reduced-motion-safe).</p>
+    </section>
+
+    <section>
+      <h3>Theme (studied UI)</h3>
+      <div class="seg" role="radiogroup" aria-label="Theme">
+        <label><input type="radio" name="theme" value="light" checked><span>Light</span></label>
+        <label><input type="radio" name="theme" value="dark"><span>Dark</span></label>
+      </div>
+      <p class="hint">Dark values beyond the measured #262624 / #3D3D3A / #575755 are INFERRED — a visible tag appears inside the studied UI in dark mode. Also settable from the studied UI's Settings sheet ("Match System" included there).</p>
+    </section>
+
+    <section>
+      <h3>Overlays (simulation)</h3>
+      <label class="sw"><input type="checkbox" id="kbToggle"><i></i><span>Keyboard simulation (raises composer)</span></label>
+      <label class="sw"><input type="checkbox" id="saToggle"><i></i><span>Safe-area overlay stripes (assumed insets)</span></label>
+    </section>
+
+    <section>
+      <h3>Scenario triggers (demo)</h3>
+      <button type="button" class="btn" id="btnArm">Next send → capacity error</button>
+      <button type="button" class="btn" id="btnReset">Reset conversation</button>
+      <button type="button" class="btn" id="btnSample">Load sample conversation</button>
+      <p class="hint">Capacity scenario renders the DOCUMENTED verbatim string with a Retry action; retry then succeeds. All other flows are stubbed toasts — no invented workflows.</p>
+    </section>
+
+    <section>
+      <h3>Live checks</h3>
+      <div id="valuesLine">—</div>
+      <ul class="checks" id="checksList"></ul>
+    </section>
+
+    <section class="ev">
+      <h3>Evidence panel — research notes (outside the studied UI)</h3>
+      <p class="hint" style="margin:0 0 4px">Two-tier citation: official tokens (DOCUMENTED) vs raster measurements (MEASURED-approx, ±2–4 RGB). Measured values are never presented as tokens. Sources are cited as bare domains/paths — the prototype makes no requests at runtime. Labels: OBSERVED / MEASURED / DOCUMENTED / INFERRED / UNVERIFIED.</p>
+
+      <details open>
+        <summary>GREEN — represented in the studied UI, with label + source</summary>
+        <div class="ev-body"><ul>
+          <li><span class="lbl g">DOC</span>Chat canvas <b>#FAF9F5</b> — claude.ai CSS token gray-050 / background-primary (T1). MEASURED ≈31% of capture 07 corroborates.</li>
+          <li><span class="lbl g">DOC</span>Cards/sheets white <b>#FFFFFF</b> (gray-000) on cream canvas — claude.ai CSS token; white cards OBSERVED in captures.</li>
+          <li><span class="lbl g">DOC</span>Tint <b>#F0EEE6</b> · chip tint <b>#E8E6DC</b> · hairline borders #E8E6DC / #D1CFC5 / #B0AEA5 (1px) — official tokens; border widths approx.</li>
+          <li><span class="lbl g">OBS</span>Soft shadow presence on cards/composer (values unmeasured — illustrative <b>0 2px 8px rgba(20,20,19,.06)</b>).</li>
+          <li><span class="lbl g">DOC</span>User message bubble fill <b>#D1CFC5</b> (gray-300) — official ramp; MEASURED #d5d5d1–#d7d6cf (approx, cited only, never used as a value). Max-width ≈65–75% (MEASURED-approx; rendered at 72%). Radius 20px approx.</li>
+          <li><span class="lbl g">OBS</span>Claude reply = plain ink text <b>#141413</b> on canvas, no bubble/avatar — captures 01/04/05/08.</li>
+          <li><span class="lbl g">DOC</span>Secondary #30302E · tertiary #5E5D59 · placeholder/icon gray #87867F — official tokens.</li>
+          <li><span class="lbl g">OBS</span>Composer row, left→right: [circular "+"] [white model pill "Opus"] [gray placeholder] [mic icon] [circular clay send with up-arrow] — captures 05/09. Model menu next to send DOCUMENTED (support.claude.com article 8664678); dictation mic on right side DOCUMENTED; placeholder text "Chat with Claude" OBSERVED capture 09.</li>
+          <li><span class="lbl g">DOC</span>Send button clay <b>#D97757</b> (MEASURED ≈#d9795a corroborates — cited only) · pressed/hover <b>#C96442</b> (clay-interactive / button-brand role).</li>
+          <li><span class="lbl g">OBS</span>Empty state shows no send arrow — capture 09 (marketing-stylized; caveat retained).</li>
+          <li><span class="lbl g">OBS</span>New-chat landing: serif greeting "What are you thinking?" + spark mark — capture 09 (typeface UNVERIFIED → substituted serif; spark drawing approximate).</li>
+          <li><span class="lbl g">OBS</span>Top bar: menu control top-left; circular "+" and "⋯" top-right — app-UI captures. "⋯"(iOS)/"⋮"(Android) + Share DOCUMENTED (support).</li>
+          <li><span class="lbl g">OBS</span>No bottom tab bar in any official capture — navigation is the top bar + drawer.</li>
+          <li><span class="lbl g">DOC</span>Expandable "Thinking · Ns" section with timer — support.claude.com article 8664678 (visuals UNVERIFIED → tagged).</li>
+          <li><span class="lbl g">DOC</span>Code entry in the app's navigation; session list; computer icon + green status dot when online; permission modes cloud = Accept edits / Plan / Auto, remote = Manual / Accept edits / Plan (never Bypass/Auto) — code.claude.com/docs/en/mobile + /remote-control.</li>
+          <li><span class="lbl g">DOC</span>Diff indicator format "+42 -18" — Claude Code mobile docs.</li>
+          <li><span class="lbl g">DOC</span>Error strings, verbatim: "Due to unexpected capacity constraints, Claude is unable to respond to your message. Please try again soon." · "Approaching 5-hour limit." · "5-hour limit reached - resets [time]" · "5-hour limit resets [time] - continuing with usage credits." · "Your message will exceed the length limit for this chat. Try attaching fewer or smaller files or starting a new conversation." · "Uploaded file is too large" · "No shared content found" — support.claude.com error article. Only the capacity string is triggered in this prototype.</li>
+          <li><span class="lbl g">DOC</span>Model sheet contents: model list incl. "More models"; Effort Low / Medium / High / Extra high / Max with "Default" marker; Thinking "Extended" toggle — support article 8664678.</li>
+          <li><span class="lbl g">DOC</span>"Add files or photos" wording — upload-files support article.</li>
+          <li><span class="lbl g">OBS</span>Attachment chips with thumbnail + DOC/PDF badges — captures 01/05/08.</li>
+          <li><span class="lbl g">DOC</span>Rename / Delete conversation controls; delete confirmation persists until answered — rename/delete support article.</li>
+          <li><span class="lbl g">DOC</span>Color mode options Light / Match System / Dark — appearance support article (web-worded; mobile location UNVERIFIED → tagged).</li>
+          <li><span class="lbl g">DOC</span>Cowork chip wording + bottom-left of the message box — "Cowork on mobile" support article (placement INFERRED → tagged).</li>
+          <li><span class="lbl g">DOC</span>Voice-mode sound-wave icon exists next to the mic in the text input — voice-mode support article (glyph UNVERIFIED → tagged, interaction stubbed).</li>
+          <li><span class="lbl g">OBS</span>Success green / "Connected" online state — capture 07 + remote-control doc (green dot DOCUMENTED). Error red <b>#B53333</b> = official error-text token.</li>
+          <li><span class="lbl g">OBS</span>White "Approve"-style hairline button on cards — capture 07 pattern; forwarded permission dialogs persist until answered (DOCUMENTED).</li>
+          <li><span class="lbl g">DOC</span>Device frames: Galaxy S25 / S25+ / S25 Ultra naming, 6.2"/6.7"/6.9" displays, 146.9×70.5×7.2 / 158.4×75.8×7.3 / 162.8×77.6×8.2 mm, 162/190/218 g — Samsung official spec pages (UK/FR) + official newsroom (T1). Aspects 19.5:9 COMPUTED (INFERRED). S25+ exact pixels: T3-agreed APPROXIMATE (official class label is "QHD+" only).</li>
+        </ul></div>
+      </details>
+
+      <details open>
+        <summary>YELLOW — represented only with a visible tag (tag text → where)</summary>
+        <div class="ev-body"><ul>
+          <li><span class="lbl y">TAG</span><b>"placement INFERRED"</b> → initials chip "ZD" in the top bar (entry DOCUMENTED, placement INFERRED) and the Cowork chip (wording/placement DOCUMENTED per article, geometry INFERRED).</li>
+          <li><span class="lbl y">TAG</span><b>"alignment UNVERIFIED"</b> → every user bubble. Evidence is contradictory (near-symmetric margins; VLM readings conflict) — the left-hugging placement is an INFERRED choice.</li>
+          <li><span class="lbl y">TAG</span><b>"visuals INFERRED"</b> → expandable Thinking section (behavior DOCUMENTED, visuals UNVERIFIED) and the drawer panel itself.</li>
+          <li><span class="lbl y">TAG</span><b>"code-block styling UNVERIFIED — dark values are the measured artifact-surface tokens used as hypothesis"</b> → the dark #262624 code block (no copy affordance — unverified, omitted).</li>
+          <li><span class="lbl y">TAG</span><b>"sheet visuals INFERRED · contents DOCUMENTED"</b> → model sheet; <b>"wording DOCUMENTED · sheet visuals INFERRED"</b> → attachment sheet; <b>"menu visuals INFERRED · Rename/Delete DOCUMENTED"</b> → overflow menu; <b>"location on mobile UNVERIFIED"</b> → settings sheet.</li>
+          <li><span class="lbl y">TAG</span><b>"INFERRED"</b> → drawer entries Chats and Settings; <b>"DOCUMENTED"</b> chip on the Code entry; drawer note "Drawer contents beyond the Code entry: UNVERIFIED."</li>
+          <li><span class="lbl y">TAG</span><b>"chrome INFERRED — structure DOCUMENTED"</b> → Code-mode surface header + new-session composer; <b>"session-list visuals INFERRED · green-dot / computer-icon / diff-indicator DOCUMENTED"</b> → session list; <b>"diff colors UNVERIFIED"</b> → diff pane (standard +/− tints are a hypothesis).</li>
+          <li><span class="lbl y">TAG</span><b>"glyph UNVERIFIED"</b> → voice-mode sound-wave icon (existence DOCUMENTED); <b>"pill styling INFERRED"</b> → model pill; "+ button style" (border/chevron UNVERIFIED) → composer "+" (tooltip).</li>
+          <li><span class="lbl y">TAG</span><b>"retry-control visual UNVERIFIED"</b> → the Retry affordance in the capacity-error block (string DOCUMENTED; control visual UNVERIFIED).</li>
+          <li><span class="lbl y">TAG</span><b>"inset UNVERIFIED"</b> → status strip and gesture strip (drawn, assumed insets; punch-hole dot is cosmetic). No One UI safe-area claim anywhere.</li>
+          <li><span class="lbl y">TAG</span><b>Dark palette note</b> → visible dashed note card at the top of the conversation in dark mode: only #262624 / #3D3D3A / #575755 are MEASURED (artifact surface); all other dark values are INFERRED.</li>
+          <li><span class="lbl y">TAG</span><b>"spark: OBSERVED existence · drawing approximate"</b> → the 8-ray CSS asterisk in the empty state (generic mark, not the proprietary logo).</li>
+          <li><span class="lbl y">TAG</span>Type family/scale: system stacks stand in for Anthropic Sans/Serif/Mono — font substitution note in the harness header; mobile type family INFERRED, exact scale UNVERIFIED. Radii, border widths, shadow values, composer/top-bar heights are approximations (labels propagated, not precision).</li>
+        </ul></div>
+      </details>
+
+      <details>
+        <summary>RED — omitted entirely (not represented anywhere in this file)</summary>
+        <div class="ev-body"><ul>
+          <li>Onboarding / login / signup / auth screens.</li>
+          <li>Chat-list and Code-tab empty states beyond the documented "No shared content found" string (which is cited, not staged).</li>
+          <li>Voice-mode UI (capture 02 is photographic marketing) — only the DOCUMENTED icon existence is represented, tagged and stubbed.</li>
+          <li>"Tools" grid (capture 03 — marketing composite); Dispatch notification cards & camera FAB (capture 06 — photographic marketing).</li>
+          <li>Widgets, lock-screen / Control-Center / Action-button / Siri surfaces (OS-level, no visuals).</li>
+          <li>iPad layout; landscape / split-screen behavior.</li>
+          <li>Age-rating badge (17+ vs 18+ conflict); any version / rating / size stated as current fact (store-listing facts are volatile — not cited at all here).</li>
+          <li>#C6613F (anthropic.com marketing accent) as an app-UI color — different official token set; excluded by rule. The measured #d9795a is likewise never used as a value, only cited as corroboration of #D97757.</li>
+          <li>Invented workflows, decorative animations, haptics or sound claims; message action rows (copy/retry/edit menus) beyond the tagged Retry demo.</li>
+        </ul></div>
+      </details>
+
+      <details>
+        <summary>Hex provenance — official token vs measured approximation</summary>
+        <div class="ev-body">
+        <table>
+          <tr><th>Value</th><th>Role in this prototype</th><th>Provenance</th></tr>
+          <tr><td><span class="sw-chip" style="background:#FAF9F5"></span><b>#FAF9F5</b></td><td>light canvas (also dark text)</td><td>official token gray-050 (claude.ai CSS) — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#FFFFFF"></span><b>#FFFFFF</b></td><td>cards, sheets, composer pill</td><td>official token gray-000 — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#F0EEE6"></span><b>#F0EEE6</b></td><td>tint surfaces (initials, icons)</td><td>official token — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#E8E6DC"></span><b>#E8E6DC</b></td><td>chip tint + hairline borders</td><td>official token gray-200 — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#D1CFC5"></span><b>#D1CFC5</b></td><td>user-bubble fill</td><td>official token gray-300 — DOCUMENTED (measured #d5d5d1–#d7d6cf cited only)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#B0AEA5"></span><b>#B0AEA5</b></td><td>border-400</td><td>official token gray-400 — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#87867F"></span><b>#87867F</b></td><td>placeholder text</td><td>official token gray-500 — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#141413"></span><b>#141413</b></td><td>ink text, ink buttons</td><td>official token foreground-primary — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#30302E"></span><b>#30302E</b></td><td>secondary text (+ dark bubble, INFERRED reuse)</td><td>official token — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#5E5D59"></span><b>#5E5D59</b></td><td>tertiary text, tag chips</td><td>official token — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#D97757"></span><b>#D97757</b></td><td>send button, spark mark, switch-active tint</td><td>official token clay — DOCUMENTED (measured ≈#d9795a cited as corroboration only)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#C96442"></span><b>#C96442</b></td><td>send pressed/hover</td><td>official token clay-interactive — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#B53333"></span><b>#B53333</b></td><td>error text, delete action</td><td>official token error-text — DOCUMENTED</td></tr>
+          <tr><td><span class="sw-chip" style="background:#1490FF"></span><b>#1490FF</b></td><td>not rendered — cited only</td><td>MEASURED-approx (status dots; possibly an OS system token, not a brand token)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#2F7D46"></span><b>#2F7D46</b></td><td>online status dot</td><td>approx — measured only as "green" (dot existence DOCUMENTED)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#6E6B96"></span><b>#6E6B96</b></td><td>not rendered — cited only</td><td>MEASURED-approx (muted-violet "ANSWER"-style pill; artifact content only)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#262624"></span><b>#262624</b></td><td>code block; dark card</td><td>MEASURED-approx (dark artifact surface; matches official gray-800 ramp)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#3D3D3A"></span><b>#3D3D3A</b></td><td>dark tint/borders</td><td>MEASURED-approx (matches official gray-700)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#575755"></span><b>#575755</b></td><td>dark border-400</td><td>MEASURED-approx (gray-600/650 region)</td></tr>
+          <tr><td><span class="sw-chip" style="background:#1F1E1D"></span><b>#1F1E1D</b></td><td>dark canvas</td><td>INFERRED (hypothesis — tagged in dark mode)</td></tr>
+        </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Method &amp; harness conventions (not app evidence)</summary>
+        <div class="ev-body"><ul>
+          <li><b>Evidence tag chips</b> ("INFERRED" / "UNVERIFIED" …) are px-fixed annotations of the research layer: they intentionally do not scale with the studied UI's rem text-scale control, so they never distort the app layout being measured.</li>
+          <li><b>Contrast</b> (computed on the documented tokens): ink #141413 on canvas #FAF9F5 = 17.50:1 (AAA) · error #B53333 on white = 5.72:1 (AA) · white on clay #D97757 = 3.12:1 — a UI-component pass only, so clay fills are kept to large controls (send button, bold icon) per the documented limitation.</li>
+          <li><b>Focus outlines</b> (2px ink ring) are a QA-harness convention for keyboard operability — not an observed app style.</li>
+          <li><b>Text-scale control</b> changes the document root font-size; the studied UI is authored entirely in rem so it scales, while the harness (px) does not. This scaling mechanism is a harness convention.</li>
+          <li><b>Keyboard simulation</b> and <b>safe-area stripes</b> are QA overlays — never claimed to reproduce One UI behavior.</li>
+          <li><b>Frame geometry</b>: outer aspect from official mm; inner viewport 320–430 CSS px at 2.167. Proportions only — no hardware pixels, DPR, or One UI safe areas.</li>
+          <li><b>Verbatim strings</b> are quoted exactly as documented; nothing paraphrases inside quotation marks. Dummy content is intentionally generic.</li>
+          <li><b>Interaction inventory</b> (documented behaviors only): send → numeric thinking timer → scripted dummy reply; capacity-error scenario + Retry (succeeds); drawer with Code entry; model sheet (models / Effort / Thinking "Extended"); attachment sheet → chips; Rename (stub) / Delete → persisting confirm; settings color mode; Code-mode sessions, mode dropdown with cloud vs remote option sets, new-session composer (queued toast), diff pane, persisting permission prompt. All other controls are labeled stubs.</li>
+          <li>Store-listing volatile facts (version/ratings/size) are intentionally absent.</li>
+        </ul></div>
+      </details>
+    </section>
+  </aside>
+</main>
+
+<script>
+'use strict';
+/* =====================================================================
+   JS part 1 — harness state, device-frame math, QA wiring, live checks.
+   (Harness logic only; studied-UI interactions live in part 2.)
+   ===================================================================== */
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+/* Official frame data (T1 Samsung; aspects computed from mm — INFERRED labels
+   are carried in the caption text, never claimed as hardware fidelity). */
+const DEVICES = {
+  s25: {
+    key: 's25', name: 'Galaxy S25', aspect: 2.084, screenRadius: 16,
+    dims: '146.9 × 70.5 × 7.2 mm', weight: '162 g',
+    display: '6.2″ display · 2340×1080 FHD+ (official)'
+  },
+  s25p: {
+    key: 's25p', name: 'Galaxy S25+', aspect: 2.090, screenRadius: 16,
+    dims: '158.4 × 75.8 × 7.3 mm', weight: '190 g',
+    display: '6.7″ display · QHD+ class (official) · 3120×1440 = T3-agreed APPROXIMATE'
+  },
+  s25u: {
+    key: 's25u', name: 'Galaxy S25 Ultra', aspect: 2.098, screenRadius: 8,
+    dims: '162.8 × 77.6 × 8.2 mm', weight: '218 g',
+    display: '6.9″ display · 3120×1440 QHD+ (official)'
+  }
+};
+
+/* Harness state */
+const S = {
+  device: 's25u', width: 360, vh: 780,
+  scale: 100, motion: 'normal', theme: 'light',
+  kb: false, sa: false, mode: 'chat', armed: false,
+  frameW: 0, frameH: 0
+};
+
+/* ---------- device frame + viewport sizing ---------- */
+function applyFrame() {
+  const d = DEVICES[S.device];
+  const vp = $('viewport'), dev = $('device');
+  const W = S.width;
+  const WH = Math.round(W * 2.167);       // screen aspect 2.167 (19.5:9 computed, INFERRED)
+  const VB = 4;                            // small top/bottom bezel so the frame keeps its official outer ratio
+  const FH = WH + 2 * VB;
+  const FW = Math.round(FH / d.aspect);
+  S.vh = WH; S.frameW = FW; S.frameH = FH;
+  dev.style.width = FW + 'px';
+  dev.style.height = FH + 'px';
+  dev.className = 'device ' + S.device;
+  vp.style.width = W + 'px';
+  vp.style.height = WH + 'px';
+  vp.style.borderRadius = d.screenRadius + 'px';
+  $('frameCaption').innerHTML =
+    '<b>' + d.name + '</b> — ' + d.display +
+    ' · outer aspect <b>' + d.aspect + '</b> (computed from official ' + d.dims + ', ' + d.weight + ')' +
+    ' · outer ' + FW + '×' + FH + ' px (harness render) · inner viewport <b>' + W + '×' + WH + ' CSS px</b>' +
+    ' (aspect 2.167; 19.5:9 computed — INFERRED) · proportions only: <b>NOT</b> hardware pixels, DPR, or One UI safe areas — ' +
+    'status & gesture strips are assumed insets (UNVERIFIED) · frame visuals are a harness approximation.';
+  applyKbHeight();
+  runChecks();
+}
+
+function applyKbHeight() {
+  const vp = $('viewport');
+  const kbH = clamp(Math.round(S.vh * 0.42), 200, 430);
+  vp.style.setProperty('--kb-h', kbH + 'px');
+}
+
+/* ---------- theme / motion / scale ---------- */
+function resolvedTheme() {
+  if (S.theme === 'system') {
+    return (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  return S.theme;
+}
+function applyTheme(mode) {
+  S.theme = mode;
+  const r = resolvedTheme();
+  $('studied').dataset.theme = r;
+  $('viewport').dataset.apptheme = r;
+  const qa = document.querySelector('input[name="theme"][value="' + r + '"]');
+  if (qa) qa.checked = true;
+  document.querySelectorAll('#sheetSettings .opt[data-cmode]').forEach(b => {
+    const on = b.getAttribute('data-cmode') === mode;
+    b.classList.toggle('sel', on);
+    b.setAttribute('aria-checked', on ? 'true' : 'false');
+  });
+  runChecks();
+}
+
+/* ---------- live checks ---------- */
+function runChecks() {
+  const vp = $('viewport'), studied = $('studied');
+  if (!vp || !studied) return;
+  const conv = $('conv'), codeScroll = $('codeScroll');
+  const owner = (S.mode === 'chat') ? conv : codeScroll;
+  const rows = [];
+
+  // 1 · portrait orientation
+  const vpw = vp.clientWidth, vph = vp.clientHeight;
+  rows.push(['Portrait orientation', vph > vpw ? 'pass' : 'fail',
+    'viewport ' + vpw + '×' + vph + ' CSS px (H/W = ' + (vph / vpw).toFixed(3) + ')']);
+
+  // 2 · top status area
+  const stH = $('vpStatus').offsetHeight;
+  rows.push(['Top status area', stH > 0 ? 'pass' : 'fail',
+    stH + 'px — assumed inset (UNVERIFIED), punch-hole dot drawn cosmetic']);
+
+  // 3 · bottom gesture area
+  const gsH = $('vpGesture').offsetHeight;
+  rows.push(['Bottom gesture area', gsH > 0 ? 'pass' : 'fail',
+    gsH + 'px — assumed inset (UNVERIFIED), home-indicator bar drawn cosmetic']);
+
+  // 4 · safe-area padding (assumption — insets are UNVERIFIED)
+  const cpr = getComputedStyle($('composerRegion'));
+  const tbr = getComputedStyle($('chatTopbar'));
+  const padB = parseFloat(cpr.paddingBottom) || 0;
+  const padT = parseFloat(tbr.paddingTop) || 0;
+  const saOK = padB >= 8 && padT >= 4;
+  rows.push(['Safe-area padding', saOK ? 'assume' : 'fail',
+    saOK ? 'padding present (top ' + padT + 'px / bottom ' + padB + 'px) — inset VALUES are assumptions (UNVERIFIED; no One UI claim)'
+         : 'padding missing (top ' + padT + 'px / bottom ' + padB + 'px)']);
+
+  // 5 · keyboard expansion
+  if (!S.kb) {
+    rows.push(['Keyboard expansion', 'info', 'simulation off']);
+  } else {
+    const kb = $('kbSim').getBoundingClientRect();
+    const bottomCtrl = (S.mode === 'chat') ? $('composerRegion') : $('codeNew');
+    const cr = bottomCtrl.getBoundingClientRect();
+    const ok = cr.bottom <= kb.top + 1;
+    rows.push(['Keyboard expansion', ok ? 'pass' : 'fail',
+      ok ? 'composer clears the simulated keyboard (kb height ' + $('kbSim').offsetHeight + 'px)'
+         : 'composer overlapped by the simulated keyboard']);
+  }
+
+  // 6 · scroll ownership
+  const oy = getComputedStyle(owner).overflowY;
+  const ownerScrolls = (oy === 'auto' || oy === 'scroll');
+  const bodyContained = studied.scrollHeight <= studied.clientHeight + 1 &&
+                        studied.scrollWidth <= studied.clientWidth + 1 &&
+                        vp.scrollWidth <= vp.clientWidth + 1;
+  rows.push(['Scroll ownership', (ownerScrolls && bodyContained) ? 'pass' : 'fail',
+    (S.mode === 'chat' ? 'conversation' : 'session area') + ' owns scroll (overflow-y: ' + oy + '); header/composer fixed; ' +
+    (bodyContained ? 'no body scroll inside the viewport' : 'BODY SCROLL DETECTED inside the viewport')]);
+
+  // 7 · overflow auto-detection (scrollWidth vs clientWidth at width × text scale)
+  const d1 = owner.scrollWidth - owner.clientWidth;
+  const d2 = studied.scrollWidth - studied.clientWidth;
+  rows.push(['Overflow (scrollWidth vs clientWidth)', (d1 <= 0 && d2 <= 0) ? 'pass' : 'fail',
+    'scroll Δ ' + d1 + 'px (scroll owner) · ' + d2 + 'px (app root) at width ' + S.width + 'px × text scale ' + S.scale + '%' +
+    ((d1 <= 0 && d2 <= 0) ? '' : ' — content wider than viewport at this combination')]);
+
+  // render
+  const list = $('checksList');
+  list.innerHTML = '';
+  rows.forEach(r => {
+    const li = document.createElement('li');
+    const st = document.createElement('span');
+    st.className = 'st ' + r[1];
+    st.textContent = r[1] === 'pass' ? 'PASS' : (r[1] === 'fail' ? 'FAIL' : (r[1] === 'assume' ? 'ASSUMED' : 'INFO'));
+    const cd = document.createElement('span');
+    cd.className = 'cd';
+    cd.textContent = r[0] + ' — ' + r[2];
+    li.appendChild(st); li.appendChild(cd);
+    list.appendChild(li);
+  });
+
+  const d = DEVICES[S.device];
+  $('valuesLine').innerHTML = 'frame: <b>' + d.name + '</b> · outer ratio <b>' + d.aspect + '</b> · outer ' +
+    S.frameW + '×' + S.frameH + ' px · viewport <b>' + S.width + '×' + S.vh + '</b> CSS px · text scale <b>' +
+    S.scale + '%</b> · theme <b>' + resolvedTheme() + '</b> · mode <b>' + S.mode + '</b>';
+}
+
+/* ---------- harness control wiring ---------- */
+function segWire(name, fn) {
+  document.querySelectorAll('input[name="' + name + '"]').forEach(r => {
+    r.addEventListener('change', () => fn(r.value));
+  });
+}
+segWire('dev',   v => { S.device = v; applyFrame(); });
+segWire('vpw',   v => { S.width = parseInt(v, 10); applyFrame(); });
+segWire('tscale', v => {
+  S.scale = parseInt(v, 10);
+  const h = document.documentElement;
+  h.classList.remove('ts130', 'ts200');
+  if (S.scale === 130) h.classList.add('ts130');
+  if (S.scale === 200) h.classList.add('ts200');
+  requestAnimationFrame(runChecks);
+});
+segWire('motion', v => {
+  S.motion = v;
+  document.documentElement.classList.toggle('rm', v === 'reduced');
+});
+segWire('theme', v => applyTheme(v));
+
+$('kbToggle').addEventListener('change', e => {
+  S.kb = e.target.checked;
+  $('viewport').classList.toggle('kb', S.kb);
+  $('kbSim').hidden = !S.kb;
+  runChecks();
+});
+$('saToggle').addEventListener('change', e => {
+  S.sa = e.target.checked;
+  $('saTop').hidden = !S.sa;
+  $('saBot').hidden = !S.sa;
+});
+window.addEventListener('resize', () => { runChecks(); });
+window.addEventListener('load', runChecks);
+</script>
+
+<script>
+'use strict';
+/* =====================================================================
+   JS part 2 — studied-UI interactions (documented behaviors only).
+   ===================================================================== */
+
+/* ---------- toast (status announcements, no animation dependency) ---------- */
+let toastTimer = null;
+function toast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
+}
+
+/* ---------- conversation engine ---------- */
+const CAPACITY_ERROR = 'Due to unexpected capacity constraints, Claude is unable to respond to your message. Please try again soon.';
+const RESPONSES = [
+  'Understood — a concise dummy reply: keep the scope small, ship the thin slice first, then iterate. (Scripted demo content.)',
+  'Here are two dummy options: (1) outline first, then draft; (2) draft immediately and revise twice. (Scripted demo content.)'
+];
+let respIdx = 0;
+
+const convEl = $('conv');
+/* capture the seeded sample-conversation markup once, for "Load sample" */
+const SEED_HTML = (function () {
+  const parts = [];
+  convEl.querySelectorAll('.msg-user-row, .msg-claude').forEach(n => parts.push(n.outerHTML));
+  return parts.join('\n');
+})();
+
+function scrollConv() {
+  requestAnimationFrame(() => { convEl.scrollTop = convEl.scrollHeight; runChecks(); });
+}
+function hideEmpty() { $('emptyState').hidden = true; }
+function appendUser(text) {
+  const node = $('tpl-user').content.firstElementChild.cloneNode(true);
+  node.querySelector('.bubble-user').textContent = text;
+  convEl.appendChild(node);
+  hideEmpty();
+  scrollConv();
+}
+function appendResponse(text) {
+  const node = $('tpl-claude').content.firstElementChild.cloneNode(true);
+  node.querySelector('p').textContent = text;
+  convEl.appendChild(node);
+  scrollConv();
+}
+function startThinking() {
+  const node = $('tpl-thinking').content.firstElementChild.cloneNode(true);
+  convEl.appendChild(node);
+  scrollConv();
+  let s = 0;
+  const iv = setInterval(() => {           // numeric seconds only — reduced-motion-safe
+    s++;
+    node.querySelector('.t-sec').textContent = s;
+    if (s >= 2) {
+      clearInterval(iv);
+      node.remove();
+      appendResponse(RESPONSES[respIdx++ % RESPONSES.length]);
+    }
+  }, 1000);
+}
+function appendCapacityError() {
+  const node = $('tpl-error').content.firstElementChild.cloneNode(true);
+  node.querySelector('.err-text').textContent = CAPACITY_ERROR;   // verbatim, DOCUMENTED
+  node.querySelector('.retry-btn').addEventListener('click', () => {
+    node.remove();
+    startThinking();                       // retry succeeds
+  });
+  convEl.appendChild(node);
+  scrollConv();
+}
+function updateSend() {
+  const empty = !$('msgInput').value.trim();
+  $('btnSend').classList.toggle('empty', empty);
+}
+function sendMessage() {
+  const inp = $('msgInput');
+  const text = inp.value.trim();
+  if (!text) return;
+  appendUser(text);
+  inp.value = '';
+  updateSend();
+  if (S.armed) {
+    disarm();
+    setTimeout(appendCapacityError, 500);
+  } else {
+    setTimeout(startThinking, 400);
+  }
+}
+$('btnSend').addEventListener('click', sendMessage);
+$('msgInput').addEventListener('input', updateSend);
+$('msgInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
+});
+
+/* expandable Thinking section (seeded sample) */
+convEl.addEventListener('click', e => {
+  const btn = e.target.closest('.thinking');
+  if (!btn) return;
+  const body = btn.closest('.msg-claude') && btn.closest('.msg-claude').querySelector('.thinking-body');
+  if (!body) return;
+  const open = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+  body.hidden = open;
+});
+
+/* ---------- scenario triggers (harness) ---------- */
+function disarm() {
+  S.armed = false;
+  const b = $('btnArm');
+  b.classList.remove('armed');
+  b.textContent = 'Next send → capacity error';
+}
+$('btnArm').addEventListener('click', () => {
+  S.armed = !S.armed;
+  const b = $('btnArm');
+  if (S.armed) {
+    b.classList.add('armed');
+    b.textContent = 'ARMED — next send renders the capacity error (click to disarm)';
+  } else {
+    disarm();
+  }
+});
+function resetConversation() {
+  convEl.querySelectorAll('.msg-user-row, .msg-claude, .thinking-live, .err-block').forEach(n => n.remove());
+  $('emptyState').hidden = false;
+  const row = $('attachRow');
+  row.innerHTML = '';
+  row.hidden = true;
+  $('msgInput').value = '';
+  updateSend();
+  runChecks();
+}
+$('btnReset').addEventListener('click', () => { resetConversation(); toast('Conversation reset (demo) — new-chat landing shown.'); });
+$('btnSample').addEventListener('click', () => {
+  resetConversation();
+  convEl.insertAdjacentHTML('beforeend', SEED_HTML);
+  $('emptyState').hidden = true;
+  runChecks();
+  toast('Sample conversation loaded (dummy content).');
+});
+
+/* ---------- sheets: open / close / focus trap / Esc ---------- */
+const openSheets = [];
+function openSheet(id, opener) {
+  const el = $(id);
+  if (!el || !el.hidden) return;
+  el.hidden = false;
+  el.__opener = opener || document.activeElement;
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('open')));
+  openSheets.push(id);
+  const f = el.querySelector('[data-autofocus]') || el.querySelector('button,select,input,textarea');
+  if (f) f.focus();
+}
+function closeSheet(id) {
+  const el = $(id);
+  if (!el || el.hidden) return;
+  el.classList.remove('open');
+  const panel = el.querySelector('.sheet-panel');
+  const dur = parseFloat(getComputedStyle(panel).transitionDuration) || 0;
+  const wait = (S.motion === 'reduced' || document.documentElement.classList.contains('rm')) ? 0 : dur * 1000;
+  setTimeout(() => {
+    el.hidden = true;
+    const i = openSheets.indexOf(id);
+    if (i > -1) openSheets.splice(i, 1);
+    if (el.__opener && el.__opener.isConnected && el.__opener.focus) el.__opener.focus();
+    el.__opener = null;
+  }, wait);
+}
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-close]');
+  if (c) closeSheet(c.getAttribute('data-close'));
+});
+function trapFocus(el, e) {
+  const items = Array.from(el.querySelectorAll('button,select,input,textarea,[href],[tabindex]:not([tabindex="-1"])'))
+    .filter(x => !x.disabled && x.offsetParent !== null);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+  else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  else if (!el.contains(document.activeElement)) { first.focus(); e.preventDefault(); }
+}
+document.addEventListener('keydown', e => {
+  const top = openSheets[openSheets.length - 1];
+  if (!top) return;
+  const el = $(top);
+  if (e.key === 'Escape') {
+    if (!el.classList.contains('persist')) closeSheet(top);   // persisting dialogs ignore Esc
+  } else if (e.key === 'Tab') {
+    trapFocus(el, e);
+  }
+});
+
+/* ---------- top bar / drawer / mode switching ---------- */
+$('btnMenu').addEventListener('click', e => openSheet('sheetDrawer', e.currentTarget));
+$('drawerCode').addEventListener('click', () => { closeSheet('sheetDrawer'); switchMode('code'); });
+$('drawerChats').addEventListener('click', () => { closeSheet('sheetDrawer'); toast('Chats entry is INFERRED — chat-list surface UNVERIFIED (stub, not represented).'); });
+$('drawerSettings').addEventListener('click', () => { closeSheet('sheetDrawer'); openSheet('sheetSettings'); });
+$('btnNewChat').addEventListener('click', () => toast('Top-right "+" — existence OBSERVED; behavior UNVERIFIED (stub).'));
+$('btnBackChat').addEventListener('click', () => switchMode('chat'));
+function switchMode(m) {
+  S.mode = m;
+  $('chatMode').hidden = (m !== 'chat');
+  $('codeMode').hidden = (m !== 'code');
+  if (m === 'code') setModeOptions(false, 'accept');
+  runChecks();
+}
+
+/* ---------- overflow menu + delete confirm (persists until answered) ---------- */
+$('btnOverflow').addEventListener('click', e => openSheet('sheetOverflow', e.currentTarget));
+$('ovRename').addEventListener('click', () => { closeSheet('sheetOverflow'); toast('Rename — DOCUMENTED control; stub only (no workflow in this prototype).'); });
+$('ovDelete').addEventListener('click', () => { closeSheet('sheetOverflow'); openSheet('dlgConfirm'); });
+$('confCancel').addEventListener('click', () => closeSheet('dlgConfirm'));
+$('confDelete').addEventListener('click', () => {
+  closeSheet('dlgConfirm');
+  resetConversation();
+  toast('Conversation deleted (demo) — the confirmation persisted until answered.');
+});
+
+/* ---------- model sheet ---------- */
+$('btnModel').addEventListener('click', e => openSheet('sheetModel', e.currentTarget));
+document.querySelectorAll('#sheetModel .opt[data-model]').forEach(b => {
+  b.addEventListener('click', () => {
+    if (b.getAttribute('data-model') === '__more') {
+      toast('"More models" — DOCUMENTED entry; the full list is beyond this prototype\'s scope.');
+      return;
+    }
+    document.querySelectorAll('#sheetModel .opt[data-model]').forEach(x => {
+      x.classList.toggle('sel', x === b);
+      x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+    });
+    $('modelPillLabel').textContent = b.getAttribute('data-model');
+    toast('Model set to ' + b.getAttribute('data-model') + ' (demo — selection state only).');
+  });
+});
+document.querySelectorAll('#sheetModel .opt[data-effort]').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#sheetModel .opt[data-effort]').forEach(x => {
+      x.classList.toggle('sel', x === b);
+      x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+    });
+  });
+});
+
+/* ---------- attachment sheet + chips ---------- */
+$('btnAttach').addEventListener('click', e => openSheet('sheetAttach', e.currentTarget));
+document.querySelectorAll('#sheetAttach .file-row').forEach(b => {
+  b.addEventListener('click', () => {
+    addAttachment(b.getAttribute('data-file'));
+    closeSheet('sheetAttach');
+  });
+});
+function addAttachment(kind) {
+  const row = $('attachRow');
+  row.hidden = false;
+  const meta = (kind === 'notes')
+    ? { name: 'Course notes.docx', badge: 'DOC' }
+    : { name: 'Results table.pdf', badge: 'PDF' };
+  const chip = document.createElement('div');
+  chip.className = 'attach-chip';
+  chip.innerHTML =
+    '<span class="attach-thumb" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6 3h6l3 3v11H6z"/><path d="M12 3v3h3"/></svg></span>' +
+    '<span class="a-name">' + meta.name + '</span>' +
+    '<span class="badge ' + kind + '">' + meta.badge + '</span>' +
+    '<button type="button" class="ax" aria-label="Remove attachment">×</button>';
+  chip.querySelector('.ax').addEventListener('click', () => {
+    chip.remove();
+    if (!row.children.length) row.hidden = true;
+  });
+  row.appendChild(chip);
+  toast('Attachment added (demo chip — OBSERVED pattern).');
+}
+
+/* ---------- settings sheet (color mode) ---------- */
+document.querySelectorAll('#sheetSettings .opt[data-cmode]').forEach(b => {
+  b.addEventListener('click', () => applyTheme(b.getAttribute('data-cmode')));
+});
+
+/* ---------- composer stubs ---------- */
+$('btnMic').addEventListener('click', () => toast('Dictation microphone — DOCUMENTED placement; interaction stub.'));
+$('btnVoice').addEventListener('click', () => toast('Voice-mode sound-wave icon — existence DOCUMENTED, glyph UNVERIFIED; stub.'));
+$('coworkChip').addEventListener('click', () => toast('Cowork — DOCUMENTED wording and bottom-left placement; stub.'));
+
+/* ---------- Code mode ---------- */
+const SESSIONS = {
+  s1: { name: 'api-refactor',   meta: 'acme/api · main',           ts: '2m', online: true,  remote: false, diff: '+42 −18' },
+  s2: { name: 'docs-passbuild', meta: 'acme/site · docs/passbuild', ts: '1h', online: true,  remote: false },
+  s3: { name: 'legacy-sync',    meta: 'acme/legacy · v2-sync',     ts: '3h', online: false, remote: false },
+  s4: { name: 'laptop — remote', meta: 'acme/api · main · Remote Control', ts: '5m', online: true, remote: true }
+};
+const MODE_LABELS = { manual: 'Manual', accept: 'Accept edits', plan: 'Plan', auto: 'Auto' };
+let currentSession = null;
+
+function setModeOptions(remote, current) {
+  const sel = $('modeSelect');
+  const opts = remote
+    ? [['manual', 'Manual'], ['accept', 'Accept edits'], ['plan', 'Plan']]   // never Bypass / Auto (DOCUMENTED)
+    : [['accept', 'Accept edits'], ['plan', 'Plan'], ['auto', 'Auto']];
+  sel.innerHTML = '';
+  let valid = false;
+  opts.forEach(pair => {
+    const o = document.createElement('option');
+    o.value = pair[0]; o.textContent = pair[1];
+    sel.appendChild(o);
+    if (pair[0] === current) valid = true;
+  });
+  sel.value = valid ? current : opts[0][0];
+  if (currentSession) currentSession.mode = sel.value;
+}
+$('modeSelect').addEventListener('change', e => {
+  if (currentSession) currentSession.mode = e.target.value;
+  toast('Permission mode set (demo): ' + MODE_LABELS[e.target.value] +
+    (currentSession && currentSession.remote ? ' — Remote Control session (Manual / Accept edits / Plan only).' : '.'));
+});
+
+document.querySelectorAll('.session-row').forEach(row => {
+  row.addEventListener('click', () => openSession(row.getAttribute('data-sess')));
+});
+function openSession(id) {
+  const s = SESSIONS[id];
+  if (!s) return;
+  currentSession = s;
+  $('codeList').hidden = true;
+  const det = $('codeDetail');
+  det.hidden = false;
+  det.innerHTML =
+    '<button type="button" class="back-sm" data-back>← Sessions</button>' +
+    '<h3 class="sess-title">' + s.name + '</h3>' +
+    '<span class="s-meta">' + s.meta + ' · ' + s.ts + ' · ' + (s.online ? 'online' : 'offline') + (s.remote ? ' · Remote Control' : '') + '</span>' +
+    '<div class="msg-user-row"><div class="bubble-user">Tighten the retry helper and add a test.</div></div>' +
+    '<div class="msg-claude"><div class="claude-text"><p>Updated the helper and added a covering test case. (Dummy session log.)</p></div></div>' +
+    '<div class="diff-pane">' +
+      '<div class="diff-head"><span class="mono">src/retry.ts</span><span class="diff-chip">' + (s.diff || '+8 −2') + '</span></div>' +
+      '<div class="diff-body">' +
+        '<span class="dl hunk">@@ retry loop @@</span>' +
+        '<span class="dl del">-  const attempts = 3;</span>' +
+        '<span class="dl add">+  const attempts = 5;</span>' +
+        '<span class="dl add">+  if (attempts > MAX) throw new Error(\'too many retries\');</span>' +
+      '</div>' +
+    '</div>' +
+    '<span class="tag-block">diff pane existence + "+N -N" format DOCUMENTED · diff colors UNVERIFIED (standard +/− tints as hypothesis)</span>' +
+    '<div class="perm-card">' +
+      '<b>Permission requested</b>' +
+      '<p>Allow the edit of <span class="mono">src/retry.ts</span>? (Dummy forwarded dialog — DOCUMENTED behavior: persists until answered.)</p>' +
+      '<button type="button" class="approve-btn" data-approve>Approve</button>' +
+    '</div>';
+  setModeOptions(s.remote, s.remote ? 'manual' : 'accept');
+  $('codeScroll').scrollTop = 0;
+  runChecks();
+}
+$('codeDetail').addEventListener('click', e => {
+  if (e.target.closest('[data-back]')) {
+    $('codeDetail').hidden = true;
+    $('codeList').hidden = false;
+    currentSession = null;
+    setModeOptions(false, 'accept');
+    runChecks();
+  }
+  const ap = e.target.closest('[data-approve]');
+  if (ap) {
+    const card = ap.closest('.perm-card');
+    card.innerHTML = '<p class="approved">Approved (demo) — the prompt persisted until answered.</p>';
+    toast('Permission approved (demo).');
+  }
+});
+$('btnQueue').addEventListener('click', () => {
+  toast('Session queued (demo) — repository / branch / task description are DOCUMENTED fields; no real workflow.');
+  $('taskDesc').value = '';
+});
+
+/* ---------- init ---------- */
+(function init() {
+  const rmq = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
+  if (rmq && rmq.matches) {
+    S.motion = 'reduced';
+    document.documentElement.classList.add('rm');
+    const r = document.querySelector('input[name="motion"][value="reduced"]');
+    if (r) r.checked = true;
+  }
+  if (window.matchMedia) {
+    const cq = matchMedia('(prefers-color-scheme: dark)');
+    const onScheme = () => { if (S.theme === 'system') applyTheme('system'); };
+    if (cq.addEventListener) cq.addEventListener('change', onScheme);
+    else if (cq.addListener) cq.addListener(onScheme);
+  }
+  applyFrame();
+  updateSend();
+  runChecks();
+})();
+</script>
+</body>
+</html>
