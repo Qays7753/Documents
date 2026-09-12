@@ -1,1 +1,0 @@
-"{\"snackMsg\":\"Filters cleared\",\"screenVisible\":true}"

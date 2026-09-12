@@ -1,1 +1,0 @@
-"{\"press\":\"80ms\",\"fast\":\"120ms\",\"normal\":\"200ms\",\"sheetIn\":\"240ms\",\"sheetOut\":\"180ms\",\"dialogIn\":\"160ms\",\"dialogOut\":\"120ms\",\"scrim\":\"200ms\",\"btnFill\":\"rgb(150, 78, 51)\",\"desFill\":\"rgb(180, 35, 24)\",\"fabFill\":\"rgb(204, 120, 92)\",\"sheetTransition\":\"0.18s, 0.2s / transform, max-height\",\"fabGapAboveNav\":80}"

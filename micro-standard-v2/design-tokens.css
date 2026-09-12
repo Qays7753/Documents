@@ -1,0 +1,50 @@
+/* Micro Standard v2 — current approved Cloud Code basis */
+:root {
+  --vf-canvas: #FAF9F5;
+  --vf-ground: #F5F4ED;
+  --vf-recessed: #F0EEE6;
+  --vf-surface: #FFFFFF;
+  --vf-tint: #E8E6DC;
+  --vf-soft: #D1CFC5;
+  --vf-border: #D1CFC5;
+  --vf-border-interactive: #87867F;
+  --vf-ink: #141413;
+  --vf-ink-secondary: #4D4C48;
+  --vf-ink-tertiary: #6B6962;
+  --vf-ink-on-dark: #FFFFFF;
+  --vf-ink-on-tint: #141413;
+  --vf-clay: #D97757;
+  --vf-clay-interactive: #C96442;
+  --vf-info: #2C84DB;
+  --vf-status: #1490FF;
+  --vf-success: #629987;
+  --vf-error: #B53333;
+  --vf-focus: #141413;
+  --vf-disabled-surface: #F0EEE6;
+  --vf-disabled-ink: #55524A;
+  --vf-field-border-focus: #87867F;
+  --vf-bg-secondary: #F5F4ED;
+  --vf-control-height: 48px;
+  --vf-radius-control: 12px;
+  --vf-radius-sheet: 20px;
+  --vf-btn-primary-bg: var(--vf-ink);
+  --vf-btn-primary-bg-pressed: #3D3D3A;
+  --vf-btn-primary-ink: var(--vf-ink-on-dark);
+  --vf-btn-secondary-bg: var(--vf-tint);
+  --vf-btn-secondary-bg-pressed: var(--vf-soft);
+  --vf-btn-secondary-ink: var(--vf-ink-on-tint);
+  --vf-btn-outline-bg: var(--vf-surface);
+  --vf-btn-outline-ink: var(--vf-ink);
+  --vf-btn-outline-border: var(--vf-border-interactive);
+  --vf-btn-ghost-ink: var(--vf-ink-tertiary);
+  --vf-btn-destructive-ink: var(--vf-error);
+  --vf-btn-destructive-border: var(--vf-error);
+  --vf-motion-fast: 120ms;
+  --vf-motion-standard: 200ms;
+  --vf-motion-sheet: 240ms;
+  /* compatibility names for the current implementation */
+  --vf-font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --vf-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html, body { background: var(--vf-canvas); color: var(--vf-ink); }
