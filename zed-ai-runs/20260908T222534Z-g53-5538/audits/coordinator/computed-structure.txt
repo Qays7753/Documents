@@ -1,1 +1,0 @@
-"{\"symbols\":43,\"iconCells\":43,\"families\":11,\"frames\":18,\"chipsInSheet\":15,\"rowsInFilterList\":7}"

@@ -1,1 +1,0 @@
-"{\"activeIsInput\":true,\"outline\":\"2px solid rgb(5, 123, 124)\",\"border\":\"rgb(100, 188, 185)\"}"

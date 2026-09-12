@@ -1,0 +1,45 @@
+{
+  "package": "Micro Standard v2",
+  "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
+  "status": "approved-current-basis",
+  "families": {
+    "primitives": "current",
+    "buttons": "current",
+    "inputs": "current",
+    "states": "current",
+    "data_display": "current",
+    "navigation": "current",
+    "overlays": "current",
+    "empty_loading_error_unknown": "current",
+    "rtl_geometry": "current",
+    "gallery": "current"
+  },
+  "official_navigation": [
+    "الرئيسية",
+    "المالية",
+    "الطلبات",
+    "الأدوات"
+  ],
+  "phone_widths": [
+    320,
+    360,
+    390,
+    430
+  ],
+  "text_scales": [
+    100,
+    130,
+    200
+  ],
+  "verification": [
+    "local_gallery",
+    "rtl",
+    "reduced_motion",
+    "json_validity",
+    "no_horizontal_overflow_inspected_state"
+  ],
+  "requires_separate_testing": [
+    "physical_device",
+    "screen_reader"
+  ]
+}

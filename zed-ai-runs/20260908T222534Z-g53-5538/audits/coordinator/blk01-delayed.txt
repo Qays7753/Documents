@@ -1,1 +1,0 @@
-"{\"screenVisibleAfter6s\":true,\"snackHidden\":true,\"rowsRestored\":7}"

@@ -1,0 +1,42 @@
+{
+  "name": "Micro Standard v2",
+  "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
+  "status": "approved-current-basis",
+  "roles": {
+    "identity_create_fab": "#D97757",
+    "chosen_current_edge": "#C96442",
+    "warm_ink_commitment": "#141413",
+    "canvas": "#FAF9F5",
+    "ground": "#F5F4ED",
+    "recessed": "#F0EEE6",
+    "surface": "#FFFFFF",
+    "secondary_tint": "#E8E6DC",
+    "interactive_boundary": "#87867F",
+    "info": "#2C84DB",
+    "status": "#1490FF",
+    "success": "#629987",
+    "error": "#B53333"
+  },
+  "navigation": [
+    "الرئيسية",
+    "المالية",
+    "الطلبات",
+    "الأدوات"
+  ],
+  "geometry": {
+    "phone_widths": [
+      320,
+      360,
+      390,
+      430
+    ],
+    "text_scales": [
+      100,
+      130,
+      200
+    ],
+    "control_height_px": 48
+  },
+  "state_rule": "Every financial state uses words plus a non-color marker.",
+  "product_boundary": "Visual contracts only; no financial policy or synchronization behavior."
+}
