@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج التحقق البصري v1 — Micro Standard v2 (محدَّث)</title>
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+
+<!-- ===================== DEMO CHROME (outside every composition) ===================== -->
+<header class="chrome" aria-label="أدوات العرض التوضيحي">
+  <p class="truth">نموذج تحقق بصري — ليس حقيقة منتج · Visual validation prototype — not product truth</p>
+  <nav class="chrome-tabs" role="tablist" aria-label="المشاهد">
+    <button type="button" role="tab" aria-selected="true" data-scene="s1">١ منطقة القيمة والمعرفة</button>
+    <button type="button" role="tab" aria-selected="false" data-scene="s2">٢ الصفوف التشغيلية</button>
+    <button type="button" role="tab" aria-selected="false" data-scene="s3">٣ الهيكل وسلوك الواجهة</button>
+    <button type="button" role="tab" aria-selected="false" data-scene="s4">٤ الإدخال والتغذية الهادئة</button>
+    <button type="button" role="tab" aria-selected="false" data-scene="s5">٥ الحوار مقابل التدفق</button>
+    <button type="button" role="tab" aria-selected="false" data-scene="s6">٦ الطباعة والأيقونات</button>
+  </nav>
+  <div class="chrome-ctrls">
+    <div class="ctrl" role="group" aria-label="عرض الإطار">
+      <span class="ctrl-name">العرض</span>
+      <div class="seg seg-sm" id="ctrl-vp">
+        <button type="button" data-vp="320">320</button>
+        <button type="button" data-vp="360">360</button>
+        <button type="button" data-vp="390" class="on">390</button>
+        <button type="button" data-vp="430">430</button>
+      </div>
+    </div>
+    <div class="ctrl" role="group" aria-label="مقياس النص">
+      <span class="ctrl-name">النص</span>
+      <div class="seg seg-sm" id="ctrl-text">
+        <button type="button" data-text="100" class="on">100%</button>
+        <button type="button" data-text="130">130%</button>
+        <button type="button" data-text="200">200%</button>
+      </div>
+    </div>
+    <div class="ctrl" role="group" aria-label="الحركة">
+      <span class="ctrl-name">الحركة</span>
+      <div class="seg seg-sm" id="ctrl-motion">
+        <button type="button" data-motion="normal" class="on">عادية</button>
+        <button type="button" data-motion="reduced">مخفَّضة</button>
+      </div>
+    </div>
+    <button type="button" class="linkish" id="open-authority">سلطة العقود</button>
+  </div>
+  <p class="chrome-note" id="scene-note" role="status" aria-live="polite"></p>
+</header>
+
+<!-- Authority drawer -->
+<div class="drawer" id="authority-drawer" hidden>
+  <div class="drawer-card" role="dialog" aria-modal="true" aria-labelledby="authority-title">
+    <h2 id="authority-title">سلطة العقد — Authority ladder</h2>
+    <ol class="authority-list">
+      <li><strong>Micro Standard v2</strong> = عقود بصرية (الرموز، الأصناف، الحالات، الهندسة، الوصولية).</li>
+      <li><strong>ربط الرموز في Micro</strong> = الناقل التشغيلي الذي يربط متغيرات التنفيذ بهذه العقود.</li>
+      <li><strong>وثائق Micro</strong> = إرشاد تنفيذي.</li>
+      <li><strong>طبقات domain/application/storage في Micro</strong> = معنى المنتج واستمراريته.</li>
+    </ol>
+    <p class="drawer-note">العقود لا تُشفِّر معنى المنتج؛ والتنفيذ لا يُعيد تعريف قيم العقد. هذا النموذج يُظهر العقود العامة فقط بمحتوى توضيحي محايد.</p>
+    <button type="button" class="btn btn-save" id="close-authority"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>فهمت</span></button>
+  </div>
+</div>
+
+<!-- ===================== PHONE FRAME ===================== -->
+<main class="stage">
+  <div class="frame" id="frame">
+    <div class="truth-strip">نموذج تحقق بصري — ليس حقيقة منتج</div>
+
+    <!-- ============ SCENE 1: value zone + knowledge states + period variants ============ -->
+    <section class="scene" id="s1" aria-labelledby="s1-title">
+      <h1 id="s1-title" class="scr-title">منطقة القيمة وحالات المعرفة</h1>
+      <p class="scene-desc">عرض توضيحي لعهود: منطقة القيمة، الفراغات الصادقة، حالات المعرفة، متغيرا التحكم بالفترة، وسلم الأرقام.</p>
+
+      <div class="card">
+        <div class="vz" aria-labelledby="vz-label">
+          <p class="vz-label" id="vz-label">القيمة التوضيحية</p>
+          <p class="vz-value"><bdi dir="ltr">12,480</bdi> <span class="vz-unit">د.أ</span></p>
+          <p class="vz-period">
+            <button type="button" class="chip on" aria-pressed="true">آخر 30 يوم</button>
+            <button type="button" class="chip" aria-pressed="false">آخر 7 أيام</button>
+            <button type="button" class="chip" aria-pressed="false">هذا الشهر</button>
+          </p>
+          <p class="vz-delta"><svg class="ic" aria-hidden="true"><use href="#i-trend-up"/></svg> <bdi dir="ltr">+8%</bdi> <span class="vz-delta-word">أعلى من الفترة السابقة</span></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">متغيرا التحكم بالفترة</h2>
+        <div class="period-variants">
+          <div class="pv">
+            <p class="pv-name">(أ) رقاقة الفترة</p>
+            <div class="seg" role="group" aria-label="رقاقة الفترة">
+              <button type="button" class="on">آخر 30 يوم</button>
+              <button type="button">هذا الشهر</button>
+            </div>
+          </div>
+          <div class="pv">
+            <p class="pv-name">(ب) إدخال شهر أصلي</p>
+            <label class="field">
+              <span class="field-label">شهر</span>
+              <span class="field-box" dir="ltr"><input type="month" value="2026-09" aria-label="شهر"></span>
+            </label>
+            <p class="hint">إدخال أرقام إنجليزية معزول الاتجاه داخل تكوين RTL — دلالات الفترة مملوكة للمنتج.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">حالات المعرفة — كيف تُعرف المعلومة</h2>
+        <ul class="kgrid">
+          <li class="kitem"><span class="kmark"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="kword">مؤكد</span><span class="kval"><bdi dir="ltr">4,200</bdi> د.أ</span></li>
+          <li class="kitem"><span class="kmark"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg></span><span class="kword">غير مؤكد</span><span class="kval"><bdi dir="ltr">1,150</bdi> د.أ</span></li>
+          <li class="kitem"><span class="kmark"><svg class="ic" aria-hidden="true"><use href="#i-approx"/></svg></span><span class="kword">تقديري</span><span class="kval"><bdi dir="ltr">3,000</bdi> د.أ</span></li>
+          <li class="kitem"><span class="kmark"><svg class="ic" aria-hidden="true"><use href="#i-half"/></svg></span><span class="kword">غير مكتمل</span><span class="kval"><bdi dir="ltr">2,400</bdi> د.أ</span></li>
+          <li class="kitem"><span class="kmark"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></span><span class="kword">بحاجة لمراجعة</span><span class="kval"><bdi dir="ltr">980</bdi> د.أ</span></li>
+          <li class="kitem"><span class="kmark"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg></span><span class="kword">غير معروف</span><span class="kval">—</span></li>
+        </ul>
+        <p class="hint">الكلمة + العلامة غير اللونية بحبر محايد — ليست نجاحًا ولا فشلًا، ولا تُذيب الفراغات الصادقة.</p>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">الفراغات الصادقة</h2>
+        <ul class="vgrid">
+          <li class="vitem"><span class="vlabel">غير مسجَّل</span> <button type="button" class="chip chip-action"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>سجّله</button></li>
+          <li class="vitem"><span class="vlabel">غير متاح</span> <span class="vword">غير متاح</span></li>
+          <li class="vitem"><span class="vlabel">صفر مقيس</span> <span class="vword mono"><bdi dir="ltr">0</bdi></span> <span class="vunit">د.أ</span></li>
+        </ul>
+        <p class="hint">ثلاث حالات مختلفة عمدًا: الفعل، الكلمة، والصفر المقيس — لا تُزيَّف كنجاح أو فشل أو زخرفة.</p>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">سلم الأرقام (mono)</h2>
+        <ul class="hgrid">
+          <li><span class="hval h28"><bdi dir="ltr">28</bdi></span><span class="hname">hero 28</span></li>
+          <li><span class="hval h24"><bdi dir="ltr">24</bdi></span><span class="hname">primary 24</span></li>
+          <li><span class="hval h15"><bdi dir="ltr">15</bdi></span><span class="hname">secondary 15</span></li>
+          <li><span class="hval h13"><bdi dir="ltr">13</bdi></span><span class="hname">tertiary 13 — بيانات رقمية غير مالية</span></li>
+        </ul>
+        <p class="hint">الحقائق المالية لا تقل عن 15px؛ 12px للبيانات الوصفية غير المالية فقط.</p>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 2: operational rows ============ -->
+    <section class="scene" id="s2" aria-labelledby="s2-title" hidden>
+      <h1 id="s2-title" class="scr-title">الصفوف التشغيلية</h1>
+      <p class="scene-desc">شبكة صف واحدة: مقدمة هوية، عنوان يلتف، خانة حالة (كلمة + علامة)، ومقدار ثابت في النهاية — مع شريط حافة اختياري لا يتجاوز 3px.</p>
+
+      <div class="card">
+        <div class="row-tools">
+          <button type="button" class="chip" id="stripe-toggle" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-stripe"/></svg>شريط الحافة</button>
+          <span class="hint">الشريط دائمًا مع كلمة الحالة، ولا يعتمد عليه وحده.</span>
+        </div>
+        <ul class="rows">
+          <li class="row" data-stripe="pending">
+            <span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-wallet"/></svg></span>
+            <span class="row-main">
+              <span class="row-title">عنصر توضيحي بحالة انتظار</span>
+              <span class="row-sub"><span class="tag t-pending"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>بالانتظار</span> <bdi dir="ltr">17/09/2026 · 09:30</bdi></span>
+            </span>
+            <span class="row-trail"><span class="row-amt"><bdi dir="ltr">+1,200</bdi> <span class="unit">د.أ</span></span></span>
+          </li>
+          <li class="row" data-stripe="failed">
+            <span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-arrow-down"/></svg></span>
+            <span class="row-main">
+              <span class="row-title">عنصر توضيحي بحالة فشل مع كلمة وعلامة</span>
+              <span class="row-sub"><span class="tag t-failed"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>فشل</span> <bdi dir="ltr">16/09/2026 · 18:00</bdi></span>
+            </span>
+            <span class="row-trail"><span class="row-amt neg"><bdi dir="ltr">−450</bdi> <span class="unit">د.أ</span></span></span>
+          </li>
+          <li class="row" data-stripe="review">
+            <span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-tag"/></svg></span>
+            <span class="row-main">
+              <span class="row-title">عنصر توضيحي بحالة مراجعة وبقيمة معرفة</span>
+              <span class="row-sub"><span class="tag t-review"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>رُوجعت</span> <span class="kmini"><svg class="ic" aria-hidden="true"><use href="#i-approx"/></svg>تقديري</span></span>
+            </span>
+            <span class="row-trail"><span class="row-amt"><bdi dir="ltr">+2,150</bdi> <span class="unit">د.أ</span></span></span>
+          </li>
+          <li class="row" data-stripe="none">
+            <span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg></span>
+            <span class="row-main">
+              <span class="row-title">عنصر توضيحي بعنوان طويل جدًا يلتف بأمان داخل العمود المرن دون أن يسبب أي تجاوز أفقي عند 320px حتى مع مقياس نص 200%</span>
+              <span class="row-sub"><bdi dir="ltr">15/09/2026 · 12:10</bdi></span>
+            </span>
+            <span class="row-trail"><span class="row-amt"><bdi dir="ltr">+800</bdi> <span class="unit">د.أ</span></span></span>
+          </li>
+          <li class="row" data-stripe="none">
+            <span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span class="row-main">
+              <span class="row-title">عنصر توضيحي بحالة فراغ صادق</span>
+              <span class="row-sub"><span class="vword">غير متاح</span></span>
+            </span>
+            <span class="row-trail"><span class="row-amt zero"><bdi dir="ltr">0</bdi> <span class="unit">د.أ</span></span></span>
+          </li>
+        </ul>
+        <p class="hint">المقدار بحبر النص مع إشارة الاتجاه كعلامة غير لونية؛ السالب يحتفظ بحبر الخطأ الآمن نصيًا.</p>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 3: AUX shell ============ -->
+    <section class="scene scene-aux" id="s3" aria-labelledby="s3-title" hidden>
+      <h1 id="s3-title" class="scr-title">الهيكل وسلوك الواجهة</h1>
+      <p class="scene-desc">عقد سلوك الهيكل: نوع المسار، إخفاء الواجهة مع لوحة المفاتيح، مناطق الأمان، كبت تسمية السياق، حد التمرير، وانتقال المحتوى.</p>
+
+      <div class="aux-tools">
+        <div class="ctrl" role="group" aria-label="نوع المسار">
+          <span class="ctrl-name">نوع المسار</span>
+          <div class="seg" id="ctrl-route">
+            <button type="button" data-route="surface" class="on">تصفّح</button>
+            <button type="button" data-route="deep">مهمة مركّزة</button>
+          </div>
+        </div>
+        <div class="ctrl" role="group" aria-label="لوحة المفاتيح">
+          <span class="ctrl-name">لوحة المفاتيح</span>
+          <div class="seg" id="ctrl-kb">
+            <button type="button" data-kb="closed" class="on">مغلقة</button>
+            <button type="button" data-kb="open">مفتوحة</button>
+          </div>
+        </div>
+        <button type="button" class="chip" id="ctx-toggle" aria-pressed="false">تسمية السياق: ظاهرة</button>
+      </div>
+
+      <div class="phone" id="aux-phone" data-route-kind="surface" data-keyboard="closed">
+        <header class="topbar" id="aux-topbar">
+          <span class="topbar-brand">النموذج</span>
+          <span class="topbar-ctx" id="aux-ctx">القسم التوضيحي</span>
+          <button type="button" class="iconbtn" aria-label="إعدادات"><svg class="ic" aria-hidden="true"><use href="#i-gear"/></svg></button>
+        </header>
+        <div class="aux-content" id="aux-content" tabindex="0" aria-label="محتوى قابل للتمرير">
+          <h2 class="aux-h" id="aux-h">القسم التوضيحي</h2>
+          <div class="aux-body" id="aux-body">
+            <p>محتوى توضيحي قابل للتمرير. مرّر لأسفل لرؤية حد التمرير تحت الشريط العلوي.</p>
+            <p>بيان توضيحي <bdi dir="ltr">1</bdi></p><p>بيان توضيحي <bdi dir="ltr">2</bdi></p>
+            <p>بيان توضيحي <bdi dir="ltr">3</bdi></p><p>بيان توضيحي <bdi dir="ltr">4</bdi></p>
+            <p>بيان توضيحي <bdi dir="ltr">5</bdi></p><p>بيان توضيحي <bdi dir="ltr">6</bdi></p>
+            <p>بيان توضيحي <bdi dir="ltr">7</bdi></p><p>بيان توضيحي <bdi dir="ltr">8</bdi></p>
+            <p>بيان توضيحي <bdi dir="ltr">9</bdi></p><p>بيان توضيحي <bdi dir="ltr">10</bdi></p>
+            <p>بيان توضيحي <bdi dir="ltr">11</bdi></p><p>بيان توضيحي <bdi dir="ltr">12</bdi></p>
+            <label class="field"><span class="field-label">حقل توضيحي (لا يختفي مع لوحة المفاتيح)</span>
+              <span class="field-box" dir="ltr"><input type="text" value="ABC123" aria-label="حقل توضيحي"></span></label>
+            <p class="hint">المحتوى والحقل المركّز وتسمياته لا تُخفى أبدًا؛ يختفي الهيكل العابر فقط.</p>
+          </div>
+          <button type="button" class="btn btn-outline" id="aux-transition">انتقل بين المحتوى</button>
+        </div>
+        <nav class="bottomnav" id="aux-nav" aria-label="تنقل توضيحي">
+          <button type="button" class="navitem on"><span class="navpill"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic" aria-hidden="true"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+        <button type="button" class="fab" id="aux-fab" aria-label="إضافة توضيحية"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+      </div>
+      <p class="hint">الوجهات الأربع هي الأمثلة الرسمية المسجلة في العقد؛ أسماء المسارات الفعلية مملوكة للمنتج. زر الإنشاء في ميزابه الخاص فوق شريط التنقل ولا يغطي خانات المقدار.</p>
+    </section>
+
+    <!-- ============ SCENE 4: input + quiet feedback ============ -->
+    <section class="scene" id="s4" aria-labelledby="s4-title" hidden>
+      <h1 id="s4-title" class="scr-title">الإدخال والتغذية الراجعة الهادئة</h1>
+      <p class="scene-desc">دورة الحفظ: ضغط بحافة مختارة، تحميل يحرس التكرار، ثم إتمام هادئ بكلمة وعلامة — والقناة المضمّنة بديل شرعي للـ Snackbar.</p>
+
+      <div class="card">
+        <div class="btn-row">
+          <button type="button" class="btn btn-create"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>إضافة عنصر</span></button>
+          <button type="button" class="iconbtn iconbtn-create" aria-label="إضافة (رمز فقط)"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+        <label class="field">
+          <span class="field-label">قيمة توضيحية</span>
+          <span class="field-box amount-box" dir="ltr"><input type="text" inputmode="decimal" value="1,480" class="amount-input" aria-label="قيمة توضيحية"></span>
+          <span class="field-unit">د.أ</span>
+        </label>
+        <label class="field">
+          <span class="field-label">اسم توضيحي</span>
+          <span class="field-box" dir="rtl"><input type="text" value="" placeholder="اكتب شيئًا" aria-label="اسم توضيحي"></span>
+          <span class="field-err" role="alert">الاسم التوضيحي مطلوب — صحِّح ثم أعد المحاولة.</span>
+        </label>
+        <div class="btn-row">
+          <button type="button" class="btn btn-save" id="save-btn" aria-busy="false">
+            <span class="btn-icon"><svg class="ic lead" aria-hidden="true"><use href="#i-save"/></svg><span class="spinner" hidden></span></span>
+            <span class="btn-label">حفظ</span>
+          </button>
+        </div>
+        <p class="inline-result" id="inline-result" role="status" aria-live="polite" hidden><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> تم الحفظ</p>
+        <div class="opt-row">
+          <button type="button" class="chip" id="snack-opt" aria-pressed="false">اختياري: إظهار Snackbar بعد الحفظ</button>
+        </div>
+        <p class="hint">الـ Snackbar عقد اختياري غير مفعّل افتراضيًا؛ القناة المضمّنة (كلمة + علامة + role=status) هي البديل الشرعي.</p>
+      </div>
+      <div class="snackbar" id="snackbar" role="status" aria-live="polite" hidden>
+        <p class="snackbar-msg">تم الحفظ — قناة اختيارية</p>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 5: overlay vs in-flow ============ -->
+    <section class="scene" id="s5" aria-labelledby="s5-title" hidden>
+      <h1 id="s5-title" class="scr-title">الحوار مقابل التدفق</h1>
+      <p class="scene-desc">التأكيدات العاقبة والحذف في Dialog/Sheet فوق scrim مشترك مع مسار تأكيد مستقل؛ والشرح والتحرير المستمر يبقى داخل التدفق.</p>
+
+      <div class="card">
+        <div class="btn-row">
+          <button type="button" class="btn btn-save" id="open-sheet"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg><span>حذف عنصر توضيحي (Sheet)</span></button>
+          <button type="button" class="btn btn-primary" id="open-dialog">إنهاء فترة توضيحية (Dialog)</button>
+        </div>
+        <details class="inflow">
+          <summary>شرح مستمر داخل التدفق (يُفتح ويُغلق)</summary>
+          <div class="inflow-body">
+            <p>هذا شرح توضيحي مستمر يخدم القراءة والتحرير المتواصل — تركيب داخل التدفق مشروع ولا يُحوَّل إلى طبقة حوار.</p>
+            <p>قيمة مذكورة داخل الشرح: <bdi dir="ltr">12,480</bdi> د.أ (آخر 30 يوم).</p>
+          </div>
+        </details>
+        <p class="hint">قاعدة الاختيار: إذا كان السياق عاقبةً لا يجوز فقدانها → حوار؛ إذا كان المحتوى قراءةً أو تحريرًا متواصلًا → تدفق.</p>
+      </div>
+
+      <div class="scrim" id="scrim" hidden></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+        <div class="sheet-handle-row"><span class="sheet-handle"></span></div>
+        <h2 class="sheet-title" id="sheet-title">حذف العنصر التوضيحي؟</h2>
+        <p class="sheet-body">سيُحذف العنصر التوضيحي «عنصر أ» وقيمته <bdi dir="ltr">1,200</bdi> د.أ من القائمة التوضيحية. هذا الفعل توضيحي ولا يمس أي بيانات حقيقية.</p>
+        <div class="sheet-actions">
+          <button type="button" class="btn btn-save" id="sheet-cancel">إلغاء</button>
+          <button type="button" class="btn btn-primary" id="sheet-confirm">نعم، احذف العنصر</button>
+        </div>
+      </div>
+
+      <div class="dialog-wrap" id="dialog-wrap" hidden>
+        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+          <h2 class="dialog-title" id="dlg-title">إنهاء الفترة التوضيحية؟</h2>
+          <p class="dialog-body">الإنهاء عاقبة كبيرة: تُقفل الفترة التوضيحية ولا يمكن تعديل قيمها بعد التأكيد. هذا توضيح للعقد فقط.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-save" id="dlg-cancel">تراجع</button>
+            <button type="button" class="btn btn-primary" id="dlg-confirm">تأكيد الإنهاء</button>
+          </div>
+        </div>
+      </div>
+      <p class="inline-result" id="overlay-result" role="status" aria-live="polite" hidden><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> تم تنفيذ الفعل التوضيحي</p>
+    </section>
+
+    <!-- ============ SCENE 6: typography + icons ============ -->
+    <section class="scene" id="s6" aria-labelledby="s6-title" hidden>
+      <h1 id="s6-title" class="scr-title">الطباعة والأيقونات</h1>
+      <p class="scene-desc">أرضية الأحجام مع تمييز واضح للحدود، ومرايا الأيقونات الاتجاهية بأعلام انعكاس — دون فرض مكتبة أيقونات إنتاجية.</p>
+
+      <div class="card">
+        <h2 class="card-title">أرضية الأحجام</h2>
+        <ul class="type-spec">
+          <li><span class="t28">عنوان 28</span><code>title 28/1.3/700</code></li>
+          <li><span class="t20">عنوان فرعي 20</span><code>title-sm 20</code></li>
+          <li><span class="t17">ترويسة قسم 17</span><code>section 17</code></li>
+          <li><span class="t15">نص أساسي 15 — قيمة مالية توضيحية <bdi dir="ltr">1,480</bdi> د.أ</span><code>body/amount 15</code></li>
+          <li><span class="t13">تسمية حقل 13 — الحد الأدنى للتسميات</span><code>label 13</code></li>
+          <li><span class="t12">بيانات وصفية غير مالية 12 — الحد الأدنى الشرعي الوحيد للـ12px</span><code>caption 12</code></li>
+        </ul>
+        <p class="hint">التسميات لا تقل عن 13px؛ الحقائق والمبالغ المالية لا تقل عن 15px؛ 12px للبيانات الوصفية غير المالية فقط.</p>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">مرايا الأيقونات وأعلامها</h2>
+        <div class="icon-grid" id="icon-grid">
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg><span class="ic-name">سهم</span><span class="ic-flag">ينعكس</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg><span class="ic-name">شيفرون</span><span class="ic-flag">ينعكس</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg><span class="ic-name">إرسال</span><span class="ic-flag">ينعكس</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-undo"/></svg><span class="ic-name">تراجع</span><span class="ic-flag">ينعكس</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-gear"/></svg><span class="ic-name">ترس</span><span class="ic-flag">ثابت</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-wallet"/></svg><span class="ic-name">محفظة</span><span class="ic-flag">ثابت</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span class="ic-name">إضافة</span><span class="ic-flag">ثابت</span></div>
+          <div class="ic-cell"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span class="ic-name">تأكيد</span><span class="ic-flag">ثابت</span></div>
+        </div>
+        <p class="hint">الانعكاس يطبقه المحوّل المستهلك (transform) لا إعادة رسم الأشكال؛ الأدوات الإعلامية تحتفظ باتجاهها القانوني.</p>
+      </div>
+    </section>
+
+    <footer class="proto-foot">Visual validation prototype — not product truth · نموذج تحقق بصري — ليس حقيقة منتج</footer>
+  </div>
+</main>
+
+<!-- ===================== ICON SYMBOLS (neutral, outlined, 24px, normalized strokes) ===================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+    <symbol id="i-question" viewBox="0 0 24 24"><path d="M9 9a3 3 0 113 3v1m0 4h.01M12 21a9 9 0 110-18 9 9 0 010 18z"/></symbol>
+    <symbol id="i-approx" viewBox="0 0 24 24"><path d="M4 9c2.5-2 5-2 7.5 0s5 2 7.5 0M4 15c2.5-2 5-2 7.5 0s5 2 7.5 0"/></symbol>
+    <symbol id="i-half" viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18 9 9 0 000-18zm0 0v18"/><path d="M12 3a9 9 0 000 18z" fill="currentColor" stroke="none" opacity=".35"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12c2.9-4.6 6.4-7 10-7s7.1 2.4 10 7c-2.9 4.6-6.4 7-10 7s-7.1-2.4-10-7z"/><circle cx="12" cy="12" r="2.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4m0 3h.01M10.3 4l-7 12a2 2 0 001.7 3h14a2 2 0 001.7-3l-7-12a2 2 0 00-3.4 0z"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M21 12a2 2 0 00-2-2h-6a2 2 0 100 4h6a2 2 0 002-2z"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 21h18M4 21V10m4 11V10m8 11V10m4 11V10M3 10l9-6 9 6"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5l9 9-7 7-9-9V3z"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M17 7L7 17m0 0h8m-8 0V9"/></symbol>
+    <symbol id="i-trend-up" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 12l2-2 7-7 7 7 2 2M5 10v10a1 1 0 001 1h4m9-11v10a1 1 0 01-1 1h-4m-4 0v-4a1 1 0 011-1h2a1 1 0 011 1v4m-4 0h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H4"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M10.3 4.3c.4-1.7 2.9-1.7 3.3 0a1.7 1.7 0 002.6 1.1c1.5-.9 3.3.8 2.4 2.4a1.7 1.7 0 001 2.6c1.8.4 1.8 2.9 0 3.3a1.7 1.7 0 00-1 2.6c.9 1.5-.9 3.3-2.4 2.4a1.7 1.7 0 00-2.6 1c-.4 1.8-2.9 1.8-3.3 0a1.7 1.7 0 00-2.6-1c-1.5.9-3.3-.9-2.4-2.4a1.7 1.7 0 00-1-2.6c-1.7-.4-1.7-2.9 0-3.3a1.7 1.7 0 001-2.6C4.4 6.2 6.2 4.4 7.7 5.4c1 .6 2.3.1 2.6-1.1z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1zm2 0v6h8V4M8 20v-6h8v6"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M19 7l-.9 12.1A2 2 0 0116.1 21H7.9a2 2 0 01-2-1.9L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></symbol>
+    <symbol id="i-stripe" viewBox="0 0 24 24"><path d="M5 4v16" stroke-width="3"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6M3 13a9 9 0 1015-6.7L3 13z"/></symbol>
+  </defs>
+</svg>
+
+<script src="prototype.js"></script>
+</body>
+</html>

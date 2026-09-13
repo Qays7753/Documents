@@ -1,0 +1,32 @@
+# Micro Standard v2 — Final Copy
+
+This package is the Final Copy for the Micro visual foundation. It is based on Cloud Code Design Wave 2 and the approved Micro Component Expansion v1, reconciled against execution run `run-20260913-msv2-zai-01` and the independent post-run audit. It is published in Documents `main`; it is not a Micro product implementation.
+
+The package is Arabic-first, RTL, phone-only, and operational. It preserves the Clay identity roles, warm canvas/surface hierarchy, financial-safe states, and official navigation: الرئيسية / المالية / الطلبات / الأدوات.
+
+## What this release adds (run run-20260913-msv2-zai-01)
+
+- **Named action classes** bound to existing approved values: text-bearing Create/add uses Clay `#D97757` with readable `#141413` ink; icon-only FAB/icon buttons use white icons on Clay; ordinary save/confirm uses Warm Tint `#F5F4ED` + warm-ink text/icon, `#C96442` pressed edge, and press never converts to success; high-consequence commitment uses filled warm ink `#141413` with white text, consequence wording, and an independent confirmation path.
+- **Token truthing**: every custom property the gallery consumes now resolves; the operative type scale, radius set, elevation, motion timings, geometry, and scrim are materialized in `design-tokens.css/.json` from the package's own recorded evidence. The approved hex set is unchanged (18 values); two disclosed alpha derivatives (scrim, translucent header) exist for functional needs.
+- **Executable state contracts**: word + non-color marker for every financial state; pending ≠ success; unknown ≠ failure; value-zone slots (label/value/unit/period/delta) with three honest voids; period chip; operational-row slots with an optional ≤3px state edge stripe always paired with the state word.
+- **Gallery demonstration**: action-class demos, edge-based selected states (chips, segments, nav current), state tag grammar, state-slot rows, a question-led chart with data/zero/no-data/loading states and a text alternative, and a corrected reduced-motion implementation.
+- **Verification records** include the original ZAI evidence and the independent Final Copy reconciliation. Standard package and Gallery checks were repeated; Prototype remains evidence only and is excluded from Final Copy acceptance. Physical-device and screen-reader checks remain separate release testing.
+
+The package contains no product backend, financial policy, synchronization implementation, or Prototype-derived product copy, and introduces no new palette color.
+
+## What this release adds (run run-20260914-msv2-reconciliation-01)
+
+- **Knowledge-state presentation contract** (`component-states.md`): a general presentation contract for unconfirmed / unknown-magnitude / incomplete / needs-review / estimated information — word + non-color marker + neutral tone, orthogonal to the outcome matrix, never bound to Success/Error, never collapsing the honest voids, with example words marked product-owned.
+- **AUX behavior addendum** (`navigation-shell.md`) and a **route/content transition row** (`motion-interaction.md`, 200ms via `--motion-normal` — no new timing value): route-kind chrome behavior, keyboard-driven chrome hiding, safe-area clearance, context-label suppression, scroll-border behavior, and route transition guidance as a behavior contract, not a route list.
+- **Period-control variants** (`component-contracts.md`): the period chip and a native month/date-input variant (LTR-isolated English-digit entry, 13px label, 44px hit, wrapper focus); time semantics remain product-owned.
+- **Quiet feedback variant** (`component-states.md`): inline/quiet completion documented as a valid alternative channel; Snackbar remains optional, never mandatory.
+- **Overlay versus in-flow guidance** (`component-contracts.md`): consequential confirmation/deletion → Dialog/Sheet; continuous explanation/editing → in-flow; no wholesale overlay conversion.
+- **Typography floor clarification** (`typography.md`): labels never below 13px; 12px caption is non-financial metadata only; financial facts and amounts never below 15px; tertiary 13px mono is non-financial numeric metadata.
+- **Icon and RTL adapter guidance** (`iconography.md`): mirror flags and semantic icon roles without mandating a production icon library.
+- **Authority ladder** (`README.md`): Standard = visual contracts; Micro mapping = runtime carrier; Micro docs = implementation guidance; domain/application/storage = meaning and persistence. The 29-core + 2-metadata split is now explicit in `README.md` and `MANIFEST.json`.
+- **Surface-specific contrast bindings** (`accessibility.md`, `color-system.md`): computed application rule — Success/Status marks bind to the white Surface (3.27/3.25) or Canvas-with-word (3.10/3.08); on Ground/Recessed they fall below the 3:1 non-text minimum (2.96/2.95, 2.81/2.80) and must not be used there; Info passes on Ground (3.51); Error is text-safe (5.46/6.02).
+- **Gallery consistency fixes** (`component-gallery.css`): state-tag and nav/segment label words moved to 13px; tag words rendered in text-safe ink with the semantic hue on the leading marker (success/status markers on the white Surface); quiet-completion word and check in ink on the warm-tint surface; row amounts in ink with the sign as the non-color direction marker (negative keeps the text-safe error ink); delta lines at 15px; icon tiles in neutral ink; `.bottomnav` gains `env(safe-area-inset-bottom)` clearance and its items compress flexibly (`min-width: 44px`, touch floor preserved, label ellipsis guard) fixing a proven pre-existing 14px overflow at 320px. No selector, layout, geometry, or color value was added or removed — words and markers were re-bound to approved values.
+- **Loading honesty rider** (`empty-loading-error-states.md`): honest text or skeleton — skeleton optional, not universal (chart loading keeps its recorded basis).
+- **Prototype v1** (run folder, outside this package): a standalone visual-validation artifact demonstrating the changed contracts with neutral illustrative content, labeled "Visual validation prototype — not product truth".
+
+Unchanged: the 18 approved hex values, the action classes, the outcome state matrix, the honest voids, selection grammar, overlay timings, geometry, spacing, elevation, and the no-new-palette rule. Physical-device and screen-reader testing remain separate release checks and are not claimed.

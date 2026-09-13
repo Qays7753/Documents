@@ -1,0 +1,228 @@
+{
+  "run": "run-20260914-msv2-reconciliation-01",
+  "branch": "micro-standard-v2-reconciliation-final-20260914",
+  "run_folder": "planning/micro-standard-v2-reconciliation-2026-09/",
+  "date": "2026-09-14 (Asia/Amman)",
+  "baseline": {
+    "documents_main": "864263c190f5d3da6041acfafb0720e85ac6e320",
+    "micro_main": "c0469e265f24c70427eb7826dee717be117cff87",
+    "comparison_branch": "bf0fc821e2f118aa9ea0e6cd0a87b1a8249be3f5",
+    "context_branch": "8806aab5adfa5d7e9b6ddac6098d9032a7cdde61",
+    "standard_package": "31 files (29 core + 2 metadata)"
+  },
+  "updated_package": {
+    "path": "planning/micro-standard-v2-reconciliation-2026-09/micro-standard-v2-UPDATED/",
+    "note": "final-for-review copy of the updated Standard; the root micro-standard-v2/ on this branch remains identical to main",
+    "file_count": 31,
+    "split": "29 core + 2 metadata (MANIFEST.json, source-inventory.md)",
+    "changed_files": [
+      "MANIFEST.json",
+      "README.md",
+      "RELEASE.md",
+      "accessibility.md",
+      "color-system.md",
+      "component-contracts.md",
+      "component-gallery.css",
+      "component-states.md",
+      "coverage-matrix.json",
+      "decision-log.md",
+      "empty-loading-error-states.md",
+      "iconography.md",
+      "motion-interaction.md",
+      "navigation-shell.md",
+      "self-critique.md",
+      "typography.md",
+      "verification-report.md"
+    ],
+    "unchanged_files": [
+      "button-system.md",
+      "component-gallery.html",
+      "component-gallery.js",
+      "content-guidelines.md",
+      "data-display-system.md",
+      "design-tokens.css",
+      "design-tokens.json",
+      "input-system.md",
+      "overlay-system.md",
+      "responsive-geometry.md",
+      "source-inventory.md",
+      "spacing-radius-elevation.md",
+      "surface-system.md",
+      "visual-direction.md"
+    ],
+    "files": [
+      {
+        "file": "MANIFEST.json",
+        "sha256": "de04682fc714ef46c9a5614d401da818c27f27417a1cc15b9e5b2744f6d50b4b",
+        "bytes": 973
+      },
+      {
+        "file": "README.md",
+        "sha256": "5a22ed21e985cadd111768cf59332ecdc809f0cffda3c33aa38e1811fd29396b",
+        "bytes": 3441
+      },
+      {
+        "file": "RELEASE.md",
+        "sha256": "e84b35a874cf17233c9063be428de3f6127f95c39444770dc1d3db9fd255a212",
+        "bytes": 6466
+      },
+      {
+        "file": "accessibility.md",
+        "sha256": "5685ab8c72a16d7b5378691a1b961d33d9101f2b04382e3c1f41b8afbde535f3",
+        "bytes": 2681
+      },
+      {
+        "file": "button-system.md",
+        "sha256": "b5462d589386ba1f4073852cad0cef9cebebfc4247577347feaecbe1e3ea9314",
+        "bytes": 2850
+      },
+      {
+        "file": "color-system.md",
+        "sha256": "478ef03afe74fc86e0f2a578ea115505035278ee634f61d30b785616ca68ec4f",
+        "bytes": 3657
+      },
+      {
+        "file": "component-contracts.md",
+        "sha256": "17b64699337340256ca044c3819601eddef672500348c6bed7c728c1ab7feef9",
+        "bytes": 4847
+      },
+      {
+        "file": "component-gallery.css",
+        "sha256": "1920d224a1655d50ea9f0fc4a0358120876d19b5c6245f6cecee9d0f68083918",
+        "bytes": 49126
+      },
+      {
+        "file": "component-gallery.html",
+        "sha256": "2c6b35ccfa290519168ecb55e17dab8b24bc0350874a078fb1d679a3d33d7c21",
+        "bytes": 80976
+      },
+      {
+        "file": "component-gallery.js",
+        "sha256": "bfb7b595d874bc3ed616534182f711ea034071598ad6ae66189f64ee59966a46",
+        "bytes": 33246
+      },
+      {
+        "file": "component-states.md",
+        "sha256": "b4016c4b823487ef6fc70605911db1501059e7a033c07d06d13d60476a2f2cbd",
+        "bytes": 4879
+      },
+      {
+        "file": "content-guidelines.md",
+        "sha256": "d3b7a0fa7fc2f35f605c500ab8b3bd52f3219f080442546b01f81b8223534ec4",
+        "bytes": 255
+      },
+      {
+        "file": "coverage-matrix.json",
+        "sha256": "4be38a39d5b8155a768fcfdd8a9ca98fbc642fdd3ec76279326a5484163e0f1d",
+        "bytes": 7572
+      },
+      {
+        "file": "data-display-system.md",
+        "sha256": "d0a1c6744edba092142deafc0eba972b8826fc7cac7f323dd4ea4faf11a800cb",
+        "bytes": 1660
+      },
+      {
+        "file": "decision-log.md",
+        "sha256": "bf743979706c084b002c324d02457d4989883e911c4d359a4af9fac86b7c6701",
+        "bytes": 8113
+      },
+      {
+        "file": "design-tokens.css",
+        "sha256": "4abcfa3d1f9c1fb720a654e4fdd37fbfc44d5a94ad67286e7ac863eb7b692d10",
+        "bytes": 7636
+      },
+      {
+        "file": "design-tokens.json",
+        "sha256": "b12bbb32edb18ea259788dc5270ff4c56338ef892d6fd080f1efd5026daf4e5f",
+        "bytes": 4496
+      },
+      {
+        "file": "empty-loading-error-states.md",
+        "sha256": "b04342201be2d984c7e6da5d9065895c6e209c97391bad2b863102ebed3b21fc",
+        "bytes": 1676
+      },
+      {
+        "file": "iconography.md",
+        "sha256": "088837e6f3e62a0cdd6003ec62a940bf00d9b2756ec4fb4dbe6a38f8db0ee1e2",
+        "bytes": 1017
+      },
+      {
+        "file": "input-system.md",
+        "sha256": "e33b33d2546de37be2466d6f761344156c099a68c9c7aef5e4a2648989b67e33",
+        "bytes": 363
+      },
+      {
+        "file": "motion-interaction.md",
+        "sha256": "2edb67a953ef3e5621586294192026c982774ae8e0cf962e6586f5e8598f7765",
+        "bytes": 1475
+      },
+      {
+        "file": "navigation-shell.md",
+        "sha256": "1c08768500f8191bd75b35bed37eeeb6a0ced653d3151c8e88a5f130495072af",
+        "bytes": 1929
+      },
+      {
+        "file": "overlay-system.md",
+        "sha256": "f88d3744e86ce0f3e8eddeead3c773608158b6c15cebcf80a1a0df5ce56348e9",
+        "bytes": 287
+      },
+      {
+        "file": "responsive-geometry.md",
+        "sha256": "2de53bcd52c658a8fb4b4fdf6773db17d404071eb0577f59ccf82d281569229c",
+        "bytes": 246
+      },
+      {
+        "file": "self-critique.md",
+        "sha256": "e814517d875d2731342355d0a371483c801770d14da8414025609630d4f9dbb0",
+        "bytes": 4141
+      },
+      {
+        "file": "source-inventory.md",
+        "sha256": "5f95534d53f9c88146ad1a4447c4a1fbcaf1c231747887202db98f8992261793",
+        "bytes": 308
+      },
+      {
+        "file": "spacing-radius-elevation.md",
+        "sha256": "7eacd147525fa0ba002668099c564f7d29c2cc69ed66ba338719bc8fc8c1bbf7",
+        "bytes": 1257
+      },
+      {
+        "file": "surface-system.md",
+        "sha256": "e51c6a57365b8916f651e543b05d67eae93757610ab666b0b645a38512b6c8aa",
+        "bytes": 227
+      },
+      {
+        "file": "typography.md",
+        "sha256": "a0bc3a6040852bd640b15a8c6991585987a9c2ef130afe4afc26bf94ca4b9435",
+        "bytes": 1554
+      },
+      {
+        "file": "verification-report.md",
+        "sha256": "104be52279e74463165fbb736332da25c6441d0eaeef233c1b2bab285f43fdd3",
+        "bytes": 7703
+      },
+      {
+        "file": "visual-direction.md",
+        "sha256": "4058b9211c44bea44acb925b1e2c7f92c3a28f47acd0751ccc3baf256fd5a6fe",
+        "bytes": 376
+      }
+    ]
+  },
+  "prototype_v1": {
+    "path": "planning/micro-standard-v2-reconciliation-2026-09/prototype-v1/",
+    "files": [
+      "README.md",
+      "prototype.html",
+      "prototype.css",
+      "prototype.js",
+      "PROTOTYPE_COVERAGE.md",
+      "PROTOTYPE_VALIDATION.md",
+      "evidence/scene-s1.png",
+      "evidence/scene-s2.png",
+      "evidence/scene-s3.png",
+      "evidence/scene-s4.png",
+      "evidence/scene-s5.png",
+      "evidence/scene-s6.png"
+    ]
+  }
+}
