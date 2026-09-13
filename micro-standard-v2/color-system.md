@@ -30,7 +30,7 @@ The filled warm-ink surface is reserved for the high-consequence class. It is no
 
 ## State marks and tint grammar
 
-Every financial state pairs a word with a non-color marker (icon, shape, or sign); color never carries a state alone. Pending never reads as success; unknown is separate from failure. Tinted state marks reuse the existing Warm Tint ground (`#F5F4ED` / `#F0EEE6`) with the semantic ink — for example the negative pair (`--color-negative-50` = ground, `--color-negative-on-tint` = error ink). No new tint hex values exist in this package.
+Every financial state pairs a word with a non-color marker (icon, shape, or sign); color never carries a state alone. Pending never reads as success; unknown is separate from failure. Tinted state marks reuse the existing Warm Tint ground (`#F5F4ED` / `#F0EEE6`) with the semantic ink — for example the negative pair (`--color-negative-50` = ground, `--color-negative-on-tint` = error ink). No new tint hex values exist in this package. As an application rule, the success and status hues bind their marks to the white Surface (or to Canvas with the word); on Ground/Recessed, marks use Info or Error — or neutral ink — with the word in a text-safe ink (see `accessibility.md` for the computed bindings).
 
 ## Functional derivatives (disclosed, not new palette)
 

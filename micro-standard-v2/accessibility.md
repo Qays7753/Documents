@@ -20,7 +20,7 @@ The system preserves 44px touch targets (36px visual chips carry an extended hit
 | Clay icon / identity surface | 5.90 | identity glyph pairing |
 | warm-ink snackbar / surface text | 18.43 | pass |
 
-Consequently: semantic hues (info, status, success) are non-text marks unless paired with a word in a text-safe ink; Clay is non-text-only when paired with white, while text-bearing Clay controls must use a text-safe dark ink such as `#141413`; state meaning is always carried by word + marker so no state depends on color, and low-ratio hues never carry it alone.
+Consequently: semantic hues (info, status, success) are non-text marks unless paired with a word in a text-safe ink; Clay is non-text-only when paired with white, while text-bearing Clay controls must use a text-safe dark ink such as `#141413`; state meaning is always carried by word + marker so no state depends on color, and low-ratio hues never carry it alone. Surface-specific bindings (computed, WCAG 2.1): Success `#629987` and Status `#1490FF` meet the 3:1 non-text minimum on the white Surface (3.27 / 3.25) and only marginally on Canvas (3.10 / 3.08 — pair with the word); on Ground `#F5F4ED` and Recessed `#F0EEE6` they fall below 3:1 (2.96 / 2.95 and 2.81 / 2.80) and must not serve as marks there — use a Surface-backed mark or an Info/Error binding instead (Info on Ground 3.51; Error is text-safe at 5.46 on Ground and 6.02 on Surface). Words always render in a text-safe ink (ink 16.72–18.43, ink-secondary 7.40–8.60, ink-tertiary 4.73–5.49 on the warm surfaces).
 
 ## Focus, states, and verification
 

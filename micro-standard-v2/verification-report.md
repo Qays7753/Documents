@@ -24,3 +24,27 @@ Headless Chromium (Playwright), viewports 320/360/390/430px at 844px height; tex
 - Real-device performance, font rendering on Arabic device fonts, and PWA behavior — outside this package.
 
 The package is a visual foundation and does not claim financial policy correctness; product semantics remain Micro-owned. The Prototype remains an evidence artifact and is not a source for product copy, domain behavior, or Final Copy acceptance.
+
+## Reconciliation run run-20260914-msv2-reconciliation-01 (branch micro-standard-v2-reconciliation-final-20260914)
+
+Re-verified after the reconciliation edits (17 package files changed; 14 untouched). Environment: headless Chromium via Playwright 1.62.1 (local), viewports 320/360/390/430px; text scales 100/130/200% emulated at the token level (the `--text-*` size tokens scaled, one disclosed emulation method — the gallery's own text control adjusts leading only); RTL and LTR; reduced-motion control and `prefers-reduced-motion` emulation.
+
+What was run and recorded:
+
+1. **Static package audit** — `MANIFEST.json`, `coverage-matrix.json`, `design-tokens.json` parse as valid JSON; the manifest states the 29-core + 2-metadata split; hex/rgba audit finds zero new values (18 approved hex unchanged; the two disclosed alpha derivatives unchanged; pre-existing recorded items — the historical retirement record in `decision-log.md`, the recorded shadow tone notation, and the gallery's pre-existing white-35% dark-fill spinner track — are unchanged and documented, not introduced by this run); cross-file references resolve; no forbidden/retired palette values outside historical records.
+2. **Token resolution** — 98 custom properties consumed by the gallery CSS all resolve (0 unresolved).
+3. **Action classes (computed)** — text-bearing Create = Clay `rgb(217,119,87)` with dark ink `rgb(20,20,19)`; Save = `rgb(245,244,237)` with ink and the `#C96442` pressed-edge rule present and token-resolved; commit fill `rgb(20,20,19)` with white text; FAB Clay with white icon; quiet-completion word and check render in ink on the warm-tint surface (semantic hue no longer used as text at sub-AA contrast).
+4. **Knowledge/type-floor/gallery rebindings (computed)** — state tags, navigation labels, segment options, and count badges at 13px; delta lines at 15px; tag words in text-safe ink (`rgb(77,76,72)`) with success/status markers on the white Surface and info/error markers on the warm ground; row amounts in ink with the sign as the direction marker (negative keeps the text-safe error ink); icon tiles in neutral ink; `.bottomnav` has `env(safe-area-inset-bottom)` clearance.
+5. **Gallery interactions** — sheet open/Escape close; dialog open/Escape close; snackbar shows the warm-ink surface (optional contract); chart state cycle; loading demo holds `aria-busy` and restores; nav switching moves the active pill; selection chips carry the 2px `rgb(201,100,66)` edge; zero console/page errors.
+6. **Geometry** — no document-level horizontal overflow and no visible-overflow elements across 320/360/390/430 × 100/130/200% × RTL/LTR (24 combinations). The bottom-navigation demo previously overflowed its frame by 14px at 320px (pre-existing in the baseline); the compression fix (`min-width: 44px; flex: 1 1 0` + label ellipsis guard, touch floor preserved) measures clean in all 24 combinations. The segmented control scrolls internally by design (recorded R-16).
+7. **Reduced motion** — transitions collapse to 1e-05s under both the gallery control and the emulated system preference; meaning is preserved by labels, markers, and `aria-busy`.
+8. **Contrast recomputation (WCAG 2.1)** — all 13 previously recorded pairs reproduce to the digit; the new surface-specific bindings are computed and recorded in `accessibility.md` (success/status on Surface 3.27/3.25, Canvas 3.10/3.08, below 3:1 on Ground/Recessed; info on Ground 3.51; error text-safe 5.19–6.02; ink-secondary 5.50–8.60; ink-tertiary 4.73–5.49 on warm surfaces).
+
+What was not tested (explicitly not claimed) — unchanged:
+
+- Physical Samsung-device testing — not performed.
+- Screen-reader (assistive technology) testing — not performed; `aria-*` usage was checked in markup only.
+- Real-device performance, font rendering on Arabic device fonts, and PWA behavior — outside this package.
+- Micro production screens — not run; Micro remains untouched by this run.
+
+Known pre-existing item (documented, not changed): the gallery's loading spinner uses a white-at-35% track on dark filled controls (`rgba(255,255,255,.35)`, a functional derivative of the approved Surface white, paired with a dark-spinner variant for light surfaces). It predates this run, passes contrast on its dark fills, and is recorded here for owner disclosure at the next revision rather than silently changed.

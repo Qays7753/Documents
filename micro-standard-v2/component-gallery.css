@@ -61,7 +61,7 @@ body {
 .seg button {
   position: relative; border: none; background: transparent; cursor: pointer;
   min-height: 36px; padding: 0 12px; border-radius: var(--radius-full);
-  font-family: inherit; font-size: var(--text-caption-size); font-weight: 600;
+  font-family: inherit; font-size: var(--text-label-size); font-weight: 600;
   color: var(--vf-ink-tertiary); line-height: 1.4;
 }
 .seg button::after { /* 44px hit area over the 36px visual */
@@ -210,8 +210,8 @@ body {
 .btn-save.is-loading { background: var(--vf-btn-save-bg); }
 /* .btn.btn-complete (0,2,0) outspecifies .btn:disabled so the completion tint
    stays visible through the disabled window (wave-2 finding) */
-.btn.btn-complete { background: var(--vf-bg-secondary); color: var(--vf-success); }
-.btn.btn-complete .ic { color: var(--vf-success); }
+.btn.btn-complete { background: var(--vf-bg-secondary); color: var(--vf-ink); }
+.btn.btn-complete .ic { color: var(--vf-ink); }
 
 /* Inset surface focus ring for dark filled controls — the dual-ring contract
    (corrected R-05): 2px surface ring inside the fill, measured 5.02–8.24:1. */
@@ -357,11 +357,11 @@ body {
 .filter-ctl .ic { color: var(--vf-ink-tertiary); }
 .filter-ctl .sel-value { max-width: 96px; }
 .filter-count {
-  min-width: 18px; height: 18px; padding: 0 5px;
+  min-width: 20px; height: 20px; padding: 0 5px;
   border-radius: var(--radius-full);
   background: var(--vf-ink); color: #FFFFFF;
   font-family: var(--vf-font-mono); font-variant-numeric: tabular-nums;
-  font-size: var(--text-caption-size); font-weight: 700; line-height: 1;
+  font-size: var(--text-label-size); font-weight: 700; line-height: 1;
   display: inline-flex; align-items: center; justify-content: center;
 }
 .filter-summary {
@@ -417,22 +417,24 @@ body {
 .tag {
   display: inline-flex; align-items: center; gap: 6px;
   border-radius: var(--radius-full); padding: 4px 12px;
-  font-size: var(--text-caption-size); font-weight: 600; line-height: 1.5;
+  font-size: var(--text-label-size); font-weight: 600; line-height: 1.5;
 }
 .tag-progress { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
 .tag-ready { background: var(--vf-bg-secondary); color: var(--vf-ink); }
 .tag-closed { background: var(--vf-recessed); color: var(--vf-ink-tertiary); }
-/* State tags — word in text-safe ink where the tag is read as text, semantic
-   hue on the leading marker; tinted ground from the existing warm ladder. */
-.tag-positive { background: var(--vf-bg-secondary); color: var(--vf-success); }
+/* State tags — word in text-safe ink; semantic hue on the leading marker only,
+   and success/status markers sit on the white Surface (3:1 non-text rule);
+   tinted ground from the existing warm ladder. */
+.tag-positive { background: var(--vf-surface); border: 1px solid var(--vf-border-soft); color: var(--vf-ink-secondary); }
 .tag-negative { background: var(--color-negative-50); color: var(--color-negative-on-tint); }
-.tag-operational { background: var(--vf-bg-secondary); color: var(--vf-info); }
+.tag-operational { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
 .tag-neutral { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
-.tag-pending { background: var(--vf-bg-secondary); color: var(--vf-info); }
-.tag-review { background: var(--vf-bg-secondary); color: var(--vf-status); }
+.tag-pending { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
+.tag-review { background: var(--vf-surface); border: 1px solid var(--vf-border-soft); color: var(--vf-ink-secondary); }
 .tag-unknown { background: var(--vf-recessed); color: var(--vf-ink-secondary); }
 .tag .ic { flex: none; }
 .tag-neutral .ic, .tag-unknown .ic { color: var(--vf-ink-tertiary); }
+.tag-operational .ic { color: var(--vf-info); }
 .tag-pending .ic { color: var(--vf-info); }
 .tag-review .ic { color: var(--vf-status); }
 .tag-positive .ic { color: var(--vf-success); }
@@ -480,9 +482,11 @@ body {
 }
 .count {
   font-family: var(--vf-font-mono); font-variant-numeric: tabular-nums;
-  font-size: var(--text-caption-size); font-weight: 700;
+  font-size: var(--text-label-size); font-weight: 700; line-height: 1;
   background: var(--vf-recessed); color: var(--vf-ink-tertiary);
-  border-radius: var(--radius-full); padding: 1px 6px; line-height: 1.4;
+  border-radius: var(--radius-full); padding: 3px 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; min-height: 20px;
 }
 .segctl-lines button.on .count { background: var(--vf-ink); color: #FFFFFF; }
 
@@ -506,8 +510,8 @@ body {
   font-size: var(--text-kpi-hero-size); font-weight: var(--text-kpi-hero-weight);
   color: var(--vf-ink); line-height: 1.1;
 }
-.kpi-change { margin: 8px 0 0; display: flex; align-items: center; gap: 6px; font-size: var(--text-caption-size); line-height: 1.5; }
-.kpi-change.pos { color: var(--vf-success); }
+.kpi-change { margin: 8px 0 0; display: flex; align-items: center; gap: 6px; font-size: var(--text-body-size); line-height: 1.5; }
+.kpi-change.pos { color: var(--vf-ink-secondary); }
 
 /* Summary metric composition — content-driven height, one surface, no
    white-in-white nesting (corrected R-09). */
@@ -531,8 +535,8 @@ body {
   display: inline-flex; align-items: center; justify-content: center;
 }
 .m-chip .ic { width: 20px; height: 20px; stroke-width: 2; }
-.m-op { background: var(--vf-soft); color: var(--vf-info); }
-.m-pos { background: var(--color-positive-100); color: var(--vf-success); }
+.m-op { background: var(--vf-soft); color: var(--vf-ink-secondary); }
+.m-pos { background: var(--color-positive-100); color: var(--vf-ink-secondary); }
 .m-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .m-name { font-size: var(--text-label-size); font-weight: 600; color: var(--vf-ink); line-height: 1.4; }
 .m-num {
@@ -571,7 +575,7 @@ body {
   display: inline-flex; align-items: center; justify-content: center;
 }
 .row-tile .ic { width: 20px; height: 20px; stroke-width: 2; }
-.t-pos { background: var(--vf-bg-secondary); color: var(--vf-success); }
+.t-pos { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
 .t-neg { background: var(--color-negative-50); color: var(--color-negative-on-tint); }
 .t-op { background: var(--vf-bg-secondary); color: var(--vf-info); }
 .t-neutral { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
@@ -593,9 +597,9 @@ body {
   font-size: var(--text-amount-size); font-weight: var(--text-amount-weight); line-height: 1.4;
   text-align: end; unicode-bidi: isolate;
 }
-.pos { color: var(--vf-success); }
+.pos { color: var(--vf-ink); }
 .neg { color: var(--color-negative-on-tint); }
-.op { color: var(--vf-info); }
+.op { color: var(--vf-ink); }
 .neutral { color: var(--vf-ink-secondary); }
 /* Optional state edge stripe (≤3px, inline-start) — always paired with the
    state word inside the row; never the only signal. */
@@ -703,12 +707,12 @@ body {
 .bottomnav {
   display: flex; justify-content: space-around; align-items: stretch;
   background: var(--vf-surface); border-top: 1px solid var(--vf-border-soft);
-  padding: 4px 12px 6px; min-height: var(--nav-height-min);
+  padding: 4px 12px max(6px, env(safe-area-inset-bottom)); min-height: var(--nav-height-min);
   border-radius: 0 0 var(--radius-card) var(--radius-card);
 }
 .navitem {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  min-width: 64px; min-height: 48px; padding: 0; border: none; background: transparent;
+  min-width: 44px; flex: 1 1 0; min-height: 48px; padding: 0; border: none; background: transparent;
   border-radius: var(--radius-card); cursor: pointer; font-family: inherit;
 }
 .navpill {
@@ -718,7 +722,8 @@ body {
 }
 .navitem .ic { color: var(--vf-ink-tertiary); stroke-width: 1.8; width: var(--icon-md); height: var(--icon-md); }
 .navlabel {
-  font-size: var(--text-caption-size); font-weight: 600; color: var(--vf-ink-tertiary);
+  font-size: var(--text-label-size); font-weight: 600; color: var(--vf-ink-tertiary);
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .navitem.on .navpill {
   background: var(--color-primary-100);
