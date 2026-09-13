@@ -1,6 +1,6 @@
-# Micro Standard v2 — Final Copy Candidate
+# Micro Standard v2 — Final Copy
 
-Micro Standard v2 is the Final Copy candidate for the Arabic-first, RTL, phone-only visual foundation for Micro. It is based on the final Cloud Code Design Wave 2 foundation and the approved Micro Component Expansion v1, reconciled against execution run `run-20260913-msv2-zai-01` and the independent post-run audit on branch `micro-standard-v2-final-copy-20260913`. It is prepared for publication to Documents `main`; it is not a Micro product implementation.
+Micro Standard v2 is the Final Copy for the Arabic-first, RTL, phone-only visual foundation for Micro. It is based on the final Cloud Code Design Wave 2 foundation and the approved Micro Component Expansion v1, reconciled against execution run `run-20260913-msv2-zai-01` and the independent post-run audit on branch `micro-standard-v2-final-copy-20260913`. It is the official visual foundation published in Documents `main`; it is not a Micro product implementation.
 
 The package defines current tokens, named action classes, component contracts, financial-safe states, mobile geometry, interaction rules, navigation, empty/loading/error behavior, and a local interactive gallery. It does not define financial policy, financial formulas, synchronization behavior, or backend implementation.
 

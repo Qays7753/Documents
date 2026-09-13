@@ -1,7 +1,7 @@
 {
   "name": "Micro Standard v2",
   "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
-  "status": "final-copy-candidate",
+  "status": "final",
   "updated_by": "Manus audit reconciliation of run-20260913-msv2-zai-01 — contrast and handoff integrity fixes; no new palette color",
   "roles": {
     "identity_create_fab": "#D97757",
