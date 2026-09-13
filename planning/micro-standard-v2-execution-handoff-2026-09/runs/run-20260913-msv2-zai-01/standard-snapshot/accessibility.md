@@ -20,7 +20,7 @@ The system preserves 44px touch targets (36px visual chips carry an extended hit
 | Clay icon / identity surface | 5.90 | identity glyph pairing |
 | warm-ink snackbar / surface text | 18.43 | pass |
 
-Consequently: semantic hues (info, status, success) are non-text marks unless paired with a word in a text-safe ink; Clay is never body-size text; state meaning is always carried by word + marker so no state depends on color, and low-ratio hues never carry it alone.
+Consequently: semantic hues (info, status, success) are non-text marks unless paired with a word in a text-safe ink; Clay is non-text-only when paired with white, while text-bearing Clay controls must use a text-safe dark ink such as `#141413`; state meaning is always carried by word + marker so no state depends on color, and low-ratio hues never carry it alone.
 
 ## Focus, states, and verification
 

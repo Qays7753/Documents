@@ -23,3 +23,11 @@ Recorded so no silent change exists. All bind to the owner-approved decisions; n
 ## Product boundary
 
 Tools calculate and explain; they do not silently write financial records. Delivery, assistant, multi-device conflict policy, and financial formulas require product implementation decisions outside this visual foundation.
+
+## Final Copy reconciliation decisions
+
+12. **Text-bearing Clay contrast** — the audit found white text on `#D97757` at 3.12:1 while the Gallery rendered a 15px text-bearing Create button. Final Copy separates the roles: text-bearing Create/add uses `#141413`; icon-only FAB/icon buttons retain white icons. This preserves Terracotta identity without using an inaccessible text treatment.
+
+13. **Prototype boundary** — the Prototype remains visual evidence only. It is not a source for Micro product copy, domain behavior, routes, or Final Copy acceptance.
+
+14. **Handoff integrity** — the stale historical `work_branch_head` and file-count claim were removed from the Final Copy manifest. The source head is recorded separately; publication status remains pending until the main merge and remote verification are completed.

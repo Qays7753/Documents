@@ -1,17 +1,21 @@
 {
   "run_id": "run-20260913-msv2-zai-01",
-  "task": "Micro Standard v2 — controlled delta execution + interactive prototype",
+  "task": "Micro Standard v2 — ZAI execution reconciled into a Final Copy",
   "repository": "https://github.com/Qays7753/Documents",
   "base_branch": "main",
   "base_commit": "dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b",
-  "work_branch": "micro-standard-v2-execution-20260913",
-  "work_branch_head": "3274e6e5646b60398a1b8804a05c1cb3c6782802",
+  "source_work_branch": "micro-standard-v2-execution-20260913",
+  "source_work_branch_head_verified_before_reconciliation": "844c834e4fab19148b0dfa9c44a95dd0ed66d82b",
+  "final_copy_branch": "micro-standard-v2-final-copy-20260913",
+  "publication_status": "pending_main_publication",
+  "final_copy_run_file_count": 92,
   "main_modified": false,
   "package": "micro-standard-v2/",
   "package_file_count": 31,
   "core_files": 29,
-  "files_changed": 22,
-  "files_unchanged": 9,
+  "upstream_files_changed": 22,
+  "reconciliation_files_changed": 8,
+  "files_unchanged_from_upstream": 9,
   "files_deferred": 0,
   "files_blocked": 0,
   "waves": {
@@ -54,14 +58,18 @@
       "PROTOTYPE_TEST_RESULTS.json",
       "screenshots/ (19)"
     ],
-    "token_source": "verbatim copy of micro-standard-v2/design-tokens.css (Wave C state)"
+    "token_source": "retained run evidence only; not a source for Final Copy and not part of Standard acceptance"
   },
   "records": [
     "EXECUTION_RECORD.md",
     "final_sha256.txt",
     "final-standard.patch",
     "standard-snapshot/",
-    "FINAL_RUN_README.md"
+    "FINAL_RUN_README.md",
+    "FINAL_COPY_VALIDATION.md",
+    "tools/final_copy_standard_audit.py",
+    "tools/final_copy_gallery_audit.py",
+    "tools/refresh_final_copy_records.py"
   ],
   "owner_decision_compliance": {
     "new_hex_values": 0,
@@ -82,7 +90,9 @@
     "micro_or_accounting_modified": false
   },
   "verification_boundaries": {
-    "executed": "headless Chromium: viewports 320/360/390/430, text 100/130/200%, RTL/LTR, reduced motion, computed contracts, contrast math, JSON/hex/token audits, interaction batteries",
+    "zai_execution_evidence": "headless Chromium: viewports 320/360/390/430, text 100/130/200%, RTL/LTR, reduced motion, computed contracts, contrast math, JSON/hex/token audits, interaction batteries",
+    "final_copy_reconciliation": "Standard package and Gallery only; create/save/commit contrast, JSON/CSS/JS, hashes, and handoff integrity rechecked",
+    "prototype_acceptance": "excluded by owner instruction; prototype remains evidence only",
     "not_executed": [
       "physical Samsung device",
       "screen reader",

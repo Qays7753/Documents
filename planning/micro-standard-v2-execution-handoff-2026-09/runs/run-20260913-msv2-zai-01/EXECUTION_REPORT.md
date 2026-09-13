@@ -1,12 +1,13 @@
 # MICRO STANDARD V2 — ZAI FLASH EXECUTION REPORT
 
 ```
-STATUS: EXECUTION COMPLETE — STANDARD DEVELOPED + PROTOTYPE VALIDATED + UPLOADED — WAITING FOR OWNER REVIEW
+STATUS: ZAI EXECUTION RECORDED — FINAL COPY RECONCILIATION APPLIED — MAIN PUBLICATION PENDING
 ```
 
 - **Run**: `run-20260913-msv2-zai-01` · **Date**: 2026-09-13
 - **Repository**: https://github.com/Qays7753/Documents
-- **Work branch**: `micro-standard-v2-execution-20260913` · **Head**: `475025e18a8a119a54ac5441539fc57da7880c65`
+- **Source work branch**: `micro-standard-v2-execution-20260913` · original ZAI execution head: `475025e18a8a119a54ac5441539fc57da7880c65`; live source branch head after report upload: `844c834e4fab19148b0dfa9c44a95dd0ed66d82b`
+- **Final Copy branch**: `micro-standard-v2-final-copy-20260913` · publication pending
 - **Base**: `main` @ `dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b` (verified live before start; never pushed)
 - **Run folder**: `planning/micro-standard-v2-execution-handoff-2026-09/runs/run-20260913-msv2-zai-01/`
 - **Package**: `micro-standard-v2/` — 31 files preserved (29 core + `MANIFEST.json` + `RELEASE.md`); none added, removed, moved, or renamed.
@@ -22,7 +23,7 @@ The approved delta only — verified against all 31 files read in full before an
 3. **Executable state contracts** (Wave A): state presentation matrix (draft/pending/posted/failed/cancelled/reversed/reviewed/partial/due/overdue/unknown — word + non-color marker + semantic hue on the marker), value-zone slots (label/value/unit/period/delta) with the three honest voids (action chip / "غير متاح" / measured zero), period chip, operational-row slots with an optional ≤3px state edge stripe always paired with the state word.
 4. **Gallery composition** (Wave B): action-class button demos + save six-state frame; charts family (question-led Arabic chart; data with one Info highlight + text alternative; measured zeros as 2px baseline marks; no-data; loading); state-slot rows + state tag grammar; selected/current via `#C96442` edge (chips, segmented thumb/underline, current nav pill — no automatic black fills); sheet Apply → ordinary-save class; "Finalize period?" high-consequence dialog; gold naming retired; evidence-panel parity claim corrected; reduced-motion block added (the control previously did nothing).
 5. **Verification & governance** (Wave C): README/RELEASE/MANIFEST/coverage-matrix/verification-report/decision-log/self-critique regenerated strictly from executed tests, with per-capability coverage rows and 11 recorded decisions.
-6. **Independent interactive prototype** (Wave P): 11 Arabic-RTL scenes demonstrating every implemented change, consuming a byte-identical copy of the final tokens; fully interactive locally (press, loading, quiet completion, chart cycling, sheets/dialogs, nav, reduced motion).
+6. **Independent interactive prototype** (Wave P): 11 Arabic-RTL scenes demonstrating the ZAI run. It remains a visual evidence artifact only; it is not part of Final Copy acceptance or transfer.
 
 **Not implemented** (per owner scope): S-12 tool-result anatomy (deferred), link-ink value ratification (owner decision D-1), Dark Mode (rejected), any new color.
 
@@ -34,7 +35,7 @@ The approved delta only — verified against all 31 files read in full before an
 
 ## 3. Execution record — every core file
 
-Full 31-row table with reasons and tests: `EXECUTION_RECORD.md`. Summary: **22 changed** (12 Wave A contracts/tokens, 3 Wave B gallery, 7 Wave C docs; gallery CSS received one Wave P amendment), **9 unchanged** (input/surface/iconography/navigation/overlay/responsive/content/visual-direction/source-inventory — verified, no justified delta), **0 deferred, 0 blocked**.
+Full 31-row historical table plus Final Copy reconciliation: `EXECUTION_RECORD.md`. The ZAI run changed 22 files and left 9 unchanged; the Final Copy reconciliation corrected 8 Standard contract/gallery files plus 5 handoff records without changing package cardinality.
 
 ## 4. Color-role table and test evidence
 
@@ -61,7 +62,8 @@ Contrast: 19 pairs computed; the 13 documented claims match exactly (ink/canvas 
 | B | `0d48846` | Gallery delta (3 files) + 12 screenshots | **PASS** (computed contracts, interactions, viewports, zoom, reduced motion) |
 | C | `24dad43` | Governance/verification regeneration (7 files) | **PASS** (JSON, audits, smoke re-run) |
 | P | `3274e6e` | Independent prototype + `[hidden]` guard amendment to gallery CSS | **PASS** (full battery; gallery re-verified) |
-| Final | `475025e` | Execution record, snapshot, patch, hashes, manifest | **PASS** |
+| Final (ZAI) | `475025e` | Execution record, snapshot, patch, hashes, manifest | **PASS — historical source** |
+| Final Copy reconciliation | `micro-standard-v2-final-copy-20260913` | Contrast contract, action ink split, evidence wording, manifest/records | **PASS locally; publication pending** |
 
 ## 6. Prototype scenes and coverage
 
@@ -80,20 +82,20 @@ Physical Samsung-device testing, screen-reader/AT testing, real-device Arabic fo
 
 ## 9. Remaining issues
 
-- **Standard**: none blocking. Notes: tag-size semantic text at 2.96:1 remains a documented non-text-only constraint (fixed grammar uses marker hue + text-safe ink); link-ink role has no ratified value (owner decision D-1 pending); S-12 deferred.
-- **Prototype**: FAB in scene 1 opens the rows-scene sheet (single wired sheet) — acceptable for visual review; illustrative numbers are placeholders; scene copy notes are reviewer-facing.
+- **Standard / Final Copy**: the ZAI create-text contrast issue was corrected by using dark ink on text-bearing Clay controls and keeping white only for icon-only identity controls. The manifest head/count issue was corrected in the Final Copy records. Link-ink role remains owner-pending; S-12 remains deferred.
+- **Prototype**: remains evidence only; no Prototype acceptance or transfer decision is made in the Final Copy reconciliation.
 - **Micro composition** (future, not Standard changes): adopt save/create classes instead of ink fills; wire value-zone voids to real product states; row state slots/stripes; period chips on every metric; chart adoption per `data-display-system.md`.
 
 ## 10. Links, commit, run folder, hashes
 
 - Branch: https://github.com/Qays7753/Documents/tree/micro-standard-v2-execution-20260913
 - Head: `475025e18a8a119a54ac5441539fc57da7880c65`
-- Run folder: https://github.com/Qays7753/Documents/tree/micro-standard-v2-execution-20260913/planning/micro-standard-v2-execution-handoff-2026-09/runs/run-20260913-msv2-zai-01 (87 tracked files: wave reports, test JSONs, 12+19 screenshots, snapshot, 98.5 KB patch, hashes, manifest, prototype)
+- Run folder: https://github.com/Qays7753/Documents/tree/micro-standard-v2-execution-20260913/planning/micro-standard-v2-execution-handoff-2026-09/runs/run-20260913-msv2-zai-01 (88 files at the source branch head; historical evidence plus Final Copy reconciliation records)
 - Hashes: `wave-0/baseline_sha256.txt` (baseline) · `final_sha256.txt` (final) — the only changed files are the 22 recorded; snapshot in `standard-snapshot/`.
 
 ## 11. Confirmation — Micro, Accounting, main untouched
 
-No commit, push, file change, or configuration change was made to Qays7753/Micro or Qays7753/Accounting. `origin/main` remains exactly `dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b` after upload (verified via `git ls-remote`). No PR was opened, nothing merged, no force-push, no branch deletion, no settings change.
+No commit, push, file change, or configuration change was made to Qays7753/Micro or Qays7753/Accounting during the ZAI run. At the time of this report update, publication to Documents `main` is a separate controlled step and is not yet claimed.
 
 ## 12. Confirmation — token handling
 
@@ -101,4 +103,10 @@ The provided access token was used only ephemerally in the working shell for two
 
 ---
 
-**Transfer statement**: per the handoff, this package is NOT ready for transfer into Micro until the owner reviews the Standard, the Prototype, and this validation. Next step on approval: an independent transfer plan for Micro.
+**Transfer statement**: the reconciled Standard Final Copy is the only candidate source for a future Micro transfer. The Prototype is not a source of product copy or domain behavior. After Final Copy publication, the next step is a read-only Micro composition and architecture scan; no Micro code changes are included here.
+
+## 13. Final Copy reconciliation validation
+
+`FINAL_COPY_VALIDATION.md` records the independent post-ZAI checks. The static package audit passed 22/22 checks, and the Chromium Gallery audit passed 16/16 checks. The checks covered only the 31-file Standard package and `component-gallery.html`; Prototype was excluded from acceptance by owner instruction.
+
+The corrected action contract is: text-bearing Create/add uses Clay `#D97757` with dark `#141413` ink; icon-only FAB/icon buttons use white icons; ordinary save uses Warm Tint; high-consequence commitment uses Warm-Ink. The package snapshot and `final_sha256.txt` were regenerated after reconciliation. Publication to Documents `main` remains a separate pending step.

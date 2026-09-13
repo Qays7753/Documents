@@ -5,7 +5,7 @@ Buttons are divided into named action classes. Every class binds to tokens in `d
 ## Action classes
 
 ### Create / add / FAB — Clay `#D97757`
-The identity action. Filled Clay surface with a white icon or short create/add wording, pressed state moves to `#C96442`. It never displays a financial value, never becomes the general color for commitments, and never fills cards or screens.
+The identity action. A text-bearing create/add button uses a filled Clay surface with dark `#141413` text and a non-semantic icon; its pressed state moves to `#C96442` with the text remaining readable. Icon-only identity controls such as the FAB and primary icon button use a white icon on the Clay surface. It never displays a financial value, never becomes the general color for commitments, and never fills cards or screens.
 
 ### Ordinary save / confirm — Warm Tint `#F5F4ED`
 Not a filled black surface. Warm Tint surface with dark `#141413` text and a save icon. Pressing shows a clear `2px` inset `#C96442` edge while the surface stays Warm Tint; pressing never converts the button into a success state. After actual completion, show a success word with a semantic marker (check icon) — quiet completion does not rely on the button color alone.

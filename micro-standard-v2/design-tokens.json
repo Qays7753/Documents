@@ -1,8 +1,8 @@
 {
   "name": "Micro Standard v2",
   "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
-  "status": "approved-current-basis",
-  "updated_by": "run-20260913-msv2-zai-01 Wave A — token truthing and action contracts; no new palette color",
+  "status": "final-copy-candidate",
+  "updated_by": "Manus audit reconciliation of run-20260913-msv2-zai-01 — contrast and handoff integrity fixes; no new palette color",
   "roles": {
     "identity_create_fab": "#D97757",
     "chosen_current_edge": "#C96442",
@@ -21,9 +21,10 @@
   "action_contracts": {
     "create_add_fab": {
       "surface": "#D97757",
-      "ink": "#FFFFFF",
+      "text_ink": "#141413",
+      "icon_ink": "#FFFFFF",
       "pressed": "#C96442",
-      "rule": "Identity Terracotta for create/add/FAB only; never financial values, chart fills, statuses, or general commitment."
+      "rule": "Terracotta is the identity surface. Text-bearing create/add uses dark ink for readable text; icon-only FAB/icon buttons use white icons. Never use the role for financial values, chart fills, statuses, or general commitment."
     },
     "ordinary_save_confirm": {
       "surface": "#F5F4ED",

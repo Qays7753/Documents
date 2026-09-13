@@ -6,7 +6,7 @@ Shared components consume `--vf-*` roles and expose slots for primary commitment
 
 | Contract | Binding | Non-color signal |
 |---|---|---|
-| create/add/FAB | `--vf-action-create` (`#D97757`), pressed `#C96442` | plus icon; create wording; never a financial value |
+| create/add/FAB | `--vf-action-create` (`#D97757`), text ink `#141413`, icon-only ink `#FFFFFF`, pressed `#C96442` | plus icon; create wording; never a financial value |
 | ordinary save/confirm | `--vf-action-save-bg/ink` (`#F5F4ED` / `#141413`); pressed edge `#C96442` | save icon; press shows edge only; completion = check + past-tense word |
 | pressed save | Warm Tint surface persists; `2px` inset `#C96442` edge | pressing is not success |
 | high-consequence commit | `--vf-action-commit-bg/ink` (`#141413` / `#FFFFFF`); pressed `#3D3D3A` | consequence word + icon + explanation + independent confirmation path |

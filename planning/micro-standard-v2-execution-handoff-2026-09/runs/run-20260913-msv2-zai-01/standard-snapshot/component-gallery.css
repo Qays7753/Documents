@@ -162,7 +162,8 @@ body {
   outline: 2px solid var(--vf-ink); outline-offset: 2px;
 }
 /* Action classes (owner-approved):
-   create = Clay identity, save = Warm Tint + #C96442 pressed edge,
+   create = Clay identity with readable dark text for text-bearing controls,
+   save = Warm Tint + #C96442 pressed edge,
    primary/commit = warm-ink fill reserved for high-consequence commitment. */
 .btn-create { background: var(--vf-btn-create-bg); color: var(--vf-btn-create-ink); }
 .btn-create:active, .btn-create.is-pressed { background: var(--vf-btn-create-pressed); }
@@ -246,8 +247,8 @@ body {
   font-family: inherit;
 }
 /* Identity icon surfaces use the identity color with non-text glyphs only
-   (source Fab.jsx bg-primary; 3.28:1 ≥ 3:1 non-text). */
-.iconbtn-primary { background: var(--vf-clay); color: #FFFFFF; }
+   (white on #D97757 is 3.12:1, meeting the non-text boundary requirement). */
+.iconbtn-primary { background: var(--vf-clay); color: var(--vf-action-create-icon-ink); }
 .iconbtn-primary:active { background: var(--vf-clay-interactive); }
 .iconbtn-quiet { background: var(--vf-recessed); color: var(--vf-ink-tertiary); }
 .iconbtn-quiet:active { background: var(--vf-border); }
@@ -692,7 +693,7 @@ body {
   inset-inline-end: 16px;
   width: var(--fab-size); height: var(--fab-size); z-index: var(--z-fab);
   border-radius: var(--radius-control); border: none; cursor: pointer;
-  background: var(--vf-clay); color: #FFFFFF; /* identity surface, icon only */
+  background: var(--vf-clay); color: var(--vf-action-create-icon-ink); /* identity surface, icon only */
   box-shadow: var(--shadow-e3);
   display: inline-flex; align-items: center; justify-content: center;
   margin-bottom: env(safe-area-inset-bottom);

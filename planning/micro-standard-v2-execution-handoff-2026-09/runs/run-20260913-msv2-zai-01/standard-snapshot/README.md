@@ -1,6 +1,6 @@
-# Micro Standard v2
+# Micro Standard v2 — Final Copy Candidate
 
-Micro Standard v2 is the current approved Arabic-first, RTL, phone-only visual foundation for Micro. It is based on the final Cloud Code Design Wave 2 foundation and the approved Micro Component Expansion v1, updated by execution run `run-20260913-msv2-zai-01` (Waves 0/A/B/C) on the branch `micro-standard-v2-execution-20260913`.
+Micro Standard v2 is the Final Copy candidate for the Arabic-first, RTL, phone-only visual foundation for Micro. It is based on the final Cloud Code Design Wave 2 foundation and the approved Micro Component Expansion v1, reconciled against execution run `run-20260913-msv2-zai-01` and the independent post-run audit on branch `micro-standard-v2-final-copy-20260913`. It is prepared for publication to Documents `main`; it is not a Micro product implementation.
 
 The package defines current tokens, named action classes, component contracts, financial-safe states, mobile geometry, interaction rules, navigation, empty/loading/error behavior, and a local interactive gallery. It does not define financial policy, financial formulas, synchronization behavior, or backend implementation.
 
@@ -18,7 +18,7 @@ The package defines current tokens, named action classes, component contracts, f
 
 | Class | Surface | Notes |
 |---|---|---|
-| Create / add / FAB | Clay `#D97757` | pressed `#C96442`; never a financial value |
+| Create / add / FAB | Clay `#D97757` | text-bearing controls use dark `#141413`; icon-only FAB/icon buttons use white icons; pressed `#C96442`; never a financial value |
 | Ordinary save / confirm | Warm Tint `#F5F4ED` + ink `#141413` | pressed shows a `#C96442` edge; press is never success; completion = word + check marker |
 | High-consequence commit | Warm ink `#141413` + white text | consequence word, icon, explanation, independent confirmation |
 | Destructive | error `#B53333` ink + confirmation | uses the high-consequence contract |
@@ -27,4 +27,4 @@ Every financial state pairs a word with a non-color marker; pending never reads 
 
 ## Verification boundary
 
-The gallery was re-verified locally at 320/360/390/430px, 100/130/200% text scale, RTL/LTR, reduced motion (control and system preference), and no horizontal overflow in headless Chromium during this run; computed-style contract checks cover the action classes, selection edges, scrim visibility, and chart states. Physical-device and screen-reader verification require separate testing and are not claimed.
+The Standard package and Gallery were re-verified locally at 320/360/390/430px, 100/130/200% text scale, RTL/LTR, reduced motion (control and system preference), and no horizontal overflow in headless Chromium during Final Copy reconciliation; computed-style contract checks cover the action classes, selection edges, scrim visibility, and chart states. The Prototype remains evidence only and is excluded from Final Copy acceptance. Physical-device and screen-reader verification require separate testing and are not claimed.

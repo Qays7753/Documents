@@ -38,3 +38,22 @@ Statuses: **changed** (justified delta executed) / **unchanged** (verified, no c
 | 31 | `source-inventory.md` | unchanged | — | Source inventory statement unchanged | — |
 
 Deferred (unchanged by owner scope): S-12 tool/integrity result anatomy; link-ink value ratification (D-1); any chart expansion beyond the documented contract. Blocked: none.
+
+## Final Copy reconciliation — post-ZAI audit
+
+The original ZAI run remains historical. A separate Final Copy reconciliation was applied on branch `micro-standard-v2-final-copy-20260913`, sourced from live ZAI head `844c834e4fab19148b0dfa9c44a95dd0ed66d82b`.
+
+Eight package files were corrected without adding, removing, moving, or renaming any package file:
+
+| File | Reconciliation |
+|---|---|
+| `design-tokens.css` | Text-bearing create/add now uses `#141413`; icon-only FAB/icon buttons retain white icon ink. |
+| `design-tokens.json` | JSON action contract mirrors the text-ink/icon-ink split and status is marked as Final Copy candidate. |
+| `component-gallery.css` | Gallery text create uses readable dark ink; identity icon surfaces bind to the icon-only white-ink token; stale contrast comment corrected. |
+| `component-gallery.html` | Evidence panel now states the Clay text/non-text boundary accurately. |
+| `button-system.md` | Create/add contract distinguishes text-bearing controls from icon-only identity controls. |
+| `color-system.md` | Action-role table records separate text and icon ink for Clay. |
+| `component-contracts.md` | Shared action contract records separate text and icon ink. |
+| `accessibility.md` | Contrast rule distinguishes white non-text Clay from text-bearing Clay with dark ink. |
+
+The Prototype remains run evidence only and is not part of Final Copy acceptance or transfer. The run manifest was rewritten to remove the stale historical head claim and to record publication as pending until the final main merge is verified.

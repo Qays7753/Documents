@@ -21,7 +21,7 @@
 
 | Action class | Surface | Ink | Pressed | Words |
 |---|---|---|---|---|
-| Create / add / FAB | Clay `#D97757` | white | Clay interactive `#C96442` | create/add wording; never a financial value |
+| Create / add / FAB | Clay `#D97757` | `#141413` for text-bearing buttons; white for icon-only FAB/icon buttons | Clay interactive `#C96442` | create/add wording; never a financial value |
 | Ordinary save / confirm | Ground `#F5F4ED` | warm ink `#141413` + icon | `2px` inset `#C96442` edge; surface stays Warm Tint | save/confirm wording; press is not success |
 | High-consequence commit | Warm ink `#141413` | white | `#3D3D3A` fill | consequence word + icon + short explanation + independent confirmation |
 | Destructive | outline/surface | error `#B53333` + icon | error-tinted press per tint grammar | consequence wording + confirmation |

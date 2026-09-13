@@ -42,7 +42,8 @@
      chart fills, never a general commitment color. */
   --vf-action-create: var(--vf-clay);                    /* #D97757 */
   --vf-action-create-pressed: var(--vf-clay-interactive);/* #C96442 */
-  --vf-action-create-ink: var(--vf-ink-on-dark);         /* #FFFFFF */
+  --vf-action-create-ink: var(--vf-ink);                 /* #141413 — text-bearing create/add */
+  --vf-action-create-icon-ink: var(--vf-ink-on-dark);     /* #FFFFFF — icon-only FAB/icon button */
   /* Ordinary save/confirm: Warm Tint surface + dark ink. Pressing shows a
      #C96442 edge and never converts the button into a success state. */
   --vf-action-save-bg: var(--vf-bg-secondary);           /* #F5F4ED */

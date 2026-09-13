@@ -1,14 +1,14 @@
 {
   "package": "Micro Standard v2",
   "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
-  "status": "approved-current-basis",
-  "updated_by": "run-20260913-msv2-zai-01 Wave C — per-capability rows regenerated from executed tests",
+  "status": "final-copy-candidate",
+  "updated_by": "Final Copy reconciliation on branch micro-standard-v2-final-copy-20260913 — Standard and Gallery checks only",
   "families": {
     "primitives": "current",
     "buttons_action_classes": {
       "status": "current",
-      "covers": "create/clay, ordinary save/warm-tint with clay pressed edge, high-consequence commit/warm-ink fill, destructive/error, secondary/outline/ghost",
-      "evidence": "wave-b computed-style checks + screenshots"
+      "covers": "text-bearing create/clay with dark ink, icon-only FAB/icon buttons with white icon, ordinary save/warm-tint with clay pressed edge, high-consequence commit/warm-ink fill, destructive/error, secondary/outline/ghost",
+      "evidence": "ZAI Wave B evidence + Final Copy Gallery computed-style checks"
     },
     "inputs": "current",
     "states": {
@@ -19,7 +19,7 @@
     "data_display": {
       "status": "current",
       "covers": "value zone slots + honest voids, question-led chart with data/zero/no-data/loading + text alternative",
-      "evidence": "wave-b chart state cycle test + screenshots"
+      "evidence": "ZAI Wave B chart state cycle evidence; Prototype excluded from Final Copy acceptance"
     },
     "navigation": {
       "status": "current",
@@ -50,7 +50,7 @@
     "gallery": {
       "status": "current",
       "covers": "local interactive gallery, zero console/page errors",
-      "evidence": "wave-b runtime smoke tests"
+      "evidence": "Final Copy Gallery runtime smoke tests; Prototype excluded"
     },
     "token_integrity": {
       "status": "current",
@@ -77,6 +77,7 @@
   ],
   "verification": [
     "local_gallery_headless_chromium_run-20260913-msv2-zai-01",
+    "final_copy_reconciliation_standard_and_gallery_only",
     "computed_style_contract_checks",
     "rtl_ltr",
     "reduced_motion_control_and_system",
