@@ -1,0 +1,120 @@
+{
+  "page_errors": [],
+  "console_errors": [],
+  "scenes": {
+    "count": 11,
+    "home": {
+      "active": "scene-home",
+      "phone_overflow": false
+    },
+    "save": {
+      "active": "scene-save",
+      "phone_overflow": false
+    },
+    "commit": {
+      "active": "scene-commit",
+      "phone_overflow": false
+    },
+    "value": {
+      "active": "scene-value",
+      "phone_overflow": false
+    },
+    "rows": {
+      "active": "scene-rows",
+      "phone_overflow": false
+    },
+    "selection": {
+      "active": "scene-selection",
+      "phone_overflow": false
+    },
+    "states": {
+      "active": "scene-states",
+      "phone_overflow": false
+    },
+    "chart": {
+      "active": "scene-chart",
+      "phone_overflow": false
+    },
+    "overlays": {
+      "active": "scene-overlays",
+      "phone_overflow": false
+    },
+    "nav": {
+      "active": "scene-nav",
+      "phone_overflow": false
+    },
+    "quiet": {
+      "active": "scene-quiet",
+      "phone_overflow": false
+    }
+  },
+  "interactions": {
+    "loading_aria_busy": "true",
+    "loading_bg": "rgb(245, 244, 237)",
+    "quiet_label": "تم الحفظ",
+    "quiet_class": true,
+    "label_restored": "حفظ القيد",
+    "snackbar_seen": true,
+    "chart_cycle": [
+      "zero+zero-alt",
+      "nodata",
+      "loading",
+      "data"
+    ],
+    "sheet_opens": true,
+    "scrim_visible": "rgba(20, 20, 19, 0.45)",
+    "sheet_closes_escape": true,
+    "dialog_opens": true,
+    "finalize_dialog_opens": true,
+    "finalize_dialog_text": "إغلاق الفترة؟",
+    "seg_thumb_visible": true,
+    "seg_thumb_moves": true,
+    "nav_switches": true
+  },
+  "computed": {
+    "save_bg": "rgb(245, 244, 237)",
+    "save_ink": "rgb(20, 20, 19)",
+    "save_pressed_edge": "rgb(201, 100, 66) 0px 0px 0px 2px inset",
+    "save_pressed_bg": "rgb(245, 244, 237)",
+    "commit_bg": "rgb(20, 20, 19)",
+    "commit_pressed": "rgb(61, 61, 58)",
+    "fab_bg": "rgb(217, 119, 87)",
+    "navpill_edge": "rgb(201, 100, 66) 0px 0px 0px 2px inset"
+  },
+  "viewports": {
+    "320px_phone": {
+      "w": 334,
+      "overflow": false
+    },
+    "320px_page": {
+      "overflow": false
+    },
+    "360px_phone": {
+      "w": 374,
+      "overflow": false
+    },
+    "360px_page": {
+      "overflow": false
+    },
+    "390px_phone": {
+      "w": 388,
+      "overflow": false
+    },
+    "390px_page": {
+      "overflow": false
+    },
+    "430px_phone": {
+      "w": 388,
+      "overflow": false
+    },
+    "430px_page": {
+      "overflow": false
+    }
+  },
+  "reduced_motion": {
+    "transition": "1e-05s",
+    "animation": "1e-05s"
+  },
+  "rtl": "rtl",
+  "verdict": "PASS"
+}

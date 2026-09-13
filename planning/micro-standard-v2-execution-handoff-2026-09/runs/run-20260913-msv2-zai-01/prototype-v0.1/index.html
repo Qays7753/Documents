@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D97757">
+<title>Micro Standard v2 — نموذج تفاعلي (Prototype v0.1)</title>
+<link rel="stylesheet" href="styles-tokens.css">
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M21 12a2 2 0 00-2-2h-6a2 2 0 100 4h6a2 2 0 002-2z"/></symbol>
+  <symbol id="i-arrow-down-left" viewBox="0 0 24 24"><path d="M17 7L7 17m0 0h8m-8 0V9"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17L17 7m0 0H9m8 0v8"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></symbol>
+  <symbol id="i-document" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></symbol>
+  <symbol id="i-storefront" viewBox="0 0 24 24"><path d="M3 10l1-5.5a1 1 0 011-.5h12a1 1 0 011 .5L21 10M4 10v9a1 1 0 001 1h14a1 1 0 001-1v-9M4 10h16M9.5 20v-5.5a1 1 0 011-1h3a1 1 0 011 1V20"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 21h18M4 21V10m4 11V10m8 11V10m4 11V10M3 10l9-6 9 6M3 10h18"/></symbol>
+  <symbol id="i-trending-up" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H4"/></symbol>
+  <symbol id="i-pos" viewBox="0 0 24 24"><path d="M7 3h10a1 1 0 011 1v16a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1zM9 7h6M9 11h.01M12 11h.01M15 11h.01M9 15h.01M12 15h.01M15 15h.01"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></symbol>
+  <symbol id="i-user-minus" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></symbol>
+  <symbol id="i-inventory" viewBox="0 0 24 24"><path d="M20 7L12 3 4 7m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 16V7h10v9M13 10h4l4 3v3h-2M9 16h6"/><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 24 24"><path d="M4 6h13M4 12h9M4 18h5"/><path d="M17 8v9m0 0l-3-3m3 3l3-3"/></symbol>
+  <symbol id="i-return" viewBox="0 0 24 24"><path d="M15 7H9a4 4 0 00-4 4v6m0 0l-3-3m3 3l3-3"/></symbol>
+</svg>
+
+<header class="proto-header">
+  <div class="ph-title">
+    <h1>Micro Standard v2 — نموذج تفاعلي</h1>
+    <p>يعرض كل تغيير بصري نُفّذ في الـStandard — بدون منطق منتج أو بيانات حقيقية</p>
+  </div>
+  <div class="ph-controls">
+    <div class="ctrl" role="group" aria-label="عرض الإطار">
+      <span class="ctrl-name">العرض</span>
+      <div class="seg seg-sm" id="ctrl-viewport">
+        <button type="button" data-vp="320">320</button>
+        <button type="button" data-vp="360">360</button>
+        <button type="button" data-vp="390" class="on">390</button>
+        <button type="button" data-vp="430">430</button>
+      </div>
+    </div>
+    <div class="ctrl" role="group" aria-label="الحركة">
+      <span class="ctrl-name">الحركة</span>
+      <div class="seg seg-sm" id="ctrl-motion">
+        <button type="button" data-motion="normal" class="on">عادية</button>
+        <button type="button" data-motion="reduced">مخففة</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="scene-nav" aria-label="المشاهد">
+  <button type="button" class="scene-chip on" data-scene="home">١ · الرئيسية وFAB</button>
+  <button type="button" class="scene-chip" data-scene="save">٢ · حفظ عادي</button>
+  <button type="button" class="scene-chip" data-scene="commit">٣ · اعتماد كبير وحذف</button>
+  <button type="button" class="scene-chip" data-scene="value">٤ · قيمة مالية</button>
+  <button type="button" class="scene-chip" data-scene="rows">٥ · صف تشغيلي</button>
+  <button type="button" class="scene-chip" data-scene="selection">٦ · تحديد وعناصر</button>
+  <button type="button" class="scene-chip" data-scene="states">٧ · الحالات</button>
+  <button type="button" class="scene-chip" data-scene="chart">٨ · رسم بياني</button>
+  <button type="button" class="scene-chip" data-scene="overlays">٩ · أوراق وحوارات</button>
+  <button type="button" class="scene-chip" data-scene="nav">١٠ · التنقل</button>
+  <button type="button" class="scene-chip" data-scene="quiet">١١ · إتمام هادئ</button>
+</nav>
+
+<main class="stage">
+  <div class="phone" id="phone">
+
+    <!-- ═══════════ 1 · الرئيسية وFAB ═══════════ -->
+    <section class="scene is-active" id="scene-home" aria-label="الرئيسية وFAB">
+      <div class="topbar safe-area-top">
+        <h2 class="topbar-title">الرئيسية</h2>
+        <div class="topbar-actions">
+          <button type="button" class="iconbtn iconbtn-quiet" aria-label="بحث"><svg class="ic"><use href="#i-search"/></svg></button>
+        </div>
+      </div>
+      <div class="scene-body">
+        <div class="today-quiet">
+          <span class="tq-dot" aria-hidden="true"></span>
+          <p>يومك مفتوح — لم تُسجّل أي حركة بعد</p>
+        </div>
+        <div class="card">
+          <p class="kpi-label">الكاش المسجل</p>
+          <div class="value-line">
+            <span class="kpi-hero num" dir="ltr">1,500</span>
+            <span class="currency-unit">د.أ</span>
+          </div>
+          <p class="kpi-change pos"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-trending-up"/></svg><span>+250 عن أمس</span></p>
+        </div>
+        <p class="demo-note">زر الإضافة FAB بلون الهوية التيراكوتا — في ممر خاص لا يغطي عمود المبالغ، ولا يعرض قيمة مالية.</p>
+      </div>
+      <div class="nav-demo-wrap">
+        <button type="button" class="fab" data-open-fab aria-label="إضافة"><svg class="ic"><use href="#i-plus"/></svg></button>
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem on" data-nav aria-current="page">
+            <span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span>
+          </button>
+          <button type="button" class="navitem" data-nav><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem" data-nav><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem" data-nav><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2 · حفظ عادي ═══════════ -->
+    <section class="scene" id="scene-save" aria-label="حفظ عادي">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">تسجيل مصروف</h2></div>
+      <div class="scene-body">
+        <div class="field">
+          <label for="p-title">الوصف</label>
+          <input id="p-title" class="input" type="text" placeholder="مثال: مواد تغليف">
+        </div>
+        <div class="field">
+          <label for="p-amount">المبلغ</label>
+          <input id="p-amount" class="input input-amount" type="text" inputmode="decimal" dir="ltr" placeholder="0">
+          <p class="helper">أرقام إنجليزية معزولة ثنائية الاتجاه داخل RTL.</p>
+        </div>
+        <p class="demo-note">الحفظ العادي: سطح Warm Tint ونص داكن — ليس زرًا أسود. الضغط يُظهر حافة C96442 ويظل السطح دافئًا؛ الضغط لا يعني نجاحًا.</p>
+        <div class="state-strip"><span class="state-tag">افتراضي</span>
+          <button type="button" class="btn btn-save"><svg class="ic"><use href="#i-check"/></svg><span>حفظ القيد</span></button>
+        </div>
+        <div class="state-strip"><span class="state-tag">مضغوط — استمر</span>
+          <button type="button" class="btn btn-save is-pressed"><svg class="ic"><use href="#i-check"/></svg><span>حفظ القيد</span></button>
+        </div>
+        <p class="demo-note">جرّب الزر التالي: نقرة تبدأ تحميلًا مع حماية من النقر المكرر، ثم إتمامًا هادئًا بكلمة وعلامة، ثم يعود كما كان.</p>
+        <button type="button" class="btn btn-save" data-loading-btn aria-busy="false">
+          <span class="btn-icon" aria-hidden="true">
+            <svg class="ic"><use href="#i-check"/></svg>
+            <span class="spinner" hidden></span>
+          </span>
+          <span class="btn-label">حفظ القيد</span>
+          <svg class="ic ic-check" hidden aria-hidden="true"><use href="#i-check"/></svg>
+        </button>
+        <div class="scrim" hidden data-scrim></div>
+        <div class="snackbar" role="status" aria-live="polite" data-snackbar hidden>
+          <svg class="ic ic-check snackbar-mark" aria-hidden="true"><use href="#i-check-circle"/></svg>
+          <p class="snackbar-msg">تم حفظ القيد</p>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 3 · اعتماد كبير وحذف ═══════════ -->
+    <section class="scene" id="scene-commit" aria-label="اعتماد كبير وحذف نهائي">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">مراجعة الفترة</h2></div>
+      <div class="scene-body">
+        <p class="demo-note">الاعتماد كبير العواقب يستخدم سطح الحبر الدافئ الممتلئ 141413 مع كلمة تصف النتيجة وشرح ومسار تأكيد مستقل. الحذف النهائي يمر بمسار الحذف أولًا ثم نفس التأكيد.</p>
+        <button type="button" class="btn btn-primary" data-open-dialog="dlg-finalize"><svg class="ic"><use href="#i-lock"/></svg><span>إغلاق الفترة واعتماد الإجماليات</span></button>
+        <button type="button" class="btn btn-outline" data-open-dialog="dlg-delete"><svg class="ic"><use href="#i-trash"/></svg><span>حذف القيد نهائيًا</span></button>
+        <div class="state-strip"><span class="state-tag">مضغوط</span>
+          <button type="button" class="btn btn-primary is-pressed">إغلاق الفترة واعتماد الإجماليات</button>
+        </div>
+        <p class="demo-note">الأسود لا يعني خطرًا تلقائيًا — الكلمة والرمز والشرح هي التي تحمل المعنى، والضغط ينتقل إلى 3D3D3A.</p>
+      </div>
+      <div class="dialog-anchor" data-dialog-anchor="dlg-finalize" hidden>
+        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgf-title">
+          <h3 class="dialog-title" id="dlgf-title">إغلاق الفترة؟</h3>
+          <p class="dialog-body">سيتم قفل إجماليات هذه الفترة ومنع التعديل عليها. لا يمكن التراجع إلا بفتح فترة مراجعة جديدة.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-outline" data-close-overlay>تراجع</button>
+            <button type="button" class="btn btn-primary" data-close-overlay><svg class="ic"><use href="#i-lock"/></svg><span>إغلاق واعتماد</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="dialog-anchor" data-dialog-anchor="dlg-delete" hidden>
+        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgd-title">
+          <h3 class="dialog-title" id="dlgd-title">حذف القيد نهائيًا؟</h3>
+          <p class="dialog-body">سيُحذف القيد "مواد تغليف — 12,500" من السجل نهائيًا ولن يظهر في أي فترة.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-outline" data-close-overlay>إلغاء</button>
+            <button type="button" class="btn btn-primary" data-close-overlay><svg class="ic"><use href="#i-trash"/></svg><span>حذف نهائي</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 4 · قيمة مالية ═══════════ -->
+    <section class="scene" id="scene-value" aria-label="قيمة مالية بسياقها">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">المالية</h2></div>
+      <div class="scene-body">
+        <div class="card">
+          <div class="chart-head">
+            <p class="kpi-label">صافي الفترة</p>
+            <span class="period-chip"><svg class="ic"><use href="#i-calendar"/></svg>آخر 30 يوم</span>
+          </div>
+          <div class="value-line">
+            <span class="kpi-hero num" dir="ltr">4,780</span>
+            <span class="currency-unit">د.أ</span>
+          </div>
+          <p class="kpi-change pos"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-trending-up"/></svg><span>+8% عن الفترة السابقة</span></p>
+        </div>
+        <p class="demo-note">مناطق الفراغ الصادقة: قيمة غير مسجّلة تعرض زر سجّله؛ قيمة غير متاحة تعرض الكلمة؛ الصفر المقيس يعرض 0 مع تسميته.</p>
+        <div class="card">
+          <div class="metric-head"><p class="kpi-label">إيجار المحل</p><span class="metric-period">هذا الشهر</span></div>
+          <div class="void-row">
+            <span class="tag tag-pending"><svg class="ic ic-dot"><use href="#i-clock"/></svg>غير مسجل</span>
+            <button type="button" class="btn btn-save btn-compact">سجّله</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="metric-head"><p class="kpi-label">مصاريف بنكية</p><span class="metric-period">هذا الشهر</span></div>
+          <p class="void-word">غير متاح</p>
+        </div>
+        <div class="card">
+          <div class="metric-head"><p class="kpi-label">مرتجعات اليوم</p><span class="metric-period">اليوم</span></div>
+          <div class="value-line"><span class="kpi-num num" dir="ltr">0</span><span class="currency-unit">د.أ</span></div>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 5 · صف تشغيلي ═══════════ -->
+    <section class="scene" id="scene-rows" aria-label="صف تشغيلي">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">الطلبات</h2></div>
+      <div class="scene-body">
+        <p class="demo-note">الصف: شريحة حالة ≤3px + كلمة وعلامة، عنوان يلتف بأمان، مبلغ ثابت الطرف مهما طال النص، وقائمة فائضة.</p>
+        <div class="rowlist">
+          <div class="row state-edge stripe-pending">
+            <div class="row-tile t-op"><svg class="ic"><use href="#i-bag"/></svg></div>
+            <div class="row-main">
+              <p class="row-title">طلب شراء مواد من المورد الرئيسي</p>
+              <p class="row-sub"><span class="tag tag-pending"><svg class="ic ic-dot"><use href="#i-clock"/></svg>بالانتظار</span> · <span class="num" dir="ltr">16/07</span></p>
+            </div>
+            <div class="row-trail">
+              <p class="row-amt num" dir="ltr">−640</p>
+              <button type="button" class="row-chev" data-open-overflow aria-label="خيارات"><svg class="ic"><use href="#i-list"/></svg></button>
+            </div>
+          </div>
+          <div class="row state-edge stripe-review">
+            <div class="row-tile t-pos"><svg class="ic mirror"><use href="#i-arrow-down-left"/></svg></div>
+            <div class="row-main">
+              <p class="row-title">دفعة عميل — الدرج</p>
+              <p class="row-sub"><span class="tag tag-review"><svg class="ic ic-dot"><use href="#i-eye"/></svg>رُوجعت</span> · <span class="num" dir="ltr">17/07</span></p>
+            </div>
+            <div class="row-trail"><p class="row-amt num pos" dir="ltr">+1,200</p></div>
+          </div>
+          <div class="row state-edge stripe-failed">
+            <div class="row-tile t-neg"><svg class="ic"><use href="#i-alert"/></svg></div>
+            <div class="row-main">
+              <p class="row-title">نتيجة غير معروفة — لم تُسجل</p>
+              <p class="row-sub"><span class="tag tag-unknown"><svg class="ic ic-dot"><use href="#i-info"/></svg>غير معروف</span> · <span class="num" dir="ltr">17/07</span></p>
+            </div>
+            <div class="row-trail"><p class="row-amt num neutral" dir="ltr">0</p></div>
+          </div>
+        </div>
+        <div class="scrim" hidden data-scrim></div>
+        <div class="sheet" data-sheet role="dialog" aria-modal="true" aria-label="خيارات الصف" hidden>
+          <div class="sheet-handle-row"><span class="sheet-handle"></span></div>
+          <div class="sheet-head"><h3 class="sheet-title">طلب شراء مواد</h3>
+            <button type="button" class="iconbtn iconbtn-quiet" data-sheet-close aria-label="إغلاق"><svg class="ic"><use href="#i-close"/></svg></button></div>
+          <div class="sheet-body">
+            <div class="sheet-rows">
+              <button type="button" class="sheet-row">عرض التفاصيل</button>
+              <button type="button" class="sheet-row">تغيير الحالة</button>
+              <button type="button" class="sheet-row sheet-row-danger">حذف الطلب</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 6 · تحديد وعناصر ═══════════ -->
+    <section class="scene" id="scene-selection" aria-label="محدد وعناصر">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">محددات وعناصر</h2></div>
+      <div class="scene-body">
+        <p class="demo-note">الحالة المحددة/الحالية: حافة 2px بلون C96442 مع إشارة غير لونية (وزن أو رمز) — وليست تعبئة سوداء تلقائية.</p>
+        <div class="segctl" data-seg role="radiogroup" aria-label="الفترة">
+          <div class="segctl-thumb" hidden></div>
+          <button type="button" class="on" role="radio" aria-checked="true">يوم</button>
+          <button type="button" role="radio" aria-checked="false">أسبوع</button>
+          <button type="button" role="radio" aria-checked="false">شهر</button>
+        </div>
+        <div class="segctl-lines" data-seg-lines role="tablist" aria-label="تصفية الحالة">
+          <div class="segctl-indicator" hidden></div>
+          <button type="button" class="on" role="tab" aria-selected="true">الكل <span class="count">24</span></button>
+          <button type="button" role="tab" aria-selected="false">مفتوح <span class="count">6</span></button>
+          <button type="button" role="tab" aria-selected="false">مغلق <span class="count">18</span></button>
+        </div>
+        <div class="chip-row">
+          <button type="button" class="chip" aria-pressed="false">غير محدد</button>
+          <button type="button" class="chip on" aria-pressed="true">محدد</button>
+          <button type="button" class="chip" disabled>معطل</button>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 7 · الحالات ═══════════ -->
+    <section class="scene" id="scene-states" aria-label="الحالات الخمس">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">الحالات الدلالية</h2></div>
+      <div class="scene-body">
+        <p class="demo-note">كل حالة: كلمة + علامة غير لونية + لون دلالي على العلامة. الانتظار لا يقرأ نجاحًا، وغير المعروف ليس فشلًا.</p>
+        <div class="states-grid">
+          <div class="state-tile"><svg class="ic st-ic st-success"><use href="#i-check-circle"/></svg><p class="st-word">تم</p><p class="st-sub">نجاح — منشور</p></div>
+          <div class="state-tile"><svg class="ic st-ic st-error"><use href="#i-alert"/></svg><p class="st-word">فشل</p><p class="st-sub">خطأ — أعد المحاولة</p></div>
+          <div class="state-tile"><svg class="ic st-ic st-info"><use href="#i-clock"/></svg><p class="st-word">بالانتظار</p><p class="st-sub">قيد التنفيذ — ليس نجاحًا</p></div>
+          <div class="state-tile"><svg class="ic st-ic st-neutral"><use href="#i-info"/></svg><p class="st-word">غير معروف</p><p class="st-sub">ليس فشلًا — تحقق</p></div>
+          <div class="state-tile"><svg class="ic st-ic st-status"><use href="#i-eye"/></svg><p class="st-word">رُوجعت</p><p class="st-sub">مراجعة حالية</p></div>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 8 · رسم بياني ═══════════ -->
+    <section class="scene" id="scene-chart" aria-label="رسم بياني">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">المالية</h2></div>
+      <div class="scene-body">
+        <div class="card">
+          <div class="chart-head">
+            <p class="chart-q" data-chart-question>أي يوم كان الأقوى هذا الأسبوع؟</p>
+            <span class="period-chip"><svg class="ic"><use href="#i-calendar"/></svg>آخر 7 أيام</span>
+          </div>
+          <div data-chart-body>
+            <div class="chart-loading" data-chart-state="loading" hidden>
+              <span class="sk sk-line"></span><span class="sk sk-card"></span>
+            </div>
+            <div data-chart-state="data">
+              <div class="chart-bars" role="img" aria-label="أعمدة آخر 7 أيام: الخميس الأعلى بـ410، والأحد والثلاثاء صفر مقيس">
+                <div class="cbar zero"><i></i><b>12</b></div>
+                <div class="cbar" style="height:52%"><i style="height:100%"></i><b>13</b></div>
+                <div class="cbar zero"><i></i><b>14</b></div>
+                <div class="cbar hot" style="height:96%"><i style="height:100%"></i><b>15</b></div>
+                <div class="cbar" style="height:38%"><i style="height:100%"></i><b>16</b></div>
+                <div class="cbar" style="height:64%"><i style="height:100%"></i><b>17</b></div>
+                <div class="cbar" style="height:22%"><i style="height:100%"></i><b>18</b></div>
+              </div>
+              <p class="chart-alt"><strong>بالكلمات:</strong> الخميس 15 كان الأقوى بـ 410، والأحد 12 والثلاثاء 14 بلا مبيعات مسجلة.</p>
+            </div>
+            <div class="chart-bars" data-chart-state="zero" hidden>
+              <div class="cbar zero"><i></i><b>19</b></div>
+              <div class="cbar zero"><i></i><b>20</b></div>
+              <div class="cbar zero"><i></i><b>21</b></div>
+              <div class="cbar zero"><i></i><b>22</b></div>
+              <div class="cbar zero"><i></i><b>23</b></div>
+              <div class="cbar zero"><i></i><b>24</b></div>
+              <div class="cbar zero"><i></i><b>25</b></div>
+            </div>
+            <p class="chart-alt" data-chart-state="zero-alt" hidden><strong>بالكلمات:</strong> كل أيام الأسبوع بمبيعات صفرية مقيسة — أصفار حقيقية، ليست أيامًا مفقودة.</p>
+            <div class="chart-empty" data-chart-state="nodata" hidden>
+              <span class="empty-tile"><svg class="ic"><use href="#i-document"/></svg></span>
+              <h3 class="empty-title">لا بيانات بعد</h3>
+              <p class="empty-body">ستظهر الأعمدة بعد أول يوم مسجّل في هذه الفترة.</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline btn-compact" data-chart-cycle><svg class="ic"><use href="#i-clock"/></svg><span>بدّل حالة الرسم</span></button>
+        </div>
+        <p class="demo-note">عمود واحد يجيب السؤال بلون المعلوماتية؛ الأعمدة محايدة؛ الأصفار علامة خط أساس مرئية؛ لا أسود شامل ولا تيراكوتا.</p>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 9 · أوراق وحوارات ═══════════ -->
+    <section class="scene" id="scene-overlays" aria-label="أوراق وحوارات">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">أوراق وحوارات</h2></div>
+      <div class="scene-body scene-rel">
+        <p class="demo-note">ورقة سفلية (مقبض وسحب للإغلاق)، حوار مركزي — فوق مسند واحد مشترك مع حجز تركيز. زر الحفظ في الورقة يستخدم الحفظ العادي.</p>
+        <button type="button" class="btn btn-outline" data-open-sheet>فتح ورقة الإضافة</button>
+        <button type="button" class="btn btn-outline" data-open-dialog="dlg-demo">فتح حوار التأكيد</button>
+        <div class="scrim" hidden data-scrim></div>
+        <div class="sheet" data-sheet role="dialog" aria-modal="true" aria-label="إضافة قيد" hidden>
+          <div class="sheet-handle-row"><span class="sheet-handle"></span></div>
+          <div class="sheet-head"><h3 class="sheet-title">إضافة قيد</h3>
+            <button type="button" class="iconbtn iconbtn-quiet" data-sheet-close aria-label="إغلاق"><svg class="ic"><use href="#i-close"/></svg></button></div>
+          <div class="sheet-body">
+            <div class="field"><label for="s-title">الوصف</label><input id="s-title" class="input" type="text" placeholder="مثال: ملخص أسبوعي"></div>
+            <div class="sheet-actions safe-area-bottom">
+              <button type="button" class="btn btn-ghost" data-sheet-close>إلغاء</button>
+              <button type="button" class="btn btn-save" data-sheet-close>حفظ</button>
+            </div>
+          </div>
+        </div>
+        <div class="dialog-anchor" data-dialog-anchor="dlg-demo" hidden>
+          <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgm-title">
+            <h3 class="dialog-title" id="dlgm-title">تأكيد الإغلاق؟</h3>
+            <p class="dialog-body">سيُقفل ما تم عرضه ويُحفظ كمرجع للفترة.</p>
+            <div class="dialog-actions">
+              <button type="button" class="btn btn-outline" data-close-overlay>تراجع</button>
+              <button type="button" class="btn btn-primary" data-close-overlay>تأكيد</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ═══════════ 10 · التنقل ═══════════ -->
+    <section class="scene" id="scene-nav" aria-label="التنقل">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">التنقل</h2></div>
+      <div class="scene-body">
+        <p class="demo-note">أربع وجهات معتمدة؛ الوجهة الحالية بحافة C96442 داخل الحبة مع أيقونة ممتلئة. FAB بممر مستقل لا يغطي عمود المبالغ.</p>
+        <div class="nav-demo-wrap">
+          <div class="demo-space">محتوى يمر تحت الأشرطة</div>
+          <button type="button" class="fab" aria-label="إضافة"><svg class="ic"><use href="#i-plus"/></svg></button>
+          <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+            <button type="button" class="navitem on" data-nav aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+            <button type="button" class="navitem" data-nav><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+            <button type="button" class="navitem" data-nav><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+            <button type="button" class="navitem" data-nav><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 11 · إتمام هادئ ═══════════ -->
+    <section class="scene" id="scene-quiet" aria-label="إتمام هادئ">
+      <div class="topbar safe-area-top"><h2 class="topbar-title">إتمام هادئ</h2></div>
+      <div class="scene-body">
+        <p class="demo-note">الإتمام الهادئ: علامة ✓ مع كلمة ماضية على السطح الهادئ — الإثبات بالكلمة والعلامة، وليس بلون الزر. جرّب الدورة كاملة:</p>
+        <button type="button" class="btn btn-save" data-full-cycle aria-busy="false">
+          <span class="btn-icon" aria-hidden="true">
+            <svg class="ic"><use href="#i-check"/></svg>
+            <span class="spinner" hidden></span>
+          </span>
+          <span class="btn-label">حفظ التعديلات</span>
+          <svg class="ic ic-check" hidden aria-hidden="true"><use href="#i-check"/></svg>
+        </button>
+        <div class="quiet-flow">
+          <div class="qf-step"><span class="qf-state">ضغط</span><span class="qf-desc">حافة C96442 — السطح دافئ</span></div>
+          <div class="qf-step"><span class="qf-state">تحميل</span><span class="qf-desc">دواران مكان الأيقونة، النص ثابت</span></div>
+          <div class="qf-step"><span class="qf-state">إتمام</span><span class="qf-desc">"تم الحفظ" + علامة نجاح</span></div>
+          <div class="qf-step"><span class="qf-state">عودة</span><span class="qf-desc">الزر لوضعه الافتراضي</span></div>
+        </div>
+      </div>
+      <div class="nav-demo-wrap">
+        <nav class="bottomnav safe-area-bottom" aria-label="التنقل الرئيسي">
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-home"/></svg></span><span class="navlabel">الرئيسية</span></button>
+          <button type="button" class="navitem on" aria-current="page"><span class="navpill"><svg class="ic"><use href="#i-wallet"/></svg></span><span class="navlabel">المالية</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-receipt"/></svg></span><span class="navlabel">الطلبات</span></button>
+          <button type="button" class="navitem"><span class="navpill"><svg class="ic"><use href="#i-gear"/></svg></span><span class="navlabel">الأدوات</span></button>
+        </nav>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="proto-footer">
+  <p>نموذج مراجعة بصرية تقريبي — ليس منتجًا ولا مصدر حقيقة. الـTokens منسوخة حرفيًا من micro-standard-v2/design-tokens.css.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

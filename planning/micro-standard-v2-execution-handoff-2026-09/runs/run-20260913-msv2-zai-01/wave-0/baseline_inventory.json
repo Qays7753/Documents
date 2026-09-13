@@ -1,0 +1,290 @@
+{
+  "run_id": "run-20260913-msv2-zai-01",
+  "branch": "micro-standard-v2-execution-20260913",
+  "base_commit": "dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b",
+  "package": "micro-standard-v2/",
+  "core_files": 29,
+  "metadata_files": 2,
+  "total_files": 31,
+  "files": [
+    {
+      "file": "MANIFEST.json",
+      "sha256": "93925729b1dd47d4e987e8dd98799b287ce0b378e5ebd3935dfc57138e0cfa2e",
+      "bytes": 175,
+      "class": "metadata",
+      "boundary_role": "metadata",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "README.md",
+      "sha256": "12283532401332ec1c0bda03ae5d7673d8d647647c8deb7b836a2caa15b985b9",
+      "bytes": 1335,
+      "class": "core",
+      "boundary_role": "package-overview",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "RELEASE.md",
+      "sha256": "63ed747c782b621c8b0e2f8e0943cea3d039456e4de1e105aa04f5d9f14998c4",
+      "bytes": 623,
+      "class": "metadata",
+      "boundary_role": "metadata",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "accessibility.md",
+      "sha256": "36765529bf15fd02188c1dd4faded59e2effabdc94977893726cef32732a78e7",
+      "bytes": 325,
+      "class": "core",
+      "boundary_role": "a11y-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "button-system.md",
+      "sha256": "5f84ba9002579bf9be3034216827951dd5b9aea0b7d7efe7eb57c096d82bc7f0",
+      "bytes": 450,
+      "class": "core",
+      "boundary_role": "action-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "color-system.md",
+      "sha256": "2195c83a46774635ae8393d33d83cbf68847ac47ec3728af45f98557b3b39d28",
+      "bytes": 929,
+      "class": "core",
+      "boundary_role": "color-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "component-contracts.md",
+      "sha256": "585d3902a54ad07f589f5dad4824627fcab89fffbcbbd913e38aaf5c76ca5838",
+      "bytes": 467,
+      "class": "core",
+      "boundary_role": "composition-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "component-gallery.css",
+      "sha256": "f5294cde0133dc1abdcb6d3fdbd0142110fc47c96cad15b9e2888aaef34d166e",
+      "bytes": 42417,
+      "class": "core",
+      "boundary_role": "gallery-demo",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "component-gallery.html",
+      "sha256": "0eda2325f11ccc7b0371d69ebdb75e73ad592e8616df2ac0b57ab37e76b06487",
+      "bytes": 70801,
+      "class": "core",
+      "boundary_role": "gallery-demo",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "component-gallery.js",
+      "sha256": "65c28d7c9e40f6e7aefa1cc8b381006273423da888f454995171295ad8a83947",
+      "bytes": 32238,
+      "class": "core",
+      "boundary_role": "gallery-demo",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "component-states.md",
+      "sha256": "9b432e5bbee053a92365d6fd126890c2f9f172f6e279bea2028c8aad406612d9",
+      "bytes": 476,
+      "class": "core",
+      "boundary_role": "state-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "content-guidelines.md",
+      "sha256": "d3b7a0fa7fc2f35f605c500ab8b3bd52f3219f080442546b01f81b8223534ec4",
+      "bytes": 255,
+      "class": "core",
+      "boundary_role": "content-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "coverage-matrix.json",
+      "sha256": "6e409e504d115fd8adcb1a07196e26009fdbf3b20bfb6afd4ea0722ba354fd7d",
+      "bytes": 927,
+      "class": "core",
+      "boundary_role": "verification",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "data-display-system.md",
+      "sha256": "04fd21e99230862e1e31e0eabcc1c32044f52f4d2a883815145913cf4d0053db",
+      "bytes": 450,
+      "class": "core",
+      "boundary_role": "data-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "decision-log.md",
+      "sha256": "59912778c9b98fcda11cb91d9e912ab5f22270927626b95a6da11fedcb4edfea",
+      "bytes": 522,
+      "class": "core",
+      "boundary_role": "governance",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "design-tokens.css",
+      "sha256": "b5f5ce349269819f902f87cc468da78b6ba8c5637afe46b6a8ef0c295c3b0a92",
+      "bytes": 1682,
+      "class": "core",
+      "boundary_role": "token-source-css",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "design-tokens.json",
+      "sha256": "83ecc0fb5dcd71ea7fbf375e02d1ab2a1952353cb25f2e892a93724c7c364356",
+      "bytes": 1023,
+      "class": "core",
+      "boundary_role": "token-source-json",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "empty-loading-error-states.md",
+      "sha256": "241f731f4a9c3ae6c248c33e07087d3a4c545301606d0dc193a58cf02677964e",
+      "bytes": 284,
+      "class": "core",
+      "boundary_role": "state-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "iconography.md",
+      "sha256": "205b62331ffb876e71b3754daba98d9e1ebc05b550b001cb48d6bb320b295690",
+      "bytes": 222,
+      "class": "core",
+      "boundary_role": "icon-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "input-system.md",
+      "sha256": "e33b33d2546de37be2466d6f761344156c099a68c9c7aef5e4a2648989b67e33",
+      "bytes": 363,
+      "class": "core",
+      "boundary_role": "input-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "motion-interaction.md",
+      "sha256": "b492485f5f54fb0f22c2b2cf9967e2d27ed52d27aa17534b576cd1c95aff215e",
+      "bytes": 266,
+      "class": "core",
+      "boundary_role": "motion-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "navigation-shell.md",
+      "sha256": "a2b6d4156ca21b835df0ccfbf6ef19508d2be8851693821b4acaf4f7fd0e8854",
+      "bytes": 356,
+      "class": "core",
+      "boundary_role": "shell-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "overlay-system.md",
+      "sha256": "f88d3744e86ce0f3e8eddeead3c773608158b6c15cebcf80a1a0df5ce56348e9",
+      "bytes": 287,
+      "class": "core",
+      "boundary_role": "overlay-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "responsive-geometry.md",
+      "sha256": "2de53bcd52c658a8fb4b4fdf6773db17d404071eb0577f59ccf82d281569229c",
+      "bytes": 246,
+      "class": "core",
+      "boundary_role": "geometry-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "self-critique.md",
+      "sha256": "6e9acb32b09560eae0a8f04f451fab67b825a5baaf7a3de1a9d476717722c820",
+      "bytes": 267,
+      "class": "core",
+      "boundary_role": "governance",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "source-inventory.md",
+      "sha256": "5f95534d53f9c88146ad1a4447c4a1fbcaf1c231747887202db98f8992261793",
+      "bytes": 308,
+      "class": "core",
+      "boundary_role": "governance",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "spacing-radius-elevation.md",
+      "sha256": "47029983b6b95a1ebb61a12b305ebf73426e5c955871e5a8580347c79a27a832",
+      "bytes": 234,
+      "class": "core",
+      "boundary_role": "geometry-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "surface-system.md",
+      "sha256": "e51c6a57365b8916f651e543b05d67eae93757610ab666b0b645a38512b6c8aa",
+      "bytes": 227,
+      "class": "core",
+      "boundary_role": "surface-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "typography.md",
+      "sha256": "87a694bcedcdb8c5e3cd9587bb4b3f02b364c1ee5cf8ca4e09249352d8b19ddb",
+      "bytes": 231,
+      "class": "core",
+      "boundary_role": "type-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "verification-report.md",
+      "sha256": "d9ca4dafe9ba379441f36148864fa28b95e8d2b066674a272f38a03e448ea191",
+      "bytes": 365,
+      "class": "core",
+      "boundary_role": "verification",
+      "standard_owned": true,
+      "micro_owned": false
+    },
+    {
+      "file": "visual-direction.md",
+      "sha256": "4058b9211c44bea44acb925b1e2c7f92c3a28f47acd0751ccc3baf256fd5a6fe",
+      "bytes": 376,
+      "class": "core",
+      "boundary_role": "direction-contract",
+      "standard_owned": true,
+      "micro_owned": false
+    }
+  ]
+}
