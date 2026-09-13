@@ -1,0 +1,23 @@
+# MANIFEST — MICRO_STANDARD_COMPREHENSIVE_UIUX_REVIEW package
+
+Generated: 2026-09-13 (Asia/Amman)
+Session type: READ-ONLY comparative UI/UX review — no source modified.
+
+## Contents
+- MICRO_STANDARD_COMPREHENSIVE_UIUX_REVIEW.md — the complete unified review report (19 sections incl. sub-agent synthesis, finding register, decision separation, development + prototype validation blueprints).
+- evidence/live/ — 11 PNG screenshots from the Micro Live session (390×844) + LIVE_OBSERVATIONS.md session notes.
+- evidence/accounting/ — 12 PNG screenshots from the successful local Accounting run (390×844) + ACCT_LOCAL_RUN_NOTES.md session notes.
+
+## Evidence sources behind the report
+1. Micro Live — https://micro-prototype.pages.dev — opened and driven as a real user (onboarding completed with test data; setup, foundation, home, orders, sale detail, finance both tabs, integrity check, tools, record dialog, dark mode).
+2. Accounting — local run SUCCEEDED (npm install + vite build + vite preview :4173); visual inspection only.
+3. Repositories read (read-only clones): Qays7753/Micro, Qays7753/Accounting, Qays7753/Documents (micro-standard-v2: all 29 files; planning/zai-flash-comparative-review: all documents + evidence).
+4. Prototype v0 evidence treated as evidence only — not a repair list.
+
+## Boundaries honored
+- No code-quality, security, performance, architecture, build/deployment, dependency, repository-hygiene, or test-infrastructure audit.
+- No modification to Micro, Accounting, micro-standard-v2, Prototype v0, or Documents.
+- No code written; no new prototype built; no tokens changed; nothing pushed, committed, merged, or opened as PR.
+
+## Status
+READ-ONLY UI/UX REVIEW COMPLETE — NO SOURCE MODIFIED — WAITING FOR OWNER REVIEW

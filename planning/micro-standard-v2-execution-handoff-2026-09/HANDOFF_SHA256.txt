@@ -1,0 +1,10 @@
+4f0e385540056e3379baebf57d25a6d88a03588c00d9eb7455ddf88cbb276531  planning/micro-standard-v2-execution-handoff-2026-09/EXECUTION_PROCEDURE.md
+6d98ab1fb6e5108690e1eb9185b070f9a8115c389d93c5ec34247f17fce793c8  planning/micro-standard-v2-execution-handoff-2026-09/HANDOFF_SHA256.txt
+878c2bb21e524510493524de252fc1e013ce3a8298e170848b0162920b0e5856  planning/micro-standard-v2-execution-handoff-2026-09/OWNER_APPROVED_DECISIONS.md
+59a14867aedf69b4093b4e2f54515af22396c69006ccb270904d8493f06f9e20  planning/micro-standard-v2-execution-handoff-2026-09/PREVIOUS_WAVE_BOUNDARIES.md
+906f6be3bee4ba5a5ff68ef95fb4de2662dbefbeb2eb6d1b917bbc552270fc2c  planning/micro-standard-v2-execution-handoff-2026-09/README.md
+d13e31ac6df7c0d51bd00c8052cbd90944029d70598ba468391e4cb06997fbba  planning/micro-standard-v2-execution-handoff-2026-09/REFERENCE_INDEX.md
+d1fb90fe6e2a2a0157d9ad81e54fb2f62a7426e4b3726b7827406533c84bd5f4  planning/micro-standard-v2-execution-handoff-2026-09/reference/brand-assets/BRAND_REFERENCE_CLASSIFICATION.md
+f7a9f12193c4f935e7a2593a99df97f0ee22616207af8e6da01a4ce0156e7240  planning/micro-standard-v2-execution-handoff-2026-09/reference/brand-assets/MicroBrandBook.dc.html
+c73d5aa1f6a33cfb80161c10a82c2752ae2f1cb0dfca3db4337cb06156363683  planning/micro-standard-v2-execution-handoff-2026-09/reference/zai-review/MANIFEST.txt
+19d2e8c62e760a8b1afc9b17262f06b5d375b00a68d34ecd692425201a03793e  planning/micro-standard-v2-execution-handoff-2026-09/reference/zai-review/MICRO_STANDARD_COMPREHENSIVE_UIUX_REVIEW.md

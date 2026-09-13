@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #FAF9F5; }
+  * { box-sizing: border-box; }
+  a { color: #964E33; text-decoration: none; border-bottom: 1px solid rgba(150,78,51,0.3); }
+  a:hover { color: #057B7C; border-bottom-color: rgba(5,123,124,0.5); }
+  @keyframes m-spin-land { 0% { transform: rotate(-300deg) scale(0.72); opacity: 0 } 55% { opacity: 1 } 78% { transform: rotate(6deg) scale(1.02) } 100% { transform: rotate(0) scale(1); opacity: 1 } }
+  @keyframes m-gather-1 { from { transform: translateY(-50%); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes m-gather-2 { from { transform: translateX(50%); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes m-gather-3 { from { transform: translateY(50%); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes m-gather-4 { from { transform: translateX(-50%); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes m-seq { from { transform: rotate(-90deg) scale(0.9); opacity: 0 } to { transform: rotate(0) scale(1); opacity: 1 } }
+  @keyframes m-settle { 0% { transform: scale(1.42); opacity: 0 } 60% { opacity: 1 } 100% { transform: scale(1); opacity: 1 } }
+  @keyframes m-load { 0%, 74%, 100% { opacity: 0.18; transform: scale(0.94) } 22% { opacity: 1; transform: scale(1) } }
+  @keyframes m-word-slide { 0% { opacity: 0; transform: translateX(-14px) } 100% { opacity: 1; transform: none } }
+  @keyframes m-word-slide-rtl { 0% { opacity: 0; transform: translateX(14px) } 100% { opacity: 1; transform: none } }
+  @keyframes m-word-clip { 0% { clip-path: inset(0 100% 0 0) } 100% { clip-path: inset(0 0 0 0) } }
+  @keyframes m-word-clip-rtl { 0% { clip-path: inset(0 0 0 100%) } 100% { clip-path: inset(0 0 0 0) } }
+  @keyframes m-word-fade { 0% { opacity: 0; letter-spacing: 0.12em } 100% { opacity: 1; letter-spacing: -0.03em } }
+  @keyframes m-mark-shift { 0% { transform: translateX(112px) scale(1.18) } 100% { transform: none } }
+  .m-anim { transform-origin: 50% 50% }
+</style>
+</helmet>
+<div style="font-family: 'Instrument Sans', system-ui, sans-serif; color: #1F1E1D; background: #FAF9F5; -webkit-font-smoothing: antialiased;">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 48px 140px 48px;">
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 96px 0 56px 0; border-bottom: 1px solid rgba(31,30,29,0.12);">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="assets/micro-quad.svg" alt="Micro mark" style="width: 60px; height: 60px; display: block;" />
+        <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #964E33; font-weight: 500;">Micro · brand book · complete</div>
+      </div>
+      <h1 style="font-size: 58px; line-height: 1.06; font-weight: 500; letter-spacing: -0.025em; margin: 0; max-width: 19ch; text-wrap: pretty;">Everything for the Micro mark, in one place</h1>
+      <p style="font-size: 20px; line-height: 1.55; margin: 0; max-width: 64ch; color: rgba(31,30,29,0.72); text-wrap: pretty;">Construction, colour, variants, both lockups, the app icon system, motion for the mark and for the lockup, splash screens, print applications, usage rules, and every downloadable file. Nothing lives anywhere else.</p>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 28px 32px; display: flex; flex-direction: column; gap: 10px;" dir="rtl">
+        <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 13px; color: #057B7C; font-weight: 600;">الملخص</div>
+        <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 17px; line-height: 1.85; color: rgba(31,30,29,0.82);">هذا المرجع الوحيد والكامل للعلامة. وحدة واحدة على شبكة 192 وحدة، مكرّرة أربع مرات بالتدوير، بفراغ مركزي 44×44 وتصحيح بصري لوزن كل لون. يحتوي كل الأرقام والألوان والمقاسات والقواعد، والقفل بالعربي والإنجليزي، وحركات للعلامة وللقفل مع الاسم، وكل الملفات القابلة للتحميل. المصدر الأساسي دائماً هو <bdi dir="ltr">SVG</bdi>.</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 40px; font-size: 15px; color: rgba(31,30,29,0.7); padding-top: 8px;">
+        <div>01 — The mark and what it means</div>
+        <div>06 — Motion: the mark</div>
+        <div>02 — Construction: every number</div>
+        <div>07 — Motion: the lockup with the name</div>
+        <div>03 — Variants, single forms</div>
+        <div>08 — Splash screens</div>
+        <div>04 — Lockups: Arabic and Latin</div>
+        <div>09 — Print applications</div>
+        <div>05 — App icon and size behaviour</div>
+        <div>10 — Colour · 11 Rules · 12 Files</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 30px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">01</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">The mark and what it means</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 48px; align-items: center;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 40px; display: flex; justify-content: center;">
+          <img src="assets/micro-quad.svg" alt="Micro primary mark" style="width: 220px; height: 220px; display: block;" />
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 20px; font-size: 17px; line-height: 1.65; color: rgba(31,30,29,0.82);">
+          <p style="margin: 0;">Four soft keystone forms — one shape rotated four times — around a square centre that stays open. Flat colour, generous radii, no gradient, no outline, no effect.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Short rationale, safe to publish:</strong> four kinds of everyday business events, drawn as one careful form and held apart by an even space, around a centre that stays open — because the owner completes the picture, not the software.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Longer version, for the product team:</strong> Micro's job is to keep separate things separate — events, consequences, what is known, what is missing — while showing how they relate. The mark is built that way: one construction repeated, so the parts are visibly one family; an even channel, so nothing merges; and an open centre that is a construction element, not a hole. The tone comes from the material rather than from decoration, so the mark survives a 60px icon, a thermal receipt and an embroidered apron equally.</p>
+          <p style="margin: 0; padding: 16px 20px; background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 12px; font-size: 16px;"><strong style="color: #1F1E1D;">No origin story is claimed.</strong> The four forms carry no fixed meaning. They are not four modules, not four accounts, not Manage / Services / Market / Delivery, and none of them is ever extracted as a sub-brand or module icon.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 18px; align-items: center;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600; align-self: flex-start;">Before · original reference</div>
+          <img src="uploads/01dee120-a260-11f1-bae4-7d06c1ef4f21.png" alt="Original reference" style="width: 200px; height: 200px; display: block; border-radius: 8px;" />
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.7); align-self: stretch;">Four separately drawn forms. Radii, tapers and areas disagree; the channel is uneven; the neutral is too pale for small sizes; raster only.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 18px; align-items: center;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #964E33; font-weight: 600; align-self: flex-start;">After · developed</div>
+          <img src="assets/micro-quad.svg" alt="Developed mark" style="width: 200px; height: 200px; display: block;" />
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.7); align-self: stretch;">One unit on a 192-unit grid, rotated 0/90/180/270°. Even channel, open square centre, optical weight correction per colour, clean vector paths, plus a compact variant.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 13px; font-weight: 600; color: #964E33;">One unit, four rotations</div><div style="font-size: 14px; line-height: 1.55; color: rgba(31,30,29,0.72);">Every form is the same six-point keystone with the same radius profile, so the variety reads as rhythm rather than inconsistency.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 13px; font-weight: 600; color: #964E33;">Blunt inner ends</div><div style="font-size: 14px; line-height: 1.55; color: rgba(31,30,29,0.72);">Tips are cut flat with a small radius instead of coming to a point. This is what stops the mark reading as a spinner or a flower.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 13px; font-weight: 600; color: #964E33;">Optical weight correction</div><div style="font-size: 14px; line-height: 1.55; color: rgba(31,30,29,0.72);">Dark form ×1.025, light form ×0.975. Mathematically unequal so they look equal — the correction lives in the file, not in the eye.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px;"><div style="font-size: 13px; font-weight: 600; color: #964E33;">Contrast-safe neutral</div><div style="font-size: 14px; line-height: 1.55; color: rgba(31,30,29,0.72);">Warm taupe #B79C86 at 2.4:1 on ivory holds down to 40px. A paler neutral disappears at small sizes.</div></div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 30px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">02</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Construction — every number</h2>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 40px; display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 48px; align-items: center;">
+        <svg viewBox="-58 -50 308 300" width="400" height="390" style="display: block;" role="img" aria-label="Construction diagram">
+          <g stroke="rgba(7,159,160,0.18)" stroke-width="0.75">
+            <path d="M0 0H192M0 24H192M0 48H192M0 72H192M0 96H192M0 120H192M0 144H192M0 168H192M0 192H192" />
+            <path d="M0 0V192M24 0V192M48 0V192M72 0V192M96 0V192M120 0V192M144 0V192M168 0V192M192 0V192" />
+          </g>
+          <rect x="-16" y="-16" width="224" height="224" fill="none" stroke="rgba(150,78,51,0.3)" stroke-width="1" stroke-dasharray="3 4" />
+          <rect x="-32" y="-32" width="256" height="256" fill="none" stroke="rgba(150,78,51,0.5)" stroke-width="1" stroke-dasharray="6 5" />
+          <rect x="0" y="0" width="192" height="192" fill="none" stroke="rgba(31,30,29,0.35)" stroke-width="1" />
+          <g opacity="0.14">
+            <path d="M80 12L112 12Q142 12 136.47 41.49L135.76 45.26Q133 60 119.91 67.33L115.85 69.6Q108 74 99 74L93 74Q84 74 76.15 69.6L72.09 67.33Q59 60 56.24 45.26L55.53 41.49Q50 12 80 12Z" fill="#1F1E1D" transform="rotate(90 96 96)" />
+            <path d="M80 12L112 12Q142 12 136.47 41.49L135.76 45.26Q133 60 119.91 67.33L115.85 69.6Q108 74 99 74L93 74Q84 74 76.15 69.6L72.09 67.33Q59 60 56.24 45.26L55.53 41.49Q50 12 80 12Z" fill="#1F1E1D" transform="rotate(180 96 96)" />
+            <path d="M80 12L112 12Q142 12 136.47 41.49L135.76 45.26Q133 60 119.91 67.33L115.85 69.6Q108 74 99 74L93 74Q84 74 76.15 69.6L72.09 67.33Q59 60 56.24 45.26L55.53 41.49Q50 12 80 12Z" fill="#1F1E1D" transform="rotate(270 96 96)" />
+          </g>
+          <path d="M80 12L112 12Q142 12 136.47 41.49L135.76 45.26Q133 60 119.91 67.33L115.85 69.6Q108 74 99 74L93 74Q84 74 76.15 69.6L72.09 67.33Q59 60 56.24 45.26L55.53 41.49Q50 12 80 12Z" fill="#CC785C" />
+          <g fill="#1F1E1D">
+            <circle cx="50" cy="12" r="2.4" /><circle cx="142" cy="12" r="2.4" /><circle cx="133" cy="60" r="2.4" /><circle cx="108" cy="74" r="2.4" /><circle cx="84" cy="74" r="2.4" /><circle cx="59" cy="60" r="2.4" />
+          </g>
+          <rect x="74" y="74" width="44" height="44" fill="none" stroke="#057B7C" stroke-width="1.25" stroke-dasharray="4 4" />
+          <g stroke="#964E33" stroke-width="1.25">
+            <path d="M-44 -32V224" /><path d="M-48 -32H-40" /><path d="M-48 224H-40" />
+          </g>
+          <text x="-52" y="96" font-family="Instrument Sans, sans-serif" font-size="9" fill="#964E33" text-anchor="middle" transform="rotate(-90 -52 96)">inner X minimum · outer 2X preferred</text>
+          <text x="96" y="99" font-family="Instrument Sans, sans-serif" font-size="8" fill="#057B7C" text-anchor="middle">44 × 44</text>
+          <text x="96" y="-40" font-family="Instrument Sans, sans-serif" font-size="9" fill="rgba(31,30,29,0.6)" text-anchor="middle">192 × 192 unit grid · 24-unit modules · X = 16 units</text>
+        </svg>
+        <div style="display: flex; flex-direction: column; gap: 18px; font-size: 16px; line-height: 1.65; color: rgba(31,30,29,0.8);">
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Grid.</strong> A 192 × 192 unit square on 24-unit modules. The drawn ink occupies the inner 168 units (87.5%) — 12 units of built-in margin on every side. This matters in practice: dropping the file into a 36 × 36px frame renders the mark at about 31.5px, below the 32px minimum. Size the frame from the ink, not the artboard, or use the compact variant.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">The unit.</strong> One six-point keystone, built by rounding a polygon. The <em>polygon corners</em> — the construction input, not points on the finished curve — are, clockwise from top-left: <span style="font-family: ui-monospace, monospace; font-size: 14px;">50,12 · 142,12 · 133,60 · 108,74 · 84,74 · 59,60</span>. Corner radii, same order: <span style="font-family: ui-monospace, monospace; font-size: 14px;">30 · 30 · 15 · 9 · 9 · 15</span>. Rounding pulls each corner inward, so the curve's own anchors land elsewhere — the top edge, for instance, runs from about 54.7 to 137.3. To reproduce the shape exactly, use the path below rather than re-deriving it from these numbers. Rotated 90°, 180° and 270° about 96,96.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Open centre.</strong> A 44 × 44 unit square, about 23% of the mark's width. It is a construction element: never fill it, never place a glyph in it, never let a pattern read through it as texture.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Clear space.</strong> X = 16 units, one sixth of a form's width. Inner dashed box is X (absolute minimum), outer is 2X (preferred). Measured from the 192-unit artboard edge, not from the visible ink — since the ink is already inset 12 units, the true clearance around the forms is X + 12.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Optical correction.</strong> Light backgrounds: ink ×1.025, taupe ×0.975, terracotta and turquoise ×1.0. Dark inverts: ivory ×0.975, warm brown ×1.02. Do not normalise these — they are deliberate.</p>
+          <p style="margin: 0;"><strong style="color: #1F1E1D;">Minimum sizes.</strong> Primary mark 32px · compact variant 16–32px · app icon 40px rendered · below 16px a single-colour terracotta silhouette.</p>
+        </div>
+      </div>
+      <div style="background: #1F1E1D; border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,247,237,0.5); font-weight: 600;">The unit as a path — copy this if you ever rebuild the mark</div>
+        <div style="font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.8; color: #FFF7ED; word-break: break-all;">M80 12L112 12Q142 12 136.47 41.49L135.76 45.26Q133 60 119.91 67.33L115.85 69.6Q108 74 99 74L93 74Q84 74 76.15 69.6L72.09 67.33Q59 60 56.24 45.26L55.53 41.49Q50 12 80 12Z</div>
+        <div style="font-size: 14px; line-height: 1.6; color: rgba(255,247,237,0.6);">viewBox 0 0 192 192. Rotate in 90° steps about 96 96, then apply each colour's scale about the same centre. The compact variant is the same construction with the forms pulled 4 units inward and the two inner radii reduced to 6.</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 30px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">03</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Variants and single forms</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;"><img src="assets/micro-quad.svg" alt="Light background variant" style="width: 104px; height: 104px;" /><div style="font-size: 13px; color: rgba(31,30,29,0.5); text-align: center; line-height: 1.5;">Light background<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">micro-quad.svg</span></div></div>
+        <div style="background: #1C1917; border-radius: 14px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;"><img src="assets/micro-quad-dark.svg" alt="Dark background variant" style="width: 104px; height: 104px;" /><div style="font-size: 13px; color: rgba(255,247,237,0.5); text-align: center; line-height: 1.5;">Dark background<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">micro-quad-dark.svg</span></div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;"><img src="assets/micro-quad-ink.svg" alt="Monochrome ink variant" style="width: 104px; height: 104px;" /><div style="font-size: 13px; color: rgba(31,30,29,0.5); text-align: center; line-height: 1.5;">Monochrome ink<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">micro-quad-ink.svg</span></div></div>
+        <div style="background: #CC785C; border-radius: 14px; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;"><img src="assets/micro-quad-ivory.svg" alt="Monochrome ivory variant" style="width: 104px; height: 104px;" /><div style="font-size: 13px; color: rgba(255,247,237,0.75); text-align: center; line-height: 1.5;">Monochrome ivory<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">micro-quad-ivory.svg</span></div></div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Single forms — for motion and graphic use</div>
+        <div style="display: flex; align-items: center; gap: 26px; flex-wrap: wrap;">
+          <img src="assets/motion/light/1-top-ink.svg" alt="Ink form" style="width: 90px; height: 90px;" />
+          <img src="assets/motion/light/2-right-turquoise.svg" alt="Turquoise form" style="width: 90px; height: 90px;" />
+          <img src="assets/motion/light/3-bottom-taupe.svg" alt="Taupe form" style="width: 90px; height: 90px;" />
+          <img src="assets/motion/light/4-left-terracotta.svg" alt="Terracotta form" style="width: 90px; height: 90px;" />
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.7); max-width: 38ch;">Each form is its own file in <span style="font-family: ui-monospace, monospace; font-size: 13px;">assets/motion/</span>, already rotated into final position on the shared 192-unit artboard with its optical scale applied. Move any layer freely — easing back to identity reassembles the mark pixel-exactly. Light, dark and mono sets, four files each.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 30px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">04</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Lockups — Arabic and Latin</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 40px; display: flex; flex-direction: column; gap: 26px;" dir="rtl">
+          <div style="display: flex; align-items: center; gap: 22px;">
+            <img src="assets/micro-quad.svg" alt="Arabic lockup" style="width: 68px; height: 68px; display: block; flex: none;" />
+            <div style="width: 1px; height: 46px; background: rgba(31,30,29,0.12); flex: none;"></div>
+            <div style="font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif; font-size: 46px; font-weight: 500; line-height: 1;">مايكرو</div>
+          </div>
+          <div style="font-size: 13px; color: rgba(31,30,29,0.55); line-height: 1.6; font-family: 'Instrument Sans', sans-serif;" dir="ltr">Arabic RTL · mark leads on the right. Set in IBM Plex Sans Arabic Medium — the typeface already established in the Micro repository (<span style="font-family: ui-monospace, monospace; font-size: 12px;">--font-arabic</span>), licensed under the SIL Open Font License, free for commercial use. The name is written <bdi dir="rtl">مايكرو</bdi>, matching the product's AppHeader. Mark height equals the Arabic character height including the alef; gap between mark and word = 2X. Never apply negative letter-spacing to Arabic.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 40px; display: flex; flex-direction: column; gap: 26px;">
+          <div style="display: flex; align-items: center; gap: 22px;">
+            <img src="assets/micro-quad.svg" alt="Latin lockup" style="width: 68px; height: 68px; display: block; flex: none;" />
+            <div style="width: 1px; height: 46px; background: rgba(31,30,29,0.12); flex: none;"></div>
+            <div style="font-size: 46px; font-weight: 500; letter-spacing: -0.03em; line-height: 1;">Micro</div>
+          </div>
+          <div style="font-size: 13px; color: rgba(31,30,29,0.55); line-height: 1.6;">Latin LTR · mark leads on the left. Instrument Sans Medium, tracking −3%. Mark height equals cap height plus descender; gap = 2X. Supplied as editable text; an outlined vector can be cut at any time — the typeface decision is settled, so this is a production step, not an open question.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #1C1917; border-radius: 14px; padding: 40px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="display: flex; align-items: center; gap: 22px;">
+            <img src="assets/micro-quad-dark.svg" alt="Latin lockup on dark" style="width: 60px; height: 60px; flex: none;" />
+            <div style="width: 1px; height: 40px; background: rgba(255,247,237,0.2); flex: none;"></div>
+            <div style="font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: #FFF7ED;">Micro</div>
+          </div>
+          <div style="font-size: 13px; color: rgba(255,247,237,0.5); line-height: 1.6;">Latin, dark set. Word in #FFF7ED, never pure white.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 40px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="display: flex; align-items: center; gap: 22px;">
+            <img src="assets/micro-quad-ink.svg" alt="Latin lockup, one colour" style="width: 60px; height: 60px; flex: none;" />
+            <div style="width: 1px; height: 40px; background: rgba(31,30,29,0.12); flex: none;"></div>
+            <div style="font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1;">Micro</div>
+          </div>
+          <div style="font-size: 13px; color: rgba(31,30,29,0.55); line-height: 1.6;">One colour, for stamps, engraving and low-grade print. Word and mark share the same ink.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px 34px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-size: 13px; font-weight: 600; color: #964E33;">Stacked lockup — narrow spaces</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 20px 0;">
+            <img src="assets/micro-quad.svg" alt="Stacked lockup" style="width: 72px; height: 72px;" />
+            <div style="font-size: 30px; font-weight: 500; letter-spacing: -0.03em; line-height: 1;">Micro</div>
+          </div>
+          <div style="font-size: 13.5px; line-height: 1.6; color: rgba(31,30,29,0.6);">Vertical gap = X. Use only where the horizontal lockup will not fit — app store listings, narrow footers, square social avatars.</div>
+        </div>
+        <div style="background: #F4E4DB; border-radius: 14px; padding: 32px 34px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-size: 13px; font-weight: 600; color: #5F3120;">Lockup rules</div>
+          <ul style="margin: 0; padding: 0 0 0 20px; font-size: 15px; line-height: 1.65; color: #7A3F29; display: flex; flex-direction: column; gap: 7px;">
+            <li>Never mix Arabic and Latin in one lockup — one language per lockup.</li>
+            <li>The divider line is optional; drop it below 40px lockup height.</li>
+            <li>Never set the word larger relative to the mark than shown here.</li>
+            <li>Never re-space or re-weight the word to "balance" the mark.</li>
+            <li>Never use the lockup as an app icon — the icon is the mark alone.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 30px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">05</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">App icon and size behaviour</h2>
+      </div>
+      <p style="font-size: 17px; line-height: 1.6; margin: 0; max-width: 72ch; color: rgba(31,30,29,0.72);">The icon is the mark, not a redrawing of it. The only differences are a slightly widened channel and slightly smaller forms, so the shape survives the sizes a phone actually renders.</p>
+      <div style="background: #E3F5F5; border-radius: 14px; padding: 26px 30px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 13px; font-weight: 600; color: #033E3F;">Inside the product · transparent</div>
+          <div style="font-size: 15px; line-height: 1.65; color: #04595A;">In the app interface — header, empty states, in-page marks — the mark sits on a <strong>transparent</strong> background and inherits the surface beneath it, exactly as the repository specifies. Use <span style="font-family: ui-monospace, monospace; font-size: 13px;">micro-quad.svg</span> on light surfaces and <span style="font-family: ui-monospace, monospace; font-size: 13px;">micro-quad-dark.svg</span> on dark.</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-size: 13px; font-weight: 600; color: #033E3F;">As an app icon · opaque, always</div>
+          <div style="font-size: 15px; line-height: 1.65; color: #04595A;">An app icon must have a filled field: iOS rejects transparency outright, and Android composites the transparent area onto an unpredictable colour. The three icon files below are therefore opaque by design. This is not a contradiction of the transparent rule — it is a different surface with a different requirement.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 18px; align-items: center;">
+          <img src="assets/micro-appicon-quad.svg" alt="App icon on ivory" style="width: 160px; height: 160px; border-radius: 36px; display: block;" />
+          <div style="font-size: 13px; color: rgba(31,30,29,0.6); text-align: center;">Ivory field · <strong style="color: #964E33;">recommended default</strong></div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 18px; align-items: center;">
+          <img src="assets/micro-appicon-quad-dark.svg" alt="App icon on dark" style="width: 160px; height: 160px; border-radius: 36px; display: block;" />
+          <div style="font-size: 13px; color: rgba(31,30,29,0.6); text-align: center;">Dark field · for dark home screens</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 18px; align-items: center;">
+          <img src="assets/micro-appicon-quad-terracotta.svg" alt="App icon on terracotta" style="width: 160px; height: 160px; border-radius: 36px; display: block;" />
+          <div style="font-size: 13px; color: rgba(31,30,29,0.6); text-align: center;">Terracotta field · alternate for launch campaigns</div>
+        </div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 34px 36px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Rendered sizes · actual pixels</div>
+        <div style="display: flex; align-items: flex-end; gap: 40px; flex-wrap: wrap;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><img src="assets/png/icon/ios-android-180.png" alt="180 pixels" style="width: 180px; height: 180px; border-radius: 40px;" /><div style="font-size: 12px; color: rgba(31,30,29,0.5);">180 · iOS @3x</div></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><img src="assets/png/icon/ios-android-120.png" alt="120 pixels" style="width: 120px; height: 120px; border-radius: 27px;" /><div style="font-size: 12px; color: rgba(31,30,29,0.5);">120 · iOS @2x</div></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><img src="assets/png/icon/ios-android-60.png" alt="60 pixels" style="width: 60px; height: 60px; border-radius: 13px;" /><div style="font-size: 12px; color: rgba(31,30,29,0.5);">60 · settings</div></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><img src="assets/png/mark/compact-32.png" alt="32 pixels" style="width: 32px; height: 32px;" /><div style="font-size: 12px; color: rgba(31,30,29,0.5);">32 · compact</div></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><img src="assets/png/mark/compact-24.png" alt="24 pixels" style="width: 24px; height: 24px;" /><div style="font-size: 12px; color: rgba(31,30,29,0.5);">24 · compact</div></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;"><img src="assets/png/mark/compact-16.png" alt="16 pixels" style="width: 16px; height: 16px;" /><div style="font-size: 12px; color: rgba(31,30,29,0.5);">16 · limit</div></div>
+        </div>
+        <div style="font-size: 15px; line-height: 1.6; color: rgba(31,30,29,0.72); max-width: 78ch;">Honest reading: excellent down to 60px, good at 32px, and at 16px the mark becomes a warm coloured cluster rather than four readable forms. Accept that — a favicon is recognised by colour and silhouette, not detail — and use the compact variant everywhere below 32px.</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; align-items: center; background: #1C1917; border-radius: 14px; padding: 36px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 18px;">
+          <img src="assets/micro-appicon-quad.svg" alt="Home screen test, ivory field" style="width: 100%; aspect-ratio: 1; border-radius: 16px;" />
+          <div style="width: 100%; aspect-ratio: 1; border-radius: 16px; background: #3B5C7A; display: flex; align-items: center; justify-content: center;"><div style="width: 44%; height: 44%; border-radius: 999px; background: rgba(255,255,255,0.82);"></div></div>
+          <div style="width: 100%; aspect-ratio: 1; border-radius: 16px; background: #6E5A8C; display: flex; align-items: center; justify-content: center;"><div style="width: 42%; height: 42%; border-radius: 5px; background: rgba(255,255,255,0.82);"></div></div>
+          <div style="width: 100%; aspect-ratio: 1; border-radius: 16px; background: #4E7B58; display: flex; align-items: center; justify-content: center;"><div style="width: 46%; height: 40%; background: rgba(255,255,255,0.82); clip-path: polygon(50% 0%, 100% 100%, 0% 100%);"></div></div>
+          <img src="assets/micro-appicon-quad-terracotta.svg" alt="Home screen test, terracotta field" style="width: 100%; aspect-ratio: 1; border-radius: 16px;" />
+          <div style="width: 100%; aspect-ratio: 1; border-radius: 16px; background: #A8483F; display: flex; align-items: center; justify-content: center;"><div style="width: 44%; height: 12%; border-radius: 999px; background: rgba(255,255,255,0.82);"></div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; color: #FFF7ED;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,247,237,0.5); font-weight: 600;">Home-screen behaviour</div>
+          <div style="font-size: 16px; line-height: 1.65; color: rgba(255,247,237,0.8); max-width: 60ch;">The grey-shape tiles stand in for the user's other apps. Against neighbouring icons the ivory field is the quietest and the terracotta field the most findable. Ship ivory as the default, keep terracotta as the alternate for launch campaigns, and never ship both to the same user.</div>
+        </div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Platform geometry — already applied in the delivered files</div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; font-size: 15px; line-height: 1.6; color: rgba(31,30,29,0.78);">
+          <div><strong style="color: #1F1E1D;">iOS.</strong> Mark at 62% of the icon square on a filled field, corner radius left to the system. Sizes 1024 · 180 · 152 · 120 · 76 · 60 · 40.</div>
+          <div><strong style="color: #1F1E1D;">Android adaptive.</strong> 432 × 432 foreground with the mark at 60% so it survives circular, squircle and rounded masks, plus a flat background layer.</div>
+          <div><strong style="color: #1F1E1D;">Web.</strong> Maskable 512 at 58% for PWA safe-zone cropping; favicon 48 · 32 · 16 on an ivory field, plus a multi-size <span style="font-family: ui-monospace, monospace; font-size: 13px;">favicon.ico</span>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">06</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Motion — the mark</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #E3F5F5; border-radius: 14px; padding: 26px 30px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 13px; font-weight: 600; color: #033E3F;">Allowed — motion that resolves</div>
+          <div style="font-size: 15px; line-height: 1.65; color: #04595A;">Forms may fly in, rotate into place or settle inward, as long as the animation ends, decelerates, and stops on the locked mark. 600–900ms total, 60–80ms stagger, ease-out, no bounce, no overshoot beyond 2%.</div>
+        </div>
+        <div style="background: #F4E4DB; border-radius: 14px; padding: 26px 30px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 13px; font-weight: 600; color: #5F3120;">Forbidden — motion that never ends</div>
+          <div style="font-size: 15px; line-height: 1.65; color: #7A3F29;">Never a continuous rotation, never a loading spinner, never a looping pulse of the whole mark. A looping mark turns the identity into a status indicator.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">A · Spin that lands</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">900ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 32px; display: flex; justify-content: center;">
+            <div key="{{ runA }}" class="m-anim" style="width: 156px; height: 156px; animation: m-spin-land 900ms cubic-bezier(0.16, 1, 0.3, 1) both;"><img src="assets/micro-quad.svg" alt="Spin that lands" style="width: 100%; height: 100%; display: block;" /></div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">The whole mark turns in from −300° and settles with a 6° overshoot. The most confident option, and my recommendation for the splash screen.</div>
+          <button onClick="{{ replayA }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">B · Gather from outside</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">760ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 32px; display: flex; justify-content: center;">
+            <div key="{{ runB }}" style="width: 156px; height: 156px; position: relative;">
+              <img src="assets/motion/light/1-top-ink.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-1 700ms cubic-bezier(0.16,1,0.3,1) 0ms both;" />
+              <img src="assets/motion/light/2-right-turquoise.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-2 700ms cubic-bezier(0.16,1,0.3,1) 60ms both;" />
+              <img src="assets/motion/light/3-bottom-taupe.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-3 700ms cubic-bezier(0.16,1,0.3,1) 120ms both;" />
+              <img src="assets/motion/light/4-left-terracotta.svg" alt="Gather from outside" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-4 700ms cubic-bezier(0.16,1,0.3,1) 180ms both;" />
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">Each form slides in from its own side, 60ms apart. The clearest expression of separate things arriving into one picture.</div>
+          <button onClick="{{ replayB }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">C · Sequence</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">880ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 32px; display: flex; justify-content: center;">
+            <div key="{{ runC }}" style="width: 156px; height: 156px; position: relative;">
+              <img src="assets/motion/light/1-top-ink.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-seq 520ms cubic-bezier(0.16,1,0.3,1) 0ms both;" />
+              <img src="assets/motion/light/2-right-turquoise.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-seq 520ms cubic-bezier(0.16,1,0.3,1) 120ms both;" />
+              <img src="assets/motion/light/3-bottom-taupe.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-seq 520ms cubic-bezier(0.16,1,0.3,1) 240ms both;" />
+              <img src="assets/motion/light/4-left-terracotta.svg" alt="Sequence" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-seq 520ms cubic-bezier(0.16,1,0.3,1) 360ms both;" />
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">Each form turns 90° into its own place, one after another. Deliberate and slow — good for a first-launch moment, too slow for everyday use.</div>
+          <button onClick="{{ replayC }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">D · Settle inward</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">640ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 32px; display: flex; justify-content: center;">
+            <div key="{{ runD }}" style="width: 156px; height: 156px; position: relative;">
+              <img src="assets/motion/light/1-top-ink.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-settle 620ms cubic-bezier(0.16,1,0.3,1) 0ms both;" />
+              <img src="assets/motion/light/2-right-turquoise.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-settle 620ms cubic-bezier(0.16,1,0.3,1) 40ms both;" />
+              <img src="assets/motion/light/3-bottom-taupe.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-settle 620ms cubic-bezier(0.16,1,0.3,1) 80ms both;" />
+              <img src="assets/motion/light/4-left-terracotta.svg" alt="Settle inward" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-settle 620ms cubic-bezier(0.16,1,0.3,1) 120ms both;" />
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">The forms contract inward from beyond the frame. The quietest of the four — right inside the app, where the mark appears often.</div>
+          <button onClick="{{ replayD }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 40px; align-items: center; background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 36px;">
+        <div style="background: #FAF9F5; border-radius: 10px; padding: 36px; display: flex; justify-content: center;">
+          <div style="width: 124px; height: 124px; position: relative;">
+            <img src="assets/motion/light/1-top-ink.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-load 1600ms ease-in-out 0ms infinite;" />
+            <img src="assets/motion/light/2-right-turquoise.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-load 1600ms ease-in-out 200ms infinite;" />
+            <img src="assets/motion/light/3-bottom-taupe.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-load 1600ms ease-in-out 400ms infinite;" />
+            <img src="assets/motion/light/4-left-terracotta.svg" alt="Loading indicator" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-load 1600ms ease-in-out 600ms infinite;" />
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.65; color: rgba(31,30,29,0.8);">
+          <div style="font-size: 19px; font-weight: 500; color: #1F1E1D;">The loader — the one legitimate loop</div>
+          <p style="margin: 0;">It works precisely because <strong style="color: #1F1E1D;">nothing rotates</strong>. Emphasis travels around the four forms while every form stays exactly where the locked mark puts it. Only opacity and a 6% scale move; the geometry never does. 1600ms cycle, 200ms stagger, resting at 18% opacity.</p>
+          <div style="background: #F4E4DB; border-radius: 12px; padding: 16px 20px; font-size: 14.5px; line-height: 1.6; color: #7A3F29;">For a smaller loader, use a single form pulsing in place — never the four-form mark spinning.</div>
+        </div>
+      </div>
+      <div style="background: #1F1E1D; border-radius: 14px; padding: 32px 34px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,247,237,0.5); font-weight: 600;">Copy-ready CSS · animation B, the gather</div>
+        <pre style="margin: 0; font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.75; color: #FFF7ED; overflow-x: auto; white-space: pre;">@keyframes gather-1 { from { transform: translateY(-50%); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes gather-2 { from { transform: translateX(50%);  opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes gather-3 { from { transform: translateY(50%);  opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes gather-4 { from { transform: translateX(-50%); opacity: 0 } to { transform: none; opacity: 1 } }
+
+.mark  { position: relative; width: 168px; aspect-ratio: 1 }
+.mark img { position: absolute; inset: 0; width: 100%; transform-origin: 50% 50%;
+            animation: 700ms cubic-bezier(.16,1,.3,1) both }
+.mark img:nth-child(1) { animation-name: gather-1; animation-delay:   0ms }
+.mark img:nth-child(2) { animation-name: gather-2; animation-delay:  60ms }
+.mark img:nth-child(3) { animation-name: gather-3; animation-delay: 120ms }
+.mark img:nth-child(4) { animation-name: gather-4; animation-delay: 180ms }
+
+@media (prefers-reduced-motion: reduce) { .mark img { animation: none } }</pre>
+        <div style="font-size: 14px; line-height: 1.6; color: rgba(255,247,237,0.6);">The <span style="font-family: ui-monospace, monospace;">both</span> fill mode is what holds the mark in its final locked position after the animation ends. Always include the reduced-motion query.</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">07</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Motion — the lockup with the name</h2>
+      </div>
+      <p style="font-size: 17px; line-height: 1.6; margin: 0; max-width: 74ch; color: rgba(31,30,29,0.72);">The rule is always the same: the mark resolves first, then the word arrives. The word never animates before the mark, never moves after the mark has settled, and never animates letter by letter.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">E · Word slides out — Latin</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">1160ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 40px 32px; display: flex; justify-content: center; align-items: center; min-height: 148px;">
+            <div key="{{ runE }}" style="display: flex; align-items: center; gap: 22px;">
+              <div class="m-anim" style="width: 76px; height: 76px; flex: none; animation: m-spin-land 900ms cubic-bezier(0.16,1,0.3,1) both;"><img src="assets/micro-quad.svg" alt="" style="width: 100%; height: 100%; display: block;" /></div>
+              <div style="width: 1px; height: 52px; background: rgba(31,30,29,0.12); flex: none; animation: m-word-fade 320ms ease-out 780ms both;"></div>
+              <div style="font-size: 52px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; animation: m-word-slide 400ms cubic-bezier(0.16,1,0.3,1) 820ms both;">Micro</div>
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">The mark lands, then the word slides in from behind it. The default lockup animation — use this one unless you have a reason not to.</div>
+          <button onClick="{{ replayE }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">F · Word slides out — Arabic</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">1160ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 40px 32px; display: flex; justify-content: center; align-items: center; min-height: 148px;" dir="rtl">
+            <div key="{{ runF }}" style="display: flex; align-items: center; gap: 22px;">
+              <div class="m-anim" style="width: 76px; height: 76px; flex: none; animation: m-spin-land 900ms cubic-bezier(0.16,1,0.3,1) both;"><img src="assets/micro-quad.svg" alt="" style="width: 100%; height: 100%; display: block;" /></div>
+              <div style="width: 1px; height: 52px; background: rgba(31,30,29,0.12); flex: none; animation: m-word-fade 320ms ease-out 780ms both;"></div>
+              <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 50px; font-weight: 500; line-height: 1; animation: m-word-slide-rtl 400ms cubic-bezier(0.16,1,0.3,1) 820ms both;">مايكرو</div>
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">Identical timing, mirrored direction. The word emerges rightward-to-leftward, matching the reading direction of the product.</div>
+          <button onClick="{{ replayF }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500;">G · Mark makes room</div><div style="font-size: 12px; color: rgba(31,30,29,0.45); font-family: ui-monospace, monospace;">1240ms</div></div>
+          <div style="background: #FAF9F5; border-radius: 10px; padding: 40px 32px; display: flex; justify-content: center; align-items: center; min-height: 148px; overflow: hidden;">
+            <div key="{{ runG }}" style="display: flex; align-items: center; gap: 22px;">
+              <div class="m-anim" style="width: 76px; height: 76px; flex: none; animation: m-settle 620ms cubic-bezier(0.16,1,0.3,1) both, m-mark-shift 560ms cubic-bezier(0.16,1,0.3,1) 640ms both;"><img src="assets/micro-quad.svg" alt="" style="width: 100%; height: 100%; display: block;" /></div>
+              <div style="width: 1px; height: 52px; background: rgba(31,30,29,0.12); flex: none; animation: m-word-fade 300ms ease-out 900ms both;"></div>
+              <div style="font-size: 52px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; animation: m-word-clip 420ms cubic-bezier(0.16,1,0.3,1) 880ms both, m-word-fade 300ms ease-out 880ms both;">Micro</div>
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.72);">The mark appears centred alone, then shifts left to make room as the word wipes open. The most cinematic of the three — for a launch video or a title card, not for app startup.</div>
+          <button onClick="{{ replayG }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #964E33; background: #F4E4DB; border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: #EBD5C8;">Replay</button>
+        </div>
+
+        <div style="background: #1C1917; border-radius: 14px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><div style="font-size: 19px; font-weight: 500; color: #FFF7ED;">H · Gather, then the word</div><div style="font-size: 12px; color: rgba(255,247,237,0.45); font-family: ui-monospace, monospace;">1180ms</div></div>
+          <div style="background: #27231F; border-radius: 10px; padding: 40px 32px; display: flex; justify-content: center; align-items: center; min-height: 148px;">
+            <div key="{{ runH }}" style="display: flex; align-items: center; gap: 22px;">
+              <div style="width: 76px; height: 76px; position: relative; flex: none;">
+                <img src="assets/motion/dark/1-top-ink.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-1 700ms cubic-bezier(0.16,1,0.3,1) 0ms both;" />
+                <img src="assets/motion/dark/2-right-turquoise.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-2 700ms cubic-bezier(0.16,1,0.3,1) 60ms both;" />
+                <img src="assets/motion/dark/3-bottom-taupe.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-3 700ms cubic-bezier(0.16,1,0.3,1) 120ms both;" />
+                <img src="assets/motion/dark/4-left-terracotta.svg" alt="" class="m-anim" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: m-gather-4 700ms cubic-bezier(0.16,1,0.3,1) 180ms both;" />
+              </div>
+              <div style="width: 1px; height: 52px; background: rgba(255,247,237,0.2); flex: none; animation: m-word-fade 300ms ease-out 840ms both;"></div>
+              <div style="font-size: 52px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: #FFF7ED; animation: m-word-slide 400ms cubic-bezier(0.16,1,0.3,1) 880ms both;">Micro</div>
+            </div>
+          </div>
+          <div style="font-size: 14.5px; line-height: 1.6; color: rgba(255,247,237,0.7);">The four forms gather, then the word follows. Shown on the dark set, because this is the version most likely to open a video.</div>
+          <button onClick="{{ replayH }}" style="align-self: flex-start; font-family: inherit; font-size: 13px; font-weight: 500; color: #FFF7ED; background: rgba(255,247,237,0.14); border: none; border-radius: 999px; padding: 9px 18px; cursor: pointer;" style-hover="background: rgba(255,247,237,0.22);">Replay</button>
+        </div>
+      </div>
+      <div style="background: #1F1E1D; border-radius: 14px; padding: 32px 34px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,247,237,0.5); font-weight: 600;">Copy-ready CSS · animation E, the default lockup</div>
+        <pre style="margin: 0; font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.75; color: #FFF7ED; overflow-x: auto; white-space: pre;">@keyframes spin-land {
+  0%   { transform: rotate(-300deg) scale(.72); opacity: 0 }
+  55%  { opacity: 1 }
+  78%  { transform: rotate(6deg) scale(1.02) }
+  100% { transform: rotate(0) scale(1); opacity: 1 }
+}
+@keyframes word-in { from { opacity: 0; transform: translateX(-14px) } to { opacity: 1; transform: none } }
+/* RTL: translateX(14px) instead */
+
+.lockup      { display: flex; align-items: center; gap: 22px }
+.lockup .mk  { width: 76px; aspect-ratio: 1; transform-origin: 50% 50%;
+               animation: spin-land 900ms cubic-bezier(.16,1,.3,1) both }
+.lockup .wd  { animation: word-in 400ms cubic-bezier(.16,1,.3,1) 820ms both }
+
+@media (prefers-reduced-motion: reduce) { .lockup .mk, .lockup .wd { animation: none } }</pre>
+        <div style="font-size: 14px; line-height: 1.6; color: rgba(255,247,237,0.6);">The word's 820ms delay is deliberate: it starts as the mark's overshoot settles, so the two read as one gesture rather than two events.</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">08</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Splash screens · real device sizes</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px;">
+        <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+          <div style="width: 100%; aspect-ratio: 1290 / 2796; border-radius: 20px; overflow: hidden; border: 1px solid rgba(31,30,29,0.12);"><img src="assets/splash/ios-1290x2796.svg" alt="iOS splash, light" style="width: 100%; height: 100%; display: block;" /></div>
+          <div style="font-size: 12.5px; color: rgba(31,30,29,0.55); text-align: center; line-height: 1.5;">iOS light<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">1290 × 2796</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+          <div style="width: 100%; aspect-ratio: 1290 / 2796; border-radius: 20px; overflow: hidden; border: 1px solid rgba(31,30,29,0.12);"><img src="assets/splash/ios-1290x2796-dark.svg" alt="iOS splash, dark" style="width: 100%; height: 100%; display: block;" /></div>
+          <div style="font-size: 12.5px; color: rgba(31,30,29,0.55); text-align: center; line-height: 1.5;">iOS dark<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">1290 × 2796</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+          <div style="width: 100%; aspect-ratio: 2048 / 2732; border-radius: 16px; overflow: hidden; border: 1px solid rgba(31,30,29,0.12);"><img src="assets/splash/ipad-2048x2732.svg" alt="iPad splash" style="width: 100%; height: 100%; display: block;" /></div>
+          <div style="font-size: 12.5px; color: rgba(31,30,29,0.55); text-align: center; line-height: 1.5;">iPad<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">2048 × 2732</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+          <div style="width: 100%; aspect-ratio: 1; border-radius: 16px; overflow: hidden; border: 1px solid rgba(31,30,29,0.12);"><img src="assets/splash/android-960x960-icon.svg" alt="Android 12 splash icon" style="width: 100%; height: 100%; display: block;" /></div>
+          <div style="font-size: 12.5px; color: rgba(31,30,29,0.55); text-align: center; line-height: 1.5;">Android 12+ icon<br /><span style="font-family: ui-monospace, monospace; font-size: 11px;">960 × 960</span></div>
+        </div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 26px 30px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; font-size: 15px; line-height: 1.6; color: rgba(31,30,29,0.76);">
+        <div><strong style="color: #1F1E1D;">Mark size.</strong> 320px on a 1290-wide screen — about 25% of the width. Deliberately modest: a splash mark that fills the screen reads as an advertisement, not as a product opening.</div>
+        <div><strong style="color: #1F1E1D;">Android 12+.</strong> The system crops to a 240dp circle and animates it itself, so the mark sits at 40% of the 960 square. Supply the flat icon, not a full-screen image.</div>
+        <div><strong style="color: #1F1E1D;">Dark mode.</strong> Ship both fields and let the OS choose. The dark splash uses the dark colour set, never the light set dimmed.</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">09</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Print applications · real dimensions</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Business card · 85 × 55 mm</div>
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="width: 272px; aspect-ratio: 85 / 55; background: #FAF9F5; border: 1px solid rgba(31,30,29,0.1); border-radius: 6px; padding: 13px; display: flex; flex-direction: column; justify-content: space-between;" dir="rtl">
+              <img src="assets/micro-quad.svg" alt="Card front" style="width: 38px; height: 38px;" />
+              <div style="display: flex; flex-direction: column; gap: 3px;">
+                <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 15px; font-weight: 600;">مايكرو</div>
+                <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 10.5px; color: rgba(31,30,29,0.6);">إدارة مالية وتشغيلية للأعمال الصغيرة</div>
+              </div>
+            </div>
+            <div style="width: 272px; aspect-ratio: 85 / 55; background: #CC785C; border-radius: 6px; padding: 22px; display: flex; align-items: center; justify-content: center;">
+              <img src="assets/micro-quad-ivory.svg" alt="Card back" style="width: 64px; height: 64px;" />
+            </div>
+          </div>
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.68);">Mark at 12mm on the front with 4mm clear space (2X at that scale); 20mm centred on the terracotta reverse. Bleed 3mm all round.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Invoice header · A4, 210mm wide</div>
+          <div style="background: #FAF9F5; border: 1px solid rgba(31,30,29,0.1); border-radius: 6px; padding: 26px 28px; display: flex; flex-direction: column; gap: 22px;" dir="rtl">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgba(31,30,29,0.12); padding-bottom: 18px;">
+              <div style="display: flex; align-items: center; gap: 13px;">
+                <img src="assets/micro-quad.svg" alt="Invoice header" style="width: 19px; height: 19px;" />
+                <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 14px; font-weight: 600;">مايكرو</div>
+              </div>
+              <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 12px; color: rgba(31,30,29,0.55); text-align: left;">فاتورة ٢٠٢٦٠٠٤١<br />٢٨ آب ٢٠٢٦</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <div style="height: 8px; background: rgba(31,30,29,0.07); border-radius: 3px; width: 82%;"></div>
+              <div style="height: 8px; background: rgba(31,30,29,0.07); border-radius: 3px; width: 64%;"></div>
+              <div style="height: 8px; background: rgba(31,30,29,0.07); border-radius: 3px; width: 71%;"></div>
+            </div>
+          </div>
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.68);">Shown to scale at A4 width. Mark at 12mm, aligned right in Arabic documents and left in Latin. Never larger than the company name's cap height × 2.</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 24px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Shop sign · 1200 × 400 mm</div>
+          <div style="background: #1C1917; border-radius: 8px; aspect-ratio: 3 / 1; padding: 14px 22px; display: flex; align-items: center; justify-content: center; gap: 20px;" dir="rtl">
+            <img src="assets/micro-quad-dark.svg" alt="Shop sign" style="width: 69px; height: 69px; flex: none;" />
+            <div style="width: 1px; height: 46px; background: rgba(255,247,237,0.2); flex: none;"></div>
+            <div style="font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 40px; font-weight: 500; color: #FFF7ED; line-height: 1;">مايكرو</div>
+          </div>
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.68);">Mark at 290mm on a 400mm-tall sign, with 2X clear space inside the field on every side. Dark set on the dark field; readable at 15m. For illuminated signs use the one-colour ivory version — never a glow around the full-colour mark.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Shirt · 70mm chest</div>
+          <div style="background: #27231F; border-radius: 8px; aspect-ratio: 4 / 5; display: flex; align-items: flex-start; justify-content: center; padding-top: 22%;">
+            <img src="assets/micro-quad-dark.svg" alt="Shirt embroidery" style="width: 34%; height: auto;" />
+          </div>
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.68);">Embroidery at 70mm, four thread colours, no outline. Below 50mm switch to the one-colour version — four threads at small scale blur together.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Rubber stamp · 40mm</div>
+          <div style="background: #FAF9F5; border: 1px solid rgba(31,30,29,0.1); border-radius: 8px; aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/micro-quad-ink.svg" alt="Rubber stamp" style="width: 52%; height: auto;" />
+          </div>
+          <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.68);">One-colour ink at 22mm. The open centre and channel survive a rubber die and ink spread. Do not add a border ring.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">10</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Colour — exact values</h2>
+      </div>
+      <p style="font-size: 17px; line-height: 1.6; margin: 0; max-width: 72ch; color: rgba(31,30,29,0.72);">CMYK values are press targets and must be proofed before any print run. Contrast ratios are measured against warm ivory #FAF9F5 unless stated.</p>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+        <div style="border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; overflow: hidden; background: #FFFDF9;">
+          <div style="height: 112px; background: #CC785C;"></div>
+          <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px;"><div style="font-size: 16px; font-weight: 600;">Warm Terracotta</div><div style="font-size: 13px; color: rgba(31,30,29,0.6); line-height: 1.7;">#CC785C · 204 120 92<br />CMYK 0 · 48 · 55 · 13<br />Contrast 3.1:1</div></div>
+        </div>
+        <div style="border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; overflow: hidden; background: #FFFDF9;">
+          <div style="height: 112px; background: #079FA0;"></div>
+          <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px;"><div style="font-size: 16px; font-weight: 600;">Turquoise</div><div style="font-size: 13px; color: rgba(31,30,29,0.6); line-height: 1.7;">#079FA0 · 7 159 160<br />CMYK 85 · 12 · 38 · 2<br />Contrast 3.1:1</div></div>
+        </div>
+        <div style="border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; overflow: hidden; background: #FFFDF9;">
+          <div style="height: 112px; background: #1F1E1D;"></div>
+          <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px;"><div style="font-size: 16px; font-weight: 600;">Near-Black Ink</div><div style="font-size: 13px; color: rgba(31,30,29,0.6); line-height: 1.7;">#1F1E1D · 31 30 29<br />CMYK 65 · 60 · 60 · 70<br />Contrast 16.1:1</div></div>
+        </div>
+        <div style="border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; overflow: hidden; background: #FFFDF9;">
+          <div style="height: 112px; background: #B79C86;"></div>
+          <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px;"><div style="font-size: 16px; font-weight: 600;">Warm Taupe <span style="font-size: 12px; color: #057B7C; font-weight: 600;">· brand-neutral</span></div><div style="font-size: 13px; color: rgba(31,30,29,0.6); line-height: 1.7;">#B79C86 · 183 156 134<br />CMYK 8 · 25 · 38 · 16<br />Contrast 2.4:1 · logo only</div></div>
+        </div>
+        <div style="border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; overflow: hidden; background: #FFFDF9;">
+          <div style="height: 112px; background: #FAF9F5; border-bottom: 1px solid rgba(31,30,29,0.08);"></div>
+          <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px;"><div style="font-size: 16px; font-weight: 600;">Warm Ivory</div><div style="font-size: 13px; color: rgba(31,30,29,0.6); line-height: 1.7;">#FAF9F5 · 250 249 245<br />CMYK 1 · 1 · 3 · 0<br />Default logo field</div></div>
+        </div>
+        <div style="border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; overflow: hidden; background: #FFFDF9;">
+          <div style="height: 112px; background: #1C1917;"></div>
+          <div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 6px;"><div style="font-size: 16px; font-weight: 600;">Dark Background</div><div style="font-size: 13px; color: rgba(31,30,29,0.6); line-height: 1.7;">#1C1917 · 28 25 23<br />CMYK 66 · 62 · 62 · 72<br />Dark-mode logo field</div></div>
+        </div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 28px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Dark interface set</div>
+        <div style="display: flex; gap: 10px;">
+          <div style="flex: 1; height: 56px; border-radius: 8px; background: #D59172;"></div>
+          <div style="flex: 1; height: 56px; border-radius: 8px; background: #5EC0C1;"></div>
+          <div style="flex: 1; height: 56px; border-radius: 8px; background: #8C7A66;"></div>
+          <div style="flex: 1; height: 56px; border-radius: 8px; background: #FFF7ED;"></div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.6; color: rgba(31,30,29,0.7);">#D59172 · #5EC0C1 · #8C7A66 · #FFF7ED on #1C1917. Measured contrast 6.8:1, 8.2:1, 4.3:1 and 16.6:1. The ink form becomes warm white and the taupe form becomes warm brown, so light and dark keep the same weight distribution. Note that <span style="font-family: ui-monospace, monospace; font-size: 13px;">#8C7A66</span> is a second logo-only neutral and must be registered alongside #B79C86 — it is the dark-mode counterpart, not an interface colour.</div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 30px 34px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Alignment with the Micro repository</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 44px; font-size: 15px; line-height: 1.65; color: rgba(31,30,29,0.78);">
+          <div>Three of the four logo colours are the product's own tokens, unchanged: <span style="font-family: ui-monospace, monospace; font-size: 13px;">brand-primary</span> #CC785C, <span style="font-family: ui-monospace, monospace; font-size: 13px;">accent-primary</span> #079FA0, <span style="font-family: ui-monospace, monospace; font-size: 13px;">text-primary</span> #1F1E1D, on <span style="font-family: ui-monospace, monospace; font-size: 13px;">canvas</span> #FAF9F5. Never substitute a different hex for these — read them from the tokens.</div>
+          <div>The fourth is new and deliberately so. Register <strong style="color: #1F1E1D;">two</strong> logo-only values: <span style="font-family: ui-monospace, monospace; font-size: 13px;">brand-neutral</span> #B79C86 for light backgrounds and <span style="font-family: ui-monospace, monospace; font-size: 13px;">brand-neutral-dark</span> #8C7A66 for dark. Neither may be used for interface surfaces, borders or text. The existing interface neutrals were tested and rejected for the mark: <span style="font-family: ui-monospace, monospace; font-size: 13px;">divider</span> #DAD5C8 measures about 1.2:1 on canvas and <span style="font-family: ui-monospace, monospace; font-size: 13px;">border</span> #EAE6DC even less, so the fourth form would vanish at icon sizes. #B79C86 is the nearest value in the same warm family that survives 40px.</div>
+        </div>
+        <div style="font-size: 15px; line-height: 1.65; color: rgba(31,30,29,0.7); border-top: 1px solid rgba(31,30,29,0.1); padding-top: 18px;">The repository's own rule — brand colour is not status colour — holds here without exception. Income, expense, withdrawal and return colours are never logo colours, and no logo colour ever carries a financial meaning. One further boundary: <strong style="color: #1F1E1D;">Instrument Sans belongs to the logo lockup only and must never enter the product interface</strong>, which is typeset in IBM Plex Sans Arabic and IBM Plex Mono. Keeping it out of the UI prevents a third typeface drifting into the codebase.</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">11</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Correct and incorrect use</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(5,123,124,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><img src="assets/micro-quad.svg" alt="Correct, full colour" style="width: 88px; height: 88px;" /><div style="font-size: 13px; color: #057B7C; font-weight: 600;">Correct</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Full colour on ivory, clear space respected.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(5,123,124,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><div style="width: 88px; height: 88px; background: #1C1917; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><img src="assets/micro-quad-dark.svg" alt="Correct, dark set" style="width: 68px; height: 68px;" /></div><div style="font-size: 13px; color: #057B7C; font-weight: 600;">Correct</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Dark set on the dark field, never the light set.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(5,123,124,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><img src="assets/micro-quad-ink.svg" alt="Correct, monochrome" style="width: 88px; height: 88px;" /><div style="font-size: 13px; color: #057B7C; font-weight: 600;">Correct</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">One colour for stamps, engraving, low-grade print.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(5,123,124,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center; justify-content: center;"><img src="assets/micro-quad-compact.svg" alt="Correct, compact" style="width: 40px; height: 40px;" /><div style="font-size: 13px; color: #057B7C; font-weight: 600;">Correct</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Compact variant below 32px, never the primary.</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+        <div style="background: #FFFDF9; border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><img src="assets/micro-quad.svg" alt="Never rotate" style="width: 88px; height: 88px; transform: rotate(22deg);" /><div style="font-size: 13px; color: #964E33; font-weight: 600;">Never</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Rotate or tilt the static mark, or loop it as a spinner.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><img src="assets/micro-quad.svg" alt="Never stretch" style="width: 108px; height: 76px;" /><div style="font-size: 13px; color: #964E33; font-weight: 600;">Never</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Stretch, squash, or rebuild the proportions.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><div style="position: relative; width: 88px; height: 88px;"><img src="assets/micro-quad.svg" alt="Never fill the centre" style="width: 88px; height: 88px; display: block;" /><div style="position: absolute; left: 37%; top: 37%; width: 26%; height: 26%; border-radius: 4px; background: #964E33;"></div></div><div style="font-size: 13px; color: #964E33; font-weight: 600;">Never</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Fill the open centre or place a glyph in it.</div></div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(150,78,51,0.35); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; align-items: center;"><div style="width: 88px; height: 88px; background: linear-gradient(135deg, #CC785C, #079FA0); border-radius: 8px; display: flex; align-items: center; justify-content: center;"><img src="assets/micro-quad-ivory.svg" alt="Never gradients" style="width: 68px; height: 68px; opacity: 0.9;" /></div><div style="font-size: 13px; color: #964E33; font-weight: 600;">Never</div><div style="font-size: 13px; color: rgba(31,30,29,0.65); text-align: center; line-height: 1.5;">Gradients, shadows, glows, or a busy photo behind it.</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+        <div style="background: #F4E4DB; border-radius: 14px; padding: 24px 28px; font-size: 15px; line-height: 1.65; color: #7A3F29;"><strong style="color: #5F3120;">Product-specific prohibitions.</strong> The mark never labels a product area — not Manage, not Services, not Market, not Delivery — and none of its four forms is ever extracted as a sub-brand or module icon. It is never a status indicator: no green version, no red version, no version meaning "complete".</div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 24px 28px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 13px; font-weight: 600; color: #1F1E1D;">Colour discipline</div>
+          <ul style="margin: 0; padding: 0 0 0 20px; font-size: 14.5px; line-height: 1.6; color: rgba(31,30,29,0.78); display: flex; flex-direction: column; gap: 7px;">
+            <li>Brand colour never encodes financial meaning. Success, warning, error, review and incomplete keep their own semantic set, visibly different from these values.</li>
+            <li>No colour in the mark represents a product area, an account or a number.</li>
+            <li>The four colours are never recoloured for a campaign.</li>
+            <li>Terracotta and turquoise are never a good/bad pair.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 28px; padding: 84px 0 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 18px;">
+        <div style="font-size: 13px; color: #964E33; font-weight: 600; letter-spacing: 0.08em;">12</div>
+        <h2 style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0;">Files — what to use when</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+        <div style="background: #1F1E1D; color: #FFF7ED; border-radius: 14px; padding: 26px 28px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,247,237,0.5); font-weight: 600;">SVG · the master source</div>
+          <div style="font-size: 15px; line-height: 1.65; color: rgba(255,247,237,0.82);">Always start here for anything new. Plain vector paths, no filters, no raster, no embedded fonts, no external references. Opens and edits cleanly in Figma, Illustrator, Inkscape, Sketch, and any browser. Infinitely scalable — favicon to shop sign.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 26px 28px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">PDF · for printers</div>
+          <div style="font-size: 15px; line-height: 1.65; color: rgba(31,30,29,0.78);">True vector PDF, curves only, no text objects and no fonts to go missing. Send this to any print shop, signmaker or embroiderer. Full colour and one-colour ink. Ask for a proof before a long run.</div>
+        </div>
+        <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 26px 28px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">PNG · ready to use</div>
+          <div style="font-size: 15px; line-height: 1.65; color: rgba(31,30,29,0.78);">For places that will not take a vector: app stores, social profiles, slide decks, documents, email signatures. Transparent for the mark, filled field for the icons. Never scale a PNG up — go back to the SVG.</div>
+        </div>
+      </div>
+      <div style="background: #FFFDF9; border: 1px solid rgba(31,30,29,0.1); border-radius: 14px; padding: 32px 34px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,30,29,0.45); font-weight: 600;">Everything in the package</div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 44px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 14px; font-weight: 600; color: #964E33;">Vector masters — assets/</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.85; color: rgba(31,30,29,0.72);">micro-quad.svg — primary, light<br />micro-quad-dark.svg — dark set<br />micro-quad-ink.svg — one colour, ink<br />micro-quad-ivory.svg — one colour, ivory<br />micro-quad-compact.svg — below 32px</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 14px; font-weight: 600; color: #964E33;">Lockups — assets/lockup/</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.85; color: rgba(31,30,29,0.72);">micro-latin-light.svg · -dark · -ink<br />micro-arabic-light.svg · -dark · -ink<br /><span style="font-family: 'Instrument Sans', sans-serif; font-size: 13px;">Live text — the fonts must be installed to render. Outline them for any file leaving your control.</span></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 14px; font-weight: 600; color: #964E33;">Icons — assets/</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.85; color: rgba(31,30,29,0.72);">micro-appicon-quad.svg — ivory field<br />micro-appicon-quad-dark.svg<br />micro-appicon-quad-terracotta.svg<br />micro-adaptive-foreground.svg — Android<br />micro-adaptive-background.svg — Android<br />micro-maskable.svg — PWA<br />micro-favicon-field.svg (+ -dark)<br />favicon.ico — 48 + 32 + 16 in one file</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 14px; font-weight: 600; color: #964E33;">Motion — assets/motion/</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.85; color: rgba(31,30,29,0.72);">light/1-top-ink.svg … 4-left-terracotta.svg<br />dark/… · mono/… — same four each<br />micro-mark-layered.svg — named layers<br />micro-mark-layered-dark.svg<br />micro-assembly.json — Lottie, 60fps, 55f</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 14px; font-weight: 600; color: #964E33;">Splash — assets/splash/</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.85; color: rgba(31,30,29,0.72);">ios-1290x2796.svg (+ -dark)<br />ios-1179x2556.svg<br />ipad-2048x2732.svg<br />android-960x960-icon.svg (+ -dark)</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 14px; font-weight: 600; color: #964E33;">Print &amp; raster</div>
+            <div style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.85; color: rgba(31,30,29,0.72);">print/micro-mark-colour.pdf<br />print/micro-mark-mono-ink.pdf<br />png/mark/light-{1024,512,256,128,64,32}.png<br />png/mark/dark-{1024,512,256}.png<br />png/mark/mono-ink · mono-ivory-{1024,512}<br />png/mark/compact-{32,24,16}.png<br />png/icon/ios-android-{1024…40}.png<br />png/icon/appicon-dark · -terracotta-512<br />png/icon/android-adaptive-foreground-*<br />png/icon/web-maskable-512.png<br />png/icon/favicon-{48,32,16}.png</div>
+          </div>
+        </div>
+        <div style="font-size: 15px; line-height: 1.65; color: rgba(31,30,29,0.7); border-top: 1px solid rgba(31,30,29,0.1); padding-top: 20px;">A <span style="font-family: ui-monospace, monospace; font-size: 13px;">README.md</span> ships inside the package repeating the construction numbers, colour values, size rules and motion rules, so the specification travels with the files even if this page does not.</div>
+      </div>
+      <div style="background: #F4E4DB; border-radius: 14px; padding: 26px 30px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-size: 13px; font-weight: 600; color: #5F3120;">Still your decision</div>
+        <div style="font-size: 15px; line-height: 1.65; color: #7A3F29;">Three items only, and none of them can be settled from inside this document. <strong style="color: #5F3120;">Pantone equivalents</strong> — needed only if you print with spot colours, and they must be chosen against a physical swatch book at your printer, never from a screen. <strong style="color: #5F3120;">A trademark similarity search</strong> — four-part radial marks are common enough that this should be done by a trademark attorney before any registration. <strong style="color: #5F3120;">Whether print, packaging or signage is in scope this year</strong> — your commercial decision; the vector and PDF masters are ready either way.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0 };
+  renderVals() {
+    const bump = (k) => () => this.setState((s) => ({ [k]: s[k] + 1 }));
+    const v = {};
+    for (const k of ["a","b","c","d","e","f","g","h"]) {
+      v["run" + k.toUpperCase()] = k + this.state[k];
+      v["replay" + k.toUpperCase()] = bump(k);
+    }
+    return v;
+  }
+}
+</script>
+</body>
+</html>
