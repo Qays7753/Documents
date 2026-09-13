@@ -1,0 +1,109 @@
+{
+  "manifest_type": "read-only comparison source manifest",
+  "task": "Read-only Micro Standard v2 -> Micro integration and UI/AUX comparison",
+  "generated": "2026-09-14",
+  "timezone": "Asia/Amman",
+  "read_only": true,
+  "sources_modified": false,
+  "repositories": [
+    {
+      "role": "implementation under comparison",
+      "name": "Micro",
+      "url": "https://github.com/Qays7753/Micro",
+      "branch_read": "main",
+      "commit_sha_read": "c0469e265f24c70427eb7826dee717be117cff87",
+      "commit_date": "2026-09-13T11:52:12+03:00",
+      "commit_subject": "Merge pull request #159 from Qays7753/remediation/micro-full-hardening-2026",
+      "verification": "git rev-parse HEAD and git log -1 on a fresh read-only clone; clean working tree"
+    },
+    {
+      "role": "standard owner",
+      "name": "Documents",
+      "url": "https://github.com/Qays7753/Documents",
+      "branch_read": "main",
+      "commit_sha_read": "864263c190f5d3da6041acfafb0720e85ac6e320",
+      "commit_date": "2026-09-13T14:00:23+00:00",
+      "commit_subject": "docs: record final copy main publication verification",
+      "verification": "git rev-parse HEAD and git log -1 on a fresh read-only clone; re-checked before publication"
+    }
+  ],
+  "standard_package": {
+    "path": "micro-standard-v2/",
+    "base": "Documents main @ 864263c190f5d3da6041acfafb0720e85ac6e320",
+    "file_count_on_disk": 31,
+    "manifest_file_count_field": 29,
+    "manifest_note": "MANIFEST.json self-documents '29 core + 2 metadata'; disk holds 31 files",
+    "files": [
+      "MANIFEST.json", "README.md", "RELEASE.md", "visual-direction.md", "color-system.md",
+      "surface-system.md", "typography.md", "spacing-radius-elevation.md", "button-system.md",
+      "input-system.md", "data-display-system.md", "component-contracts.md", "component-states.md",
+      "empty-loading-error-states.md", "navigation-shell.md", "overlay-system.md",
+      "motion-interaction.md", "iconography.md", "responsive-geometry.md", "accessibility.md",
+      "content-guidelines.md", "design-tokens.css", "design-tokens.json", "coverage-matrix.json",
+      "decision-log.md", "verification-report.md", "self-critique.md", "source-inventory.md",
+      "component-gallery.html", "component-gallery.css", "component-gallery.js"
+    ]
+  },
+  "micro_inspected_paths": {
+    "root_configs": [
+      "package.json", "tsconfig.json", "vite.config.ts", "index.html", "public/micro-mark.svg",
+      "scripts/design-token-guards.py", "AGENTS.md", "README.md", "todo.md", "REPORT.md"
+    ],
+    "client_src": [
+      "apps/prototype-web/client/src/index.css",
+      "apps/prototype-web/client/src/App.tsx",
+      "apps/prototype-web/client/src/app/ (MicroRouter, routeClassifier, navigation, navigationContract, useReturnNavigation, StartupGate, PrototypeServicesContext, resultFeedback)",
+      "apps/prototype-web/client/src/pages/ (60 .tsx pages incl. Home, Finance, FinanceActivity, Statement, Orders, OrderDetail, NewDraft, DraftEditor, AgreementEditor, CostEditor, DeliveryReview, DirectSaleEditor, InventoryMaterials, InventoryMovementEditor, InventoryReversalEditor, MaterialEditor, Suppliers, SupplierPurchaseEditor, Parties, CashWallets, WalletLedger, CashTransferEditor, CashDistribution, CashCount, CashAdjustmentEditor, CashReversalEditor, CashOpeningLaterEditor, CashWalletEditor, Collect, OwnerEntitlement, OwnerWithdrawalEditor, Tools, CostCalculator, EstimateDetail, ToolsIntegrity, Schedule, ScheduleEditor, Catalog, Assets, AssetEditor, AssetDetail, Loans, LoanEditor, LoanDetail, Settings, Profile, Setup, Foundation, SharePreview, NotFound)",
+      "apps/prototype-web/client/src/components/ (layout, finance, order, orders, catalog, cost, loans, owner, presentation, security, settings, forms, ui, pwa)",
+      "apps/prototype-web/client/src/presentation/ (formatters, plurals, g5Plurals, cashCountMessages, orderAgreementPresentation, catalogPresentation, ownerEntitlementPresentation, activityLabels)",
+      "apps/prototype-web/client/src/application/ (20+ service folders; spot-verified imports)",
+      "apps/prototype-web/client/src/storage/local/ (IndexedDbLocalStore, MemoryLocalStore, commit guards, migrations)",
+      "apps/prototype-web/client/src/contexts/ThemeContext.tsx"
+    ],
+    "domain": ["src/domain/ (15 domains + shared: businessTime, currency, numeric)"],
+    "docs": [
+      "docs/product/design-system-v1.md", "docs/product/mobile-ui-ux-reference-v1.md",
+      "docs/product/placement-principles-v1.md", "docs/product/guidance-interaction-policy-v1.md",
+      "docs/product/home-navigation-proof-v1.md", "docs/contracts/26-navigation-referrer-and-deep-link-contract.md",
+      "docs/contracts/37-local-app-lock-contract.md", "docs/decisions/v3-finance-cash-first-ui.md",
+      "docs/decisions/v4-schedule-follow-up-first-ui.md", "docs/decisions/v5-safe-labels-back-and-disclosures.md",
+      "docs/00-document-index.md", "docs/product-source-of-truth.md", "docs/quality/ (G20-G23 UX acceptance reports)"
+    ],
+    "tests": "165 test files under apps/prototype-web/client/src (31 .dom, 11 .ui, 1 .css) + tests/domain/ (read-only spot checks)"
+  },
+  "agent_roles": [
+    {"id": "COMP-1", "role": "Micro UI and AUX Inventory Analyst", "output": "route/shell/component/presentation/CSS-map/docs/tests inventory with usage status (live/dead/duplicated)"},
+    {"id": "COMP-2", "role": "Micro Standard Contract Mapping Analyst", "output": "31-file package inventory, token/contract/state/a11y/geometry inventory, deliberately-not-owned list, mapping to Micro concepts (direct / runtime token mapping / adapter / no counterpart), hex-presence audit"},
+    {"id": "COMP-3", "role": "Reuse, Composition, and Boundary Analyst", "output": "source-of-truth conflicts, CSS organization, oversized files, layer dependency edges, guard-test limits, reuse assessment, token-propagation test, findings R3-01..R3-22"},
+    {"id": "COMP-4", "role": "Feature-Pattern and Screen-Gap Analyst", "output": "surface-by-surface existence/coverage/pattern/missing analysis, consolidated gap register G4-01..G4-22"},
+    {"id": "COMP-5", "role": "Independent Synthesis and Quality Reviewer (adversarial)", "output": "verification of 18 high-stakes claims (13 confirmed / 4 partial / 1 caveat), contradiction resolution, truth-source audit, final conservative classification, top-5 next steps"}
+  ],
+  "method": {
+    "clone": "anonymous https read-only git clone; no credentials used or required",
+    "verification": "git rev-parse / git log for SHAs; targeted reads and greps across listed paths; adversarial re-verification of all quantitative claims",
+    "adversarial_corrections_applied": [
+      "57 <Route> elements (not 56)",
+      "60 page .tsx files (not 64)",
+      "47 non-test component files (not 50)",
+      "29 deep-flow regexes (not 26); 25 canonicalReturnFallbacks (not 28)",
+      "275 exact د.أ literals across 53 files (not ~300); EventsLayer = 12 (not 17)",
+      "triple-duplicated CSS block = 130-line unit, ~256 redundant lines (not ~190/380)",
+      "Standard/Micro elevation value-identical (E2 string differs 0.10 vs 0.1), not byte-identical",
+      "index.html meta theme-color carries canvas colors rewritten at runtime, not a #CC785C twin"
+    ]
+  },
+  "deliverables": [
+    "MICRO_STANDARD_TO_MICRO_READONLY_INTEGRATION_COMPARISON_REPORT.md",
+    "MICRO_STANDARD_GAP_MATRIX.csv",
+    "MICRO_UI_AUX_STRUCTURE_SCAN.md",
+    "MICRO_STANDARD_SOURCE_MANIFEST.json",
+    "README.md"
+  ],
+  "limitations": [
+    "Static read-only analysis: no build, no run, no browser/device/screen-reader session",
+    "Standard's own verification is local headless-Chromium only; physical-device and screen-reader testing are explicitly not claimed by the Standard (coverage-matrix.json requires_separate_testing)",
+    "Prototype v0, historical branches, old prompts, and prior session reports were excluded as decision sources",
+    "No access token was used; both repositories were read anonymously",
+    "No source repository, package, branch, or file was modified, created, or deleted"
+  ]
+}
