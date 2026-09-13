@@ -76,13 +76,17 @@
 - لا نقل Prototype إلى Micro.
 - إذا ظهرت حاجة إلى structural refactoring أو bulk file moves، يتوقف العمل ويبدأ أولًا Structure/Architecture/Code Organization Scan read-only، ثم مراجعة المالك قبل أي تنفيذ.
 
-## بعد اكتمال Standard
+## بعد اكتمال Standard — Prototype HTML إلزامي
 
 1. مراجعة المالك للحزمة النهائية.
-2. بناء Prototype v0.1 معزول فوق Standard النهائي.
-3. اختبار Home وFinance وOrders وDetail وTools بصريًا.
-4. تسجيل مشاكل التركيب في Prototype فقط أولًا، وعدم تعديل Standard تلقائيًا.
-5. بعد قبول Prototype، إعداد خطة مستقلة لنقل الأنماط إلى Micro.
+2. إنشاء Prototype HTML تفاعلي مستقل داخل مجلد تسليم منفصل، وليس داخل `micro-standard-v2/`، ولا داخل Micro أو Accounting.
+3. يجب أن يعرض Prototype كل تغيير بصري نفذ في Standard، لا عينة ناقصة فقط. الحد الأدنى هو: إنشاء/إضافة، حفظ/تأكيد عادي، ضغط الحفظ، اعتماد كبير، حذف نهائي، قيمة مالية، صف تشغيلي، selected/current، lifecycle states، success/error/pending/review، FAB، chart question-led، sheet/dialog، bottom navigation، overflow، وreduced motion.
+4. يجب أن تكون المشاهد قابلة للتفاعل محليًا: تبديل الحالات، الضغط، loading، quiet completion، فتح وإغلاق sheet/dialog، وتغيير period أو state عند الحاجة. لا routes منتجية، ولا writes، ولا formulas، ولا data sources حقيقية.
+5. يجب أن يعمل Prototype في RTL وبمقاسات 320/360/390/430px، مع 100/130/200%، وألا يعتمد على remote assets أو خدمة خارجية. يستخدم نفس tokens والعقود النهائية من Standard، ولا يضيف Palette أو theme.
+6. يجب أن يحتوي المجلد على ملف HTML واضح، وملفات CSS/JS اللازمة، و`PROTOTYPE_README.md`، و`PROTOTYPE_COVERAGE.md` لربط كل مشهد بملف Standard والعقد الذي يمثله، و`PROTOTYPE_VALIDATION.md` لتسجيل ما اختُبر وما لم يُختبر.
+7. يسلم ZAI ملف HTML قابلًا للتحميل ومجلدًا قابلًا للقراءة، إضافة إلى لقطات للمشاهد الرئيسية عند الإمكان. لا يُعلن Prototype منتجًا جاهزًا ولا مصدر حقيقة للـMicro.
+8. تُسجل مشاكل التركيب في Prototype فقط أولًا، ولا يُعدّل Standard تلقائيًا بسببها. أي تعديل جديد على Standard يحتاج موجة وقرارًا مستقلًا.
+9. بعد قبول Prototype، إعداد خطة مستقلة لنقل الأنماط إلى Micro.
 
 ## نقطة التوقف الحالية
 
