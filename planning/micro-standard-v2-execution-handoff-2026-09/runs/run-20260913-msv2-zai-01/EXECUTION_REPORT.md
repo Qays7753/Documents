@@ -1,13 +1,14 @@
 # MICRO STANDARD V2 — ZAI FLASH EXECUTION REPORT
 
 ```
-STATUS: ZAI EXECUTION RECORDED — FINAL COPY RECONCILIATION APPLIED — MAIN PUBLICATION PENDING
+STATUS: FINAL COPY PUBLISHED TO MAIN — REMOTE VERIFICATION PASS
 ```
 
 - **Run**: `run-20260913-msv2-zai-01` · **Date**: 2026-09-13
 - **Repository**: https://github.com/Qays7753/Documents
 - **Source work branch**: `micro-standard-v2-execution-20260913` · original ZAI execution head: `475025e18a8a119a54ac5441539fc57da7880c65`; live source branch head after report upload: `844c834e4fab19148b0dfa9c44a95dd0ed66d82b`
-- **Final Copy branch**: `micro-standard-v2-final-copy-20260913` · publication pending
+- **Final Copy branch**: `micro-standard-v2-final-copy-20260913` · source head `557056a`
+- **Published main**: `main` @ `7a9ef2a0ab6f58493937cf08223baee2953d2353`
 - **Base**: `main` @ `dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b` (verified live before start; never pushed)
 - **Run folder**: `planning/micro-standard-v2-execution-handoff-2026-09/runs/run-20260913-msv2-zai-01/`
 - **Package**: `micro-standard-v2/` — 31 files preserved (29 core + `MANIFEST.json` + `RELEASE.md`); none added, removed, moved, or renamed.
@@ -63,7 +64,8 @@ Contrast: 19 pairs computed; the 13 documented claims match exactly (ink/canvas 
 | C | `24dad43` | Governance/verification regeneration (7 files) | **PASS** (JSON, audits, smoke re-run) |
 | P | `3274e6e` | Independent prototype + `[hidden]` guard amendment to gallery CSS | **PASS** (full battery; gallery re-verified) |
 | Final (ZAI) | `475025e` | Execution record, snapshot, patch, hashes, manifest | **PASS — historical source** |
-| Final Copy reconciliation | `micro-standard-v2-final-copy-20260913` | Contrast contract, action ink split, evidence wording, manifest/records | **PASS locally; publication pending** |
+| Final Copy reconciliation | `micro-standard-v2-final-copy-20260913` | Contrast contract, action ink split, evidence wording, manifest/records | **PASS** |
+| Main publication | `main` @ `7a9ef2a0ab6f58493937cf08223baee2953d2353` | Final Copy package and records published; rollback tag preserved | **PASS** |
 
 ## 6. Prototype scenes and coverage
 
@@ -95,7 +97,7 @@ Physical Samsung-device testing, screen-reader/AT testing, real-device Arabic fo
 
 ## 11. Confirmation — Micro, Accounting, main untouched
 
-No commit, push, file change, or configuration change was made to Qays7753/Micro or Qays7753/Accounting during the ZAI run. At the time of this report update, publication to Documents `main` is a separate controlled step and is not yet claimed.
+No commit, push, file change, or configuration change was made to Qays7753/Micro or Qays7753/Accounting during the ZAI run. Documents `main` now contains the Final Copy and was verified remotely at `7a9ef2a0ab6f58493937cf08223baee2953d2353`.
 
 ## 12. Confirmation — token handling
 
