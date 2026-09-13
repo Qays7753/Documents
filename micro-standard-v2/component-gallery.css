@@ -996,3 +996,7 @@ html[data-motion="reduced"] *::after {
   .metric-parts { grid-template-columns: 1fr; }
 }
 
+
+/* [hidden] must always win — author display values on overlay roots otherwise
+   override the UA rule and invisible overlays intercept pointer events. */
+[hidden] { display: none !important; }
