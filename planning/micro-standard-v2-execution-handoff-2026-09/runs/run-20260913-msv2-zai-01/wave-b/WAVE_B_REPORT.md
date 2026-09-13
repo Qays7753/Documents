@@ -45,3 +45,6 @@ Inputs, menus, rail cards, snackbars, topbars, empty/skeleton/error panels, icon
 
 ## Wave boundary
 Gate passed → Wave C (verification & documentation) may proceed. Rollback: `git reset --hard 125115d`.
+
+## Amendment (added during Wave P, same branch — commit `3274e6e`)
+Validation of the interactive Prototype surfaced a latent defect in `component-gallery.css`: overlay roots carrying author `display` values (`.dialog-anchor { display: grid }`) overrode the UA `[hidden] { display: none }` rule, so a *hidden* dialog anchor remained in layout and could intercept pointer events (the shipped sheets/dialogs had worked only because the overlay manager also toggles classes/transforms). Fix applied: one defensive rule `[hidden] { display: none !important; }` appended to `component-gallery.css`. Full Wave B test battery re-run after the fix: zero errors, dialog/sheet open-close PASS, all computed contracts unchanged. No other Wave B content altered.

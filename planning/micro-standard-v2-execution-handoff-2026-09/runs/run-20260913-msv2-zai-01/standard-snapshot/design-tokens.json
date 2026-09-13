@@ -1,0 +1,111 @@
+{
+  "name": "Micro Standard v2",
+  "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
+  "status": "approved-current-basis",
+  "updated_by": "run-20260913-msv2-zai-01 Wave A — token truthing and action contracts; no new palette color",
+  "roles": {
+    "identity_create_fab": "#D97757",
+    "chosen_current_edge": "#C96442",
+    "warm_ink_commitment": "#141413",
+    "canvas": "#FAF9F5",
+    "ground": "#F5F4ED",
+    "recessed": "#F0EEE6",
+    "surface": "#FFFFFF",
+    "secondary_tint": "#E8E6DC",
+    "interactive_boundary": "#87867F",
+    "info": "#2C84DB",
+    "status": "#1490FF",
+    "success": "#629987",
+    "error": "#B53333"
+  },
+  "action_contracts": {
+    "create_add_fab": {
+      "surface": "#D97757",
+      "ink": "#FFFFFF",
+      "pressed": "#C96442",
+      "rule": "Identity Terracotta for create/add/FAB only; never financial values, chart fills, statuses, or general commitment."
+    },
+    "ordinary_save_confirm": {
+      "surface": "#F5F4ED",
+      "ink": "#141413",
+      "pressed_edge": "#C96442",
+      "rule": "Warm Tint surface with dark ink and icon; pressed shows a #C96442 edge; pressing never converts the action into a success state; completion is a word plus semantic marker, not color alone."
+    },
+    "high_consequence_commit": {
+      "surface": "#141413",
+      "ink": "#FFFFFF",
+      "pressed": "#3D3D3A",
+      "rule": "Warm-ink filled surface reserved for high-consequence commitment and justified destructive confirmation: consequence word, icon, short explanation, and an independent confirmation path."
+    },
+    "destructive": {
+      "ink": "#B53333",
+      "rule": "Error role with words and an icon; destructive confirmation uses the high-consequence contract."
+    }
+  },
+  "semantic_state_presentation": {
+    "rule": "Every financial state uses words plus a non-color marker (icon, shape, or sign); color never carries the state alone.",
+    "states": {
+      "success": "#629987",
+      "error": "#B53333",
+      "pending": "#2C84DB",
+      "reviewed": "#1490FF",
+      "info": "#2C84DB",
+      "unknown": "word + marker on neutral ink; never rendered as success or failure"
+    },
+    "tint_grammar": "Tinted state marks reuse the #F5F4ED ground with the semantic ink; no new tint hex values exist in this package."
+  },
+  "functional_derivatives": {
+    "disclosure": "Alpha composites of approved base values used for scrim and translucent header only; they are not new palette members.",
+    "scrim": "rgba(20, 20, 19, 0.45) — approved warm ink #141413 at 45%",
+    "header_translucent": "rgba(250, 249, 245, 0.86) — approved canvas #FAF9F5 at 86%",
+    "shadow_ink": "rgba(60, 50, 40, x) elevation shadow tone from the recorded evidence values"
+  },
+  "type_scale": {
+    "title": "28/1.3/700",
+    "title_sm": "20/1.3/700",
+    "section": "17/1.4/600",
+    "card_title": "15/1.4/600",
+    "body": "15/1.6/400",
+    "label": "13/1.4/500",
+    "caption_floor": "12/1.5/400",
+    "kpi": "24 mono/600",
+    "kpi_hero": "28 mono/600",
+    "amount": "15 mono/600",
+    "numeric_hierarchy": "hero 28 / primary 24 / secondary 15 / tertiary 13 tabular mono; financial facts never below 15px"
+  },
+  "geometry": {
+    "phone_widths": [320, 360, 390, 430],
+    "text_scales": [100, 130, 200],
+    "control_height_px": 48,
+    "touch_target_px": 44,
+    "topbar_px": 56,
+    "nav_min_px": 64,
+    "fab_px": 56,
+    "spacing_grid": "4px base — 4/8/12/16/20/24/32",
+    "radius": "12 controls · 16 cards · 18 segment · 20 sheet · full pills"
+  },
+  "elevation": {
+    "e1": "0 1px 2px rgba(60,50,40,.06), 0 4px 12px rgba(60,50,40,.06)",
+    "e2": "0 6px 20px rgba(60,50,40,.10)",
+    "e3": "0 16px 40px rgba(60,50,40,.16)"
+  },
+  "motion": {
+    "press": "80ms scale 0.97",
+    "fast": "120ms",
+    "normal": "200ms",
+    "sheet_in_out": "240ms / 180ms",
+    "dialog_in_out": "160ms / 120ms",
+    "scrim": "200ms",
+    "skeleton": "1.5s infinite",
+    "snackbar_hold": "5000ms",
+    "reduced_motion": "nonessential movement removed; state and action meaning preserved"
+  },
+  "navigation": [
+    "الرئيسية",
+    "المالية",
+    "الطلبات",
+    "الأدوات"
+  ],
+  "state_rule": "Every financial state uses words plus a non-color marker.",
+  "product_boundary": "Visual contracts only; no financial policy or synchronization behavior."
+}

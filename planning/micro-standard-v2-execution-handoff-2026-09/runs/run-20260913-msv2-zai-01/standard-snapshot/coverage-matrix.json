@@ -1,0 +1,93 @@
+{
+  "package": "Micro Standard v2",
+  "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
+  "status": "approved-current-basis",
+  "updated_by": "run-20260913-msv2-zai-01 Wave C — per-capability rows regenerated from executed tests",
+  "families": {
+    "primitives": "current",
+    "buttons_action_classes": {
+      "status": "current",
+      "covers": "create/clay, ordinary save/warm-tint with clay pressed edge, high-consequence commit/warm-ink fill, destructive/error, secondary/outline/ghost",
+      "evidence": "wave-b computed-style checks + screenshots"
+    },
+    "inputs": "current",
+    "states": {
+      "status": "current",
+      "covers": "draft/pending/posted/failed/cancelled/reversed/reviewed/partial/due/overdue/unknown with word+marker; pressed≠success; quiet completion",
+      "evidence": "wave-b state tag grammar + save six-state frame"
+    },
+    "data_display": {
+      "status": "current",
+      "covers": "value zone slots + honest voids, question-led chart with data/zero/no-data/loading + text alternative",
+      "evidence": "wave-b chart state cycle test + screenshots"
+    },
+    "navigation": {
+      "status": "current",
+      "covers": "four destinations, current-destination clay edge, FAB gutter",
+      "evidence": "wave-b navpill edge check"
+    },
+    "overlays": {
+      "status": "current",
+      "covers": "sheet/dialog/menu/snackbar, visible scrim rgba(20,20,19,.45), high-consequence dialog",
+      "evidence": "wave-b scrim + dialog checks"
+    },
+    "selection_grammar": {
+      "status": "current",
+      "covers": "chips/segments/current via 2px #C96442 edge + non-color cue; no automatic black fills",
+      "evidence": "wave-b computed checks"
+    },
+    "empty_loading_error_unknown": "current",
+    "rtl_geometry": {
+      "status": "current",
+      "covers": "RTL/LTR, 320/360/390/430px, 100/130/200% text scale, no horizontal overflow",
+      "evidence": "wave-b viewport/zoom tests"
+    },
+    "reduced_motion": {
+      "status": "current",
+      "covers": "control + prefers-reduced-motion collapse to near-instant, meaning preserved",
+      "evidence": "wave-b reduced-motion test"
+    },
+    "gallery": {
+      "status": "current",
+      "covers": "local interactive gallery, zero console/page errors",
+      "evidence": "wave-b runtime smoke tests"
+    },
+    "token_integrity": {
+      "status": "current",
+      "covers": "all consumed custom properties resolve; 18 approved hex values unchanged; 2 disclosed alpha derivatives",
+      "evidence": "wave-a hex audit + token resolution"
+    }
+  },
+  "official_navigation": [
+    "الرئيسية",
+    "المالية",
+    "الطلبات",
+    "الأدوات"
+  ],
+  "phone_widths": [
+    320,
+    360,
+    390,
+    430
+  ],
+  "text_scales": [
+    100,
+    130,
+    200
+  ],
+  "verification": [
+    "local_gallery_headless_chromium_run-20260913-msv2-zai-01",
+    "computed_style_contract_checks",
+    "rtl_ltr",
+    "reduced_motion_control_and_system",
+    "json_validity",
+    "hex_audit_zero_new_values",
+    "token_resolution_zero_unresolved",
+    "contrast_pair_computation",
+    "no_horizontal_overflow_inspected_states"
+  ],
+  "requires_separate_testing": [
+    "physical_device",
+    "screen_reader"
+  ]
+}
