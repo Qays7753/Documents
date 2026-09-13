@@ -79,7 +79,7 @@ The 18 approved hex values; the two disclosed alpha derivatives; the action clas
 - Gallery re-verification (headless Chromium): 43/43 PASS — token resolution (98 properties), computed action/tag/label styles, interactions smoke, geometry 24 combos (incl. the fixed bottom-nav), reduced motion (control + system), scrim, zero console errors.
 - Prototype v1: ALL PASS — anti-contamination gate, palette gate, computed contracts, AUX behaviors, save lifecycle, overlays, icon mirrors, geometry 72 combos, reduced motion, bidi, truth labels, zero console errors.
 - Contrast recomputation: all 13 recorded pairs reproduce to the digit; the new bindings computed and recorded.
-- `git diff --check`: clean. SHA-256 refreshed for all deliverables.
+- `git diff --check`: one warning only — the verbatim-copied `component-gallery.html`'s pre-existing trailing blank line (byte-identical to `main`'s original; left as-is to preserve the unchanged-file guarantee). No whitespace or conflict issues in any edited file. SHA-256 refreshed for all deliverables.
 
 **Tests not run (explicitly):** physical-device testing; screen-reader testing; production-Micro testing; browser-level text-only zoom (token-level emulation used and disclosed); real Arabic webfonts (fallback metrics); real software keyboard/notches (simulated and disclosed).
 
