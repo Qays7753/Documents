@@ -4,8 +4,8 @@
   "file_count_total": 31,
   "core_files": 29,
   "metadata_files": 2,
-  "metadata_files_list": ["MANIFEST.json", "source-inventory.md"],
-  "split_note": "29 core contract/gallery/evidence files + 2 metadata records (29-core + 2-metadata split made explicit by run run-20260914-msv2-reconciliation-01)",
+  "metadata_files_list": ["MANIFEST.json", "RELEASE.md"],
+  "split_note": "29 core contract/gallery/evidence files + 2 metadata records (MANIFEST.json, RELEASE.md); the established baseline classification is preserved.",
   "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1, reconciled against ZAI run-20260913-msv2-zai-01",
   "updated_by": "Reconciliation run run-20260914-msv2-reconciliation-01 on branch micro-standard-v2-reconciliation-final-20260914 — 17 package files updated (knowledge-state contract, AUX behavior addendum, period variants, quiet feedback, overlay-vs-in-flow, type floor, icon adapter guidance, authority ladder, contrast application rule, gallery consistency fixes, manifest split correction); 14 files untouched; no files added, removed, moved, or renamed; no new palette color"
 }

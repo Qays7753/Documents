@@ -32,7 +32,7 @@
 - `button-system.md`, `surface-system.md`, `visual-direction.md`, `spacing-radius-elevation.md`, `responsive-geometry.md`, `input-system.md`, `data-display-system.md`, `content-guidelines.md`, `overlay-system.md` — no approved addition touches their contracts; the overlay-vs-in-flow guidance lives in `component-contracts.md` (per the audited smallest-safe-set); the chart skeleton basis stays as recorded (scoped by the U-18 rider instead of editing `data-display-system.md`).
 - `design-tokens.css`, `design-tokens.json` — the token values are untouched (no new palette, timing, or geometry); `design-tokens.json`'s `updated_by` intentionally stays as-is because the file's content is byte-identical to baseline (decision recorded here per the adversarial review).
 - `component-gallery.html`, `component-gallery.js` — all gallery fixes are style rebindings; markup and behavior are unchanged.
-- `source-inventory.md` — the metadata record's content remains accurate (the source basis did not change).
+- `source-inventory.md` — the core evidence/contract inventory record remains byte-identical; the source basis did not change. The two metadata records are `MANIFEST.json` and `RELEASE.md`.
 
 ## Prototype v1 (new, outside the package)
 

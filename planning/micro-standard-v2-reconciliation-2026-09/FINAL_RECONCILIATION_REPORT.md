@@ -110,3 +110,10 @@ Every changed file restores to its baseline SHA-256 (`PRE_FLIGHT_REPORT.md` §3)
 2. If accepted, merge the branch to `main` as the owner-approved gate (promoting the updated package to the root `micro-standard-v2/`).
 3. Separately decide the two disclosed pre-existing items: the gallery spinner's white-35% track disclosure, and (on the Micro side) the register's Wave-1/Wave-2 sequencing per the comparison reports.
 4. Begin Micro integration as a separate owner-approved task (waves per the Flash report §17) — this run ends at the updated Standard + Prototype v1 handoff, per the brief.
+
+
+## 12. Post-run metadata reconciliation amendment
+
+A post-run audit found that the initial reconciliation record classified `source-inventory.md` as metadata. The established baseline convention classifies `MANIFEST.json` and `RELEASE.md` as the two metadata records; `source-inventory.md` remains one of the 29 core evidence/contract files. The package remains exactly 31 files with no additions, removals, moves, or renames.
+
+This amendment changes inventory semantics and related documentation only. It does not change visual contracts, tokens, CSS, JavaScript, Prototype v1, product meaning, or the 17/14 changed-file set. The amended manifest, run records, and SHA values must be regenerated and revalidated before promotion to the root package or Documents/main.

@@ -1,6 +1,6 @@
 # Micro Standard v2 — Final Copy
 
-This package is the Final Copy for the Micro visual foundation. It is based on Cloud Code Design Wave 2 and the approved Micro Component Expansion v1, reconciled against execution run `run-20260913-msv2-zai-01` and the independent post-run audit. It is published in Documents `main`; it is not a Micro product implementation.
+This package is the Final Copy for the Micro visual foundation. It is based on Cloud Code Design Wave 2 and the approved Micro Component Expansion v1, reconciled against execution run `run-20260913-msv2-zai-01` and the independent post-run audit. It is a final-for-review copy on the dedicated reconciliation branch in Documents; the root package on Documents `main` remains unchanged until the owner-approved merge gate. It is not a Micro product implementation.
 
 The package is Arabic-first, RTL, phone-only, and operational. It preserves the Clay identity roles, warm canvas/surface hierarchy, financial-safe states, and official navigation: الرئيسية / المالية / الطلبات / الأدوات.
 

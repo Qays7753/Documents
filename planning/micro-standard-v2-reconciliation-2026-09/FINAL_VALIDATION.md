@@ -7,7 +7,7 @@
 ### Standard package — static
 - **JSON parsing/schema:** `MANIFEST.json`, `coverage-matrix.json`, `design-tokens.json` parse as valid JSON; the manifest states the 29+2 split correctly (`file_count_total: 31`, `core_files: 29`, `metadata_files: 2`).
 - **Hex/rgba audit:** zero new color values. 18 approved hex unchanged; the two disclosed alpha derivatives unchanged; the only non-approved strings are pre-existing recorded items (the historical retirement record in `decision-log.md` decision 3; the recorded shadow-tone notation `rgba(60,50,40,x)` in `color-system.md`/`design-tokens.json`; the gallery's pre-existing white-35% dark-fill spinner track — now disclosed in `verification-report.md` rather than silently changed).
-- **Markdown/link/path consistency:** all cross-file references named in the changed files exist in the package (`component-contracts.md` ↔ `component-states.md`/`accessibility.md`; `color-system.md` → `accessibility.md`; `empty-loading-error-states.md` → `data-display-system.md`; `README.md` → `MANIFEST.json`/`source-inventory.md`; `RELEASE.md` → all changed files).
+- **Markdown/link/path consistency:** all cross-file references named in the changed files exist in the package (`component-contracts.md` ↔ `component-states.md`/`accessibility.md`; `color-system.md` → `accessibility.md`; `empty-loading-error-states.md` → `data-display-system.md`; `README.md` → `MANIFEST.json`/`RELEASE.md` (with `source-inventory.md` remaining a core evidence record); `RELEASE.md` → all changed files).
 - **Cross-file terminology/decision consistency:** every key phrase of the ten additions verified present in its target file; no contradiction found between the additions and the surviving wording (checked: type floor vs caption row; tint grammar vs application rule; loading rider vs chart skeleton; route row vs timing table).
 - **Forbidden values:** no retired palette (`#964E33`, `#5F3120`, `#CC785C`, `#1F1E1D` as live value, teal, gold family) anywhere outside historical/negation records; no `260ms` adoption (recorded only as non-adopted in decision 16).
 
@@ -49,3 +49,12 @@ All checks PASS (see `prototype-v1/PROTOTYPE_VALIDATION.md`): anti-contamination
 ## 4. Verdict
 
 **PASS.** The updated package is internally consistent; every change traces to the unified decision register; no approved foundation was weakened; no new palette/timing/geometry value exists; Prototype v1 demonstrates every changed contract; all limitations are recorded honestly. The run may be packaged and uploaded for owner review.
+
+
+## 5. Follow-up metadata reconciliation validation
+
+The established package split is now explicit and preserved: **29 core files + 2 metadata records (`MANIFEST.json`, `RELEASE.md`)**. `source-inventory.md` remains a core evidence/contract record. The updated package contains 31 files and all three JSON files parse successfully. `git diff --check` passes.
+
+A fresh local Chromium smoke run passed **16/16 Gallery checks** on the updated copy. A fresh local Chromium smoke run passed **29/29 Prototype v1 checks**, including scene switching, viewport controls, reduced motion, stripe toggle, AUX route/keyboard/context/scroll behavior, save loading/completion, overlays, Escape close, and no document overflow at 320/360/390/430px. No console or page errors appeared in either smoke run.
+
+These are local headless Chromium checks only. No physical-device or screen-reader testing is claimed. The corrected copy remains final-for-review and has not been promoted to Documents/main by this follow-up.

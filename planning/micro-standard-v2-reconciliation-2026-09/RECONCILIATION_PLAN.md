@@ -120,12 +120,12 @@ Legend: GP = general-purpose (reusable across products). All changes are GP unle
 >
 > Micro Standard v2 = visual contracts (tokens, classes, states, geometry, accessibility, composition guidance). The Micro runtime token mapping = the carrier that binds implementation variables to these contracts. Micro docs = implementation guidance. Micro domain/application/storage layers = product meaning and persistence. Contracts never encode product meaning; runtime never redefines contract values.
 
-Also append to the Verification boundary section: the package is "29 core files + 2 metadata records (`MANIFEST.json`, `source-inventory.md`)".
+Also append to the Verification boundary section: the package is "29 core files + 2 metadata records (`MANIFEST.json`, `RELEASE.md`)"; `source-inventory.md` remains a core evidence/contract file.
 **Register basis:** U-19. **GP: yes.** **Rollback:** baseline hash.
 
 ### C-12 · Manifest split correction → `MANIFEST.json`
 **Current:** `"file_count": 29` (no split statement).
-**Proposed:** replace with `"file_count_total": 31, "core_files": 29, "metadata_files": 2, "metadata_files_list": ["MANIFEST.json", "source-inventory.md"], "split_note": "29 core contract/gallery/evidence files + 2 metadata records"`, and update `updated_by` to record this run.
+**Proposed:** replace with `"file_count_total": 31, "core_files": 29, "metadata_files": 2, "metadata_files_list": ["MANIFEST.json", "RELEASE.md"], "split_note": "29 core contract/gallery/evidence files + 2 metadata records"`, and update `updated_by` to record this reconciliation. `source-inventory.md` remains in the 29 core files.
 **Basis:** GAP-46; Agent 5 file-count confirmation. **GP: yes** (metadata accuracy). **Rollback:** baseline hash.
 
 ### C-13 · U-18 skeleton rider → `empty-loading-error-states.md`

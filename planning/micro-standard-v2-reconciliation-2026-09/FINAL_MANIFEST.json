@@ -14,7 +14,7 @@
     "path": "planning/micro-standard-v2-reconciliation-2026-09/micro-standard-v2-UPDATED/",
     "note": "final-for-review copy of the updated Standard; the root micro-standard-v2/ on this branch remains identical to main",
     "file_count": 31,
-    "split": "29 core + 2 metadata (MANIFEST.json, source-inventory.md)",
+    "split": "29 core + 2 metadata (MANIFEST.json, RELEASE.md)",
     "changed_files": [
       "MANIFEST.json",
       "README.md",
@@ -53,18 +53,18 @@
     "files": [
       {
         "file": "MANIFEST.json",
-        "sha256": "de04682fc714ef46c9a5614d401da818c27f27417a1cc15b9e5b2744f6d50b4b",
-        "bytes": 973
+        "sha256": "bafa8151947cc50c022d66bcff18f14d45e6a298420287d264a796c25e8e3fa7",
+        "bytes": 961
       },
       {
         "file": "README.md",
-        "sha256": "5a22ed21e985cadd111768cf59332ecdc809f0cffda3c33aa38e1811fd29396b",
-        "bytes": 3441
+        "sha256": "287c9511cd785e05cd6345ddb4465baa8feda7716f8ded0b7c93d89af496e988",
+        "bytes": 3610
       },
       {
         "file": "RELEASE.md",
-        "sha256": "e84b35a874cf17233c9063be428de3f6127f95c39444770dc1d3db9fd255a212",
-        "bytes": 6466
+        "sha256": "1e5d1d9fa1eabcf822f4a44b453767f2e1c7817d828c217df29758929d21c553",
+        "bytes": 6604
       },
       {
         "file": "accessibility.md",
@@ -232,7 +232,7 @@
     "run_commit_parent": "864263c190f5d3da6041acfafb0720e85ac6e320",
     "branch_base": "864263c190f5d3da6041acfafb0720e85ac6e320",
     "main_after_push": "864263c190f5d3da6041acfafb0720e85ac6e320",
-    "files_in_run_commit": 58,
+    "files_in_run_commit": 62,
     "token_audit": "live token value: 0 occurrences in commits, files, history, and remote URLs"
   }
 }
