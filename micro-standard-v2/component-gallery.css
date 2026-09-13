@@ -152,7 +152,7 @@ body {
   border: none;
   font-family: inherit; font-size: var(--text-card-title-size); font-weight: 600;
   line-height: 1.4; cursor: pointer; width: 100%;
-  transition: transform var(--motion-press) var(--ease-out), background-color var(--motion-press) var(--ease-out);
+  transition: transform var(--motion-press) var(--ease-out), background-color var(--motion-press) var(--ease-out), box-shadow var(--motion-press) var(--ease-out);
 }
 .btn:focus-visible, .iconbtn:focus-visible, .chip:focus-visible, .navitem:focus-visible,
 .segctl button:focus-visible, .segctl-lines button:focus-visible, .input:focus-visible,
@@ -160,6 +160,22 @@ body {
 .topbar-actions button:focus-visible, .filter-ctl:focus-visible, .rail-card:focus-visible,
 .row-chev:focus-visible, .row-remove:focus-visible, .seg button:focus-visible {
   outline: 2px solid var(--vf-ink); outline-offset: 2px;
+}
+/* Action classes (owner-approved):
+   create = Clay identity, save = Warm Tint + #C96442 pressed edge,
+   primary/commit = warm-ink fill reserved for high-consequence commitment. */
+.btn-create { background: var(--vf-btn-create-bg); color: var(--vf-btn-create-ink); }
+.btn-create:active, .btn-create.is-pressed { background: var(--vf-btn-create-pressed); }
+.btn-save {
+  background: var(--vf-btn-save-bg); color: var(--vf-btn-save-ink);
+  border: 1px solid var(--vf-tint);
+}
+.btn-save:active, .btn-save.is-pressed {
+  background: var(--vf-btn-save-bg);
+  box-shadow: inset 0 0 0 2px var(--vf-btn-save-pressed-edge);
+}
+.btn-save.is-loading, .btn-save.is-loading:active {
+  background: var(--vf-btn-save-bg); box-shadow: none; cursor: progress;
 }
 .btn-primary { background: var(--vf-ink); color: var(--vf-ink-on-dark); }
 .btn-primary:active, .btn-primary.is-pressed { background: var(--vf-ink-pressed); }
@@ -174,10 +190,15 @@ body {
 .btn-ghost:active { background: var(--vf-bg-secondary); }
 .btn-destructive { background: var(--vf-error); color: var(--vf-ink-on-dark); }
 .btn-destructive:active { background: var(--vf-error); }
-.btn-positive { background: var(--vf-success); color: var(--vf-ink-on-dark); }
-.btn-positive:active { background: var(--vf-success); }
-.btn-operational { background: var(--vf-info); color: var(--vf-ink-on-dark); }
-.btn-operational:active { background: var(--vf-ink-pressed); }
+/* Semantic action support: word in text-safe ink + semantic marker icon
+   (success/info hues are non-text marks per accessibility.md; the previous
+   filled variants relied on color alone and failed AA text contrast). */
+.btn-positive { background: var(--vf-bg-secondary); color: var(--vf-ink); border: 1px solid var(--vf-tint); }
+.btn-positive .ic { color: var(--vf-success); }
+.btn-positive:active { box-shadow: inset 0 0 0 2px var(--vf-success); }
+.btn-operational { background: var(--vf-bg-secondary); color: var(--vf-ink); border: 1px solid var(--vf-tint); }
+.btn-operational .ic { color: var(--vf-info); }
+.btn-operational:active { box-shadow: inset 0 0 0 2px var(--vf-info); }
 .btn:disabled {
   background: var(--vf-disabled-surface); color: var(--vf-disabled-ink); cursor: not-allowed;
   box-shadow: none; transform: none;
@@ -185,6 +206,7 @@ body {
 .btn-compact { min-height: 40px; padding: 10px 20px; }
 .btn.is-focused { outline: 2px solid var(--vf-ink); outline-offset: 2px; }
 .btn.is-loading, .btn.is-loading:active { background: var(--vf-ink-pressed); cursor: progress; transform: none; }
+.btn-save.is-loading { background: var(--vf-btn-save-bg); }
 /* .btn.btn-complete (0,2,0) outspecifies .btn:disabled so the completion tint
    stays visible through the disabled window (wave-2 finding) */
 .btn.btn-complete { background: var(--vf-bg-secondary); color: var(--vf-success); }
@@ -192,9 +214,9 @@ body {
 
 /* Inset surface focus ring for dark filled controls — the dual-ring contract
    (corrected R-05): 2px surface ring inside the fill, measured 5.02–8.24:1. */
-.btn-primary:focus-visible, .btn-positive:focus-visible,
+.btn-primary:focus-visible, .btn-create:focus-visible,
 .btn-destructive:focus-visible,
-.iconbtn-primary:focus-visible, .fab:focus-visible, .chip.on:focus-visible,
+.iconbtn-primary:focus-visible, .fab:focus-visible,
 .segctl button.on:focus-visible, .sheet-row-danger:focus-visible {
   outline: 2px solid var(--vf-surface); outline-offset: -4px;
 }
@@ -211,6 +233,10 @@ body {
   width: 20px; height: 20px;
   border: 2px solid rgba(255,255,255,.35); border-top-color: #FFFFFF;
   border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+/* dark spinner for quiet (light-surface) buttons — soft boundary track, ink head */
+.btn-save .spinner, .btn-outline .spinner, .btn-secondary .spinner {
+  border-color: var(--vf-soft); border-top-color: var(--vf-ink);
 }
 
 .iconbtn {
@@ -377,9 +403,13 @@ body {
   content: ""; position: absolute; inset: -4px; border-radius: var(--radius-full);
 }
 .chip:active { transform: scale(0.97); }
+/* Selected chip = the chosen/current edge role: 2px #C96442 inset edge on the
+   surface, bold ink label — a shape cue visible without color, never an
+   automatic black fill. */
 .chip.on {
-  background: var(--vf-ink); color: #FFFFFF;
+  background: var(--vf-surface); color: var(--vf-ink);
   font-weight: 600; border-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--vf-clay-interactive);
 }
 .chip:disabled { background: var(--vf-recessed); color: var(--vf-disabled-ink); border-color: var(--vf-border-soft); cursor: not-allowed; }
 .tag-row, .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -391,10 +421,21 @@ body {
 .tag-progress { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
 .tag-ready { background: var(--vf-bg-secondary); color: var(--vf-ink); }
 .tag-closed { background: var(--vf-recessed); color: var(--vf-ink-tertiary); }
+/* State tags — word in text-safe ink where the tag is read as text, semantic
+   hue on the leading marker; tinted ground from the existing warm ladder. */
 .tag-positive { background: var(--vf-bg-secondary); color: var(--vf-success); }
 .tag-negative { background: var(--color-negative-50); color: var(--color-negative-on-tint); }
 .tag-operational { background: var(--vf-bg-secondary); color: var(--vf-info); }
-.tag-gold { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
+.tag-neutral { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
+.tag-pending { background: var(--vf-bg-secondary); color: var(--vf-info); }
+.tag-review { background: var(--vf-bg-secondary); color: var(--vf-status); }
+.tag-unknown { background: var(--vf-recessed); color: var(--vf-ink-secondary); }
+.tag .ic { flex: none; }
+.tag-neutral .ic, .tag-unknown .ic { color: var(--vf-ink-tertiary); }
+.tag-pending .ic { color: var(--vf-info); }
+.tag-review .ic { color: var(--vf-status); }
+.tag-positive .ic { color: var(--vf-success); }
+.tag-negative .ic { color: var(--vf-error); }
 
 /* ---------- Segmented ---------- */
 .segctl, .segctl-lines { display: flex; }
@@ -404,8 +445,8 @@ body {
 }
 .segctl-thumb {
   position: absolute; top: 4px; bottom: 4px;
-  background: var(--vf-ink); border-radius: var(--radius-control);
-  box-shadow: var(--shadow-sm);
+  background: var(--vf-surface); border-radius: var(--radius-control);
+  box-shadow: inset 0 0 0 2px var(--vf-clay-interactive), var(--shadow-sm);
   transition: inset-inline-start var(--motion-normal) var(--ease-out), width var(--motion-normal) var(--ease-out);
 }
 .segctl button {
@@ -416,7 +457,7 @@ body {
   color: var(--vf-ink-tertiary); border-radius: var(--radius-control);
   transition: color var(--motion-normal) var(--ease-out);
 }
-.segctl button.on { color: #FFFFFF; font-weight: 700; }
+.segctl button.on { color: var(--vf-ink); font-weight: 700; }
 .segctl-lines {
   position: relative; border-bottom: 1px solid var(--vf-border);
   gap: 20px; overflow-x: auto; scrollbar-width: none;
@@ -430,10 +471,10 @@ body {
   border-bottom: 2px solid transparent;
   transition: color var(--motion-normal) var(--ease-out), border-color var(--motion-normal) var(--ease-out);
 }
-.segctl-lines button.on { color: var(--vf-ink); font-weight: 700; border-bottom-color: var(--vf-ink); }
+.segctl-lines button.on { color: var(--vf-ink); font-weight: 700; border-bottom-color: var(--vf-clay-interactive); }
 .segctl-indicator {
   position: absolute; bottom: 0; height: 2px;
-  background: var(--vf-ink);
+  background: var(--vf-clay-interactive);
   transition: inset-inline-start var(--motion-normal) var(--ease-out), width var(--motion-normal) var(--ease-out);
 }
 .count {
@@ -532,7 +573,7 @@ body {
 .t-pos { background: var(--vf-bg-secondary); color: var(--vf-success); }
 .t-neg { background: var(--color-negative-50); color: var(--color-negative-on-tint); }
 .t-op { background: var(--vf-bg-secondary); color: var(--vf-info); }
-.t-gold { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
+.t-neutral { background: var(--vf-bg-secondary); color: var(--vf-ink-secondary); }
 .row-main { flex: 1 1 auto; min-width: 0; }
 .row-title {
   margin: 0 0 2px; font-size: var(--text-card-title-size); font-weight: 600;
@@ -554,7 +595,17 @@ body {
 .pos { color: var(--vf-success); }
 .neg { color: var(--color-negative-on-tint); }
 .op { color: var(--vf-info); }
-.gold { color: var(--vf-ink-secondary); }
+.neutral { color: var(--vf-ink-secondary); }
+/* Optional state edge stripe (≤3px, inline-start) — always paired with the
+   state word inside the row; never the only signal. */
+.row.state-edge::before {
+  content: ""; position: absolute; inset-inline-start: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+.row.stripe-pending::before { background: var(--vf-info); }
+.row.stripe-failed::before { background: var(--vf-error); }
+.row.stripe-review::before { background: var(--vf-status); }
+
 /* Trailing chevron action with directional feedback (R-10). */
 .row-chev {
   width: 44px; height: 44px; flex: none; border: none; background: transparent;
@@ -608,6 +659,8 @@ body {
 .rc-neg .rail-chip { color: var(--vf-error); }
 .rc-op { background: var(--vf-bg-secondary); }
 .rc-op .rail-chip { color: var(--vf-info); }
+.rc-neutral { background: var(--vf-bg-secondary); }
+.rc-neutral .rail-chip { color: var(--vf-ink-secondary); }
 
 /* ---------- Navigation ---------- */
 .topbar {
@@ -666,7 +719,10 @@ body {
 .navlabel {
   font-size: var(--text-caption-size); font-weight: 600; color: var(--vf-ink-tertiary);
 }
-.navitem.on .navpill { background: var(--color-primary-100); }
+.navitem.on .navpill {
+  background: var(--color-primary-100);
+  box-shadow: inset 0 0 0 2px var(--vf-clay-interactive); /* current-destination edge */
+}
 .navitem.on .ic { color: var(--vf-ink); stroke-width: 0; fill: currentColor; }
 .navitem.on .navlabel { color: var(--vf-ink); }
 .navitem:active { transform: scale(0.97); }
@@ -826,6 +882,47 @@ body {
   border-radius: var(--radius-control); padding: 12px; color: var(--vf-ink);
 }
 
+/* ---------- Question-led chart ---------- */
+.chart-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.chart-q { margin: 0; font-size: var(--text-card-title-size); font-weight: var(--text-card-title-weight); color: var(--vf-ink); line-height: 1.4; }
+.period-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: var(--control-height-compact); padding: 4px 12px;
+  border-radius: var(--radius-full); background: var(--vf-recessed);
+  color: var(--vf-ink-secondary); font-size: var(--text-caption-size); font-weight: 600;
+}
+.period-chip .ic { width: 14px; height: 14px; }
+.chart-bars {
+  display: flex; align-items: flex-end; gap: 6px;
+  height: 160px; padding: 8px 4px 0;
+  border-bottom: 1px solid var(--vf-border);
+}
+.cbar {
+  flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  gap: 4px; height: 100%;
+}
+.cbar i {
+  display: block; width: 100%; border-radius: 4px 4px 0 0;
+  background: var(--vf-ink-secondary); /* neutral series — never all-black, never Terracotta */
+}
+.cbar.hot i { background: var(--vf-info); } /* the bar that answers the question */
+.cbar.zero i {
+  height: 2px; border-radius: var(--radius-full);
+  background: var(--vf-border-interactive); /* visible measured-zero baseline mark */
+}
+.cbar b {
+  font-family: var(--vf-font-mono); font-variant-numeric: tabular-nums;
+  font-size: var(--text-caption-size); font-weight: 400;
+  color: var(--vf-ink-tertiary); text-align: center; direction: ltr;
+}
+.chart-alt {
+  margin: 0; font-size: var(--text-caption-size); line-height: 1.5;
+  color: var(--vf-ink-tertiary);
+}
+.chart-alt strong { color: var(--vf-ink); font-weight: 600; }
+.chart-empty { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 28px 16px 20px; }
+.chart-loading { display: flex; flex-direction: column; gap: 8px; padding: 16px 4px 8px; }
+
 /* ---------- Evidence panel (documentation chrome) ---------- */
 #evidence-panel {
   position: fixed; inset-block: 0; inset-inline-end: 0; z-index: 200;
@@ -866,6 +963,28 @@ body {
 /* ---------- Gallery responsive ---------- */
 @media (min-width: 900px) {
   .gallery-main { padding-top: 32px; }
+}
+
+/* ---------- Reduced motion (mandatory contract, motion-interaction.md) ----------
+   The gallery control sets html[data-motion="reduced"]; the system preference
+   is honored identically. Nonessential movement collapses to near-instant;
+   state and action meaning is preserved through words, markers, and aria-busy
+   (the loading spinner remains as a static ring beside its persistent label). */
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 @media (max-width: 640px) {
   .gallery-header { padding: 10px 12px; }

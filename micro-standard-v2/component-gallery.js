@@ -459,6 +459,7 @@
     var leadIcon = iconSlot ? $("svg.ic", iconSlot) : null;
     var spinner = iconSlot ? $(".spinner", iconSlot) : null;
     var check = $(".ic-check", btn);
+    var originalLabel = label ? label.textContent : "Save"; /* restore per-button wording */
     var busy = false;
     on(btn, "click", function () {
       if (busy) return; /* duplicate-submit guard */
@@ -478,7 +479,7 @@
           btn.classList.remove("btn-complete");
           if (check) check.hidden = true;
           if (leadIcon) leadIcon.hidden = false;
-          if (label) label.textContent = "Save";
+          if (label) label.textContent = originalLabel;
           btn.disabled = false;
           btn.setAttribute("aria-busy", "false");
           busy = false;
@@ -534,6 +535,29 @@
         fireSnackbar(mainSnack, "Entry saved", null, null, btn.closest(".screen"));
       }, 800);
     }, 900);
+  });
+
+  /* ---------- question-led chart: four honest states ---------- */
+  var chartStates = ["data", "zero", "nodata", "loading"];
+  var chartIdx = 0;
+  var chartBody = $("[data-chart-body]");
+  var chartCycleBtn = $("[data-chart-cycle]");
+  function showChartState(name) {
+    if (!chartBody) return;
+    $$("[data-chart-state]", chartBody).forEach(function (el) {
+      var isAlt = el.getAttribute("data-chart-state") === "zero-alt";
+      el.hidden = !(isAlt ? name === "zero" : el.getAttribute("data-chart-state") === name);
+    });
+    var q = $("[data-chart-question]");
+    if (q) {
+      q.textContent = name === "nodata"
+        ? "ماذا يحدث في هذه الفترة؟"
+        : "أي يوم كان الأقوى هذا الأسبوع؟";
+    }
+  }
+  on(chartCycleBtn, "click", function () {
+    chartIdx = (chartIdx + 1) % chartStates.length;
+    showChartState(chartStates[chartIdx]);
   });
 
   /* ---------- summary metric: bar moves, numbers land immediately ---------- */

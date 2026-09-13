@@ -110,6 +110,7 @@
     <a href="#filtering">Filtering</a>
     <a href="#segmented">Segmented</a>
     <a href="#metrics">Metrics</a>
+    <a href="#charts">Charts</a>
     <a href="#rows">Rows</a>
     <a href="#rail">Quick actions</a>
     <a href="#navigation">Navigation</a>
@@ -124,61 +125,62 @@
     <section class="family" id="buttons">
       <header class="family-head">
         <h2>Buttons</h2>
-        <p>One filled identity action leads a view; the ladder steps down through the cool secondary, outline, and ghost. 48px height, 12px radius, 600 weight, 0.97 press at 80ms.</p>
+        <p>Named action classes: Create uses the Clay identity, ordinary save uses the Warm Tint with a Clay pressed edge, and the filled warm-ink surface is reserved for high-consequence commitment. Secondary, outline, and ghost step down. 48px height, 12px radius, 600 weight, 0.97 press at 80ms.</p>
       </header>
       <div class="frame">
-        <div class="frame-bar"><span>Variants — full width</span><span class="frame-w" data-w-label>auto</span></div>
+        <div class="frame-bar"><span>Action classes — full width</span><span class="frame-w" data-w-label>auto</span></div>
         <div class="screen">
-          <button type="button" class="btn btn-primary press">Primary action</button>
+          <button type="button" class="btn btn-create press"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>Create entry</span></button>
+          <button type="button" class="btn btn-save press"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Save entry</span></button>
+          <button type="button" class="btn btn-primary press">Finalize period</button>
           <button type="button" class="btn btn-secondary press">Secondary action</button>
           <button type="button" class="btn btn-outline press">Outline action</button>
           <button type="button" class="btn btn-ghost press">Ghost action</button>
           <button type="button" class="btn btn-destructive press">Delete record</button>
           <div class="pair-row">
-            <button type="button" class="btn btn-positive press">Accept</button>
-            <button type="button" class="btn btn-operational press">Transfer</button>
+            <button type="button" class="btn btn-positive press"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Accept</span></button>
+            <button type="button" class="btn btn-operational press"><svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"/></svg><span>Transfer</span></button>
           </div>
           <div class="pair-row">
-            <button type="button" class="btn btn-primary press"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>With icon</span></button>
             <button type="button" class="iconbtn iconbtn-primary press" aria-label="Add"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
             <button type="button" class="iconbtn iconbtn-quiet press" aria-label="Search"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg></button>
           </div>
         </div>
       </div>
       <div class="frame">
-        <div class="frame-bar"><span>Interaction states — six states of one button</span><span class="frame-w" data-w-label>auto</span></div>
+        <div class="frame-bar"><span>Ordinary save — six states of one action</span><span class="frame-w" data-w-label>auto</span></div>
         <div class="screen">
-          <p class="demo-note">These are states of the same action over time — not color variants. Press and hold the pressed sample; tap the loading sample twice to feel the duplicate-submit guard.</p>
+          <p class="demo-note">The ordinary save stays on the Warm Tint surface at every moment. Pressing shows a 2px Clay edge and never converts the button into a success state; completion is a check icon plus a past-tense word. Press and hold the pressed sample; tap the loading sample twice to feel the duplicate-submit guard.</p>
           <div class="state-strip">
             <span class="state-tag">Default</span>
-            <button type="button" class="btn btn-primary press">Save</button>
+            <button type="button" class="btn btn-save press"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Save entry</span></button>
           </div>
           <div class="state-strip">
             <span class="state-tag">Pressed — hold</span>
-            <button type="button" class="btn btn-primary press is-pressed">Save</button>
+            <button type="button" class="btn btn-save press is-pressed"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Save entry</span></button>
           </div>
           <div class="state-strip">
             <span class="state-tag">Focused</span>
-            <button type="button" class="btn btn-primary is-focused">Save</button>
+            <button type="button" class="btn btn-save is-focused"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Save entry</span></button>
           </div>
           <div class="state-strip">
             <span class="state-tag">Disabled</span>
-            <button type="button" class="btn btn-primary" disabled>Save</button>
+            <button type="button" class="btn btn-save" disabled><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Save entry</span></button>
           </div>
           <div class="state-strip">
             <span class="state-tag">Loading — tap</span>
-            <button type="button" class="btn btn-primary press" data-loading-btn aria-busy="false">
+            <button type="button" class="btn btn-save press" data-loading-btn aria-busy="false">
               <span class="btn-icon" aria-hidden="true">
-                <svg class="ic"><use href="#i-plus"/></svg>
+                <svg class="ic"><use href="#i-check"/></svg>
                 <span class="spinner" hidden></span>
               </span>
-              <span class="btn-label">Save</span>
+              <span class="btn-label">Save entry</span>
               <svg class="ic ic-check" hidden aria-hidden="true"><use href="#i-check"/></svg>
             </button>
           </div>
           <div class="state-strip">
             <span class="state-tag">Quiet completion</span>
-            <button type="button" class="btn btn-complete" data-complete-demo><svg class="ic ic-check" aria-hidden="true"><use href="#i-check"/></svg><span>Saved</span></button>
+            <button type="button" class="btn btn-save btn-complete" data-complete-demo><svg class="ic ic-check" aria-hidden="true"><use href="#i-check"/></svg><span>Saved</span></button>
           </div>
         </div>
       </div>
@@ -334,12 +336,12 @@
               <div class="row-trail"><p class="row-amt num op" dir="ltr">−300</p></div>
             </li>
             <li class="row alt" data-status="returned" data-type="incoming" data-era="month" data-order="4" data-amount="800">
-              <div class="row-tile t-gold"><svg class="ic" aria-hidden="true"><use href="#i-trending-up"/></svg></div>
+              <div class="row-tile t-neutral"><svg class="ic" aria-hidden="true"><use href="#i-trending-up"/></svg></div>
               <div class="row-main">
                 <p class="row-title">Quarterly return</p>
-                <p class="row-sub"><span class="tag tag-gold"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-trending-up"/></svg>Returned</span><span class="num" dir="ltr">15/07/2026 · 11:05</span></p>
+                <p class="row-sub"><span class="tag tag-neutral"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-trending-up"/></svg>Returned</span><span class="num" dir="ltr">15/07/2026 · 11:05</span></p>
               </div>
-              <div class="row-trail"><p class="row-amt num gold" dir="ltr">+800</p></div>
+              <div class="row-trail"><p class="row-amt num neutral" dir="ltr">+800</p></div>
             </li>
             <li class="row" data-status="ready" data-type="incoming" data-era="month" data-order="5" data-amount="2150">
               <div class="row-tile t-pos"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></div>
@@ -416,7 +418,7 @@
             </div>
             <div class="sheet-actions safe-area-bottom">
               <button type="button" class="btn btn-ghost press" data-filter-reset>Reset</button>
-              <button type="button" class="btn btn-primary press" data-filter-apply>Apply</button>
+              <button type="button" class="btn btn-save press" data-filter-apply>Apply filters</button>
             </div>
           </div>
         </div>
@@ -424,7 +426,7 @@
       <div class="frame">
         <div class="frame-bar"><span>Chip anatomy — reference only</span><span class="frame-w" data-w-label>auto</span></div>
         <div class="screen">
-          <p class="demo-note">Chips are selection controls that live inside sheets, menus, and segmented contexts — they are not the page-level filter UI. 36px visual, 44px hit area, one selected per single-choice group; multi-choice groups toggle independently.</p>
+          <p class="demo-note">Chips are selection controls that live inside sheets, menus, and segmented contexts — they are not the page-level filter UI. The selected chip uses the chosen/current edge role: a 2px Clay edge on the surface with a bold ink label — never an automatic black fill. 36px visual, 44px hit area, one selected per single-choice group; multi-choice groups toggle independently.</p>
           <div class="chip-row">
             <button type="button" class="chip press" aria-pressed="false">Unselected</button>
             <button type="button" class="chip press on" aria-pressed="true">Selected</button>
@@ -524,6 +526,57 @@
       </div>
     </section>
 
+    <!-- ============ CHARTS ============ -->
+    <section class="family" id="charts">
+      <header class="family-head">
+        <h2>Charts</h2>
+        <p>One question per chart, asked in the title. The neutral series carries the shape; one semantic mark may highlight the bar that answers the question. Measured zeros show a visible baseline mark, no-data is a word plus icon, loading is a skeleton — and a text alternative repeats the answer in words. Tap the state button to cycle loading → data → zero days → no data.</p>
+      </header>
+      <div class="frame">
+        <div class="frame-bar"><span>Question-led bar chart — four honest states</span><span class="frame-w" data-w-label>auto</span></div>
+        <div class="screen">
+          <div class="chart-head">
+            <p class="chart-q" lang="ar" data-chart-question>أي يوم كان الأقوى هذا الأسبوع؟</p>
+            <span class="period-chip"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><span lang="ar">آخر 7 أيام</span></span>
+          </div>
+          <div data-chart-body>
+            <div class="chart-loading" data-chart-state="loading" hidden>
+              <span class="sk sk-line"></span>
+              <span class="sk sk-card"></span>
+            </div>
+            <div data-chart-state="data">
+              <div class="chart-bars" role="img" aria-label="Bar chart, last 7 days: Thursday highest at 410; Sunday and Tuesday measured zero">
+                <div class="cbar zero"><i></i><b>12</b></div>
+                <div class="cbar" style="height:52%"><i style="height:100%"></i><b>13</b></div>
+                <div class="cbar zero"><i></i><b>14</b></div>
+                <div class="cbar hot" style="height:96%"><i style="height:100%"></i><b>15</b></div>
+                <div class="cbar" style="height:38%"><i style="height:100%"></i><b>16</b></div>
+                <div class="cbar" style="height:64%"><i style="height:100%"></i><b>17</b></div>
+                <div class="cbar" style="height:22%"><i style="height:100%"></i><b>18</b></div>
+              </div>
+              <p class="chart-alt"><strong lang="ar">بالكلمات:</strong> <span lang="ar">الخميس 15 كان الأقوى بـ 410، والأحد 12 والثلاثاء 14 بلا مبيعات مسجلة.</span></p>
+            </div>
+            <div class="chart-bars" data-chart-state="zero" hidden>
+              <div class="cbar zero"><i></i><b>19</b></div>
+              <div class="cbar zero"><i></i><b>20</b></div>
+              <div class="cbar zero"><i></i><b>21</b></div>
+              <div class="cbar zero"><i></i><b>22</b></div>
+              <div class="cbar zero"><i></i><b>23</b></div>
+              <div class="cbar zero"><i></i><b>24</b></div>
+              <div class="cbar zero"><i></i><b>25</b></div>
+            </div>
+            <p class="chart-alt" data-chart-state="zero-alt" hidden><strong lang="ar">بالكلمات:</strong> <span lang="ar">كل أيام الأسبوع السبعة بمبيعات صفرية مسجلة — أصفار مقيسة، ليست أيامًا مفقودة.</span></p>
+            <div class="chart-empty" data-chart-state="nodata" hidden>
+              <span class="empty-tile"><svg class="ic" aria-hidden="true"><use href="#i-document"/></svg></span>
+              <h3 class="empty-title" lang="ar">لا بيانات بعد</h3>
+              <p class="empty-body" lang="ar">ستظهر الأعمدة بعد أول يوم مسجّل في هذه الفترة.</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline btn-compact press" data-chart-cycle><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span>Cycle chart state</span></button>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ ROWS ============ -->
     <section class="family" id="rows">
       <header class="family-head">
@@ -567,18 +620,72 @@
               </div>
             </div>
             <div class="row alt">
-              <div class="row-tile t-gold"><svg class="ic" aria-hidden="true"><use href="#i-trending-up"/></svg></div>
+              <div class="row-tile t-neutral"><svg class="ic" aria-hidden="true"><use href="#i-trending-up"/></svg></div>
               <div class="row-main">
                 <p class="row-title" lang="ar">عائد ربع سنوي</p>
-                <p class="row-sub num" dir="ltr">15/07/2026 · 11:05</p>
+                <p class="row-sub"><span class="tag tag-neutral"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-return"/></svg>Returned</span> · <span class="num" dir="ltr">15/07/2026 · 11:05</span></p>
               </div>
               <div class="row-trail">
-                <p class="row-amt num gold" dir="ltr">+800</p>
+                <p class="row-amt num neutral" dir="ltr">+800</p>
                 <button type="button" class="row-chev press" data-row-chev aria-label="Open details"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
               </div>
             </div>
           </div>
           <p class="demo-note">Long Arabic titles wrap to two lines and clamp — they never push the trailing value off-screen. The chevron fires a short directional nudge toward the reading end when a row opens a new context.</p>
+        </div>
+      </div>
+      <div class="frame">
+        <div class="frame-bar"><span>State slots — word + marker + optional edge stripe</span><span class="frame-w" data-w-label>auto</span></div>
+        <div class="screen">
+          <p class="demo-note">Operational rows carry one optional state slot: a single word with a non-color marker, plus an optional ≤3px edge stripe in the state's semantic color. The stripe repeats the word's meaning — it never replaces it.</p>
+          <div class="rowlist">
+            <div class="row state-edge stripe-pending">
+              <div class="row-tile t-op"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg></div>
+              <div class="row-main">
+                <p class="row-title" lang="ar">طلب شراء من المورد الرئيسي</p>
+                <p class="row-sub"><span class="tag tag-pending"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-clock"/></svg>Pending</span> · <span class="num" dir="ltr">16/07/2026</span></p>
+              </div>
+              <div class="row-trail">
+                <p class="row-amt num op" dir="ltr">−640</p>
+                <button type="button" class="row-chev press" data-row-chev aria-label="Open details"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+              </div>
+            </div>
+            <div class="row state-edge stripe-review">
+              <div class="row-tile t-pos"><svg class="ic mirror" aria-hidden="true"><use href="#i-arrow-down-left"/></svg></div>
+              <div class="row-main">
+                <p class="row-title">Morning batch</p>
+                <p class="row-sub"><span class="tag tag-review"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-eye"/></svg>Reviewed</span> · <span class="num" dir="ltr">17/07/2026 · 09:30</span></p>
+              </div>
+              <div class="row-trail">
+                <p class="row-amt num pos" dir="ltr">+1,200</p>
+                <button type="button" class="row-chev press" data-row-chev aria-label="Open details"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+              </div>
+            </div>
+            <div class="row state-edge stripe-failed">
+              <div class="row-tile t-neg"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg></div>
+              <div class="row-main">
+                <p class="row-title">Sync result unknown — not recorded</p>
+                <p class="row-sub"><span class="tag tag-unknown"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-info"/></svg>Unknown</span> · <span class="num" dir="ltr">17/07/2026 · 14:02</span></p>
+              </div>
+              <div class="row-trail">
+                <p class="row-amt num neutral" dir="ltr">0</p>
+                <button type="button" class="row-chev press" data-row-chev aria-label="Open details"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame">
+        <div class="frame-bar"><span>State tag grammar — semantic hue on the marker, text-safe word</span><span class="frame-w" data-w-label>auto</span></div>
+        <div class="screen">
+          <div class="tag-row">
+            <span class="tag tag-positive"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-check"/></svg>Posted</span>
+            <span class="tag tag-negative"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-alert"/></svg>Failed</span>
+            <span class="tag tag-pending"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-clock"/></svg>Pending</span>
+            <span class="tag tag-unknown"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-info"/></svg>Unknown</span>
+            <span class="tag tag-review"><svg class="ic ic-dot" aria-hidden="true"><use href="#i-eye"/></svg>Reviewed</span>
+          </div>
+          <p class="demo-note">Every state pairs a word with a marker; the semantic hue sits on the marker and the tinted ground. Pending never reads as success, unknown is separate from failure, and no state depends on color alone.</p>
         </div>
       </div>
       <div class="frame">
@@ -696,7 +803,7 @@
             </nav>
           </div>
           <div class="actionbar safe-area-bottom">
-            <button type="button" class="btn btn-primary press" data-open-dialog>Confirm summary</button>
+            <button type="button" class="btn btn-primary press" data-open-dialog>Finalize period</button>
           </div>
         </div>
       </div>
@@ -733,11 +840,11 @@
           </div>
           <div class="dialog-anchor" data-dialog-anchor hidden>
             <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
-              <h3 class="dialog-title" id="dlg-title">Confirm summary?</h3>
-              <p class="dialog-body">This closes the review period and locks the displayed totals.</p>
+              <h3 class="dialog-title" id="dlg-title">Finalize period?</h3>
+              <p class="dialog-body">This closes the review period and locks the displayed totals. The filled warm-ink button is reserved for this high-consequence commitment — consequence word, explanation, and an independent confirm/cancel path.</p>
               <div class="dialog-actions">
                 <button type="button" class="btn btn-outline press" data-close-overlay>Cancel</button>
-                <button type="button" class="btn btn-primary press" data-close-overlay>Confirm</button>
+                <button type="button" class="btn btn-primary press" data-close-overlay>Finalize</button>
               </div>
             </div>
           </div>
@@ -879,7 +986,7 @@
       <h3>Identity &amp; accent ramps</h3>
       <div class="ev-ramp" data-ramp="primary"></div>
       <div class="ev-ramp" data-ramp="accent"></div>
-      <p class="ev-note">The current Standard uses warm ink for one text-bearing commitment action, neutral tint for secondary action, and Clay for identity/create. Clay is never used as ordinary body-size text; chosen/current is a 2px edge plus a non-color cue.</p>
+      <p class="ev-note">Action classes (owner-approved): Create/add/FAB is the Clay identity; ordinary save/confirm is the Warm Tint surface with dark ink and a 2px Clay pressed edge — pressing is never success; the filled warm-ink surface is reserved for high-consequence commitment with consequence wording and an independent confirmation path. Chosen/current is a 2px Clay edge plus a non-color cue — never an automatic black fill. Clay is never body-size text.</p>
     </section>
     <section>
       <h3>Semantic pairings</h3>
@@ -887,7 +994,7 @@
       <div class="ev-ramp" data-ramp="negative"></div>
       <div class="ev-ramp" data-ramp="operational"></div>
       <div class="ev-ramp" data-ramp="gold"></div>
-      <p class="ev-note">Semantic colors are sparse outcome marks. They must be paired with words and shapes; charts use semantic marks only when they answer a clear question. The current Standard does not use the old gold ramp as a required identity family.</p>
+      <p class="ev-note">Semantic colors are sparse outcome marks paired with words and shapes; the semantic hue sits on the marker while tag words stay in text-safe ink. Charts use semantic marks only when they answer a clear question — never all-black, never Terracotta. The old gold ramp is retired: its former demo roles now use the neutral ink pair.</p>
     </section>
     <section>
       <h3>Contrast evidence (WCAG 2.1)</h3>
@@ -968,14 +1075,14 @@
       <h3>Token classification summary</h3>
       <table class="ev-table">
         <tbody>
-          <tr><td>inherited</td><td>65</td></tr>
-          <tr><td>normalized</td><td>78</td></tr>
-          <tr><td>corrected</td><td>11</td></tr>
-          <tr><td>proposed</td><td>1</td></tr>
-          <tr><td>unresolved</td><td>0 (record-level: 2)</td></tr>
+          <tr><td>approved base values (hex)</td><td>18 — unchanged since baseline</td></tr>
+          <tr><td>canonical tokens, design-tokens.css</td><td>133</td></tr>
+          <tr><td>gallery compatibility aliases</td><td>5</td></tr>
+          <tr><td>functional alpha derivatives (disclosed)</td><td>2 (scrim, translucent header)</td></tr>
+          <tr><td>gallery-consumed tokens unresolved</td><td>0</td></tr>
         </tbody>
       </table>
-      <p class="ev-note">155 tokens, CSS↔JSON parity verified (177 custom properties, zero mismatches). Full records: design-tokens.json · decisions: decision-log.md.</p>
+      <p class="ev-note">Wave A truthing (run-20260913-msv2-zai-01): the previously claimed “155 tokens / 177 custom properties / zero mismatches” did not describe the shipped files — 62 consumed tokens were undefined and rendered on browser fallbacks. This panel now reflects the audited package: every consumed token resolves, and the hex set is byte-identical to the approved baseline. No new palette color was introduced.</p>
     </section>
   </div>
 </aside>

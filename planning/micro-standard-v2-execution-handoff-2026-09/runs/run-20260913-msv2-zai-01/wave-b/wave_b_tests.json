@@ -1,0 +1,70 @@
+{
+  "errors": [],
+  "computed": {
+    "btn_create_bg": "rgb(217, 119, 87)",
+    "btn_create_pressed": "rgb(201, 100, 66)",
+    "btn_save_bg": "rgb(245, 244, 237)",
+    "btn_save_color": "rgb(20, 20, 19)",
+    "btn_save_pressed_edge": "rgb(201, 100, 66) 0px 0px 0px 2px inset",
+    "btn_primary_bg": "rgb(20, 20, 19)",
+    "chip_on_bg": "rgb(255, 255, 255)",
+    "chip_on_edge": "rgb(201, 100, 66) 0px 0px 0px 2px inset",
+    "segctl_thumb_bg": "rgb(255, 255, 255)",
+    "segctl_thumb_edge": "rgb(201, 100, 66) 0px 0px 0px 2px inset, rgba(60, 50, 40, 0.06) 0px 1px 2px 0px",
+    "segctl_indicator_bg": "rgb(201, 100, 66)",
+    "fab_bg": "rgb(217, 119, 87)",
+    "fab_size": "56px",
+    "navpill_edge": "rgb(201, 100, 66) 0px 0px 0px 2px inset",
+    "scrim_visible": "rgba(20, 20, 19, 0.45)",
+    "gold_classes_left": 0
+  },
+  "interactions": {
+    "loading_busy": "true",
+    "loading_bg_stays_tint": "rgb(245, 244, 237)",
+    "quiet_complete_class": true,
+    "quiet_label": "Saved",
+    "label_restored": "Save entry",
+    "chart_state_cycle": [
+      "zero+zero-alt",
+      "nodata",
+      "loading",
+      "data",
+      "zero+zero-alt"
+    ],
+    "sheet_opens": true,
+    "dialog_opens": true
+  },
+  "viewports": {
+    "320px": {
+      "overflowX": false,
+      "scrollW": 320,
+      "innerW": 320
+    },
+    "360px": {
+      "overflowX": false,
+      "scrollW": 360,
+      "innerW": 360
+    },
+    "390px": {
+      "overflowX": false,
+      "scrollW": 390,
+      "innerW": 390
+    },
+    "430px": {
+      "overflowX": false,
+      "scrollW": 430,
+      "innerW": 430
+    }
+  },
+  "reduced_motion": {
+    "transition_on_button": "1e-05s",
+    "animation_on_skeleton": "1e-05s"
+  },
+  "zoom": {
+    "320px_200pct": {
+      "overflowX": false,
+      "scrollW": 320
+    }
+  },
+  "verdict": "PASS"
+}
