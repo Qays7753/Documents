@@ -1,20 +1,21 @@
 # FINAL_RUN_README — run-20260913-msv2-zai-01
 
-## Completion proof (Final Copy reconciliation; publication pending)
+## Completion proof (Final Copy published to main)
 
 | Item | Value |
 |---|---|
 | Repository | `https://github.com/Qays7753/Documents` |
 | Base branch | `main` @ `dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b` (verified live before start; **never pushed**) |
 | Source work branch | `micro-standard-v2-execution-20260913` @ `844c834e4fab19148b0dfa9c44a95dd0ed66d82b` |
-| Final Copy branch | `micro-standard-v2-final-copy-20260913` |
+| Final Copy branch | `micro-standard-v2-final-copy-20260913` @ `557056a` |
+| Published main | `main` @ `7a9ef2a0ab6f58493937cf08223baee2953d2353` |
 | Run folder | `planning/micro-standard-v2-execution-handoff-2026-09/runs/run-20260913-msv2-zai-01/` |
 | Package | `micro-standard-v2/` — 31 files (29 core + `MANIFEST.json` + `RELEASE.md`); none added/removed/moved |
 | Upstream files changed | 22 (12 Wave A, 3 Wave B, 7 Wave C; gallery CSS amended once in Wave P) |
 | Final Copy reconciliation | 8 Standard contract/gallery files plus 5 handoff records corrected; 31-file package remains intact |
 | Files unchanged from upstream | 9 (recorded with reasons in `EXECUTION_RECORD.md`) |
 | Deferred / blocked | 0 / 0 (S-12 and link-ink value remain owner decisions, not executed) |
-| Final package state | `standard-snapshot/` + `final-standard.patch` + `final_sha256.txt` + `FINAL_COPY_VALIDATION.md` + reproducible audit tools; current Final Copy run-folder count: 92 |
+| Final package state | `standard-snapshot/` + `final-standard.patch` + `final_sha256.txt` + `FINAL_COPY_VALIDATION.md` + `MAIN_PUBLICATION_VERIFICATION.md` + reproducible audit tools; current run-folder count: 93 |
 
 ## Branch name note
 The execution prompt specified `micro-standard-v2-execution-20260913`; the handoff upload policy example wrote `micro-standard-v2-zai-execution-20260913`. The owner prompt was followed; recorded in `micro-standard-v2/decision-log.md` and here.
@@ -35,7 +36,7 @@ The execution prompt specified `micro-standard-v2-execution-20260913`; the hando
 4. **Gallery demonstration** of every Standard change. The Prototype remains a separate visual evidence artifact; it is not part of Final Copy acceptance or transfer.
 
 ## Explicit confirmations
-- During the original ZAI run, `main` was **not** modified or pushed; no force-push, PR, branch deletion, or settings change occurred. Final Copy publication to `main` is a separate controlled step and remains pending until verified.
+- During the original ZAI run, `main` was **not** modified or pushed; no force-push, PR, branch deletion, or settings change occurred. Final Copy publication to `main` was completed and verified at `7a9ef2a0ab6f58493937cf08223baee2953d2353`.
 - Micro and Accounting repositories were **not** accessed for writes and contain no changes from this run.
 - The access token was used ephemerally in the working shell for authentication only; it was **not** written to any file, report, screenshot, commit message, or chat output.
 - No physical-device or screen-reader claims are made; those require separate release testing.
