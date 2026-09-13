@@ -25,14 +25,20 @@ A primary value composition exposes named slots so screens stay comparable:
 - **period** — the period chip text (e.g., "آخر 30 يوم") anchored to the value it qualifies;
 - **delta** — optional comparison with a direction word and marker.
 
-Honest voids are part of the contract: an unrecorded value shows an action chip ("سجّله"); an unavailable value shows the word "غير متاح"; a measured zero shows "0" with its label. A void is never styled as success, failure, or decoration.
+Honest voids are part of the contract: an unrecorded value shows an action chip ("سجّله"); an unavailable value shows the word "غير متاح"; a measured zero shows "0" with its label. A void is never styled as success, failure, or decoration. Information-quality qualifiers (unconfirmed, incomplete, needs-review, estimated, unknown magnitude) follow the knowledge-state presentation contract in `component-states.md` and never replace a void with an invented value.
 
-## Period chip
+## Period control
 
 The period control is a chip or segmented row that states the qualifying range in Arabic with English numerals. It sits with the value or list it qualifies, keeps 36px visual / 44px hit-area geometry, and stages range changes until applied when used inside filter surfaces. Time semantics (what ranges exist, defaults) are product-owned; this contract covers presentation only.
 
+Two presentation variants are supported: (a) the period chip / segmented row above, and (b) a native month or date input (`<input type="month"|"date">`) for precise selection. The native variant keeps LTR-isolated English-digit entry inside the RTL composition (`dir="ltr"`, bidi isolation), a 13px label, the 44px hit-area floor, and a visible wrapper focus ring; the control's native internals stay out of scope. Both variants state the qualifying range in Arabic with English numerals and anchor to the value or list they qualify.
+
 ## Operational row slots
 
-Rows use one grid: an optional identity lead (icon tile or avatar), a flexible title/caption column that wraps Arabic safely, an optional state slot (one word + marker), and a stable trailing slot for tabular amounts and actions. An optional state edge stripe (≤3px, the state's semantic color) may mark the row's inline-start edge — always paired with the state word in the row. Rows keep inset dividers and never rely on the stripe alone.
+Rows use one grid: an optional identity lead (icon tile or avatar), a flexible title/caption column that wraps Arabic safely, an optional state slot (one word + marker), and a stable trailing slot for tabular amounts and actions. An optional state edge stripe (≤3px, the state's semantic color) may mark the row's inline-start edge — always paired with the state word in the row. Rows keep inset dividers and never rely on the stripe alone. When a row shows a state, the word plus its non-color marker are the primary signal; the stripe and any hue are reinforcement only, and the stripe hue must meet the 3:1 non-text minimum against the row's actual background (see the surface-specific bindings in `accessibility.md`).
+
+## Overlay versus in-flow
+
+Consequential confirmation and destructive deletion use the overlay contracts (Dialog/Sheet with scrim, focus containment, and an independent confirmation path). Continuous explanation, reading, and editing can remain in-flow — expandable sections and layered content are legitimate compositions and must not be converted into overlays wholesale. A surface qualifies for an overlay when the user must not lose the consequence context; it qualifies for in-flow when the content supports ongoing reading or editing.
 
 Micro domain compositions sit above these primitives: balance, attention, party, receivable, operational row, order detail, tool result, simple chart, and period control. The visual foundation must not invent product policy inside a primitive.

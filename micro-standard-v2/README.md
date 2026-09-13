@@ -4,6 +4,10 @@ Micro Standard v2 is the Final Copy for the Arabic-first, RTL, phone-only visual
 
 The package defines current tokens, named action classes, component contracts, financial-safe states, mobile geometry, interaction rules, navigation, empty/loading/error behavior, and a local interactive gallery. It does not define financial policy, financial formulas, synchronization behavior, or backend implementation.
 
+## Authority ladder
+
+Micro Standard v2 = visual contracts (tokens, action classes, component and state contracts, geometry, accessibility, composition guidance). The Micro runtime token mapping = the carrier that binds implementation variables to these contracts. Micro docs = implementation guidance. Micro domain/application/storage layers = product meaning and persistence. Contracts never encode product meaning; runtime never redefines contract values. The package is **29 core files + 2 metadata records** (`MANIFEST.json`, `RELEASE.md`). `source-inventory.md` remains one of the 29 core evidence/contract files. This classification preserves the established baseline and was reconciled after the initial run record.
+
 ## Official navigation
 
 `الرئيسية` · `المالية` · `الطلبات` · `الأدوات`
