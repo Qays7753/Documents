@@ -5,6 +5,7 @@
 | `README.md` | Source boundary | Read first. Establishes repository, baseline, authority order, and exclusions. |
 | `OWNER_APPROVED_DECISIONS.md` | Approved decision | The only current product/UI decision source for this handoff. |
 | `EXECUTION_PROCEDURE.md` | Execution control | Defines waves, stop conditions, rollback, tests, and no-silent-change rules. |
+| `GITHUB_UPLOAD_POLICY.md` | Upload control | Defines the restricted-token placeholder, branch/run-folder policy, required uploads, and completion proof. |
 | `PREVIOUS_WAVE_BOUNDARIES.md` | History boundary | Prevents use of unpublished branch/commit and repeated work. |
 | `micro-standard-v2/` | Executable foundation | Actual 31-file package to inspect and modify on a new branch. |
 | `reference/zai-review/MICRO_STANDARD_COMPREHENSIVE_UIUX_REVIEW.md` | External review evidence | Use for findings and gaps after independently checking current files. It does not override owner decisions. |
@@ -18,6 +19,10 @@
 ## Required reading order
 
 Read `README.md`, `OWNER_APPROVED_DECISIONS.md`, `EXECUTION_PROCEDURE.md`, and `PREVIOUS_WAVE_BOUNDARIES.md` before touching any package file. Then inspect the actual current `micro-standard-v2/` files. Read external review and brand references only as supporting context.
+
+## Upload requirement
+
+The final execution prompt must require ZAI to read `GITHUB_UPLOAD_POLICY.md` and upload all wave outputs, the final Standard result, and the interactive Prototype to the specified Documents branch/run folder. No token may be stored or exposed.
 
 ## Missing by design
 

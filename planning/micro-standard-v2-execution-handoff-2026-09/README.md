@@ -34,6 +34,10 @@
 
 إذا ظهر احتياج إلى إعادة تنظيم بنية أو نقل ملفات جماعي، يتوقف المنفذ قبل التنفيذ وتبدأ بوابة Structure/Architecture/Code Organization Scan read-only وفق تعليمات المشروع.
 
+## الرفع السحابي الإلزامي
+
+يجب على ZAI قراءة `GITHUB_UPLOAD_POLICY.md` ورفع كل تقارير الموجات، نسخة Standard النهائية، Prototype HTML، وملفات التحقق إلى Documents تحت run folder محدد. لا يرفع إلى `main`، ولا يخزن Access Token، ويعيد رابط الفرع والـcommit والملفّات بعد الرفع.
+
 ## التسلسل
 
 يبدأ المنفذ بـWave 0 baseline وrollback، ثم ينفذ الموجات المعتمدة واحدةً واحدة، ويوقف العمل بعد كل موجة لتسليم diff وhashes والاختبارات والقيود. لا Push أو Merge إلى `main` قبل موافقة المالك.
