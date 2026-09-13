@@ -1,7 +1,7 @@
 {
   "package": "Micro Standard v2",
   "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1",
-  "status": "final-copy-candidate",
+  "status": "final",
   "updated_by": "Final Copy reconciliation on branch micro-standard-v2-final-copy-20260913 — Standard and Gallery checks only",
   "families": {
     "primitives": "current",
