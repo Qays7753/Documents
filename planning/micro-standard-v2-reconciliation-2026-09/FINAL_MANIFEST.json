@@ -224,5 +224,15 @@
       "evidence/scene-s5.png",
       "evidence/scene-s6.png"
     ]
+  },
+  "upload": {
+    "repository": "https://github.com/Qays7753/Documents",
+    "branch": "micro-standard-v2-reconciliation-final-20260914",
+    "run_commit": "3cd52062fd926f4217c8c1b2e4bb8fec5012e469",
+    "run_commit_parent": "864263c190f5d3da6041acfafb0720e85ac6e320",
+    "branch_base": "864263c190f5d3da6041acfafb0720e85ac6e320",
+    "main_after_push": "864263c190f5d3da6041acfafb0720e85ac6e320",
+    "files_in_run_commit": 58,
+    "token_audit": "live token value: 0 occurrences in commits, files, history, and remote URLs"
   }
 }

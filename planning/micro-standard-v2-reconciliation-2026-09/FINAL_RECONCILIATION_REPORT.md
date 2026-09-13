@@ -95,8 +95,14 @@ Every changed file restores to its baseline SHA-256 (`PRE_FLIGHT_REPORT.md` §3)
 
 - **Branch:** `micro-standard-v2-reconciliation-final-20260914` (created from `main` @ `864263c190f5d3da6041acfafb0720e85ac6e320`; `main` untouched)
 - **Run folder:** `planning/micro-standard-v2-reconciliation-2026-09/`
-- **Commit SHA / parent / changed-file list / SHA-256 values:** recorded in the upload section appended after the push (see the run README and `FINAL_MANIFEST.json`).
-- **Confirmations:** Documents `main` unchanged after push (re-verified); Micro `main` never touched; context branch never touched; token appears in zero files and zero commits (audited); no merge to `main` performed in this run — the main merge is the owner's separate review gate.
+- **Commit 1 (the run):** `3cd52062fd926f4217c8c1b2e4bb8fec5012e469` — parent `864263c190f5d3da6041acfafb0720e85ac6e320` (main); 58 files, 7,294 insertions; exactly the run folder (31 updated-package files + 12 prototype files + 5 agent reports + 10 run records).
+- **Commit 2 (this proof record):** fills §10 with the verified post-push facts; parent = commit 1.
+- **Branch URL:** https://github.com/Qays7753/Documents/tree/micro-standard-v2-reconciliation-final-20260914
+- **Run-folder URL:** https://github.com/Qays7753/Documents/tree/micro-standard-v2-reconciliation-final-20260914/planning/micro-standard-v2-reconciliation-2026-09
+- **Changed-file list / SHA-256 values:** `FINAL_MANIFEST.json` + `SHA256SUMS.txt` (all 58 files hashed).
+- **Standard package file count:** 31 (29 core + 2 metadata — 17 changed, 14 unchanged).
+- **Prototype file list:** README.md, prototype.html, prototype.css, prototype.js, PROTOTYPE_COVERAGE.md, PROTOTYPE_VALIDATION.md, evidence/scene-s1..s6.png.
+- **Confirmations (all re-verified after the push):** Documents `main` = `864263c190f5d3da6041acfafb0720e85ac6e320` (unchanged); the remote branch head equals the local commit; Micro `main` (`c0469e2`) never touched (read-only clone); context branch never touched; the live token value appears in **zero** files, **zero** commits (full-history audit), and zero remote URLs (the only token-prefix strings in repository history are pre-existing prose mentions in three 2026-09-05/06 reports already on `main`, untouched by this run); no merge to `main` performed in this run — the main merge is the owner's separate review gate.
 
 ## 11. Recommended next steps (owner gate)
 
