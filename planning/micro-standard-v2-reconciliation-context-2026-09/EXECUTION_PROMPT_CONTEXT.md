@@ -1,4 +1,4 @@
-# ZAI Execution Brief — Micro Standard v2 Reconciliation, Final Copy, and Prototype v1
+# ZAI 5.3 Full-Context Execution Brief — Micro Standard v2 Reconciliation, Final Copy, and Prototype v1
 
 ## Mission
 
@@ -40,12 +40,43 @@ Use only the following sources as decision inputs:
 5. **ZAI 5.3 Flash read-only integration comparison report:**
    `https://github.com/Qays7753/Documents/blob/micro-standard-v2-micro-integration-comparison-20260913/planning/micro-standard-v2-micro-integration-comparison-2026-09/MICRO_STANDARD_TO_MICRO_READONLY_INTEGRATION_COMPARISON_REPORT.md`
 
-6. **Unified decision register prepared from both reports:**
-   `micro_unified_decision_register_v1.md`
+6. **Unified context pack on Documents:**
+   `https://github.com/Qays7753/Documents/tree/micro-standard-v2-reconciliation-context-20260914/planning/micro-standard-v2-reconciliation-context-2026-09/`
 
-If the two report URLs resolve to the same uploaded filename, verify the commit and compare the actual content before proceeding. The Flash report is the primary operational baseline where the two reports differ in counts or evidence, while the 5.3 report remains a cross-check.
+   Required files in that context pack:
+   - `OWNER_UNIFIED_DECISION_REGISTER.md`
+   - `REPORTS_RECONCILIATION.md`
+   - `REFERENCE_ZAI_5_3_REPORT.md`
+   - `REFERENCE_ZAI_FLASH_REPORT.md`
+   - `FLASH_DELIVERY_TRANSCRIPT.txt`
+   - `EXECUTION_PROMPT_CONTEXT.md`
+
+If any required context file is unavailable, stop and report `CONTEXT_NOT_AVAILABLE`. Do not infer missing decisions. The Flash report is the primary operational baseline where the two reports differ in counts or evidence, while the 5.3 report remains a cross-check.
+
+If the two report documents contain different counts, do not silently choose a number. Preserve the definition and scope of each count, prefer the adversarially re-verified Flash number when its evidence is available, and record the difference in the reconciliation log.
 
 Do not use historical branches, old prompts, old UI/UX reviews, Accounting, Prototype v0, or unpinned files as product truth.
+
+---
+
+## Mandatory context gate — before any edit
+
+Before starting any edit, the main agent and all five sub-agents must read the complete context pack and produce a shared `CONTEXT_ACKNOWLEDGEMENT.md` containing:
+
+- Micro source SHA actually read.
+- Documents/main SHA actually read.
+- Standard file count and SHA manifest status.
+- Confirmation that the Flash report was read.
+- Confirmation that the 5.3 report was read.
+- Confirmation that `OWNER_UNIFIED_DECISION_REGISTER.md` was read.
+- A plain-language summary of the unified strategy.
+- A list of any conflicts between the reports.
+- A list of decisions that are already fixed versus decisions that remain deliberately deferred.
+- A confirmation that Prototype v0 and AI Assistant are excluded.
+
+The main agent must paste the acknowledgement in the chat before requesting or using an Access Token. If the acknowledgement is incomplete, the agent must stop at read-only preflight.
+
+The agent must not claim to understand the context by reading only the prompt. It must cite the exact context files it read.
 
 ---
 
@@ -267,9 +298,9 @@ Create a new branch; do not push directly to `main`:
 Create a new run folder:
 `planning/micro-standard-v2-reconciliation-2026-09/`
 
-The run folder must contain the reports, manifests, SHA file, decision register copy, and Prototype v1. The updated Standard package must be included in a clearly named subfolder or package path with no ambiguity about which copy is final for review.
+The run folder must contain the reports, manifests, SHA file, decision register copy, and Prototype v1. The updated Standard package must be included in a clearly named subfolder or package path with no ambiguity about which copy is final for review. The context pack branch is read-only reference material; do not modify it during the execution run.
 
-Use the following placeholders only. The owner will insert the token manually at execution time:
+Use the following placeholders only. The owner will insert the token manually at execution time, after `CONTEXT_ACKNOWLEDGEMENT.md` is complete and accepted:
 
 ```text
 DOCUMENTS_REPOSITORY_URL: https://github.com/Qays7753/Documents
