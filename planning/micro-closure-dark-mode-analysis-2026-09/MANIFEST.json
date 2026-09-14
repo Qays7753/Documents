@@ -1,0 +1,81 @@
+{
+  "run": "micro-closure-dark-mode-analysis-2026-09",
+  "analysis_timestamp_utc": "2026-09-15",
+  "analysis_mode": "READ-ONLY five-agent closure analysis; Micro and Standard untouched",
+  "source_shas": {
+    "micro_integration_branch_micro-standard-ui-aux-integration-20260914": "ece7be3630739d551b9ba7caf37d30a9a63c872f",
+    "micro_main": "c0469e265f24c70427eb7826dee717be117cff87",
+    "documents_main": "f919982c692e5ba78cf3284a4240c45f66be91c6",
+    "documents_mirror_micro-standard-ui-aux-integration-2026-09": "c8e57019d285fe8c05cdc409a030bb3a6b73d87e"
+  },
+  "target_branch": "micro-closure-dark-mode-analysis-20260915",
+  "target_folder": "planning/micro-closure-dark-mode-analysis-2026-09/",
+  "artifacts": [
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/MICRO_REMAINING_CLOSURE_AND_DARK_MODE_ANALYSIS.md",
+      "bytes": 42385,
+      "sha256": "395912f6335fd1b52c6469e9a37840abf737c7acbd3edaa7b7483ba70f265c63"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/CLOSURE_FINDINGS.csv",
+      "bytes": 32726,
+      "sha256": "c5f4c3ba1005b9f0cebf580772973aa30d63b2ebef903b1485b5785a4ebcbb4b"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/OWNER_DECISIONS_REQUIRED.md",
+      "bytes": 11639,
+      "sha256": "4e8564c4fca5c4b5c6c19c541f1062ab4f1bc944bc08937ee22c211fa792cf93"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/DARK_MODE_PARITY_MATRIX.csv",
+      "bytes": 23937,
+      "sha256": "a671df67a8ee8218ca1398f28ee9c230307d7933504a0fab792c867cf6df33d3"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/TEST_AND_EVIDENCE_GAP_MATRIX.csv",
+      "bytes": 13530,
+      "sha256": "f1573c8c939b35960aa5a59c9051c28fcc5c62078af730d066cfa21b67c83823"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/NEXT_EXECUTION_PLAN.md",
+      "bytes": 9407,
+      "sha256": "a9447343629ff5c1f18f54be748bb590da1872f7e5e41249f65772ccc4429085"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/SOURCE_PROVENANCE.md",
+      "bytes": 6793,
+      "sha256": "14ef7fe6f0676a2218005005dfa36368860059f7df4a4964df7ffeec59333150"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/LIGHT_CLOSURE_INTEGRITY_REVIEW.md",
+      "bytes": 30214,
+      "sha256": "18216d5024cba0ba97cadf211d7029a1f9a22f8dd87c335897720b9ee6d799f6"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/TEST_AND_EVIDENCE_GAP_REVIEW.md",
+      "bytes": 35099,
+      "sha256": "b3bc6ddf817ca2cb8c4b273117bc2d134fb053b8e100185d601257cb4132ec5c"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/STRATEGY_AND_FUTURE_AGENT_REVIEW.md",
+      "bytes": 46466,
+      "sha256": "b44555b7d0cfbc087b5ba06b73103eaffd41c6d204c01d133f7fc1f8bdfe10e5"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/DARK_MODE_READINESS_REVIEW.md",
+      "bytes": 39603,
+      "sha256": "171000607c813d822a82945de4f98e8ae971fa21905107af6a9ee7cfd522ff07"
+    },
+    {
+      "path": "planning/micro-closure-dark-mode-analysis-2026-09/NEXT_PHASE_READINESS_REVIEW.md",
+      "bytes": 44498,
+      "sha256": "6f320785e9a365506cd007e02da462a6dc7ace8a0f22ef2e9515d012b7dbd255"
+    }
+  ],
+  "artifact_count": 12,
+  "manifest_self_note": "MANIFEST.json excludes its own hash; its final hash is recorded in the chat delivery table after the verification commit.",
+  "verification": {
+    "status": "PREPARED",
+    "note": "Updated to UPLOAD_VERIFIED after the 10-point post-push gate passes (per-artifact uploaded sha256 recorded)."
+  }
+}
