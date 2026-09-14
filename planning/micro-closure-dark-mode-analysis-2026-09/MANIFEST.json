@@ -14,68 +14,107 @@
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/MICRO_REMAINING_CLOSURE_AND_DARK_MODE_ANALYSIS.md",
       "bytes": 42385,
-      "sha256": "395912f6335fd1b52c6469e9a37840abf737c7acbd3edaa7b7483ba70f265c63"
+      "sha256": "395912f6335fd1b52c6469e9a37840abf737c7acbd3edaa7b7483ba70f265c63",
+      "uploaded_sha256": "395912f6335fd1b52c6469e9a37840abf737c7acbd3edaa7b7483ba70f265c63",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/CLOSURE_FINDINGS.csv",
       "bytes": 32726,
-      "sha256": "c5f4c3ba1005b9f0cebf580772973aa30d63b2ebef903b1485b5785a4ebcbb4b"
+      "sha256": "c5f4c3ba1005b9f0cebf580772973aa30d63b2ebef903b1485b5785a4ebcbb4b",
+      "uploaded_sha256": "c5f4c3ba1005b9f0cebf580772973aa30d63b2ebef903b1485b5785a4ebcbb4b",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/OWNER_DECISIONS_REQUIRED.md",
       "bytes": 11639,
-      "sha256": "4e8564c4fca5c4b5c6c19c541f1062ab4f1bc944bc08937ee22c211fa792cf93"
+      "sha256": "4e8564c4fca5c4b5c6c19c541f1062ab4f1bc944bc08937ee22c211fa792cf93",
+      "uploaded_sha256": "4e8564c4fca5c4b5c6c19c541f1062ab4f1bc944bc08937ee22c211fa792cf93",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/DARK_MODE_PARITY_MATRIX.csv",
       "bytes": 23937,
-      "sha256": "a671df67a8ee8218ca1398f28ee9c230307d7933504a0fab792c867cf6df33d3"
+      "sha256": "a671df67a8ee8218ca1398f28ee9c230307d7933504a0fab792c867cf6df33d3",
+      "uploaded_sha256": "a671df67a8ee8218ca1398f28ee9c230307d7933504a0fab792c867cf6df33d3",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/TEST_AND_EVIDENCE_GAP_MATRIX.csv",
       "bytes": 13530,
-      "sha256": "f1573c8c939b35960aa5a59c9051c28fcc5c62078af730d066cfa21b67c83823"
+      "sha256": "f1573c8c939b35960aa5a59c9051c28fcc5c62078af730d066cfa21b67c83823",
+      "uploaded_sha256": "f1573c8c939b35960aa5a59c9051c28fcc5c62078af730d066cfa21b67c83823",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/NEXT_EXECUTION_PLAN.md",
       "bytes": 9407,
-      "sha256": "a9447343629ff5c1f18f54be748bb590da1872f7e5e41249f65772ccc4429085"
+      "sha256": "a9447343629ff5c1f18f54be748bb590da1872f7e5e41249f65772ccc4429085",
+      "uploaded_sha256": "a9447343629ff5c1f18f54be748bb590da1872f7e5e41249f65772ccc4429085",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/SOURCE_PROVENANCE.md",
       "bytes": 6793,
-      "sha256": "14ef7fe6f0676a2218005005dfa36368860059f7df4a4964df7ffeec59333150"
+      "sha256": "14ef7fe6f0676a2218005005dfa36368860059f7df4a4964df7ffeec59333150",
+      "uploaded_sha256": "14ef7fe6f0676a2218005005dfa36368860059f7df4a4964df7ffeec59333150",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/LIGHT_CLOSURE_INTEGRITY_REVIEW.md",
       "bytes": 30214,
-      "sha256": "18216d5024cba0ba97cadf211d7029a1f9a22f8dd87c335897720b9ee6d799f6"
+      "sha256": "18216d5024cba0ba97cadf211d7029a1f9a22f8dd87c335897720b9ee6d799f6",
+      "uploaded_sha256": "18216d5024cba0ba97cadf211d7029a1f9a22f8dd87c335897720b9ee6d799f6",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/TEST_AND_EVIDENCE_GAP_REVIEW.md",
       "bytes": 35099,
-      "sha256": "b3bc6ddf817ca2cb8c4b273117bc2d134fb053b8e100185d601257cb4132ec5c"
+      "sha256": "b3bc6ddf817ca2cb8c4b273117bc2d134fb053b8e100185d601257cb4132ec5c",
+      "uploaded_sha256": "b3bc6ddf817ca2cb8c4b273117bc2d134fb053b8e100185d601257cb4132ec5c",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/STRATEGY_AND_FUTURE_AGENT_REVIEW.md",
       "bytes": 46466,
-      "sha256": "b44555b7d0cfbc087b5ba06b73103eaffd41c6d204c01d133f7fc1f8bdfe10e5"
+      "sha256": "b44555b7d0cfbc087b5ba06b73103eaffd41c6d204c01d133f7fc1f8bdfe10e5",
+      "uploaded_sha256": "b44555b7d0cfbc087b5ba06b73103eaffd41c6d204c01d133f7fc1f8bdfe10e5",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/DARK_MODE_READINESS_REVIEW.md",
       "bytes": 39603,
-      "sha256": "171000607c813d822a82945de4f98e8ae971fa21905107af6a9ee7cfd522ff07"
+      "sha256": "171000607c813d822a82945de4f98e8ae971fa21905107af6a9ee7cfd522ff07",
+      "uploaded_sha256": "171000607c813d822a82945de4f98e8ae971fa21905107af6a9ee7cfd522ff07",
+      "verification": "PASS"
     },
     {
       "path": "planning/micro-closure-dark-mode-analysis-2026-09/NEXT_PHASE_READINESS_REVIEW.md",
       "bytes": 44498,
-      "sha256": "6f320785e9a365506cd007e02da462a6dc7ace8a0f22ef2e9515d012b7dbd255"
+      "sha256": "6f320785e9a365506cd007e02da462a6dc7ace8a0f22ef2e9515d012b7dbd255",
+      "uploaded_sha256": "6f320785e9a365506cd007e02da462a6dc7ace8a0f22ef2e9515d012b7dbd255",
+      "verification": "PASS"
     }
   ],
   "artifact_count": 12,
   "manifest_self_note": "MANIFEST.json excludes its own hash; its final hash is recorded in the chat delivery table after the verification commit.",
   "verification": {
-    "status": "PREPARED",
-    "note": "Updated to UPLOAD_VERIFIED after the 10-point post-push gate passes (per-artifact uploaded sha256 recorded)."
+    "status": "UPLOAD_VERIFIED",
+    "gate": "10-point",
+    "verified_at_utc": "2026-09-15",
+    "upload_commit": "8a02903a4281fcdc534537cd24928f6495dc586a",
+    "checks": {
+      "1_target_branch_exists": "PASS — refs/heads/micro-closure-dark-mode-analysis-20260915 at 8a02903a4281fcdc534537cd24928f6495dc586a",
+      "2_commit_on_target_branch_only": "PASS — new-branch push; no other ref moved",
+      "3_changes_only_target_folder": "PASS — 0 files outside planning/micro-closure-dark-mode-analysis-2026-09/",
+      "4_documents_main_unchanged": "PASS — f919982c692e5ba78cf3284a4240c45f66be91c6",
+      "5_micro_standard_v2_unchanged": "PASS — empty diff vs origin/main",
+      "6_existing_mirror_unchanged": "PASS — micro-standard-ui-aux-integration-2026-09 at c8e57019d285fe8c05cdc409a030bb3a6b73d87e",
+      "7_inventory_matches_local": "PASS — 13/13 files",
+      "8_sha256_match_every_artifact": "PASS — 13/13 (raw.githubusercontent.com fetch, hash-compared)",
+      "9_public_urls_available": "PASS — branch/commit/folder/file URLs live",
+      "10_no_token_in_files_urls_metadata_logs": "PASS — scanned; only methodology mentions of pattern names, zero token values"
+    },
+    "manifest_self_note": "This verification commit changes only MANIFEST.json; its own final hash is recorded in the chat delivery table."
   }
 }
