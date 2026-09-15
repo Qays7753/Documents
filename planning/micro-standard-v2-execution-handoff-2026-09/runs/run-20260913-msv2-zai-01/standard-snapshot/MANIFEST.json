@@ -1,7 +1,0 @@
-{
-  "package": "Micro Standard v2",
-  "status": "final",
-  "file_count": 29,
-  "source": "Cloud Code Design Wave 2 + approved Micro Component Expansion v1, reconciled against ZAI run-20260913-msv2-zai-01",
-  "updated_by": "Final Copy reconciliation on branch micro-standard-v2-final-copy-20260913; 13 package/run-facing files reconciled: 8 Standard contract/gallery files plus 5 handoff records; 31 package files preserved (29 core + 2 metadata); no package files added, removed, moved, or renamed"
-}

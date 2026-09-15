@@ -1,7 +1,0 @@
-{
-  "method": "git-native rollback",
-  "rollback_commit": "dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b",
-  "rollback_command": "git checkout micro-standard-v2-execution-20260913 && git reset --hard dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b",
-  "package_hash_manifest": "wave-0/baseline_sha256.txt",
-  "note": "Branch created from main at dfa8bf7 with zero content modifications; any wave can be reverted by git restore against the baseline hashes."
-}
