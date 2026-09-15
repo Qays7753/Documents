@@ -1,0 +1,92 @@
+# Delivery metadata — micro-group-1-guided-financial-entry-001
+id: micro-group-1-guided-financial-entry-001
+delivery_date: "2026-09-03"
+program: "Zman-to-Micro transfer program — Group 1 (guided financial entry, expense classification, allocation, financial foundation)"
+
+repositories:
+  micro:
+    url: https://github.com/Qays7753/Micro
+    final_main_commit: "761638b"
+    feature_commit: "bc2e4c5"
+    baseline_commit: "4db6a5f"
+    pull_request: 149
+    merged: true
+    ci: "completed success"
+    files_changed: 40
+    insertions: 3894
+    deletions: 153
+  zman_reference:
+    url: https://github.com/Qays7753/zman-app
+    commit: "bdd63ab"
+    access: read-only
+  documents:
+    url: https://github.com/Qays7753/Documents
+    commit: pending-upload
+
+files:
+  - path: en/group-1-implementation-report-en.md
+    sha256: 9dd6e4538018ec0ca8044ca4db871bb1ff53c394e580f4fab69158e692ce5353
+    bytes: 22139
+  - path: en/group-1-financial-contracts-en.md
+    sha256: 114bbe512eb1702f5495c3bc8010a4f200ec8524b815abf09ea12652372be624
+    bytes: 13741
+  - path: en/group-1-ux-and-flow-review-en.md
+    sha256: c8a920dd01a1b3b58c582aa613d92eac0db60ebcbaffade57c0d5cf575db8f74
+    bytes: 16221
+  - path: en/group-1-test-evidence-en.md
+    sha256: cf093333a11d2a7d86c1bdbb3910c1f1a1c83f623c82a3b17f240a7a57a694de
+    bytes: 11014
+  - path: en/group-1-subagent-synthesis-en.md
+    sha256: 59056b5d40bd1da962e8f9c9a6d9c334e013a1739c3959adbc2b1ce3b298560e
+    bytes: 8432
+  - path: ar/group-1-implementation-report-ar.docx
+    sha256: 2b3a2d92ad5b5212e203b9f398dfde01a7192c6e98e48a8f63dacdae755d4bb5
+    bytes: 20407
+  - path: supporting/ar-report-render-preview.pdf
+    sha256: 74295cd0596a69ccea90a5025031797c2428e5726ca4971eebc5164a9d1c0e37
+    bytes: 160821
+  - path: supporting/group1-integrity-live.png
+    sha256: 0d6bd716fe5c7787f18ed5af0d1abc1890cabcfd2c81f024d6edb1473ce5111f
+    bytes: 66292
+  - path: supporting/group1-payable-effect-live.png
+    sha256: 7b0fce03dac9c522f4e726abefe9ef9b37b1a64a1a05e7dffe2b8e869cd01971
+    bytes: 49668
+
+verification:
+  pnpm_check: pass
+  typecheck: pass
+  lint: "0 errors / 37 warnings (baseline ceiling, zero new)"
+  domain_tests: "231 passed / 20 files"
+  prototype_tests: "607 passed / 96 files"
+  text_density: "all caps (ToolsIntegrity 32/32, FinancialEventEditor 138/138, Statement 89/89, Tools 28/34, Finance 181/181)"
+  design_guards: pass
+  production_build: "pass (PWA, 80 precache entries)"
+  github_actions_ci: "completed success (commit bc2e4c5)"
+  merge_verified: "main = origin/main = 761638b, clean tree"
+  live_browser_qa: "production preview, 390x844 RTL, scenarios A/B/C/E + integrity + surfaces, 0 console errors"
+  ar_docx_render: "LibreOffice PDF render + VLM visual check: Arabic shaped, RTL correct, tables RTL, no defects"
+  token_leak_scan: pass
+
+scope:
+  implemented:
+    - "categoryLabel (schema 31 / export 23, legacy 22/30 null default, zero delta effect — twin-tested)"
+    - "Guided expense journey (wallet question, category field + chips, allocation review card, effect preview derived from expenseRecordIntent + domain dry-run, path guidance, drafts)"
+    - "Quick-sheet category chips + honest negatives clause"
+    - "Statement «مصاريفي حسب تصنيفي» grouping + derived recognizedRevenueTotalMinor"
+    - "Canonical period-result lock (deep-equal + invocation spy + null-as-value)"
+    - "Integrity foundation: /tools/integrity surface, MIC-1/2/4/7/9, zero-writes tested"
+    - "Defect fixes: D-025 (transfer/transfer-reversal import rejection), editor useFormDirty stable token"
+  deferred:
+    - "TR-03 statement export artifact"
+    - "TR-05 activity layer"
+    - "TR-07 inventory bridge"
+    - "TR-09 undo-delete"
+    - "EventsLayer tag filter (needs ?tag vocabulary entry)"
+    - "OwnerWithdrawalEditor loan hint (page at density cap)"
+    - "MIC-3/5/6/8/10 (registry reserved)"
+    - "Density-counter truth-section blind-spot fix (D-026)"
+
+findings_summary:
+  defects_found_and_fixed: 2
+  pre_existing: true
+  adversarial_review: "SA-5 FIX REQUIRED → all actionable findings fixed pre-merge (1 major + 3 minors + 5 notes adopted)"

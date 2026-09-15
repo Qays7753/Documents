@@ -1,0 +1,235 @@
+/* ==========================================================================
+   MICRO · CANONICAL DESIGN TOKENS — tokens.css
+   --------------------------------------------------------------------------
+   Product : Arabic-first (RTL), phone-only (320 / 360 / 390 / 430 px),
+             financial & operational app for Jordanian small businesses.
+   Mode    : LIGHT MODE ONLY.
+             - There is no `.dark` class, no `prefers-color-scheme` query
+               and no theme switch anywhere in this system.
+             - No dark token variants exist or will be authored.
+   Source  : These are the EXACT Micro tokens, authored verbatim from the
+             token spec. Values are never rounded, re-derived or invented.
+   Layer   : This file is the SEMANTIC layer and the single source of truth.
+             Primitives (the raw hex / px / ms values below) are documented
+             inline; component-level tokens live with each component in
+             components/*.css and may only resolve back to vars defined here.
+   Use     : Extraction-ready. Dropping this file into any stack (plain CSS,
+             React, Next.js, Vue…) is sufficient — no preprocessor, no build
+             step, no JS runtime. The optional Tailwind v4 adapter
+             (tailwind-v4-theme.css) re-exposes these same values.
+   Naming  : camelCase token names from the spec become kebab-case custom
+             properties (brandAtmosphere -> --brand-atmosphere).
+   Fonts   : IBM Plex Sans Arabic 400 / 500 / 600 with Noto Sans Arabic
+             fallback. Digits are English (Latin), bidi-isolated, tabular.
+   Currency: Always "د.أ" — never "JOD".
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   TEXT-SCALE VERIFICATION HOOK (--text-scale, default 1)
+   --------------------------------------------------------------------------
+   The lab multiplies every font-size token by a single --text-scale factor:
+
+     html                { --text-scale: 1; }   default (spec values)
+     html[data-text-scale="130"] { --text-scale: 1.3; }   130% check
+     html[data-text-scale="200"] { --text-scale: 2; }     200% check
+
+   Every font-size token is written as calc(<px> * var(--text-scale)), so:
+     - At scale 1 the computed value is EXACTLY the spec pixel value
+       (32px stays 32px) — extraction is lossless.
+     - At 1.3 / 2 all type scales together; line-height tokens are unitless
+       so they scale proportionally; the lab verifies that nothing clips,
+       that tap targets keep their hit areas, and that no Arabic-script
+       text falls below the 14px floor (floor checked at the active scale).
+   --text-scale is a lab/verification hook, NOT a user-facing setting; it
+   is never wired to a UI control.
+   -------------------------------------------------------------------------- */
+
+:root {
+
+  /* ======================================================================
+     1 · COLOR (semantic layer — values are the spec primitives)
+     ====================================================================== */
+
+  /* -- 1a. Brand & interaction ------------------------------------------ */
+  --brand-atmosphere: #CC785C;          /* terracotta; FILLS only: primary
+                                           button bg, active pills, chart
+                                           series. ≈3.1:1 on canvas — fine
+                                           for non-text (≥3:1), never for
+                                           body-size text. */
+  --brand-tint: #F7EAE4;                /* soft brand wash: chips, selected
+                                           list rows, quiet surfaces */
+  --brand-ink: #964E33;                 /* brand TEXT color: quiet-text
+                                           buttons, links, active nav label.
+                                           ≈6:1 on canvas — AA for text. */
+  --on-brand: #FFFFFF;                  /* text/icon on brand & status fills
+                                           (on-brand on brand-atmosphere
+                                           measures ≈3.3:1 — flagged for
+                                           a11y review, see
+                                           component-architecture.md §7) */
+  --press-overlay: rgba(31,30,29,0.08); /* pressed-state veil layered over
+                                           ANY filled control; also reused as
+                                           the neutral soft shadow color */
+
+  /* -- 1b. Surfaces & scrim --------------------------------------------- */
+  --canvas: #FAF9F5;                    /* app background (page level) */
+  --surface: #FFFFFF;                   /* cards, sheets, dialogs, inputs */
+  --sunken: #F0EEE6;                    /* wells, tracks, skeletons, chips */
+  --scrim: rgba(31,30,29,0.45);         /* modal/sheet/dialog backdrop */
+
+  /* -- 1c. Ink ramp (text & icons) -------------------------------------- */
+  --ink-strong: #1F1E1D;                /* primary value block (32px), titles */
+  --ink: #33322E;                       /* default body text (≈10:1 canvas) */
+  --ink-muted: #6E6A60;                 /* secondary text, icons (≈5:1) */
+  --ink-subtle: #767265;                /* tertiary hints (≈4.6:1 — hints
+                                           only, never <14px) */
+  --ink-disabled: #B7B2A6;              /* disabled text/icons & placeholders */
+
+  /* -- 1d. Lines --------------------------------------------------------- */
+  --line-soft: #EAE6DC;                 /* hairline dividers inside surfaces */
+  --line-strong: #DED9CB;               /* input borders, control outlines */
+
+  /* -- 1e. Status (foreground + tinted ground pairs) --------------------- */
+  --positive: #2E7D57;                  /* success, credit, completed */
+  --positive-tint: #E7EFE7;             /* success chip bg (pair icon-only:
+                                           pair text is 4.28:1, use --ink) */
+  --danger: #B42318;                    /* errors, debit, destructive */
+  --danger-tint: #F7E7E2;               /* error chip bg (pair 5.5:1 ✓) */
+  --warning: #8A6520;                   /* caution, offline, conflict */
+  --warning-tint: #F4EDD8;              /* warning chip bg (pair 4.5:1 ✓) */
+  --info: #3E5C76;                      /* pending, informational */
+  --info-tint: #E8EDF1;                 /* info chip bg (pair 5.9:1 ✓) */
+
+  /* ======================================================================
+     2 · SPACING (px scale: 2, 4, 8, 12, 16, 24, 32, 40; screen edge 16)
+     ====================================================================== */
+  --space-2: 2px;      /* hairline gaps, icon nudges, chip padding-block */
+  --space-4: 4px;      /* icon-to-label, tight inline padding */
+  --space-8: 8px;      /* touch gap, tile gap, stacked label spacing */
+  --space-12: 12px;    /* card padding-tight, chip padding-inline */
+  --space-16: 16px;    /* card padding, control padding-inline */
+  --space-24: 24px;    /* section spacing, sheet content padding */
+  --space-32: 32px;    /* block separation between sections */
+  --space-40: 40px;    /* page-level breathing room */
+  --space-edge: 16px;  /* screen edge gutter — identical on every
+                          breakpoint (320/360/390/430) */
+
+  /* ======================================================================
+     3 · RADIUS
+     ====================================================================== */
+  --radius-sm: 6px;    /* checkbox, small chips, tag corners */
+  --radius-md: 12px;   /* buttons, inputs, tiles, rows (default control) */
+  --radius-lg: 16px;   /* cards, dialogs, sheet top corners */
+  --radius-xl: 24px;   /* large feature cards, hero blocks */
+  --radius-full: 999px;/* pills, switch track, grabber, dots */
+  /* NOTE: BottomNavigation is EDGE-TO-EDGE — border-radius: 0 is a
+     component rule authored in bottom-navigation.css, not a token. */
+
+  /* ======================================================================
+     4 · TYPOGRAPHY
+     ====================================================================== */
+
+  /* 4a. Family & numeric behaviour */
+  --font-product: "IBM Plex Sans Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+  /* All amounts, metrics and figures render with tabular lining figures so
+     columns of Latin digits inside Arabic context stay aligned:
+       font-variant-numeric: var(--numeric-variant); */
+  --numeric-variant: tabular-nums lining-nums;
+
+  /* 4b. Weights (exactly the three product-font weights) */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* 4c. Text-scale hook (see comment block above this :root) */
+  --text-scale: 1;
+
+  /* 4d. Type roles — size / weight / line-height */
+  --text-value-size: calc(32px * var(--text-scale));       /* PrimaryValue */
+  --text-value-weight: var(--weight-semibold);
+  --text-value-line-height: 1.15;
+
+  --text-label-size: calc(15px * var(--text-scale));       /* labels, body */
+  --text-label-weight: var(--weight-regular);
+  --text-label-line-height: 1.55;
+
+  --text-qualifier-size: calc(13px * var(--text-scale));   /* hints, meta  */
+  --text-qualifier-weight: var(--weight-regular);
+  --text-qualifier-line-height: 1.4;
+
+  /* Arabic-script floor: no Arabic string is ever set below 14px. The 13px
+     qualifier role is reserved for digit runs, Latin and unit marks ONLY —
+     including the currency mark "د.أ", which is Arabic script and therefore
+     never rendered at 13px. Verified at every --text-scale step. */
+  --text-arabic-min: 14px;
+
+  /* ======================================================================
+     5 · MOTION
+     ====================================================================== */
+  --dur-press: 80ms;      /* press-overlay veil on any control */
+  --dur-fast: 120ms;      /* small state swaps: segmented pill, switch,
+                             checkbox, loading crossfade */
+  --dur-normal: 200ms;    /* default state transitions, fades, completions */
+  --dur-sheet-in: 240ms;  /* bottom sheet entrance */
+  --dur-sheet-out: 180ms; /* bottom sheet exit */
+  --dur-dialog-in: 160ms; /* centered dialog entrance */
+  --dur-dialog-out: 120ms;/* centered dialog exit */
+  --dur-scrim: 200ms;     /* scrim fade, in and out */
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);  /* entrances & state moves */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);      /* exits only */
+
+  /* MOTION LAW (non-negotiable): no bounce, no springs, no overshoot,
+     no count-up. Values always render at their FINAL state immediately —
+     numbers never animate. Entrances use --ease-standard, exits use
+     --ease-exit. All overlay motion is vertical / scale / opacity only,
+     which makes it direction-safe under RTL by construction. */
+
+  /* ======================================================================
+     6 · TOUCH
+     ====================================================================== */
+  --touch-min: 44px;      /* minimum hit area for any secondary target */
+  --touch-primary: 48px;  /* primary controls: buttons, inputs, nav items */
+  --touch-gap: 8px;       /* minimum air between adjacent hit areas */
+
+  /* ======================================================================
+     7 · Z-INDEX
+     ====================================================================== */
+  --z-base: 0;            /* normal document flow */
+  --z-sticky: 10;         /* sticky headers / section bars */
+  --z-nav: 100;           /* BottomNavigation (fixed) */
+  --z-scrim-sheet: 250;   /* sheet scrim — sits UNDER the sheet */
+  --z-sheet: 300;         /* bottom sheet */
+  --z-scrim-dialog: 350;  /* dialog scrim — sits UNDER the dialog */
+  --z-dialog: 400;        /* centered dialog (top of stack) */
+
+  /* Base hint (NOT a token): pins native form controls, scrollbars and
+     dialogs to light rendering — reinforces the light-mode-only guarantee. */
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   COMPONENT-LEVEL LAYER (authored in components/*.css — never in this file)
+   --------------------------------------------------------------------------
+   Components consume tokens through private locals, e.g.:
+
+     .mc-btn {
+       --_height: var(--touch-primary);
+       --_radius: var(--radius-md);
+       --_bg: var(--brand-atmosphere);
+       --_fg: var(--on-brand);
+       height: var(--_height);
+       border-radius: var(--_radius);
+       background: var(--_bg);
+       color: var(--_fg);
+     }
+     .mc-btn[data-state="loading"] → label slot swaps to spinner, width locked
+
+   Rules that keep extraction lossless:
+     1. A component local may ONLY reference vars defined in this file (or
+        other locals of the same component). No new raw colors, sizes,
+        durations or easings are allowed outside tokens.css.
+     2. States are expressed with data-attributes ([data-state="…"],
+        [data-pressed], [aria-disabled="true"]) — never with extra classes.
+     3. Variants use BEM-ish modifier classes (.mc-btn--primary); state
+        selectors stay orthogonal to variant selectors.
+   -------------------------------------------------------------------------- */

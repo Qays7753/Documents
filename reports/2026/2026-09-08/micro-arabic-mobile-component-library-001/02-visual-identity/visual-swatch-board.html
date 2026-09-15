@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دفء الطابون — لوحة عينات الهوية البصرية</title>
+<!-- Progressive enhancement only: if offline, the board falls back to Noto Sans Arabic / system sans. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — the only color definitions in this artifact.
+   SPEC §6.3 exact values. No dark mode. No other colors exist.
+   ============================================================ */
+:root{
+  /* Brand */
+  --brand-atmosphere:#CC785C;
+  --brand-tint:#F7EAE4;
+  --brand-ink:#964E33;
+  --on-brand:#FFFFFF;
+  --press-overlay:rgba(31,30,29,0.08);   /* #1F1E1D @ 8% */
+  /* Product surfaces (exactly three) */
+  --canvas:#FAF9F5;
+  --surface:#FFFFFF;
+  --sunken:#F0EEE6;
+  /* Ink & structure */
+  --ink-strong:#1F1E1D;
+  --ink:#33322E;
+  --ink-muted:#6E6A60;
+  --ink-subtle:#767265;
+  --ink-disabled:#B7B2A6;
+  --line-soft:#EAE6DC;
+  --line-strong:#DED9CB;
+  --scrim:rgba(31,30,29,0.45);           /* #1F1E1D @ 45% */
+  /* Semantic */
+  --positive:#2E7D57;   --positive-tint:#E7EFE7;
+  --danger:#B42318;     --danger-tint:#F7E7E2;
+  --warning:#8A6520;    --warning-tint:#F4EDD8;
+  --info:#3E5C76;       --info-tint:#E8EDF1;
+  /* Type */
+  --font-family:'IBM Plex Sans Arabic','Noto Sans Arabic',system-ui,sans-serif;
+}
+
+/* ============ Board chrome (px-based; artifact, not product) ============ */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--canvas);
+  color:var(--ink);
+  font-family:var(--font-family);
+  font-size:15px;
+  line-height:1.55;
+  padding:24px 16px 40px;
+  max-width:880px;
+  margin-inline:auto;
+}
+.board-head{margin-block-end:24px;border-block-end:1px solid var(--line-soft);padding-block-end:16px}
+.board-kicker{font-size:13px;color:var(--ink-subtle);letter-spacing:.04em;margin:0 0 8px;direction:ltr;text-align:right}
+h1{font-size:24px;font-weight:600;color:var(--ink-strong);line-height:1.3;margin:0 0 4px}
+h1 .latin{font-weight:400;font-size:16px;color:var(--ink-muted)}
+.board-sub{margin:0;color:var(--ink-muted);font-size:15px}
+.board-note{margin:8px 0 0;color:var(--ink-subtle);font-size:13px;line-height:1.4}
+
+section{background:var(--surface);border:1px solid var(--line-soft);border-radius:16px;padding:16px;margin-block-end:16px}
+h2{font-size:17px;font-weight:600;color:var(--ink-strong);margin:0 0 4px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+h2 .en{font-weight:400;font-size:13px;color:var(--ink-subtle);direction:ltr}
+.sec-note{font-size:13px;color:var(--ink-subtle);line-height:1.4;margin:0 0 16px}
+
+/* swatch grid */
+.grid{display:flex;flex-wrap:wrap;gap:12px}
+.swatch{flex:1 1 200px;border:1px solid var(--line-soft);border-radius:12px;overflow:hidden;background:var(--surface)}
+.chip{height:88px;display:flex;align-items:flex-end;padding:8px 12px;border-block-end:1px solid var(--line-soft)}
+.chip .chip-note{font-size:13px;line-height:1.4}
+.swatch figcaption{padding:10px 12px 12px}
+.role{display:block;font-size:14px;color:var(--ink);font-weight:500}
+.code{display:block;direction:ltr;text-align:right;font-size:13px;color:var(--ink-subtle);margin-block-start:2px}
+figure{margin:0}
+
+/* section-specific chip text colors */
+.chip-atmosphere{background:var(--brand-atmosphere)} .chip-atmosphere .chip-note{color:var(--ink-strong)}
+.chip-tint{background:var(--brand-tint)} .chip-tint .chip-note{color:var(--brand-ink)}
+.chip-brandink{background:var(--brand-ink)} .chip-brandink .chip-note{color:var(--on-brand)}
+.chip-onbrand{background:var(--on-brand);border-block-end:1px solid var(--line-strong)} .chip-onbrand .chip-note{color:var(--ink-muted)}
+.chip-canvas{background:var(--canvas)} .chip-canvas .chip-note{color:var(--ink-muted)}
+.chip-surface{background:var(--surface);border-block-end:1px solid var(--line-strong)} .chip-surface .chip-note{color:var(--ink-muted)}
+.chip-sunken{background:var(--sunken)} .chip-sunken .chip-note{color:var(--ink-muted)}
+.ink-chip{display:flex;align-items:center;justify-content:space-between}
+.ink-chip .big{font-size:24px;font-weight:600}
+
+/* nesting demo */
+.nest{border:1px solid var(--line-soft);border-radius:12px;background:var(--canvas);padding:16px;margin-block-start:12px}
+.nest-l1{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:12px}
+.nest-l2{background:var(--sunken);border-radius:12px;padding:12px;color:var(--ink-muted);font-size:14px}
+.nest p{margin:0}
+.nest-tag{font-size:13px;color:var(--ink-subtle)}
+
+/* semantic pair chips */
+.pair-grid{display:flex;flex-wrap:wrap;gap:12px;margin-block-start:4px}
+.chip-sem{display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:8px 12px;font-size:15px;color:var(--ink);font-weight:500}
+.chip-sem svg{flex:none}
+.chip-sem.pos{background:var(--positive-tint)} .chip-sem.pos svg{color:var(--positive)}
+.chip-sem.dng{background:var(--danger-tint)} .chip-sem.dng svg{color:var(--danger)}
+.chip-sem.wrn{background:var(--warning-tint)} .chip-sem.wrn svg{color:var(--warning)}
+.chip-sem.inf{background:var(--info-tint)} .chip-sem.inf svg{color:var(--info)}
+.chip-sem .num{font-variant-numeric:tabular-nums lining-nums}
+
+.large-value-demo{background:var(--positive-tint);border-radius:12px;padding:16px;margin-block-start:12px}
+.large-value-demo .m-val{font-size:32px;font-weight:600;line-height:1.15;color:var(--positive);font-variant-numeric:tabular-nums lining-nums}
+.large-value-demo .cur{font-size:20px;font-weight:500;color:var(--ink)}
+.large-value-demo .lbl{font-size:15px;color:var(--ink);margin-block-start:4px}
+.cap{display:block;font-size:13px;color:var(--ink-subtle);line-height:1.4;margin-block-start:6px}
+
+/* ============ type specimens (px = exact role sizes; product tokens are rem) ============ */
+.spec{border:1px solid var(--line-soft);border-radius:12px;padding:16px;margin-block-end:12px}
+.spec .t-value{font-size:32px;font-weight:600;line-height:1.15;color:var(--ink-strong);font-variant-numeric:tabular-nums lining-nums}
+.spec .t-value .cur{font-size:20px;font-weight:500;color:var(--ink)}
+.spec .t-label{font-size:15px;line-height:1.55;color:var(--ink-muted)}
+.spec .t-qual{font-size:13px;line-height:1.4;color:var(--ink-subtle)}
+.spec .spec-tag{display:block;direction:ltr;text-align:right;font-size:13px;color:var(--ink-subtle);margin-block-start:8px}
+
+.tnum-cols{display:flex;gap:12px;flex-wrap:wrap}
+.tnum-col{flex:1 1 260px;border:1px solid var(--line-soft);border-radius:12px;padding:12px}
+.tnum-col h3{font-size:14px;font-weight:500;color:var(--ink-muted);margin:0 0 8px}
+.trow{display:flex;justify-content:space-between;align-items:baseline;min-height:36px}
+.trow .lbl{font-size:15px;color:var(--ink)}
+.m-val{display:inline-flex;align-items:baseline}
+.m-val .num{display:inline-block;min-width:9ch;text-align:right;direction:ltr;font-size:24px;font-weight:600;color:var(--ink-strong);font-variant-numeric:tabular-nums lining-nums}
+.m-val .cur{font-size:14px;color:var(--ink-muted)}
+.tnum-col.prop .m-val .num{font-variant-numeric:proportional-nums}
+.trow.dng .m-val .num{color:var(--danger)}
+.trow.pos .m-val .num{color:var(--positive)}
+
+/* spacing strip */
+.space-row{display:flex;align-items:center;gap:12px;margin-block-end:8px}
+.space-bar{height:24px;background:var(--line-strong)}
+.space-lbl{font-size:13px;color:var(--ink-subtle);direction:ltr}
+
+/* radius strip */
+.radius-grid{display:flex;flex-wrap:wrap;gap:12px}
+.radius-cell{flex:0 0 auto}
+.radius-tile{width:88px;height:64px;background:var(--surface);border:2px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-muted)}
+.radius-cell .cap{text-align:center}
+.bnav-note{border:2px solid var(--line-strong);background:var(--surface);border-radius:0;padding:12px 16px;margin-block-start:12px;font-size:14px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.bnav-note .cap{margin:0}
+
+/* press & scrim demos */
+.demo-row{display:flex;flex-wrap:wrap;gap:12px;margin-block-end:12px}
+.demo-cell{flex:1 1 200px;border:1px solid var(--line-soft);border-radius:12px;padding:12px}
+.quiet-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1px solid var(--line-strong);border-radius:12px;background:var(--surface);color:var(--ink);font-size:15px;font-weight:500;overflow:hidden}
+.cta-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:8px 20px;border:0;border-radius:12px;background:var(--brand-ink);color:var(--on-brand);font-size:15px;font-weight:600;overflow:hidden}
+.is-pressed .ovl{position:absolute;inset:0;border-radius:inherit;background:var(--press-overlay)}
+.scrim-stage{position:relative;border:1px solid var(--line-soft);border-radius:12px;overflow:hidden;background:var(--canvas)}
+.scrim-behind{padding:16px}
+.behind-row{display:flex;justify-content:space-between;padding-block:10px;border-block-end:1px solid var(--line-soft);font-size:15px;color:var(--ink)}
+.scrim-layer{position:absolute;inset:0;background:var(--scrim)}
+.mini-sheet{position:relative;background:var(--surface);border-radius:16px 16px 0 0;padding:16px;margin:24px 16px 0}
+.mini-sheet h3{margin:0 0 4px;font-size:17px;font-weight:600;color:var(--ink-strong)}
+.mini-sheet p{margin:0 0 12px;font-size:15px;color:var(--ink)}
+.sheet-actions{display:flex;gap:8px}
+
+/* do / don't */
+.dd-grid{display:flex;flex-wrap:wrap;gap:12px}
+.dd{flex:1 1 300px}
+.dd-title{font-size:14px;font-weight:600;color:var(--ink-strong);margin-block-end:8px;display:flex;gap:6px;align-items:center}
+.dd-box{border:1px solid var(--line-soft);border-radius:12px;padding:12px;background:var(--surface);margin-block-end:8px}
+.dd-box.bad{background:var(--sunken)}
+.dd-mark{font-size:15px;font-weight:600}
+.dd-mark.good{color:var(--positive)}
+.dd-mark.bad{color:var(--danger)}
+.mini-card{border:1px solid var(--line-soft);border-radius:12px;padding:12px}
+.mini-card.full-pos{background:var(--positive-tint);border-color:var(--positive-tint)}
+.mini-card.full-pos .mc-t{color:var(--positive)}
+.mini-row{display:flex;justify-content:space-between;align-items:baseline}
+.mc-t{font-size:15px;color:var(--ink);margin:0}
+.mc-v{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums lining-nums}
+.bad-fill{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border-radius:12px;border:0;font-size:15px;font-weight:500}
+.bad-fill.atmo{background:var(--brand-atmosphere);color:var(--on-brand)}
+.value-only{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums lining-nums;color:var(--positive)}
+
+footer{font-size:13px;color:var(--ink-subtle);line-height:1.4;border-top:1px solid var(--line-soft);padding-block-start:16px}
+footer p{margin:0 0 4px}
+</style>
+</head>
+<body>
+
+<header class="board-head">
+  <p class="board-kicker">RUN 20260908T133450Z-16d11 · AGENT 02 · VISUAL IDENTITY · REFERENCE ARTIFACT (NOT A PRODUCT SCREEN)</p>
+  <h1>دفء الطابون <span class="latin">· Taboun Warmth</span></h1>
+  <p class="board-sub">لوحة عينات الهوية البصرية للنظام المكوّنات العربية — الألوان والخطوط والمسافات والانحناء.</p>
+  <p class="board-note">النمط الضوئي فقط · كل الألوان عبر متغيّرات CSS الرمزية · أرقام إنجليزية وعملة د.أ · تاريخ DD/MM/YYYY · عينة مرجعية معزولة لكل قسم، وليست تركيبة شاشة واحدة.</p>
+</header>
+
+<main>
+
+<!-- 1 · BRAND -->
+<section id="brand">
+  <h2>١. الهوية <span class="en">Brand</span></h2>
+  <p class="sec-note">لحظة علامة واحدة لكل إطار: زر أساسي معبّأ بـ brand-ink، أو كتلة جوّية واحدة في الحالة الفارغة — لا الاثنان معاً.</p>
+  <div class="grid">
+    <figure class="swatch">
+      <div class="chip chip-atmosphere"><span class="chip-note">نص الحبر القوي فوق الجوّ — 5.08:1</span></div>
+      <figcaption><span class="role">سطح الهوية الجوّي (الطابون)</span><code class="code">brand-atmosphere · #CC785C</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-tint"><span class="chip-note">أيقونة brand-ink فوق الصبغة — 5.20:1</span></div>
+      <figcaption><span class="role">بلاطة QuickActionRail الملوّنة الوحيدة</span><code class="code">brand-tint · #F7EAE4</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-brandink"><span class="chip-note">on-brand فوق حبر العلامة — 6.11:1</span></div>
+      <figcaption><span class="role">حبر العلامة + تعبئة CTA الأساسي</span><code class="code">brand-ink · #964E33</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-onbrand"><span class="chip-note">فوق brand-ink فقط</span></div>
+      <figcaption><span class="role">نص/أيقونة فوق تعبئة العلامة</span><code class="code">on-brand · #FFFFFF</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-surface" style="position:relative">
+        <span class="ovl" style="position:absolute;inset:0;background:var(--press-overlay)"></span>
+        <span class="chip-note">معالجة الضغط — فوق أي عنصر</span>
+      </div>
+      <figcaption><span class="role">طبقة الضغط (80ms)</span><code class="code">press-overlay · #1F1E1D @ 8%</code></figcaption>
+    </figure>
+  </div>
+  <span class="cap">ممنوع دائماً: ‎#B4613F‎ كحبر علامة بديل · الأبيض بنص عادي فوق الجوّ (3.28:1 = نص كبير/أيقونات فقط) · الصبغة كسطح رابع.</span>
+</section>
+
+<!-- 2 · SURFACES -->
+<section id="surfaces">
+  <h2>٢. الأسطح <span class="en">Product Surfaces — exactly three</span></h2>
+  <p class="sec-note">الدفء من فروق صغيرة بين ثلاثة مستويات فقط: حائط الغرفة، الطاولة النظيفة، حوض الغور.</p>
+  <div class="grid">
+    <figure class="swatch">
+      <div class="chip chip-canvas"><span class="chip-note">القيمة الرئيسية تسكن هنا مباشرة</span></div>
+      <figcaption><span class="role">الخلفية — جدار الغرفة الدافئ</span><code class="code">canvas · #FAF9F5</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-surface"><span class="chip-note">مجموعة المقاييس والبطاقات</span></div>
+      <figcaption><span class="role">السطح — الطاولة النظيفة</span><code class="code">surface · #FFFFFF</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-sunken"><span class="chip-note">حقول الإدخال ومناطق الرسوم</span></div>
+      <figcaption><span class="role">الغائر — حوض الدقيق</span><code class="code">sunken · #F0EEE6</code></figcaption>
+    </figure>
+  </div>
+  <div class="nest">
+    <p><span class="nest-tag">canvas</span></p>
+    <div class="nest-l1">
+      <p><span class="nest-tag">surface</span></p>
+      <div class="nest-l2">sunken — أقصى تعشيق مسموح: مستويان</div>
+    </div>
+    <span class="cap">لا يوجد سطح رابع (لا paper ولا grouped ولا quiet) · لا sunken داخل sunken · الصبغات الدلالية جُمل مالية لا أماكن.</span>
+  </div>
+</section>
+
+<!-- 3 · INK & STRUCTURE -->
+<section id="ink">
+  <h2>٣. الحبر والبنية <span class="en">Ink &amp; Structure</span></h2>
+  <p class="sec-note">حبر دافئ، لا أزرق-رمادي أبداً. الخطوط البنيوية ملمس لا إشارة: التعرّف على المكوّن من الحشوة والخط وحلقة التركيز 2px.</p>
+  <div class="grid">
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--ink-strong)"><span class="big" style="color:var(--on-brand)">أa 0</span></div>
+      <figcaption><span class="role">الحبر الأول: القيمة 32px والعناوين</span><code class="code">ink-strong · #1F1E1D · 16.64:1</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--ink)"><span class="big" style="color:var(--on-brand)">أa 0</span></div>
+      <figcaption><span class="role">حبر النص والعناوين الثانوية</span><code class="code">ink · #33322E · 12.83:1</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--ink-muted)"><span class="big" style="color:var(--on-brand)">أa 0</span></div>
+      <figcaption><span class="role">التسميات فوق القيم</span><code class="code">ink-muted · #6E6A60 · 5.39:1</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--ink-subtle)"><span class="big" style="color:var(--on-brand)">أa 0</span></div>
+      <figcaption><span class="role">الملحقات 13px — فوق surface/canvas فقط</span><code class="code">ink-subtle · #767265 · 4.81:1</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--ink-disabled)"><span class="big" style="color:var(--on-brand)">أa 0</span></div>
+      <figcaption><span class="role">عناصر معطّلة فقط (مع إشارة غير لونية)</span><code class="code">ink-disabled · #B7B2A6 · 2.11:1</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-surface" style="border-block-start:4px solid var(--line-soft)"><span class="chip-note">فاصل شقيق هادئ</span></div>
+      <figcaption><span class="role">خط ناعم — إيقاع زخرفي</span><code class="code">line-soft · #EAE6DC</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip chip-surface" style="border-block-start:4px solid var(--line-strong)"><span class="chip-note">حدود المكوّنات</span></div>
+      <figcaption><span class="role">خط قوي — حدود المدخلات والبلاطات</span><code class="code">line-strong · #DED9CB</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip" style="background:var(--scrim)"><span class="chip-note" style="color:var(--ink-strong)">خلف Sheet وDialog فقط</span></div>
+      <figcaption><span class="role">ستارة الحوار (200ms)</span><code class="code">scrim · #1F1E1D @ 45%</code></figcaption>
+    </figure>
+  </div>
+  <span class="cap">ink-subtle فوق sunken ممنوع (4.14:1) · ink-muted فوق brand-atmosphere ممنوع (1.65:1) · الفواصل ≤3 لكل تركيبة.</span>
+</section>
+
+<!-- 4 · SEMANTIC -->
+<section id="semantic">
+  <h2>٤. العائلات الدلالية <span class="en">Semantic — meaning, not decoration</span></h2>
+  <p class="sec-note">عائلتان كحد أقصى في التركيبة الواحدة، وقيمتان ملونتان كحد أقصى. الإشارة والنص أولاً، واللون ثانياً.</p>
+  <div class="pair-grid">
+    <span class="chip-sem pos">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.6 2.6 4.8-5.2"/></svg>
+      قبض <span class="num"><bdi dir="ltr">+385.00</bdi></span> د.أ
+    </span>
+    <span class="chip-sem dng">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg>
+      صرف <span class="num"><bdi dir="ltr">-65.00</bdi></span> د.أ
+    </span>
+    <span class="chip-sem wrn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L21 19H3z"/><path d="M12 9v5"/><path d="M12 16.8v.01"/></svg>
+      طحين فاخر 10كغ — تحت الحد
+    </span>
+    <span class="chip-sem inf">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      قيد التسوية — شركة التوصيل السريع
+    </span>
+  </div>
+  <div class="large-value-demo">
+    <div class="m-val"><span class="num"><bdi dir="ltr">+1,284.50</bdi></span> <span class="cur">د.أ</span></div>
+    <p class="lbl">قيمة كبيرة (32px/600) بلون دلالي فوق الصبغة — مسموح (نص كبير)؛ النص الصغير فوق الصبغة يبقى بالحبر.</p>
+    <span class="cap">positive فوق positive-tint = 4.27:1 → نص كبير وأيقونات فقط (خ حد 3:1) · خطر positive-tint نص عادي يبقى ink.</span>
+  </div>
+  <div class="grid" style="margin-block-start:12px">
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--positive)"><span class="big" style="color:var(--on-brand)">قبض</span></div>
+      <figcaption><span class="role">إشارة/أيقونة/قيمة كبيرة: قبض وتأكيد</span><code class="code">positive #2E7D57 · tint #E7EFE7</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--danger)"><span class="big" style="color:var(--on-brand)">صرف</span></div>
+      <figcaption><span class="role">إشارة/أيقونة/قيمة كبيرة: صرف وخطأ</span><code class="code">danger #B42318 · tint #F7E7E2</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--warning)"><span class="big" style="color:var(--on-brand)">انتباه</span></div>
+      <figcaption><span class="role">إشارة/أيقونة/قيمة كبيرة: استحقاق وحد</span><code class="code">warning #8A6520 · tint #F4EDD8</code></figcaption>
+    </figure>
+    <figure class="swatch">
+      <div class="chip ink-chip" style="background:var(--info)"><span class="big" style="color:var(--on-brand)">قيد</span></div>
+      <figcaption><span class="role">إشارة/أيقونة/قيمة كبيرة: قيد وجارٍ</span><code class="code">info #3E5C76 · tint #E8EDF1</code></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 5 · TYPE -->
+<section id="type">
+  <h2>٥. عينات الخطوط <span class="en">Type Specimens</span></h2>
+  <p class="sec-note">IBM Plex Sans Arabic 400/500/600 · الأرقام الإنجليزية دائماً · القيم معزولة LTR والعملة عقدة عربية مستقلة.</p>
+
+  <div class="spec">
+    <div class="t-value"><bdi dir="ltr">1,284.50</bdi> <span class="cur">د.أ</span></div>
+    <div class="t-label">رصيد اليوم النقدي</div>
+    <div class="t-qual">آخر تحديث <bdi dir="ltr">30/09/2026</bdi> · أبو محمد</div>
+    <span class="spec-tag">main value · 32px / 600 / 1.15 · tabular-nums lining-nums · ink-strong</span>
+  </div>
+
+  <div class="spec">
+    <div class="t-label">تحصيل دين من مطعم النخيل — تم تسجيل القبض بنجاح وسيظهر في كشف اليوم.</div>
+    <span class="spec-tag">label · 15px / 400 / 1.55 · ink-muted (→ ink when actionable)</span>
+  </div>
+
+  <div class="spec">
+    <div class="t-qual">استحقاق <bdi dir="ltr">12/10/2026</bdi> · مؤسسة الشرق للتجهيزات · <bdi dir="ltr">12.5%</bdi></div>
+    <span class="spec-tag">qualifier · 13px / 400 / 1.4 · ink-subtle (surface/canvas only)</span>
+  </div>
+
+  <div class="tnum-cols">
+    <div class="tnum-col prop">
+      <h3>بدون tabular-nums — أعمدة لا تستقيم</h3>
+      <div class="trow pos"><span class="lbl">مطعم النخيل</span><span class="m-val"><span class="num"><bdi dir="ltr">+1,284.50</bdi></span><span class="cur">د.أ</span></span></div>
+      <div class="trow"><span class="lbl">أبو أحمد</span><span class="m-val"><span class="num"><bdi dir="ltr">385.00</bdi></span><span class="cur">د.أ</span></span></div>
+      <div class="trow dng"><span class="lbl">شركة التوصيل السريع</span><span class="m-val"><span class="num"><bdi dir="ltr">-65.00</bdi></span><span class="cur">د.أ</span></span></div>
+    </div>
+    <div class="tnum-col">
+      <h3>مع tabular-nums — عمود الآحاد يستقيم</h3>
+      <div class="trow pos"><span class="lbl">مطعم النخيل</span><span class="m-val"><span class="num"><bdi dir="ltr">+1,284.50</bdi></span><span class="cur">د.أ</span></span></div>
+      <div class="trow"><span class="lbl">أبو أحمد</span><span class="m-val"><span class="num"><bdi dir="ltr">385.00</bdi></span><span class="cur">د.أ</span></span></div>
+      <div class="trow dng"><span class="lbl">شركة التوصيل السريع</span><span class="m-val"><span class="num"><bdi dir="ltr">-65.00</bdi></span><span class="cur">د.أ</span></span></div>
+    </div>
+  </div>
+  <span class="cap">الإشارة قبل الرقم داخل العزل LTR (+/−) — إشارة الاتجاه المالي الأولى، واللون ثانوي.</span>
+</section>
+
+<!-- 6 · SPACING -->
+<section id="spacing">
+  <h2>٦. سلم المسافات <span class="en">Spacing Scale</span></h2>
+  <p class="sec-note">حافة الشاشة 16px دائماً · المسافة تصنع التسلسل قبل أي خط فاصل · لا قيم خارج السلم.</p>
+  <div class="space-row"><span class="space-bar" style="width:2px"></span><span class="space-lbl">2px — micro-nudge</span></div>
+  <div class="space-row"><span class="space-bar" style="width:4px"></span><span class="space-lbl">4px — icon↔text, checkbox↔label</span></div>
+  <div class="space-row"><span class="space-bar" style="width:8px"></span><span class="space-lbl">8px — tile gap, icon-to-label, target gap</span></div>
+  <div class="space-row"><span class="space-bar" style="width:12px"></span><span class="space-lbl">12px — chip padding, compact row padding</span></div>
+  <div class="space-row"><span class="space-bar" style="width:16px"></span><span class="space-lbl">16px — screen edge, card padding, rail padding</span></div>
+  <div class="space-row"><span class="space-bar" style="width:24px"></span><span class="space-lbl">24px — between sibling groups</span></div>
+  <div class="space-row"><span class="space-bar" style="width:32px"></span><span class="space-lbl">32px — air above PrimaryValueBlock</span></div>
+  <div class="space-row"><span class="space-bar" style="width:40px"></span><span class="space-lbl">40px — top breathing, above bottom nav</span></div>
+</section>
+
+<!-- 7 · RADIUS -->
+<section id="radius">
+  <h2>٧. سلم الانحناء <span class="en">Radius Scale</span></h2>
+  <p class="sec-note">لا تحويل كل عنصر لكبسولة: full للأشكال الدائرية فقط.</p>
+  <div class="radius-grid">
+    <div class="radius-cell"><div class="radius-tile" style="border-radius:6px">chips</div><span class="cap">6 · شرائح ومربعات اختيار</span></div>
+    <div class="radius-cell"><div class="radius-tile" style="border-radius:12px">inputs · CTA</div><span class="cap">12 · مدخلات وأزرار وبلاطات</span></div>
+    <div class="radius-cell"><div class="radius-tile" style="border-radius:16px">dialog</div><span class="cap">16 · حوارات وحفر مجمّعة</span></div>
+    <div class="radius-cell"><div class="radius-tile" style="border-radius:24px">sheet</div><span class="cap">24 · زوايا Sheet العلوية</span></div>
+    <div class="radius-cell"><div class="radius-tile" style="border-radius:999px">avatar</div><span class="cap">full · أفاتار ومفتاح وصورة دائرية</span></div>
+  </div>
+  <div class="bnav-note"><span>الشريط السفلي — يمتد من حافة إلى حافة</span><span class="cap">radius 0: كروم دائم لا عنصر عائم</span></div>
+</section>
+
+<!-- 8 · PRESS & SCRIM -->
+<section id="press-scrim">
+  <h2>٨. الضغط والستارة <span class="en">Press Overlay &amp; Scrim</span></h2>
+  <p class="sec-note">الضغط = طبقة #1F1E1D @ 8% خلال 80ms (لا ظلال ولا تكبير) · الستارة خلف الأوراق والحوارات فقط.</p>
+  <div class="demo-row">
+    <div class="demo-cell"><div class="quiet-btn">زر هادئ</div><span class="cap">عادي — surface + line-strong</span></div>
+    <div class="demo-cell"><div class="quiet-btn is-pressed"><span class="ovl"></span>زر هادئ</div><span class="cap">مضغوط — press-overlay (حبر 10.96:1)</span></div>
+    <div class="demo-cell"><div class="cta-btn">تسجيل دفعة</div><span class="cap">CTA — brand-ink + on-brand 6.11:1</span></div>
+    <div class="demo-cell"><div class="cta-btn is-pressed"><span class="ovl"></span>تسجيل دفعة</div><span class="cap">مضغوط — يبقى 6.69:1</span></div>
+  </div>
+  <div class="scrim-stage">
+    <div class="scrim-behind">
+      <div class="behind-row"><span>مطعم النخيل</span><span><bdi dir="ltr">1,284.50</bdi> د.أ</span></div>
+      <div class="behind-row"><span>مؤسسة الشرق للتجهيزات</span><span><bdi dir="ltr">-352.00</bdi> د.أ</span></div>
+    </div>
+    <div class="scrim-layer"></div>
+    <div class="mini-sheet">
+      <h3>تأكيد تسجيل دفعة</h3>
+      <p>سيتم تسجيل <bdi dir="ltr">385.00</bdi> د.أ قبضاً من مطعم النخيل بتاريخ <bdi dir="ltr">30/09/2026</bdi>.</p>
+      <div class="sheet-actions">
+        <button type="button" class="quiet-btn">رجوع</button>
+        <button type="button" class="cta-btn">تأكيد</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · DO / DON'T -->
+<section id="do-dont">
+  <h2>٩. يفعل / لا يفعل <span class="en">Color Economy — 3 rules</span></h2>
+  <div class="dd-grid">
+
+    <div class="dd">
+      <div class="dd-title"><span class="dd-mark good">✓</span> معنى دلالي داخل شريحة</div>
+      <div class="dd-box">
+        <span class="chip-sem pos">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.6 2.6 4.8-5.2"/></svg>
+          قبض <span class="num"><bdi dir="ltr">+385.00</bdi></span> د.أ — أبو أحمد
+        </span>
+        <span class="cap">أيقونة + إشارة بلون دلالي، النص بالحبر، الخلفية صبغة دلالية صغيرة.</span>
+      </div>
+      <div class="dd-title"><span class="dd-mark bad">✕</span> تلوين بطاقة كاملة للحيوية</div>
+      <div class="dd-box bad">
+        <div class="mini-card full-pos">
+          <div class="mini-row"><p class="mc-t mc-pos-t">قبض اليوم</p><span class="mc-v mc-t"><bdi dir="ltr">385.00</bdi></span></div>
+        </div>
+        <span class="cap">بطاقة كاملة ملوّنة — ممنوع، حتى لو كان المعنى إيجابياً.</span>
+      </div>
+    </div>
+
+    <div class="dd">
+      <div class="dd-title"><span class="dd-mark good">✓</span> تعبئة علامة واحدة للشاشة</div>
+      <div class="dd-box">
+        <button type="button" class="cta-btn">تسجيل دفعة</button>
+        <span class="cap">CTA وحيد معبّأ بـ brand-ink ونص on-brand — لحظة الطابون الوحيدة.</span>
+      </div>
+      <div class="dd-title"><span class="dd-mark bad">✕</span> تعبئتان ونص أبيض صغير على الجوّ</div>
+      <div class="dd-box bad">
+        <button type="button" class="bad-fill atmo">بيع جديد</button>
+        <button type="button" class="cta-btn" style="margin-inline-start:8px">تحصيل دين</button>
+        <span class="cap">تعبئتان من عائلة العلامة + أبيض 15px فوق brand-atmosphere (3.28:1) — ممنوع.</span>
+      </div>
+    </div>
+
+    <div class="dd">
+      <div class="dd-title"><span class="dd-mark good">✓</span> الإشارة أولاً ثم اللون</div>
+      <div class="dd-box">
+        <div class="mini-row"><p class="mc-t">مصروف — شركة التوصيل السريع</p><span class="mc-v" style="color:var(--danger)"><bdi dir="ltr">-65.00</bdi> <span style="font-size:14px;color:var(--ink)">د.أ</span></span></div>
+        <span class="cap">علامة سالبة داخل العزل، تسمية واضحة، ثم لون danger — اللون إشارة ثانوية.</span>
+      </div>
+      <div class="dd-title"><span class="dd-mark bad">✕</span> لون بلا إشارة ولا نص</div>
+      <div class="dd-box bad">
+        <span class="value-only"><bdi dir="ltr">385.00</bdi></span>
+        <span class="cap">قيمة خضراء بلا إشارة ولا تسمية — ممنوع: اللون ليس الإشارة الوحيدة.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>مرجع الهوية البصرية — اتجاه «دفء الطابون» · عامل الوكيل 02 · المهمة 2-b · التشغيل 20260908T133450Z-16d11.</p>
+  <p>كل الألوان في هذه اللوحة متغيّرات CSS من رموز SPEC §6.3 فقط — لا ألوان جديدة، لا بني موروث، لا وضع ليلي. الأرقام إنجليزية، العملة د.أ، التواريخ DD/MM/YYYY.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+delivery_id: micro-deep-workflow-content-product-closure-continuation-001
+date: 2026-09-06
+program: micro-deep-workflow-content-product-closure
+mode: continuation-of-stopped-execution
+agent: deep workflow, content, and product experience closure (continuation agent)
+generated_at: 2026-09-06T02:30:00+03:00
+micro:
+  repository: https://github.com/Qays7753/Micro
+  baseline_main_sha: 6a8c151a7132891384412673f9134c14b764bc01
+  continuation_branch: agent/deep-workflow-content-product-closure
+  branch_head_sha: 8a98835e52b8642b5c78cf2a4a0df7cb318a1b5d
+  pull_request: https://github.com/Qays7753/Micro/pull/156
+  merge_commit: 1601fd90028b45f307345520b700aed6fe82e4a3
+  merge_state: merged into main after CI green (PR checks passed)
+  ci:
+    intermediate_run: 33990597565 (failure — PR whitespace step: no merge base under shallow checkout; audit retry, lint, full check all green)
+    final_run: 33990754485 (success — all 10 steps including artifact upload)
+    workflow_changes: bounded-retry audit, concurrency group, job timeout 45m, full-history checkout, PR whitespace check, PWA build artifact (no check weakened, no continue-on-error)
+  recovery:
+    preserved_prior_commits: 5 (02ea79f, fa24688, 444501f, e5670ac, c29ad39 — from the stopped run, verified not redone)
+    continuation_commits: 4 (2969839, 7d33b59, 27d969e, 8a98835)
+    local_snapshot_branch: recovery/deep-closure-partial-work-2026-09-06 (not pushed)
+    offline_bundles:
+      - /home/z/my-project/micro-closure-baseline-recovery.bundle (baseline, from the stopped run)
+      - /home/z/my-project/micro-closure-recovery-continuation.bundle (all refs, this continuation)
+  uncommitted_work_at_start: 19 files with real content changes (87+/20-) — AV-04 guards, MR-02/03/04/06, FC-03, WF-03 (all completed, tested, and committed by this continuation)
+findings:
+  p0_fixed: 1 (AV-01 re-entrant duplicate money writes — prior run committed, continuation verified with 4 regression tests + in-transaction audit)
+  p1_fixed: 7 (FC-01 waste profit-impact; FC-04 deposit wallet choice; WF-01/MR-01 mid-journey deposit; AR-01 Arabic-Indic digits in domain messages; AR-02 register; AV-02 loan repayment race; AV-03 service-level family guard)
+  p2_fixed: 12 (AV-04 envelope tampering; AV-05 safe-integer bounds; AV-06 cancel warning; FC-03 period warning; FC-05 deposit card; FC-07 shortage warning; FC-08 unknown-cost rows; FC-09 settlement labels; FC-10 resulting quantity; MR-02 back arrows; MR-03 44px quiet buttons; MR-04 header labels)
+  p3_fixed: 4 (WF-02 header duplication; WF-03/MR-05 العمل links; MR-06 Tools backup link)
+  deferred_p3: 5 (FC-06, AV-07, AV-08, AV-09, WF-04 — documented in report 05)
+  needs_owner_decision: 1 (FC-02 — direct-edit path of contract 2 conflicts with in-repo decision C1; never implemented an irreversible guess)
+tests:
+  domain: 23 files / 278 tests (baseline 277; +1 AV-05 domain test)
+  prototype: 125 files / 818 tests (baseline 794; +21 from stopped run, +3 from continuation: AV-04 x2, AV-05 import, AV-06, FC-03 — net count includes updated fixtures)
+  gates: typecheck, lint 0/37, format, text-density 52 surfaces, design-token + stylelint, PWA build, pnpm audit — all green
+  browser_qa: production build, RTL, 360x800 + 390x844, offline SW reload, zero console/page errors
+scope_boundaries:
+  zman: not accessed, not referenced, no migration or bridge
+  report_formats: markdown only (no Word/PDF)
+  chat_attachments: none
+  secrets: none committed, printed, or reported (secret scan over the full diff and changed files)

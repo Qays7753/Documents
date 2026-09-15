@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مايكرو — الصندوق · Direction C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=Tajawal:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="app" data-theme="light">
+
+<!-- ═══════════ ROOT · الصندوق (The Counter Hub) ═══════════ -->
+<section class="screen root" id="scr-hub" data-tab="hub">
+  <div class="body" id="hub-body" data-scroller>
+    <div class="banner b-offline" id="offline-banner" role="status" hidden>
+      <span data-icon="cloud-off" class="b-ic" aria-hidden="true"></span>
+      <span>غير متزامن — التسجيل يعمل وكل شي محفوظ على جهازك.</span>
+    </div>
+    <div class="banner b-error" id="error-banner" role="alert" hidden>
+      <span data-icon="alert" class="b-ic" aria-hidden="true"></span>
+      <span>تعذّرت المزامنة — يمكنك إعادة المحاولة.</span>
+      <button class="b-retry" data-act="retry-sync">إعادة المحاولة</button>
+    </div>
+
+    <section class="hero" id="hero">
+      <div class="hero-main">
+        <p class="h-label">النقد المتاح</p>
+        <p class="h-val"><bdi dir="ltr">3,477.50</bdi> <span class="h-unit">د.أ</span></p>
+        <p class="h-delta">أعلى بـ <bdi dir="ltr">297.50</bdi> عن أمس — قبضت <bdi dir="ltr">825.00</bdi> وصرفت <bdi dir="ltr">527.50</bdi></p>
+        <p class="h-state"><span class="st-ic h-ok" data-icon="check-double" aria-hidden="true"></span><span>متزامن · آخر تحديث <bdi dir="ltr">17:05</bdi></span></p>
+      </div>
+      <div class="hero-compact" id="hero-compact" aria-hidden="true">
+        <span class="hc-label">النقد</span>
+        <span class="hc-val"><bdi dir="ltr">3,477.50</bdi> <i>د.أ</i></span>
+      </div>
+    </section>
+
+    <section class="counters">
+      <button class="counter" data-nav="position">
+        <span class="c-label">لك <i>ذمم مدينة</i></span>
+        <span class="c-val"><bdi dir="ltr">2,240.00</bdi> <i>د.أ</i></span>
+        <span class="c-sub">من 4 جهات · أخفض بـ 140.00</span>
+      </button>
+      <button class="counter" data-nav="position">
+        <span class="c-label">عليك <i>ذمم دائنة</i></span>
+        <span class="c-val"><bdi dir="ltr">6,650.00</bdi> <i>د.أ</i></span>
+        <span class="c-sub">لـ 3 موردين · أخفض بـ 500.00</span>
+      </button>
+    </section>
+    <p class="netline">الصافي: عليك أكثر من النقد ولك بفارق <bdi dir="ltr">932.50</bdi> د.أ</p>
+
+    <div class="daystrip" id="daystrip" role="tablist" aria-label="أيام الأسبوع">
+      <button class="ds-cell" data-dp="p1" role="tab"><span class="ds-w">ث</span><span class="ds-n"><bdi dir="ltr">01/09</bdi></span></button>
+      <button class="ds-cell" data-dp="p2" role="tab"><span class="ds-w">ر</span><span class="ds-n"><bdi dir="ltr">02/09</bdi></span></button>
+      <button class="ds-cell" data-dp="p3" role="tab"><span class="ds-w">خ</span><span class="ds-n"><bdi dir="ltr">03/09</bdi></span><span class="ds-mark" data-icon="check" aria-hidden="true"></span></button>
+      <button class="ds-cell ds-gap" data-dp="p4" role="tab" aria-label="الجمعة 04/09 — غير مسجّل"><span class="ds-w">ج</span><span class="ds-n"><bdi dir="ltr">04/09</bdi></span><span class="ds-mark gap" data-icon="unknown" aria-hidden="true"></span></button>
+      <button class="ds-cell" data-dp="p5" role="tab"><span class="ds-w">س</span><span class="ds-n"><bdi dir="ltr">05/09</bdi></span><span class="ds-mark" data-icon="check" aria-hidden="true"></span></button>
+      <button class="ds-cell" data-dp="p6" role="tab"><span class="ds-w">أ</span><span class="ds-n"><bdi dir="ltr">06/09</bdi></span><span class="ds-mark" data-icon="check" aria-hidden="true"></span></button>
+      <button class="ds-cell is-today" data-dp="p7" role="tab" aria-selected="true"><span class="ds-w">الـ</span><span class="ds-n"><bdi dir="ltr">07/09</bdi></span><span class="ds-mark" data-icon="conflict" aria-hidden="true"></span></button>
+    </div>
+
+    <div class="agenda" id="agenda" tabindex="0" aria-label="حركات اليوم — اسحب أفقيًا لتغيير اليوم">
+      <div class="daypage" data-dp="p1">
+        <p class="dp-head">الثلاثاء <bdi dir="ltr">01/09/2026</bdi></p>
+        <ul class="rows">
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">10:20</bdi></span><span class="subj"><span class="subj-t">بيع نقدي — وصلات نحاسية</span><span class="subj-s">متزامن</span></span><span class="amt pos"><bdi dir="ltr">+620.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">15:45</bdi></span><span class="subj"><span class="subj-t">مصروف — صيانة كهربائية</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−340.00</bdi><span class="unit">د.أ</span></span></li>
+        </ul>
+      </div>
+      <div class="daypage" data-dp="p2">
+        <p class="dp-head">الأربعاء <bdi dir="ltr">02/09/2026</bdi></p>
+        <ul class="rows">
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">09:50</bdi></span><span class="subj"><span class="subj-t">بيع بالذمة — ورشة الأمان</span><span class="subj-s">معلّق</span></span><span class="amt pos"><bdi dir="ltr">+545.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">13:30</bdi></span><span class="subj"><span class="subj-t">مصروف — نقل بضاعة</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−410.00</bdi><span class="unit">د.أ</span></span></li>
+        </ul>
+      </div>
+      <div class="daypage" data-dp="p3">
+        <p class="dp-head">الخميس <bdi dir="ltr">03/09/2026</bdi></p>
+        <ul class="rows">
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">10:15</bdi></span><span class="subj"><span class="subj-t">بيع نقدي — أطقم صنابير</span><span class="subj-s">متزامن</span></span><span class="amt pos"><bdi dir="ltr">+730.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">16:00</bdi></span><span class="subj"><span class="subj-t">مصروف — مستلزمات مخزن</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−505.00</bdi><span class="unit">د.أ</span></span></li>
+        </ul>
+      </div>
+      <div class="daypage" data-dp="p4">
+        <p class="dp-head">الجمعة <bdi dir="ltr">04/09/2026</bdi></p>
+        <div class="empty-day">
+          <span class="st-ic st-unk" data-icon="unknown" aria-hidden="true"></span>
+          <p>يوم غير مسجّل — لا يُعرض صفرًا.</p>
+          <p class="e-sub">إذا كان عندك حركات هذا اليوم، سجّلها الآن وسنحدّث الكشف.</p>
+        </div>
+      </div>
+      <div class="daypage" data-dp="p5">
+        <p class="dp-head">السبت <bdi dir="ltr">05/09/2026</bdi></p>
+        <ul class="rows">
+          <li class="row money-row row-cancelled" tabindex="0"><span class="time"><bdi dir="ltr">11:20</bdi></span><span class="subj"><span class="subj-t">بيع مرتجع — خلاط تالف</span><span class="subj-s">ملغى قبل التنفيذ — يبقى مرئيًا</span></span><span class="amt cxl"><bdi dir="ltr">+45.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">09:30</bdi></span><span class="subj"><span class="subj-t">بيع نقدي — خلاطات</span><span class="subj-s">متزامن</span></span><span class="amt pos"><bdi dir="ltr">+200.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">13:15</bdi></span><span class="subj"><span class="subj-t">مصروف — قرطاسية</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−35.00</bdi><span class="unit">د.أ</span></span></li>
+        </ul>
+      </div>
+      <div class="daypage" data-dp="p6">
+        <p class="dp-head">الأحد <bdi dir="ltr">06/09/2026</bdi></p>
+        <ul class="rows">
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">10:10</bdi></span><span class="subj"><span class="subj-t">بيع نقدي — أدوات صحية متفرقة</span><span class="subj-s">متزامن</span></span><span class="amt pos"><bdi dir="ltr">+415.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">12:15</bdi></span><span class="subj"><span class="subj-t">تحصيل — مقهى الياسمين</span><span class="subj-s">محصّل — سُدّد الحساب بالكامل</span></span><span class="amt pos"><bdi dir="ltr">+240.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">14:00</bdi></span><span class="subj"><span class="subj-t">مصروف — صيانة المولدة</span><span class="subj-s">متزامن · <button class="fixlink" data-act="open-correction">تصحيح</button></span></span><span class="amt neg"><bdi dir="ltr">−60.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">16:30</bdi></span><span class="subj"><span class="subj-t">مصروف — فاتورة كهرباء</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−90.00</bdi><span class="unit">د.أ</span></span></li>
+        </ul>
+      </div>
+      <div class="daypage is-today" data-dp="p7">
+        <p class="dp-head">اليوم — الاثنين <bdi dir="ltr">07/09/2026</bdi></p>
+        <div class="alertrow" role="alert" data-act="open-conflict">
+          <span class="st-ic st-conflict" data-icon="conflict" aria-hidden="true"></span>
+          <span class="ar-t">تعارض — تحصيل أبو زياد بنسختين (<bdi dir="ltr">150.00</bdi> مقابل <bdi dir="ltr">180.00</bdi>)</span>
+          <span class="st-word w-bad">تعارض</span>
+        </div>
+        <ul class="rows">
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">08:15</bdi></span><span class="subj"><span class="subj-t">بيع نقدي — خلاطات ومستلزمات</span><span class="subj-s">متزامن</span></span><span class="amt pos"><bdi dir="ltr">+425.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">09:20</bdi></span><span class="subj"><span class="subj-t">دفعة سداد — شركة الرشيد للتوزيع</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−500.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">10:05</bdi></span><span class="subj"><span class="subj-t">تحصيل — محمد الخطيب</span><span class="subj-s">محصّل — نقدًا</span></span><span class="amt pos"><bdi dir="ltr">+300.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0" data-nav="order"><span class="time"><bdi dir="ltr">11:10</bdi></span><span class="subj"><span class="subj-t">بيع بالذمة — أنابيب ووصلات</span><span class="subj-s">معلّق — ورشة الأمان</span></span><span class="amt pos"><bdi dir="ltr">+260.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">12:30</bdi></span><span class="subj"><span class="subj-t">طلب شراء — بلاط 60×60، 40 صندوقًا</span><span class="subj-s">القيمة غير محددة — خصم الكمية قيد الاتفاق</span></span><span class="amt unk">—</span></li>
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">13:40</bdi></span><span class="subj"><span class="subj-t">مصروف — وقود سيارة التوصيل</span><span class="subj-s">متزامن</span></span><span class="amt neg"><bdi dir="ltr">−15.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">15:50</bdi></span><span class="subj"><span class="subj-t">تحصيل — ورشة الأمان</span><span class="subj-s">بانتظار المزامنة — سُجّل بدون إنترنت</span></span><span class="amt pos"><bdi dir="ltr">+100.00</bdi><span class="unit">د.أ</span></span></li>
+          <li class="row money-row" tabindex="0" data-nav="entry"><span class="time"><bdi dir="ltr">16:20</bdi></span><span class="subj"><span class="subj-t">مصروف — وجبة عمال</span><span class="subj-s">تقديري — من الذاكرة، لا إيصال</span></span><span class="amt neg"><bdi dir="ltr">−12.50</bdi><span class="unit">د.أ</span></span></li>
+        </ul>
+        <button class="allink" data-nav="position">المركز المالي الكامل والإغلاق</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ROOT · العمل ═══════════ -->
+<section class="screen root" id="scr-work" data-tab="work" hidden>
+  <header class="appbar">
+    <div class="appbar-row"><h1 class="appbar-title">العمل</h1><div class="appbar-actions"><button class="iconbtn" data-icon="plus" data-act="open-capture" aria-label="سجّل حركة"></button></div></div>
+    <div class="chips" role="group" aria-label="مرشحات العمليات">
+      <button class="chip is-active" data-wchip="all">الكل</button>
+      <button class="chip" data-wchip="wait">بانتظار</button>
+      <button class="chip" data-wchip="done">تم</button>
+    </div>
+  </header>
+  <div class="body" data-scroller>
+    <div class="skeleton" id="work-skeleton"><div class="sk-row"></div><div class="sk-row"></div><div class="sk-row"></div><div class="sk-row"></div></div>
+    <div id="work-list" hidden>
+      <ul class="rows ops">
+        <li class="row op-row" tabindex="0" data-wstate="wait" data-nav="order">
+          <span class="op-ic" data-icon="truck" aria-hidden="true"></span>
+          <span class="subj"><span class="subj-t">توصيل مجدول — مشروع أبو زياد</span><span class="subj-s">الأربعاء <bdi dir="ltr">09/09/2026</bdi> · يُحصّل 760.00 عند التسليم</span></span>
+          <span class="amt unk">—</span>
+        </li>
+        <li class="row op-row" tabindex="0" data-wstate="wait" data-nav="order">
+          <span class="op-ic" data-icon="box" aria-hidden="true"></span>
+          <span class="subj"><span class="subj-t">طلب شراء — بلاط البتراء</span><span class="subj-s">40 صندوقًا 60×60 · بانتظار اتفاق السعر</span></span>
+          <span class="amt unk">—</span>
+        </li>
+        <li class="row op-row" tabindex="0" data-wstate="wait" data-nav="order">
+          <span class="op-ic" data-icon="box" aria-hidden="true"></span>
+          <span class="subj"><span class="subj-t">بيع بالذمة — أنابيب لورشة الأمان</span><span class="subj-s">بانتظار التسليم · 260.00 معلّقة</span></span>
+          <span class="amt pos"><bdi dir="ltr">260.00</bdi><span class="unit">د.أ</span></span>
+        </li>
+        <li class="row op-row" tabindex="0" data-wstate="done" data-nav="order">
+          <span class="op-ic st-ic st-ok" data-icon="check-fill" aria-hidden="true"></span>
+          <span class="subj"><span class="subj-t">بيع نقدي — خلاطات ومستلزمات</span><span class="subj-s">سُلّم وحُصّل 08:15</span></span>
+          <span class="amt pos"><bdi dir="ltr">425.00</bdi><span class="unit">د.أ</span></span>
+        </li>
+        <li class="row op-row" tabindex="0" data-wstate="done" data-nav="order">
+          <span class="op-ic st-ic st-ok" data-icon="check-fill" aria-hidden="true"></span>
+          <span class="subj"><span class="subj-t">تسليم — مقهى الياسمين</span><span class="subj-s">سُلّم وسُدّد الأحد <bdi dir="ltr">06/09</bdi></span></span>
+          <span class="amt zero"><bdi dir="ltr">0.00</bdi><span class="unit">د.أ</span></span>
+        </li>
+      </ul>
+      <p class="swipe-hint">كل الإجراءات في العمل تتم من صف العملية — سجّل التسليم والتحصيل بنفس الخطوة.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ROOT · الناس ═══════════ -->
+<section class="screen root" id="scr-people" data-tab="people" hidden>
+  <header class="appbar">
+    <div class="appbar-row"><h1 class="appbar-title">الناس</h1></div>
+    <div class="searchbar"><input id="people-search" type="search" placeholder="ابحث بالاسم… (الرشيد، حوراني…)" aria-label="بحث في الجهات"></div>
+    <div class="seg seg-inline" role="tablist" aria-label="نوع الجهات">
+      <button class="segbtn is-active" role="tab" aria-selected="true" data-pseg="cust">زبائن</button>
+      <button class="segbtn" role="tab" aria-selected="false" data-pseg="supp">موردون</button>
+    </div>
+    <div class="chips" role="group" aria-label="مرشحات">
+      <button class="chip is-active" data-pchip="all">الكل</button>
+      <button class="chip" data-pchip="late">متأخر</button>
+      <button class="chip" data-pchip="week">هذا الأسبوع</button>
+    </div>
+  </header>
+  <div class="body" data-scroller>
+    <div class="skeleton" id="people-skeleton"><div class="sk-row"></div><div class="sk-row"></div><div class="sk-row"></div><div class="sk-row"></div></div>
+    <div id="people-list" hidden>
+      <ul class="rows ppl cust">
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="khatib" data-late="1"><span class="p-avatar">مخ</span><span class="subj"><span class="subj-t">محمد الخطيب</span><span class="subj-s">مقاول تركيبات صحية · متأخر 48 يومًا</span></span><span class="amt pos"><bdi dir="ltr">940.00</bdi><span class="unit">د.أ</span></span></li>
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="abuziad" data-late="1"><span class="p-avatar">أب</span><span class="subj"><span class="subj-t">أبو زياد للمقاولات</span><span class="subj-s">مستحق منذ <bdi dir="ltr">27/08</bdi> · تعارض بانتظار المراجعة</span></span><span class="amt pos"><bdi dir="ltr">760.00</bdi><span class="unit">د.أ</span></span></li>
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="aman"><span class="p-avatar">وأ</span><span class="subj"><span class="subj-t">ورشة الأمان</span><span class="subj-s">ورشة صيانة · 260.00 اليوم + 280.00 سابقة</span></span><span class="amt pos"><bdi dir="ltr">540.00</bdi><span class="unit">د.أ</span></span></li>
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="yasmine"><span class="p-avatar">مي</span><span class="subj"><span class="subj-t">مقهى الياسمين</span><span class="subj-s">مشروع تجديد · محصّل بالكامل الأحد</span></span><span class="amt zero"><bdi dir="ltr">0.00</bdi><span class="unit">د.أ</span></span></li>
+      </ul>
+      <ul class="rows ppl supp" hidden>
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="rashid"><span class="p-avatar">شر</span><span class="subj"><span class="subj-t">شركة الرشيد للتوزيع</span><span class="subj-s">مواد صحية بالجملة · استحقاق <bdi dir="ltr">15/09/2026</bdi></span></span><span class="amt neg"><bdi dir="ltr">2,350.00</bdi><span class="unit">د.أ</span></span></li>
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="petra"><span class="p-avatar">مب</span><span class="subj"><span class="subj-t">مصنع البتراء للسيراميك والبلاط — فرع السخنة</span><span class="subj-s">استحقاق <bdi dir="ltr">30/09/2026</bdi> · طلب اليوم غير محدد القيمة</span></span><span class="amt neg"><bdi dir="ltr">4,300.00</bdi><span class="unit">د.أ</span></span></li>
+        <li class="row ppl-row" tabindex="0" data-nav="party" data-party="sharq"><span class="p-avatar">مش</span><span class="subj"><span class="subj-t">مؤسسة الشرق للتجهيزات</span><span class="subj-s">مسدّد بالكامل</span></span><span class="amt zero"><bdi dir="ltr">0.00</bdi><span class="unit">د.أ</span></span></li>
+      </ul>
+    </div>
+    <div class="empty" id="people-empty" hidden>
+      <span data-icon="search" class="e-ic" aria-hidden="true"></span>
+      <p class="e-t">لا أسماء مطابقة.</p>
+      <button class="quietbtn" data-act="clear-people-search">مسح البحث</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ROOT · أدوات ═══════════ -->
+<section class="screen root" id="scr-tools" data-tab="tools" hidden>
+  <header class="appbar"><div class="appbar-row"><h1 class="appbar-title">أدوات</h1></div></header>
+  <div class="body" data-scroller>
+    <div class="profile">
+      <div class="logo-slot"><span>شعار مايكرو</span></div>
+      <div class="p-info"><h2 class="p-name">مؤسسة الحوراني للأدوات الصحية</h2><p class="p-sub">خالد الحوراني · عمّان</p></div>
+    </div>
+    <h3 class="grouphead">المظهر</h3>
+    <div class="seg seg-block" role="tablist" aria-label="المظهر">
+      <button class="segbtn" data-theme-set="light">فاتح</button>
+      <button class="segbtn" data-theme-set="dark">داكن</button>
+      <button class="segbtn is-active" data-theme-set="auto">تلقائي</button>
+    </div>
+    <h3 class="grouphead">اللغة والأرقام</h3>
+    <ul class="rows settingrows">
+      <li class="row set-row"><span class="subj"><span class="subj-t">اللغة</span></span><span class="set-val">العربية (أساسية)</span></li>
+      <li class="row set-row"><span class="subj"><span class="subj-t">الأرقام</span></span><span class="set-val">غربية 0-9 (قرار مثبّت)</span></li>
+    </ul>
+    <h3 class="grouphead">البيانات والمزامنة</h3>
+    <ul class="rows settingrows">
+      <li class="row set-row" tabindex="0" data-act="force-sync"><span class="subj"><span class="subj-t">المزامنة الآن</span><span class="subj-s">آخر مزامنة <bdi dir="ltr">17:05</bdi> · كل شي محفوظ</span></span><span class="iconbtn" data-icon="refresh" aria-hidden="true"></span></li>
+      <li class="row set-row" tabindex="0" data-nav="closing"><span class="subj"><span class="subj-t">إغلاق الصندوق</span><span class="subj-s">إغلاق أمس — مطابق تمامًا</span></span><span class="iconbtn" data-icon="chev" aria-hidden="true"></span></li>
+    </ul>
+    <h3 class="grouphead">المساعد (لاحقًا)</h3>
+    <ul class="rows settingrows">
+      <li class="row set-row" tabindex="0" data-act="assistant"><span class="subj"><span class="subj-t">اسأل مايكرو — قيد التطوير</span><span class="subj-s">مساعد هادئ يفسّر ما الذي تغيّر ولماذا</span></span><span class="iconbtn" data-icon="spark" aria-hidden="true"></span></li>
+    </ul>
+    <p class="about">مايكرو — مفهوم الاتجاه الأصيل C «الصندوق» · الإصدار 0.3.0 · نسخة مراجعة</p>
+  </div>
+</section>
+
+<!-- ═══════════ PUSHED · المركز المالي ═══════════ -->
+<section class="screen pushed" id="scr-position" hidden>
+  <header class="appbar appbar-detail">
+    <div class="appbar-row">
+      <button class="backbtn" data-back aria-label="رجوع"><span data-icon="back"></span><span>رجوع</span></button>
+      <h1 class="appbar-title-compact">المركز المالي</h1>
+    </div>
+  </header>
+  <div class="body" data-scroller>
+    <div class="minihero">
+      <p class="pb-label">النقد المتاح</p>
+      <p class="pb-hero"><bdi dir="ltr">3,477.50</bdi> <span class="unit">د.أ</span></p>
+      <p class="pb-delta">أعلى بـ <bdi dir="ltr">297.50</bdi> عن أمس — قبضت <bdi dir="ltr">825.00</bdi> وصرفت <bdi dir="ltr">527.50</bdi>.</p>
+    </div>
+    <ul class="rows truthrows">
+      <li class="row truth-row" tabindex="0" data-act="goto-people-recv"><span class="subj"><span class="subj-t">لك — ذمم مدينة</span><span class="subj-s">من 4 جهات · أخفض بـ 140.00</span></span><span class="amt pos"><bdi dir="ltr">2,240.00</bdi><span class="unit">د.أ</span></span></li>
+      <li class="row truth-row" tabindex="0" data-act="goto-people-pay"><span class="subj"><span class="subj-t">عليك — ذمم دائنة</span><span class="subj-s">لـ 3 موردين · أخفض بـ 500.00</span></span><span class="amt neg"><bdi dir="ltr">6,650.00</bdi><span class="unit">د.أ</span></span></li>
+    </ul>
+    <div class="chart-block">
+      <div class="chart-head"><h3 class="ch-t">النقد هذا الأسبوع — داخل مقابل خارج</h3><span class="ch-meta">من <bdi dir="ltr">01/09</bdi> إلى <bdi dir="ltr">07/09</bdi> · د.أ · متزامن</span></div>
+      <div class="weekchart" role="img" aria-label="خلال آخر 7 أيام دخل 3,890.00 وخرج 2,622.50 د.أ — أعلى دخل اليوم 825.00، والجمعة 04/09 غير مسجّلة.">
+        <div class="wc-day"><span class="wc-bars"><i class="b-in" style="--h:48%"></i><i class="b-out" style="--h:26%"></i></span><span class="wc-l">ث</span></div>
+        <div class="wc-day"><span class="wc-bars"><i class="b-in" style="--h:42%"></i><i class="b-out" style="--h:32%"></i></span><span class="wc-l">ر</span></div>
+        <div class="wc-day wc-gap"><span class="wc-bars"></span><span class="wc-l">ج</span></div>
+        <div class="wc-day"><span class="wc-bars"><i class="b-in" style="--h:56%"></i><i class="b-out" style="--h:39%"></i></span><span class="wc-l">خ</span></div>
+        <div class="wc-day"><span class="wc-bars"><i class="b-in" style="--h:37%"></i><i class="b-out" style="--h:30%"></i></span><span class="wc-l">س</span></div>
+        <div class="wc-day"><span class="wc-bars"><i class="b-in" style="--h:53%"></i><i class="b-out" style="--h:35%"></i></span><span class="wc-l">أ</span></div>
+        <div class="wc-day wc-today"><span class="wc-bars"><i class="b-in" style="--h:64%"></i><i class="b-out" style="--h:41%"></i></span><span class="wc-l">اليوم</span></div>
+      </div>
+      <p class="chart-note">الجمعة <bdi dir="ltr">04/09</bdi> غير مسجّلة — تُعرض كفراغ، لا كصفر.</p>
+      <p class="chart-read">آخر 7 أيام: دخل 3,890.00 وخرج 2,622.50 د.أ — أعلى دخل اليوم 825.00.</p>
+    </div>
+    <h3 class="grouphead">الذمم حسب الأعمار</h3>
+    <ul class="rows agerows">
+      <li class="row age-row"><span class="subj"><span class="subj-t">0–30 يومًا</span><span class="subj-s">ورشة الأمان · أبو زياد</span></span><span class="ageminibar"><i style="--w:58%"></i></span><span class="amt pos"><bdi dir="ltr">1,300.00</bdi><span class="unit">د.أ</span></span></li>
+      <li class="row age-row"><span class="subj"><span class="subj-t">31–60 يومًا</span><span class="subj-s">محمد الخطيب</span></span><span class="ageminibar"><i class="od" style="--w:42%"></i></span><span class="amt pos"><bdi dir="ltr">940.00</bdi><span class="unit">د.أ</span></span></li>
+    </ul>
+    <button class="primarybtn" data-nav="closing">إغلاق صندوق اليوم</button>
+  </div>
+</section>
+
+<!-- ═══════════ PUSHED · حركة / جهة / عملية / إغلاق ═══════════ -->
+<section class="screen pushed" id="scr-entry" hidden>
+  <header class="appbar appbar-detail">
+    <div class="appbar-row"><button class="backbtn" data-back aria-label="رجوع"><span data-icon="back"></span><span>رجوع</span></button><h1 class="appbar-title-compact">حركة</h1></div>
+  </header>
+  <div class="body" data-scroller>
+    <div class="entry-hero">
+      <p class="eh-type">تحصيل · الاثنين <bdi dir="ltr">07/09/2026</bdi> · <bdi dir="ltr">10:05</bdi></p>
+      <p class="eh-amt pos"><bdi dir="ltr">+300.00</bdi> <span class="unit">د.أ</span></p>
+      <p class="eh-state"><span class="st-ic st-ok" data-icon="check-fill" aria-hidden="true"></span> محصّل — نقدًا · متزامن</p>
+    </div>
+    <ul class="rows detailrows">
+      <li class="row dt-row"><span class="dt-k">الجهة</span><span class="dt-v">محمد الخطيب</span></li>
+      <li class="row dt-row"><span class="dt-k">الأثر</span><span class="dt-v">النقد +300.00 · رصيده نقص 300.00 ← 940.00</span></li>
+      <li class="row dt-row"><span class="dt-k">المصدر</span><span class="dt-v">سُجّل على هذا الجهاز · تزامن 10:07</span></li>
+    </ul>
+    <div class="row-actions">
+      <button class="quietbtn" data-act="open-correction">تصحيح</button>
+      <button class="quietbtn" data-act="share-entry">مشاركة</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen pushed" id="scr-party" hidden>
+  <header class="appbar appbar-detail">
+    <div class="appbar-row"><button class="backbtn" data-back aria-label="رجوع"><span data-icon="back"></span><span>رجوع</span></button><h1 class="appbar-title-compact" id="party-title">محمد الخطيب</h1><div class="appbar-actions"><button class="iconbtn" data-icon="plus" data-act="open-capture" aria-label="سجّل"></button></div></div>
+  </header>
+  <div class="body" data-scroller>
+    <div class="party-hero">
+      <p class="eh-type" id="party-sub">مقاول تركيبات صحية</p>
+      <p class="eh-amt pos"><bdi dir="ltr" id="party-balance">940.00</bdi> <span class="unit">د.أ</span></p>
+      <p class="eh-state" id="party-state"><span class="st-ic st-wait" data-icon="clock" aria-hidden="true"></span> مستحق منذ <bdi dir="ltr">21/07/2026</bdi> — 48 يومًا</p>
+    </div>
+    <div class="relbar-block" id="relbar">
+      <div class="relbar" role="img" aria-label="رصيد ورشة الأمان 540.00: 260.00 بيع اليوم و280.00 متأخرة منذ 25/08."><i class="rb-cur" style="--w:48%"></i><i class="rb-od" style="--w:52%"></i></div>
+      <div class="relbar-legend"><span><i class="dot d-cur"></i>حالي 260.00</span><span><i class="dot d-od"></i>متأخر 280.00</span></div>
+    </div>
+    <h3 class="grouphead">حركات أخيرة</h3>
+    <ul class="rows">
+      <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">10:05</bdi></span><span class="subj"><span class="subj-t">تحصيل — نقدًا</span><span class="subj-s">محصّل · <bdi dir="ltr">07/09/2026</bdi></span></span><span class="amt pos"><bdi dir="ltr">+300.00</bdi><span class="unit">د.أ</span></span></li>
+      <li class="row money-row" tabindex="0"><span class="time"><bdi dir="ltr">25/08</bdi></span><span class="subj"><span class="subj-t">بيع بالذمة — سخّانات</span><span class="subj-s">معلّق · <bdi dir="ltr">25/08/2026</bdi></span></span><span class="amt pos"><bdi dir="ltr">+380.00</bdi><span class="unit">د.أ</span></span></li>
+    </ul>
+    <div class="row-actions">
+      <button class="primarybtn" data-act="collect-sheet">تحصيل الآن</button>
+      <button class="quietbtn" data-act="share-entry">كشف الحساب</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen pushed" id="scr-order" hidden>
+  <header class="appbar appbar-detail">
+    <div class="appbar-row"><button class="backbtn" data-back aria-label="رجوع"><span data-icon="back"></span><span>رجوع</span></button><h1 class="appbar-title-compact">عملية</h1></div>
+  </header>
+  <div class="body" data-scroller>
+    <div class="entry-hero">
+      <p class="eh-type">توصيل مجدول · الأربعاء <bdi dir="ltr">09/09/2026</bdi></p>
+      <p class="eh-amt pos"><bdi dir="ltr">760.00</bdi> <span class="unit">د.أ</span></p>
+      <p class="eh-state"><span class="st-ic st-wait" data-icon="clock" aria-hidden="true"></span> معلّق · يُحصّل عند التسليم</p>
+    </div>
+    <ul class="steps">
+      <li class="step done"><i class="st-ic st-ok" data-icon="check-fill" aria-hidden="true"></i><span>جهّزت الطلبية</span></li>
+      <li class="step current"><i class="st-ic st-wait" data-icon="clock" aria-hidden="true"></i><span>خرجت للتوصيل — الأربعاء</span></li>
+      <li class="step"><i class="st-ic st-future" data-icon="future" aria-hidden="true"></i><span>تم التسليم والتحصيل — 760.00</span></li>
+    </ul>
+    <ul class="rows detailrows">
+      <li class="row dt-row"><span class="dt-k">الجهة</span><span class="dt-v">أبو زياد للمقاولات</span></li>
+      <li class="row dt-row"><span class="dt-k">المال المرتبط</span><span class="dt-v">ذمته 760.00 — تُحصّل عند التسليم</span></li>
+    </ul>
+    <div class="row-actions"><button class="primarybtn" data-act="collect-sheet">تسجيل تسليم وتحصيل</button></div>
+  </div>
+</section>
+
+<section class="screen pushed" id="scr-closing" hidden>
+  <header class="appbar appbar-detail">
+    <div class="appbar-row"><button class="backbtn" data-back aria-label="رجوع"><span data-icon="back"></span><span>رجوع</span></button><h1 class="appbar-title-compact">إغلاق الصندوق</h1></div>
+  </header>
+  <div class="body" data-scroller>
+    <p class="closing-date">الاثنين <bdi dir="ltr">07/09/2026</bdi></p>
+    <div id="closing-open">
+      <ul class="rows detailrows">
+        <li class="row dt-row"><span class="dt-k">المتوقع من الدفتر</span><span class="dt-v"><bdi dir="ltr">3,477.50</bdi> <span class="unit">د.أ</span></span></li>
+        <li class="row dt-row"><span class="dt-k">يشمل</span><span class="dt-v">كل سجلات اليوم، منها واحدة بانتظار المزامنة</span></li>
+      </ul>
+      <div class="count-field">
+        <label class="cf-label" for="counted">النقد المعدود</label>
+        <div class="cf-input"><input id="counted" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" dir="ltr"><span class="unit">د.أ</span></div>
+      </div>
+      <p class="variance" id="variance" aria-live="polite"></p>
+      <div class="count-field">
+        <label class="cf-label" for="closing-note">سبب الفرق (اختياري)</label>
+        <div class="cf-input"><input id="closing-note" type="text" placeholder="—" autocomplete="off"></div>
+      </div>
+      <button class="primarybtn" data-act="confirm-closing">تأكيد الإغلاق</button>
+    </div>
+    <div id="closing-done" hidden>
+      <div class="closed-hero">
+        <span class="st-ic st-ok big" data-icon="check-fill" aria-hidden="true"></span>
+        <p class="cd-t">اليوم مغلق</p>
+        <p class="cd-s">المعدود <bdi dir="ltr">3,469.00</bdi> · المتوقع <bdi dir="ltr">3,477.50</bdi> — عجز <bdi dir="ltr">8.50</bdi> سُجّل كتسوية.</p>
+      </div>
+      <div class="row-actions">
+        <button class="quietbtn" data-act="correction-entry">قيد تصحيح</button>
+        <button class="quietbtn" data-act="share-entry">مشاركة وصل الإغلاق</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TAB BAR + capture pill ═══════════ -->
+<nav id="tabbar" role="tablist" aria-label="التنقل الرئيسي">
+  <button class="tabbtn is-active" role="tab" aria-selected="true" data-tab="hub"><span class="t-ic" data-icon="vault" aria-hidden="true"></span><span class="t-lb">الصندوق</span></button>
+  <button class="tabbtn" role="tab" aria-selected="false" data-tab="work"><span class="t-ic" data-icon="work" aria-hidden="true"></span><span class="t-lb">العمل</span></button>
+  <button class="tabbtn" role="tab" aria-selected="false" data-tab="people"><span class="t-ic" data-icon="people" aria-hidden="true"></span><span class="t-lb">الناس</span></button>
+  <button class="tabbtn" role="tab" aria-selected="false" data-tab="tools"><span class="t-ic" data-icon="tools" aria-hidden="true"></span><span class="t-lb">أدوات</span></button>
+</nav>
+<button id="cappill" data-act="open-capture"><span data-icon="plus" aria-hidden="true"></span><span>سجّل حركة</span></button>
+
+<!-- ═══════════ SHEETS ═══════════ -->
+<div id="scrim" hidden></div>
+
+<section class="sheet" id="sheet-capture" role="dialog" aria-modal="true" aria-labelledby="cap-title" hidden>
+  <div class="grabber-zone" data-drag>
+    <span class="grabber" aria-hidden="true"></span>
+    <span class="sheet-title" id="cap-title">سجّل حركة</span>
+    <button class="iconbtn" data-close-sheet aria-label="إغلاق"><span data-icon="x"></span></button>
+  </div>
+  <div class="sheet-mid">
+    <div class="seg typeseg" role="tablist" aria-label="نوع الحركة">
+      <button class="segbtn is-active" data-ctype="sale">بيع</button>
+      <button class="segbtn" data-ctype="collect">قبض</button>
+      <button class="segbtn" data-ctype="expense">مصروف</button>
+      <button class="segbtn" data-ctype="payment">دفع</button>
+      <button class="segbtn" data-ctype="adjust">تسوية</button>
+    </div>
+    <div class="amt-display" aria-live="polite">
+      <span class="ad-label">المبلغ</span>
+      <span class="ad-val"><bdi dir="ltr" id="amt-val">0</bdi> <span class="unit">د.أ</span></span>
+    </div>
+    <div class="field"><label class="f-label" for="cap-party">الجهة (اختياري)</label><input id="cap-party" type="text" placeholder="محمد الخطيب…"></div>
+    <div class="field"><label class="f-label" for="cap-note">ملاحظة (اختياري)</label><input id="cap-note" type="text" placeholder="—"></div>
+  </div>
+  <div class="keypad" role="group" aria-label="لوحة الأرقام">
+    <div class="kp-row"><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button></div>
+    <div class="kp-row"><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button></div>
+    <div class="kp-row"><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button></div>
+    <div class="kp-row"><button data-k=".">.</button><button data-k="0">0</button><button data-k="⌫" data-icon="backspace" aria-label="حذف"></button></div>
+    <div class="kp-chips">
+      <button class="kp-chip" data-add="5">+5.00</button>
+      <button class="kp-chip" data-add="10">+10.00</button>
+      <button class="kp-chip" data-add="20">+20.00</button>
+      <button class="kp-chip" data-act="amt-clear">مسح</button>
+    </div>
+  </div>
+  <div class="accessory">
+    <button class="acc-cancel" data-close-sheet>إلغاء</button>
+    <button class="acc-save" id="cap-save" data-act="save-entry">حفظ</button>
+  </div>
+  <div class="receipt" id="capture-receipt" hidden>
+    <span class="r-check" data-icon="check-fill" aria-hidden="true"></span>
+    <p class="r-sentence" id="receipt-sentence"></p>
+    <p class="r-note" id="receipt-note"></p>
+    <div class="r-actions">
+      <button class="quietbtn" data-act="undo-entry">تراجع</button>
+      <button class="primarybtn sm" data-act="done-entry">تم</button>
+    </div>
+  </div>
+</section>
+
+<section class="sheet sheet-mid" id="sheet-collect" role="dialog" aria-modal="true" aria-labelledby="col-title" hidden>
+  <div class="grabber-zone" data-drag>
+    <span class="grabber" aria-hidden="true"></span>
+    <span class="sheet-title" id="col-title">تسجيل تحصيل</span>
+    <button class="iconbtn" data-close-sheet aria-label="إغلاق"><span data-icon="x"></span></button>
+  </div>
+  <div class="sheet-mid">
+    <p class="col-party" id="col-party">محمد الخطيب</p>
+    <div class="amt-display"><span class="ad-label">المبلغ</span><span class="ad-val"><bdi dir="ltr" id="col-amt">0</bdi> <span class="unit">د.أ</span></span></div>
+    <p class="col-hint" id="col-hint">رصيده 940.00 — أدخل المبلغ المحصّل</p>
+  </div>
+  <div class="keypad">
+    <div class="kp-row"><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button></div>
+    <div class="kp-row"><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button></div>
+    <div class="kp-row"><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button></div>
+    <div class="kp-row"><button data-k=".">.</button><button data-k="0">0</button><button data-k="⌫" data-icon="backspace" aria-label="حذف"></button></div>
+  </div>
+  <div class="accessory">
+    <button class="acc-cancel" data-close-sheet>إلغاء</button>
+    <button class="acc-save" data-act="save-collect">حفظ</button>
+  </div>
+</section>
+
+<!-- ═══════════ DIALOGS ═══════════ -->
+<div class="dialog-wrap" id="dlg-close" role="dialog" aria-modal="true" aria-labelledby="dlgc-t" hidden>
+  <div class="dialog">
+    <h2 id="dlgc-t" class="dlg-title">إغلاق الصندوق؟</h2>
+    <p class="dlg-body" id="dlgc-b">الفرق عجز <bdi dir="ltr">8.50</bdi> د.أ — سيُسجّل كتسوية. لن تستطيع إضافة حركات لهذا اليوم بعد الإغلاق.</p>
+    <div class="dlg-actions"><button class="dlg-cancel" data-close-dialog>إلغاء</button><button class="dlg-confirm" data-act="do-closing">إغلاق الآن</button></div>
+  </div>
+</div>
+<div class="dialog-wrap" id="dlg-conflict" role="dialog" aria-modal="true" aria-labelledby="dlgcf-t" hidden>
+  <div class="dialog">
+    <h2 id="dlgcf-t" class="dlg-title">حلّ التعارض</h2>
+    <p class="dlg-body">تحصيل واحد من أبو زياد موجود بنسختين. لم يُفقد شيء — اختر القيمة الصحيحة.</p>
+    <div class="conflict-opts">
+      <button class="c-opt" data-act="resolve-local"><span class="co-amt"><bdi dir="ltr">150.00</bdi> <span class="unit">د.أ</span></span><span class="co-src">هذا الجهاز — سُجّل <bdi dir="ltr">06/09</bdi></span></button>
+      <button class="c-opt" data-act="resolve-remote"><span class="co-amt"><bdi dir="ltr">180.00</bdi> <span class="unit">د.أ</span></span><span class="co-src">جهازك الآخر — سُجّل <bdi dir="ltr">06/09</bdi></span></button>
+    </div>
+    <div class="dlg-actions"><button class="dlg-cancel" data-close-dialog>لاحقًا</button></div>
+  </div>
+</div>
+<div class="dialog-wrap" id="dlg-correction" role="dialog" aria-modal="true" aria-labelledby="dlgcr-t" hidden>
+  <div class="dialog">
+    <h2 id="dlgcr-t" class="dlg-title">معاينة التصحيح</h2>
+    <div class="dlg-body">
+      <p class="cp-h">سيتغيّر</p>
+      <ul class="cp-list"><li>المصروف المسجّل (−60.00) يُعكس بقيد معكوس: تعود +60.00 إلى النقد.</li><li>مجاميع يوم أمس تُعاد حسابها.</li></ul>
+      <p class="cp-h no">لن يتغيّر</p>
+      <ul class="cp-list no"><li>يبقى السجل مرئيًا مع قيد التصحيح المرتبط.</li></ul>
+    </div>
+    <div class="dlg-actions"><button class="dlg-cancel" data-close-dialog>إلغاء</button><button class="dlg-confirm" data-act="do-correction">تنفيذ التصحيح</button></div>
+  </div>
+</div>
+<div class="dialog-wrap" id="dlg-discard" role="dialog" aria-modal="true" aria-labelledby="dlgds-t" hidden>
+  <div class="dialog">
+    <h2 id="dlgds-t" class="dlg-title">في رقم مكتوب</h2>
+    <p class="dlg-body">كتبت مبلغًا لم يُحفظ بعد — تسجّله أم تتجاهله؟</p>
+    <div class="dlg-actions"><button class="dlg-cancel" data-act="discard-amount">تجاهل</button><button class="dlg-confirm" data-close-dialog>متابعة الكتابة</button></div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<div id="kbd-sim" hidden>
+  <p class="kbd-note">لوحة مفاتيح محاكاة — للمراجعة</p>
+  <button class="kbd-done" data-act="kbd-done">تم</button>
+</div>
+
+<script src="app.js"></script>
+</main>
+</body>
+</html>

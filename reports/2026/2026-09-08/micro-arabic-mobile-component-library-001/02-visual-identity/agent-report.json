@@ -1,0 +1,47 @@
+{
+  "task_id": "2-b",
+  "agent_id": "02-visual-identity",
+  "run_id": "20260908T133450Z-16d11",
+  "status": "complete",
+  "deliverables": [
+    {
+      "file": "visual-direction-report.md",
+      "summary": "Names and defines the single direction 'دفء الطابون · Taboun Warmth': character statement measured against the SPEC §5 neutral comfort benchmark, warmth built from exactly three surfaces + warm ink system with no fourth surface, useful energy from semantic meaning / one brand moment / tinted rail tile / positive–danger metric pair with a full SPEC §6.3 color-economy compliance table, hierarchy tactics (32px value first, tabular digits, sign-first), density and calm spacing strategy, anti-generic commitments, and RTL visual decisions."
+    },
+    {
+      "file": "color-role-map.md",
+      "summary": "Complete reference for all 27 tokens (brand, 3 surfaces, ink & structure, 4 semantic families + tints): role, allowed usages, forbidden usages, pairing notes, and the color-economy enforcement checklist. Includes 44 computed text-pair WCAG ratios, 15 graphic/structure ratios, and press/scrim alpha composites, each flagged with pass/large-only/fail and mitigation; computation script recorded in the doc."
+    },
+    {
+      "file": "type-and-spacing-review.md",
+      "summary": "Audit of IBM Plex Sans Arabic 400/500/600 + fallback stack; the three type roles (32px/600/1.15 value, 15px/400/1.55 label, 13px/400/1.4 qualifier) and the 14px Arabic minimum with a documented 13px-tension resolution; numeric policy (English digits, tabular-nums lining-nums, sign-first, ASCII minus, unknown ≠ 0); rem-based component typography with px-based lab chrome for 100/130/200% text scaling; bidi markup strategy (bdi dir=ltr + separate د.أ node); spacing scale and radius usage maps incl. BottomNavigation radius 0; elevation restraint rules."
+    },
+    {
+      "file": "visual-swatch-board.html",
+      "summary": "Self-contained valid HTML reference board (lang=ar, dir=rtl, zero JS, IBM Plex Sans Arabic via Google Fonts as progressive enhancement). All colors are CSS custom properties from the exact SPEC tokens; sections for brand, surfaces (with nesting demo), ink & structure, semantic families (chips + large-value-on-tint demo), three type specimens with tabular vs proportional alignment demo, spacing strip 2–40, radius strip 6/12/16/24/full + radius-0 bottom-nav note, press-overlay and scrim/mini-sheet demos, and three do/don't pairs honoring the color economy. Verified headlessly: tag balance OK, all color declarations var()-only, all 22 token colors render exactly, no #B4613F fill, no dark mode."
+    },
+    {
+      "file": "agent-report.json",
+      "summary": "This report."
+    }
+  ],
+  "key_decisions": [
+    "One direction only: 'Taboun Warmth' — neutral-comfort floor plus useful heat; warmth carried by surface deltas and warm inks, energy budgeted to operational meaning.",
+    "PrimaryValueBlock lives directly on canvas (no card) so hierarchy never needs a fourth plane; nesting locked to canvas > surface > sunken.",
+    "The single brand moment per viewport is the brand-ink filled CTA (white text 6.11:1; pressed 6.69:1); brand-atmosphere text is always ink-strong (5.08:1); white-on-atmosphere restricted to large text/graphics (3.28:1).",
+    "Tinted QuickActionRail tile uses brand-ink icon (5.21:1) — never a brand-atmosphere icon on brand-tint (2.78:1 fails 3:1).",
+    "Colored numeric values are capped at the +/− pair per composition; sign precedes digits inside the LTR isolate (color secondary, per SPEC §6.12).",
+    "Chip text on semantic tints defaults to ink (10.7:1+); semantic solids on tints are for icons/signs and large (≥24px / 18.66px@600) values only.",
+    "Component typography is rem-based (root 16px) so 100/130/200% text scaling grows content while lab chrome stays px; heights stay content-driven.",
+    "Elevation restraint: static surfaces flat; only Sheet/Dialog lift (scrim + one ink-alpha overlay shadow to be tokenized by Agent 03); press = #1F1E1D@8% overlay, focus = 2px ink-strong ring."
+  ],
+  "spec_conflicts_or_risks": [
+    "positive #2E7D57 on positive-tint #E7EFE7 = 4.27:1 — below 4.5 for normal text: restricted to icons/graphics (≥3:1) and large text; chip text uses ink. Danger/info pass; warning-on-tint passes at 4.53:1 with a narrow margin.",
+    "ink-subtle #767265 on sunken #F0EEE6 = 4.14:1 — ink-subtle restricted to surface/canvas; qualifiers inside sunken use ink-muted ≥14px.",
+    "ink-disabled = 2.11:1 on white — allowed only on genuinely disabled controls (WCAG-incidental) with a non-color cue; unavailable values never render as faded numbers.",
+    "Structure lines (1.25–1.41:1) and surface/canvas step (1.05:1) are sub-3:1 by design: never the sole component boundary or status signal; identification via fill, typography, and 2px ink-strong focus ring.",
+    "SPEC-internal tension: 13px qualifiers/rail labels (§6.4/§6.8) vs 14px Arabic minimum (§6.4) — resolved and documented (13px reserved for numeric/Latin metadata and spec-mandated rail labels; reading Arabic ≥14px); needs Agent 05 ruling in the decision log.",
+    "Ink-alpha derivatives beyond press-overlay (8%) and scrim (45%) — specifically the 8–12% Sheet/Dialog shadow — need explicit tokenization by Agent 03 to stay inside the 'no invented colors' rule."
+  ],
+  "handoff_to_agent_05": "Synthesize on top of Taboun Warmth: take the direction report as the character baseline, the color-role-map constraints as hard law (especially the LARGE-ONLY pairs and chip-text-ink rule), and the type-and-spacing-review rem strategy as the scaling backbone. When judging energy, check the four budget rules before adding anything: one brand fill, ≤2 semantic families, ≤2 colored values, ≤1 tinted rail tile. If a composition feels lifeless, fix it with the +/− metric pair, the tinted rail tile, or a 32px tabular value on canvas — never with more fill. Resolve the flagged 13px/14px tension and the shadow tokenization explicitly in the final decision log."
+}

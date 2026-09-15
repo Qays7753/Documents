@@ -1,0 +1,166 @@
+/* Micro Standard v2 — current approved Cloud Code basis
+   Wave A (run run-20260913-msv2-zai-01): materialized the tokens the gallery
+   already consumes (type scale, radius, elevation, motion, geometry, scrim)
+   and added action/state aliases bound ONLY to the approved values below.
+   No new palette color was introduced. Alpha derivatives (scrim, translucent
+   header) reuse approved base values and are disclosed in color-system.md. */
+:root {
+  /* -- Approved surfaces (unchanged) ------------------------------------ */
+  --vf-canvas: #FAF9F5;
+  --vf-ground: #F5F4ED;
+  --vf-recessed: #F0EEE6;
+  --vf-surface: #FFFFFF;
+  --vf-tint: #E8E6DC;
+  --vf-soft: #D1CFC5;
+  --vf-border: #D1CFC5;
+  --vf-border-interactive: #87867F;
+  --vf-border-soft: var(--vf-tint); /* quiet hairline tier; alias of #E8E6DC */
+
+  /* -- Approved ink (unchanged) ----------------------------------------- */
+  --vf-ink: #141413;
+  --vf-ink-secondary: #4D4C48;
+  --vf-ink-tertiary: #6B6962;
+  --vf-ink-on-dark: #FFFFFF;
+  --vf-ink-on-tint: #141413;
+  --vf-ink-pressed: var(--vf-btn-primary-bg-pressed); /* #3D3D3A existing value */
+
+  /* -- Approved identity + semantic roles (unchanged) -------------------- */
+  --vf-clay: #D97757;
+  --vf-clay-interactive: #C96442;
+  --vf-info: #2C84DB;
+  --vf-status: #1490FF;
+  --vf-success: #629987;
+  --vf-error: #B53333;
+  --vf-focus: #141413;
+  --vf-disabled-surface: #F0EEE6;
+  --vf-disabled-ink: #55524A;
+  --vf-field-border-focus: #87867F;
+  --vf-bg-secondary: #F5F4ED;
+
+  /* -- Action contracts (owner-approved; aliases of the values above) ---- */
+  /* Create/add/FAB: identity Terracotta. Never financial values, never
+     chart fills, never a general commitment color. */
+  --vf-action-create: var(--vf-clay);                    /* #D97757 */
+  --vf-action-create-pressed: var(--vf-clay-interactive);/* #C96442 */
+  --vf-action-create-ink: var(--vf-ink);                 /* #141413 — text-bearing create/add */
+  --vf-action-create-icon-ink: var(--vf-ink-on-dark);     /* #FFFFFF — icon-only FAB/icon button */
+  /* Ordinary save/confirm: Warm Tint surface + dark ink. Pressing shows a
+     #C96442 edge and never converts the button into a success state. */
+  --vf-action-save-bg: var(--vf-bg-secondary);           /* #F5F4ED */
+  --vf-action-save-ink: var(--vf-ink);                   /* #141413 */
+  --vf-action-save-pressed-edge: var(--vf-clay-interactive); /* #C96442 */
+  /* High-consequence commit / destructive confirmation: warm-ink filled
+     surface, white text, consequence word + icon + explanation + an
+     independent confirmation path. */
+  --vf-action-commit-bg: var(--vf-ink);                  /* #141413 */
+  --vf-action-commit-ink: var(--vf-ink-on-dark);         /* #FFFFFF */
+  --vf-action-commit-pressed: var(--vf-btn-primary-bg-pressed); /* #3D3D3A */
+
+  /* -- Control geometry (unchanged values, now explicit) ----------------- */
+  --vf-control-height: 48px;
+  --vf-radius-control: 12px;
+  --vf-radius-sheet: 20px;
+  --vf-radius-card: 16px;
+  --vf-radius-segment: 18px;
+  --vf-radius-full: 999px;
+  /* gallery-consumed unprefixed aliases of the canonical tokens above */
+  --radius-control: var(--vf-radius-control);
+  --radius-sheet: var(--vf-radius-sheet);
+  --radius-card: var(--vf-radius-card);
+  --radius-segment: var(--vf-radius-segment);
+  --radius-full: var(--vf-radius-full);
+
+  /* -- Button bindings (primary = high-consequence commitment only) ------ */
+  --vf-btn-primary-bg: var(--vf-ink);
+  --vf-btn-primary-bg-pressed: #3D3D3A;
+  --vf-btn-primary-ink: var(--vf-ink-on-dark);
+  --vf-btn-save-bg: var(--vf-action-save-bg);
+  --vf-btn-save-ink: var(--vf-action-save-ink);
+  --vf-btn-save-pressed-edge: var(--vf-action-save-pressed-edge);
+  --vf-btn-create-bg: var(--vf-action-create);
+  --vf-btn-create-ink: var(--vf-action-create-ink);
+  --vf-btn-create-pressed: var(--vf-action-create-pressed);
+  --vf-btn-secondary-bg: var(--vf-tint);
+  --vf-btn-secondary-bg-pressed: var(--vf-soft);
+  --vf-btn-secondary-ink: var(--vf-ink-on-tint);
+  --vf-btn-outline-bg: var(--vf-surface);
+  --vf-btn-outline-ink: var(--vf-ink);
+  --vf-btn-outline-border: var(--vf-border-interactive);
+  --vf-btn-ghost-ink: var(--vf-ink-tertiary);
+  --vf-btn-destructive-ink: var(--vf-error);
+  --vf-btn-destructive-border: var(--vf-error);
+
+  /* -- Type scale (values recorded by the gallery evidence panel) -------- */
+  --text-title-size: 28px;      --text-title-line: 1.3;   --text-title-weight: 700;
+  --text-title-sm-size: 20px;   --text-title-sm-line: 1.3; --text-title-sm-weight: 700;
+  --text-section-size: 17px;    --text-section-line: 1.4; --text-section-weight: 600;
+  --text-card-title-size: 15px; --text-card-title-line: 1.4; --text-card-title-weight: 600;
+  --text-body-size: 15px;       --text-body-line: 1.6;    --text-body-weight: 400;
+  --text-label-size: 13px;      --text-label-line: 1.4;   --text-label-weight: 500;
+  --text-caption-size: 12px;    --text-caption-line: 1.5; --text-caption-weight: 400;
+  --text-kpi-size: 24px;        --text-kpi-weight: 600;
+  --text-kpi-hero-size: 28px;   --text-kpi-hero-weight: 600;
+  --text-amount-size: 15px;     --text-amount-weight: 600;
+  --text-amount-input-size: 24px; --text-amount-input-weight: 600;
+
+  /* -- Elevation (evidence-panel values; shadow ink is decoration, not palette) */
+  --shadow-sm: 0 1px 2px rgba(60, 50, 40, 0.06);
+  --shadow-e1: 0 1px 2px rgba(60, 50, 40, 0.06), 0 4px 12px rgba(60, 50, 40, 0.06);
+  --shadow-e2: 0 6px 20px rgba(60, 50, 40, 0.10);
+  --shadow-e3: 0 16px 40px rgba(60, 50, 40, 0.16);
+
+  /* -- Motion (evidence-panel timing system) ------------------------------ */
+  --motion-press: 80ms;
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-sheet-in: 240ms;
+  --motion-sheet-out: 180ms;
+  --motion-dialog-in: 160ms;
+  --motion-dialog-out: 120ms;
+  --motion-scrim: 200ms;
+  --motion-skeleton: 1.5s;
+  --motion-snackbar-hold: 5000ms;
+  --vf-motion-fast: 120ms;   /* compatibility names preserved */
+  --vf-motion-standard: 200ms;
+  --vf-motion-sheet: 240ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.64, 0, 0.78, 0);
+
+  /* -- Layering + phone geometry ------------------------------------------ */
+  --z-scrim: 250;
+  --z-overlay: 300;
+  --z-fab: 400;
+  --z-snackbar: 500;
+  --control-height: var(--vf-control-height);
+  --control-height-compact: 36px;
+  --topbar-height: 56px;
+  --nav-height-min: 64px;
+  --fab-size: 56px;
+  --fab-offset: 16px; /* FAB sits 80px above the nav: 64px nav + 16px */
+  --icon-sm: 20px;
+  --icon-md: 24px;
+  --progress-track-height: 8px;
+
+  /* -- Functional derivatives of approved values (disclosed, not new palette)
+         scrim = approved warm ink at 45% (required by overlay-system.md);
+         translucent header = approved canvas at 86%. */
+  --vf-scrim: rgba(20, 20, 19, 0.45);
+  --color-scrim: var(--vf-scrim);
+  --vf-header-translucent: rgba(250, 249, 245, 0.86);
+  --color-header-translucent: var(--vf-header-translucent);
+
+  /* -- Tint aliases for semantic marks (existing tint grammar:
+         bg-secondary surface + semantic ink; word+marker always required) */
+  --color-negative-50: var(--vf-bg-secondary);
+  --color-negative-on-tint: var(--vf-error);
+  --color-positive-100: var(--vf-bg-secondary);
+  --color-primary-100: var(--vf-bg-secondary);
+  --color-primary-200: var(--vf-ink-on-dark);
+
+  /* compatibility names for the current implementation */
+  --vf-font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --vf-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html, body { background: var(--vf-canvas); color: var(--vf-ink); }

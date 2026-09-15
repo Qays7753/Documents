@@ -1,0 +1,42 @@
+{
+  "agent_id": "05",
+  "task_id": "5",
+  "status": "completed",
+  "rubric_scores": {
+    "micro_specificity": 5,
+    "native_mobile": 4,
+    "visual_warmth": 5,
+    "visual_energy": 4,
+    "directness": 5,
+    "component_reusability": 5,
+    "color_correctness": 4,
+    "rtl_accessibility": 4,
+    "interaction_quality": 4,
+    "responsive_integrity": 5,
+    "handoff_quality": 4
+  },
+  "hard_failures": [],
+  "revisions_required": [],
+  "binding_corrections_pre_upload": [
+    "AC-03: '.mc-compact-unit' renders the Arabic-script currency 'د.أ' at 13px (CompactTile + chart heads) — below the pinned 14px Arabic floor; fix to var(--fs-14) and correct the overclaimed coverage-matrix row.",
+    "AC-12: '.mc-op-status--warning' uses 14px warning text on warning-tint inside a pressable row — 3.87:1 mid-press; switch to ink text + warning icon (match positive/danger chip pattern).",
+    "AC-11: add the 'آخر تحديث …' freshness line to the Test Composition's PrimaryValueBlock (Agent 01 trust rule (c)).",
+    "AC-09: amount-input digits sit at inline-start while 'د.أ' sits at inline-end — number/currency separated by the field width; align digits adjacent to the unit before extraction.",
+    "AC-14: README lists final/self-critique.md which does not exist — add the file (deriving from 05-synthesis-and-redesign/self-critique.md is acceptable) or remove the row.",
+    "AC-08 (doc): log the native-keypad resolution (D-23) and add keypad / row-swipe / conflict-dialog-interaction to verification-report 'not verified'; AC-05 (doc): annotate the stale tokens.css primary-button comment."
+  ],
+  "non_blocking_notes": [
+    "Native-keypad decision (inputmode=decimal) is platform-correct but was an unlogged deviation from Agent 04 checklist item 41.",
+    "Completion proof persists as rows + live announcements but lacks entry IDs ('رقم القيد') per Agent 04 §4.",
+    "Bottom nav lacks the env(safe-area-inset-bottom) hook from Agent 03's architecture (add at extraction).",
+    "Component type sizes 12/16/18 soften Agent 02's four-size law without a log entry; amount placeholder '0.000' deviates from Agent 01's 'أدخل المبلغ' contract.",
+    "Verification was single-engine (Chromium); the 130% scale step was spot-checked, and the long settlements screen needed to stress the one-terracotta-moment budget was never built."
+  ],
+  "files": [
+    "05-synthesis-and-redesign/synthesis-report.md",
+    "05-synthesis-and-redesign/selected-direction.md",
+    "05-synthesis-and-redesign/self-critique.md",
+    "05-synthesis-and-redesign/decision-log.md",
+    "05-synthesis-and-redesign/agent-report.json"
+  ]
+}

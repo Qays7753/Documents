@@ -1,0 +1,12 @@
+# 01 — Current Work Lessons
+
+| Current pattern | Why it feels generic, immature, empty, crowded, or unclear | What the new concept must do instead |
+|---|---|---|
+| Card-wall composition of equal primitives (the MicroPrimitives showcase) | A gallery of similar rectangles reads as a component lab, not a product; nothing carries hierarchy, so the eye has no entry point and the screen feels both crowded and empty | One dominant "truth block" per screen, then full-width grouped bands with clear tonal steps; cards only where a bounded object truly exists (an order, a payable) |
+| Showcase/lab controls inside the product frame | Breaks the owner's trust that what she sees is her business; coding-style labels and primitive toggles are development furniture | The simulated product contains only product UI; all review controls live outside the phone frame |
+| Generic SaaS dashboard rhythm (stat tiles + chart panel) | Reads as a template any team could ship; wastes the top of the screen on decoration instead of decisions | Composition led by the owner's questions (what changed, who owes me, what needs attention today) with deltas and explanations, not vanity stat tiles |
+| Elevated floating cards on flat background | Shadows everywhere flatten the hierarchy they were meant to create; depth loses meaning | Two-step depth discipline: hairline-separated bands on canvas, a single overlay layer for sheets; shadows reserved for the overlay layer only |
+| Weak NumericSurface presentation (small amount, cramped controls) | Money entry is the product's most-used action; small digits and hidden position feel unsafe | Large tabular-numeral surface, always-visible position context, visible tap controls, directional digit movement, reduced-motion alternative |
+| Equal-tile settings grids | Four identical tiles give no reading order and break one-handed scanning | Vertical settings rows with leading icons, labels, and value hints |
+| Decorative color usage (terracotta washes, logo-shaped ornaments) | Atmosphere color used on controls destroys the action hierarchy and violates the measured-contrast audit | Terracotta as atmosphere on soft surfaces; `#964e33` reserved for the single primary action per view; press-only `#b4613f` never presented as a resting state |
+| Silent confident numbers (0.00 for unknown, totals without source state) | A confident zero is a lie that costs the owner real money decisions | Honest states rendered as first-class citizens: «قيمة غير محددة بعد», estimated/pending/offline/synced chips, chart source-state captions |

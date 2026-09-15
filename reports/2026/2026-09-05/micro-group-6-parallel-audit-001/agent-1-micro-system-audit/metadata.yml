@@ -1,0 +1,63 @@
+delivery_id: micro-group-6-parallel-audit-001
+track: agent-1-micro-system-audit
+date: 2026-09-05
+program: micro-release-quality-parallel-audit
+agent: 1 (Principal Micro System Auditor and Release Owner)
+parallel_track: agent-2 (Zman-to-Micro transfer audit — independent, not touched)
+generated_at: 2026-09-05T10:30:00+03:00
+micro:
+  repository: https://github.com/Qays7753/Micro
+  baseline_main_sha: ad9fc137c8aeeadbb2e5c7dd6666f18b8e3f04c8
+  audit_branch: agent/group-6-micro-system-audit
+  audit_branch_sha: c1ae93e (pushed; PR #154 open for review, NOT merged)
+  pull_request: https://github.com/Qays7753/Micro/pull/154
+  ci:
+    baseline_main_run: 33948024196 (success)
+    audit_branch_run: 33960263084 (success)
+  recovery:
+    local_snapshot_branch: recovery/group-6-audit-baseline-2026-09-05 (not pushed)
+    offline_bundle: micro-baseline-recovery.bundle (kept outside the repository)
+  integration_state: awaiting controlled integration with agent-2 report; do not merge while agent 2 is running
+findings:
+  p0: 0
+  p1: 8 (all fixed on the audit branch)
+  p2: 13 (safe subset fixed; remainder documented with remediation plans)
+  p3: 19 (documented; deferrable)
+fixes:
+  commits: 10 on the branch (fc9e5e9..c1ae93e)
+  files_changed_vs_main: 175
+  new_tests: 18 (9 lock service, 4 settings PIN gate dom, 3 re-delivery attribution, 3 sale-cancel wallet mirror, 2 family-event guard dom, 2 envelope v27 adversarial) minus none removed
+  ci_workflow: NOT changed on the branch (push token lacks workflow scope); delivered as proposed-ci-hardening.patch
+tests:
+  domain: 277/277 (23 files)
+  prototype: 784/784 (123 files; baseline 766/120)
+  lint: 0 errors / 37 warnings (max-warnings ceiling unchanged)
+  format: prettier clean — scope now includes apps/prototype-web/client/src
+  text_density: 52/52 routed pages measured (baseline 40/52)
+  build: production PWA generateSW, 96 precache entries (2062 KiB)
+secrets_scan: clean (tracked files + working tree; no .env/.pem/.key committed)
+files:
+  - path: INDEX.md
+    bytes: 3716
+    sha256_prefix: 039b90246ab54334
+  - path: metadata.yml
+    bytes: 2334
+    sha256_prefix: f18247272ab8646e
+  - path: en/agent-1-micro-system-audit-report-en.md
+    bytes: 10682
+    sha256_prefix: 0c5e55abf11700e9
+  - path: en/agent-1-findings-and-remediation-en.md
+    bytes: 17984
+    sha256_prefix: 7e1f74e495677059
+  - path: en/agent-1-financial-invariants-en.md
+    bytes: 8801
+    sha256_prefix: 8036abfaebc5f233
+  - path: en/agent-1-ux-performance-security-ci-en.md
+    bytes: 9175
+    sha256_prefix: df46963ee5f1b23d
+  - path: en/agent-1-test-evidence-en.md
+    bytes: 6460
+    sha256_prefix: a71ba5a2c91bfda0
+  - path: proposed-ci-hardening.patch
+    bytes: 2909
+    sha256_prefix: 0786c1a94fa97521

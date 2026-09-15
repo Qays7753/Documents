@@ -1,0 +1,49 @@
+{
+  "task_id": "2-c",
+  "agent_id": "03-design-system-engineering",
+  "run_id": "20260908T133450Z-16d11",
+  "status": "complete",
+  "deliverables": [
+    {
+      "file": "tokens.css",
+      "summary": "Production --mc-* custom-property sheet: brand (atmosphere/tint/ink/on-brand + press-overlay rgba(31,30,29,.08) and scrim rgba(31,30,29,.45)), exactly three surfaces (canvas/surface/sunken), ink and line ramps, four semantic base+tint pairs, spacing 2-40, radius 6/12/16/24/full, role-based typography triads (32/600/1.15, 15/400/1.55, 13/400/1.4) with IBM Plex Sans Arabic stack, tabular-nums note and a px-to-rem bridge, SPEC §6.11-exact motion durations, three documented no-overshoot easing curves, QuickActionRail/touch/icon geometry locks, and two warm-neutral elevation levels. Light Mode only; no dark tokens."
+    },
+    {
+      "file": "tailwind-v4-theme.css",
+      "summary": "Optional Tailwind v4 CSS-first @theme mapping of the same values: --color-mc-*, --spacing-mc-* (incl. geometry locks), --radius-mc-*, --font-mc-sans, --text-mc-value/label/qualifier with line-height/weight sub-keys, --shadow-mc-1/2, --ease-mc-*. Documents that Tailwind v4 has no duration namespace (bare duration-N or var() shorthand), that tokens.css remains the single source of truth, and that the lab component CSS never depends on Tailwind."
+    },
+    {
+      "file": "component-architecture.md",
+      "summary": "1,391-word architecture of the final lab: four-file structure and CSS layer order, kebab-case family naming table with --variant modifiers, data-state/data-tone/.is-* exhibit-class hook strategy, logical-property RTL with .icon-mirror registry and LTR chart axes, rem-based component typography with px lab chrome for 100/130/200% scaling, 2px brand-ink focus-visible ring, ::after press overlay at 80ms, html[data-motion=reduced] strategy, sheet/dialog focus-trap/Escape/scrim/focus-return contract, and a five-step single-family extraction recipe."
+    },
+    {
+      "file": "variant-state-matrix.md",
+      "summary": "Complete matrix of all 14 SPEC §6.9 family groups (~75 rows): family, variant, state, exact CSS hooks, and must-exhibit location (Library/Test Composition/Verification). Covers all SPEC §8 mandatory items (button loading/disabled/focused/pressed/quiet-completion; input focus/error/filled/disabled; all ten state-family conditions; sheets/dialogs/scrim; charts with text alternatives) plus the locked QuickActionRail responsive peek table (320px 16px documented exception; 360/390/430px measured 56/86/30px)."
+    },
+    {
+      "file": "agent-report.json",
+      "summary": "This report."
+    }
+  ],
+  "key_decisions": [
+    "Easing: standard cubic-bezier(0.2,0,0,1) for press/fades, enter cubic-bezier(0.05,0.7,0.1,1) for arriving surfaces, exit cubic-bezier(0.3,0,0.8,0.15) for leaving surfaces - all under 1.0 so no bounce/spring/overshoot can exist; SPEC durations kept verbatim.",
+    "Typography: tokens.css keeps px as the declared source of truth and adds a documented rem bridge (--mc-type-*-size-rem = px/16) so components are rem-based and root font-size 16/20.8/32px drives 100/130/200% text-scale verification while lab chrome and geometry locks stay px.",
+    "State strategy: JS writes a single data-state attribute (mirrored to aria-*) for dynamic states; data-tone carries semantic accent separately; .is-* classes are exhibit-only mirrors for frozen matrix cells and are never set by JS; variants are static --modifier classes.",
+    "State family root named .state-notice instead of bare .state for extraction collision safety (single documented naming deviation).",
+    "Press: one shared ::after overlay using --mc-press-overlay rgba(31,30,29,.08) at 80ms with radius:inherit - works over any fill including brand, and structurally prevents the forbidden #B4613F swap.",
+    "Focus: one base-layer :focus-visible rule (2px solid --mc-brand-ink, offset 2px) inherited by all interactive families; ring contrast vs canvas/surface verified ~6.3-6.8:1.",
+    "Elevation limited to two warm-neutral levels cast in ink alpha; bottom sheet flips only the y sign at component layer (documented single exception).",
+    "RTL: logical properties only in component CSS, .icon-mirror explicit registry for directional icons, charts internally dir=ltr with Arabic labels RTL.",
+    "Sheet/dialog: Escape and scrim dismiss sheets and informational dialogs; --confirm/--destructive dialogs require an explicit choice; focus returns to invoker; drag-to-dismiss collapses to tap under reduced motion.",
+    "QuickActionRail: full-bleed rail with 16px inline padding = screen edge; peek formula (W-16)-(n*88+(n-1)*8)-8 yields 16/56/86/30px at 320/360/390/430 with geometry locked and 5 actions required at 430px for a next-item cue."
+  ],
+  "spec_conflicts_or_risks": [
+    "Tailwind v4 has no --duration-* theme namespace; the theme file documents bare-number and var() workarounds and flags this for verification against the exact Tailwind version the adopting project uses.",
+    "The rem bridge is a manual px/16 sync (CSS cannot divide two lengths portably yet); a token edit without a bridge edit would descale text - documented in tokens.css and flagged for Agent 05 build discipline.",
+    "QuickActionRail tile label 13px is both a geometry lock and a typography role: at 200% text scale the scaled label must wrap to two lines inside the locked 88x92 tile; Agent 04 must verify clipping does not occur.",
+    "320px peek is a measured 16px (documented spec-approved exception); 360/390/430 measurements (56/86/30px) are computed, not browser-measured - the Verification view must report real measurements and must not overclaim a universal 28px.",
+    "IBM Plex Sans Arabic cannot be committed as a deliverable font file and the lab must have no required remote runtime; the lab must declare the stack with system fallback and treat the Plex rendering as best-effort (coordinator holds local fonts for screenshots only).",
+    "Destructive/confirm dialogs intentionally ignore Escape and scrim dismissal (safe-dismissal rule); Agent 04 may challenge this as an accessibility trade-off - decision recorded for transparent review."
+  ],
+  "handoff_to_agent_05": "Build the final four code files directly from component-architecture.md: import tokens.css, then the ~30-line base layer (font stack, tabular-nums, focus-visible rule, press ::after base, .icon-mirror, html[data-motion=reduced]), then each family section consuming only --mc-* tokens, then .lab-* chrome in px. Use variant-state-matrix.md as the build and coverage checklist (~75 rows, all must be visibly exhibited with L/T/V locations; every chart needs a .chart-alt text alternative). Keep the Test Composition within SPEC 6.10 budget (matrices are exempt). Verbatim obligations: press overlay rgba(31,30,29,.08) never #B4613F; durations 80/120/200/240-180/160-120/200ms; touch targets 44/48; three surfaces only; Light Mode only; no count-up; digits 0-9 with tabular-nums and bidi isolation; currency as د.أ never JOD. Risks above (rem bridge sync, 200% tile label wrap, peek measurements, font fallback) should be verified in the final verification report."
+}

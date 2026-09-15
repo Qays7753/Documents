@@ -1,0 +1,288 @@
+<!-- ============================================================
+     VIEW 3 — TEST COMPOSITION (the only view bound by SPEC §6.10)
+     ============================================================ -->
+<section class="lab-view" id="view-composition" data-view="composition" role="tabpanel">
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">التركيبة التجريبية — «يوم مخبز أبو محمد»</h2>
+    <p class="lab-section-sub">تركيبة واحدة صغيرة تُثبت العلاقات: قيمة رئيسية واحدة على اللوحة، شريط إجراءات واحد، مجموعة قيم واحدة، زوج مقارنة واحد، ثلاثة أسطح، أسرتان دلاليتان، رقمان ملوّنان، ومالك تمرير رأسي واحد. المس التدفق: بلاطة «إضافة بيع» تفتح الورقة — تحميل ثم اكتمال هادئ ثم تحديث فوري للنقد.</p>
+
+    <div class="controls-bar">
+      <div class="ctrl-group" data-ctrl="width">
+        <span class="ctrl-label">العرض</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="320" aria-pressed="false">320</button>
+          <button type="button" class="ctrl-btn" data-value="360" aria-pressed="false">360</button>
+          <button type="button" class="ctrl-btn" data-value="390" aria-pressed="true">390</button>
+          <button type="button" class="ctrl-btn" data-value="430" aria-pressed="false">430</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="dir">
+        <span class="ctrl-label">الاتجاه</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="rtl" aria-pressed="true">RTL</button>
+          <button type="button" class="ctrl-btn" data-value="ltr" aria-pressed="false">LTR</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="scale">
+        <span class="ctrl-label">تكبير النص</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="16" aria-pressed="true">100%</button>
+          <button type="button" class="ctrl-btn" data-value="20.8" aria-pressed="false">130%</button>
+          <button type="button" class="ctrl-btn" data-value="32" aria-pressed="false">200%</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="motion">
+        <span class="ctrl-label">الحركة</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="full" aria-pressed="true">كاملة</button>
+          <button type="button" class="ctrl-btn" data-value="reduced" aria-pressed="false">مخفّضة</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-stage">
+      <div>
+        <div class="phone-frame" id="comp-frame"></div>
+        <p class="frame-caption" id="frame-caption">390 × 844px · RTL</p>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     VIEW 4 — VERIFICATION (audit evidence, separate from showcase)
+     ============================================================ -->
+<section class="lab-view" id="view-verification" data-view="verification" role="tabpanel">
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">معاينات الأعراض الحقيقية</h2>
+    <p class="lab-section-sub">أزواج عرض×ارتفاع ممثّلة لأجهزة فعلية (320×568، 360×640، 390×844، 430×932) بالوضع RTL الافتراضي، مع نسخة LTR هندسيةً فقط بنصوص عربية. المعاينات خاملة — التفاعلات تُثبت في عرضي «المكوّنات» و«التركيبة».</p>
+    <div class="controls-bar">
+      <div class="ctrl-group" data-ctrl="scale">
+        <span class="ctrl-label">تكبير النص</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="16" aria-pressed="true">100%</button>
+          <button type="button" class="ctrl-btn" data-value="20.8" aria-pressed="false">130%</button>
+          <button type="button" class="ctrl-btn" data-value="32" aria-pressed="false">200%</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="motion">
+        <span class="ctrl-label">الحركة</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="full" aria-pressed="true">كاملة</button>
+          <button type="button" class="ctrl-btn" data-value="reduced" aria-pressed="false">مخفّضة</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="gray">
+        <span class="ctrl-label">تدرّج رمادي</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="off" aria-pressed="true">إيقاف</button>
+          <button type="button" class="ctrl-btn" data-value="on" aria-pressed="false">تشغيل</button>
+        </div>
+      </div>
+    </div>
+    <div class="frame-row">
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-320"></div><p class="frame-caption">320 × 568</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-360"></div><p class="frame-caption">360 × 640</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-390"></div><p class="frame-caption">390 × 844</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-430"></div><p class="frame-caption">430 × 932</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-ltr"></div><p class="frame-caption">390 × 844 · LTR</p></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">قياسات شريط الإجراءات السريعة</h2>
+    <p class="lab-section-sub">قياس فعلي بأداة القياس في الصفحة (getBoundingClientRect) عند التحميل وبعد كل تبديل — الهندسة مقفلة: بلاطة 88×92، فجوة 8، حشوة 16. الظهور عند 320 استثناء موثق (16px)؛ البقية ≥28px.</p>
+    <div class="specimen">
+      <table class="peek-table">
+        <thead><tr><th>العرض</th><th>الظهور المقيس</th><th>المتوقع</th><th>الحالة</th></tr></thead>
+        <tbody id="peek-results"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">فحوص المكتبة الآلية</h2>
+    <p class="lab-section-sub">تُشغَّل تلقائيًا عند التحميل ويمكن إعادة تشغيلها. النتائج قيم مقيسة لا انطباعات.</p>
+    <div class="specimen">
+      <div class="audit-run">
+        <button type="button" class="button button--secondary pressable" id="audit-run">تشغيل الفحوص</button>
+        <span class="specimen-label" style="margin-block-start:0">تُحدَّث القيم عند كل تغيير للعرض أو التكبير</span>
+      </div>
+      <table class="audit-table">
+        <thead><tr><th>الفحص</th><th>القيمة المقيسة</th><th>الحالة</th></tr></thead>
+        <tbody id="audit-results"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">ملاحظات التحقق والاستثناءات الموثقة</h2>
+    <div class="note-block">
+      1) ظهور البلاطة التالية عند 320px هو 16px — استثناء موثّق في المواصفة؛ القيم عند 360/390/430 تتجاوز 28px دون أي تعديل للهندسة المقفلة.<br>
+      2) عند عرض ≤359px فقط تُضغط الهوامش الرأسية للتركيبة (32→24 وما يماثلها) لضمان ظهور أول صف متابعة قبل الطية — قيم كلها من سلّم المسافات.<br>
+      3) تكبير النص يكبّر نص المكوّنات فقط (rem) بينما يبقى هيكل المختبر بالبكسل — محاكاة أمينة لتكبير النص في المتصفح مع ثبات الأطر.<br>
+      4) نسخة LTR هندسية فقط: تعكس الخصائص المنطقية التخطيط بينما تبقى النصوص عربية والأرقام عزلات LTR ومحور الزمن في الرسوم LTR.<br>
+      5) مفتاح التدرّج الرمادي أداة تحقق من عدم الاعتماد على اللون وحده — ليس ميزة منتج.<br>
+      6) معاينات التحقق خاملة (بدون تفاعل) — عقود التفاعل تُثبت في عرضي المكوّنات والتركيبة.<br>
+      7) الخط عبر رابط الويب تحسين تدريجي فقط: بدون شبكة تعمل المكتبة كاملة بخطوط النظام البديلة.
+    </div>
+  </section>
+
+</section>
+
+</main>
+
+<!-- ============================================================
+     Composition source of truth — instantiated once for the live
+     Test Composition frame and cloned (inert) into each
+     verification preview. No element ids inside (clones repeat).
+     ============================================================ -->
+<template id="tpl-composition">
+  <div class="phone-screen" dir="rtl">
+    <div class="phone-scroll">
+      <div class="comp">
+
+        <header class="top-zone">
+          <div>
+            <p class="top-zone-title">مخبز أبو محمد</p>
+            <p class="top-zone-date">الثلاثاء <bdi dir="ltr">08/09/2026</bdi></p>
+          </div>
+          <button type="button" class="avatar pressable" aria-label="الملف الشخصي والإعدادات">أم</button>
+        </header>
+
+        <section class="primary-value-block" aria-label="نقد اليوم">
+          <p class="primary-label">نقد اليوم</p>
+          <p class="primary-value-row"><bdi class="primary-value" dir="ltr" data-hook="cash">1,284.50</bdi><span class="primary-currency">د.أ</span></p>
+          <p class="primary-qualifier">حتى <bdi dir="ltr">14:20</bdi></p>
+        </section>
+
+        <nav class="quick-action-rail" aria-label="إجراءات سريعة">
+          <button type="button" class="quick-tile quick-tile--tinted pressable" data-action="sale">
+            <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+            <span class="quick-tile-label">إضافة بيع</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="collect">
+            <svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg>
+            <span class="quick-tile-label">تحصيل دين</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="expense">
+            <svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg>
+            <span class="quick-tile-label">إضافة مصروف</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="purchase">
+            <svg class="icon" aria-hidden="true"><use href="#i-package"/></svg>
+            <span class="quick-tile-label">إضافة شراء</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="payment">
+            <svg class="icon" aria-hidden="true"><use href="#i-banknote"/></svg>
+            <span class="quick-tile-label">تسجيل دفعة</span>
+          </button>
+        </nav>
+
+        <section class="metric-group" aria-label="حركة اليوم">
+          <div class="metric-group-head">
+            <h3 class="metric-group-title">حركة اليوم</h3>
+            <button type="button" class="metric-group-action pressable">التفاصيل</button>
+          </div>
+          <ul class="metric-list">
+            <li class="metric-row">
+              <div class="metric-row-label">مبيعات اليوم</div>
+              <div class="metric-row-value"><bdi dir="ltr" data-hook="sales">465.00</bdi><span class="cur">د.أ</span></div>
+            </li>
+            <li class="metric-row" data-tone="positive">
+              <div class="metric-row-label">تحصيلات ذمم</div>
+              <div class="metric-row-value"><bdi dir="ltr" data-hook="collections">+210.00</bdi><span class="cur">د.أ</span></div>
+            </li>
+            <li class="metric-row">
+              <div class="metric-row-label">مصروفات اليوم</div>
+              <div class="metric-row-value"><bdi dir="ltr" data-hook="expenses">-92.50</bdi><span class="cur">د.أ</span></div>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-label="متابعة اليوم">
+          <div class="section-header">
+            <h3 class="section-title">متابعة اليوم</h3>
+            <span class="section-count"><bdi dir="ltr">3</bdi></span>
+          </div>
+          <div class="follow-up">
+            <div class="operational-row" data-tone="warning">
+              <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-clock"/></svg></span>
+              <div class="operational-row-main">
+                <p class="operational-row-title">شركة التوصيل السريع</p>
+                <p class="operational-row-meta">بانتظار التحويل — منذ <bdi dir="ltr">05/09/2026</bdi></p>
+              </div>
+              <div class="operational-row-end">
+                <span class="operational-row-amount"><bdi dir="ltr">142.00</bdi><span class="cur">د.أ</span></span>
+              </div>
+            </div>
+            <div class="operational-row" data-tone="positive">
+              <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-check"/></svg></span>
+              <div class="operational-row-main">
+                <p class="operational-row-title">أبو أحمد</p>
+                <p class="operational-row-meta">تحصيل دين — اليوم <bdi dir="ltr">12:40</bdi></p>
+              </div>
+              <div class="operational-row-end">
+                <span class="operational-row-amount"><bdi dir="ltr">+120.00</bdi><span class="cur">د.أ</span></span>
+              </div>
+            </div>
+            <div class="operational-row" data-tone="warning">
+              <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-package"/></svg></span>
+              <div class="operational-row-main">
+                <p class="operational-row-title">طحين فاخر 10كغ</p>
+                <p class="operational-row-meta">متبقي <span class="num-warning"><bdi dir="ltr">4</bdi></span> أكياس — الحد الأدنى <bdi dir="ltr">6</bdi></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="comparison-pair" aria-label="المستحقات">
+          <div class="compact-tile">
+            <span class="compact-tile-label">مستحق لك</span>
+            <span class="compact-tile-value-row"><bdi class="compact-tile-value" dir="ltr">1,175.00</bdi><span class="compact-tile-currency">د.أ</span></span>
+            <span class="compact-tile-qualifier">عند <bdi dir="ltr">4</bdi> عملاء</span>
+          </div>
+          <div class="compact-tile">
+            <span class="compact-tile-label">مستحق عليك</span>
+            <span class="compact-tile-value-row"><bdi class="compact-tile-value" dir="ltr">640.00</bdi><span class="compact-tile-currency">د.أ</span></span>
+            <span class="compact-tile-qualifier">مؤسسة الشرق</span>
+          </div>
+        </section>
+
+        <div class="comp-footer">
+          <button type="button" class="button button--quiet pressable">عرض كل متابعات اليوم</button>
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="bottom-navigation" aria-label="التنقل الرئيسي">
+      <button type="button" class="nav-item is-active pressable" aria-current="page">
+        <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+        <span class="nav-label">اليوم</span>
+      </button>
+      <button type="button" class="nav-item pressable" data-short="مبيعات">
+        <svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg>
+        <span class="nav-label">المبيعات</span>
+      </button>
+      <button type="button" class="nav-item pressable">
+        <svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg>
+        <span class="nav-label">الذمم</span>
+      </button>
+      <button type="button" class="nav-item pressable">
+        <svg class="icon" aria-hidden="true"><use href="#i-package"/></svg>
+        <span class="nav-label">المخزون</span>
+      </button>
+      <button type="button" class="nav-item pressable" data-nav="more">
+        <svg class="icon" aria-hidden="true"><use href="#i-ellipsis"/></svg>
+        <span class="nav-label">المزيد</span>
+      </button>
+    </nav>
+  </div>
+</template>
+
+</body>
+</html>

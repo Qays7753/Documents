@@ -1,0 +1,101 @@
+# Delivery metadata — micro-visual-product-concept-002
+delivery_id: micro-visual-product-concept-002
+date: 2026-09-06
+project: Micro (Arabic-first, RTL, mobile-first financial operations platform for Jordanian micro/small businesses)
+stage: "Stage 0-2 (intake, specialist research, synthesis, interactive HTML review) — stopped at the approval gate"
+deliverable_type: visual product concept review (Markdown reports + self-contained interactive HTML artifact)
+recommended_direction: "A — دفتر هادئ The Calm Ledger"
+documents_repo_commit_baseline: 9aa5066 (rebased; clone point 167cf14)
+source_provenance:
+  - task prompt fixed constraints (authority level 1: fixed Terracotta palette, measured-contrast role rules, logo rule, no Jordanian decoration)
+  - reports/Micro-Target-State-Design-Report.md (screen contracts, thumb-zone model, JOD/RTL binding rules, 12-state vocabulary)
+  - Micro recovery/implementation delivery packages in reports/ (decision and correction history)
+  - Micro Phase 2 research document (users/roles/scenarios) and Phase 2 benchmark research digest (assistant workspace)
+  - ABSENT (documented in en/00-SOURCE-INTAKE-REPORT.md): micro-agent-input.zip, micro-recovery-docs.zip, MicroPrimitives-anti-reference.html
+verification:
+  html_opens_and_controls_work: pass  # headless Chromium: 0 console errors, 0 page errors; toggles (language/theme/motion/width/mode), FAB sheet, keypad, quiet completion, correction preview, search/filter, guard, sync and skeleton demos all exercised programmatically
+  functional_checks: "tab transitions, FAB sheet, NumericSurface entry (2 -> 21.00), receipt closure sentence with cash 145.00 -> 166.00, documented reversal back to 145.00, Arabic search filtering, honest empty state, discard guard with typed amount, offline->syncing->synced, first-paint skeleton"
+  geometry_fixes_applied: "content offset below status bar (48px); FAB raised 15px above nav with dedicated shadow"
+  measured_contrast_pairs: "34 pairs measured by script (supporting/measured-contrast-pairs.md); 0 resting pairs failing; press-only and prohibited pairs documented"
+  visual_review: "independent vision-model review of home (8.5/10), NumericSurface, dark theme (9/10), statement chart (9/10) — feedback items triaged: status-bar clearance and FAB elevation fixed; minor chip/currency-mark notes accepted as-is with rationale"
+  secret_scan: pending-push-check  # token fragment scan + staged-diff scan run by scripts/push-documents-repo.sh immediately before push
+  real_device_testing: not-performed  # no touch hardware / screen readers available; explicitly not claimed
+items_status:
+  implemented: [interactive HTML review artifact, all five sub-agent reports, synthesis, review guide, review request, intake report, lessons table, measured contrast report, QA screenshots]
+  designed_only: [directions B and C (static comparison previews inside the artifact)]
+  unverified: [real-device behavior, screen-reader pronunciation of د.أ, RTL chart time-flow with real owners, haptics]
+  deferred_to_stage4: [final visual package en/05..en/14, final prototype HTML, asset inventory, implementation handoff]
+  missing_sources: [micro-agent-input.zip, micro-recovery-docs.zip, MicroPrimitives-anti-reference.html]
+files:
+  - path: en/00-SOURCE-INTAKE-REPORT.md
+    size_bytes: 15626
+    sha256: 559f29fae14d3b48a1907672cc9c10c8c32c678eef319ee011cb75b0a30cc964
+  - path: en/01-current-work-lessons.md
+    size_bytes: 5134
+    sha256: ec55990721c54c4a44809549d1f698098a70bf4bbe3e19ab8a369d4fcd1cbe7b
+  - path: en/02-research-and-direction-synthesis.md
+    size_bytes: 21512
+    sha256: f7e21a57a403975f5743401f48ba8e7edf6fb919e6c71300261d66f0384c5651
+  - path: en/03-html-review-guide.md
+    size_bytes: 7396
+    sha256: 36cc44a08523bc33cf6a82f0822a480d7bcce9fb96f45d9115ad827e3c6451b7
+  - path: en/04-REVIEW-REQUEST.md
+    size_bytes: 6537
+    sha256: 8a30a47818bab8af5163df66f7a63b834d38c5a1c5188e7f2507f7a98081064d
+  - path: handoff/README.md
+    size_bytes: 350
+    sha256: 2d81655c4e236db66bd648ee74cb711af2ecc814874b95e63a9d8a3e0553d55d
+  - path: prototype/micro-visual-concept-review.html
+    size_bytes: 173361
+    sha256: 3467da587e206b003b0f428fc7b2918c5974a22f77dae15508efbcae805e44cc
+  - path: subagents/01-visual-research-and-benchmarks.md
+    size_bytes: 26672
+    sha256: cb1ce5c957db91fd79050f6e2d0d10300b95e209d0ae97aa2f479546e1dbd57b
+  - path: subagents/02-art-direction-and-spatial-language.md
+    size_bytes: 29306
+    sha256: 7bb6890dd0152e1b20073bd8b17e7429c7c43036efdb4634035f3950acbfcfe9
+  - path: subagents/03-mobile-motion-and-interaction.md
+    size_bytes: 43692
+    sha256: 0caeb923a50d9697004aa2ad3236425b1d6f7288a7bf63374561467e7dfffaf4
+  - path: subagents/04-rtl-accessibility-and-data-visualization.md
+    size_bytes: 32345
+    sha256: 7dc6995a09dea2fbff42f6ab4fb3497d47fc8201dfd146e59ae18a7621dbf9d2
+  - path: subagents/05-adversarial-critique-and-decision.md
+    size_bytes: 24201
+    sha256: cf3acfa8eeb9a05e52af73146bed730cdc03cd8f9d4ccb08f6def95a927812ae
+  - path: supporting/README.md
+    size_bytes: 361
+    sha256: 554fefb711f3397c85e2c7c3510ca5e5597cee2be8a9e076c5cbbda174f22ca5
+  - path: supporting/measured-contrast-pairs.md
+    size_bytes: 4576
+    sha256: 0091640f5a41ef2f550ccf1e570a51de498b324d5681255a74a939e673c0ab20
+  - path: supporting/qa-screenshots/shot-01-home-light-ar.png
+    size_bytes: 199129
+    sha256: 0086ddc4a6d7a65d790c2b7b64ceccad0a0d8034a999cca86cddcb5c4c7216e0
+  - path: supporting/qa-screenshots/shot-02-finance-light-ar.png
+    size_bytes: 190109
+    sha256: f0b71c53e07cd3159e6358f09dc77d240431ee7801b3b110731c6c30259e8693
+  - path: supporting/qa-screenshots/shot-03-orders-light-ar.png
+    size_bytes: 197986
+    sha256: eccc67d513798332a5ede61e325ee37b9d6c80fe0078014ace816a2207c00559
+  - path: supporting/qa-screenshots/shot-04-numeric-surface.png
+    size_bytes: 172381
+    sha256: b31d0bfd358d99dcb6f262dce5851f5e2d2c8c49bbc39ad025b65b5ca69a7f94
+  - path: supporting/qa-screenshots/shot-05-receipt.png
+    size_bytes: 190254
+    sha256: 136356ae4445921db87993bfa2f155865e122d78decf75185b17dd2cf7a27a6f
+  - path: supporting/qa-screenshots/shot-06-statement.png
+    size_bytes: 188710
+    sha256: 95cbffc065a5b9f39094abd016af8545c64dd0d077025b049fec05d6d2b0a3bf
+  - path: supporting/qa-screenshots/shot-07-home-dark-ar.png
+    size_bytes: 194238
+    sha256: d17800a8c741227d422621644f084e101463166e47cc75647afc4bea949c9a71
+  - path: supporting/qa-screenshots/shot-08-home-en-ltr.png
+    size_bytes: 188036
+    sha256: 4c794e74eada24fa28b7cb1a9a15ba145048726bf5d37df6f0127a026b65f6d1
+  - path: supporting/qa-screenshots/shot-09-compare.png
+    size_bytes: 98616
+    sha256: 563906321235f9e7f7ff27f25d53f9f9f8c8d56fe36bb0959f0a9f54e7b2fe2d
+  - path: supporting/qa-screenshots/shot-10-home-320.png
+    size_bytes: 190405
+    sha256: cd5896b2ce04cc91773e1f5373ef39cca35b6fc740796077a4f7430097992907

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-motion="full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مكتبة مكوّنات Micro — أساس عربي أولًا</title>
+<!-- Typography: progressive enhancement only. The lab is fully functional
+     offline; IBM Plex Sans Arabic falls back to Noto Sans Arabic / system. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="micro-component-visual-library.css">
+<script defer src="micro-component-visual-library.js"></script>
+</head>
+<body>
+
+<!-- Lucide-style icon sprite — 24×24, 2px stroke, currentColor.
+     Directional glyphs (chevrons/arrows) mirror in RTL via .icon-mirror.
+     Semantic/object icons never mirror. The send/plane glyph is excluded
+     from the set by design. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+  <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M12 20h.01"/><path d="M8.5 16.4a5 5 0 0 1 7 0"/><path d="M5 12.9a10 10 0 0 1 4.6-2.5"/><path d="M19 12.9a10 10 0 0 1 2.1-1.4"/><path d="M2 8.8a15 15 0 0 1 5-2.9"/><path d="M16.7 6.3a15 15 0 0 1 3 1.2"/><path d="m2 2 20 20"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.4 6.4L3 16"/><path d="M3 21v-5h5"/></symbol>
+  <symbol id="i-ellipsis" viewBox="0 0 24 24"><circle class="dot" cx="5" cy="12" r="1"/><circle class="dot" cx="12" cy="12" r="1"/><circle class="dot" cx="19" cy="12" r="1"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.2 12 3l9 7.2"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-hand-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-banknote" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01"/><path d="M18 12h.01"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h5"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="m3 9 1.6-5h14.8L21 9"/><path d="M4 9v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/><path d="M3 9h18"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 17V7a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v10h2"/><path d="M14 9h3.4a1 1 0 0 1 .8.4l2.6 3.4a1 1 0 0 1 .2.6V17h-2"/><path d="M9 17h6"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
+  <symbol id="i-trending" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-chevron-f" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-chevron-b" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+</svg>
+
+<header class="lab-header">
+  <div class="lab-header-row">
+    <span class="lab-wordmark">Micro <span class="lab-wordmark-sub">· مكتبة مكوّنات عربية أولًا — نمط فاتح فقط</span></span>
+    <span class="lab-run-id">run 20260908T133450Z-16d11</span>
+  </div>
+  <nav class="lab-tabs" role="tablist" aria-label="أقسام المكتبة">
+    <button class="lab-tab" role="tab" data-view-btn="foundation" aria-selected="true" aria-controls="view-foundation">الأساسيات</button>
+    <button class="lab-tab" role="tab" data-view-btn="library" aria-selected="false" aria-controls="view-library">المكوّنات</button>
+    <button class="lab-tab" role="tab" data-view-btn="composition" aria-selected="false" aria-controls="view-composition">تركيبة تجريبية</button>
+    <button class="lab-tab" role="tab" data-view-btn="verification" aria-selected="false" aria-controls="view-verification">التحقق</button>
+  </nav>
+</header>
+
+<main class="lab-main">
+
+<!-- ============================================================
+     VIEW 1 — FOUNDATION (audit-side reference: tokens live here,
+     never inside the phone composition)
+     ============================================================ -->
+<section class="lab-view" id="view-foundation" data-view="foundation" role="tabpanel">
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">ألوان العلامة</h2>
+    <p class="lab-section-sub">أسرة العلامة: سطح الهوية الهادئ، والصبغة الوحيدة للبلاطة الملوّنة، وحبر العلامة المقروء الذي يظهر أيضًا كزر أساسي معبأ بنص أبيض. معالجة الضغط حبر بنسبة 8% — وليس بنيًا بديلًا.</p>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:#CC785C"></div><div class="tok-body"><div class="tok-role">سطح الهوية</div><div class="tok-name">#CC785C</div><div class="tok-use">ظهور واحد هادئ لكل إطار — نص داكن فوقه</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#F7EAE4"></div><div class="tok-body"><div class="tok-role">صبغة العلامة</div><div class="tok-name">#F7EAE4</div><div class="tok-use">بلاطة واحدة فقط في شريط الإجراءات</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#964E33"></div><div class="tok-body"><div class="tok-role">حبر العلامة</div><div class="tok-name">#964E33</div><div class="tok-use">نص وأيقونات العلامة + الزر الأساسي المعبأ</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#FFFFFF; border-block-start:1px solid #EAE6DC"></div><div class="tok-body"><div class="tok-role">فوق العلامة</div><div class="tok-name">#FFFFFF</div><div class="tok-use">نص الزر الأساسي فوق حبر العلامة فقط</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">أسطح المنتج — ثلاثة فقط</h2>
+    <p class="lab-section-sub">لا يوجد سطح رابع من أي نوع. تتداخل الصبغات الدلالية أدوارها الدلالية فقط ولا تشكل نظام أسطح موازيًا.</p>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:#FAF9F5"></div><div class="tok-body"><div class="tok-role">اللوحة</div><div class="tok-name">#FAF9F5</div><div class="tok-use">أرضية الصفحة — القيمة الرئيسية تعيش عليها</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#FFFFFF; border-block-start:1px solid #EAE6DC"></div><div class="tok-body"><div class="tok-role">السطح</div><div class="tok-name">#FFFFFF</div><div class="tok-use">المجموعات والقوائم المرفوعة</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#F0EEE6"></div><div class="tok-body"><div class="tok-role">الغائر</div><div class="tok-name">#F0EEE6</div><div class="tok-use">حقول الإدخال والمسارات غير النشطة</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الحبر والبنية</h2>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:#1F1E1D"></div><div class="tok-body"><div class="tok-role">حبر قوي</div><div class="tok-name">#1F1E1D</div><div class="tok-use">الأرقام الرئيسية وحلقة التركيز</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#33322E"></div><div class="tok-body"><div class="tok-role">حبر</div><div class="tok-name">#33322E</div><div class="tok-use">نص المتن والتسميات</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#6E6A60"></div><div class="tok-body"><div class="tok-role">حبر خافت</div><div class="tok-name">#6E6A60</div><div class="tok-use">تسميات ثانوية</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#767265"></div><div class="tok-body"><div class="tok-role">حبر لطيف</div><div class="tok-name">#767265</div><div class="tok-use">بيانات وصفية وطوابع زمنية — فوق اللوحة/السطح</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#B7B2A6"></div><div class="tok-body"><div class="tok-role">حبر معطّل</div><div class="tok-name">#B7B2A6</div><div class="tok-use">عناصر معطّلة فقط مع إشارة غير لونية</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#EAE6DC"></div><div class="tok-body"><div class="tok-role">خط لطيف</div><div class="tok-name">#EAE6DC</div><div class="tok-use">فواصل شعرية — ثلاثة كحد أقصى</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#DED9CB"></div><div class="tok-body"><div class="tok-role">خط قوي</div><div class="tok-name">#DED9CB</div><div class="tok-use">حواف عناصر التحكم والحدود</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(rgba(31,30,29,.45),rgba(31,30,29,.45))"></div><div class="tok-body"><div class="tok-role">ستارة</div><div class="tok-name">rgba(31,30,29,.45)</div><div class="tok-use">خلف الأوراق والحواريات</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الأسر الدلالية</h2>
+    <p class="lab-section-sub">اللون الدلالي معنى تشغيلي وليس زينة: يُقرن دائمًا بإشارة أو أيقونة أو كلمة، ولا تتجاوز تركيبة واحدة أُسرتين دلاليتين ورقمين ملوّنين.</p>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#2E7D57 50%,#E7EFE7 50%)"></div><div class="tok-body"><div class="tok-role">قبض / مؤكد</div><div class="tok-name">#2E7D57 · #E7EFE7</div><div class="tok-use">تحصيل، اكتمال، حركة مواتية</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#B42318 50%,#F7E7E2 50%)"></div><div class="tok-body"><div class="tok-role">دفع / خطأ حقيقي</div><div class="tok-name">#B42318 · #F7E7E2</div><div class="tok-use">خروج نقدي، اتجاه سالب، إجراء هدّام</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#8A6520 50%,#F4EDD8 50%)"></div><div class="tok-body"><div class="tok-role">انتباه</div><div class="tok-name">#8A6520 · #F4EDD8</div><div class="tok-use">متأخر، حد مخزون، تجاوز تقدير</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#3E5C76 50%,#E8EDF1 50%)"></div><div class="tok-body"><div class="tok-role">معلومة</div><div class="tok-name">#3E5C76 · #E8EDF1</div><div class="tok-use">قيد التنفيذ، سياق قرار معلّق</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الطباعة</h2>
+    <p class="lab-section-sub">IBM Plex Sans Arabic بوزن 400/500/600، ثم Noto Sans Arabic ثم نظام التشغيل. الأرقام إنجليزية بأرقام جدولية في كل القيم المالية، والتواريخ DD/MM/YYYY، والعملة د.أ عقدة عربية مستقلة خارج عزل الاتجاه.</p>
+    <div class="specimen">
+      <div class="type-row"><span class="type-meta">32px / 600 / 1.15 — value</span><bdi class="primary-value" dir="ltr">1,284.50</bdi></div>
+      <div class="type-row"><span class="type-meta">15px / 400 / 1.55 — label</span><span class="primary-label">نقد اليوم — حركة النقد حتى اللحظة</span></div>
+      <div class="type-row"><span class="type-meta">14px / 400 — Arabic floor</span><span class="operational-row-meta">بانتظار التحويل — منذ <bdi dir="ltr">05/09/2026</bdi></span></div>
+      <div class="type-row"><span class="type-meta">13px / 400 / 1.4 — qualifier</span><span class="primary-qualifier">حتى <bdi dir="ltr">14:20</bdi> · <bdi dir="ltr">62%</bdi></span></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">المسافات والأركان</h2>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">spacing</span><span class="specimen-desc">سلّم المسافات</span></div>
+      <div class="space-strip">
+        <div class="space-item"><div class="space-bar" style="width:2px;height:24px"></div><div class="space-val">2</div></div>
+        <div class="space-item"><div class="space-bar" style="width:4px;height:32px"></div><div class="space-val">4</div></div>
+        <div class="space-item"><div class="space-bar" style="width:8px;height:40px"></div><div class="space-val">8</div></div>
+        <div class="space-item"><div class="space-bar" style="width:12px;height:48px"></div><div class="space-val">12</div></div>
+        <div class="space-item"><div class="space-bar" style="width:16px;height:56px"></div><div class="space-val">16</div></div>
+        <div class="space-item"><div class="space-bar" style="width:24px;height:64px"></div><div class="space-val">24</div></div>
+        <div class="space-item"><div class="space-bar" style="width:32px;height:72px"></div><div class="space-val">32</div></div>
+        <div class="space-item"><div class="space-bar" style="width:40px;height:80px"></div><div class="space-val">40</div></div>
+      </div>
+    </div>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">radius</span><span class="specimen-desc">سلّم الأركان — شريط التنقل السفلي حافّة بحافة بزاوية 0</span></div>
+      <div class="radius-strip">
+        <div class="radius-item"><div class="radius-box" style="border-radius:6px"></div><div class="radius-val">6</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><div class="radius-val">12</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:16px"></div><div class="radius-val">16</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:24px"></div><div class="radius-val">24</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:9999px; width:64px"></div><div class="radius-val">full</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الحركة</h2>
+    <div class="specimen">
+      <table class="motion-table">
+        <thead><tr><th>التفاعل</th><th>المدة</th><th>المنحنى</th></tr></thead>
+        <tbody>
+          <tr><td>الضغط</td><td class="ltr">80ms</td><td class="ltr">standard (0.2, 0, 0, 1)</td></tr>
+          <tr><td>سريع — تغييرات الاختيار</td><td class="ltr">120ms</td><td class="ltr">standard</td></tr>
+          <tr><td>عادي — انتقالات الحالة</td><td class="ltr">200ms</td><td class="ltr">standard</td></tr>
+          <tr><td>الورقة السفلية دخول/خروج</td><td class="ltr">240ms / 180ms</td><td class="ltr">enter / exit</td></tr>
+          <tr><td>الحوارية دخول/خروج</td><td class="ltr">160ms / 120ms</td><td class="ltr">enter / exit</td></tr>
+          <tr><td>الستارة</td><td class="ltr">200ms</td><td class="ltr">standard</td></tr>
+        </tbody>
+      </table>
+      <p class="specimen-note">لا ارتداد ولا زنبرك ولا عدّ تصاعدي للقيم المالية — القيمة النهائية تظهر فورًا. مع تقليل الحركة تختفي الحركة المكانية ويبقى معنى الحالة.</p>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">سجل انعكاس الأيقونات (RTL)</h2>
+    <p class="lab-section-sub">أيقونات اتجاهية فقط تنعكس في السياق العربي. الأيقونات الدلالية والشيئية لا تنعكس أبدًا. لا توجد أيقونة طائرة ورقية.</p>
+    <div class="specimen">
+      <div class="mirror-cols">
+        <div>
+          <div class="mirror-col-title">ينعكس</div>
+          <div class="mirror-list">
+            <span class="mirror-chip"><svg class="icon icon-mirror" aria-hidden="true"><use href="#i-chevron-f"/></svg> شيفرون تالٍ</span>
+            <span class="mirror-chip"><svg class="icon icon-mirror" aria-hidden="true"><use href="#i-chevron-b"/></svg> شيفرون سابق</span>
+          </div>
+        </div>
+        <div>
+          <div class="mirror-col-title">لا ينعكس</div>
+          <div class="mirror-list">
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg> إضافة</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> اكتمال</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> انتظار</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg> سند</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg> مخزون</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg> توصيل</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg> تحصيل</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-trending"/></svg> اتجاه</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>

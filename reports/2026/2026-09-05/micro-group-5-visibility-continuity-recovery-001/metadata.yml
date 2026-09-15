@@ -1,0 +1,55 @@
+delivery_id: micro-group-5-visibility-continuity-recovery-001
+date: 2026-09-05
+program: zman-to-micro-transfer
+group: 5
+generated_at: 2026-09-05T06:00:00
+micro:
+  repository: https://github.com/Qays7753/Micro
+  main_sha: ad9fc137c8aeeadbb2e5c7dd6666f18b8e3f04c8
+  pull_request: https://github.com/Qays7753/Micro/pull/153
+  baseline_main_sha: 05669a9d8d26ce797f0a2120c1acf1c3e51fdf85
+  recovery_from_branch_sha: 782127b73db19f7e928ed3e09175187462394a7a
+  final_branch_sha: 4445da04756a90b31a9664df4a2c50287c59977a
+  ci:
+    pr_run: 33947927146
+    pr_run_result: success
+    main_push_run: 33948024196
+    main_push_run_result: success
+    failures_this_cycle: none
+tests:
+  domain: 277/277 (23 files)
+  prototype: 766/766 (120 files)
+  lint: 0 errors / 37 baseline warnings
+browser_qa:
+  mode: production build + real service worker
+  viewports: 390x844, 360x800
+  screenshots: 33
+  console_page_errors: 0
+files:
+  - path: INDEX.md
+    bytes: 2540
+    sha256_prefix: eac8b0c92c8c887a
+  - path: en/group-5-recovery-and-implementation-report-en.md
+    bytes: 13273
+    sha256_prefix: 10d8a18ac7f5e24f
+  - path: en/group-5-activity-reporting-en.md
+    bytes: 5830
+    sha256_prefix: 94e7656fe113afed
+  - path: en/group-5-health-audit-integrity-en.md
+    bytes: 5611
+    sha256_prefix: 341429808062d114
+  - path: en/group-5-drafts-pwa-backup-restore-en.md
+    bytes: 8299
+    sha256_prefix: 733a639b7143f362
+  - path: en/group-5-sharing-privacy-rtl-en.md
+    bytes: 5072
+    sha256_prefix: 4739b92a317863c1
+  - path: en/group-5-test-ci-carry-forward-en.md
+    bytes: 6788
+    sha256_prefix: ba2ea766f3ed3b4e
+  - path: en/group-5-subagent-synthesis-en.md
+    bytes: 5281
+    sha256_prefix: c773702bae804549
+  - path: ar/group-5-recovery-and-implementation-report-ar.docx
+    bytes: 21023
+    sha256_prefix: 60a1a2f3e6a275dd

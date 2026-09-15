@@ -1,0 +1,30 @@
+{
+  "agent_id": "03",
+  "task_id": "2-c",
+  "status": "completed",
+  "files": [
+    "tokens.css",
+    "tailwind-v4-theme.css",
+    "component-architecture.md",
+    "variant-state-matrix.md",
+    "agent-report.json"
+  ],
+  "key_decisions": [
+    "tokens.css is the single canonical semantic layer; every font-size is calc(px * var(--text-scale)) with unitless line-heights, so extraction is lossless at scale 1 and the lab verifies 130%/200% by flipping one custom property on <html>.",
+    "Tailwind v4 adapter references tokens.css via var() wherever @theme names don't collide, and restates literals only where a self-reference would be cyclic (--radius-*, --ease-*, --font-product); sync rules and the @theme-vs-:root split are documented in the file header.",
+    "Unified focus ring: outline 2px solid var(--brand-ink) with 2px offset (~6:1 on canvas) instead of brand-atmosphere (~3.1:1), for WCAG non-text robustness including 200% zoom; ring is global on :focus-visible only.",
+    "Palette role split: brand-atmosphere is a FILL color (non-text >=3:1); brand-ink is the brand TEXT color (>=4.5:1) for quiet-text buttons, links and active nav; positive-tint chips pair a positive icon with --ink text because positive-on-positive-tint measures 4.28:1.",
+    "State grammar via data-attributes ([data-state], [data-pressed], [aria-disabled], [aria-invalid]) orthogonal to BEM-ish .mc-* variant classes, so React adapters map props 1:1 to DOM hooks without restyling.",
+    "All overlay motion is translateY/scale/opacity only (sheet 240ms in / 180ms out, dialog 160ms in / 120ms out, scrim 200ms; standard easing in, exit easing out) — direction-safe under RTL by construction; no bounce/spring/count-up anywhere.",
+    "Z-index scale splits scrim into --z-scrim-sheet (250) and --z-scrim-dialog (350) under sheet (300) and dialog (400); BottomNavigation stays edge-to-edge with radius 0 as a component rule, never a token.",
+    "13px qualifier role is reserved for digit/Latin runs only; Arabic script (including the currency mark 'د.أ') is never set below 14px — currency always renders as 'د.أ', never 'JOD'."
+  ],
+  "open_questions": [
+    "Should the final lab add @media (prefers-reduced-motion: reduce) to collapse durations? It concerns motion, not color, so it does not violate the light-mode/no-prefers-color-scheme constraint — policy call deferred to Agent 04 / coordinator.",
+    "on-brand white text on brand-atmosphere measures ~3.3:1 (below 4.5:1 for 15px labels). The spec mandates this pairing for primary buttons; kept and flagged. Compliant alternative if a11y review requires: --ink-strong on atmosphere (~5.0:1).",
+    "Spinner loop duration is not a Micro token (deliberately no --animate-spin); component CSS will need a pragmatic loop value (~750-900ms) — confirm with coordinator or keep spinners token-free.",
+    "Checkbox/switch 'on' fill uses brand-atmosphere (3.1:1 non-text minimum met); confirm whether stronger brand-ink fill is preferred after visual review by Agent 02.",
+    "Tab active underline at 2px brand-atmosphere measures 3.1:1 (non-text minimum met); confirm 2px vs 3px thickness with Agent 02 for visual weight.",
+    "Amount input internal bidi (dir=ltr digits + inline-end alignment) needs on-device verification in the final lab; architecture documents the expected behavior."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "customPeriodSheet": true,
+  "lifecycleStates": [
+    "نتيجة غير معروفة",
+    "قيد الانتظار",
+    "يمكن إعادة الفحص",
+    "نتيجة مؤكدة توضيحيًا",
+    "أثر معكوس — audit effect"
+  ],
+  "confirmationBoundary": true,
+  "toolResult": "1,156.4 د.أ",
+  "pass": false
+}

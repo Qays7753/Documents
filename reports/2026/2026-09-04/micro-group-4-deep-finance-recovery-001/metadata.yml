@@ -1,0 +1,52 @@
+delivery_id: micro-group-4-deep-finance-recovery-001
+date: 2026-09-04
+program: zman-to-micro-transfer
+group: 4
+generated_at: 2026-09-04T11:27:31.511363
+micro:
+  repository: https://github.com/Qays7753/Micro
+  main_sha: 05669a9d8d26ce797f0a2120c1acf1c3e51fdf85
+  pull_request: https://github.com/Qays7753/Micro/pull/152
+  baseline_main_sha: 67d4e41f98bd63c283053cc2bcfeacd0c6b9a767
+  ci:
+    failed_runs:
+      - run: 33861709388
+        classification: source_format
+      - run: 33866384883
+        classification: infrastructure_registry
+    green_run: 33867065062
+tests:
+  domain: 277/277 (23 files)
+  prototype: 717/717 (110 files)
+  lint: 0 errors / 37 baseline warnings
+files:
+  - path: INDEX.md
+    bytes: 2418
+    sha256_prefix: d96211f97b919201
+  - path: en/group-4-recovery-and-implementation-report-en.md
+    bytes: 8803
+    sha256_prefix: b6e842844c64e848
+  - path: en/group-4-assets-depreciation-contracts-en.md
+    bytes: 5781
+    sha256_prefix: e135d30eead8d16a
+  - path: en/group-4-loans-deposit-contracts-en.md
+    bytes: 6237
+    sha256_prefix: 302bd86f7e960441
+  - path: en/group-4-inventory-automation-and-waste-en.md
+    bytes: 6111
+    sha256_prefix: 153f15a4ece260d2
+  - path: en/group-4-reconciliation-and-test-evidence-en.md
+    bytes: 6444
+    sha256_prefix: 4296cf56ad2f6915
+  - path: en/group-4-ci-investigation-report-en.md
+    bytes: 4123
+    sha256_prefix: 83f886f369928dda
+  - path: en/group-4-recovery-subagent-synthesis-en.md
+    bytes: 5369
+    sha256_prefix: 86ba9fc591d59509
+  - path: ar/group-4-recovery-and-implementation-report-ar.docx
+    bytes: 19525
+    sha256_prefix: 5949c466e72fb29d
+  - path: metadata.yml
+    bytes: 1698
+    sha256_prefix: 198992867ac32974

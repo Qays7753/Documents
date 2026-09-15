@@ -1,0 +1,6 @@
+{
+  "main_commit_at_wave0": "dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b",
+  "expected": "dfa8bf7d7f7a2c01f256d4c77d359c8a5770d60b",
+  "match": true,
+  "worktree_clean_inside_package": true
+}

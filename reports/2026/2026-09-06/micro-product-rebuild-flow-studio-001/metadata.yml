@@ -1,0 +1,89 @@
+product: Micro
+deliverable: Micro Product Rebuild Flow Studio
+repository: https://github.com/Qays7753/Micro
+branch: main
+micro_commit: 4af025d38f04dfb36ee645a4f9ca3345e362bf5b
+micro_commit_date: "2026-09-06T13:21:03+03:00"
+source_atlas_repository: https://github.com/Qays7753/Documents
+source_atlas_path: reports/2026/2026-09-06/micro-user-flow-atlas-001
+source_atlas_commit: 622af98c309160bc97625231bd4268a6a075808c
+analysis_date: "2026-09-07"
+timezone: Asia/Amman
+micro_modified: false
+micro_pr_opened: false
+schema_version: "2.0.0"
+workspace_id: micro-product-rebuild-flow-studio
+layer_vocabulary: [CURRENT_STATE, APPROVED_TARGET, FUTURE_EXPANSION, OWNER_PROPOSAL, UNVERIFIABLE]
+counts:
+  features_target: 17
+  flows_target: 17
+  nodes: 183
+  edges: 208
+  screens_target: 17
+  screen_contracts: 17
+  wireframes: 17
+  personas: 2
+  domains: 14
+  financial_boundaries: 12
+  migration_notes: 6
+  dependencies: 18
+  build_phases: 15
+  acceptance_criteria: 42
+  notes_seed: 5
+  versions_seed: 1
+  audit_log_seed: 3
+  imported:
+    actors: 7
+    permissions: 20
+    entities: 31
+    screens: 57
+    features: 72
+    services: 48
+    flows: 53
+    flow_steps: 192
+    states: 57
+    transitions: 28
+    scenarios: 14
+    gaps: 20
+    decisions: 22
+    traceability_rows: 30
+    diagrams: 26
+    diagram_nodes: 201
+deliverables:
+  html: micro-product-rebuild-flow-studio.html
+  json: micro-product-rebuild-flow-studio-data.json
+  schema: micro-product-rebuild-flow-studio-schema.json
+  markdown:
+    - README.md
+    - INDEX.md
+    - micro-product-rebuild-flow-studio-user-guide-ar.md
+    - micro-product-rebuild-flow-studio-current-state-ar.md
+    - micro-product-rebuild-flow-studio-target-state-ar.md
+    - micro-product-rebuild-flow-studio-build-roadmap-ar.md
+    - micro-product-rebuild-flow-studio-feature-cards-ar.md
+    - micro-product-rebuild-flow-studio-validation-report-ar.md
+    - micro-product-rebuild-flow-studio-agent-review-protocol-ar.md
+    - micro-product-rebuild-flow-studio-change-log.md
+  examples:
+    - examples/login-feature-card.json
+    - examples/dashboard-feature-card.json
+    - examples/sales-entry-feature-card.json
+    - examples/product-to-sale-target-flow.json
+    - examples/owner-review-package-example.json
+    - examples/owner-review-package-example.md
+verification:
+  json_parse: pass
+  id_uniqueness_per_collection: pass
+  cross_references: pass
+  validator_seed_findings: 0
+  validator_broken_example_detection: pass
+  file_offline_boot: pass
+  console_errors: 0
+  browser_qa: "agent-browser on file:// — boot, 4 modes, editor add/connect/drag/undo/redo, version save+diff, review export, persistence reload"
+  mobile_390_no_overflow: pass
+  vlm_visual_check: pass
+secrets_present: false
+limitations:
+  - "Composed edges of the 26 Atlas diagrams live only in the Atlas HTML; metadata imported + relative link out"
+  - "PNG raster export may be refused by strict file:// policies; SVG export is the reliable path"
+  - "No cloud sync / multi-user / server persistence / GitHub automation — by design"

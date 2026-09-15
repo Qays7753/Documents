@@ -1,0 +1,207 @@
+/* ==========================================================================
+   MICRO · TAILWIND V4 CSS-FIRST THEME ADAPTER — tailwind-v4-theme.css
+   --------------------------------------------------------------------------
+   OPTIONAL ADAPTER. The vanilla lab does NOT import this file: the target
+   repository (Documents) is documents-only with no code stack, so the lab
+   stays framework-neutral plain CSS/HTML/JS built on tokens.css. This
+   adapter exists so a future Next.js + Tailwind v4 app can consume the
+   EXACT same Micro tokens without re-deriving anything.
+
+   HOW A FUTURE NEXT.JS + TAILWIND V4 APP CONSUMES IT (app/globals.css):
+
+     @import "tailwindcss";
+     @import "./tokens.css";
+     @import "./tailwind-v4-theme.css";
+
+   (Wire up via the @tailwindcss/postcss plugin or @tailwindcss/vite; then
+   utilities such as bg-canvas, text-ink-muted, rounded-md, p-edge,
+   gap-md, text-value-lg, ease-standard and animate-sheet-in are generated
+   from the namespaces below. Load IBM Plex Sans Arabic 400/500/600 with
+   next/font/local from the same woff2 subsets — never Inter.)
+
+   WHAT MAPS TO @theme VS :root
+   - :root (tokens.css) is the single source of truth for EVERY value.
+   - @theme (this file) only RE-EXPOSES tokens inside Tailwind's utility
+     namespaces, which is what turns them into generated utilities:
+
+       --color-*      -> bg-*, text-*, border-*, ring-*, from-*, …
+       --spacing-*    -> p-*, m-*, gap-*, w-*, … (named scale only)
+       --radius-*     -> rounded-*
+       --text-*       -> text-*  (font-size + paired line-height / weight)
+       --font-*       -> font-*  (font families)
+       --font-weight-*-> font-*  (weights)
+       --ease-*       -> ease-*  (transition-timing-function utilities)
+       --animate-*    -> animate-* (keyframe animations, defined below)
+
+   - NO Tailwind namespace exists for durations, touch targets or z-index,
+     so those stay :root-only in tokens.css and are consumed through
+     var() in component CSS or arbitrary values, e.g.:
+       transition-duration: var(--dur-fast)
+       z-[var(--z-sheet)]  ·  duration-[var(--dur-normal)]
+     --text-scale, --numeric-variant and --press-overlay behave the same
+     way (the last one is also exposed as --color-press-overlay).
+
+   SYNC & COLLISION RULES
+   - Entries whose @theme name is IDENTICAL to a :root token name
+     (--radius-sm…full, --ease-standard, --ease-exit, --font-product)
+     cannot use var() — a self-reference is cyclic and computes to nothing
+     — so they restate the literal value. tokens.css stays canonical:
+     change values there first, then mirror them here.
+   - Every other entry references tokens.css vars (single source of truth,
+     including the --text-scale calc() hook: text-value-lg in a React app
+     scales exactly like the vanilla lab during 130%/200% verification).
+   - Numeric spacing utilities (p-4, gap-6 …) are left on Tailwind's
+     default --spacing base (0.25rem = 4px steps) — deliberately NOT
+     overridden, and no --spacing-<number> keys are defined, so named
+     Micro steps (p-md = 12px, p-lg = 16px …) never clash with them.
+
+   HARD CONSTRAINTS
+   - Light mode ONLY: no .dark, no @media (prefers-color-scheme), no theme
+     switch — this file contains no media queries at all.
+   - No Inter import; IBM Plex Sans Arabic with Noto Sans Arabic fallback.
+   - No invented tokens: every value traces to the Micro token spec.
+   - RTL-first: pair utilities with logical variants (ms-/me-, start-/end-)
+     and the .icon-mirror registry defined in the lab's base CSS.
+   ========================================================================== */
+
+@theme {
+
+  /* ======================================================================
+     --color-* namespace  ->  bg-* / text-* / border-* / fill-* / stroke-*
+     (referenced from tokens.css — one source of truth)
+     ====================================================================== */
+  --color-brand-atmosphere: var(--brand-atmosphere);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-ink: var(--brand-ink);
+  --color-on-brand: var(--on-brand);
+  --color-press-overlay: var(--press-overlay);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-scrim: var(--scrim);
+
+  --color-ink-strong: var(--ink-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-ink-disabled: var(--ink-disabled);
+
+  --color-line-soft: var(--line-soft);
+  --color-line-strong: var(--line-strong);
+
+  --color-positive: var(--positive);
+  --color-positive-tint: var(--positive-tint);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-info: var(--info);
+  --color-info-tint: var(--info-tint);
+
+  /* ======================================================================
+     --spacing-* namespace  ->  p-* / m-* / gap-* / w-* (named Micro steps)
+     (numeric utilities untouched — see header note)
+     ====================================================================== */
+  --spacing-2xs: var(--space-2);    /* p-2xs  = 2px  */
+  --spacing-xs: var(--space-4);     /* p-xs   = 4px  */
+  --spacing-sm: var(--space-8);     /* p-sm   = 8px  */
+  --spacing-md: var(--space-12);    /* p-md   = 12px */
+  --spacing-lg: var(--space-16);    /* p-lg   = 16px */
+  --spacing-xl: var(--space-24);    /* p-xl   = 24px */
+  --spacing-2xl: var(--space-32);   /* p-2xl  = 32px */
+  --spacing-3xl: var(--space-40);   /* p-3xl  = 40px */
+  --spacing-edge: var(--space-edge);/* p-edge = 16px screen gutter */
+
+  /* ======================================================================
+     --radius-* namespace  ->  rounded-*
+     (LITERALS: same names already exist in :root — a var() self-reference
+     would be cyclic. Keep in sync with tokens.css.)
+     ====================================================================== */
+  --radius-sm: 6px;     /* rounded-sm     */
+  --radius-md: 12px;    /* rounded-md     */
+  --radius-lg: 16px;    /* rounded-lg     */
+  --radius-xl: 24px;    /* rounded-xl     */
+  --radius-full: 999px; /* rounded-full   */
+  /* BottomNavigation stays edge-to-edge: rounded-none (radius 0) by
+     component rule — never map a token for it. */
+
+  /* ======================================================================
+     --text-* namespace  ->  text-<role> (font-size + paired lh / weight)
+     (referenced from tokens.css, so the --text-scale hook survives)
+     ====================================================================== */
+  --text-value-lg: var(--text-value-size);          /* 32px · 600 · 1.15 */
+  --text-value-lg--line-height: var(--text-value-line-height);
+  --text-value-lg--font-weight: var(--text-value-weight);
+
+  --text-label: var(--text-label-size);             /* 15px · 400 · 1.55 */
+  --text-label--line-height: var(--text-label-line-height);
+  --text-label--font-weight: var(--text-label-weight);
+
+  --text-qualifier: var(--text-qualifier-size);     /* 13px · 400 · 1.4  */
+  --text-qualifier--line-height: var(--text-qualifier-line-height);
+  --text-qualifier--font-weight: var(--text-qualifier-weight);
+
+  --text-arabic-min: 14px; /* floor utility — Arabic-script minimum,
+                              digits/Latin only below this (never) */
+
+  /* ======================================================================
+     --font-* and --font-weight-* namespaces
+     ====================================================================== */
+  /* LITERAL: --font-product already exists in :root — var() here would be
+     cyclic. Keep in sync with tokens.css. */
+  --font-product: "IBM Plex Sans Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+
+  --font-weight-regular: var(--weight-regular);    /* 400 */
+  --font-weight-medium: var(--weight-medium);      /* 500 */
+  --font-weight-semibold: var(--weight-semibold);  /* 600 */
+
+  /* ======================================================================
+     --ease-* namespace  ->  ease-standard / ease-exit
+     (LITERALS: same names already exist in :root — cyclic if referenced.
+     Keep in sync with tokens.css.)
+     ====================================================================== */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* entrances & state moves */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);     /* exits only             */
+
+  /* ======================================================================
+     --animate-* namespace  ->  animate-<name>
+     Durations/easings are pulled from tokens.css vars (no namespace
+     collision). All motion is translateY / scale / opacity — identical
+     under RTL and LTR by construction. No bounce, no springs.
+     ====================================================================== */
+  --animate-sheet-in: sheet-in var(--dur-sheet-in) var(--ease-standard);
+  --animate-sheet-out: sheet-out var(--dur-sheet-out) var(--ease-exit);
+  --animate-dialog-in: dialog-in var(--dur-dialog-in) var(--ease-standard);
+  --animate-dialog-out: dialog-out var(--dur-dialog-out) var(--ease-exit);
+  --animate-scrim-in: scrim-in var(--dur-scrim) var(--ease-standard);
+  --animate-scrim-out: scrim-out var(--dur-scrim) var(--ease-exit);
+  /* No --animate-spin entry: a spinner's loop duration is not a Micro
+     token, so spinners are authored in component CSS where loop timing
+     can be tuned without touching the token spec. */
+
+  @keyframes sheet-in {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+  @keyframes sheet-out {
+    from { transform: translateY(0); }
+    to   { transform: translateY(100%); }
+  }
+  @keyframes dialog-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes dialog-out {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.96); }
+  }
+  @keyframes scrim-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes scrim-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+}

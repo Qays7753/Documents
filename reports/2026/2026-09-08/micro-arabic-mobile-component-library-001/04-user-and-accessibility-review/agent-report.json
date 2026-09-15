@@ -1,0 +1,65 @@
+{
+  "task_id": "3",
+  "agent_id": "04-user-and-accessibility-review",
+  "run_id": "20260908T133450Z-16d11",
+  "status": "complete",
+  "deliverables": [
+    {
+      "file": "user-journey-review.md",
+      "summary": "Four journeys walked through the proposed design (2-second morning glance, one-handed cash sale mid-rush, failed-entry recovery, receivables/payables check). Top failures: 320px fold may cut the warning row; sheet may exit before the completion proof is seen; offline-save vs failed state ambiguity; comparison pair direction confusion. Each failure carries a concrete fix for Agent 05."
+    },
+    {
+      "file": "interaction-review.md",
+      "summary": "Touch-target audit (two FAILs: tappable quick-fill chips at 28px, drag handle 32x4 without a 44px hit region), thumb-zone mapping (inline retry sits in the far-side/mid-screen zone; scroll-padding-bottom missing for WCAG 2.2 2.4.11), motion contract verified spec-exact with computed no-overshoot easing, sheet/dialog dismissal rules audited with a ruling that keeps the destructive-dialog Escape exemption, and list/empty-state behavior requirements made interactive-proof obligations."
+    },
+    {
+      "file": "accessibility-rtl-report.md",
+      "summary": "All 62 contrast pairs recomputed with contrast_check.py: 62/62 match Agent 02 (one flagged row is a range-vs-point artifact). New findings: focus-ring conflict across Agents 01/02/03 resolved to ink-strong (brand-atmosphere ring fails 3:1 on sunken and all tints; Agent 03's 6.3-6.8:1 claim corrected to 5.09-6.11); bidi audit (bracketed percentage trap, unknown-dash isolation, inputmode=decimal); icon mirror registry verified with no paper-plane; text-scaling risk register with rail tile min-height ruling; 13px-vs-14px ruling; non-color signal map; keyboard/live-region semantics."
+    },
+    {
+      "file": "verification-checklist.md",
+      "summary": "Binding QA checklist: 50 rows across viewport/direction/scale/motion/family-state/currency/accessibility/lab constraints, each with pass condition and verification method (manual/headless/JS-measured). Covers all 4 widths RTL, geometry-only LTR, 100/130/200% scale, reduced motion, full SPEC 6.9 family-state coverage, measured rail peeks (16/56/86/30), currency rules, no-JOD, no dark mode, no fake system UI, no placeholders, offline open."
+    },
+    {
+      "file": "contrast_check.py",
+      "summary": "Evidence script: recomputes every WCAG 2.2 ratio claimed in Agent 02's color-role-map (text, graphics, press/scrim composites), audits the three focus-ring candidates over every drawable surface, and recomputes the QuickActionRail peek arithmetic (320:16, 360:56, 390:86, 430:30)."
+    }
+  ],
+  "key_findings": [
+    "Agent 02's contrast math is verified correct: 62/62 recomputed pairs match (ink-subtle/sunken 4.14 LARGE-ONLY, positive/positive-tint 4.27 LARGE-ONLY, ink-disabled 2.11 incidental-only all confirmed).",
+    "Focus-ring conflict: Agents 01/02/03 proposed three different ring colors. Computed: brand-atmosphere ring FAILS 3:1 on sunken (2.82) and every semantic tint (2.73-2.80) - exactly where inputs live; brand-ink passes on light surfaces (5.09-6.11, not the 6.3-6.8 Agent 03 claimed) but fails on atmosphere (1.87); ink-strong passes everywhere (14.1-16.6).",
+    "QuickActionRail peek arithmetic confirmed: 16px at 320 (documented spec exception), 56/86/30 at 360/390/430 - all meet the >=28 target without geometry changes.",
+    "At 200% text scale the locked 92px rail tile height cannot hold 24px icon + 8 gap + two 26px label lines (~105px+); fixed height violates SPEC 6.5's content-driven-heights rule - 92 must become min-height.",
+    "Tappable chips (quick-fill 240.00, date quick chip اليوم) and the 32x4 drag handle are below the 44px touch-target minimum as proposed.",
+    "Bidi pattern (bdi dir=ltr + separate د.أ node) is correct for signs, thousands separators, and DD/MM/YYYY, but bracketed percentages like (65%) must be isolated with their brackets or brackets dropped.",
+    "The comparison pair ذمم العملاء/ذمم المورّدين risks direction confusion; locked copy-bank labels مستحق لك/مستحق عليك fix it without new components.",
+    "Agent 01's sheet CTA brand-ink fill and Agent 03's .icon-mirror registry and 20/5/3 list rules are all internally consistent with SPEC."
+  ],
+  "required_fixes_for_agent_05": [
+    "Unify the focus ring to 2px ink-strong with 2px offset on :focus-visible everywhere; drop Agent 01's brand-atmosphere input ring and Agent 03's brand-ink ring; correct Agent 03's 6.3-6.8:1 claim to 5.09-6.11:1.",
+    "13px-vs-14px ruling: numeric/Latin qualifier runs stay 13px; QuickActionRail labels stay 13px (SPEC 6.8 precedence, logged in decision-log); Arabic-word qualifiers, state lines, and input helper/error text render at 14px (--mc-type-min-arabic).",
+    "Rail tile: 92px becomes min-height (width 88, gap 8, padding 16 stay locked); label clamps to 2 lines; JS-measure at all 4 widths x 3 text scales.",
+    "Tappable chips get >=44px hit areas (quick-fill, اليوم); drag handle gets a >=44px tall hit region with Escape/scrim as guaranteed alternatives.",
+    "Completion dwell >=1.5s before sheet exit in recording flows; announcement fires at state change (role=status for completion, role=alert for failure).",
+    "All dismissal routes (scrim, drag, Escape, back) on dirty sheets route through تجاهل التغييرات؟; focus-return chain sheet->guard->sheet specified.",
+    "One offline->failed->completed state machine; a row never shows two states; failed-row retry also bottom-pinned in its detail sheet; the sheet hydrates from the saved record (WCAG 3.3.7).",
+    "scroll-padding-bottom >= 64px + safe-area on the scroll owner (WCAG 2.2 2.4.11 focus-not-obscured).",
+    "320px fold check: warning row visible before fold; if cut, compress top breathing 40->32 and pre-block air 32->24 at 320px only (on-scale values).",
+    "Comparison pair labels مستحق لك/مستحق عليك; no silent warning dot on tiles.",
+    "Bidi: isolate (65%) with brackets inside one LTR bdi (or drop brackets); unknown dash isolated in value positions; amount input gets inputmode=decimal + type=text + dir=ltr.",
+    "Dialog entry unified: opacity + 0.97->1 scale over 160ms; reduced-motion = opacity only (resolves Agent 01 vs Agent 03 wording conflict).",
+    "Nav label 320px fit measured; fallback copy مبيعات (drop the article) if المبيعات clips in the 64px seat.",
+    "Destructive-dialog Escape exemption kept with tabbable إلغاء, destructive action not initially focused, decision logged as Micro-over-generic deviation.",
+    "List rules (20-row batch, prefetch at last 5, 3 skeletons, stop auto-retry after first failure) demonstrated interactively in the Verification view, not only as frozen matrix cells."
+  ],
+  "spec_conflicts_or_risks": [
+    "SPEC 6.8 locks the rail tile at 88x92 while SPEC 6.5 forbids fixed heights for variable Arabic content and 6.1 requires increased-text-size testing - resolved by treating 92 as min-height (spec-internal conflict, Micro values preserved at default scale).",
+    "SPEC 6.4 sets qualifiers at 'approximately 13px' and an Arabic minimum of 14px - internal conflict resolved by the 13px/14px ruling (numeric runs vs Arabic words), using 'approximately' as the documented latitude.",
+    "Destructive dialogs ignoring Escape/scrim is a deliberate Micro deviation from generic dialog practice - documented, with a tabbable إلغاء so WCAG 2.1.2 is still satisfied.",
+    "ink-disabled at 2.11:1 relies on WCAG's disabled-incidental exemption plus non-color cues (Micro palette constraint, documented mitigation).",
+    "Agent 03's focus-ring contrast claim (6.3-6.8:1) is overstated vs computed 5.09-6.11:1 - numeric correction required, verdict unchanged.",
+    "Agent 01's Input contract proposes brand-atmosphere focus rings, which fail 3:1 on sunken and all semantic tints - must be overridden by the ink-strong ruling.",
+    "brand-atmosphere on canvas is 3.11:1 (graphics threshold) - narrow margin flagged for real-device verification by Agent 05."
+  ],
+  "handoff_to_agent_05": "Build the final lab from Agent 03's architecture and Agent 01/02's contracts with the 15 fixes above applied. The three binding rulings: (1) focus ring = 2px ink-strong everywhere; (2) the 13px/14px split (numeric runs and rail labels 13px; Arabic-word qualifiers, state lines, and input helper/error text 14px); (3) rail tile 92px as min-height with width/gap/padding locked. Pass the final lab against verification-checklist.md (50 rows, JS-measured where numbers matter) before upload; contrast may be trusted from the recomputed table but the focus-ring and peek numbers must be re-measured in the browser. Keep every fix copy-level or token-level - no new components, no new colors."
+}

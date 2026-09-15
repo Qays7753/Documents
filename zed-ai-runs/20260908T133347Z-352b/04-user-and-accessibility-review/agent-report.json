@@ -1,0 +1,47 @@
+{
+  "agent_id": "04",
+  "task_id": "2-d",
+  "status": "completed",
+  "files": [
+    {
+      "path": "04-user-and-accessibility-review/user-journey-review.md",
+      "purpose": "Three second-person owner journeys (morning cash check, debt collection with proof, cash expense via keypad) with 3-second first-glance tests, state/recovery paths, trust wording, and abandonment triggers."
+    },
+    {
+      "path": "04-user-and-accessibility-review/interaction-review.md",
+      "purpose": "Eight interaction contracts (press 80ms/8% ink, focus-visible, loading, quiet completion, error retry, sheet 240/180ms, dialog 160/120ms, reduced motion) plus a 10-entry anti-pattern rejection list."
+    },
+    {
+      "path": "04-user-and-accessibility-review/accessibility-rtl-report.md",
+      "purpose": "Computed WCAG 2.2 audit: relative-luminance math for all 22 tokens, 38 contrast pairs + 9 alpha composites with PASS/FAIL, 10 binding pairing rules; touch-target/rail/bottom-nav geometry; 130%/200% text-scaling analysis; 4 bidi scenarios with required markup; icon mirroring policy; one-hand reachability; non-color status signaling."
+    },
+    {
+      "path": "04-user-and-accessibility-review/verification-checklist.md",
+      "purpose": "Executable 62-item checklist (groups A–L) with concrete PASS criteria and test methods (viewports, RTL/LTR, text scales, reduced motion, grep rules for JOD/dark/Arabic-Indic digits/paper-plane, color budget counts, 13 component families, 8 interaction demos, touch-target and focus audits, rail peek measurements, overflow scans)."
+    },
+    {
+      "path": "04-user-and-accessibility-review/agent-report.json",
+      "purpose": "This report."
+    }
+  ],
+  "key_decisions": [
+    "Contrast was computed, not estimated: 38 pairs + 9 press/scrim composites from the exact token hex values. Two token-level failures became binding pairing rules: positive-on-positive-tint (4.27:1) and white-on-brand-atmosphere (3.28:1) are forbidden for normal-size text; warning-on-warning-tint text is limited to >=18.66px at weight 600 because it drops to 3.87:1 under the 8% press overlay.",
+    "Interactive content must be surface-backed: the 8% press overlay over canvas drops ink-muted to 4.36:1 and ink-subtle to 4.11:1 (surface) / 3.89:1 (canvas), so ink-subtle is restricted to non-pressable or >=24px positions and pressable rows/tiles/chips render on surface tokens, with canvas reserved for the page backdrop.",
+    "Sheet-vs-scrim edge measures 2.96:1 (just under the 3:1 UI threshold), so a sheet must not rely on the 45% scrim alone: an elevation shadow (>=8px blur, ink >=12% alpha) plus 16px top radius are required to define the boundary.",
+    "QuickActionRail geometry locked by arithmetic: tile 88x92, gap 8 (pitch 96), first-tile inset 16px gives peeks of 16px at 320 (documented exception), 56px at 360, 86px at 390, and 30px at 430 — all meeting the >=28px rule at 360+; any tile-size or inset change must re-derive the peek with the published formula.",
+    "Completion is 'quiet completion' as a hard contract: check icon + 'تم الحفظ'-family Arabic label + persistent proof (entry ID + timestamp, navigable record) + immediate discrete value update. Toast-only proof and count-up financial values are build-blocker anti-patterns, along with fake system UI, page-wide slides, and spring/bounce physics.",
+    "Bidi is specified per string type with expected on-screen glyph order: <bdi dir=\"ltr\"> for signed amounts, mixed-sentence numbers, DD/MM/YYYY dates, and '+9%' percentages; currency 'د.أ' is a separate Arabic run; ASCII digits and ASCII separators only; 'JOD' string forbidden everywhere user-facing.",
+    "Icon mirroring policy table: directional icons (back/forward chevrons, disclosure, arrows) mirror in RTL; objects, semantic glyphs, charts (time axis stays LTR inside the chart), brand marks, and math signs never mirror; the paper-plane send icon is forbidden entirely and send/save actions use Arabic text labels.",
+    "Verification is executable: 62 objectively checkable items with grep commands (JOD, dark theme, Arabic-Indic digits, paper-plane, ISO dates), DOM measurements (touch targets, rail peeks, overflow at 24 width/scale/direction combinations), frame-count timing checks for press/animations, and grayscale chart texture tests; three documented exceptions (320px rail peek, ink-disabled contrast, decorative line tokens) are the only allowed waivers."
+  ],
+  "open_questions": [
+    "Bottom navigation: 4 tabs assumed (80px per tab at 320). If a 5th tab is planned, label-wrap math at 320px + 200% must be re-run (64px per tab).",
+    "Agent 03 must confirm all font sizes are in rem; the text-scale harness (root font-size 20.8px/32px) is invalid if any component uses px font sizes.",
+    "Which families get live interactive demos vs static state matrices in the gallery (items I-42..49 assume working sheet/dialog/button demos exist in the artifact).",
+    "Elevation shadow token: the 22-token list has no shadow token; the required sheet shadow (ink >=12% alpha, >=8px blur) may need to be added as a derived token or composite value — needs Agent 02/03 sign-off.",
+    "Chart text alternative format: visually-hidden data table (preferred) vs aria-label summary — the checklist accepts either; final choice should be consistent across all chart primitives.",
+    "Bottom-nav label size: spec allows 13px only for qualifiers and QuickActionRail labels, so nav labels are held at >=14px in this review — confirm Agent 03 agrees (affects nav height at 200%).",
+    "Expense-greater-than-cash validation: this review recommends a warning line plus a confirm dialog on save (owner may have paid from another pocket) — needs product sign-off.",
+    "Unknown-data demo data: the 'غير متوفر' state needs a demo source (empty/masked data) — the library must include it even though real data never will."
+  ]
+}

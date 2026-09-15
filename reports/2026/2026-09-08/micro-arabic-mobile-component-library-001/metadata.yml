@@ -1,0 +1,44 @@
+delivery_id: micro-arabic-mobile-component-library-001
+delivery_number: 17
+date: 2026-09-08
+run_id: 20260908T133450Z-16d11
+title: "Micro Arabic-first mobile component visual library (five-agent design-system run)"
+language: "Arabic-first RTL UI · English documentation with Arabic UI copy inline"
+format: "self-contained HTML lab (file://, no runtime) + tokens.css + 10 documents + agent workspaces + QA screenshots"
+provenance: "Zed AI coordinated run — agents 01 (UX architecture), 02 (visual identity), 03 (design-system engineering), 04 (accessibility review), 05 (lead synthesis, executed by the coordinator)"
+structure:
+  - SPEC.md
+  - 01-ux-architecture/
+  - 02-visual-identity/
+  - 03-design-system-engineering/
+  - 04-user-and-accessibility-review/
+  - 05-synthesis-and-redesign/
+  - final/
+  - run-report.md
+selected_direction: "«دفء الطابون» · Taboun Warmth — one direction only"
+light_mode_only: true
+verification:
+  audit_checks: "9/9 pass (window.MicroAudit, JS-measured)"
+  rail_peeks: { "320": 16, "360": 56, "390": 86, "430": 30 }
+  min_touch_target_px: 44
+  overflow: "none at 100/130/200% text scale x RTL/LTR x 320/360/390/430"
+  interaction_contracts: "sheet flow, dirty guard, destructive dialog, focus return, retry demos — all pass"
+  screenshots: 15
+  vision_qa: "pass (composition, sheet, 320 frame, library, grayscale charts)"
+  documented_only:
+    - "20-row batched list with prefetch-at-5 (contract-level)"
+    - "28px value fallback for >9-character values (never triggered)"
+    - "real screen-reader session (structural roles/labels/live-region proof instead)"
+scores:
+  micro_specificity: 5
+  native_mobile: 4
+  visual_warmth: 5
+  visual_energy: 4
+  directness: 5
+  component_reusability: 5
+  color_correctness: 5
+  rtl_accessibility: 4
+  interaction_quality: 5
+  accessibility: 4
+  responsive_integrity: 5
+  handoff_quality: 4

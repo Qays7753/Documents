@@ -1,0 +1,619 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "micro-product-rebuild-flow-studio-schema-2.0.0",
+  "title": "Micro Product Rebuild Flow Studio — Data Model 2.0.0",
+  "description": "Versioned, human-readable and machine-readable data model for the offline Arabic studio. Layer vocabulary: CURRENT_STATE (verified in Micro repository at baseline commit), APPROVED_TARGET (explicitly approved future behavior), FUTURE_EXPANSION (supplier portal, courier network, multi-user, cloud sync, conversational assistant when not implemented), OWNER_PROPOSAL (owner-created/edited, not yet approved), UNVERIFIABLE (cannot be proven from available evidence).",
+  "type": "object",
+  "required": ["schemaVersion", "workspaceId", "workspaceTitleAr", "baseline", "layers", "features", "flows", "nodes", "edges", "screens", "buildPhases"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "2.0.0" },
+    "workspaceId": { "type": "string", "const": "micro-product-rebuild-flow-studio" },
+    "workspaceTitleAr": { "type": "string" },
+    "baseline": {
+      "type": "object",
+      "required": ["microRepository", "microCommit", "sourceAtlasRepository", "sourceAtlasPath", "sourceAtlasCommit", "analysisDate"],
+      "properties": {
+        "microRepository": { "type": "string" },
+        "microCommit": { "type": "string" },
+        "microCommitDate": { "type": "string" },
+        "microWorkingTree": { "type": "string" },
+        "sourceAtlasRepository": { "type": "string" },
+        "sourceAtlasPath": { "type": "string" },
+        "sourceAtlasCommit": { "type": "string" },
+        "analysisDate": { "type": "string" },
+        "timezone": { "type": "string" }
+      }
+    },
+    "financialBoundaries": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/financialBoundary" }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "titleAr", "descriptionAr", "mutable"],
+        "properties": {
+          "id": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] },
+          "titleAr": { "type": "string" },
+          "descriptionAr": { "type": "string" },
+          "mutable": { "type": "boolean" }
+        }
+      }
+    },
+    "migrationNotes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/migrationNote" }
+    },
+    "actors": { "type": "array", "items": { "$ref": "#/definitions/actor" } },
+    "personas": { "type": "array", "items": { "$ref": "#/definitions/persona" } },
+    "domains": { "type": "array", "items": { "$ref": "#/definitions/domain" } },
+    "permissions": { "type": "array", "items": { "$ref": "#/definitions/permission" } },
+    "features": { "type": "array", "items": { "$ref": "#/definitions/feature" } },
+    "flows": { "type": "array", "items": { "$ref": "#/definitions/flow" } },
+    "flowSteps": { "type": "array", "items": { "$ref": "#/definitions/flowStep" }, "description": "Imported Atlas flow steps (FLW-*-SNN). Immutable read-only current-state data." },
+    "traceability": { "type": "array", "items": { "$ref": "#/definitions/traceabilityRow" }, "description": "Imported Atlas contract-to-implementation traceability rows." },
+    "atlasDiagrams": { "type": "array", "items": { "$ref": "#/definitions/atlasDiagram" }, "description": "Imported Atlas diagram metadata. Composed edges live only in the source Atlas HTML; the studio links out to it." },
+    "atlasDiagramNodes": { "type": "array", "items": { "$ref": "#/definitions/atlasDiagramNode" } },
+    "nodes": { "type": "array", "items": { "$ref": "#/definitions/node" } },
+    "edges": { "type": "array", "items": { "$ref": "#/definitions/edge" } },
+    "screens": { "type": "array", "items": { "$ref": "#/definitions/screen" } },
+    "screenContracts": { "type": "array", "items": { "$ref": "#/definitions/screenContract" } },
+    "wireframes": { "type": "array", "items": { "$ref": "#/definitions/wireframe" } },
+    "services": { "type": "array", "items": { "$ref": "#/definitions/service" } },
+    "entities": { "type": "array", "items": { "$ref": "#/definitions/entity" } },
+    "states": { "type": "array", "items": { "$ref": "#/definitions/state" } },
+    "transitions": { "type": "array", "items": { "$ref": "#/definitions/transition" } },
+    "scenarios": { "type": "array", "items": { "$ref": "#/definitions/scenario" } },
+    "decisions": { "type": "array", "items": { "$ref": "#/definitions/decision" } },
+    "gaps": { "type": "array", "items": { "$ref": "#/definitions/gap" } },
+    "dependencies": { "type": "array", "items": { "$ref": "#/definitions/dependency" } },
+    "buildPhases": { "type": "array", "items": { "$ref": "#/definitions/buildPhase" } },
+    "acceptanceCriteria": { "type": "array", "items": { "$ref": "#/definitions/acceptanceCriterion" } },
+    "notes": { "type": "array", "items": { "$ref": "#/definitions/note" } },
+    "versions": { "type": "array", "items": { "$ref": "#/definitions/version" } },
+    "auditLog": { "type": "array", "items": { "$ref": "#/definitions/auditEntry" } },
+    "counts": { "type": "object" }
+  },
+  "definitions": {
+    "financialBoundary": {
+      "type": "object",
+      "required": ["id", "titleAr", "ruleAr"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^FB-" },
+        "titleAr": { "type": "string" },
+        "ruleAr": { "type": "string" },
+        "validatorHint": { "type": "string" }
+      }
+    },
+    "migrationNote": {
+      "type": "object",
+      "required": ["id", "note"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^MIG-" },
+        "note": { "type": "string" },
+        "affectedIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "idField": { "type": "string", "minLength": 3 },
+    "statusEnum": {
+      "enum": ["CURRENT_STATE", "APPROVED_TARGET", "FUTURE_EXPANSION", "OWNER_PROPOSAL", "UNVERIFIABLE"]
+    },
+    "atlasStatusEnum": {
+      "enum": ["IMPLEMENTED", "PARTIALLY_IMPLEMENTED", "PLANNED_OR_CONCEPTUAL", "NOT_FOUND", "CONFLICTING", "UNVERIFIABLE_FROM_REPOSITORY"]
+    },
+    "severityEnum": { "enum": ["P0", "P1", "P2", "P3", "INFO", "OWNER_DECISION_REQUIRED"] },
+    "actor": {
+      "type": "object",
+      "required": ["id", "name_ar", "status"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^ACT-" },
+        "name_en": { "type": "string" },
+        "name_ar": { "type": "string" },
+        "kind": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "$ref": "#/definitions/statusEnum" },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "persona": {
+      "type": "object",
+      "required": ["id", "nameAr", "descriptionAr"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^PERS-" },
+        "nameAr": { "type": "string" },
+        "nameEn": { "type": "string" },
+        "descriptionAr": { "type": "string" },
+        "needsAr": { "type": "array", "items": { "type": "string" } },
+        "fearsAr": { "type": "array", "items": { "type": "string" } },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "required": ["id", "titleAr"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^DOM-" },
+        "titleAr": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "featureIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "required": ["id", "actor", "capability", "can"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^PRM-" },
+        "actor": { "type": "string" },
+        "capability": { "type": "string" },
+        "can": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "required": ["id", "nameAr", "nameEn", "layer", "status"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^(FTR-|HOM-|FIN-|ORD-|DEP-|SAL-|DEB-|EXP-|INV-|PUR-|DEL-|AST-|LOA-|CAS-|SCH-|CTA-|CTL-|EST-|PAR-|ACT-|SHR-|DAT-|SEC-|PWA-|NAV-|FRM-|SET-|BOT-|NET-|POS-)" },
+        "nameAr": { "type": "string" },
+        "nameEn": { "type": "string" },
+        "title": { "type": "string" },
+        "domain": { "type": "string" },
+        "description": { "type": "string" },
+        "role": { "type": "string" },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] },
+        "status": { "$ref": "#/definitions/statusEnum" },
+        "approvalState": { "enum": ["DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "SUPERSEDED"] },
+        "buildCard": { "$ref": "#/definitions/buildCard" },
+        "screens": { "type": "array", "items": { "type": "string" } },
+        "services": { "type": "array", "items": { "type": "string" } },
+        "flowIds": { "type": "array", "items": { "type": "string" } },
+        "phaseId": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "atlasStatus": { "$ref": "#/definitions/atlasStatusEnum" },
+        "migration": { "$ref": "#/definitions/migration" },
+        "deprecated": { "type": "boolean" },
+        "supersededBy": { "type": "string" }
+      }
+    },
+    "buildCard": {
+      "type": "object",
+      "description": "Feature Build Card — the 36-field target-state rebuild card. Arabic owner-facing text; technical names in English secondary fields.",
+      "properties": {
+        "featureId": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "nameEn": { "type": "string" },
+        "productIntentAr": { "type": "string" },
+        "personaId": { "type": "string" },
+        "userGoalAr": { "type": "string" },
+        "entryPointsAr": { "type": "array", "items": { "type": "string" } },
+        "preconditionsAr": { "type": "array", "items": { "type": "string" } },
+        "requiredDataAr": { "type": "array", "items": { "type": "string" } },
+        "primaryFlowId": { "type": "string" },
+        "alternativeFlowIds": { "type": "array", "items": { "type": "string" } },
+        "failureFlowIds": { "type": "array", "items": { "type": "string" } },
+        "screenContractIds": { "type": "array", "items": { "type": "string" } },
+        "navigationEntryAr": { "type": "string" },
+        "navigationExitAr": { "type": "string" },
+        "contentHierarchyAr": { "type": "array", "items": { "type": "string" } },
+        "wireframeId": { "type": "string" },
+        "fieldsAndValidationsAr": { "type": "array", "items": { "type": "object" } },
+        "decisionsAr": { "type": "array", "items": { "type": "string" } },
+        "financialEffectAr": { "type": "string" },
+        "operationalEffectAr": { "type": "string" },
+        "inventoryEffectAr": { "type": "string" },
+        "debtDepositEffectAr": { "type": "string" },
+        "permissionsAr": { "type": "string" },
+        "servicesEntitiesAr": { "type": "string" },
+        "dependencyIds": { "type": "array", "items": { "type": "string" } },
+        "buildPriority": { "type": "string" },
+        "whyThisOrderAr": { "type": "string" },
+        "acceptanceCriteriaIds": { "type": "array", "items": { "type": "string" } },
+        "testScenariosAr": { "type": "array", "items": { "type": "string" } },
+        "currentStateEvidence": { "type": "array", "items": { "type": "string" } },
+        "targetDefinitionAr": { "type": "string" },
+        "openQuestionsAr": { "type": "array", "items": { "type": "string" } },
+        "ownerNotes": { "type": "string" },
+        "tenQuestionsAr": { "type": "object" }
+      }
+    },
+    "flow": {
+      "type": "object",
+      "required": ["id", "nameAr", "layer", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "name_en": { "type": "string" },
+        "name_ar": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "group": { "type": "string" },
+        "domain": { "type": "string" },
+        "actor": { "type": "string" },
+        "intention": { "type": "string" },
+        "entry_points": { "type": "array", "items": { "type": "string" } },
+        "success_outcome": { "type": "string" },
+        "primary_path": { "type": "string" },
+        "alternative_paths": { "type": "string" },
+        "failure_exception_paths": { "type": "string" },
+        "screens": { "type": "array", "items": { "type": "string" } },
+        "services": { "type": "array", "items": { "type": "string" } },
+        "entities": { "type": "array", "items": { "type": "string" } },
+        "before_state": { "type": "string" },
+        "after_state": { "type": "string" },
+        "financial_effect": { "type": "string" },
+        "cashbox_effect": { "type": "string" },
+        "profit_cost_effect": { "type": "string" },
+        "inventory_effect": { "type": "string" },
+        "debt_deposit_effect": { "type": "string" },
+        "offline_sync_behavior": { "type": "string" },
+        "permissions_approval": { "type": "string" },
+        "history_audit_behavior": { "type": "string" },
+        "exit_next_action": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] },
+        "status": { "$ref": "#/definitions/statusEnum" },
+        "approvalState": { "enum": ["DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "SUPERSEDED"] },
+        "featureId": { "type": "string" },
+        "steps": { "type": "array", "items": { "type": "string" } },
+        "nodeIds": { "type": "array", "items": { "type": "string" } },
+        "derivedFrom": { "type": "string" },
+        "gaps": { "type": "array", "items": { "type": "string" } },
+        "atlasStatus": { "$ref": "#/definitions/atlasStatusEnum" },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": ["id", "flow", "kind", "labelAr"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^NODE-" },
+        "flow": { "type": "string" },
+        "kind": {
+          "enum": ["start", "end", "action", "decision", "input", "output", "store", "subflow", "external", "event", "document", "screen"]
+        },
+        "labelAr": { "type": "string" },
+        "labelEn": { "type": "string" },
+        "actor": { "type": "string" },
+        "detailAr": { "type": "string" },
+        "screen": { "type": "string" },
+        "service": { "type": "string" },
+        "financialEffectAr": { "type": "string" },
+        "financialEffectCode": { "enum": ["REVENUE", "CASH_IN", "CASH_OUT", "DEPOSIT_APPLY", "DEPOSIT_REFUND", "DEPOSIT_RETAIN", "RECEIVABLE", "PAYABLE", "EXPENSE", "COST", "OWNER_FUNDS", "NONE"] },
+        "effectFlags": { "type": "array", "items": { "type": "string" } },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] },
+        "status": { "$ref": "#/definitions/statusEnum" },
+        "ref": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "sourceStepId": { "type": "string" },
+        "deprecated": { "type": "boolean" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": ["id", "from", "to", "kind"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^EDGE-" },
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "kind": { "enum": ["control", "data", "failure"] },
+        "labelAr": { "type": "string" },
+        "conditionAr": { "type": "string" },
+        "flow": { "type": "string" },
+        "order": { "type": "number" },
+        "deprecated": { "type": "boolean" }
+      }
+    },
+    "screen": {
+      "type": "object",
+      "required": ["id", "title_ar"],
+      "properties": {
+        "id": { "type": "string" },
+        "route": { "type": "string" },
+        "file": { "type": "string" },
+        "title_ar": { "type": "string" },
+        "purpose": { "type": "string" },
+        "entry_points": { "type": "array", "items": { "type": "string" } },
+        "primary_actions": { "type": "array", "items": { "type": "string" } },
+        "exits": { "type": "array", "items": { "type": "string" } },
+        "related_flows": { "type": "array", "items": { "type": "string" } },
+        "related_services": { "type": "array", "items": { "type": "string" } },
+        "kind": { "type": "string" },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] },
+        "featureId": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "screenContract": {
+      "type": "object",
+      "required": ["id", "screenId", "titleAr"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^CTR-" },
+        "screenId": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "purposeAr": { "type": "string" },
+        "entryAr": { "type": "array", "items": { "type": "string" } },
+        "exitAr": { "type": "array", "items": { "type": "string" } },
+        "fieldsAr": { "type": "array", "items": { "type": "object" } },
+        "validationsAr": { "type": "array", "items": { "type": "string" } },
+        "statesAr": { "type": "object" },
+        "financialEffectAr": { "type": "string" },
+        "featureId": { "type": "string" },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] }
+      }
+    },
+    "wireframe": {
+      "type": "object",
+      "required": ["id", "screenId", "lines"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^WFR-" },
+        "screenId": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "lines": { "type": "array", "items": { "type": "string" } },
+        "notesAr": { "type": "array", "items": { "type": "string" } },
+        "layer": { "enum": ["CURRENT", "TARGET", "PROPOSAL", "FUTURE"] }
+      }
+    },
+    "service": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "file": { "type": "string" },
+        "name": { "type": "string" },
+        "summary": { "type": "string" },
+        "writes": { "type": "array", "items": { "type": "string" } },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "store": { "type": "string" },
+        "fields": { "type": "string" },
+        "states": { "type": "string" },
+        "owner_actor": { "type": "string" },
+        "actions": { "type": "string" },
+        "financial_effect": { "type": "string" },
+        "inventory_effect": { "type": "string" },
+        "related": { "type": "array", "items": { "type": "string" } },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": ["id", "entity", "state"],
+      "properties": {
+        "id": { "type": "string" },
+        "entity": { "type": "string" },
+        "state": { "type": "string" },
+        "label_ar": { "type": "string" },
+        "meaning": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "required": ["id", "entity", "from", "to"],
+      "properties": {
+        "id": { "type": "string" },
+        "entity": { "type": "string" },
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "trigger": { "type": "string" },
+        "actor": { "type": "string" },
+        "guard": { "type": "string" },
+        "feedback": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "narrative": { "type": "string" },
+        "expected": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string" },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "ruling": { "type": "string" },
+        "source": { "type": "string" },
+        "implementation_status": { "type": "string" },
+        "flow_refs": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" },
+        "openForOwner": { "type": "boolean" },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "severity": { "type": "string" },
+        "user_impact": { "type": "string" },
+        "financial_risk": { "type": "string" },
+        "evidence": { "type": "array", "items": { "type": "string" } },
+        "recommendation": { "type": "string" },
+        "status": { "type": "string" },
+        "migration": { "$ref": "#/definitions/migration" }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "required": ["id", "from", "to", "kind"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^DEP-" },
+        "from": { "type": "string", "description": "Feature that depends" },
+        "to": { "type": "string", "description": "Feature depended upon" },
+        "kind": { "enum": ["hard", "soft"] },
+        "reasonAr": { "type": "string" }
+      }
+    },
+    "buildPhase": {
+      "type": "object",
+      "required": ["id", "titleAr", "order"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^PHASE-" },
+        "order": { "type": "number" },
+        "titleAr": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "goalAr": { "type": "string" },
+        "featureIds": { "type": "array", "items": { "type": "string" } },
+        "dependsOn": { "type": "array", "items": { "type": "string" } },
+        "userValueAr": { "type": "string" },
+        "riskAr": { "type": "string" },
+        "whyHereAr": { "type": "string" },
+        "acceptanceCriteriaIds": { "type": "array", "items": { "type": "string" } },
+        "status": { "$ref": "#/definitions/statusEnum" }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "required": ["id", "titleAr", "featureId"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^AC-" },
+        "titleAr": { "type": "string" },
+        "featureId": { "type": "string" },
+        "givenAr": { "type": "string" },
+        "whenAr": { "type": "string" },
+        "thenAr": { "type": "string" },
+        "phaseId": { "type": "string" }
+      }
+    },
+    "note": {
+      "type": "object",
+      "required": ["id", "type", "text"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^NOTE-" },
+        "type": { "enum": ["understanding", "question", "owner_decision", "proposal", "problem", "conflict", "approval", "rejection"] },
+        "typeAr": { "type": "string" },
+        "text": { "type": "string" },
+        "attachedTo": { "type": "array", "items": { "type": "string" } },
+        "author": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "reasonCode": { "enum": ["why", "constraint", "evidence", "scope", "other"] }
+      }
+    },
+    "version": {
+      "type": "object",
+      "required": ["id", "timestamp", "summaryAr"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^VER-" },
+        "parentVersion": { "type": ["string", "null"] },
+        "timestamp": { "type": "string" },
+        "author": { "type": "string" },
+        "summaryAr": { "type": "string" },
+        "changedIds": { "type": "array", "items": { "type": "string" } },
+        "counts": { "type": "object" },
+        "approvalState": { "enum": ["DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "SUPERSEDED"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "auditEntry": {
+      "type": "object",
+      "required": ["id", "timestamp", "action"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^LOG-" },
+        "timestamp": { "type": "string" },
+        "action": { "type": "string" },
+        "detail": { "type": "string" },
+        "actorLabel": { "type": "string" }
+      }
+    },
+    "migration": {
+      "type": "object",
+      "properties": {
+        "sourceCollection": { "type": "string" },
+        "sourceStatus": { "type": "string" },
+        "mappedStatus": { "type": "string" },
+        "importedFrom": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "flowStep": {
+      "type": "object",
+      "required": ["id", "flow", "order", "kind"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^FLW-\\d+-S\\d+$" },
+        "flow": { "type": "string" },
+        "order": { "type": "number" },
+        "kind": { "enum": ["decision", "store", "system", "user"] },
+        "kind_ar": { "type": "string" },
+        "kind_en": { "type": "string" },
+        "actor": { "type": "string" },
+        "action_ar": { "type": "string" },
+        "action_en": { "type": "string" },
+        "screen": { "type": "string" },
+        "service": { "type": "string" },
+        "detail": { "type": "string" }
+      }
+    },
+    "traceabilityRow": {
+      "type": "object",
+      "required": ["id", "contract_or_decision"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^TRC-" },
+        "contract_or_decision": { "type": "string" },
+        "expected_behavior": { "type": "string" },
+        "code_evidence": { "type": "string" },
+        "screen_evidence": { "type": "string" },
+        "test_evidence": { "type": "string" },
+        "flow_id": { "type": "string" },
+        "status": { "type": "string" },
+        "gap_or_contradiction": { "type": "string" }
+      }
+    },
+    "atlasDiagram": {
+      "type": "object",
+      "required": ["id", "title_ar"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^DGM-" },
+        "title_ar": { "type": "string" },
+        "title_en": { "type": "string" },
+        "category": { "type": "string" },
+        "desc_ar": { "type": "string" },
+        "desc_en": { "type": "string" },
+        "columns": { "type": "number" },
+        "node_ids": { "type": "array", "items": { "type": "string" } },
+        "edge_count": { "type": "number" }
+      }
+    },
+    "atlasDiagramNode": {
+      "type": "object",
+      "required": ["id", "diagram", "kind", "label_ar"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^DGM-\\d+-N\\d+$" },
+        "diagram": { "type": "string" },
+        "ref": { "type": ["string", "null"] },
+        "kind": { "type": "string" },
+        "label_ar": { "type": "string" },
+        "sub_ar": { "type": "string" },
+        "status_code": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "task_id": "2-a",
+  "agent_id": "01-ux-architecture",
+  "run_id": "20260908T133450Z-16d11",
+  "status": "complete",
+  "deliverables": [
+    {
+      "file": "01-ux-architecture/ux-architecture-report.md",
+      "summary": "2,596-word UX architecture report: scanning model for the primary persona (first-2-seconds path, 10 glanceability rules), exact before-scroll hierarchy at 390px with reasons, native phone patterns (integrated top zone with one Avatar, BottomNavigation 4 destinations + More with 320px-safe Arabic labels, sheet-vs-dialog decision rules, thumb-zone map), state-truth model for unknown/unavailable/true-zero/empty-input with sign-first direction, the full test composition proposal with exact Arabic labels and example values, and Arabic microcopy principles with a copy bank covering all component families, buttons, and every state wording."
+    },
+    {
+      "file": "01-ux-architecture/component-contracts-draft.md",
+      "summary": "Draft contracts for all 11 SPEC §6.9 families (PrimaryValueBlock, MetricGroup, MetricRow, CompactTile, OperationalRow, Button, Input, State, Sheet & Dialog, BottomNavigation + integrated top zone with Avatar, Chart primitives) — each with all fields required by SPEC §8 in the required order (the brief says 19 but lists 21; all 21 are included), 1–3 substantive sentences per field, locked conventions referenced (kebab-case class names, spacing 2/4/8/12/16/24/32/40, radius 6/12/16/24/full, touch 44/48, QuickActionRail geometry 88x92 / icon 24 / label 13 / gaps 8 / padding 16 with the 16px peek at 320)."
+    },
+    {
+      "file": "01-ux-architecture/task-to-component-map.md",
+      "summary": "12 operational tasks mapped to components (cash sale, receivable collection, expense, supplier purchase cash/credit, delivery settlement follow-up, stock threshold, customer balance, supplier payable, today's cash movement, exception resolution, supplier payment, planned-vs-actual review) — each with trigger, primary components, state considerations, and the number/state shown first, using the shared example bank (أبو محمد, أبو أحمد, مطعم النخيل, مؤسسة الشرق للتجهيزات, شركة التوصيل السريع, طحين فاخر 10كغ) and internally consistent amounts (نقد اليوم 1,284.50; مبيعات 465.00; تحصيلات +210.00 = 120.00 + 90.00; مصروفات -92.50; ذمم عملاء 1,175.00; ذمم مورّدين 640.00; تسوية بانتظار 142.00)."
+    },
+    {
+      "file": "01-ux-architecture/agent-report.json",
+      "summary": "This structured handoff record."
+    }
+  ],
+  "key_decisions": [
+    "Primary anchor of the test composition is the stock value 'نقد اليوم 1,284.50 د.أ' (cash on hand), not a flow metric; signs are reserved for directional flow rows (+210.00 / -92.50) so direction is always explicit and money-in/money-out never needs mental math.",
+    "Test composition order: integrated top zone (name + date + one Avatar) → PrimaryValueBlock on canvas → QuickActionRail (5 locked actions, إضافة بيع first, the single brand-tint tile) → MetricGroup 'حركة اليوم' (3 aligned rows) → 'متابعة اليوم' OperationalRows on canvas → one comparison pair (ذمم العملاء 1,175.00 vs ذمم المورّدين 640.00) → quiet 'عرض كل متابعات اليوم' link; action-needing content sits above reference content.",
+    "Composition budget held exactly: 1 PrimaryValueBlock, 1 rail, 1 MetricGroup (3 rows), 1 comparison pair, 3 surfaces (MetricGroup + 2 CompactTiles), 2 semantic families (positive + warning), 2 colored numbers (+210.00 and the threshold quantity 4), 2 dividers used inside MetricGroup (1 of 3 held in reserve), no repeated key value; OperationalRows are line-based on canvas with 12px gaps instead of dividers.",
+    "BottomNavigation = 4 destinations + clearly-labelled More with Arabic labels اليوم / المبيعات / الذمم / المخزون / المزيد at 14px that fit 320px seats; active state uses ink-strong + a 24x3px brand-atmosphere indicator bar instead of a brand-tint pill so the rail tile keeps the viewport's one brand-family tinted surface; More opens a real sheet (المورّدون، شركات التوصيل، التقارير، الإعدادات).",
+    "Sheets host all entry/selection/detail flows with the primary CTA pinned at the bottom (thumb zone); dialogs are restricted to short binary confirmations (delete, discard-changes); completion is inline quiet proof (check + تم) — never a toast as sole proof; sheets never stack deeper than one.",
+    "State truth locked: unknown = '—' + reason, unavailable = '—' + 'غير متاح حاليًا' + retry, true zero = full-weight 0.00 د.أ, empty input = placeholder only; unknown is never rendered as 0; negative sign is the primary financial-direction signal with color secondary; all values bidi-isolated dir=ltr with د.أ following in RTL flow."
+  ],
+  "spec_conflicts_or_risks": [
+    "Field-count mismatch: the agent brief says 'ALL 19 required fields' but both the brief and SPEC §8 list 21 fields (name, purpose, when to use, when not to use, anatomy, content hierarchy, sizes, spacing, radius, surface role, brand role, semantic color role, variants, states, interaction and motion, RTL behavior, accessibility, Arabic copy examples, Micro operational examples, responsive behavior, known limitations). All listed fields are included; no content impact, but the count should be corrected in future briefs.",
+    "BottomNavigation label size: SPEC §6.4 sets a 14px Arabic minimum while §6.8 locks 13px for QuickActionRail labels; the contracts use 14px for nav labels (short, ≤8 chars) and 13px only where SPEC explicitly sanctions it (rail labels, compact qualifiers). Agent 04 should verify 14px fit for 'المبيعات' in a 64px seat at 320px with real IBM Plex Sans Arabic metrics.",
+    "QuickActionRail peek at 320px is 16px, below the 28px wider-width target — this is the documented measured exception required by SPEC §6.8; the geometry must not be altered to fake 28px at 320px.",
+    "Divider accounting: the BottomNavigation top hairline and any section rules must be checked against the ≤3 visible dividers cap; the contracts declare chrome hairline as structural (not content) — Agent 04/05 should validate this interpretation against the spec wording.",
+    "One-filled-brand-action rule interplay: the test composition spends the brand-tint on the إضافة بيع rail tile, while sheets use a filled brand-ink CTA; the contracts interpret an open sheet overlay as the active layer carrying its own single filled action. If Agent 04/05 reads the rule as strictly per-physical-viewport, the sheet CTA or the rail tint must be re-examined.",
+    "Semantic-family budget on the اليوم destination: positive (completed/colored +210.00) + warning (pending settlement, flour threshold) fills the 2-family cap, so any info-tinted in-progress state on the same view must stay neutral chip+word until one of the two families is freed."
+  ],
+  "handoff_to_agent_05": "Take the test composition in ux-architecture-report.md §5 as the single canonical demo (exact labels, values, order, and budget ledger already audited); build every family against component-contracts-draft.md (all 11 contracts, kebab-case class names, locked geometry/spacing/radius/touch/motion values); use task-to-component-map.md as the Micro-specificity acceptance checklist and the copy bank as the single wording source. Resolve the six flagged risks (field-count typo, 14px nav-label fit at 320px, 16px peek exception, chrome-hairline divider accounting, sheet-CTA brand-fill interpretation, 2-family cap on اليوم) with Agents 02–04 findings, then record outcomes in decision-log.md."
+}

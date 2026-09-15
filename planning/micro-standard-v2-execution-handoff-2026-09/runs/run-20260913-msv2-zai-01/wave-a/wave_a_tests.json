@@ -1,0 +1,44 @@
+{
+  "git_diff_check": {
+    "clean": true,
+    "output": ""
+  },
+  "json_valid": true,
+  "hex_audit": {
+    "baseline_hex_count": 18,
+    "current_hex_count": 18,
+    "new_hex_introduced": [],
+    "verdict": "PASS — no new hex values"
+  },
+  "token_resolution": {
+    "defined": 138,
+    "consumed": 106,
+    "unresolved": [],
+    "verdict": "PASS"
+  },
+  "contrast": {
+    "ink/canvas": 17.5,
+    "ink/surface": 18.43,
+    "clay/surface": 3.12,
+    "clay/canvas": 2.96,
+    "clay_int/surface": 3.9,
+    "error/surface": 6.02,
+    "info/surface": 3.87,
+    "status/surface": 3.25,
+    "success/surface": 3.27,
+    "boundary/surface": 3.65,
+    "ink/disabled_ink_pair": 6.72,
+    "ink_sec/surface": 8.6,
+    "ink_ter/surface": 5.49,
+    "white/ink_fill": 18.43,
+    "white/clay": 3.12,
+    "ink_on_tint": 14.73,
+    "ink_on_ground": 16.72,
+    "success_on_ground": 2.96,
+    "error_on_ground": 5.46
+  },
+  "contrast_claims_match": {
+    "mismatches": {},
+    "verdict": "PASS"
+  }
+}

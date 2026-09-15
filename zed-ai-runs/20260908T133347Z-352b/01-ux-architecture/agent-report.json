@@ -1,0 +1,30 @@
+{
+  "agent_id": "01",
+  "task_id": "2-a",
+  "status": "completed",
+  "files": [
+    "/home/z/my-project/zed-ai-runs/20260908T133347Z-352b/01-ux-architecture/ux-architecture-report.md",
+    "/home/z/my-project/zed-ai-runs/20260908T133347Z-352b/01-ux-architecture/component-contracts-draft.md",
+    "/home/z/my-project/zed-ai-runs/20260908T133347Z-352b/01-ux-architecture/task-to-component-map.md",
+    "/home/z/my-project/zed-ai-runs/20260908T133347Z-352b/01-ux-architecture/agent-report.json"
+  ],
+  "key_decisions": [
+    "Navigation = 4 destinations + short 'المزيد' (الرئيسية / العمليات / الذمم / المزيد): measured 14px/500 upper-bound label widths from the shipped IBM Plex Sans Arabic subsets (e.g. التحصيلات 85.9px, الرئيسية 70.2px) exceed the 60px safe width of 64px slots at 320px, so a fifth domain label would clip; 'المزيد' (41.9px) is guaranteed safe. Profile/settings is NOT a nav slot — the single 40px Avatar in the integrated top zone owns it.",
+    "Money state truth: four distinct, non-interchangeable treatments — unknown = '—' (U+2014) + 'قيد المزامنة…', unavailable = 'غير متوفّر', true zero = '0.000' exactly, empty input = 'أدخل المبلغ' placeholder; displaying unknown as 0 is classified as a data-integrity defect.",
+    "Financial direction: '−' U+2212 (verified present in all three shipped latin subsets) placed INSIDE the LTR bdi as the PRIMARY signal; color (max 2 semantic families, max 2 colored values) is secondary reinforcement only; '+' only in delta/comparison contexts, never on primary balances; currency 'د.أ' sits outside the bdi so RTL renders it left of the number.",
+    "Before-scroll hierarchy at 390px (674px total): integrated top zone 64 → PrimaryValueBlock 104 on canvas → QuickActionRail zone 124 (tiles 88×92, first tile = the single filled brand action) → MetricGroup 170 (one surface, 3×48px rows, 2 hairlines) → section header 36 → list start 144; glance layer (292px) always fits even on 320×568 devices.",
+    "Sheet vs dialog rule: all money-recording/input flows use bottom sheets (snap 40/60/92%, bottom-anchored action bars in the thumb zone, sheet owns vertical scroll while page is locked); irreversible confirms and either/or sync conflicts use dialogs (max 2 buttons, lower vertical bias for reachability); destructive actions never execute on swipe release; dirty sheets guard dismissal.",
+    "Charts read RTL (oldest right → newest left) and are direct-labelled with no axes/tooltips/interaction in v1; planned-vs-actual consumes the composition's single comparison-pair slot; trend markers use direction words + signed bdi numbers instead of bare arrow icons.",
+    "Loading model: 20-row batches, prefetch near the last 5 rows, 3 skeleton rows (72px); auto-retry stops after the first failure and every error path ends in a visible retry action; offline saves surface as 'محفوظ محليًا — سيُزامن عند الاتصال' row states, never blocking.",
+    "Budget interpretation documented for Agent 05 sign-off: the QuickActionRail counts as ONE surface zone (not per-tile) toward the max-3-visible-surfaces rule; MetricGroup internal hairlines count toward the max-3-divider budget."
+  ],
+  "open_questions": [
+    "Shaped (connected) Arabic label widths need a real layout-engine verification by Agent 03 — the documented widths are isolated-glyph upper bounds; specifically confirm 'الرئيسية' and 'العمليات' fit the 60px safe width of 64px nav slots at 320px (fallback: reduce insets to 0 and re-measure before considering any label change).",
+    "Does 'max 3 visible surfaces' count each QuickActionRail tile or the rail as one zone? My documented interpretation (rail = one surface zone) needs Agent 05/coordinator sign-off; likewise whether MetricGroup hairlines count toward the 3-divider budget.",
+    "Dialog vs sheet for sync conflicts when the two conflicting values need extra context (entity + date + two amounts): dialog chosen, but if content exceeds the no-scroll dialog limit at 320px the fallback is a medium sheet — needs a final call during build.",
+    "Nav label 'الذمم' is assumed understood by non-finance-trained Jordanian users (living trade register); Agent 04 usability review should validate, with 'الحسابات' as a wider fallback (but it is wider at 320px and would need re-measurement).",
+    "Timestamp format for qualifiers is undecided: fixed 24h 'HH:MM' with English digits (recommended, bdi-isolated) vs relative wording ('قبل ساعة') — needs a call before build.",
+    "Multi-step flows (e.g. a sale with 6+ fields) may exceed the tall-sheet model and need step sheets or pages; v1 contracts document sheets only — flag for a future scope decision by the coordinator.",
+    "U+2212 fallback: if any target environment renders it from a fallback font with mismatched metrics, hyphen-minus U+002D is the documented fallback — Agent 03 to verify rendering in the actual test pages."
+  ]
+}

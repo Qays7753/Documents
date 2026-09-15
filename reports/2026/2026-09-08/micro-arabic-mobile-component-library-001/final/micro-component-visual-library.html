@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-motion="full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مكتبة مكوّنات Micro — أساس عربي أولًا</title>
+<!-- Typography: progressive enhancement only. The lab is fully functional
+     offline; IBM Plex Sans Arabic falls back to Noto Sans Arabic / system. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="micro-component-visual-library.css">
+<script defer src="micro-component-visual-library.js"></script>
+</head>
+<body>
+
+<!-- Lucide-style icon sprite — 24×24, 2px stroke, currentColor.
+     Directional glyphs (chevrons/arrows) mirror in RTL via .icon-mirror.
+     Semantic/object icons never mirror. The send/plane glyph is excluded
+     from the set by design. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+  <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M12 20h.01"/><path d="M8.5 16.4a5 5 0 0 1 7 0"/><path d="M5 12.9a10 10 0 0 1 4.6-2.5"/><path d="M19 12.9a10 10 0 0 1 2.1-1.4"/><path d="M2 8.8a15 15 0 0 1 5-2.9"/><path d="M16.7 6.3a15 15 0 0 1 3 1.2"/><path d="m2 2 20 20"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.4 6.4L3 16"/><path d="M3 21v-5h5"/></symbol>
+  <symbol id="i-ellipsis" viewBox="0 0 24 24"><circle class="dot" cx="5" cy="12" r="1"/><circle class="dot" cx="12" cy="12" r="1"/><circle class="dot" cx="19" cy="12" r="1"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.2 12 3l9 7.2"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-hand-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-banknote" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01"/><path d="M18 12h.01"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h5"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="m3 9 1.6-5h14.8L21 9"/><path d="M4 9v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/><path d="M3 9h18"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 17V7a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v10h2"/><path d="M14 9h3.4a1 1 0 0 1 .8.4l2.6 3.4a1 1 0 0 1 .2.6V17h-2"/><path d="M9 17h6"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
+  <symbol id="i-trending" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-chevron-f" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-chevron-b" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+</svg>
+
+<header class="lab-header">
+  <div class="lab-header-row">
+    <span class="lab-wordmark">Micro <span class="lab-wordmark-sub">· مكتبة مكوّنات عربية أولًا — نمط فاتح فقط</span></span>
+    <span class="lab-run-id">run 20260908T133450Z-16d11</span>
+  </div>
+  <nav class="lab-tabs" role="tablist" aria-label="أقسام المكتبة">
+    <button class="lab-tab" role="tab" data-view-btn="foundation" aria-selected="true" aria-controls="view-foundation">الأساسيات</button>
+    <button class="lab-tab" role="tab" data-view-btn="library" aria-selected="false" aria-controls="view-library">المكوّنات</button>
+    <button class="lab-tab" role="tab" data-view-btn="composition" aria-selected="false" aria-controls="view-composition">تركيبة تجريبية</button>
+    <button class="lab-tab" role="tab" data-view-btn="verification" aria-selected="false" aria-controls="view-verification">التحقق</button>
+  </nav>
+</header>
+
+<main class="lab-main">
+
+<!-- ============================================================
+     VIEW 1 — FOUNDATION (audit-side reference: tokens live here,
+     never inside the phone composition)
+     ============================================================ -->
+<section class="lab-view" id="view-foundation" data-view="foundation" role="tabpanel">
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">ألوان العلامة</h2>
+    <p class="lab-section-sub">أسرة العلامة: سطح الهوية الهادئ، والصبغة الوحيدة للبلاطة الملوّنة، وحبر العلامة المقروء الذي يظهر أيضًا كزر أساسي معبأ بنص أبيض. معالجة الضغط حبر بنسبة 8% — وليس بنيًا بديلًا.</p>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:#CC785C"></div><div class="tok-body"><div class="tok-role">سطح الهوية</div><div class="tok-name">#CC785C</div><div class="tok-use">ظهور واحد هادئ لكل إطار — نص داكن فوقه</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#F7EAE4"></div><div class="tok-body"><div class="tok-role">صبغة العلامة</div><div class="tok-name">#F7EAE4</div><div class="tok-use">بلاطة واحدة فقط في شريط الإجراءات</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#964E33"></div><div class="tok-body"><div class="tok-role">حبر العلامة</div><div class="tok-name">#964E33</div><div class="tok-use">نص وأيقونات العلامة + الزر الأساسي المعبأ</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#FFFFFF; border-block-start:1px solid #EAE6DC"></div><div class="tok-body"><div class="tok-role">فوق العلامة</div><div class="tok-name">#FFFFFF</div><div class="tok-use">نص الزر الأساسي فوق حبر العلامة فقط</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">أسطح المنتج — ثلاثة فقط</h2>
+    <p class="lab-section-sub">لا يوجد سطح رابع من أي نوع. تتداخل الصبغات الدلالية أدوارها الدلالية فقط ولا تشكل نظام أسطح موازيًا.</p>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:#FAF9F5"></div><div class="tok-body"><div class="tok-role">اللوحة</div><div class="tok-name">#FAF9F5</div><div class="tok-use">أرضية الصفحة — القيمة الرئيسية تعيش عليها</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#FFFFFF; border-block-start:1px solid #EAE6DC"></div><div class="tok-body"><div class="tok-role">السطح</div><div class="tok-name">#FFFFFF</div><div class="tok-use">المجموعات والقوائم المرفوعة</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#F0EEE6"></div><div class="tok-body"><div class="tok-role">الغائر</div><div class="tok-name">#F0EEE6</div><div class="tok-use">حقول الإدخال والمسارات غير النشطة</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الحبر والبنية</h2>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:#1F1E1D"></div><div class="tok-body"><div class="tok-role">حبر قوي</div><div class="tok-name">#1F1E1D</div><div class="tok-use">الأرقام الرئيسية وحلقة التركيز</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#33322E"></div><div class="tok-body"><div class="tok-role">حبر</div><div class="tok-name">#33322E</div><div class="tok-use">نص المتن والتسميات</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#6E6A60"></div><div class="tok-body"><div class="tok-role">حبر خافت</div><div class="tok-name">#6E6A60</div><div class="tok-use">تسميات ثانوية</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#767265"></div><div class="tok-body"><div class="tok-role">حبر لطيف</div><div class="tok-name">#767265</div><div class="tok-use">بيانات وصفية وطوابع زمنية — فوق اللوحة/السطح</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#B7B2A6"></div><div class="tok-body"><div class="tok-role">حبر معطّل</div><div class="tok-name">#B7B2A6</div><div class="tok-use">عناصر معطّلة فقط مع إشارة غير لونية</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#EAE6DC"></div><div class="tok-body"><div class="tok-role">خط لطيف</div><div class="tok-name">#EAE6DC</div><div class="tok-use">فواصل شعرية — ثلاثة كحد أقصى</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:#DED9CB"></div><div class="tok-body"><div class="tok-role">خط قوي</div><div class="tok-name">#DED9CB</div><div class="tok-use">حواف عناصر التحكم والحدود</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(rgba(31,30,29,.45),rgba(31,30,29,.45))"></div><div class="tok-body"><div class="tok-role">ستارة</div><div class="tok-name">rgba(31,30,29,.45)</div><div class="tok-use">خلف الأوراق والحواريات</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الأسر الدلالية</h2>
+    <p class="lab-section-sub">اللون الدلالي معنى تشغيلي وليس زينة: يُقرن دائمًا بإشارة أو أيقونة أو كلمة، ولا تتجاوز تركيبة واحدة أُسرتين دلاليتين ورقمين ملوّنين.</p>
+    <div class="tok-grid">
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#2E7D57 50%,#E7EFE7 50%)"></div><div class="tok-body"><div class="tok-role">قبض / مؤكد</div><div class="tok-name">#2E7D57 · #E7EFE7</div><div class="tok-use">تحصيل، اكتمال، حركة مواتية</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#B42318 50%,#F7E7E2 50%)"></div><div class="tok-body"><div class="tok-role">دفع / خطأ حقيقي</div><div class="tok-name">#B42318 · #F7E7E2</div><div class="tok-use">خروج نقدي، اتجاه سالب، إجراء هدّام</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#8A6520 50%,#F4EDD8 50%)"></div><div class="tok-body"><div class="tok-role">انتباه</div><div class="tok-name">#8A6520 · #F4EDD8</div><div class="tok-use">متأخر، حد مخزون، تجاوز تقدير</div></div></div>
+      <div class="tok-card"><div class="tok-swatch" style="background:linear-gradient(to bottom,#3E5C76 50%,#E8EDF1 50%)"></div><div class="tok-body"><div class="tok-role">معلومة</div><div class="tok-name">#3E5C76 · #E8EDF1</div><div class="tok-use">قيد التنفيذ، سياق قرار معلّق</div></div></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الطباعة</h2>
+    <p class="lab-section-sub">IBM Plex Sans Arabic بوزن 400/500/600، ثم Noto Sans Arabic ثم نظام التشغيل. الأرقام إنجليزية بأرقام جدولية في كل القيم المالية، والتواريخ DD/MM/YYYY، والعملة د.أ عقدة عربية مستقلة خارج عزل الاتجاه.</p>
+    <div class="specimen">
+      <div class="type-row"><span class="type-meta">32px / 600 / 1.15 — value</span><bdi class="primary-value" dir="ltr">1,284.50</bdi></div>
+      <div class="type-row"><span class="type-meta">15px / 400 / 1.55 — label</span><span class="primary-label">نقد اليوم — حركة النقد حتى اللحظة</span></div>
+      <div class="type-row"><span class="type-meta">14px / 400 — Arabic floor</span><span class="operational-row-meta">بانتظار التحويل — منذ <bdi dir="ltr">05/09/2026</bdi></span></div>
+      <div class="type-row"><span class="type-meta">13px / 400 / 1.4 — qualifier</span><span class="primary-qualifier">حتى <bdi dir="ltr">14:20</bdi> · <bdi dir="ltr">62%</bdi></span></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">المسافات والأركان</h2>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">spacing</span><span class="specimen-desc">سلّم المسافات</span></div>
+      <div class="space-strip">
+        <div class="space-item"><div class="space-bar" style="width:2px;height:24px"></div><div class="space-val">2</div></div>
+        <div class="space-item"><div class="space-bar" style="width:4px;height:32px"></div><div class="space-val">4</div></div>
+        <div class="space-item"><div class="space-bar" style="width:8px;height:40px"></div><div class="space-val">8</div></div>
+        <div class="space-item"><div class="space-bar" style="width:12px;height:48px"></div><div class="space-val">12</div></div>
+        <div class="space-item"><div class="space-bar" style="width:16px;height:56px"></div><div class="space-val">16</div></div>
+        <div class="space-item"><div class="space-bar" style="width:24px;height:64px"></div><div class="space-val">24</div></div>
+        <div class="space-item"><div class="space-bar" style="width:32px;height:72px"></div><div class="space-val">32</div></div>
+        <div class="space-item"><div class="space-bar" style="width:40px;height:80px"></div><div class="space-val">40</div></div>
+      </div>
+    </div>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">radius</span><span class="specimen-desc">سلّم الأركان — شريط التنقل السفلي حافّة بحافة بزاوية 0</span></div>
+      <div class="radius-strip">
+        <div class="radius-item"><div class="radius-box" style="border-radius:6px"></div><div class="radius-val">6</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><div class="radius-val">12</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:16px"></div><div class="radius-val">16</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:24px"></div><div class="radius-val">24</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:9999px; width:64px"></div><div class="radius-val">full</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">الحركة</h2>
+    <div class="specimen">
+      <table class="motion-table">
+        <thead><tr><th>التفاعل</th><th>المدة</th><th>المنحنى</th></tr></thead>
+        <tbody>
+          <tr><td>الضغط</td><td class="ltr">80ms</td><td class="ltr">standard (0.2, 0, 0, 1)</td></tr>
+          <tr><td>سريع — تغييرات الاختيار</td><td class="ltr">120ms</td><td class="ltr">standard</td></tr>
+          <tr><td>عادي — انتقالات الحالة</td><td class="ltr">200ms</td><td class="ltr">standard</td></tr>
+          <tr><td>الورقة السفلية دخول/خروج</td><td class="ltr">240ms / 180ms</td><td class="ltr">enter / exit</td></tr>
+          <tr><td>الحوارية دخول/خروج</td><td class="ltr">160ms / 120ms</td><td class="ltr">enter / exit</td></tr>
+          <tr><td>الستارة</td><td class="ltr">200ms</td><td class="ltr">standard</td></tr>
+        </tbody>
+      </table>
+      <p class="specimen-note">لا ارتداد ولا زنبرك ولا عدّ تصاعدي للقيم المالية — القيمة النهائية تظهر فورًا. مع تقليل الحركة تختفي الحركة المكانية ويبقى معنى الحالة.</p>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">سجل انعكاس الأيقونات (RTL)</h2>
+    <p class="lab-section-sub">أيقونات اتجاهية فقط تنعكس في السياق العربي. الأيقونات الدلالية والشيئية لا تنعكس أبدًا. لا توجد أيقونة طائرة ورقية.</p>
+    <div class="specimen">
+      <div class="mirror-cols">
+        <div>
+          <div class="mirror-col-title">ينعكس</div>
+          <div class="mirror-list">
+            <span class="mirror-chip"><svg class="icon icon-mirror" aria-hidden="true"><use href="#i-chevron-f"/></svg> شيفرون تالٍ</span>
+            <span class="mirror-chip"><svg class="icon icon-mirror" aria-hidden="true"><use href="#i-chevron-b"/></svg> شيفرون سابق</span>
+          </div>
+        </div>
+        <div>
+          <div class="mirror-col-title">لا ينعكس</div>
+          <div class="mirror-list">
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg> إضافة</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> اكتمال</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> انتظار</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg> سند</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg> مخزون</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg> توصيل</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg> تحصيل</span>
+            <span class="mirror-chip"><svg class="icon" aria-hidden="true"><use href="#i-trending"/></svg> اتجاه</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+<!-- ============================================================
+     VIEW 2 — COMPONENT LIBRARY (matrices of meaningful variants;
+     lab exhibits — the color budget binds compositions, not matrices)
+     ============================================================ -->
+<section class="lab-view" id="view-library" data-view="library" role="tabpanel">
+
+  <!-- 1. PrimaryValueBlock -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">PrimaryValueBlock — كتلة القيمة الرئيسية</h2>
+    <p class="lab-section-sub">واحدة فقط في كل تركيبة، على اللوحة مباشرة لا داخل بطاقة. الرقم أولًا، مع حالة مرتبطة بالقرار عند الحاجة فقط.</p>
+    <div class="exhibit-cols">
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">default</span><span class="specimen-desc">الافتراضي</span></div>
+        <div class="specimen-stage">
+          <div class="primary-value-block" style="margin-block:0">
+            <p class="primary-label">نقد اليوم</p>
+            <p class="primary-value-row"><bdi class="primary-value" dir="ltr">1,284.50</bdi><span class="primary-currency">د.أ</span></p>
+            <p class="primary-qualifier">حتى <bdi dir="ltr">14:20</bdi></p>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">with-state</span><span class="specimen-desc">مع حالة مرتبطة بالقرار</span></div>
+        <div class="specimen-stage">
+          <div class="primary-value-block" style="margin-block:0">
+            <p class="primary-label">صافي اليوم</p>
+            <p class="primary-value-row"><bdi class="primary-value" dir="ltr">812.75</bdi><span class="primary-currency">د.أ</span></p>
+            <p class="primary-state-chip"><svg class="icon" aria-hidden="true"><use href="#i-trending"/></svg><bdi dir="ltr">+215.00</bdi> عن أمس</p>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">unavailable</span><span class="specimen-desc">غير متاح — ليس صفرًا</span></div>
+        <div class="specimen-stage">
+          <div class="primary-value-block" style="margin-block:0">
+            <p class="primary-label">رصيد البنك</p>
+            <p class="primary-value-row"><bdi class="primary-value" dir="ltr">—</bdi></p>
+            <p class="primary-qualifier">غير متاح حاليًا — أعد المحاولة لاحقًا</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. MetricGroup + MetricRow -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">MetricGroup · MetricRow — مجموعة القيم الثانوية</h2>
+    <p class="lab-section-sub">سطح واحد يجمع 2–5 قيم في صفوف محاذية — لا بطاقة لكل قيمة. الأرقام المحاذاة عموديًا بالإرقام الجدولية، والإشارة قبل اللون.</p>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">tones</span><span class="specimen-desc">الموجب والسالب والانتباه وغير المتاح</span></div>
+      <div class="specimen-stage">
+        <section class="metric-group" style="margin-inline:0; margin-block-end:0">
+          <div class="metric-group-head"><h3 class="metric-group-title">حركة اليوم</h3><button type="button" class="metric-group-action pressable">التفاصيل</button></div>
+          <ul class="metric-list">
+            <li class="metric-row" data-tone="positive">
+              <div class="metric-row-label">مبيعات اليوم<span class="metric-row-qualifier">منذ فتح الفرن</span></div>
+              <div class="metric-row-value"><bdi dir="ltr">+465.00</bdi><span class="cur">د.أ</span></div>
+            </li>
+            <li class="metric-row" data-tone="danger">
+              <div class="metric-row-label">مصروفات اليوم<span class="metric-row-qualifier">وقود وصيانة</span></div>
+              <div class="metric-row-value"><bdi dir="ltr">-92.50</bdi><span class="cur">د.أ</span></div>
+            </li>
+            <li class="metric-row" data-tone="warning">
+              <div class="metric-row-label">تجاوز المخطط<span class="metric-row-qualifier">مقابل <bdi dir="ltr">340.00</bdi></span></div>
+              <div class="metric-row-value"><bdi dir="ltr">+12%</bdi></div>
+            </li>
+            <li class="metric-row" data-state="unavailable">
+              <div class="metric-row-label">رصيد البنك<span class="metric-row-qualifier">تعذّر الاتصال</span></div>
+              <div class="metric-row-value"><bdi dir="ltr">—</bdi></div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CompactTile -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">CompactTile — زوج المقارنة</h2>
+    <p class="lab-section-sub">لزوج مقارنة حقيقي فقط — لا شبكات بطاقات مصغّرة. القيمتان محايدتان هنا؛ الدلالة في الكلمتين.</p>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">comparison-pair</span><span class="specimen-desc">مستحق لك مقابل مستحق عليك</span></div>
+      <div class="specimen-stage">
+        <div class="comparison-pair" style="margin-inline:0; margin-block-end:0">
+          <div class="compact-tile">
+            <span class="compact-tile-label">مستحق لك</span>
+            <span class="compact-tile-value-row"><bdi class="compact-tile-value" dir="ltr">1,175.00</bdi><span class="compact-tile-currency">د.أ</span></span>
+            <span class="compact-tile-qualifier">عند <bdi dir="ltr">4</bdi> عملاء</span>
+          </div>
+          <div class="compact-tile">
+            <span class="compact-tile-label">مستحق عليك</span>
+            <span class="compact-tile-value-row"><bdi class="compact-tile-value" dir="ltr">640.00</bdi><span class="compact-tile-currency">د.أ</span></span>
+            <span class="compact-tile-qualifier">مؤسسة الشرق</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. QuickActionRail -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">QuickActionRail — شريط الإجراءات السريعة</h2>
+    <p class="lab-section-sub">بلاطة 88×92، أيقونة 24، تسمية 13px، فجوة أيقونة-تسمية 8، فجوة بلاطات 8، حشوة شريط 16. تمرير أفقي من اليمين مع التقاط القرب وبلاطة واحدة مصبغة. جرّب التمرير.</p>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">rail</span><span class="specimen-desc">الإجراءات الخمسة المستقرة — إضافة بيع أولًا</span></div>
+      <div class="specimen-stage" style="padding:16px 0">
+        <nav class="quick-action-rail" style="margin-block-end:0" aria-label="إجراءات سريعة">
+          <button type="button" class="quick-tile quick-tile--tinted pressable"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span class="quick-tile-label">إضافة بيع</span></button>
+          <button type="button" class="quick-tile pressable"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg><span class="quick-tile-label">تحصيل دين</span></button>
+          <button type="button" class="quick-tile pressable"><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg><span class="quick-tile-label">إضافة مصروف</span></button>
+          <button type="button" class="quick-tile pressable"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg><span class="quick-tile-label">إضافة شراء</span></button>
+          <button type="button" class="quick-tile pressable"><svg class="icon" aria-hidden="true"><use href="#i-banknote"/></svg><span class="quick-tile-label">تسجيل دفعة</span></button>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. OperationalRow -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">OperationalRow — صف تشغيلي</h2>
+    <p class="lab-section-sub">محتوى تشغيلي متكرر على اللوحة أو داخل سطح مجمّع واحد. كل مثال أدناه حالة عرض مستقلة: شراء مورد، تسوية توصيل، تحصيل، حد مخزون، مصروف.</p>
+    <div class="exhibit-cols">
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">supplier-purchase</span><span class="specimen-desc">شراء من مورد</span></div>
+        <div class="specimen-stage">
+          <div class="operational-row pressable" data-tone="danger">
+            <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-store"/></svg></span>
+            <div class="operational-row-main">
+              <p class="operational-row-title">مؤسسة الشرق للتجهيزات</p>
+              <p class="operational-row-meta">شراء آجل — <bdi dir="ltr">06/09/2026</bdi></p>
+            </div>
+            <div class="operational-row-end">
+              <span class="operational-row-amount"><bdi dir="ltr">-420.00</bdi><span class="cur">د.أ</span></span>
+            </div>
+            <svg class="icon icon-mirror operational-row-chevron" aria-hidden="true"><use href="#i-chevron-f"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">delivery-settlement</span><span class="specimen-desc">تسوية شركة توصيل — قيد المراجعة</span></div>
+        <div class="specimen-stage">
+          <div class="operational-row pressable" data-tone="info">
+            <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-truck"/></svg></span>
+            <div class="operational-row-main">
+              <p class="operational-row-title">شركة التوصيل السريع</p>
+              <p class="operational-row-meta">قيد التسوية — منذ <bdi dir="ltr">05/09/2026</bdi></p>
+            </div>
+            <div class="operational-row-end">
+              <span class="operational-row-amount"><bdi dir="ltr">142.00</bdi><span class="cur">د.أ</span></span>
+            </div>
+            <svg class="icon icon-mirror operational-row-chevron" aria-hidden="true"><use href="#i-chevron-f"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">collection</span><span class="specimen-desc">تحصيل دين — مكتمل</span></div>
+        <div class="specimen-stage">
+          <div class="operational-row pressable" data-tone="positive">
+            <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <div class="operational-row-main">
+              <p class="operational-row-title">تحصيل من أبو أحمد</p>
+              <p class="operational-row-meta">اليوم <bdi dir="ltr">12:40</bdi> — من أصل <bdi dir="ltr">400.00</bdi></p>
+            </div>
+            <div class="operational-row-end">
+              <span class="operational-row-amount"><bdi dir="ltr">+150.00</bdi><span class="cur">د.أ</span></span>
+            </div>
+            <svg class="icon icon-mirror operational-row-chevron" aria-hidden="true"><use href="#i-chevron-f"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">stock-threshold</span><span class="specimen-desc">حد مخزون</span></div>
+        <div class="specimen-stage">
+          <div class="operational-row pressable" data-tone="warning">
+            <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-package"/></svg></span>
+            <div class="operational-row-main">
+              <p class="operational-row-title">طحين فاخر 10كغ</p>
+              <p class="operational-row-meta">متبقي <span class="num-warning"><bdi dir="ltr">4</bdi></span> أكياس — الحد الأدنى <bdi dir="ltr">6</bdi></p>
+            </div>
+            <svg class="icon icon-mirror operational-row-chevron" aria-hidden="true"><use href="#i-chevron-f"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">expense</span><span class="specimen-desc">مصروف مدفوع</span></div>
+        <div class="specimen-stage">
+          <div class="operational-row pressable" data-tone="danger">
+            <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-receipt"/></svg></span>
+            <div class="operational-row-main">
+              <p class="operational-row-title">صيانة المولّد</p>
+              <p class="operational-row-meta">اليوم <bdi dir="ltr">11:20</bdi> — نقدي</p>
+            </div>
+            <div class="operational-row-end">
+              <span class="operational-row-amount"><bdi dir="ltr">-35.00</bdi><span class="cur">د.أ</span></span>
+            </div>
+            <svg class="icon icon-mirror operational-row-chevron" aria-hidden="true"><use href="#i-chevron-f"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Button family -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">Button — عائلة الأزرار</h2>
+    <p class="lab-section-sub">الضغط حبر بنسبة 8% خلال 80ms فوق أي تعبئة. جرّب الزر الأساسي: تحميل ثم إثبات اكتمال هادئ قبل العودة.</p>
+    <div class="exhibit-cols">
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">variants</span><span class="specimen-desc">المتغيرات الأساسية</span></div>
+        <div class="specimen-stage exhibit-flex">
+          <div><button type="button" class="button button--primary button--block pressable" id="btn-flow-demo">تسجيل البيع</button><p class="specimen-label">primary — تفاعلي: اضغط</p></div>
+          <div><button type="button" class="button button--secondary pressable">عرض التفاصيل</button><p class="specimen-label">secondary</p></div>
+          <div><button type="button" class="button button--quiet pressable">عرض الكل</button><p class="specimen-label">quiet</p></div>
+          <div><button type="button" class="button button--destructive pressable">حذف</button><p class="specimen-label">destructive</p></div>
+          <div><button type="button" class="button button--destructive-quiet pressable">تجاهل</button><p class="specimen-label">destructive-quiet</p></div>
+          <div class="specimen-row">
+            <button type="button" class="button button--icon pressable" aria-label="بحث"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+            <button type="button" class="button button--icon pressable" aria-label="إغلاق"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+          </div>
+          <p class="specimen-label">icon-only — مع اسم يمكن الوصول إليه</p>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">states</span><span class="specimen-desc">الحالات مجمّدة للعرض</span></div>
+        <div class="specimen-stage exhibit-flex">
+          <div><button type="button" class="button button--primary pressable" data-state="loading" aria-busy="true"><span class="button-spinner" aria-hidden="true"></span><span>جاري الحفظ…</span></button><p class="specimen-label">loading — أثر مستقر مع aria-busy</p></div>
+          <div><button type="button" class="button button--primary" disabled>تسجيل البيع</button><p class="specimen-label">disabled — معطّل غير لونيًا أيضًا</p></div>
+          <div><button type="button" class="button button--secondary pressable is-focused">عرض التفاصيل</button><p class="specimen-label">focused — حلقة 2px</p></div>
+          <div><button type="button" class="button button--secondary pressable is-pressed">عرض التفاصيل</button><p class="specimen-label">pressed — طبقة 8%</p></div>
+          <div><button type="button" class="button button--secondary button--block pressable" data-state="completed"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>تم التسجيل</span></button><p class="specimen-label">quiet completion</p></div>
+          <div class="press-pad pressable">منطقة اختبار الضغط — اضغط</div>
+          <p class="specimen-label">press — 80ms على أي سطح</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Input family -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">Input — عائلة الإدخال</h2>
+    <p class="lab-section-sub">الإدخال الكمي باتجاه LTR وأرقام جدولية مع د.أ خارج العزل. خطأ التحقق قابل للإطلاق فعليًا من ورقة إضافة بيع (أدخل صفرًا أو فارغًا ثم سجّل).</p>
+    <div class="exhibit-cols">
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">fields</span><span class="specimen-desc">أنواع الحقول</span></div>
+        <div class="specimen-stage exhibit-flex">
+          <div class="field">
+            <label class="input-label" for="in-text">اسم العميل</label>
+            <input class="input-field" id="in-text" type="text" placeholder="اكتب اسم العميل">
+          </div>
+          <div class="field">
+            <label class="input-label" for="in-amount">المبلغ</label>
+            <div class="input-wrap">
+              <input class="input-field input--amount" id="in-amount" inputmode="decimal" value="365.00" autocomplete="off">
+              <span class="input-affix">د.أ</span>
+            </div>
+            <span class="input-hint">أدخل مبلغًا أكبر من صفر</span>
+          </div>
+          <div class="field">
+            <label class="input-label" for="in-search">البحث</label>
+            <div class="input-wrap">
+              <svg class="input-search-icon icon" aria-hidden="true"><use href="#i-search"/></svg>
+              <input class="input-field input--search" id="in-search" type="text" placeholder="ابحث عن عميل أو عملية" autocomplete="off">
+              <button type="button" class="input-clear pressable" aria-label="مسح البحث" hidden><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+            </div>
+          </div>
+          <div class="field">
+            <label class="input-label" for="in-date">التاريخ</label>
+            <input class="input-field input--date" id="in-date" inputmode="numeric" value="08/09/2026" autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="input-label" for="in-cat">الفئة</label>
+            <div class="input-wrap">
+              <select class="input-field input-select" id="in-cat">
+                <option selected>تشغيل</option>
+                <option>وقود</option>
+                <option>صيانة</option>
+                <option>رواتب</option>
+              </select>
+              <svg class="input-chevron icon" aria-hidden="true"><use href="#i-chevron-f"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">controls</span><span class="specimen-desc">مفاتيح واختيارات</span></div>
+        <div class="specimen-stage exhibit-flex">
+          <div class="field">
+            <span class="input-label">طريقة الدفع</span>
+            <div class="segmented" role="group" aria-label="طريقة الدفع">
+              <button type="button" class="segmented-item pressable" aria-pressed="true">نقدي</button>
+              <button type="button" class="segmented-item pressable" aria-pressed="false">آجل</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="input-label">الفترة</span>
+            <div class="tabs" role="tablist" aria-label="الفترة">
+              <button type="button" class="tab-item pressable" role="tab" aria-selected="true">اليوم</button>
+              <button type="button" class="tab-item pressable" role="tab" aria-selected="false">الأسبوع</button>
+              <button type="button" class="tab-item pressable" role="tab" aria-selected="false">الشهر</button>
+            </div>
+          </div>
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="checkbox-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span class="checkbox-label">تنبيه عند وصول التحويل</span>
+          </label>
+          <div class="field">
+            <span class="input-label">تذكير بالمتابعات — إعداد فوري</span>
+            <button type="button" class="switch" role="switch" aria-checked="true" aria-label="تذكير بالمتابعات">
+              <span class="switch-track"></span><span class="switch-thumb"></span>
+            </button>
+          </div>
+          <div class="field">
+            <label class="input-label" for="in-err">مبلغ خاطئ — مثال حالة الخطأ</label>
+            <div class="input-wrap">
+              <input class="input-field input--amount has-error" id="in-err" inputmode="decimal" value="0.00" aria-invalid="true" aria-describedby="in-err-msg" autocomplete="off">
+              <span class="input-affix">د.أ</span>
+            </div>
+            <span class="input-error" id="in-err-msg"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>أدخل مبلغًا أكبر من صفر</span>
+          </div>
+          <div class="field">
+            <label class="input-label" for="in-dis">حقل معطّل</label>
+            <input class="input-field" id="in-dis" type="text" placeholder="ابحث عن عميل أو عملية" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. State family -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">State — عائلة الحالات</h2>
+    <p class="lab-section-sub">حالات سطرية بإيجاز واتجاه نحو إجراء. جرّب «إعادة المحاولة» في حالتي الخطأ والفشل: محاولة واحدة صريحة ثم اكتمال — دون إعادة محاولة تلقائية.</p>
+    <div class="exhibit-cols">
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">operational</span><span class="specimen-desc">حالات التشغيل</span></div>
+        <div class="specimen-stage state-stack">
+          <div class="state-notice">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">لا عمليات اليوم</p></div>
+            <span class="state-notice-action"><button type="button" class="button button--quiet pressable">سجّل بيعًا</button></span>
+          </div>
+          <div class="state-notice" data-tone="danger">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">تعذّر التحميل</p></div>
+            <span class="state-notice-action"><button type="button" class="button button--secondary pressable" data-retry-demo data-done="تم التحميل" data-done-sub="ظهرت حركة اليوم">إعادة المحاولة</button></span>
+          </div>
+          <div class="state-notice" data-tone="danger">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">فشل الإرسال</p><p class="state-notice-sub">القيد محفوظ على الجهاز</p></div>
+            <span class="state-notice-action"><button type="button" class="button button--secondary pressable" data-retry-demo data-done="تم الإرسال" data-done-sub="وصلت العملية إلى السجل">إعادة المحاولة</button></span>
+          </div>
+          <div class="state-notice" data-tone="info">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-wifi-off"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">محفوظ على الجهاز</p><p class="state-notice-sub">يُرسل عند عودة الاتصال</p></div>
+          </div>
+          <div class="state-notice" data-tone="info">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">بانتظار تأكيد المورد</p><p class="state-notice-sub">دفعة مؤسسة الشرق — منذ أمس</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">resolution</span><span class="specimen-desc">حالات القرار والحسم</span></div>
+        <div class="specimen-stage state-stack">
+          <div class="state-notice" data-tone="warning">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">عملية مشابهة موجودة</p><p class="state-notice-sub">قيمة <bdi dir="ltr">365.00</bdi> بتاريخ اليوم</p></div>
+            <span class="state-notice-action"><button type="button" class="button button--quiet pressable">عرض الموجودة</button></span>
+          </div>
+          <div class="state-notice" data-tone="positive">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">تم التسجيل</p><p class="state-notice-sub">بيع بقيمة <bdi dir="ltr">365.00</bdi> د.أ</p></div>
+          </div>
+          <div class="state-notice">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">أُلغيت</p><p class="state-notice-sub">طلب إلغاء التسوية</p></div>
+          </div>
+          <div class="state-notice">
+            <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg></span>
+            <div class="state-notice-main"><p class="state-notice-text">معكوسة</p><p class="state-notice-sub">عُكست العملية — أُضيف قيد مقابل</p></div>
+          </div>
+          <div>
+            <p class="state-notice-text" style="margin-block-end:8px">جاري التحميل — ثلاثة صفوف هيكلية</p>
+            <div class="skeleton-row"><span class="skeleton-blob skeleton-avatar"></span><span class="skeleton-blob skeleton-line skeleton-line--w60"></span></div>
+            <div class="skeleton-row"><span class="skeleton-blob skeleton-avatar"></span><span class="skeleton-blob skeleton-line skeleton-line--w40"></span></div>
+            <div class="skeleton-row"><span class="skeleton-blob skeleton-avatar"></span><span class="skeleton-blob skeleton-line skeleton-line--w60"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Sheet & Dialog -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">Sheet · Dialog — الورقة والحوارية</h2>
+    <p class="lab-section-sub">الورقة لدخول البيانات مع إجراء مثبّت أسفلها؛ الحوارية لقرار ثنائي فقط. الستارة بالنقر أو Escape أو السحب، مع فخ التركيز وإعادته للمُشغّل. حوار الحذف الهدّام يتجاهل الستارة وEscape — خيار صريح فقط. ورقة.dirty تمرّ عبر حوار «تجاهل التغييرات؟».</p>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">overlays</span><span class="specimen-desc">أمثلة تفاعلية داخل سطح هاتفي</span></div>
+      <div class="specimen-stage">
+        <div class="mini-stage">
+          <div style="display:flex; gap:12px; justify-content:center; align-items:center; height:100%; padding:16px; flex-wrap:wrap">
+            <button type="button" class="button button--secondary pressable" data-open-sheet>فتح ورقة إضافة بيع</button>
+            <button type="button" class="button button--secondary pressable" data-open-dialog>فتح حوار حذف</button>
+          </div>
+        </div>
+      </div>
+      <div class="state-notice" data-tone="positive" data-demo-deleted hidden>
+        <span class="state-notice-icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+        <div class="state-notice-main"><p class="state-notice-text">تم الحذف</p><p class="state-notice-sub">أُضيف قيد عكسي بقيمة <bdi dir="ltr">35.00</bdi> د.أ</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Navigation + top zone -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">BottomNavigation + المنطقة العلوية</h2>
+    <p class="lab-section-sub">شريط التنقل هو الواجهة الدائمة الوحيدة: حافّة بحافة بزاوية 0، أربع وجهات مع «المزيد» — تتّسع التسميات في 320px مع تبديل تلقائي إلى الصيغة القصيرة. المنطقة العلوية محتوى متدفق مع الأفاتار كمدخل موحّد للملف والإعدادات.</p>
+    <div class="specimen">
+      <div class="specimen-head"><span class="specimen-name">shell</span><span class="specimen-desc">الصدفة داخل سطح 390px</span></div>
+      <div class="specimen-stage" style="display:flex; justify-content:center">
+        <div class="mini-stage" style="width:390px; max-width:100%">
+          <div class="top-zone">
+            <div>
+              <p class="top-zone-title">مخبز أبو محمد</p>
+              <p class="top-zone-date">الثلاثاء <bdi dir="ltr">08/09/2026</bdi></p>
+            </div>
+            <button type="button" class="avatar pressable" aria-label="الملف الشخصي والإعدادات">أم</button>
+          </div>
+          <nav class="bottom-navigation" style="position:absolute; inset-inline:0; bottom:0" aria-label="التنقل الرئيسي">
+            <button type="button" class="nav-item is-active pressable" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="nav-label">اليوم</span></button>
+            <button type="button" class="nav-item pressable" data-short="مبيعات"><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg><span class="nav-label">المبيعات</span></button>
+            <button type="button" class="nav-item pressable"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg><span class="nav-label">الذمم</span></button>
+            <button type="button" class="nav-item pressable"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg><span class="nav-label">المخزون</span></button>
+            <button type="button" class="nav-item pressable" data-nav="more"><svg class="icon" aria-hidden="true"><use href="#i-ellipsis"/></svg><span class="nav-label">المزيد</span></button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Chart primitives -->
+  <section class="lab-section">
+    <h2 class="lab-section-title">Chart — عناصر الرسوم الأولية</h2>
+    <p class="lab-section-sub">محور الزمن يبقى LTR داخل الرسم والكلمات عربية. المخطط مقابل الفعلي يتميّزان بالنمط (متقطع/متصل) والوسم المباشر لا باللون وحده. لكل رسم بديل نصي.</p>
+    <div class="exhibit-cols">
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">sparkline</span><span class="specimen-desc">اتجاه سبعة أيام</span></div>
+        <div class="specimen-stage">
+          <figure class="chart-figure">
+            <div class="chart-head"><span class="chart-title">المبيعات — آخر 7 أيام</span><span class="chart-value"><bdi dir="ltr">285.00</bdi><span class="cur">د.أ</span></span></div>
+            <svg class="chart-svg" viewBox="0 0 280 64" role="img" aria-label="مخطط خطي للمبيعات خلال آخر سبعة أيام، الاتجاه صاعد">
+              <polyline class="chart-spark" points="8,53.9 52,43.5 96,49.7 140,28.9 184,35.1 228,20.5 272,10.1"/>
+              <circle class="chart-dot chart-dot--brand" cx="272" cy="10.1" r="3.5"/>
+            </svg>
+            <figcaption class="chart-alt">الاتجاه صاعد خلال آخر 7 أيام؛ أعلى قيمة <bdi dir="ltr">285.00</bdi> د.أ بتاريخ <bdi dir="ltr">07/09/2026</bdi>.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">planned-vs-actual</span><span class="specimen-desc">المخطط مقابل الفعلي</span></div>
+        <div class="specimen-stage">
+          <figure class="chart-figure">
+            <div class="chart-head"><span class="chart-title">المخطط مقابل الفعلي — الأسبوع</span><span class="chart-value"><bdi dir="ltr">270.00</bdi><span class="cur">د.أ</span></span></div>
+            <svg class="chart-svg" viewBox="0 0 280 96" role="img" aria-label="خطان: الفعلي أعلى من المخطط في معظم الأسبوع">
+              <polyline class="chart-series-plan" points="8,70 52,70 96,62.8 140,62.8 184,55.6 228,55.6 272,48.3"/>
+              <polyline class="chart-series-actual" points="8,77.6 52,52.3 96,66.8 140,34.1 184,41.4 228,23.3 272,12.5"/>
+              <text class="chart-label-plan" x="244" y="62" text-anchor="end">مخطط</text>
+              <text class="chart-label-actual" x="244" y="24" text-anchor="end">فعلي</text>
+            </svg>
+            <figcaption class="chart-alt">الفعلي أعلى من المخطط في معظم الأسبوع؛ بلغ <bdi dir="ltr">270.00</bdi> د.أ مقابل مخطط <bdi dir="ltr">230.00</bdi> د.أ.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">target-meter</span><span class="specimen-desc">عداد الهدف</span></div>
+        <div class="specimen-stage">
+          <figure class="chart-figure">
+            <div class="chart-head"><span class="chart-title">هدف التحصيل الشهري</span><span class="chart-value"><bdi dir="ltr">62%</bdi></span></div>
+            <div class="meter" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="هدف التحصيل الشهري">
+              <div class="meter-fill" style="width:62%"></div>
+            </div>
+            <figcaption class="chart-alt">اكتمل <bdi dir="ltr">62%</bdi> من هدف الشهر: حُصّل <bdi dir="ltr">7,750.00</bdi> من <bdi dir="ltr">12,500.00</bdi> د.أ.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="specimen">
+        <div class="specimen-head"><span class="specimen-name">trend-marker</span><span class="specimen-desc">علامة اتجاه موسومة</span></div>
+        <div class="specimen-stage">
+          <figure class="chart-figure">
+            <div class="chart-head"><span class="chart-title">التحصيلات اليومية</span><span class="chart-value" data-tone="positive"><bdi dir="ltr">310.00</bdi><span class="cur">د.أ</span></span></div>
+            <svg class="chart-svg" viewBox="0 0 280 64" role="img" aria-label="خط تحصيلات مع علامة على أعلى قيمة">
+              <polyline class="chart-spark" points="8,53.7 52,44.6 96,46.9 140,35.4 184,40 228,10.3 272,24"/>
+              <circle class="chart-dot chart-dot--positive" cx="228" cy="10.3" r="4"/>
+              <text class="chart-label-actual" x="190" y="14" text-anchor="end">أعلى تحصيل</text>
+            </svg>
+            <figcaption class="chart-alt">أعلى تحصيل <bdi dir="ltr">310.00</bdi> د.أ بتاريخ <bdi dir="ltr">04/09/2026</bdi>؛ الاتجاه العام صاعد.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+<!-- ============================================================
+     VIEW 3 — TEST COMPOSITION (the only view bound by SPEC §6.10)
+     ============================================================ -->
+<section class="lab-view" id="view-composition" data-view="composition" role="tabpanel">
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">التركيبة التجريبية — «يوم مخبز أبو محمد»</h2>
+    <p class="lab-section-sub">تركيبة واحدة صغيرة تُثبت العلاقات: قيمة رئيسية واحدة على اللوحة، شريط إجراءات واحد، مجموعة قيم واحدة، زوج مقارنة واحد، ثلاثة أسطح، أسرتان دلاليتان، رقمان ملوّنان، ومالك تمرير رأسي واحد. المس التدفق: بلاطة «إضافة بيع» تفتح الورقة — تحميل ثم اكتمال هادئ ثم تحديث فوري للنقد.</p>
+
+    <div class="controls-bar">
+      <div class="ctrl-group" data-ctrl="width">
+        <span class="ctrl-label">العرض</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="320" aria-pressed="false">320</button>
+          <button type="button" class="ctrl-btn" data-value="360" aria-pressed="false">360</button>
+          <button type="button" class="ctrl-btn" data-value="390" aria-pressed="true">390</button>
+          <button type="button" class="ctrl-btn" data-value="430" aria-pressed="false">430</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="dir">
+        <span class="ctrl-label">الاتجاه</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="rtl" aria-pressed="true">RTL</button>
+          <button type="button" class="ctrl-btn" data-value="ltr" aria-pressed="false">LTR</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="scale">
+        <span class="ctrl-label">تكبير النص</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="16" aria-pressed="true">100%</button>
+          <button type="button" class="ctrl-btn" data-value="20.8" aria-pressed="false">130%</button>
+          <button type="button" class="ctrl-btn" data-value="32" aria-pressed="false">200%</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="motion">
+        <span class="ctrl-label">الحركة</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="full" aria-pressed="true">كاملة</button>
+          <button type="button" class="ctrl-btn" data-value="reduced" aria-pressed="false">مخفّضة</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-stage">
+      <div>
+        <div class="phone-frame" id="comp-frame"></div>
+        <p class="frame-caption" id="frame-caption">390 × 844px · RTL</p>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     VIEW 4 — VERIFICATION (audit evidence, separate from showcase)
+     ============================================================ -->
+<section class="lab-view" id="view-verification" data-view="verification" role="tabpanel">
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">معاينات الأعراض الحقيقية</h2>
+    <p class="lab-section-sub">أزواج عرض×ارتفاع ممثّلة لأجهزة فعلية (320×568، 360×640، 390×844، 430×932) بالوضع RTL الافتراضي، مع نسخة LTR هندسيةً فقط بنصوص عربية. المعاينات خاملة — التفاعلات تُثبت في عرضي «المكوّنات» و«التركيبة».</p>
+    <div class="controls-bar">
+      <div class="ctrl-group" data-ctrl="scale">
+        <span class="ctrl-label">تكبير النص</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="16" aria-pressed="true">100%</button>
+          <button type="button" class="ctrl-btn" data-value="20.8" aria-pressed="false">130%</button>
+          <button type="button" class="ctrl-btn" data-value="32" aria-pressed="false">200%</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="motion">
+        <span class="ctrl-label">الحركة</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="full" aria-pressed="true">كاملة</button>
+          <button type="button" class="ctrl-btn" data-value="reduced" aria-pressed="false">مخفّضة</button>
+        </div>
+      </div>
+      <div class="ctrl-group" data-ctrl="gray">
+        <span class="ctrl-label">تدرّج رمادي</span>
+        <div class="ctrl-seg">
+          <button type="button" class="ctrl-btn" data-value="off" aria-pressed="true">إيقاف</button>
+          <button type="button" class="ctrl-btn" data-value="on" aria-pressed="false">تشغيل</button>
+        </div>
+      </div>
+    </div>
+    <div class="frame-row">
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-320"></div><p class="frame-caption">320 × 568</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-360"></div><p class="frame-caption">360 × 640</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-390"></div><p class="frame-caption">390 × 844</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-430"></div><p class="frame-caption">430 × 932</p></div>
+      <div class="frame-card"><div class="phone-frame is-preview" id="vf-ltr"></div><p class="frame-caption">390 × 844 · LTR</p></div>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">قياسات شريط الإجراءات السريعة</h2>
+    <p class="lab-section-sub">قياس فعلي بأداة القياس في الصفحة (getBoundingClientRect) عند التحميل وبعد كل تبديل — الهندسة مقفلة: بلاطة 88×92، فجوة 8، حشوة 16. الظهور عند 320 استثناء موثق (16px)؛ البقية ≥28px.</p>
+    <div class="specimen">
+      <table class="peek-table">
+        <thead><tr><th>العرض</th><th>الظهور المقيس</th><th>المتوقع</th><th>الحالة</th></tr></thead>
+        <tbody id="peek-results"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">فحوص المكتبة الآلية</h2>
+    <p class="lab-section-sub">تُشغَّل تلقائيًا عند التحميل ويمكن إعادة تشغيلها. النتائج قيم مقيسة لا انطباعات.</p>
+    <div class="specimen">
+      <div class="audit-run">
+        <button type="button" class="button button--secondary pressable" id="audit-run">تشغيل الفحوص</button>
+        <span class="specimen-label" style="margin-block-start:0">تُحدَّث القيم عند كل تغيير للعرض أو التكبير</span>
+      </div>
+      <table class="audit-table">
+        <thead><tr><th>الفحص</th><th>القيمة المقيسة</th><th>الحالة</th></tr></thead>
+        <tbody id="audit-results"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="lab-section">
+    <h2 class="lab-section-title">ملاحظات التحقق والاستثناءات الموثقة</h2>
+    <div class="note-block">
+      1) ظهور البلاطة التالية عند 320px هو 16px — استثناء موثّق في المواصفة؛ القيم عند 360/390/430 تتجاوز 28px دون أي تعديل للهندسة المقفلة.<br>
+      2) عند عرض ≤359px فقط تُضغط الهوامش الرأسية للتركيبة (32→24 وما يماثلها) لضمان ظهور أول صف متابعة قبل الطية — قيم كلها من سلّم المسافات.<br>
+      3) تكبير النص يكبّر نص المكوّنات فقط (rem) بينما يبقى هيكل المختبر بالبكسل — محاكاة أمينة لتكبير النص في المتصفح مع ثبات الأطر.<br>
+      4) نسخة LTR هندسية فقط: تعكس الخصائص المنطقية التخطيط بينما تبقى النصوص عربية والأرقام عزلات LTR ومحور الزمن في الرسوم LTR.<br>
+      5) مفتاح التدرّج الرمادي أداة تحقق من عدم الاعتماد على اللون وحده — ليس ميزة منتج.<br>
+      6) معاينات التحقق خاملة (بدون تفاعل) — عقود التفاعل تُثبت في عرضي المكوّنات والتركيبة.<br>
+      7) الخط عبر رابط الويب تحسين تدريجي فقط: بدون شبكة تعمل المكتبة كاملة بخطوط النظام البديلة.
+    </div>
+  </section>
+
+</section>
+
+</main>
+
+<!-- ============================================================
+     Composition source of truth — instantiated once for the live
+     Test Composition frame and cloned (inert) into each
+     verification preview. No element ids inside (clones repeat).
+     ============================================================ -->
+<template id="tpl-composition">
+  <div class="phone-screen" dir="rtl">
+    <div class="phone-scroll">
+      <div class="comp">
+
+        <header class="top-zone">
+          <div>
+            <p class="top-zone-title">مخبز أبو محمد</p>
+            <p class="top-zone-date">الثلاثاء <bdi dir="ltr">08/09/2026</bdi></p>
+          </div>
+          <button type="button" class="avatar pressable" aria-label="الملف الشخصي والإعدادات">أم</button>
+        </header>
+
+        <section class="primary-value-block" aria-label="نقد اليوم">
+          <p class="primary-label">نقد اليوم</p>
+          <p class="primary-value-row"><bdi class="primary-value" dir="ltr" data-hook="cash">1,284.50</bdi><span class="primary-currency">د.أ</span></p>
+          <p class="primary-qualifier">حتى <bdi dir="ltr">14:20</bdi></p>
+        </section>
+
+        <nav class="quick-action-rail" aria-label="إجراءات سريعة">
+          <button type="button" class="quick-tile quick-tile--tinted pressable" data-action="sale">
+            <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+            <span class="quick-tile-label">إضافة بيع</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="collect">
+            <svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg>
+            <span class="quick-tile-label">تحصيل دين</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="expense">
+            <svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg>
+            <span class="quick-tile-label">إضافة مصروف</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="purchase">
+            <svg class="icon" aria-hidden="true"><use href="#i-package"/></svg>
+            <span class="quick-tile-label">إضافة شراء</span>
+          </button>
+          <button type="button" class="quick-tile pressable" data-action="payment">
+            <svg class="icon" aria-hidden="true"><use href="#i-banknote"/></svg>
+            <span class="quick-tile-label">تسجيل دفعة</span>
+          </button>
+        </nav>
+
+        <section class="metric-group" aria-label="حركة اليوم">
+          <div class="metric-group-head">
+            <h3 class="metric-group-title">حركة اليوم</h3>
+            <button type="button" class="metric-group-action pressable">التفاصيل</button>
+          </div>
+          <ul class="metric-list">
+            <li class="metric-row">
+              <div class="metric-row-label">مبيعات اليوم</div>
+              <div class="metric-row-value"><bdi dir="ltr" data-hook="sales">465.00</bdi><span class="cur">د.أ</span></div>
+            </li>
+            <li class="metric-row" data-tone="positive">
+              <div class="metric-row-label">تحصيلات ذمم</div>
+              <div class="metric-row-value"><bdi dir="ltr" data-hook="collections">+210.00</bdi><span class="cur">د.أ</span></div>
+            </li>
+            <li class="metric-row">
+              <div class="metric-row-label">مصروفات اليوم</div>
+              <div class="metric-row-value"><bdi dir="ltr" data-hook="expenses">-92.50</bdi><span class="cur">د.أ</span></div>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-label="متابعة اليوم">
+          <div class="section-header">
+            <h3 class="section-title">متابعة اليوم</h3>
+            <span class="section-count"><bdi dir="ltr">3</bdi></span>
+          </div>
+          <div class="follow-up">
+            <div class="operational-row" data-tone="warning">
+              <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-clock"/></svg></span>
+              <div class="operational-row-main">
+                <p class="operational-row-title">شركة التوصيل السريع</p>
+                <p class="operational-row-meta">بانتظار التحويل — منذ <bdi dir="ltr">05/09/2026</bdi></p>
+              </div>
+              <div class="operational-row-end">
+                <span class="operational-row-amount"><bdi dir="ltr">142.00</bdi><span class="cur">د.أ</span></span>
+              </div>
+            </div>
+            <div class="operational-row" data-tone="positive">
+              <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-check"/></svg></span>
+              <div class="operational-row-main">
+                <p class="operational-row-title">أبو أحمد</p>
+                <p class="operational-row-meta">تحصيل دين — اليوم <bdi dir="ltr">12:40</bdi></p>
+              </div>
+              <div class="operational-row-end">
+                <span class="operational-row-amount"><bdi dir="ltr">+120.00</bdi><span class="cur">د.أ</span></span>
+              </div>
+            </div>
+            <div class="operational-row" data-tone="warning">
+              <span class="operational-row-icon"><svg class="icon icon--row" aria-hidden="true"><use href="#i-package"/></svg></span>
+              <div class="operational-row-main">
+                <p class="operational-row-title">طحين فاخر 10كغ</p>
+                <p class="operational-row-meta">متبقي <span class="num-warning"><bdi dir="ltr">4</bdi></span> أكياس — الحد الأدنى <bdi dir="ltr">6</bdi></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="comparison-pair" aria-label="المستحقات">
+          <div class="compact-tile">
+            <span class="compact-tile-label">مستحق لك</span>
+            <span class="compact-tile-value-row"><bdi class="compact-tile-value" dir="ltr">1,175.00</bdi><span class="compact-tile-currency">د.أ</span></span>
+            <span class="compact-tile-qualifier">عند <bdi dir="ltr">4</bdi> عملاء</span>
+          </div>
+          <div class="compact-tile">
+            <span class="compact-tile-label">مستحق عليك</span>
+            <span class="compact-tile-value-row"><bdi class="compact-tile-value" dir="ltr">640.00</bdi><span class="compact-tile-currency">د.أ</span></span>
+            <span class="compact-tile-qualifier">مؤسسة الشرق</span>
+          </div>
+        </section>
+
+        <div class="comp-footer">
+          <button type="button" class="button button--quiet pressable">عرض كل متابعات اليوم</button>
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="bottom-navigation" aria-label="التنقل الرئيسي">
+      <button type="button" class="nav-item is-active pressable" aria-current="page">
+        <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+        <span class="nav-label">اليوم</span>
+      </button>
+      <button type="button" class="nav-item pressable" data-short="مبيعات">
+        <svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg>
+        <span class="nav-label">المبيعات</span>
+      </button>
+      <button type="button" class="nav-item pressable">
+        <svg class="icon" aria-hidden="true"><use href="#i-hand-coins"/></svg>
+        <span class="nav-label">الذمم</span>
+      </button>
+      <button type="button" class="nav-item pressable">
+        <svg class="icon" aria-hidden="true"><use href="#i-package"/></svg>
+        <span class="nav-label">المخزون</span>
+      </button>
+      <button type="button" class="nav-item pressable" data-nav="more">
+        <svg class="icon" aria-hidden="true"><use href="#i-ellipsis"/></svg>
+        <span class="nav-label">المزيد</span>
+      </button>
+    </nav>
+  </div>
+</template>
+
+</body>
+</html>

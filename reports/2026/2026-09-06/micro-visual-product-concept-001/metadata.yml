@@ -1,0 +1,89 @@
+delivery_id: micro-visual-product-concept-001
+date: 2026-09-06
+stage: 3 — review gate (Stage 4 intentionally not started; awaiting owner approval)
+recommended_direction: 'A — «السجل الدافئ» / The Warm Ledger' (adversarial score 7.90/10; B 6.45; C 6.40)
+source_provenance:
+  brief_fixed_constraints: authority (palette, contrast audit, formats, state truth, NumericSurface principles)
+  micro_agent_input_zip: MISSING (not found in repository or workspace; nothing invented)
+  micro_recovery_docs_zip: MISSING (not found; partially substituted by in-repo recovery reports)
+  microprimitives_anti_reference_html: MISSING (avoid-list derived from the brief's characterization)
+  in_repo_evidence_used:
+    - reports/2026/2026-09-06/micro-final-agent-resumption-001/
+    - reports/2026/2026-09-06/micro-deep-workflow-content-product-closure-continuation-001/
+    - reports/2026/2026-09-05/micro-group-6-parallel-audit-001/
+    - reports/2026/2026-09-04/micro-group-2-catalog-inventory-recovery-001/
+    - reports/2026/2026-09-03/zaman-to-micro-gap-analysis-001/subagents/03-workflow-mobile-ux.md
+verification:
+  html_opens_and_controls_work: pass (headless Chromium: screens, toggles, sheet, save flow, closing diff, i18n/dir, themes, widths, motion toggle)
+  secret_scan_before_push: pass (pattern scan over all changed files)
+  device_testing: not performed (none claimed)
+  english_layer: verification mode, not finalized localization
+files:
+  - path: en/00-SOURCE-INTAKE-REPORT.md
+    bytes: 6978
+    sha256: e3fc600661b99d5711ec20282ad31fa70394d3124144056ae6c6931c89bb60e6
+    verification: implemented
+  - path: en/01-current-work-lessons.md
+    bytes: 2585
+    sha256: 328eb9357f3145920770f04108151aa55db91a0d741b20dc22efd91c6adf23a9
+    verification: implemented
+  - path: en/02-research-and-direction-synthesis.md
+    bytes: 8104
+    sha256: bc2014b86ece930445ab6cc50aa0d1a96e873ef2dde997ae991046ab2d2e03a9
+    verification: implemented
+  - path: en/03-html-review-guide.md
+    bytes: 5516
+    sha256: 223366622f368b7fabb188261061171770b0f36e041f74c21f42023cc200a65d
+    verification: implemented
+  - path: en/04-REVIEW-REQUEST.md
+    bytes: 4547
+    sha256: 0adfa3a294097151902e571ea8be7f4125a00c6293980b915303cc363b4b1035
+    verification: implemented
+  - path: handoff/README-empty-until-approval.md
+    bytes: 365
+    sha256: 91fccfa88e9f2c13c090823dba23dff0e96534e622fcc791bfddf94f9e913e37
+    verification: placeholder (Stage 4 deferred pending approval)
+  - path: prototype/micro-visual-concept-review.html
+    bytes: 87231
+    sha256: 0831b89475c6bac754d1d4c4f2bf177f6377574245a269ce0e73fd5e7085e5b8
+    verification: implemented (interactive; browser-verified)
+  - path: subagents/01-visual-research-and-benchmarks.md
+    bytes: 10917
+    sha256: 0e7d2898687210d0b522875bf633bbdd9c26c3b469e369ce9a7c52b399f0b550
+    verification: implemented
+  - path: subagents/02-art-direction-and-spatial-language.md
+    bytes: 12262
+    sha256: a68ce7c5768b5ad66cc7463bbe8d09673d6372052b41f03e681d5d17080be5b7
+    verification: implemented
+  - path: subagents/03-mobile-motion-and-interaction.md
+    bytes: 12083
+    sha256: 09729f8bd1f99d50418309c9ff1964e5798157f5cb535ef1b9acca5b7877232a
+    verification: implemented
+  - path: subagents/04-rtl-accessibility-and-data-visualization.md
+    bytes: 10812
+    sha256: b5d42b6d7f40ac584934031acd225d9462b98575cf4280d829d6a76cc53b31af
+    verification: implemented
+  - path: subagents/05-adversarial-critique-and-decision.md
+    bytes: 10354
+    sha256: 8e9546b0a1aa63d0c6951c00bff11c8c2d7c1fdd1b22a1410d4fab4108a6c02b
+    verification: implemented
+  - path: supporting/review-evidence/01-today-390-light-ar.png
+    bytes: 93792
+    sha256: 228708df63d6eaf04453567e6d842ff806fb0ea56020d1920e2d1a8fe8d89d09
+    verification: captured evidence
+  - path: supporting/review-evidence/02-financial-truth.png
+    bytes: 85073
+    sha256: 72b29f9807d58b26d535a600e1cf627fce76207bc2cab59e9cda09a49cde4710
+    verification: captured evidence
+  - path: supporting/review-evidence/03-truth-conflict-alert.png
+    bytes: 96281
+    sha256: cd1dc2044448d0317e2a1ece53883894c71bacbef47aac773bc024aebaece245
+    verification: captured evidence
+  - path: supporting/review-evidence/04-collect-effect-sheet.png
+    bytes: 89634
+    sha256: 224e9313b8935c9c29b7c573cce74253b7373023c8326c1d918a3177042c942e
+    verification: captured evidence
+  - path: supporting/review-evidence/05-today-320-dark-en.png
+    bytes: 94990
+    sha256: b7d791ef29ba13ef21eb6a67c640035a2e6b1f309a20330bf896df91dad672c6
+    verification: captured evidence

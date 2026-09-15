@@ -1,0 +1,217 @@
+id: micro-native-mobile-direction-001
+delivery: 14
+date: 2026-09-07
+project: Micro
+title: "Micro — Native Mobile Visual Product Concept (Stage 0–3, owner review gate)"
+status: review-gate
+recommended_direction: "B «الدفتر» / The Register"
+stage4_started: false
+production_code_touched: false
+root_index_rows: 38-53
+
+files:
+  - path: en/00-previous-work-lessons.md
+    role: stage0-lessons
+    verification: implemented
+  - path: en/01-intake-and-previous-work-audit.md
+    role: stage0-audit
+    verification: implemented
+  - path: subagents/01-native-mobile-architecture.md
+    role: specialist-report
+    verification: implemented
+  - path: subagents/02-native-art-direction.md
+    role: specialist-report
+    verification: implemented
+  - path: subagents/03-native-motion-and-interaction.md
+    role: specialist-report
+    verification: implemented
+  - path: subagents/04-arabic-rtl-financial-mobile.md
+    role: specialist-report
+    verification: implemented
+  - path: subagents/05-adversarial-native-critique.md
+    role: specialist-report
+    verification: implemented
+  - path: en/02-native-direction-synthesis.md
+    role: stage1-synthesis
+    verification: implemented
+  - path: prototype/direction-a/index.html
+    role: prototype
+    verification: browser-qa-passed
+  - path: prototype/direction-a/styles.css
+    role: prototype
+    verification: browser-qa-passed
+  - path: prototype/direction-a/app.js
+    role: prototype
+    verification: browser-qa-passed
+  - path: prototype/direction-b/index.html
+    role: prototype-recommended
+    verification: browser-qa-passed
+  - path: prototype/direction-b/styles.css
+    role: prototype-recommended
+    verification: browser-qa-passed
+  - path: prototype/direction-b/app.js
+    role: prototype-recommended
+    verification: browser-qa-passed
+  - path: prototype/direction-c/index.html
+    role: prototype
+    verification: browser-qa-passed
+  - path: prototype/direction-c/styles.css
+    role: prototype
+    verification: browser-qa-passed
+  - path: prototype/direction-c/app.js
+    role: prototype
+    verification: browser-qa-passed
+  - path: prototype/review-index.html
+    role: review-index
+    verification: browser-qa-passed
+  - path: en/03-native-prototype-review-guide.md
+    role: stage3-guide
+    verification: implemented
+  - path: en/04-REVIEW-REQUEST.md
+    role: stage3-gate
+    verification: implemented
+  - path: supporting/README.md
+    role: evidence-index
+    verification: implemented
+  - path: supporting/review-evidence/01-b-register-390-light-ar.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/02-b-position-week-chart.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/03-b-capture-quiet-receipt.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/04-b-register-320.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/05-a-brief-390-light-ar.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/06-a-large-title-collapsed.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/07-c-hub-390-light-ar.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/08-c-hub-320.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/09-b-people-list.png
+    role: qa-screenshot
+    verification: captured
+  - path: supporting/review-evidence/10-b-register-dark.png
+    role: qa-screenshot
+    verification: captured
+  - path: INDEX.md
+    role: folder-index
+    verification: implemented
+
+verification_summary:
+  browser_qa: "headless Chromium (agent-browser): no console errors; capture→receipt→truth-update, live filter, conflict resolution, closing flow, offline/error demos, 320/390 widths, light/dark verified; VLM inspection layer used, all flagged defects fixed or documented"
+  secret_scan: pass (no token-like strings in any delivery file)
+  source_packages_absent:
+    - micro-agent-input.zip
+    - micro-recovery-docs.zip
+    - MicroPrimitives-anti-reference.html
+
+checksums:
+  - path: INDEX.md
+    size: 2268
+    sha256: 842299aad82810b01a26e77ae96009e1606fa10feb59a55d749550b8eeb06594
+  - path: metadata.yml
+    size: 4185
+    sha256: a2d0a690fa6480157e8b9cb931af6e791547cece2d17d29126184624e6ada8ac
+  - path: en/00-previous-work-lessons.md
+    size: 9224
+    sha256: 99bd8955f743f6def9847410473bb6e77f363cdd7f619ce57b0976fa9784e5ec
+  - path: en/01-intake-and-previous-work-audit.md
+    size: 7900
+    sha256: c055800399756dcb2cb6354fd983f3c20c53192398514f21615e22c08c5c9e58
+  - path: en/02-native-direction-synthesis.md
+    size: 23152
+    sha256: 13fe5e6828f41808e0dd2f82b690fab1578f6c9931d7e042c1899eee7c0ef747
+  - path: en/03-native-prototype-review-guide.md
+    size: 8729
+    sha256: 8fd135458682a8c9625e7dc64729f7331e8dd45375c58d46fdd056505400f630
+  - path: en/04-REVIEW-REQUEST.md
+    size: 5120
+    sha256: c35bec6fe984e98a3361a6f48c0908cc3c3dadb04e3a97a3440b46b9355bada5
+  - path: prototype/review-index.html
+    size: 9177
+    sha256: a51062b386985ab48f48ddf593928a6753da2e62a9e6dd91add0a24c7048d812
+  - path: prototype/direction-a/app.js
+    size: 34698
+    sha256: f461005a7f5de423cea1ac143b43522a9c9ddce28d0a726656efbd6834f3deb6
+  - path: prototype/direction-a/index.html
+    size: 48038
+    sha256: ba0bcf13a78e913ec8ce2a2160fb50ab53210d63d66dcd4708d0671443598201
+  - path: prototype/direction-a/styles.css
+    size: 30665
+    sha256: 0dea76a574b888635ba1530f7d7b7602a6c916fa1edbd6f90487d4ce5881f424
+  - path: prototype/direction-b/app.js
+    size: 46928
+    sha256: 011f8175782818e8ad97b4cf1ae8ba01832490db6f11b9f7b1efd908ba5d41f1
+  - path: prototype/direction-b/index.html
+    size: 57743
+    sha256: 60d9a3af1d3b07335a95ee91825a3329a3af2754bc41d82bda8236d0c1f3c759
+  - path: prototype/direction-b/styles.css
+    size: 33516
+    sha256: 69f2de919bcae15224e06de54c7b526ac518c63f207af7c1a503b21355b121d0
+  - path: prototype/direction-c/app.js
+    size: 36741
+    sha256: d77c988950d6a036b89555da6ca134710f7fdc80e57be94accb30299d6a627d0
+  - path: prototype/direction-c/index.html
+    size: 45835
+    sha256: 2bd9f2511f830c1398d9fcf62335956683e2aebbbece0d5b26bd969ad3c6cf31
+  - path: prototype/direction-c/styles.css
+    size: 30089
+    sha256: 923644f68e7307a628dbb000b9b4ccf6af18f750733fe577d6826bcfabb41c9b
+  - path: subagents/01-native-mobile-architecture.md
+    size: 15112
+    sha256: 80556eaafc80c9280419e7a93488ce7088b175cf7d45b46ab8bccc62a4d2ee71
+  - path: subagents/02-native-art-direction.md
+    size: 17931
+    sha256: db2dd5b527076607f097024486457b19c4367d1d1d3ae7a2367abadf39e57bb2
+  - path: subagents/03-native-motion-and-interaction.md
+    size: 17575
+    sha256: ecb9d4f4f3ba30edfeb916d0c17d1d8ea7abfa36895c0fc6d564a05b32c05284
+  - path: subagents/04-arabic-rtl-financial-mobile.md
+    size: 17695
+    sha256: 4dcfdad081ce7cb208ad728912c0c980788f50be58296e131d8b793e1fe8a5fb
+  - path: subagents/05-adversarial-native-critique.md
+    size: 12959
+    sha256: 331009776cbe024002ab6ab766aca2e558d13a8edbd596ce1c10fccc4b5410ed
+  - path: supporting/README.md
+    size: 2163
+    sha256: e77cd64498423c480d3fb74bbf82401e7a899aa6a06a342bd422b4c9a5406f6f
+  - path: supporting/review-evidence/01-b-register-390-light-ar.png
+    size: 78464
+    sha256: 143a155a133b050c222355bdf356bc19df09c50006e5e86865d0c94af4842d22
+  - path: supporting/review-evidence/02-b-position-week-chart.png
+    size: 63723
+    sha256: baabb16dbc1e67018197d562b1c4a919fe8abe3e420f288d068a544626989c39
+  - path: supporting/review-evidence/03-b-capture-quiet-receipt.png
+    size: 57000
+    sha256: 7bd727abe6dd0c6ee9e76538534c7e8e3ab40c2c27cb133996c368490c4ab1ce
+  - path: supporting/review-evidence/04-b-register-320.png
+    size: 59789
+    sha256: 907480ced15b6d13db5fa819393bcec14397b517107ebfb8e73c65614a54dc02
+  - path: supporting/review-evidence/05-a-brief-390-light-ar.png
+    size: 74673
+    sha256: 1373625012f40b3c799ae6ae700b3705fdbc468f59a702854d9862bd5672f34b
+  - path: supporting/review-evidence/06-a-large-title-collapsed.png
+    size: 78841
+    sha256: 50db58c643a07680b80576eb995f2cc27b4a97e401a470ca3767754e9f955afd
+  - path: supporting/review-evidence/07-c-hub-390-light-ar.png
+    size: 80678
+    sha256: 08e40167afd2c6fbb3bb54edd4ef320db20ab5c976ee679157c8219341189035
+  - path: supporting/review-evidence/08-c-hub-320.png
+    size: 64595
+    sha256: 5ff9d61121292e14ec749ed4b8fd36bed6453045130501396ee3a5ec9b748eed
+  - path: supporting/review-evidence/09-b-people-list.png
+    size: 42977
+    sha256: 35e15ebde632e63a860b19ceebcc939ae906f074201dae7dd5eb097105ddd46d
+  - path: supporting/review-evidence/10-b-register-dark.png
+    size: 78352
+    sha256: 864f0a1f0a504f04f43289baff38c800c8b2e51518cce82fea23c1401960e607

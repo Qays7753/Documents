@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Micro — Visual Concept Review · مراجعة المفهوم البصري</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MICRO — VISUAL CONCEPT REVIEW ARTIFACT
+   Delivery: micro-visual-product-concept-001 · Stage 2
+   Direction: D-A «دفتر هادئ» The Calm Ledger (recommended)
+   This file is self-contained; web fonts are progressive
+   enhancement with full system-font fallbacks.
+   ============================================================ */
+
+/* ---------- 1. Tokens (synthesis §5.1, DSY-07/08/09) ---------- */
+:root{
+  /* brand (fixed) */
+  --brand:#cc785c; --brand-pressed:#b4613f; --brand-text:#964e33; --brand-soft:#f4e4db;
+  --accent:#079fa0; --accent-text:#057b7c; --accent-soft:#e3f5f5;
+  /* neutrals — light */
+  --canvas:#faf6f2; --surface:#ffffff; --ink:#221c18; --ink2:#5c5148;
+  --hairline:#e5dcd6; --scrim:rgba(34,28,24,0.40);
+  /* semantic (functional text tokens only — R-H) */
+  --success:#057b7c; --success-soft:#e3f5f5;
+  --danger:#b3362e; --warning:#9a6700;
+  /* motion (DSY-02) */
+  --m-out:cubic-bezier(0.05,0.7,0.1,1);
+  --m-in:cubic-bezier(0.3,0,0.8,0.15);
+  --m-flat:cubic-bezier(0.4,0,0.2,1);
+  /* type + geometry (DSY-06..09) */
+  --font-ar:'Noto Sans Arabic','Segoe UI',Tahoma,'Geeza Pro',sans-serif;
+  --font-num:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --r-page:0px; --r-ctl:4px; --r-sheet:12px;
+  --sp-xs:4px; --sp-sm:8px; --sp-md:12px; --sp-lg:16px; --sp-xl:24px; --sp-2xl:32px; --sp-3xl:48px;
+  --row-h:56px; --amount-col:88px;
+  /* device */
+  --pw:390px; --ph:844px;
+}
+body.dark{
+  --canvas:#1c1815; --surface:#332d27; --ink:#f4e4db; --ink2:#c9bdb3;
+  --hairline:rgba(213,145,114,0.18); --scrim:rgba(0,0,0,0.50);
+  --brand:#d59172; --brand-text:#8fd5d6; --accent:#5ec0c1; --accent-text:#8fd5d6;
+  --accent-soft:#332d27; --brand-soft:#332d27;
+  --success:#8fd5d6; --success-soft:#332d27;
+  --danger:#ff9d94; --warning:#e6b455;
+  --e1:0 -12px 32px rgba(0,0,0,0.40);
+}
+body:not(.dark){
+  --e1:0 -12px 32px rgba(34,28,24,0.18);
+}
+
+/* ---------- 2. Reset ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-ar);
+  background:#efeae4; color:#221c18;
+  font-size:15px; line-height:1.6;
+  min-height:100vh;
+}
+body.dark{background:#141110;color:#e8e0d8}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input{font:inherit;color:inherit}
+ul,ol{list-style:none}
+bdi{unicode-bidi:isolate}
+.num,bdi.num{
+  font-family:var(--font-num);
+  font-feature-settings:'tnum' 1,'lnum' 1;
+  font-variant-numeric:tabular-nums lining-nums;
+  direction:ltr; unicode-bidi:isolate;
+}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0 0 0 0);overflow:hidden;white-space:nowrap}
+
+/* money island (DSY-04: digits isolated, unit in flow, whole island nowrap) */
+.money{white-space:nowrap;display:inline-flex;align-items:baseline;gap:4px}
+.money .num{font-weight:600}
+.money .unit{font-size:0.78em;color:var(--ink2);font-weight:500}
+.money.hero .num{font-size:34px;line-height:40px;font-weight:700}
+.money.hero .unit{font-size:14px}
+.money.unknown .num{font-weight:400;color:var(--ink2)}
+
+/* ---------- 3. Review console (everything OUTSIDE the phone) ---------- */
+.review{max-width:1280px;margin:0 auto;padding:24px 20px 80px}
+.review-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:6px}
+.review-head h1{font-size:21px;font-weight:700;letter-spacing:-0.01em}
+.review-head .sub{font-size:13px;color:#6b6158}
+body.dark .review-head .sub{color:#a89c92}
+.review-note{
+  font-size:13px;color:#6b6158;margin-bottom:16px;
+  border-inline-start:3px solid #cc785c;padding-inline-start:10px;
+}
+body.dark .review-note{color:#a89c92}
+.console{
+  background:#ffffff;border:1px solid #ded5cd;border-radius:10px;
+  padding:14px 16px;margin-bottom:22px;
+  box-shadow:0 1px 3px rgba(34,28,24,0.06);
+}
+body.dark .console{background:#221d19;border-color:#3a332c;box-shadow:none}
+.console-row{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center}
+.console-group{display:flex;align-items:center;gap:8px}
+.console-group .lbl{font-size:12px;font-weight:600;letter-spacing:0.02em;color:#8a7e73;text-transform:uppercase}
+body.dark .console-group .lbl{color:#a89c92}
+.seg{display:inline-flex;border:1px solid #ded5cd;border-radius:6px;overflow:hidden}
+body.dark .seg{border-color:#3a332c}
+.seg button{
+  padding:6px 12px;font-size:13px;font-weight:500;color:#5c5148;background:#faf6f2;
+  min-height:32px;display:flex;align-items:center;gap:6px;
+}
+body.dark .seg button{background:#1c1815;color:#c9bdb3}
+.seg button+button{border-inline-start:1px solid #ded5cd}
+body.dark .seg button+button{border-inline-start-color:#3a332c}
+.seg button[aria-pressed="true"]{background:#964e33;color:#ffffff;font-weight:600}
+body.dark .seg button[aria-pressed="true"]{background:#8fd5d6;color:#1c1815}
+.demos{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;padding-top:12px;border-top:1px dashed #ded5cd}
+body.dark .demos{border-top-color:#3a332c}
+.demo-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:#964e33;background:#f4e4db;
+  padding:8px 14px;border-radius:6px;min-height:36px;
+}
+body.dark .demo-btn{color:#8fd5d6;background:#332d27}
+.demo-btn:hover{background:#efdad0}
+body.dark .demo-btn:hover{background:#3a332c}
+.demo-btn .tick{font-size:11px;color:#8a7e73}
+.review-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}
+@media (max-width:1020px){.review-layout{grid-template-columns:1fr}}
+.stage{
+  display:flex;justify-content:center;align-items:flex-start;min-height:880px;
+  background:
+    radial-gradient(1200px 500px at 50% -100px, rgba(204,120,92,0.10), transparent 70%);
+  border-radius:14px;padding:28px 12px;
+}
+body.dark .stage{background:radial-gradient(1200px 500px at 50% -100px, rgba(213,145,114,0.08), transparent 70%)}
+.stage.mode-compare{display:block;min-height:0;padding:20px 8px}
+
+/* panels beside the phone */
+.panels{display:flex;flex-direction:column;gap:16px}
+.panel{background:#ffffff;border:1px solid #ded5cd;border-radius:10px;padding:16px}
+body.dark .panel{background:#221d19;border-color:#3a332c}
+.panel h3{font-size:14px;font-weight:700;margin-bottom:10px}
+.panel p,.panel li{font-size:13px;color:#5c5148;line-height:1.65}
+body.dark .panel p,body.dark .panel li{color:#c9bdb3}
+.panel ul{display:flex;flex-direction:column;gap:6px}
+.panel .k{color:#964e33;font-weight:600}
+body.dark .panel .k{color:#8fd5d6}
+.ctable{width:100%;border-collapse:collapse;font-size:12.5px}
+.ctable th,.ctable td{text-align:start;padding:5px 6px;border-bottom:1px solid #eee6df;vertical-align:top}
+body.dark .ctable th,body.dark .ctable td{border-bottom-color:#3a332c}
+.ctable th{font-weight:600;color:#8a7e73;font-size:11.5px;text-transform:uppercase;letter-spacing:0.03em}
+body.dark .ctable th{color:#a89c92}
+.ctable .fail{color:#b3362e;font-weight:600}
+.ctable .pass{color:#256b45;font-weight:600}
+body.dark .ctable .fail{color:#ff9d94}body.dark .ctable .pass{color:#7fd0a4}
+.swatch{display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid rgba(0,0,0,0.15);vertical-align:-1px;margin-inline-end:4px}
+.coverage .in{color:#256b45;font-weight:600}body.dark .coverage .in{color:#7fd0a4}
+.coverage .out{color:#8a7e73}body.dark .coverage .out{color:#a89c92}
+.compare-wrap{display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
+.compare-col{display:flex;flex-direction:column;align-items:center;gap:12px}
+.compare-col .tag{
+  font-size:13px;font-weight:700;padding:5px 14px;border-radius:999px;
+}
+.compare-col.winner .tag{background:#964e33;color:#fff}
+.compare-col.rejected .tag{background:#efe9e3;color:#5c5148}
+body.dark .compare-col.rejected .tag{background:#332d27;color:#c9bdb3}
+.compare-col .verdict{font-size:12.5px;color:#6b6158;max-width:250px;text-align:center;line-height:1.55}
+body.dark .compare-col .verdict{color:#a89c92}
+.mini-rules{font-size:12.5px;color:#5c5148;max-width:255px;line-height:1.6}
+body.dark .mini-rules{color:#c9bdb3}
+.mini-rules b{color:#964e33}body.dark .mini-rules b{color:#8fd5d6}
+.preview-shell{width:236px;height:512px;overflow:hidden;border-radius:12px}
+.preview-frame{width:390px;height:844px;transform:scale(0.6);transform-origin:top center;pointer-events:none}
+
+/* ---------- 4. Device (bezel — outside the product) ---------- */
+.device{
+  width:calc(var(--pw) + 16px); height:calc(var(--ph) + 16px);
+  background:#17130f;border-radius:52px;padding:8px;
+  box-shadow:0 24px 60px rgba(34,28,24,0.30), inset 0 0 0 2px #2c261f;
+  position:relative;
+}
+body.dark .device{box-shadow:0 24px 60px rgba(0,0,0,0.55), inset 0 0 0 2px #2c261f}
+.device .screen-glass{
+  width:var(--pw);height:var(--ph);
+  background:var(--canvas);
+  border-radius:44px;overflow:hidden;position:relative;
+  transition:background 150ms var(--m-flat);
+}
+.device .cam{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#0b0908;z-index:60;box-shadow:inset 0 0 3px rgba(255,255,255,0.2)}
+.statusbar{
+  height:48px;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 26px 0;font-family:var(--font-num);
+  font-size:14px;font-weight:600;color:var(--ink);
+  direction:ltr;position:relative;z-index:50;
+}
+.statusbar .icons{display:flex;gap:6px;align-items:center}
+.sig{display:inline-flex;align-items:flex-end;gap:1.5px;height:11px}
+.sig i{width:2.5px;background:var(--ink);border-radius:1px;display:block}
+.sig i:nth-child(1){height:4px}.sig i:nth-child(2){height:6px}.sig i:nth-child(3){height:8px}.sig i:nth-child(4){height:11px}
+.sig i.off{opacity:0.25}
+.wifi{width:15px;height:11px;position:relative}
+.wifi::before{content:'';position:absolute;inset:auto 0 0 0;height:3px;background:var(--ink);border-radius:1px;bottom:0;left:5px;width:5px}
+.wifi::after{content:'';position:absolute;bottom:2px;left:1.5px;width:12px;height:12px;border:2px solid var(--ink);border-bottom:none;border-radius:12px 12px 0 0;clip-path:inset(35% 0 0 0)}
+.batt{width:24px;height:12px;border:1.5px solid var(--ink);border-radius:3.5px;position:relative;display:inline-block}
+.batt::before{content:'';position:absolute;inset:1.5px;inset-inline-end:auto;left:1.5px;width:70%;background:var(--ink);border-radius:1.5px}
+.batt::after{content:'';position:absolute;top:3px;bottom:3px;width:1.5px;background:var(--ink);border-radius:1px;right:-4px}
+
+/* live region (invisible, politeness set per DSY-21) */
+#liveregion{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<style>
+/* ---------- 5. App shell (INSIDE the phone — product-real only) ---------- */
+.app{position:absolute;inset:0;background:var(--canvas);color:var(--ink);transition:background 150ms var(--m-flat)}
+.app .screens{position:absolute;top:48px;left:0;right:0;bottom:76px;overflow:hidden}
+.screen{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  opacity:0;visibility:hidden;transform:translateX(0);
+  transition:opacity 180ms var(--m-flat), transform 180ms var(--m-out), visibility 0s linear 180ms;
+  scrollbar-width:none;
+}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{opacity:1;visibility:visible;transform:translateX(0);transition-delay:0s}
+.screen.enter-from-start{transform:translateX(9px)}     /* enters moving toward inline-start */
+.screen.enter-from-end{transform:translateX(-9px)}
+.screen.exit-to-start{transform:translateX(-9px)}
+.screen.exit-to-end{transform:translateX(9px)}
+
+/* screen header — typographic, never boxed (DSY-08) */
+.shead{padding:12px var(--sp-lg) 0;position:sticky;top:0;z-index:20;background:transparent;transition:background 150ms var(--m-flat)}
+.shead::after{content:'';display:block;height:2px;background:var(--brand);margin:var(--sp-md) var(--sp-lg) 0 var(--sp-lg);border-radius:1px}
+.shead.scrolled{background:var(--canvas);box-shadow:0 1px 0 var(--hairline)}
+.shead.scrolled::after{opacity:0}
+.overline{font-size:13px;font-weight:500;color:var(--ink2);letter-spacing:0.01em}
+.shead .q{font-size:20px;line-height:28px;font-weight:600;margin-top:2px}
+.shead .dateline{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:13px;color:var(--ink2);margin-top:2px}
+.statusword{display:inline-flex;align-items:center;gap:5px}
+.shead .body-pad{padding-bottom:var(--sp-sm)}
+
+/* status glyphs (DSY-15: shape + label, color tertiary) */
+.glyph{width:12px;height:12px;border-radius:50%;position:relative;flex:none;display:inline-block}
+.glyph.filled{background:var(--success)}
+.glyph.hollow{border:1.5px solid var(--ink2)}
+.glyph.dashed{border:1.5px dashed var(--ink2)}
+.glyph.ring{border:1.5px solid var(--warning)}
+.glyph.ring::after{content:'';position:absolute;inset:3px;border-radius:50%;border:1.5px solid var(--ink2)}
+.glyph.slash{border:1.5px solid var(--ink2);overflow:hidden}
+.glyph.slash::after{content:'';position:absolute;top:-2px;left:4px;width:1.5px;height:16px;background:var(--ink2);transform:rotate(45deg)}
+.glyph.split{border:1.5px solid var(--ink2);overflow:hidden}
+.glyph.split::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink2) 50%,transparent 50%);opacity:.55}
+.glyph.emdash{border:1.5px solid var(--hairline)}
+.glyph.emdash::after{content:'';position:absolute;top:5px;left:2.5px;right:2.5px;height:1.5px;background:var(--ink2)}
+.glyph.sync{border:1.5px dashed var(--ink2);animation:spin 1200ms linear infinite}
+.glyph.double{border:none;background:none}
+.glyph.double::before{content:'';position:absolute;top:2px;bottom:2px;left:2px;width:7px;border:1.5px solid var(--success);border-right:none;border-radius:6px 0 0 6px;transform:rotate(-45deg)}
+.glyph.double::after{content:'';position:absolute;top:3px;bottom:3px;left:5px;width:4px;border:1.5px solid var(--success);border-right:none;border-radius:6px 0 0 6px;transform:rotate(-45deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* truth slot (offline / locality / sync — one quiet line) */
+.truth-slot{margin:var(--sp-sm) var(--sp-lg) 0;display:flex;flex-direction:column;gap:4px}
+.truth-line{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:6px;min-height:20px}
+.truth-line .lnk{color:var(--accent-text);font-weight:600;padding:4px 2px;margin-inline-start:2px;min-height:28px;display:inline-flex;align-items:center}
+
+/* sections + list rows */
+.section{margin-top:var(--sp-xl)}
+.section-h{display:flex;align-items:baseline;justify-content:space-between;padding:0 var(--sp-lg);margin-bottom:var(--sp-xs)}
+.section-h .t{font-size:16px;font-weight:600}
+.section-h .more{font-size:13px;color:var(--accent-text);font-weight:600;padding:4px 2px}
+.row{
+  min-height:var(--row-h);padding:10px var(--sp-lg);
+  display:flex;align-items:center;gap:var(--sp-md);
+  border-bottom:1px solid var(--hairline);
+  position:relative;background:transparent;width:100%;text-align:start;
+  transition:background 100ms var(--m-flat);
+}
+.row:last-child{border-bottom:none}
+.row:active{background:color-mix(in srgb,var(--brand) 10%,transparent)}
+body.dark .row:active{background:rgba(213,145,114,0.16)}
+.row .lead{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.row .subj{font-size:15px;font-weight:500;line-height:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .subj.long{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row .cap{font-size:13px;line-height:20px;color:var(--ink2);display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;min-width:0}
+.row .act{
+  align-self:center;font-size:13px;font-weight:600;color:var(--accent-text);
+  min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+  padding:4px 6px;border-radius:var(--r-ctl);flex:none;
+}
+.row .act:active{background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.row .amount{
+  flex:none;width:var(--amount-col);text-align:end; /* inline-end of the LTR run → sits at row's left in RTL */
+  font-size:16px;font-weight:600;align-self:center;
+}
+.row .amount .capline{display:block;font-size:13px;color:var(--ink2);font-weight:400}
+.row .amount .num.signed-in{color:var(--success)}
+.row .amount .num.signed-out{color:var(--brand-text)}
+body.dark .row .amount .num.signed-out{color:var(--brand)}
+.row .amount.unk{color:var(--ink2);font-weight:400}
+.row .amount.unk .num{font-weight:400}
+.attention-mark{position:absolute;inset-inline-start:0;top:10px;bottom:10px;width:2px;border-radius:1px;background:var(--brand-text)}
+body.dark .attention-mark{background:var(--brand)}
+.row.decision-row{padding-inline-start:calc(var(--sp-lg) + 10px)}
+
+/* ruled 2×2 facts grid (not cards) */
+.facts{display:grid;grid-template-columns:1fr 1fr;margin:var(--sp-sm) var(--sp-lg) 0;
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);position:relative}
+.facts::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--hairline)}
+.fact{padding:var(--sp-md) var(--sp-md);display:flex;flex-direction:column;gap:3px;text-align:start;position:relative;min-height:96px}
+.fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid var(--hairline)}
+.fact:active{background:color-mix(in srgb,var(--brand-soft) 60%,transparent)}
+body.dark .fact:active{background:rgba(213,145,114,0.10)}
+.fact .fl{font-size:13px;color:var(--ink2)}
+.fact .fv{font-size:18px;font-weight:600}
+.fact .fqual{font-size:13px;color:var(--ink2)}
+.fact .fqual .lnk{color:var(--accent-text);font-weight:600}
+.fact .road{font-size:13px;color:var(--accent-text);font-weight:600}
+.fact .chev{position:absolute;top:50%;inset-inline-end:8px;transform:translateY(-50%) scaleX(var(--chevdir,-1));color:var(--ink2);font-size:12px}
+
+/* quiet links row */
+.quiet-links{display:flex;flex-wrap:wrap;gap:6px 18px;padding:var(--sp-md) var(--sp-lg)}
+.quiet-links a,.quiet-links button{font-size:13px;color:var(--ink2);text-decoration:none;font-weight:500;padding:6px 2px}
+.quiet-links .sep{color:var(--hairline)}
+
+/* hero figure block (Finance) */
+.hero-block{padding:var(--sp-sm) var(--sp-lg) 0}
+.hero-block .hl{font-size:13px;color:var(--ink2)}
+.hero-block .money.hero .num{color:var(--ink)}       /* DSY-10: hero in ink */
+.hero-statusline{font-size:13px;color:var(--ink2);margin-top:2px;display:flex;gap:6px;align-items:center}
+
+/* decision line */
+.decision{margin:var(--sp-md) var(--sp-lg) 0;padding:10px var(--sp-md) 12px calc(var(--sp-md) + 10px);
+  position:relative;background:color-mix(in srgb,var(--brand-soft) 55%,transparent);
+  border-radius:var(--r-page);}
+body.dark .decision{background:transparent;border:1px solid var(--hairline)}
+.decision .dt{font-size:15px;font-weight:600;line-height:24px}
+.decision .dd{font-size:13px;color:var(--ink2);line-height:20px}
+.decision .dlink{display:inline-block;margin-top:4px;font-size:13px;color:var(--accent-text);font-weight:600;padding:4px 2px;min-height:28px}
+
+/* primary + secondary buttons (DSY: one primary per screen) */
+.btn-primary{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;min-height:48px;border-radius:var(--r-ctl);
+  background:#964e33;color:#ffffff;font-size:15px;font-weight:600;
+  transition:background 100ms var(--m-flat),transform 80ms var(--m-flat);
+}
+.btn-primary:active{background:#b4613f;transform:scale(0.99)}   /* press-only, transient */
+body.dark .btn-primary{background:#8fd5d6;color:#1c1815}
+body.dark .btn-primary:active{background:#5ec0c1}
+.btn-primary.busy{pointer-events:none;background:#964e33}
+body.dark .btn-primary.busy{background:#8fd5d6}
+.btn-primary .arc{width:16px;height:16px;border:2px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:spin 1200ms linear infinite}
+body.dark .btn-primary .arc{border-color:rgba(28,24,21,0.3);border-top-color:#1c1815}
+.btn-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:44px;padding:6px 16px;border-radius:var(--r-ctl);
+  border:1px solid var(--hairline);font-size:15px;font-weight:500;color:var(--ink);
+}
+body.dark .btn-secondary{border-color:var(--hairline)}
+.text-action{color:var(--accent-text);font-weight:600;font-size:13px;min-height:44px;display:inline-flex;align-items:center;padding:4px 6px;border-radius:var(--r-ctl)}
+.text-action:active{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+
+/* focus-visible (DSY: 2px offset ring, brand-text family) */
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--brand-text);outline-offset:2px;border-radius:2px}
+body.dark :focus-visible{outline-color:#8fd5d6}
+
+/* bottom navigation — five destinations, center text FAB (DSY-11) */
+.bottomnav{
+  position:absolute;bottom:0;left:0;right:0;height:76px;z-index:40;
+  background:var(--canvas);border-top:1px solid var(--hairline);
+  display:grid;grid-template-columns:1fr 1fr 92px 1fr 1fr;align-items:stretch;
+  padding:0 4px 10px;
+}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:44px;color:var(--ink2);border-radius:var(--r-ctl);position:relative}
+.nav-item .ic{width:24px;height:24px;display:block}
+.nav-item .ic svg{width:24px;height:24px;display:block;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nl{font-size:13px;font-weight:500;line-height:16px}
+.nav-item[aria-current="page"]{color:var(--brand-text)}
+body.dark .nav-item[aria-current="page"]{color:var(--brand)}
+.nav-item:active{background:color-mix(in srgb,var(--brand-soft) 70%,transparent)}
+body.dark .nav-item:active{background:rgba(213,145,114,0.12)}
+.fab{
+  align-self:center;width:64px;height:48px;border-radius:var(--r-ctl);
+  background:#964e33;color:#ffffff;font-size:15px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  transform:translateY(-24px);box-shadow:0 -6px 18px rgba(34,28,24,0.26), 0 2px 6px rgba(34,28,24,0.18);
+  transition:background 100ms var(--m-flat),transform 80ms var(--m-flat);
+}
+.fab:active{background:#b4613f;transform:translateY(-24px) scale(0.97)}
+body.dark .fab{background:#8fd5d6;color:#1c1815}
+body.dark .fab:active{background:#5ec0c1}
+</style>
+<style>
+/* ---------- 6. Components: search, chips, bars, charts, badges ---------- */
+.searchbar{
+  margin:var(--sp-sm) var(--sp-lg) 0;display:flex;align-items:center;gap:8px;
+  min-height:48px;padding:0 var(--sp-md);border-radius:var(--r-ctl);
+  border:1px solid var(--hairline);background:color-mix(in srgb,var(--surface) 60%,var(--canvas));
+}
+body.dark .searchbar{background:transparent}
+.searchbar svg{width:18px;height:18px;stroke:var(--ink2);fill:none;stroke-width:1.6;flex:none}
+.searchbar input{flex:1;border:none;background:transparent;font-size:15px;min-width:0;color:var(--ink)}
+.searchbar input::placeholder{color:var(--ink2)}
+.searchbar .clear{font-size:13px;color:var(--accent-text);font-weight:600;padding:6px}
+
+.chips{display:flex;gap:8px;padding:var(--sp-sm) var(--sp-lg) 0;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:none;min-height:44px;display:inline-flex;align-items:center;padding:4px 16px;
+  border-radius:999px;border:1px solid var(--hairline);font-size:13px;font-weight:500;color:var(--ink2);
+}
+.chip[aria-pressed="true"]{border-color:var(--brand-text);color:var(--brand-text);background:color-mix(in srgb,var(--brand-soft) 70%,transparent);font-weight:600}
+body.dark .chip[aria-pressed="true"]{border-color:var(--brand);color:var(--brand);background:rgba(213,145,114,0.10)}
+.chip .n{font-family:var(--font-num);font-size:12px;color:inherit;opacity:0.75;margin-inline-start:4px}
+
+/* status badge (dot + word) */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--ink2);font-weight:500}
+.badge.warn{color:var(--warning)}
+.badge.ok{color:var(--success)}
+.badge.est{color:var(--ink2)}
+.est-underline{border-bottom:1px dotted var(--ink2)}
+.badge .bword{line-height:20px}
+
+/* relationship bar (chart 3) — one track = order total */
+.relbar{margin:6px var(--sp-lg) 0;height:8px;border-radius:4px;background:color-mix(in srgb,var(--ink) 8%,transparent);position:relative;overflow:hidden;flex:none}
+body.dark .relbar{background:rgba(244,228,219,0.12)}
+.relbar .paid{position:absolute;inset-block:0;inset-inline-start:0;background:var(--accent);border-radius:4px}
+.relbar .paid .dep{
+  position:absolute;inset-block:0;inset-inline-start:0;width:var(--depw,43%);
+  background:repeating-linear-gradient(-45deg,var(--accent) 0 5px,color-mix(in srgb,var(--accent) 30%,var(--canvas)) 5px 10px);
+}
+.relbar .outl{position:absolute;inset-block:0;inset-inline-start:var(--paidw,43%);right:0;border:1.5px dashed color-mix(in srgb,var(--ink2) 60%,transparent);border-radius:4px}
+.rel-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px var(--sp-lg) 0;font-size:13px;color:var(--ink2)}
+
+/* aging micro bar (chart 2) */
+.agebar{margin-top:6px;height:6px;border-radius:3px;background:transparent;position:relative;max-width:150px}
+.agebar .seg{position:absolute;inset-block:0;inset-inline-start:0;border-radius:3px;background:var(--ink2);opacity:.55}
+.agebar .seg.overdue{background:repeating-linear-gradient(-45deg,var(--warning) 0 4px,transparent 4px 8px);opacity:1}
+
+/* segmented composition row (chart 4) */
+.comprow{margin:var(--sp-sm) var(--sp-lg) 0}
+.comprow .track{height:26px;border-radius:6px;overflow:hidden;display:flex;direction:ltr}
+.comprow .free{background:var(--accent)}
+.comprow .amanah{background:repeating-linear-gradient(-45deg,var(--brand) 0 5px,color-mix(in srgb,var(--brand) 22%,var(--canvas)) 5px 10px)}
+.comprow .unalloc{background:repeating-radial-gradient(circle at 3px 3px,var(--ink2) 0 1.2px,transparent 1.3px 5px);opacity:.6}
+.comprow .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-size:13px;color:var(--ink2)}
+.comprow .legend b{color:var(--ink);font-weight:600}
+.comp-caption{font-size:13px;color:var(--ink2);line-height:20px;margin:8px var(--sp-lg) 0}
+
+/* week chart (chart 1) — SVG injected by JS */
+.chart-block{margin:var(--sp-sm) var(--sp-lg) 0;border-top:1px solid var(--hairline);padding-top:var(--sp-md)}
+.chart-head{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:13px;color:var(--ink2)}
+.chart-head .per{font-weight:500}
+.chart-title{font-size:16px;font-weight:600;margin-bottom:2px}
+.chart-svg{display:block;margin-top:8px}
+.chart-svg .bar-in{fill:var(--accent)}
+.chart-svg .bar-out{fill:var(--brand-text)}
+body.dark .chart-svg .bar-out{fill:var(--brand)}
+.chart-svg .daylbl{font-size:9.5px;fill:var(--ink2);font-family:var(--font-ar)}
+.chart-svg .vallbl{font-size:9px;fill:var(--ink2);font-family:var(--font-num)}
+.chart-svg .gapdot{stroke:var(--ink2);stroke-dasharray:2 3;stroke-width:1;fill:none}
+.chart-interp{font-size:13px;line-height:21px;color:var(--ink);margin-top:10px;border-top:1px dashed var(--hairline);padding-top:8px}
+.chart-foot{font-size:13px;color:var(--ink2);margin-top:4px}
+
+/* statement lines (six-line ledger) */
+.ledgerline{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px var(--sp-lg);border-bottom:1px solid var(--hairline)}
+.ledgerline .ll{font-size:15px;flex:1;min-width:0}
+.ledgerline .lqual{display:block;font-size:13px;color:var(--ink2)}
+.ledgerline .lv{flex:none;font-size:18px;font-weight:600}
+.cashline{padding:12px var(--sp-lg);display:flex;align-items:center;gap:10px;flex-direction:row}
+.cashline .num{font-size:22px;font-weight:700}
+.cashline .arrow{color:var(--ink2);font-size:18px}
+.period-switch{display:flex;align-items:center;gap:4px}
+.period-switch .pbtn{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink2);border-radius:var(--r-ctl)}
+.period-switch .pbtn:active{background:color-mix(in srgb,var(--brand-soft) 70%,transparent)}
+body.dark .period-switch .pbtn:active{background:rgba(213,145,114,0.12)}
+.period-switch .chev-l{transform:scaleX(calc(var(--chevdir,-1) * -1))}.period-switch .chev-r{transform:scaleX(var(--chevdir,-1))}
+
+/* ---------- 7. Sheets, dialogs, scrim (E1) ---------- */
+.scrim{position:absolute;inset:0;background:var(--scrim);opacity:0;visibility:hidden;transition:opacity 160ms var(--m-flat),visibility 0s linear 160ms;z-index:45}
+.scrim.show{opacity:1;visibility:visible;transition-delay:0s}
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;z-index:50;
+  background:var(--surface);border-radius:var(--r-sheet) var(--r-sheet) 0 0;
+  box-shadow:var(--e1);border-top:1px solid var(--hairline);
+  transform:translateY(105%);transition:transform 260ms var(--m-out);
+  max-height:92%;display:flex;flex-direction:column;
+}
+.sheet.closing{transition:transform 220ms var(--m-in)}
+.sheet.open{transform:translateY(0)}
+.sheet .grab{width:38px;height:4px;border-radius:2px;background:var(--hairline);margin:10px auto 2px;flex:none}
+.sheet .sheet-title{font-size:16px;font-weight:600;text-align:center;padding:8px var(--sp-lg) 4px;flex:none}
+.sheet .sheet-body{overflow-y:auto;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.sheet .sheet-close{position:absolute;top:8px;inset-inline-end:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;color:var(--ink2);font-size:18px}
+.menu-row{min-height:var(--row-h);padding:8px var(--sp-lg);display:flex;align-items:center;gap:var(--sp-md);width:100%;text-align:start;border-bottom:1px solid var(--hairline)}
+.menu-row:last-child{border-bottom:none}
+.menu-row .mi{width:24px;height:24px;flex:none;display:flex;align-items:center;justify-content:center;color:var(--brand-text)}
+body.dark .menu-row .mi{color:var(--brand)}
+.menu-row svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.menu-row .mt{flex:1;display:flex;flex-direction:column}
+.menu-row .mt .t1{font-size:15px;font-weight:600}
+.menu-row .mt .t2{font-size:13px;color:var(--ink2)}
+.menu-row .chev{color:var(--ink2);transform:scaleX(var(--chevdir,-1))}
+
+/* ---------- 8. NumericSurface (quick capture form) ---------- */
+.qc-form{padding:4px var(--sp-lg) 8px}
+.amount-label{font-size:13px;color:var(--ink2);margin-bottom:6px}
+.slotgrid{
+  direction:ltr;display:flex;align-items:baseline;justify-content:flex-end;gap:2px;
+  min-height:72px;padding:6px 4px;border-bottom:2px solid var(--hairline);
+  touch-action:pan-y;user-select:none;cursor:pointer;position:relative;
+  font-family:var(--font-num);font-variant-numeric:tabular-nums;
+  transition:border-color 100ms var(--m-flat);
+}
+.slotgrid.focused{border-bottom-color:var(--brand-text)}
+body.dark .slotgrid.focused{border-bottom-color:#8fd5d6}
+.slot{width:30px;text-align:center;font-size:38px;line-height:48px;font-weight:700;color:var(--ink);position:relative}
+.slot.dim{color:color-mix(in srgb,var(--ink2) 45%,transparent)}
+.slot.dec{width:30px}
+.slot.pt{width:16px;font-weight:500}
+.slot.pt .d{font-size:34px}
+.slot .cursor{position:absolute;inset-inline:6px;bottom:4px;height:2.5px;border-radius:2px;background:transparent}
+.slot.active .cursor{background:var(--brand-text)}
+body.dark .slot.active .cursor{background:#8fd5d6}
+.slot:active{background:color-mix(in srgb,var(--brand-soft) 60%,transparent)}
+.slotgrid .unitmark{margin-inline-end:12px;font-family:var(--font-ar);font-size:14px;color:var(--ink2);font-weight:500}
+.posrow{display:flex;align-items:center;justify-content:space-between;margin:10px 0 2px}
+.posrow .stepper{display:flex;align-items:center;gap:2px}
+.stepper .pbtn{min-width:48px;min-height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink2);border-radius:var(--r-ctl)}
+.stepper .pbtn:active{background:color-mix(in srgb,var(--brand) 12%,transparent)}
+.stepper .pbtn .chev{transform:scaleX(var(--chevdir,-1))}
+.posrow .poslbl{font-size:13px;color:var(--ink2)}
+.posrow .poslbl b{color:var(--ink)}
+.quickchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.quickchips .chip{min-height:44px}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 2px 0;direction:ltr}
+.keypad .key{
+  min-height:48px;border-radius:var(--r-ctl);font-family:var(--font-num);
+  font-size:22px;font-weight:500;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  transition:background 80ms var(--m-flat),transform 80ms var(--m-flat);
+}
+.keypad .key:active{background:color-mix(in srgb,var(--brand) 14%,transparent);transform:scale(0.97)}
+body.dark .keypad .key:active{background:rgba(213,145,114,0.16)}
+.keypad .key.fn{font-size:18px;color:var(--ink2)}
+.options-disc{margin-top:12px;border-top:1px solid var(--hairline)}
+.options-disc summary{
+  list-style:none;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;color:var(--ink2);padding:4px 2px;
+}
+.options-disc summary::-webkit-details-marker{display:none}
+.options-disc summary .chev{transform:scaleX(var(--chevdir,-1));transition:transform 150ms var(--m-out)}
+.options-disc[open] summary .chev{transform:scaleX(var(--chevdir,-1)) rotate(90deg)}
+.opt-row{padding:10px 2px;border-top:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.opt-row .ol{font-size:15px}
+.opt-row .ov{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:6px;min-height:44px}
+.walletpick{display:flex;gap:8px;flex-wrap:wrap}
+.walletpick .chip{min-height:44px}
+.walletpick .chip[aria-pressed="true"]{border-color:var(--accent-text);color:var(--accent-text);background:var(--accent-soft);font-weight:600}
+body.dark .walletpick .chip[aria-pressed="true"]{border-color:#8fd5d6;color:#8fd5d6;background:transparent}
+
+/* receipt (quiet completion) */
+.receipt{padding:var(--sp-lg) var(--sp-lg) 8px;text-align:center}
+.mark{
+  width:52px;height:52px;border-radius:50%;margin:0 auto 10px;
+  background:var(--success-soft);display:flex;align-items:center;justify-content:center;
+  animation:markin 200ms var(--m-out);
+}
+@keyframes markin{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+.mark svg{width:26px;height:26px;stroke:var(--success);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.receipt .closure{font-size:15px;line-height:26px;font-weight:500}
+.receipt .closure .num{font-weight:700}
+.receipt .subline{font-size:13px;color:var(--ink2);margin-top:4px}
+.receipt .actions{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:8px;flex-wrap:wrap}
+.receipt .actions .text-action{min-height:48px;font-size:14px}
+.receipt .actions .done{min-width:96px}
+
+/* inline error (preserves input) */
+.inline-error{
+  display:none;margin-top:10px;padding:10px var(--sp-md);border-radius:var(--r-ctl);
+  background:color-mix(in srgb,var(--danger) 8%,transparent);
+  font-size:13px;color:var(--danger);line-height:20px;text-align:start;
+}
+.inline-error.show{display:block;animation:fadein 150ms var(--m-flat)}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* ---------- 9. Dialogs (center, CorrectionPreview per DSY-17) ---------- */
+.dialog-scrim{position:absolute;inset:0;background:var(--scrim);z-index:60;opacity:0;visibility:hidden;transition:opacity 160ms var(--m-flat),visibility 0s 160ms;display:flex;align-items:center;justify-content:center;padding:24px}
+.dialog-scrim.show{opacity:1;visibility:visible;transition-delay:0s}
+.dialog{
+  width:100%;max-width:330px;background:var(--surface);border-radius:var(--r-sheet);
+  box-shadow:var(--e1);padding:var(--sp-lg);
+  transform:scale(0.96);opacity:0;transition:transform 200ms var(--m-out),opacity 150ms var(--m-flat);
+}
+.dialog-scrim.show .dialog{transform:scale(1);opacity:1}
+.dialog .dtitle{font-size:16px;font-weight:600;text-align:center}
+.dialog .dsub{font-size:13px;color:var(--ink2);text-align:center;margin-top:2px;line-height:19px}
+.dlist{margin-top:12px;border:1px solid var(--hairline);border-radius:var(--r-ctl);padding:6px 12px}
+.dlist .dh{font-size:13px;font-weight:600;color:var(--brand-text);padding:6px 0 2px}
+body.dark .dlist .dh{color:var(--brand)}
+.dlist .di{font-size:13px;color:var(--ink);line-height:21px;padding:4px 0;display:flex;gap:6px}
+.dlist .di::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--hairline);margin-top:8px;flex:none}
+.dialog .dactions{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.dialog .dactions .quiet{align-self:center}
+
+/* highlight (the ONE localized emphasis — DSY-18) */
+.located-highlight{position:relative}
+.located-highlight::after{
+  content:'';position:absolute;inset:-4px -8px;border-radius:6px;background:var(--accent-soft);
+  animation:hlfade 600ms var(--m-flat) forwards;pointer-events:none;
+}
+@keyframes hlfade{from{opacity:1}to{opacity:0}}
+
+/* skeletons (first-boot only — DSY-17) */
+.skel-row{min-height:var(--row-h);padding:10px var(--sp-lg);display:flex;align-items:center;gap:var(--sp-md);border-bottom:1px solid var(--hairline)}
+.skel{background:color-mix(in srgb,var(--ink2) 12%,transparent);border-radius:4px;animation:pulse 1200ms linear infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.skel-row .s1{flex:1;max-width:170px;height:15px}
+.skel-row .s2{flex:none;width:70px;height:16px}
+.skel-hero{margin:var(--sp-sm) var(--sp-lg) 0;height:42px;max-width:220px}
+.screen.skeleton .real{display:none}
+.screen:not(.skeleton) .skelwrap{display:none}
+
+/* honest empty (search no-match) */
+.empty-note{padding:26px var(--sp-lg);text-align:center;color:var(--ink2);font-size:14px;line-height:24px}
+.empty-note .e1{font-weight:600;color:var(--ink)}
+
+/* ---------- 10. Reduced motion (DSY-03: full alternatives) ---------- */
+body.rm *,body.rm *::before,body.rm *::after{
+  animation-duration:0.001s !important;animation-iteration-count:1 !important;
+  transition-duration:0.001s !important;transition-delay:0s !important;
+}
+body.rm .glyph.sync{animation:none}
+body.rm .skel{animation:none;opacity:.7}
+body.rm .mark{animation:none}
+body.rm .screen{transition:none !important;opacity:1 !important;transform:none !important;visibility:visible !important}
+body.rm .screen:not(.active){display:none}
+body.rm .sheet{transition:none}
+body.rm .located-highlight::after{display:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.001s !important;transition-duration:0.001s !important}
+  .glyph.sync{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="review" id="review">
+
+  <div class="review-head">
+    <h1>Micro — Visual Concept Review</h1>
+    <span class="sub" data-i18n="rev.delivery">micro-visual-product-concept-001 · Stage 2 · 06/09/2026</span>
+  </div>
+  <p class="review-note" data-i18n="rev.note">Review console — every control on this page sits outside the product frame. Inside the phone is the product itself: Arabic RTL by default, no development labels.</p>
+
+  <div class="console" role="group" aria-label="Review controls">
+    <div class="console-row">
+      <div class="console-group"><span class="lbl" data-i18n="rev.mode">Mode</span>
+        <div class="seg" id="seg-mode">
+          <button data-mode="app" aria-pressed="true" data-i18n="rev.modeApp">Recommended concept</button>
+          <button data-mode="compare" aria-pressed="false" data-i18n="rev.modeCompare">Compare directions</button>
+        </div>
+      </div>
+      <div class="console-group"><span class="lbl" data-i18n="rev.lang">Language</span>
+        <div class="seg" id="seg-lang">
+          <button data-lang="ar" aria-pressed="true">العربية · RTL</button>
+          <button data-lang="en" aria-pressed="false">English · LTR</button>
+        </div>
+      </div>
+      <div class="console-group"><span class="lbl" data-i18n="rev.theme">Theme</span>
+        <div class="seg" id="seg-theme">
+          <button data-theme="light" aria-pressed="true" data-i18n="rev.light">Light</button>
+          <button data-theme="dark" aria-pressed="false" data-i18n="rev.dark">Dark</button>
+        </div>
+      </div>
+      <div class="console-group"><span class="lbl" data-i18n="rev.motion">Motion</span>
+        <div class="seg" id="seg-motion">
+          <button data-motion="normal" aria-pressed="true" data-i18n="rev.motionNormal">Normal</button>
+          <button data-motion="reduced" aria-pressed="false" data-i18n="rev.motionReduced">Reduced</button>
+        </div>
+      </div>
+      <div class="console-group"><span class="lbl" data-i18n="rev.width">Width</span>
+        <div class="seg" id="seg-width">
+          <button data-w="320" aria-pressed="false">320</button>
+          <button data-w="360" aria-pressed="false">360</button>
+          <button data-w="390" aria-pressed="true">390</button>
+          <button data-w="430" aria-pressed="false">430</button>
+        </div>
+      </div>
+    </div>
+    <div class="demos" id="demos">
+      <button class="demo-btn" id="demo-sale" data-i18n="rev.demoSale">▶ Quiet save — full choreography</button>
+      <button class="demo-btn" id="demo-sync" data-i18n="rev.demoSync">▶ Offline → sync → synced</button>
+      <button class="demo-btn" id="demo-fail" data-i18n="rev.demoFail">▶ Save failure → recovery</button>
+      <button class="demo-btn" id="demo-skel" data-i18n="rev.demoSkel">▶ First-paint skeleton</button>
+      <button class="demo-btn" id="demo-guard" data-i18n="rev.demoGuard">▶ Discard guard</button>
+    </div>
+  </div>
+
+  <div class="review-layout">
+    <div class="stage mode-app" id="stage">
+
+      <!-- ============ THE PHONE ============ -->
+      <div class="device">
+        <div class="screen-glass">
+          <div class="cam"></div>
+          <div class="statusbar">
+            <span class="num" data-i18n="sb.time">8:26</span>
+            <span class="icons"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="wifi"></span><span class="batt"></span></span>
+          </div>
+
+          <div class="app" id="app" dir="rtl" lang="ar">
+            <div class="screens" id="screens">
+
+              <!-- ================= HOME · مشروعي الآن ================= -->
+              <section class="screen" id="scr-home" role="tabpanel" aria-labelledby="tab-home" tabindex="-1">
+                <div class="shead" id="shead-home">
+                  <div class="overline"><span data-i18n="home.overline">مشروعي الآن</span> · <span data-i18n="biz">مشغل ليان</span></div>
+                  <h1 class="q" data-i18n="home.q">ماذا عليّ اليوم؟</h1>
+                  <div class="dateline">
+                    <span data-i18n="home.date">السبت 12 أيلول 2026</span>
+                    <span class="statusword"><span class="glyph double" data-glyph="synced"></span><span data-i18n="st.synced">متزامن</span></span>
+                  </div>
+                  <div class="body-pad"></div>
+                </div>
+
+                <div class="truth-slot">
+                  <div class="truth-line" id="offline-line" hidden>
+                    <span class="glyph slash"></span><span data-i18n="home.offline">شغال بدون إنترنت — بياناتك محفوظة على هذا الجهاز</span>
+                  </div>
+                  <div class="truth-line">
+                    <span class="glyph emdash"></span>
+                    <span><span data-i18n="home.locality">بياناتك على هذا الجهاز فقط — آخر نسخة مصدّرة</span> <bdi class="num" dir="ltr">05/09/2026</bdi></span>
+                    <button class="lnk" data-i18n="home.settingsLink">الإعدادات</button>
+                  </div>
+                  <div class="truth-line" id="sync-line" hidden>
+                    <span class="glyph sync"></span><span data-i18n="st.syncing">جارٍ المزامنة…</span>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="home.today">اليوم</span></div>
+                  <button class="row" data-nav="orders">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="home.t1s">تسليم غدًا — صندوق خشبي</span> · <span data-i18n="nm.sara">سارة</span></span>
+                      <span class="cap"><span data-i18n="home.t1c">التسليم 13/09/2026 · الاتفاق مؤقت</span></span>
+                    </span>
+                    <span class="act" data-i18n="act.deliver">سلّم</span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">35.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <button class="row" data-nav="orders">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="home.t2s">تحصيل مستحق</span> · <span data-i18n="nm.khalid">خالد</span></span>
+                      <span class="cap"><span data-i18n="home.t2c">مستحق منذ</span> <bdi class="num" dir="ltr">11/09/2026</bdi></span>
+                    </span>
+                    <span class="act" data-i18n="act.collect">حصّل</span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <button class="row" data-nav="orders">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="home.t3s">أكمل تكلفة</span> · <span data-i18n="home.t3s2">طلب ريم</span></span>
+                      <span class="cap"><span data-i18n="home.t3c">مسودة — السعر والاتفاق غير مكتملين</span></span>
+                    </span>
+                    <span class="act" data-i18n="act.complete">أكمل</span>
+                    <span class="amount unk"><span class="money unknown"><bdi class="num" dir="ltr">—</bdi></span></span>
+                  </button>
+                  <button class="row" data-nav="orders">
+                    <span class="lead">
+                      <span class="subj" data-i18n="home.t4s">مواعيد قادمة</span>
+                      <span class="cap"><span data-i18n="home.t4c">قادمة</span> <bdi class="num" dir="ltr">15/09/2026</bdi> (+1)</span>
+                    </span>
+                    <span class="act" data-i18n="act.open">افتح</span>
+                    <span class="amount"></span>
+                  </button>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="home.facts">ما هو مسجّل حتى الآن؟</span></div>
+                  <div class="facts">
+                    <button class="fact" id="fact-cash" data-nav="finance">
+                      <span class="fl" data-i18n="facts.cash">الكاش المسجّل</span>
+                      <span class="fv"><span class="money"><bdi class="num" dir="ltr" id="cash-val">145.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                      <span class="fqual"><span data-i18n="facts.cashq">منها أمانات</span> <bdi class="num" dir="ltr">10.00</bdi> <span data-i18n="cur2">د.أ</span></span>
+                      <span class="chev">❯</span>
+                    </button>
+                    <button class="fact" data-nav="finance">
+                      <span class="fl" data-i18n="facts.rec">لي عند العملاء</span>
+                      <span class="fv"><span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                      <span class="fqual"><span data-i18n="facts.recq">دين مسجّل بعد التسليم</span></span>
+                      <span class="chev">❯</span>
+                    </button>
+                    <button class="fact" data-nav="finance">
+                      <span class="fl" data-i18n="facts.pay">عليّ للموردين</span>
+                      <span class="fv"><span class="money"><bdi class="num" dir="ltr">0.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                      <span class="fqual"><span data-i18n="facts.payq">لا مستحقات حالية</span></span>
+                      <span class="chev">❯</span>
+                    </button>
+                    <button class="fact" data-nav="finance">
+                      <span class="fl" data-i18n="facts.owner">مال المالك المسجّل</span>
+                      <span class="fv" data-i18n="st.unset">—</span>
+                      <span class="fqual"><span class="road" data-i18n="facts.ownerroad">غير مسجّل — سجّله (نقرة)</span></span>
+                      <span class="chev">❯</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="home.recent">ما تغيّر مؤخرًا</span><button class="more" data-i18n="home.viewlog">عرض السجل</button></div>
+                  <button class="row" data-nav="orders">
+                    <span class="lead">
+                      <span class="subj" data-i18n="home.r1">بيع مباشر — كوب قهوة</span>
+                      <span class="cap"><bdi class="num" dir="ltr">12/09/2026</bdi></span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">3.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <button class="row" data-nav="orders">
+                    <span class="lead">
+                      <span class="subj" data-i18n="home.r2">بيع مباشر — بسكويت لوز</span>
+                      <span class="cap"><bdi class="num" dir="ltr">12/09/2026</bdi></span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">2.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <button class="row" data-nav="finance">
+                    <span class="lead">
+                      <span class="subj" data-i18n="home.r3">مصروف — مواصلات</span>
+                      <span class="cap"><bdi class="num" dir="ltr">12/09/2026</bdi></span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num signed-out" dir="ltr">−1.50</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <div id="correction-note" hidden>
+                    <div class="ledgerline">
+                      <span class="ll"><span data-i18n="home.corr">تراجع موثّق — بيع مباشر</span><span class="lqual" data-i18n="home.corrq">تصحيح مع معاينة الأثر قبل التنفيذ</span></span>
+                      <span class="lv"><span class="money"><bdi class="num signed-out" dir="ltr">−3.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="quiet-links">
+                  <button data-i18n="lnk.foundation">صفحة الأساس</button><span class="sep">·</span>
+                  <button data-nav="finance" data-i18n="nav.finance">مالي</button><span class="sep">·</span>
+                  <button data-i18n="lnk.catalog">منتجاتي وخدماتي</button><span class="sep">·</span>
+                  <button data-nav="tools" data-i18n="nav.tools">أدواتي</button>
+                </div>
+                <div style="height:24px"></div>
+              </section>
+
+              <!-- ================= ORDERS · العمل ================= -->
+              <section class="screen" id="scr-orders" role="tabpanel" aria-labelledby="tab-orders" tabindex="-1">
+                <div class="shead">
+                  <div class="overline" data-i18n="nav.orders">العمل</div>
+                  <h1 class="q" data-i18n="orders.q">وين وصلت الطلبات والمسودات؟</h1>
+                  <div class="dateline"><span data-i18n="orders.sub">الأولوية أولًا — ثم السجلات</span></div>
+                  <div class="body-pad"></div>
+                </div>
+
+                <div class="decision decision-row">
+                  <span class="attention-mark"></span>
+                  <div class="dt"><span data-i18n="orders.d1">دين مستحق بعد التسليم</span>: <span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></div>
+                  <div class="dd" data-i18n="orders.d2">الباقي من كيكة شوكولة بيعت لخالد في 10/09</div>
+                  <button class="dlink" data-i18n="orders.d3">حصّل المتبقي أو سجّله دينًا</button>
+                </div>
+
+                <div class="searchbar">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+                  <input id="orders-search" type="search" data-i18n-ph="orders.searchPh" placeholder="ابحث بالاسم أو البند…" aria-label="بحث في السجلات">
+                  <button class="clear" id="orders-clear" hidden data-i18n="orders.clear">مسح</button>
+                </div>
+                <div class="chips" id="orders-chips">
+                  <button class="chip" data-filter="all" aria-pressed="true" data-i18n="f.all">الكل</button>
+                  <button class="chip" data-filter="orders" aria-pressed="false" data-i18n="f.orders">الطلبات</button>
+                  <button class="chip" data-filter="sales" aria-pressed="false" data-i18n="f.sales">المبيعات</button>
+                  <button class="chip" data-filter="drafts" aria-pressed="false" data-i18n="f.drafts">المسودات</button>
+                </div>
+
+                <div class="section" data-cat="orders">
+                  <div class="section-h"><span class="t" data-i18n="orders.mine">طلباتي</span></div>
+                  <button class="row" data-searchable="sara صندوق خشبي خشب" data-cat="orders">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="nm.sara">سارة</span> · <span data-i18n="od.sara.title">صندوق خشبي</span></span>
+                      <span class="cap">
+                        <span class="badge"><span class="glyph dashed"></span><span data-i18n="od.inprogress">قيد التنفيذ</span></span>
+                        · <span data-i18n="od.due">التسليم</span> <bdi class="num" dir="ltr">13/09/2026</bdi>
+                      </span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">35.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span><span class="capline"><span data-i18n="od.remaining">المتبقي</span> <bdi class="num" dir="ltr">20.00</bdi></span></span>
+                  </button>
+                  <div class="relbar" role="img" aria-label="طلب صندوق خشبي 35.00 دينار: محصّل 15.00 منها عربون محفوظ 15.00، متبقٍ 20.00">
+                    <div class="paid" style="--paidw:43%;--depw:43%"><div class="dep"></div></div>
+                    <div class="outl" style="--paidw:43%"></div>
+                  </div>
+                  <div class="rel-legend">
+                    <span><span data-i18n="od.collected">محصّل</span> <bdi class="num" dir="ltr">15.00</bdi> <span class="unit" data-i18n="cur3">د.أ</span></span>
+                    <span><span data-i18n="od.deposit">عربون محفوظ</span> <bdi class="num" dir="ltr">15.00</bdi> <span class="unit" data-i18n="cur3">د.أ</span></span>
+                    <span><span data-i18n="od.remaining2">متبقٍ</span> <bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur3">د.أ</span></span>
+                  </div>
+                  <div class="comp-caption" data-i18n="od.depnote">العربون كاش حقيقي في الدرج، مرتبط بطلب غير منجَز — يُطبَّق مرة واحدة عند الإكمال، وليس ربحًا بعد.</div>
+                </div>
+
+                <div class="section" data-cat="sales">
+                  <div class="section-h"><span class="t" data-i18n="orders.sales">مبيعاتي</span></div>
+                  <button class="row" data-searchable="خالد khalid كيكة شوكولا" data-cat="sales">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="nm.khalid">خالد</span> · <span data-i18n="od.khalid.title">كيكة شوكولا</span></span>
+                      <span class="cap">
+                        <span class="badge warn"><span class="glyph ring"></span><span data-i18n="st.due">مستحق</span></span>
+                        · <bdi class="num" dir="ltr">10/09/2026</bdi> · <span data-i18n="od.paidOf">قبض</span> <bdi class="num" dir="ltr">30.00</bdi> <span data-i18n="od.of">من</span> <bdi class="num" dir="ltr">50.00</bdi>
+                      </span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span><span class="capline" data-i18n="od.debtOn">دَين على خالد</span></span>
+                  </button>
+                  <button class="row" data-searchable="كوب قهوة coffee" data-cat="sales">
+                    <span class="lead">
+                      <span class="subj" data-i18n="od.coffee">كوب قهوة</span>
+                      <span class="cap">
+                        <span class="badge ok"><span class="glyph filled"></span><span data-i18n="st.paid">كامل</span></span>
+                        · <bdi class="num" dir="ltr">12/09/2026</bdi>
+                      </span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">3.00</bidi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <button class="row" data-searchable="بسكويت لوز" data-cat="sales">
+                    <span class="lead">
+                      <span class="subj" data-i18n="od.biscuit">بسكويت لوز</span>
+                      <span class="cap">
+                        <span class="badge ok"><span class="glyph filled"></span><span data-i18n="st.paid">كامل</span></span>
+                        · <bdi class="num" dir="ltr">12/09/2026</bdi>
+                      </span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">2.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                </div>
+
+                <div class="section" data-cat="drafts">
+                  <div class="section-h"><span class="t" data-i18n="orders.drafts">مسودات قيد الإكمال</span></div>
+                  <button class="row" data-searchable="ريم reem طلب ضيافة" data-cat="drafts">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="nm.reem">ريم</span> · <span data-i18n="od.reem.title">طلب ضيافة</span></span>
+                      <span class="cap"><span data-i18n="od.reem.next">الخطوة التالية: أكمل ما تعرفه الآن</span></span>
+                    </span>
+                    <span class="amount unk"><span class="money unknown"><bdi class="num" dir="ltr">—</bdi></span></span>
+                  </button>
+                </div>
+
+                <div class="section" data-cat="orders">
+                  <div class="section-h"><span class="t" data-i18n="orders.sched">المواعيد</span></div>
+                  <button class="row" data-searchable="سارة مواعيد" data-cat="orders">
+                    <span class="lead">
+                      <span class="subj"><span data-i18n="orders.sched1">غدًا 13/09 — تسليم صندوق سارة</span></span>
+                      <span class="cap" data-i18n="orders.sched2">(+1) موعد آخر خلال الأسبوع</span>
+                    </span>
+                    <span class="act" data-i18n="act.open">افتح</span>
+                    <span class="amount"></span>
+                  </button>
+                </div>
+
+                <div class="empty-note" id="orders-empty" hidden>
+                  <div class="e1" data-i18n="orders.empty1">لا نتائج مطابقة</div>
+                  <div data-i18n="orders.empty2">جرّب كلمة أقصر، أو أعد ضبط الم филиتر</div>
+                </div>
+
+                <div class="quiet-links">
+                  <button data-i18n="orders.newDraft">إنشاء مسودة أخرى</button><span class="sep">·</span>
+                  <button data-i18n="orders.newSale">تسجيل بيع مباشر</button>
+                </div>
+                <div style="height:24px"></div>
+              </section>
+
+              <!-- ================= FINANCE · مالي ================= -->
+              <section class="screen" id="scr-finance" role="tabpanel" aria-labelledby="tab-finance" tabindex="-1">
+                <div class="shead" id="shead-finance">
+                  <div class="overline" data-i18n="nav.finance">مالي</div>
+                  <h1 class="q" data-i18n="fin.q">وين الكاش؟ وإيش القرار المالي عليّ؟</h1>
+                  <div class="body-pad"></div>
+                </div>
+
+                <div class="hero-block" role="group" aria-label="الكاش المسجل الآن 145.00 دينار">
+                  <div class="hl" data-i18n="fin.cashNow">الكاش المسجّل الآن</div>
+                  <span class="money hero"><bdi class="num" dir="ltr" id="fin-cash">145.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span>
+                  <div class="hero-statusline">
+                    <span class="statusword"><span class="glyph filled"></span><span data-i18n="st.recorded">مسجّل</span></span>
+                    · <span data-i18n="fin.period">الفترة 1–30 أيلول</span>
+                  </div>
+                </div>
+
+                <div class="decision decision-row">
+                  <span class="attention-mark"></span>
+                  <div class="dt"><span data-i18n="fin.d1">قبض متوقع قريب</span>: <span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></div>
+                  <div class="dd" data-i18n="fin.d2">دين خالد يستحق منذ 11/09 — راجعه قبل الوعد القادم</div>
+                </div>
+                <div style="padding:12px 16px 0">
+                  <button class="btn-primary" id="fin-primary"><span data-i18n="fin.primary">سجّل قبضًا أو دفعًا متوقعًا</span></button>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="fin.comp">ممّ يتكوّن الكاش؟</span></div>
+                  <div class="comprow" role="img" aria-label="الكاش المسجل 145.00 دينار: 135.00 حرة الاستخدام و10.00 أمانات">
+                    <div class="track">
+                      <div class="free" style="width:93.1%"></div>
+                      <div class="amanah" style="width:6.9%"></div>
+                    </div>
+                    <div class="legend">
+                      <span><b><bdi class="num" dir="ltr">135.00</bdi></b> <span data-i18n="fin.free">حرّة الاستخدام</span></span>
+                      <span><b><bdi class="num" dir="ltr">10.00</bdi></b> <span data-i18n="fin.amanah">أمانات</span></span>
+                    </div>
+                    <div class="comp-caption" data-i18n="fin.amnote">الأمانات كاش حقيقي في الدرج لكنه ليس لك ولا يدخل الربح.</div>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="fin.position">الوضع المسجّل</span></div>
+                  <div class="facts">
+                    <button class="fact" data-nav="home">
+                      <span class="fl" data-i18n="facts.cash">الكاش المسجّل</span>
+                      <span class="fv"><span class="money"><bdi class="num" dir="ltr">145.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                      <span class="fqual" data-i18n="fin.cashq">محافظ معلنة + غير موزّع</span>
+                      <span class="chev">❯</span>
+                    </button>
+                    <button class="fact" data-nav="orders">
+                      <span class="fl" data-i18n="facts.rec">لي عند العملاء</span>
+                      <span class="fv"><span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                      <span class="fqual" data-i18n="facts.recq">دين مسجّل بعد التسليم</span>
+                      <span class="chev">❯</span>
+                    </button>
+                    <button class="fact">
+                      <span class="fl" data-i18n="facts.pay">عليّ للموردين</span>
+                      <span class="fv"><span class="money"><bdi class="num" dir="ltr">0.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                      <span class="fqual" data-i18n="facts.payq">لا مستحقات حالية</span>
+                      <span class="chev">❯</span>
+                    </button>
+                    <button class="fact">
+                      <span class="fl" data-i18n="facts.owner">مال المالك المسجّل</span>
+                      <span class="fv" data-i18n="st.unset">—</span>
+                      <span class="fqual"><span class="road" data-i18n="facts.ownerroad2">غير مسجّل — سجّله (نقرة)</span></span>
+                      <span class="chev">❯</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="fin.layers">التفاصيل</span></div>
+                  <button class="row" data-nav="statement">
+                    <span class="lead">
+                      <span class="subj" data-i18n="fin.l1">قراءة الفترة — كيف كان أسبوعي؟</span>
+                      <span class="cap" data-i18n="fin.l1c">كشف الأسبوع 06/09–12/09</span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">62.50</bdi> <span class="unit" data-i18n="cur">د.أ</span></span><span class="capline" data-i18n="fin.net">صافي الأسبوع</span></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="fin.l2">صورة الطلبات: قبض ودين ونتائج</span>
+                    </span>
+                    <span class="act" data-i18n="act.open">افتح</span>
+                    <span class="amount"></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="fin.l3">التغطية والتعادل + سجل المتوقعات</span>
+                    </span>
+                    <span class="act" data-i18n="act.open">افتح</span>
+                    <span class="amount"></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="fin.l4">عربونات محفوظة</span>
+                      <span class="cap" data-i18n="fin.l4c">سيولة مرتبطة بطلبات غير منجزة</span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">15.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="fin.l5">السجل — كل حركة موثقة</span>
+                    </span>
+                    <span class="act" data-i18n="act.open">افتح</span>
+                    <span class="amount"></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="fin.l6">تصحيحاتي الموثقة</span>
+                      <span class="cap" data-i18n="fin.l6c">كل تصحيح بمعاينة أثر قبل التنفيذ</span>
+                    </span>
+                    <span class="act" data-i18n="act.open">افتح</span>
+                    <span class="amount"></span>
+                  </button>
+                </div>
+
+                <div class="truth-slot" style="margin-top:16px">
+                  <div class="truth-line" id="fin-offline" hidden>
+                    <span class="glyph slash"></span><span data-i18n="home.offline">شغال بدون إنترنت — كل الأرقام من هذا الجهاز</span>
+                  </div>
+                </div>
+                <div style="height:24px"></div>
+              </section>
+
+              <!-- ================= STATEMENT · كشف الأسبوع (stack reader) ================= -->
+              <section class="screen" id="scr-statement" role="tabpanel" aria-labelledby="tab-statement-h" tabindex="-1">
+                <div class="shead">
+                  <div class="dateline" style="margin-top:8px">
+                    <button class="text-action back-btn" id="stmt-back" style="min-height:44px;padding:0 4px" aria-label="رجوع">
+                      <span class="chev" style="display:inline-block;transform:scaleX(calc(var(--chevdir,-1) * -1))">❯</span>
+                      <span data-i18n="nav.back">رجوع</span>
+                    </button>
+                    <span class="overline" id="tab-statement-h" data-i18n="stmt.overline">مالي · كشف الأسبوع</span>
+                  </div>
+                  <h1 class="q" data-i18n="stmt.q">كيف تحرّك أسبوعي؟</h1>
+                  <div class="dateline">
+                    <div class="period-switch">
+                      <button class="pbtn" id="per-prev" aria-label="الأسبوع السابق"><span class="chev chev-l">❯</span></button>
+                      <span class="per"><bdi class="num" dir="ltr">06/09/2026</bdi> <span data-i18n="stmt.to">إلى</span> <bdi class="num" dir="ltr">12/09/2026</bdi></span>
+                      <button class="pbtn" id="per-next" disabled aria-label="الأسبوع القادم"><span class="chev chev-r" style="opacity:.3">❯</span></button>
+                    </div>
+                    <span class="statusword"><span class="glyph filled"></span><span data-i18n="st.recorded">مسجّل</span></span>
+                  </div>
+                  <div class="body-pad"></div>
+                </div>
+
+                <div class="skelwrap">
+                  <div class="skel skel-hero"></div>
+                  <div class="skel-row"><div class="skel s1"></div><div class="skel s2"></div></div>
+                  <div class="skel-row"><div class="skel s1"></div><div class="skel s2"></div></div>
+                  <div class="skel-row"><div class="skel s1"></div><div class="skel s2"></div></div>
+                  <div class="truth-line" style="margin:12px 16px 0;color:var(--ink2);font-size:13px" data-i18n="st.loadingFirst">جارٍ قراءة السجلات أول مرة…</div>
+                </div>
+
+                <div class="real">
+                  <div class="cashline">
+                    <bdi class="num" dir="ltr">82.50</bdi> <span class="unit" data-i18n="cur4" style="font-size:13px;color:var(--ink2)">د.أ</span>
+                    <span class="arrow" id="cash-arrow" aria-hidden="true">←</span>
+                    <bdi class="num" dir="ltr">145.00</bdi> <span class="unit" data-i18n="cur4" style="font-size:13px;color:var(--ink2)">د.أ</span>
+                    <span style="flex:1"></span>
+                    <span style="font-size:13px;color:var(--ink2)" data-i18n="stmt.weeknet">صافي الأسبوع +62.50</span>
+                  </div>
+
+                  <div class="chart-block">
+                    <div class="chart-title" data-i18n="ch1.title">قبض وصرف — يوم بيوم</div>
+                    <div class="chart-head">
+                      <span class="per"><bdi class="num" dir="ltr">06/09/2026</bdi> <span data-i18n="stmt.to">إلى</span> <bdi class="num" dir="ltr">12/09/2026</bdi></span>
+                      <span>· <span data-i18n="cur5">د.أ</span></span>
+                      <span class="statusword" style="margin-inline-start:auto"><span class="glyph filled"></span><span data-i18n="st.recorded">مسجّل</span></span>
+                    </div>
+                    <svg class="chart-svg" id="week-chart" viewBox="0 0 326 120" role="img" aria-label=""></svg>
+                    <div class="chart-foot"><span data-i18n="ch1.legend">قبض</span> <span style="color:var(--accent)">●</span> <span data-i18n="ch1.legend2">صرف</span> <span style="color:var(--brand-text)">●</span> · <span data-i18n="ch1.gap">أيام بلا تسجيل: الجمعة 11/09 — لا يُرسم صفرًا</span></div>
+                    <p class="chart-interp" data-i18n="ch1.interp">هذا الأسبوع: قبضت 85.00 د.أ وصرفت 22.50 د.أ — أعلى يوم قبض كان الخميس 10/09 (40.00 د.أ).</p>
+                  </div>
+
+                  <div class="section">
+                    <div class="section-h"><span class="t" data-i18n="stmt.lines">خلاصة الأسبوع</span></div>
+                    <div class="ledgerline">
+                      <span class="ll" data-i18n="stmt.l1">القبض النقدي<span class="lqual" data-i18n="stmt.l1q">مبيعات + عربون سارة</span></span>
+                      <span class="lv"><span class="money"><bdi class="num" dir="ltr">85.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </div>
+                    <div class="ledgerline">
+                      <span class="ll" data-i18n="stmt.l2">الصرف النقدي<span class="lqual" data-i18n="stmt.l2q">خامات + تغليف + مواصلات</span></span>
+                      <span class="lv"><span class="money"><bdi class="num signed-out" dir="ltr">−22.50</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </div>
+                    <div class="ledgerline">
+                      <span class="ll" data-i18n="stmt.l3">لي عند الناس<span class="lqual" data-i18n="stmt.l3q">دين خالد من كيكة 10/09</span></span>
+                      <span class="lv"><span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </div>
+                    <div class="ledgerline">
+                      <span class="ll" data-i18n="stmt.l4">عربونات محفوظة<span class="lqual" data-i18n="stmt.l4q">عربون سارة — سيولة وليست ربحًا</span></span>
+                      <span class="lv"><span class="money"><bdi class="num" dir="ltr">15.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </div>
+                    <div class="ledgerline">
+                      <span class="ll" data-i18n="stmt.l5">ربح الأسبوع<span class="lqual" data-i18n="stmt.l5q">تكلفة بيعين غير معروفة — نصف النتائج تقديري</span></span>
+                      <span class="lv"><span class="badge est"><span class="glyph dashed"></span><span data-i18n="st.estimated">تقديري</span></span> <span class="money"><bdi class="num" dir="ltr">~55.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </div>
+                    <div class="ledgerline">
+                      <span class="ll" data-i18n="stmt.l6">ربح كيكة الخميس<span class="lqual" data-i18n="stmt.l6q">التكلفة غير مسجلة لهذا البيع</span></span>
+                      <span class="lv" style="color:var(--ink2)" data-i18n="st.unavail">غير متاح</span>
+                    </div>
+                  </div>
+
+                  <div class="section">
+                    <div class="section-h"><span class="t" data-i18n="stmt.aging">مين علينا؟ ومَن مدين لي؟</span></div>
+                    <button class="row">
+                      <span class="lead">
+                        <span class="subj"><span data-i18n="nm.khalid">خالد</span> · <span data-i18n="od.khalid.title">كيكة شوكولا</span></span>
+                        <span class="cap">
+                          <span class="badge warn"><span class="glyph ring"></span><span data-i18n="st.overdue">متأخر</span></span>
+                          · <span data-i18n="ag.since">مستحق منذ</span> <bdi class="num" dir="ltr">11/09/2026</bdi> (يوم واحد)
+                        </span>
+                        <span class="agebar"><span class="seg overdue" style="width:100%"></span></span>
+                      </span>
+                      <span class="act" data-i18n="act.collect">حصّل</span>
+                      <span class="amount"><span class="money"><bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </button>
+                    <button class="row">
+                      <span class="lead">
+                        <span class="subj"><span data-i18n="nm.sara">سارة</span> · <span data-i18n="ag.sara">عربون صندوق خشبي</span></span>
+                        <span class="cap">
+                          <span class="badge est"><span class="glyph dashed"></span><span data-i18n="st.held">عربون محفوظ</span></span>
+                          · <span data-i18n="ag.saraq">مرتبط بطلب غير منجَز — التسليم غدًا</span>
+                        </span>
+                        <span class="agebar"><span class="seg" style="width:0%"></span></span>
+                      </span>
+                      <span class="amount"><span class="money"><bdi class="num" dir="ltr">15.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                    </button>
+                    <div class="comp-caption" data-i18n="ag.note">العربون ليس دينًا ولا ربحًا — يُحسب مرة واحدة عند إكمال الطلب.</div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ================= TOOLS · أدواتي ================= -->
+              <section class="screen" id="scr-tools" role="tabpanel" aria-labelledby="tab-tools" tabindex="-1">
+                <div class="shead">
+                  <div class="overline" data-i18n="nav.tools">أدواتي</div>
+                  <h1 class="q" data-i18n="tools.q">احسب قبل أن تلتزم</h1>
+                  <div class="dateline"><span data-i18n="tools.rule">تقدير فقط — لا يسجّل شيئًا ولا يغيّر مالك</span></div>
+                  <div class="body-pad"></div>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="tools.calc">حاسبة السعر</span></div>
+                  <div class="row" style="border-top:1px solid var(--hairline)">
+                    <span class="lead">
+                      <span class="subj" data-i18n="tools.sale">سعر البيع المتوقع</span>
+                      <span class="cap" data-i18n="tools.saleq">الرقم الذي ستعطيه للزبون</span>
+                    </span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">10.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </div>
+                  <div class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="tools.cost">هل تعرف التكلفة؟</span>
+                    </span>
+                    <span class="walletpick" style="flex:none">
+                      <button class="chip" id="cost-known" aria-pressed="false" data-i18n="tools.known">نعم — 5.00</button>
+                      <button class="chip" id="cost-unknown" aria-pressed="true" data-i18n="tools.unknown">لا أعرف الآن</button>
+                    </span>
+                  </div>
+                  <div id="tools-resultbar" style="padding:10px 16px;margin-top:4px;border-top:1px solid var(--hairline)">
+                    <div class="truth-line" style="color:var(--ink);font-size:14px">
+                      <span class="glyph emdash"></span>
+                      <span><span data-i18n="tools.resUnavail">الربح غير متاح — سجّل التكلفة لاحقًا من مصدرها</span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="tools.saved">تقديراتي المحفوظة</span></div>
+                  <button class="row">
+                    <span class="lead">
+                      <span class="subj" data-i18n="tools.e1">تقدير كيكة شوكولا</span>
+                      <span class="cap"><bdi class="num" dir="ltr">10/09/2026</bdi> · <span data-i18n="tools.e1c">السعر 10.00 · التكلفة تقديرية</span></span>
+                    </span>
+                    <span class="act" data-i18n="tools.draft">ابدأ مسودة</span>
+                    <span class="amount"><span class="money"><bdi class="num" dir="ltr">10.00</bdi> <span class="unit" data-i18n="cur">د.أ</span></span></span>
+                  </button>
+                </div>
+
+                <div class="section">
+                  <div class="section-h"><span class="t" data-i18n="tools.modules">حالة الوحدات</span></div>
+                  <button class="row">
+                    <span class="lead"><span class="subj" data-i18n="tools.m1">دفتر الناس</span><span class="cap" data-i18n="tools.m1c">دين واحد قائم</span></span>
+                    <span class="badge warn"><span class="glyph ring"></span><span data-i18n="tools.attention">انتباه</span></span>
+                    <span class="amount"></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead"><span class="subj" data-i18n="tools.m2">المواعيد</span><span class="cap" data-i18n="tools.m2c">2 خلال الأسبوع القادم</span></span>
+                    <span class="badge ok"><span class="glyph filled"></span><span data-i18n="tools.active">نشط</span></span>
+                    <span class="amount"></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead"><span class="subj" data-i18n="tools.m3">المخزون والمواد</span><span class="cap" data-i18n="tools.m3c">خامتان تحت الحد</span></span>
+                    <span class="badge ok"><span class="glyph filled"></span><span data-i18n="tools.active">نشط</span></span>
+                    <span class="amount"></span>
+                  </button>
+                  <button class="row">
+                    <span class="lead"><span class="subj" data-i18n="tools.m4">الموردون</span><span class="cap" data-i18n="tools.m4c">لا مستحقات</span></span>
+                    <span class="badge"><span class="glyph hollow"></span><span data-i18n="tools.idle">هادئ</span></span>
+                    <span class="amount"></span>
+                  </button>
+                </div>
+                <div style="height:24px"></div>
+              </section>
+
+            </div><!-- /screens -->
+
+            <!-- ================= BOTTOM NAV (five destinations + center FAB) ================= -->
+            <nav class="bottomnav" id="bottomnav" role="tablist" aria-label="التنقل الرئيسي">
+              <button class="nav-item" id="tab-home" role="tab" data-nav="home" aria-current="page">
+                <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10.5V20h12v-9.5"/><path d="M10 20v-5h4v5"/></svg></span>
+                <span class="nl" data-i18n="nav.home">مشروعي الآن</span>
+              </button>
+              <button class="nav-item" id="tab-orders" role="tab" data-nav="orders">
+                <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h16v12H4z"/><path d="M9 8V5h6v3"/><path d="M4 13h16"/></svg></span>
+                <span class="nl" data-i18n="nav.orders">العمل</span>
+              </button>
+              <button class="fab" id="fab" aria-label="سجّل — مركز التسجيل السريع" data-i18n="nav.fab">سجّل</button>
+              <button class="nav-item" id="tab-finance" role="tab" data-nav="finance">
+                <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 6V4h8v2"/><path d="M4 11h16"/><path d="M9 15h6"/></svg></span>
+                <span class="nl" data-i18n="nav.finance">مالي</span>
+              </button>
+              <button class="nav-item" id="tab-tools" role="tab" data-nav="tools">
+                <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span>
+                <span class="nl" data-i18n="nav.tools">أدواتي</span>
+              </button>
+            </nav>
+
+            <!-- scrim for sheets -->
+            <div class="scrim" id="scrim"></div>
+
+            <!-- ================= QUICK CAPTURE SHEET · سجّل ================= -->
+            <div class="sheet" id="sheet-record" role="dialog" aria-modal="true" aria-labelledby="sheet-title-el">
+              <div class="grab"></div>
+              <button class="sheet-close" id="sheet-close" aria-label="إغلاق">✕</button>
+              <div class="sheet-title" id="sheet-title-el" data-i18n="qc.title">ماذا تريد أن تسجّل؟</div>
+              <div class="sheet-body">
+
+                <!-- menu -->
+                <div id="sheet-menu">
+                  <button class="menu-row" id="qc-sale">
+                    <span class="mi"><svg viewBox="0 0 24 24"><path d="M12 7v10M7 12h10"/></svg></span>
+                    <span class="mt"><span class="t1" data-i18n="qc.sale">تسجيل بيع</span><span class="t2" data-i18n="qc.salec">احفظ بيعًا مباشرًا من دون إنشاء طلب</span></span>
+                    <span class="chev">❯</span>
+                  </button>
+                  <button class="menu-row" id="qc-expense">
+                    <span class="mi"><svg viewBox="0 0 24 24"><path d="M12 7v10M7 12h10"/></svg></span>
+                    <span class="mt"><span class="t1" data-i18n="qc.expense">تسجيل مصروف</span><span class="t2" data-i18n="qc.expensec">سجّل مصروفًا مدفوعًا في لحظته</span></span>
+                    <span class="chev">❯</span>
+                  </button>
+                  <button class="menu-row">
+                    <span class="mi"><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg></span>
+                    <span class="mt"><span class="t1" data-i18n="qc.order">طلب من عميل</span><span class="t2" data-i18n="qc.orderc">ابدأ مسودة طلب واتفاق أولي</span></span>
+                    <span class="chev">❯</span>
+                  </button>
+                  <button class="menu-row">
+                    <span class="mi"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6"/></svg></span>
+                    <span class="mt"><span class="t1" data-i18n="qc.draft">مسودة تصميم</span><span class="t2" data-i18n="qc.draftc">ابدأ مسودة قبل الاتفاق</span></span>
+                    <span class="chev">❯</span>
+                  </button>
+                  <button class="menu-row" id="qc-collect">
+                    <span class="mi"><svg viewBox="0 0 24 24"><path d="M4 8h16v9H4z"/><path d="M4 8 8 4h8l4 4"/><path d="M9 12.5h6"/></svg></span>
+                    <span class="mt"><span class="t1" data-i18n="qc.collect">تحصيل أو عربون</span><span class="t2"><span data-i18n="qc.collectc">حصّل دينًا قائمًا باسم صاحبه</span> — <span data-i18n="nm.khalid">خالد</span> <bdi class="num" dir="ltr">20.00</bdi> <span class="unit" data-i18n="cur6">د.أ</span></span></span>
+                    <span class="chev">❯</span>
+                  </button>
+                </div>
+
+                <!-- sale form (NumericSurface) -->
+                <div id="sheet-form" hidden>
+                  <div class="qc-form">
+                    <div class="amount-label"><span data-i18n="qc.amount">المبلغ المحصّل</span> (<span data-i18n="cur7">د.أ</span>)</div>
+                    <div class="slotgrid" id="slotgrid" tabindex="0" role="group" aria-label="المبلغ — خانات الأرقام">
+                      <span class="unitmark" data-i18n="cur8">د.أ</span>
+                    </div>
+                    <div class="posrow">
+                      <span class="poslbl"><span data-i18n="qc.position">الخانة النشطة</span>: <b id="posname" data-i18n="pos.ones">الآحاد</b></span>
+                      <div class="stepper">
+                        <button class="pbtn" id="pos-prev" aria-label="الخانة السابقة"><span style="display:inline-block;transform:scaleX(-1)">❯</span></button>
+                        <button class="pbtn" id="pos-next" aria-label="الخانة التالية"><span class="chev" style="transform:scaleX(1)">❯</span></button>
+                      </div>
+                    </div>
+                    <div class="keypad" id="keypad">
+                      <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+                      <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+                      <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+                      <button class="key fn" data-k="." aria-label="الانتقال إلى الكسور">٫</button><button class="key" data-k="0">0</button><button class="key fn" data-k="back" aria-label="امسح خانة">⌫</button>
+                    </div>
+                    <div class="quickchips">
+                      <button class="chip" data-add="5">+5</button>
+                      <button class="chip" data-add="10">+10</button>
+                      <button class="chip" data-add="20">+20</button>
+                      <button class="chip" data-add="50">+50</button>
+                    </div>
+                    <div style="padding-top:12px">
+                      <button class="btn-primary" id="qc-save"><span id="qc-save-label" data-i18n="qc.save">سجّل البيع</span></button>
+                    </div>
+                    <div class="inline-error" id="qc-error" role="alert"></div>
+                    <details class="options-disc">
+                      <summary><span class="chev">❯</span><span data-i18n="qc.more">خيارات أكثر</span></summary>
+                      <div class="opt-row">
+                        <span class="ol" data-i18n="qc.what">ما الذي بعته؟</span>
+                        <span class="ov"><span data-i18n="qc.whatv">كوب قهوة — اختياري</span></span>
+                      </div>
+                      <div class="opt-row">
+                        <span class="ol" data-i18n="qc.costknown">هل تعرف تكلفته؟</span>
+                        <span class="ov"><span class="badge est"><span class="glyph dashed"></span><span data-i18n="qc.costv">لا أعرف الآن — الربح «غير متاح» لا صفر</span></span></span>
+                      </div>
+                      <div class="opt-row">
+                        <span class="ol" data-i18n="qc.remainingq">هل بقي شيء عليه؟</span>
+                        <span class="ov"><span data-i18n="qc.remainingv">قُبض المبلغ كاملًا</span></span>
+                      </div>
+                      <div class="opt-row">
+                        <span class="ol" data-i18n="qc.wallet">محفظة القبض</span>
+                        <span class="walletpick">
+                          <button class="chip" aria-pressed="true" data-i18n="qc.drawer">الدرج</button>
+                          <button class="chip" aria-pressed="false" data-i18n="qc.unalloc">اتركه غير موزّع</button>
+                        </span>
+                      </div>
+                    </details>
+                  </div>
+                </div>
+
+                <!-- receipt (quiet completion) -->
+                <div id="sheet-receipt" hidden>
+                  <div class="receipt">
+                    <div class="mark"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+                    <p class="closure" id="receipt-closure"></p>
+                    <p class="subline" id="receipt-subline"></p>
+                    <div class="actions">
+                      <button class="text-action" data-i18n="qc.openlog">افتح السجل</button>
+                      <button class="text-action" id="receipt-undo" data-i18n="qc.undo">تراجع</button>
+                      <button class="btn-primary done" id="receipt-done" style="width:auto;padding:6px 24px"><span data-i18n="qc.done">تم</span></button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- CorrectionPreview dialog (the only bordered lists) -->
+            <div class="dialog-scrim" id="dlg-correct" aria-hidden="true">
+              <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-correct-title">
+                <div class="dtitle" id="dlg-correct-title" data-i18n="cp.title">معاينة الأثر — تراجع موثّق</div>
+                <div class="dsub" data-i18n="cp.sub">الأصل يُحفظ دائمًا؛ التراجع يُسجَّل كتصحيح موثّق</div>
+                <div class="dlist">
+                  <div class="dh" data-i18n="cp.will">ما يتغيّر</div>
+                  <div class="di"><span data-i18n="cp.w1">الكاش يرجع من 165.00 إلى 145.00 (−20.00 د.أ)</span></div>
+                  <div class="di"><span data-i18n="cp.w2">يُلغى أثر سجل البيع المباشر بقيمة 20.00 د.أ</span></div>
+                </div>
+                <div class="dlist">
+                  <div class="dh" data-i18n="cp.wont">ما لا يتغيّر</div>
+                  <div class="di"><span data-i18n="cp.n1">دين خالد (20.00 د.أ) وبقية السجلات كما هي</span></div>
+                  <div class="di"><span data-i18n="cp.n2">طلب سارة وعربونها المحفوظ</span></div>
+                </div>
+                <div class="dactions">
+                  <button class="btn-primary" id="cp-execute"><span data-i18n="cp.execute">نفّذ التراجع موثقًا</span></button>
+                  <button class="text-action quiet" id="cp-cancel" data-i18n="cp.cancel">إلغاء</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Discard guard -->
+            <div class="dialog-scrim" id="dlg-guard" aria-hidden="true">
+              <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-guard-title">
+                <div class="dtitle" id="dlg-guard-title" data-i18n="g.title">في رقم مكتوب — تسجّله أو تتجاهله؟</div>
+                <div class="dsub" id="guard-sub"></div>
+                <div class="dactions">
+                  <button class="btn-primary" id="g-stay"><span data-i18n="g.stay">ابقَ وكمّل التسجيل</span></button>
+                  <button class="text-action quiet" id="g-discard" data-i18n="g.discard">تجاهل الرقم وأغلق</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="liveregion" aria-live="polite" class="sr-only"></div>
+          </div><!-- /app -->
+        </div><!-- /screen-glass -->
+      </div><!-- /device -->
+    </div><!-- /stage -->
+
+      <!-- ============ COMPARE DIRECTIONS ============ -->
+      <div class="compare-wrap" id="compare-view" hidden>
+        <div class="compare-col winner">
+          <span class="tag" data-i18n="cmp.aTag">A · دفتر هادئ — Recommended</span>
+          <div class="preview-shell"><div class="preview-frame pv pv-a">
+            <div class="pv-shead">
+              <div class="pv-over" data-i18n="home.overline">مشروعي الآن</div>
+              <div class="pv-q" data-i18n="home.q">ماذا عليّ اليوم؟</div>
+              <div class="pv-rule"></div>
+            </div>
+            <div class="pv-truth" data-i18n="cmp.aTruth">متزامن · بياناتك على جهازك</div>
+            <div class="pv-row"><span class="pv-subj"><span data-i18n="nm.sara">سارة</span> · <span data-i18n="od.sara.title">صندوق خشبي</span></span><span class="pv-amt"><bdi class="num" dir="ltr">35.00</bdi></span></div>
+            <div class="pv-row"><span class="pv-subj"><span data-i18n="nm.khalid">خالد</span> · <span data-i18n="home.t2s">تحصيل مستحق</span></span><span class="pv-amt"><bdi class="num" dir="ltr">20.00</bdi></span></div>
+            <div class="pv-row"><span class="pv-subj"><span data-i18n="home.t3s2">طلب ريم</span></span><span class="pv-amt">—</span></div>
+            <div class="pv-facts">
+              <div><span class="pv-fl" data-i18n="facts.cash">الكاش المسجّل</span><b class="num" dir="ltr">145.00</b></div>
+              <div><span class="pv-fl" data-i18n="facts.rec">لي عند العملاء</span><b class="num" dir="ltr">20.00</b></div>
+              <div><span class="pv-fl" data-i18n="facts.pay">عليّ للموردين</span><b class="num" dir="ltr">0.00</b></div>
+              <div><span class="pv-fl" data-i18n="facts.owner">مال المالك</span><b>—</b></div>
+            </div>
+            <div class="pv-nav"><span data-i18n="nav.home">مشروعي الآن</span><span data-i18n="nav.orders">العمل</span><b class="pv-fab" data-i18n="nav.fab">سجّل</b><span data-i18n="nav.finance">مالي</span><span data-i18n="nav.tools">أدواتي</span></div>
+          </div></div>
+          <div class="mini-rules"><b data-i18n="cmp.aR1">Ledger grammar:</b> <span data-i18n="cmp.aR1t">fixed 88px tabular amount column · hairline rhythm · 2 elevation levels · radius 0/4/12 · hero 34px · «—» in the number position · 4 motion primitives</span></div>
+          <div class="verdict" data-i18n="cmp.aV">Wins on trust-as-typography, RTL naturalness, and countable calm — 28/30 in the adversarial ranking.</div>
+        </div>
+
+        <div class="compare-col rejected">
+          <span class="tag" data-i18n="cmp.bTag">B · مكتب المالك — Rejected</span>
+          <div class="preview-shell"><div class="preview-frame pv pv-b">
+            <div class="pv-shell">
+              <div class="pv-shell-over" data-i18n="fin.cashNow">الكاش المسجّل الآن</div>
+              <div class="pv-shell-fig"><bdi class="num" dir="ltr">145.00</bdi> <span class="pv-u" data-i18n="cur9">د.أ</span></div>
+              <div class="pv-shell-st" data-i18n="cmp.bSt">الحالة: مسجّل · متزامن</div>
+            </div>
+            <div class="pv-module">
+              <div class="pv-mt" data-i18n="fin.position">الوضع المسجّل</div>
+              <div class="pv-mrow"><span data-i18n="facts.rec">لي عند العملاء</span><b class="num" dir="ltr">20.00</b></div>
+              <div class="pv-mrow"><span data-i18n="facts.pay">عليّ للموردين</span><b class="num" dir="ltr">0.00</b></div>
+            </div>
+            <div class="pv-module">
+              <div class="pv-mt" data-i18n="fin.layers">التفاصيل</div>
+              <div class="pv-mrow"><span data-i18n="fin.l1">قراءة الفترة</span><b class="num" dir="ltr">62.50</b></div>
+              <div class="pv-mrow"><span data-i18n="fin.l4">عربونات محفوظة</span><b class="num" dir="ltr">15.00</b></div>
+            </div>
+            <div class="pv-module">
+              <div class="pv-mt" data-i18n="cmp.bMod">سجل الحركة</div>
+              <div class="pv-mrow"><span data-i18n="home.r1">بيع مباشر — كوب قهوة</span><b class="num" dir="ltr">3.00</b></div>
+            </div>
+          </div></div>
+          <div class="mini-rules"><b data-i18n="cmp.bR1">Module grammar:</b> <span data-i18n="cmp.bR1t">sticky shell + white modules on soft canvas · 4 elevation levels · radius 6/10/14/20 · 48px rows · inline amounts · 6 motion primitives</span></div>
+          <div class="verdict" data-i18n="cmp.bV">Rejected: the direction a competent generic design system would produce — module chrome per screen, rows below Arabic floors, and a shell figure count-tween that violates the forbidden motion register.</div>
+        </div>
+
+        <div class="compare-col rejected">
+          <span class="tag" data-i18n="cmp.cTag">C · مسار المال — Rejected</span>
+          <div class="preview-shell"><div class="preview-frame pv pv-c">
+            <div class="pv-flowhead">
+              <div class="pv-q" data-i18n="fin.q">وين الكاش؟</div>
+              <div class="pv-flowstrip"><i class="in"></i><i class="out"></i><i class="held"></i></div>
+            </div>
+            <div class="pv-card in"><div class="pv-mt" data-i18n="cmp.cIn">قبض هذا الأسبوع</div><b class="num" dir="ltr">85.00</b></div>
+            <div class="pv-card out"><div class="pv-mt" data-i18n="cmp.cOut">صرف هذا الأسبوع</div><b class="num" dir="ltr">22.50</b></div>
+            <div class="pv-bar-row"><span class="pv-subj"><span data-i18n="nm.sara">سارة</span> · <span data-i18n="od.sara.title">صندوق خشبي</span></span><span class="pv-amt"><bdi class="num" dir="ltr">15/35</bdi></span><div class="pv-bar"><i style="width:43%"></i></div></div>
+            <div class="pv-bar-row"><span class="pv-subj"><span data-i18n="nm.khalid">خالد</span> · <span data-i18n="od.khalid.title">كيكة شوكولا</span></span><span class="pv-amt"><bdi class="num" dir="ltr">30/50</bdi></span><div class="pv-bar"><i style="width:60%"></i></div></div>
+          </div></div>
+          <div class="mini-rules"><b data-i18n="cmp.cR1">Flow grammar:</b> <span data-i18n="cmp.cR1t">relationship bars under 60–72px rows · 3px edge bars on cards · pill chips · 8 motion primitives incl. number roll</span></div>
+          <div class="verdict" data-i18n="cmp.cV">Rejected on physics: its essence is animated flow, and the binding motion register forbids its core primitives; bars fail the 3:1 minimum on tinted zones. Its verifiable ideas — the relationship bar and segmented row — were merged into A as chart content.</div>
+        </div>
+      </div>
+
+    </div><!-- /stage -->
+
+    <!-- ============ SIDE PANELS (outside the phone) ============ -->
+    <div class="panels">
+      <div class="panel">
+        <h3 data-i18n="p.inspect">What to inspect first</h3>
+        <ul>
+          <li><span class="k">1.</span> <span data-i18n="p.i1">Home: one question, one hero rhythm — today rows with action words, ruled facts grid (not cards), «—» where money is unknown.</span></li>
+          <li><span class="k">2.</span> <span data-i18n="p.i2">Finance: the 34px figure answers «وين الكاش؟» before anything else; deposit/amanah honesty lines.</span></li>
+          <li><span class="k">3.</span> <span data-i18n="p.i3">سجّل sheet → تسجيل بيع: NumericSurface — stable digits, position cursor, keypad + quick chips, then quiet completion (no counter, no confetti).</span></li>
+          <li><span class="k">4.</span> <span data-i18n="p.i4">Statement «كشف الأسبوع»: week chart with an unrecorded day rendered as a gap, plus the interpretation sentence under every chart.</span></li>
+          <li><span class="k">5.</span> <span data-i18n="p.i5">Toggle EN LTR: chevrons and the chart mirror; money and dates never mirror. Toggle dark: warm hairlines keep it from going cold.</span></li>
+          <li><span class="k">6.</span> <span data-i18n="p.i6">Width 320: rows, facts cells, and long Arabic labels must all survive — this was built and checked first.</span></li>
+        </ul>
+      </div>
+
+      <div class="panel coverage">
+        <h3 data-i18n="p.coverage">Coverage of this review</h3>
+        <ul>
+          <li><span class="in" data-i18n="p.cIn">In scope:</span> <span data-i18n="p.cInT">Home · Orders (+search/filter) · Finance · StatementView · Quick Capture + NumericSurface · CorrectionPreview dialog · Tools (compact) · 12-state coverage inside real surfaces.</span></li>
+          <li><span class="out" data-i18n="p.cOut">Out of scope (Stage 4):</span> <span data-i18n="p.cOutT">Settings/profile list (no open decisions depend on it) · PartyDetail ledger (its core pattern is previewed in the aging list) · cash-closing screens (deliberate thumb-zone exceptions) · assistant shell (Phase 2 defined boundaries; visual work deferred) · WalletLedger (same contract as StatementView).</span></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3 data-i18n="p.contrast">Measured color pairings (WCAG 2.x)</h3>
+        <table class="ctable">
+          <tr><th data-i18n="p.pair">Pair</th><th data-i18n="p.ratio">Ratio</th><th data-i18n="p.verdict">Verdict / role</th></tr>
+          <tr><td><span class="swatch" style="background:#964e33"></span><span data-i18n="p.p1">white on #964e33 (primary action)</span></td><td class="pass">6.11</td><td data-i18n="p.v1">PASS AA — action role</td></tr>
+          <tr><td><span class="swatch" style="background:#b4613f"></span><span data-i18n="p.p2">white on #b4613f (pressed)</span></td><td class="fail">≈4.42</td><td data-i18n="p.v2">press-only, transient — never a resting pair</td></tr>
+          <tr><td><span class="swatch" style="background:#cc785c"></span><span data-i18n="p.p3">white on #cc785c</span></td><td class="fail">3.28</td><td data-i18n="p.v3">prohibited — brand stays atmosphere</td></tr>
+          <tr><td><span class="swatch" style="background:#057b7c"></span><span data-i18n="p.p4">#057b7c on #ffffff (quiet actions)</span></td><td class="pass">5.08</td><td data-i18n="p.v4">PASS AA text</td></tr>
+          <tr><td><span class="swatch" style="background:#f4e4db"></span><span data-i18n="p.p5">#964e33 on #f4e4db</span></td><td class="pass">4.94</td><td data-i18n="p.v5">PASS — prefer ≥16px on soft</td></tr>
+          <tr><td><span class="swatch" style="background:#1c1815"></span><span data-i18n="p.p6">#d59172 on #1c1815 (dark emphasis)</span></td><td class="pass">6.82</td><td data-i18n="p.v6">PASS AA — dark warm role</td></tr>
+          <tr><td><span class="swatch" style="background:#332d27"></span><span data-i18n="p.p7">#8fd5d6 on #332d27 (dark action)</span></td><td class="pass">8.19</td><td data-i18n="p.v7">PASS AA</td></tr>
+          <tr><td><span class="swatch" style="background:#079fa0"></span><span data-i18n="p.p8">#079fa0 on #ffffff (chart bars)</span></td><td class="pass">3.24</td><td data-i18n="p.v8">non-text ≥3:1 only — graphics/large</td></tr>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h3 data-i18n="p.states">The 12 states — where to see each</h3>
+        <ul>
+          <li><span class="k" data-i18n="s.empty">empty</span> <span data-i18n="p.s1">— Orders: search a word with no match.</span></li>
+          <li><span class="k" data-i18n="s.loading">loading</span> <span data-i18n="p.s2">— Statement: first-paint demo (genuinely-unknown case only).</span></li>
+          <li><span class="k" data-i18n="s.saving">saving</span> <span data-i18n="p.s3">— سجّل sale: button-level «جارٍ التسجيل…», screen stays truthful.</span></li>
+          <li><span class="k" data-i18n="s.success">success</span> <span data-i18n="p.s4">— the receipt: closure sentence with final numbers + quiet mark.</span></li>
+          <li><span class="k" data-i18n="s.error">error</span> <span data-i18n="p.s5">— failure demo: input preserved, nothing navigates.</span></li>
+          <li><span class="k" data-i18n="s.offline">offline</span> <span data-i18n="p.s6">— sync demo: truth line, writes stay enabled.</span></li>
+          <li><span class="k" data-i18n="s.unknown">unknown</span> <span data-i18n="p.s7">— «—» in facts/amounts; «غير محدد بعد» roads.</span></li>
+          <li><span class="k" data-i18n="s.partial">partial</span> <span data-i18n="p.s8">— profit «تقديري» with bounded-gap sentence; locality/staleness line.</span></li>
+          <li><span class="k" data-i18n="s.unsaved">unsaved</span> <span data-i18n="p.s9">— discard guard when the sheet closes with a typed amount.</span></li>
+          <li><span class="k" data-i18n="s.cancel">cancel</span> <span data-i18n="p.s10">— sheet drag/✕; dialogs «إلغاء».</span></li>
+          <li><span class="k" data-i18n="s.back">back</span> <span data-i18n="p.s11">— Statement reader's رجوع.</span></li>
+          <li><span class="k" data-i18n="s.correction">correction</span> <span data-i18n="p.s12">— تراجع → معاينة الأثر (will-change/won't-change) → documented receipt note on Home.</span></li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3 data-i18n="p.truth">Content truth</h3>
+        <p data-i18n="p.truthT">One coherent week, reconciled exactly: opening 82.50 + cash-in 85.00 − cash-out 22.50 = 145.00 د.أ available now. سارة's order 35.00 with a retained deposit 15.00 (liquidity, not profit). خالد owes 20.00 since 11/09. ريم is still a draft — its price stays «—». Friday 11/09 has no records, so the chart shows a gap, not zero.</p>
+      </div>
+    </div>
+  </div><!-- /review-layout -->
+
+<style>
+/* ---------- preview frames (B/C static comparisons — scoped) ---------- */
+.pv{position:relative;background:#fff;overflow:hidden;display:block;padding-top:40px}
+.pv .num{font-family:var(--font-num);font-feature-settings:'tnum' 1;direction:ltr;unicode-bidi:isolate}
+.pv-a{background:#faf6f2;color:#221c18}
+.pv-shead{padding:10px 16px 0}
+.pv-over{font-size:13px;color:#5c5148}
+.pv-q{font-size:20px;font-weight:600;margin-top:2px}
+.pv-rule{height:2px;background:#cc785c;margin-top:12px;border-radius:1px}
+.pv-truth{font-size:13px;color:#5c5148;margin:12px 16px 0}
+.pv-row{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:8px 16px;border-bottom:1px solid #e5dcd6}
+.pv-subj{font-size:15px;font-weight:500}
+.pv-amt{font-size:16px;font-weight:600;font-family:var(--font-num);direction:ltr}
+.pv-facts{display:grid;grid-template-columns:1fr 1fr;margin:14px 16px 0;border-top:1px solid #e5dcd6;border-bottom:1px solid #e5dcd6}
+.pv-facts>div{padding:12px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid #e5dcd8;min-height:72px}
+.pv-facts>div:nth-child(odd){border-inline-end:1px solid #e5dcd6}
+.pv-facts>div:nth-child(-n+2){border-bottom:1px solid #e5dcd6}
+.pv-facts .pv-fl{font-size:13px;color:#5c5148}
+.pv-facts b{font-size:18px;font-weight:600}
+.pv-nav{position:absolute;bottom:0;left:0;right:0;height:70px;border-top:1px solid #e5dcd6;background:#faf6f2;display:flex;align-items:center;justify-content:space-around;font-size:13px;color:#5c5148;padding-bottom:8px}
+.pv-fab{background:#964e33;color:#fff;border-radius:4px;padding:10px 18px;font-weight:600;margin-top:-26px}
+.pv-b{background:#f4e4db;color:#221c18;padding:36px 12px}
+.pv-shell{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(34,28,24,0.07),0 0 0 1px rgba(34,28,24,0.08);padding:14px;margin-bottom:10px}
+.pv-shell-over{font-size:13px;color:#5c5148}
+.pv-shell-fig{font-size:28px;font-weight:700}
+.pv-shell-fig .pv-u{font-size:12px;color:#5c5148;font-weight:400}
+.pv-shell-st{font-size:12px;color:#5c5148;margin-top:2px}
+.pv-module{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(34,28,24,0.07),0 0 0 1px rgba(34,28,24,0.08);padding:6px 14px;margin-bottom:10px}
+.pv-mt{font-size:14px;font-weight:600;padding:8px 0 2px}
+.pv-mrow{display:flex;justify-content:space-between;align-items:center;min-height:44px;font-size:14px;border-top:1px solid #efe7e0}
+.pv-mrow b{font-size:15px;font-weight:600}
+.pv-c{background:#fff;color:#221c18;padding:36px 12px}
+.pv-flowhead{padding:8px 6px 12px}
+.pv-flowstrip{display:flex;gap:4px;margin-top:10px}
+.pv-flowstrip i{height:4px;border-radius:2px;flex:1}
+.pv-flowstrip i.in{background:#079fa0}
+.pv-flowstrip i.out{background:#cc785c}
+.pv-flowstrip i.held{background:#e5dcd6}
+.pv-card{position:relative;background:#fff;border-radius:16px;box-shadow:0 2px 6px rgba(34,28,24,0.08);padding:14px;margin-bottom:10px;border-inline-start:3px solid #079fa0;display:flex;justify-content:space-between;align-items:center}
+.pv-card.out{border-inline-start-color:#cc785c}
+.pv-card b{font-size:22px;font-weight:700}
+.pv-card .pv-mt{font-size:14px;padding:0}
+.pv-bar-row{padding:10px 6px;border-bottom:1px solid #efe7e0}
+.pv-bar{height:6px;border-radius:3px;background:#eee7e1;margin-top:6px;position:relative;overflow:hidden}
+.pv-bar i{position:absolute;inset-block:0;inset-inline-start:0;background:#079fa0;border-radius:3px}
+</style>
+
+<script>
+/* ============ i18n dictionary (AR default · EN verification) ============ */
+const I18N = {
+ar: {
+  'rev.delivery':'micro-visual-product-concept-001 · المرحلة 2 · 06/09/2026',
+  'rev.note':'منطقة المراجعة — كل أدوات التحكم هنا خارج إطار المنتج. داخل الهاتف يقع المنتج نفسه: عربي RTL افتراضيًا، بلا أي ملصقات تطوير.',
+  'rev.mode':'الوضع','rev.modeApp':'الاتجاه الموصى به','rev.modeCompare':'مقارنة الاتجاهات',
+  'rev.lang':'اللغة','rev.theme':'المظهر','rev.light':'فاتح','rev.dark':'داكن',
+  'rev.motion':'الحركة','rev.motionNormal':'عادية','rev.motionReduced':'مخفّضة',
+  'rev.width':'العرض',
+  'rev.demoSale':'▶ حفظ هادئ — التسلسل كاملًا','rev.demoSync':'▶ غير متصل → مزامنة → متزامن',
+  'rev.demoFail':'▶ فشل الحفظ → استرجاع','rev.demoSkel':'▶ هيكل التحميل الأول','rev.demoGuard':'▶ حارس التجاهل',
+  'sb.time':'8:26',
+  'nav.home':'مشروعي الآن','nav.orders':'العمل','nav.fab':'سجّل','nav.finance':'مالي','nav.tools':'أدواتي','nav.back':'رجوع',
+  'biz':'مشغل ليان','cur':'د.أ','cur2':'د.أ','cur3':'د.أ','cur4':'د.أ','cur5':'د.أ','cur6':'د.أ','cur7':'د.أ','cur8':'د.أ','cur9':'د.أ',
+  'home.overline':'مشروعي الآن','home.q':'ماذا عليّ اليوم؟','home.date':'السبت 12 أيلول 2026',
+  'home.offline':'شغال بدون إنترنت — بياناتك محفوظة على هذا الجهاز',
+  'home.locality':'بياناتك على هذا الجهاز فقط — آخر نسخة مصدّرة','home.settingsLink':'الإعدادات',
+  'home.today':'اليوم',
+  'home.t1s':'تسليم غدًا — صندوق خشبي','nm.sara':'سارة','nm.khalid':'خالد','nm.reem':'ريم',
+  'home.t1c':'التسليم 13/09/2026 · الاتفاق مؤقت','act.deliver':'سلّم',
+  'home.t2s':'تحصيل مستحق','home.t2c':'مستحق منذ','act.collect':'حصّل',
+  'home.t3s':'أكمل تكلفة','home.t3s2':'طلب ريم','home.t3c':'مسودة — السعر والاتفاق غير مكتملين','act.complete':'أكمل',
+  'home.t4s':'مواعيد قادمة','home.t4c':'قادمة','act.open':'افتح',
+  'home.facts':'ما هو مسجّل حتى الآن؟',
+  'facts.cash':'الكاش المسجّل','facts.cashq':'منها أمانات','facts.rec':'لي عند العملاء','facts.recq':'دين مسجّل بعد التسليم',
+  'facts.pay':'عليّ للموردين','facts.payq':'لا مستحقات حالية','facts.owner':'مال المالك المسجّل',
+  'facts.ownerroad':'غير مسجّل — سجّله (نقرة)','facts.ownerroad2':'غير مسجّل — سجّله (نقرة)','st.unset':'—',
+  'home.recent':'ما تغيّر مؤخرًا','home.viewlog':'عرض السجل',
+  'home.r1':'بيع مباشر — كوب قهوة','home.r2':'بيع مباشر — بسكويت لوز','home.r3':'مصروف — مواصلات',
+  'home.corr':'تراجع موثّق — بيع مباشر','home.corrq':'تصحيح مع معاينة الأثر قبل التنفيذ',
+  'lnk.foundation':'صفحة الأساس','lnk.catalog':'منتجاتي وخدماتي',
+  'st.synced':'متزامن','st.syncing':'جارٍ المزامنة…','st.recorded':'مسجّل','st.due':'مستحق','st.paid':'كامل',
+  'st.estimated':'تقديري','st.unavail':'غير متاح','st.held':'عربون محفوظ','st.overdue':'متأخر','st.loadingFirst':'جارٍ قراءة السجلات أول مرة…',
+  'orders.q':'وين وصلت الطلبات والمسودات؟','orders.sub':'الأولوية أولًا — ثم السجلات',
+  'orders.d1':'دين مستحق بعد التسليم','orders.d2':'الباقي من كيكة شوكولة بيعت لخالد في 10/09','orders.d3':'حصّل المتبقي أو سجّله دينًا',
+  'orders.searchPh':'ابحث بالاسم أو البند…','orders.clear':'مسح',
+  'f.all':'الكل','f.orders':'الطلبات','f.sales':'المبيعات','f.drafts':'المسودات',
+  'orders.mine':'طلباتي','od.sara.title':'صندوق خشبي','od.inprogress':'قيد التنفيذ','od.due':'التسليم','od.remaining':'المتبقي',
+  'od.collected':'محصّل','od.deposit':'عربون محفوظ','od.remaining2':'متبقٍ',
+  'od.depnote':'العربون كاش حقيقي في الدرج، مرتبط بطلب غير منجَز — يُطبَّق مرة واحدة عند الإكمال، وليس ربحًا بعد.',
+  'orders.sales':'مبيعاتي','od.khalid.title':'كيكة شوكولا','od.paidOf':'قبض','od.of':'من','od.debtOn':'دَين على خالد',
+  'od.coffee':'كوب قهوة','od.biscuit':'بسكويت لوز',
+  'orders.drafts':'مسودات قيد الإكمال','od.reem.title':'طلب ضيافة','od.reem.next':'الخطوة التالية: أكمل ما تعرفه الآن',
+  'orders.sched':'المواعيد','orders.sched1':'غدًا 13/09 — تسليم صندوق سارة','orders.sched2':'(مواعيد أخرى خلال الأسبوع +1)',
+  'orders.empty1':'لا نتائج مطابقة','orders.empty2':'جرّب كلمة أقصر أو أعد ضبط الفلاتر',
+  'orders.newDraft':'إنشاء مسودة أخرى','orders.newSale':'تسجيل بيع مباشر',
+  'fin.q':'وين الكاش؟ وإيش القرار المالي عليّ؟','fin.cashNow':'الكاش المسجّل الآن','fin.period':'الفترة 1–30 أيلول',
+  'fin.d1':'قبض متوقع قريب','fin.d2':'دين خالد يستحق منذ 11/09 — راجعه قبل الوعد القادم',
+  'fin.primary':'سجّل قبضًا أو دفعًا متوقعًا',
+  'fin.comp':'ممّ يتكوّن الكاش؟','fin.free':'حرّة الاستخدام','fin.amanah':'أمانات',
+  'fin.amnote':'الأمانات كاش حقيقي في الدرج لكنه ليس لك ولا يدخل الربح.',
+  'fin.position':'الوضع المسجّل','fin.cashq':'محافظ معلنة + غير موزّع','fin.layers':'التفاصيل','fin.net':'صافي الأسبوع',
+  'fin.l1':'قراءة الفترة — كيف كان أسبوعي؟','fin.l1c':'كشف الأسبوع 06/09–12/09',
+  'fin.l2':'صورة الطلبات: قبض ودين ونتائج','fin.l3':'التغطية والتعادل + سجل المتوقعات',
+  'fin.l4':'عربونات محفوظة','fin.l4c':'سيولة مرتبطة بطلبات غير منجزة',
+  'fin.l5':'السجل — كل حركة موثقة','fin.l6':'تصحيحاتي الموثقة','fin.l6c':'كل تصحيح بمعاينة أثر قبل التنفيذ',
+  'stmt.overline':'مالي · كشف الأسبوع','stmt.q':'كيف تحرّك أسبوعي؟','stmt.to':'إلى','stmt.weeknet':'صافي الأسبوع +62.50',
+  'ch1.title':'قبض وصرف — يوم بيوم','ch1.legend':'قبض','ch1.legend2':'صرف',
+  'ch1.gap':'أيام بلا تسجيل: الجمعة 11/09 — لا يُرسم صفرًا',
+  'ch1.interp':'هذا الأسبوع: قبضت 85.00 د.أ وصرفت 22.50 د.أ — أعلى يوم قبض كان الخميس 10/09 (40.00 د.أ).',
+  'stmt.lines':'خلاصة الأسبوع',
+  'stmt.l1':'القبض النقدي','stmt.l1q':'مبيعات + عربون سارة','stmt.l2':'الصرف النقدي','stmt.l2q':'خامات + تغليف + مواصلات',
+  'stmt.l3':'لي عند الناس','stmt.l3q':'دين خالد من كيكة 10/09','stmt.l4':'عربونات محفوظة','stmt.l4q':'عربون سارة — سيولة وليست ربحًا',
+  'stmt.l5':'ربح الأسبوع','stmt.l5q':'تكلفة بيعين غير معروفة — نصف النتائج تقديري',
+  'stmt.l6':'ربح كيكة الخميس','stmt.l6q':'التكلفة غير مسجلة لهذا البيع',
+  'stmt.aging':'مين علينا؟ ومَن مدين لي؟','ag.since':'مستحق منذ','ag.sara':'عربون صندوق خشبي',
+  'ag.saraq':'مرتبط بطلب غير منجَز — التسليم غدًا','ag.note':'العربون ليس دينًا ولا ربحًا — يُحسب مرة واحدة عند إكمال الطلب.',
+  'tools.q':'احسب قبل أن تلتزم','tools.rule':'تقدير فقط — لا يسجّل شيئًا ولا يغيّر مالك',
+  'tools.calc':'حاسبة السعر','tools.sale':'سعر البيع المتوقع','tools.saleq':'الرقم الذي ستعطيه للزبون',
+  'tools.cost':'هل تعرف التكلفة؟','tools.known':'نعم — 5.00','tools.unknown':'لا أعرف الآن',
+  'tools.resUnavail':'الربح غير متاح — سجّل التكلفة لاحقًا من مصدرها',
+  'tools.resEst':'الربح 5.00 د.أ (تقديري — من رقم التكلفة المدخل)',
+  'tools.saved':'تقديراتي المحفوظة','tools.e1':'تقدير كيكة شوكولا','tools.e1c':'السعر 10.00 · التكلفة تقديرية','tools.draft':'ابدأ مسودة',
+  'tools.modules':'حالة الوحدات','tools.m1':'دفتر الناس','tools.m1c':'دين واحد قائم','tools.attention':'انتباه','tools.active':'نشط',
+  'tools.m2':'المواعيد','tools.m2c':'مواعيد خلال الأسبوع القادم +2','tools.m3':'المخزون والمواد','tools.m3c':'خامتان تحت الحد',
+  'tools.m4':'الموردون','tools.m4c':'لا مستحقات','tools.idle':'هادئ',
+  'qc.title':'ماذا تريد أن تسجّل؟','qc.sale':'تسجيل بيع','qc.salec':'احفظ بيعًا مباشرًا من دون إنشاء طلب',
+  'qc.expense':'تسجيل مصروف','qc.expensec':'سجّل مصروفًا مدفوعًا في لحظته',
+  'qc.order':'طلب من عميل','qc.orderc':'ابدأ مسودة طلب واتفاق أولي','qc.draft':'مسودة تصميم','qc.draftc':'ابدأ مسودة قبل الاتفاق',
+  'qc.collect':'تحصيل أو عربون','qc.collectc':'حصّل دينًا قائمًا باسم صاحبه',
+  'qc.amount':'المبلغ المحصّل','qc.position':'الخانة النشطة','pos.ones':'الآحاد',
+  'qc.save':'سجّل البيع','qc.saveExp':'سجّل المصروف','qc.saveCol':'سجّل التحصيل',
+  'qc.more':'خيارات أكثر','qc.what':'ما الذي بعته؟','qc.whatv':'كوب قهوة — اختياري',
+  'qc.costknown':'هل تعرف تكلفته؟','qc.costv':'لا أعرف الآن — الربح «غير متاح» لا صفر',
+  'qc.remainingq':'هل بقي شيء عليه؟','qc.remainingv':'قُبض المبلغ كاملًا',
+  'qc.wallet':'محفظة القبض','qc.drawer':'الدرج','qc.unalloc':'اتركه غير موزّع',
+  'qc.openlog':'افتح السجل','qc.undo':'تراجع','qc.done':'تم',
+  'cp.title':'معاينة الأثر — تراجع موثّق','cp.sub':'الأصل يُحفظ دائمًا؛ التراجع يُسجَّل كتصحيح موثّق',
+  'cp.will':'ما يتغيّر','cp.w1':'الكاش يرجع من 165.00 إلى 145.00 (−20.00 د.أ)','cp.w2':'يُلغى أثر سجل البيع المباشر بقيمة 20.00 د.أ',
+  'cp.wont':'ما لا يتغيّر','cp.n1':'دين خالد (20.00 د.أ) وبقية السجلات كما هي','cp.n2':'طلب سارة وعربونه المحفوظ',
+  'cp.execute':'نفّذ التراجع موثقًا','cp.cancel':'إلغاء',
+  'g.title':'في رقم مكتوب — تسجّله أو تتجاهله؟','g.stay':'ابقَ وكمّل التسجيل','g.discard':'تجاهل الرقم وأغلق',
+  'cmp.aTag':'أ · دفتر هادئ — الموصى به','cmp.aTruth':'متزامن · بياناتك على جهازك',
+  'cmp.aR1':'قواعد الدفتر:','cmp.aR1t':'عمود مبالغ ثابت 88px بأرقام جدولية · إيقاع خطوط شعرية · مستويان للعمق · أنصاف أقطار 0/4/12 · رقم رئيسي 34px · «—» في موضع الرقم · 4 حركات أساسية فقط',
+  'cmp.aV':'يفوز بثقة الطباعة، وانسجام RTL، والهدوء القابل للقياس — 28/30 في التقييم الخصومي.',
+  'cmp.bTag':'ب · مكتب المالك — مرفوض','cmp.bSt':'الحالة: مسجّل · متزامن','cmp.bMod':'سجل الحركة',
+  'cmp.bR1':'قواعد الوحدات:','cmp.bR1t':'قشرة ثابتة + وحدات بيضاء على خلفية ناعمة · 4 مستويات عمق · أنصاف أقطار 6/10/14/20 · صفوف 48px · مبالغ داخل السطر · 6 حركات أساسية',
+  'cmp.bV':'مرفوض: هو الاتجاه الذي سينتجه أي نظام تصميم عام كفء — إطارات وحدات في كل شاشة، وصفوف تحت حدوث العربية، وحركة عدّاد محظورة في سجل الحركة.',
+  'cmp.cTag':'ج · مسار المال — مرفوض','cmp.cIn':'قبض هذا الأسبوع','cmp.cOut':'صرف هذا الأسبوع',
+  'cmp.cR1':'قواعد المسار:','cmp.cR1t':'أشرطة علاقة أسفل صفوف 60–72px · حواف ملونة 3px على البطاقات · رقائق حبّية · 8 حركات أساسية تشمل تدوير الأرقام',
+  'cmp.cV':'مرفوض فيزيائيًا: جوهره حركة انسيابية وسجل الحركة الملزم يحظر عناصره الأساسية؛ وأشرطته تفشل حد 3:1 فوق المناطق المصبوغة. أفكاره القابلة للتحقق — شريط العلاقة والصف المُقسَّم — دُمجت في (أ) كمحتوى بياني.',
+  'p.inspect':'ماذا تراجع أولًا',
+  'p.i1':'الرئيسية: سؤال واحد وإيقاع واحد — صفوف اليوم بأفعال محددة، شبكة حقائق مسطّرة (لا بطاقات)، و«—» حيث المال غير معروف.',
+  'p.i2':'مالي: الرقم 34px يجيب «وين الكاش؟» قبل أي شيء آخر؛ مع أسطر صدق العربون والأمانة.',
+  'p.i3':'ورقة سجّل → تسجيل بيع: سطح الأرقام — خانات ثابتة، مؤشر خانة، لوحة أرقام + رقائق سريعة، ثم الحفظ الهادئ (بلا عدّاد ولا احتفال).',
+  'p.i4':'كشف الأسبوع: مخطط الأسبوع مع يوم غير مسجّل يظهر فجوة، وجملة تفسير تحت كل مخطط.',
+  'p.i5':'بدّل إلى EN LTR: الأسهم والمخطط تنعكس؛ المبالغ والتواريخ لا تنعكس أبدًا. وفي الداكن: خطوط دافئة تمنع البرودة.',
+  'p.i6':'عرض 320: الصفوف وخلايا الحقائق والعناوين العربية الطويلة يجب أن تنجو — بُني هذا العرض واختبر أولًا.',
+  'p.coverage':'نطاق هذه المراجعة',
+  'p.cIn':'داخل النطاق:','p.cInT':'الرئيسية · العمل (+ بحث وفلاتر) · مالي · كشف الأسبوع · سجّل السريع + سطح الأرقام · حوار معاينة الأثر · أدواتي (مختصر) · حالات الـ12 داخل أسطح حقيقية.',
+  'p.cOut':'خارج النطاق (المرحلة 4):','p.cOutT':'قائمة الإعدادات/الملف (لا قرارات معلقة تعتمد عليها) · صفحة شخص الدفتر (نمطها الأساسي معروض في قائمة الأعمار) · شاشات إقفال الصندوق (استثناءات مقصودة لمنطقة الإبهام) · غلاف المساعد (حدود المرحلة 2 معرفة؛ العمل البصري مؤجل) · كشف المحفظة (نفس عقد كشف الأسبوع).',
+  'p.contrast':'الأزواج اللونية المقاسة (WCAG 2.x)','p.pair':'الزوج','p.ratio':'النسبة','p.verdict':'الحكم / الدور',
+  'p.p1':'أبيض على #964e33 (الإجراء الرئيسي)','p.v1':'اجتياز AA — دور الإجراء',
+  'p.p2':'أبيض على #b4613f (الضغط)','p.v2':'ضغط عابر فقط — ليس زوجًا مستقرًا أبدًا',
+  'p.p3':'أبيض على #cc785c','p.v3':'محظور — البراند يبقى جوًّا لا نصًّا',
+  'p.p4':'#057b7c على #ffffff (الأفعال الهادئة)','p.v4':'اجتياز AA للنص',
+  'p.p5':'#964e33 على #f4e4db','p.v5':'اجتياز — يُفضَّل ≥16px فوق الناعم',
+  'p.p6':'#d59172 على #1c1815 (تمييز داكن)','p.v6':'اجتياز AA — الدور الدافئ الداكن',
+  'p.p7':'#8fd5d6 على #332d27 (إجراء داكن)','p.v7':'اجتياز AA',
+  'p.p8':'#079fa0 على #ffffff (أعمدة المخطط)','p.v8':'غير نصي ≥3:1 — رسوم فقط',
+  'p.states':'حالات الـ12 — أين تجد كل واحدة',
+  's.empty':'فارغ','s.loading':'تحميل','s.saving':'حفظ','s.success':'نجاح','s.error':'خطأ','s.offline':'غير متصل',
+  's.unknown':'غير معروف','s.partial':'جزئي','s.unsaved':'غير محفوظ','s.cancel':'إلغاء','s.back':'رجوع','s.correction':'تصحيح',
+  'p.s1':'— العمل: ابحث بكلمة بلا نتائج.','p.s2':'— كشف الأسبوع: عرض التحميل الأول (حالة مجهولة فعلًا فقط).',
+  'p.s3':'— ورقة سجّل: «جارٍ التسجيل…» على مستوى الزر، والشاشة تبقى صادقة.','p.s4':'— الوصل: جملة إغلاق بأرقام نهائية + علامة هادئة.',
+  'p.s5':'— عرض الفشل: المدخل محفوظ، ولا تنقل يحدث.','p.s6':'— عرض المزامنة: سطر الحقيقة، والتسجيل يبقى متاحًا.',
+  'p.s7':'— «—» في الحقائق والمبالغ؛ وطرق «غير محدد بعد».','p.s8':'— ربح «تقديري» بجملة فجوة محدودة؛ وسطر الموقع/قِدَم النسخة.',
+  'p.s9':'— حارس التجاهل عند إغلاق الورقة وفيها مبلغ مكتوب.','p.s10':'— سحب الورقة أو ✕؛ وأزرار «إلغاء» في الحوارات.',
+  'p.s11':'— زر رجوع في قارئ كشف الأسبوع.','p.s12':'— تراجع → معاينة الأثر (يتغيّر/لا يتغيّر) → إيصال موثّق في الرئيسية.',
+  'p.truth':'صدق المحتوى','p.truthT':'أسبوع واحد متسق يتصالح حسابيًا: افتتاح 82.50 + دخول 85.00 − خروج 22.50 = 145.00 د.أ متاحة الآن. طلب سارة 35.00 وعربونه المحفوظ 15.00 (سيولة لا ربح). خالد مدين بـ 20.00 منذ 11/09. ريم ما زالت مسودة — سعرها «—». والجمعة 11/09 بلا تسجيلات، فيظهر المخطط فجوة لا صفرًا.',
+  /* dynamic */
+  'dyn.saving':'جارٍ التسجيل…','dyn.errSale':'ما انحفظ البيع — الرقم باقي مكتوب، جرّب مرة ثانية',
+  'dyn.errExp':'ما انحفظ المصروف — الرقم باقي مكتوب، جرّب مرة ثانية',
+  'dyn.guardSub':'المبلغ المكتوب: {v} — تسجّله قبل الإغلاق؟',
+  'dyn.closeSale':'سُجّل بيع {v} د.أ — الكاش زاد {v} وصار {n} د.أ',
+  'dyn.closeExp':'سُجّل مصروف {v} د.أ — الكاش نقص {v} وصار {n} د.أ',
+  'dyn.closeCol':'سُجّل تحصيل {v} د.أ من خالد — المتبقي عليه {r} د.أ',
+  'dyn.subWallet':'محفظة القبض: الدرج · الربح غير متاح (تكلفة غير معروفة)',
+  'dyn.subCol':'التحصيل من دفتر الناس — الخالد، والمتبقي يظهر في «لي عند العملاء»',
+  'dyn.announced':'تم التسجيل — {s}','dyn.annCorrect':'انسجّل التصحيح — الأصل محفوظ والكاش رجع {n} د.أ',
+  'dyn.chartAria':'مخطط الأسبوع: قبض 85.00 وصرف 22.50 — أعلى يوم قبض الخميس 10/09 بمبلغ 40.00 د.أ، والجمعة 11/09 بلا تسجيل',
+  'dyn.gapNote':'أيام بلا تسجيل','dyn.offAnn':'غير متصل — البيانات محلية','dyn.syncedAnn':'تمت المزامنة'
+},
+en: {
+  'rev.delivery':'micro-visual-product-concept-001 · Stage 2 · 06/09/2026',
+  'rev.note':'Review console — every control on this page sits outside the product frame. Inside the phone is the product itself: English LTR verification mode; switch back to Arabic for the default RTL experience.',
+  'rev.mode':'Mode','rev.modeApp':'Recommended concept','rev.modeCompare':'Compare directions',
+  'rev.lang':'Language','rev.theme':'Theme','rev.light':'Light','rev.dark':'Dark',
+  'rev.motion':'Motion','rev.motionNormal':'Normal','rev.motionReduced':'Reduced',
+  'rev.width':'Width',
+  'rev.demoSale':'▶ Quiet save — full choreography','rev.demoSync':'▶ Offline → sync → synced',
+  'rev.demoFail':'▶ Save failure → recovery','rev.demoSkel':'▶ First-paint skeleton','rev.demoGuard':'▶ Discard guard',
+  'sb.time':'8:26',
+  'nav.home':'Home','nav.orders':'Work','nav.fab':'Record','nav.finance':'Finance','nav.tools':'Tools','nav.back':'Back',
+  'biz':'Lian Workshop','cur':'JOD','cur2':'JOD','cur3':'JOD','cur4':'JOD','cur5':'JOD','cur6':'JOD','cur7':'JOD','cur8':'JOD','cur9':'JOD',
+  'home.overline':'My project now','home.q':'What needs me today?','home.date':'Saturday, 12 September 2026',
+  'home.offline':'Working offline — your data is saved on this device',
+  'home.locality':'Your data lives on this device only — last exported','home.settingsLink':'Settings',
+  'home.today':'Today',
+  'home.t1s':'Deliver tomorrow — wooden box','home.t1c':'Delivery 13/09/2026 · preliminary agreement','act.deliver':'Deliver',
+  'home.t2s':'Collection due','home.t2c':'due since','act.collect':'Collect',
+  'home.t3s':'Finish costing','home.t3s2':'Reem’s request','home.t3c':'draft — price and agreement incomplete','act.complete':'Finish',
+  'home.t4s':'Upcoming appointments','home.t4c':'next','act.open':'Open',
+  'home.facts':'What is recorded so far?',
+  'facts.cash':'Recorded cash','facts.cashq':'incl. amanah','facts.rec':'Customers owe me','facts.recq':'recorded post-delivery debt',
+  'facts.pay':'I owe suppliers','facts.payq':'no current payables','facts.owner':'Recorded owner money',
+  'facts.ownerroad':'Not recorded — record it (tap)','facts.ownerroad2':'Not recorded — record it (tap)','st.unset':'—',
+  'home.recent':'What changed recently','home.viewlog':'View log',
+  'home.r1':'Direct sale — coffee cup','home.r2':'Direct sale — almond biscuits','home.r3':'Expense — transport',
+  'home.corr':'Documented reversal — direct sale','home.corrq':'correction with impact preview before execution',
+  'lnk.foundation':'Foundation','lnk.catalog':'Products & services',
+  'st.synced':'Synced','st.syncing':'Syncing…','st.recorded':'Recorded','st.due':'Due','st.paid':'Paid in full',
+  'st.estimated':'Estimated','st.unavail':'Unavailable','st.held':'Held deposit','st.overdue':'Overdue','st.loadingFirst':'Reading your records for the first time…',
+  'orders.q':'Where are my orders and drafts?','orders.sub':'Priority first — then the records',
+  'orders.d1':'Post-delivery debt due','orders.d2':'Remaining from a chocolate cake sold to Khalid on 10/09','orders.d3':'Collect the remainder or record it as debt',
+  'orders.searchPh':'Search by name or item…','orders.clear':'Clear',
+  'f.all':'All','f.orders':'Orders','f.sales':'Sales','f.drafts':'Drafts',
+  'orders.mine':'My orders','od.sara.title':'Wooden box','od.inprogress':'In progress','od.due':'Delivery','od.remaining':'Remaining',
+  'od.collected':'Collected','od.deposit':'Held deposit','od.remaining2':'Outstanding',
+  'od.depnote':'The deposit is real cash in the drawer, tied to an unfinished order — applied once at completion; not profit yet.',
+  'orders.sales':'My sales','od.khalid.title':'Chocolate cake','od.paidOf':'Collected','od.of':'of','od.debtOn':'debt on Khalid',
+  'od.coffee':'Coffee cup','od.biscuit':'Almond biscuits',
+  'orders.drafts':'Drafts in progress','od.reem.title':'Hospitality platter','od.reem.next':'Next step: complete what you know now',
+  'orders.sched':'Schedule','orders.sched1':'Tomorrow 13/09 — deliver Sara’s box','orders.sched2':'(+1) another appointment this week',
+  'orders.empty1':'No matching results','orders.empty2':'Try a shorter word or reset the filters',
+  'orders.newDraft':'Create another draft','orders.newSale':'Record a direct sale',
+  'fin.q':'Where is the cash? And what decision is mine?','fin.cashNow':'Recorded cash now','fin.period':'Period 1–30 Sep',
+  'fin.d1':'Expected collection soon','fin.d2':'Khalid’s debt due since 11/09 — review before the next promise',
+  'fin.primary':'Record an expected collection or payment',
+  'fin.comp':'What makes up the cash?','fin.free':'free to use','fin.amanah':'amanah',
+  'fin.amnote':'Amanah is real cash in the drawer, but it is not yours and does not enter profit.',
+  'fin.position':'Recorded position','fin.cashq':'declared wallets + unallocated','fin.layers':'Details','fin.net':'week net',
+  'fin.l1':'Period reading — how was my week?','fin.l1c':'Week statement 06/09–12/09',
+  'fin.l2':'Orders picture: collection, debt, results','fin.l3':'Coverage & break-even + expectations log',
+  'fin.l4':'Held deposits','fin.l4c':'liquidity tied to unfinished orders',
+  'fin.l5':'The log — every movement documented','fin.l6':'My documented corrections','fin.l6c':'every correction previews its impact first',
+  'stmt.overline':'Finance · Week statement','stmt.q':'How did my week move?','stmt.to':'to','stmt.weeknet':'Week net +62.50',
+  'ch1.title':'In vs out — day by day','ch1.legend':'In','ch1.legend2':'Out',
+  'ch1.gap':'Days with no records: Friday 11/09 — never drawn as zero',
+  'ch1.interp':'This week: collected 85.00 JOD, spent 22.50 JOD — highest collection day was Thursday 10/09 (40.00 JOD).',
+  'stmt.lines':'Week summary',
+  'stmt.l1':'Cash in','stmt.l1q':'sales + Sara’s deposit','stmt.l2':'Cash out','stmt.l2q':'materials + packaging + transport',
+  'stmt.l3':'Owed to me','stmt.l3q':'Khalid’s debt from the 10/09 cake','stmt.l4':'Held deposits','stmt.l4q':'Sara’s deposit — liquidity, not profit',
+  'stmt.l5':'Week profit','stmt.l5q':'two costs unknown — half the results are estimates',
+  'stmt.l6':'Thursday cake profit','stmt.l6q':'cost not recorded for this sale',
+  'stmt.aging':'Who owes me — and how old is it?','ag.since':'due since','ag.sara':'Wooden-box deposit',
+  'ag.saraq':'tied to an unfinished order — delivery tomorrow','ag.note':'A deposit is neither debt nor profit — counted once at order completion.',
+  'tools.q':'Calculate before you commit','tools.rule':'Estimate only — records nothing, changes nothing',
+  'tools.calc':'Price calculator','tools.sale':'Expected sale price','tools.saleq':'the number you will quote',
+  'tools.cost':'Do you know the cost?','tools.known':'Yes — 5.00','tools.unknown':'Not yet',
+  'tools.resUnavail':'Profit unavailable — record the cost later from its source',
+  'tools.resEst':'Profit 5.00 JOD (estimated — from the entered cost figure)',
+  'tools.saved':'Saved estimates','tools.e1':'Chocolate cake estimate','tools.e1c':'price 10.00 · estimated cost','tools.draft':'Start a draft',
+  'tools.modules':'Module status','tools.m1':'People ledger','tools.m1c':'one open debt','tools.attention':'Attention','tools.active':'Active',
+  'tools.m2':'Schedule','tools.m2c':'2 in the coming week','tools.m3':'Inventory & materials','tools.m3c':'two materials below threshold',
+  'tools.m4':'Suppliers','tools.m4c':'no payables','tools.idle':'Quiet',
+  'qc.title':'What do you want to record?','qc.sale':'Record a sale','qc.salec':'Save a direct sale without creating an order',
+  'qc.expense':'Record an expense','qc.expensec':'Record an expense paid on the spot',
+  'qc.order':'Customer order','qc.orderc':'Start an order draft and an initial agreement','qc.draft':'Design draft','qc.draftc':'Start a draft before agreeing',
+  'qc.collect':'Collect or take a deposit','qc.collectc':'Collect an existing debt by name',
+  'qc.amount':'Amount collected','qc.position':'Active slot','pos.ones':'Units',
+  'qc.save':'Record the sale','qc.saveExp':'Record the expense','qc.saveCol':'Record the collection',
+  'qc.more':'More options','qc.what':'What did you sell?','qc.whatv':'Coffee cup — optional',
+  'qc.costknown':'Do you know its cost?','qc.costv':'Not yet — profit reads “unavailable”, never zero',
+  'qc.remainingq':'Is anything left on it?','qc.remainingv':'Collected in full',
+  'qc.wallet':'Receiving wallet','qc.drawer':'The drawer','qc.unalloc':'Leave unallocated',
+  'qc.openlog':'Open the record','qc.undo':'Reverse','qc.done':'Done',
+  'cp.title':'Impact preview — documented reversal','cp.sub':'The original is always kept; the reversal is logged as a documented correction',
+  'cp.will':'What changes','cp.w1':'Cash goes from 165.00 back to 145.00 (−20.00 JOD)','cp.w2':'The effect of the 20.00 JOD direct sale is cancelled',
+  'cp.wont':'What stays','cp.n1':'Khalid’s debt (20.00 JOD) and every other record unchanged','cp.n2':'Sara’s order and her held deposit',
+  'cp.execute':'Execute documented reversal','cp.cancel':'Cancel',
+  'g.title':'There is a typed number — record it or discard it?','g.stay':'Stay and finish recording','g.discard':'Discard the number and close',
+  'cmp.aTag':'A · The Calm Ledger — Recommended','cmp.aTruth':'Synced · your data on your device',
+  'cmp.aR1':'Ledger grammar:','cmp.aR1t':'fixed 88px tabular amount column · hairline rhythm · 2 elevation levels · radii 0/4/12 · 34px hero · “—” in the number position · 4 motion primitives',
+  'cmp.aV':'Wins on trust-as-typography, RTL naturalness, and countable calm — 28/30 in the adversarial ranking.',
+  'cmp.bTag':'B · The Owner’s Desk — Rejected','cmp.bSt':'State: recorded · synced','cmp.bMod':'Movement log',
+  'cmp.bR1':'Module grammar:','cmp.bR1t':'sticky shell + white modules on a soft canvas · 4 elevation levels · radii 6/10/14/20 · 48px rows · inline amounts · 6 motion primitives',
+  'cmp.bV':'Rejected: the direction a competent generic design system would produce — module chrome on every screen, rows below the Arabic floors, and a shell count-tween that violates the forbidden motion register.',
+  'cmp.cTag':'C · The Flow of Money — Rejected','cmp.cIn':'Cash in this week','cmp.cOut':'Cash out this week',
+  'cmp.cR1':'Flow grammar:','cmp.cR1t':'relationship bars under 60–72px rows · 3px colored edges on cards · pill chips · 8 motion primitives including number rolls',
+  'cmp.cV':'Rejected on physics: its essence is animated flow, and the binding motion register forbids its core primitives; its bars fail the 3:1 minimum on tinted zones. Its verifiable ideas — the relationship bar and the segmented row — were merged into A as chart content.',
+  'p.inspect':'What to inspect first',
+  'p.i1':'Home: one question, one rhythm — today rows with action words, a ruled facts grid (not cards), and “—” where money is unknown.',
+  'p.i2':'Finance: the 34px figure answers “where is the cash?” before anything else; deposit and amanah honesty lines.',
+  'p.i3':'Record sheet → record a sale: the NumericSurface — stable slots, position cursor, keypad + quick chips, then quiet completion (no counter, no celebration).',
+  'p.i4':'Week statement: the chart renders an unrecorded day as a gap, and every chart carries its interpretation sentence.',
+  'p.i5':'Toggle EN LTR: chevrons and the chart mirror; money and dates never mirror. In dark theme, warm hairlines keep it from going cold.',
+  'p.i6':'Width 320: rows, facts cells, and long Arabic labels must all survive — this width was built and checked first.',
+  'p.coverage':'Coverage of this review',
+  'p.cIn':'In scope:','p.cInT':'Home · Work (+search and filters) · Finance · Week statement · Quick Capture + NumericSurface · impact-preview dialog · Tools (compact) · all 12 states inside real surfaces.',
+  'p.cOut':'Out of scope (Stage 4):','p.cOutT':'Settings/profile list (no open decisions depend on it) · party ledger page (its core pattern is previewed in the aging list) · cash-closing screens (deliberate thumb-zone exceptions) · assistant shell (Phase 2 defined the boundaries; visual work deferred) · wallet ledger (same contract as the week statement).',
+  'p.contrast':'Measured color pairings (WCAG 2.x)','p.pair':'Pair','p.ratio':'Ratio','p.verdict':'Verdict / role',
+  'p.p1':'white on #964e33 (primary action)','p.v1':'PASS AA — action role',
+  'p.p2':'white on #b4613f (pressed)','p.v2':'press-only, transient — never a resting pair',
+  'p.p3':'white on #cc785c','p.v3':'prohibited — brand stays atmosphere',
+  'p.p4':'#057b7c on #ffffff (quiet actions)','p.v4':'PASS AA text',
+  'p.p5':'#964e33 on #f4e4db','p.v5':'PASS — prefer ≥16px on soft',
+  'p.p6':'#d59172 on #1c1815 (dark emphasis)','p.v6':'PASS AA — dark warm role',
+  'p.p7':'#8fd5d6 on #332d27 (dark action)','p.v7':'PASS AA',
+  'p.p8':'#079fa0 on #ffffff (chart bars)','p.v8':'non-text ≥3:1 — graphics only',
+  'p.states':'The 12 states — where to find each',
+  's.empty':'empty','s.loading':'loading','s.saving':'saving','s.success':'success','s.error':'error','s.offline':'offline',
+  's.unknown':'unknown','s.partial':'partial','s.unsaved':'unsaved','s.cancel':'cancel','s.back':'back','s.correction':'correction',
+  'p.s1':'— Work: search a word with no match.','p.s2':'— Week statement: first-paint demo (genuinely-unknown case only).',
+  'p.s3':'— Record sheet: button-level “Recording…”, the screen stays truthful.','p.s4':'— the receipt: closure sentence with final numbers + a quiet mark.',
+  'p.s5':'— failure demo: input preserved, nothing navigates.','p.s6':'— sync demo: truth line, recording stays enabled.',
+  'p.s7':'— “—” in facts and amounts; “not set yet” roads.','p.s8':'— “estimated” profit with a bounded-gap sentence; locality/staleness line.',
+  'p.s9':'— discard guard when the sheet closes with a typed amount.','p.s10':'— sheet drag or ✕; “cancel” in dialogs.',
+  'p.s11':'— the week-statement reader’s back button.','p.s12':'— reverse → impact preview (changes / stays) → documented receipt note on Home.',
+  'p.truth':'Content truth','p.truthT':'One coherent week, reconciled exactly: opening 82.50 + in 85.00 − out 22.50 = 145.00 JOD available now. Sara’s order 35.00 with a held deposit of 15.00 (liquidity, not profit). Khalid owes 20.00 since 11/09. Reem is still a draft — her price stays “—”. Friday 11/09 has no records, so the chart shows a gap, not zero.',
+  /* dynamic */
+  'dyn.saving':'Recording…','dyn.errSale':'The sale was not saved — the number is still typed; try again',
+  'dyn.errExp':'The expense was not saved — the number is still typed; try again',
+  'dyn.guardSub':'Typed amount: {v} — record it before closing?',
+  'dyn.closeSale':'Recorded a sale of {v} JOD — cash rose by {v} to {n} JOD',
+  'dyn.closeExp':'Recorded an expense of {v} JOD — cash fell by {v} to {n} JOD',
+  'dyn.closeCol':'Recorded a collection of {v} JOD from Khalid — remaining on him: {r} JOD',
+  'dyn.subWallet':'Receiving wallet: the drawer · profit unavailable (cost unknown)',
+  'dyn.subCol':'Collected from the people ledger — Khalid; the remainder appears under “customers owe me”',
+  'dyn.announced':'Recorded — {s}','dyn.annCorrect':'The correction was recorded — the original is kept and cash returned to {n} JOD',
+  'dyn.chartAria':'Week chart: collected 85.00, spent 22.50 — peak collection day Thursday 10/09 at 40.00 JOD; Friday 11/09 has no records',
+  'dyn.gapNote':'days without records','dyn.offAnn':'Offline — data is local','dyn.syncedAnn':'Synced'
+}};
+const POSNAMES = {
+  ar:['مئات الآلاف','عشرات الآلاف','الآلاف','المئات','العشرات','الآحاد','أجزاء العُشر','أجزاء المئة'],
+  en:['Hundred-thousands','Ten-thousands','Thousands','Hundreds','Tens','Units','Tenths','Hundredths']
+};
+</script>
+
+<script>
+/* ============ application logic ============ */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const state = {
+  lang:'ar', theme:'light', motion:'normal', w:390, mode:'app',
+  screen:'home', offline:false, sync:'synced',
+  cash:145.00, debt:20.00,
+  sheet:{open:false, view:'menu', mode:'sale'},
+  slots:['0','0','0','0','0','0','0','0'], cursor:5,
+  failNext:false, busy:false, lastAction:null
+};
+const t = k => (I18N[state.lang][k] !== undefined ? I18N[state.lang][k] : I18N.ar[k] || k);
+const tf = (k, vars) => t(k).replace(/\{(\w+)\}/g, (_, n) => vars[n] !== undefined ? vars[n] : '');
+const fmt = v => v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+const money = (v, cls='') => `<bdi class="num ${cls}" dir="ltr">${fmt(v)}</bdi>`;
+const rm = () => document.body.classList.contains('rm');
+
+/* ---------- console: mode / lang / theme / motion / width ---------- */
+function segBind(id, attr, fn){
+  const seg = $(id);
+  seg.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    $$('button', seg).forEach(x => x.setAttribute('aria-pressed', x===b ? 'true':'false'));
+    fn(b.dataset[attr]);
+  });
+}
+segBind('#seg-mode', 'mode', v => { state.mode=v; $('#stage').classList.toggle('mode-compare', v==='compare'); $('#compare-view').hidden = (v!=='compare'); $('.device').style.display = (v==='compare') ? 'none':''; });
+segBind('#seg-lang', 'lang', v => { state.lang=v; applyLang(); });
+segBind('#seg-theme','theme', v => { state.theme=v; document.body.classList.toggle('dark', v==='dark'); });
+segBind('#seg-motion','motion', v => { state.motion=v; document.body.classList.toggle('rm', v==='reduced'); });
+segBind('#seg-width','w', v => { state.w=+v; document.documentElement.style.setProperty('--pw', v+'px'); });
+
+/* ---------- i18n application ---------- */
+function applyI18n(){
+  $$('[data-i18n]').forEach(el => { const v=t(el.dataset.i18n); if(v!==undefined) el.textContent=v; });
+  $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+}
+function applyLang(){
+  const rtl = state.lang==='ar';
+  document.documentElement.dir = rtl?'rtl':'ltr';
+  document.documentElement.lang = state.lang;
+  const app = $('#app'); app.dir = rtl?'rtl':'ltr'; app.lang = state.lang;
+  document.documentElement.style.setProperty('--chevdir', rtl ? '-1' : '1');
+  applyI18n();
+  $('#cash-arrow').textContent = rtl ? '←' : '→';
+  renderSlots(); renderWeekChart();
+}
+
+/* ---------- navigation (tab transitions per motion report §2.1) ---------- */
+const ORDER = {home:0, orders:1, finance:2, tools:3, statement:4};
+function setScreen(name, viaTab=false){
+  if(name===state.screen) return;
+  const cur = $('#scr-'+state.screen), nxt = $('#scr-'+name);
+  const rtl = state.lang==='ar';
+  const fwd = ORDER[name] > ORDER[state.screen];
+  /* incoming enters from the side the travel moves toward: RTL forward = leftward */
+  const fromLeft = rtl ? fwd : !fwd;
+  if(!rm()){
+    nxt.classList.remove('enter-from-start','enter-from-end');
+    nxt.classList.add(fromLeft ? 'enter-from-end':'enter-from-start');
+    void nxt.offsetWidth; /* reflow so the start transform applies before activation */
+  }
+  cur.classList.remove('active');
+  cur.scrollTop = 0;
+  nxt.classList.add('active');
+  state.screen = name;
+  $$('.nav-item').forEach(b => {
+    const on = b.id === 'tab-'+name;
+    if(on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
+  });
+  const h1 = nxt.querySelector('.q, .dateline .overline');
+  if(h1) h1.focus && h1.focus({preventScroll:true});
+}
+document.addEventListener('click', e => {
+  const n = e.target.closest('[data-nav]');
+  if(n){ setScreen(n.dataset.nav); return; }
+});
+
+/* sticky header shadow on scroll */
+$$(':not(.rm) .screen').forEach(sc => {
+  sc.addEventListener('scroll', () => {
+    const h = sc.querySelector('.shead');
+    if(h) h.classList.toggle('scrolled', sc.scrollTop > 6);
+  }, {passive:true});
+});
+
+/* ---------- week chart (chart 1: paired bars, RTL time flow) ---------- */
+const WEEK = [
+  {d_ar:'أحد', d_en:'Sun', in:15, out:2.5},
+  {d_ar:'إثنين', d_en:'Mon', in:10, out:0},
+  {d_ar:'ثلاثاء', d_en:'Tue', in:15, out:0},
+  {d_ar:'أربعاء', d_en:'Wed', in:0, out:12.5},
+  {d_ar:'خميس', d_en:'Thu', in:40, out:6, peak:true},
+  {d_ar:'جمعة', d_en:'Fri', in:null, out:null},
+  {d_ar:'سبت', d_en:'Sat', in:5, out:1.5}
+];
+function renderWeekChart(){
+  const svg = $('#week-chart'); if(!svg) return;
+  const rtl = state.lang==='ar';
+  const W=326, H=120, base=88, plotH=80, maxV=40, cw=W/7, bw=12, gap=3;
+  let s = '';
+  /* baseline */
+  s += `<line x1="0" y1="${base}" x2="${W}" y2="${base}" stroke="var(--hairline)" stroke-width="1"/>`;
+  WEEK.forEach((day,i)=>{
+    const colX = rtl ? (W-(i+1)*cw) : i*cw;
+    const cx = colX + cw/2;
+    const lbl = state.lang==='ar' ? day.d_ar : day.d_en;
+    s += `<text class="daylbl" x="${cx}" y="${base+14}" text-anchor="middle">${lbl}</text>`;
+    if(day.in===null){ /* unrecorded day: a gap, never a zero bar */
+      s += `<circle class="gapdot" cx="${cx}" cy="${base-6}" r="4"/>`;
+      return;
+    }
+    const hIn = Math.round(day.in/maxV*plotH), hOut = Math.round(day.out/maxV*plotH);
+    const xIn = colX + (cw - (bw*2+gap))/2;
+    const xOut = xIn + bw + gap;
+    if(hIn>0) s += `<rect class="bar-in" x="${xIn}" y="${base-hIn}" width="${bw}" height="${hIn}" rx="1.5"/>`;
+    if(hOut>0) s += `<rect class="bar-out" x="${xOut}" y="${base-hOut}" width="${bw}" height="${hOut}" rx="1.5"/>`;
+    if(day.peak) s += `<text class="vallbl" x="${cx}" y="${base-hIn-6}" text-anchor="middle">${fmt(day.in)}</text>`;
+  });
+  svg.innerHTML = s;
+  svg.setAttribute('aria-label', t('dyn.chartAria'));
+}
+
+/* ---------- search + filter (honest empty state) ---------- */
+const oscreen = () => $('#scr-orders');
+function applyOrdersFilter(){
+  const term = ($('#orders-search').value||'').trim().toLowerCase();
+  const chip = $('#orders-chips .chip[aria-pressed="true"]');
+  const cat = chip ? chip.dataset.filter : 'all';
+  let anyVisible = false;
+  $$('#scr-orders [data-searchable]').forEach(el => {
+    const okCat = cat==='all' || el.dataset.cat===cat;
+    const okTerm = !term || el.dataset.searchable.toLowerCase().includes(term);
+    const show = okCat && okTerm;
+    el.hidden = !show;
+    if(show) anyVisible = true;
+  });
+  $$('#scr-orders .section').forEach(sec => {
+    const items = $$('[data-searchable]', sec);
+    sec.hidden = items.length>0 && items.every(i => i.hidden);
+  });
+  $('#orders-empty').hidden = anyVisible;
+  $('#orders-clear').hidden = !term;
+}
+$('#orders-search').addEventListener('input', applyOrdersFilter);
+$('#orders-clear').addEventListener('click', ()=>{ $('#orders-search').value=''; applyOrdersFilter(); });
+$('#orders-chips').addEventListener('click', e => {
+  const c = e.target.closest('.chip'); if(!c) return;
+  $$('#orders-chips .chip').forEach(x => x.setAttribute('aria-pressed', x===c?'true':'false'));
+  applyOrdersFilter();
+});
+
+/* ---------- tools: estimate honesty ---------- */
+$('#cost-known').addEventListener('click', ()=>{
+  $('#cost-known').setAttribute('aria-pressed','true'); $('#cost-unknown').setAttribute('aria-pressed','false');
+  $('#tools-resultbar').innerHTML = `<div class="truth-line" style="color:var(--ink);font-size:14px"><span class="glyph dashed"></span><span><span class="est-underline">${t('tools.resEst')}</span></span></div>`;
+});
+$('#cost-unknown').addEventListener('click', ()=>{
+  $('#cost-unknown').setAttribute('aria-pressed','true'); $('#cost-known').setAttribute('aria-pressed','false');
+  $('#tools-resultbar').innerHTML = `<div class="truth-line" style="color:var(--ink);font-size:14px"><span class="glyph emdash"></span><span>${t('tools.resUnavail')}</span></div>`;
+});
+</script>
+
+<script>
+/* ============ sheet · NumericSurface · quiet completion · dialogs · demos ============ */
+const sheet = $('#sheet-record'), scrim = $('#scrim');
+const views = {menu:$('#sheet-menu'), form:$('#sheet-form'), receipt:$('#sheet-receipt')};
+
+function openSheet(view, mode){
+  state.sheet.open = true; state.sheet.view = view;
+  if(mode) state.sheet.mode = mode;
+  Object.entries(views).forEach(([k,el]) => el.hidden = (k!==view));
+  sheet.classList.remove('closing'); sheet.classList.add('open');
+  scrim.classList.add('show');
+  if(view==='form') { renderSlots(); $('#slotgrid').focus({preventScroll:true}); }
+  if(view==='menu') $('#qc-sale').focus({preventScroll:true});
+}
+function closeSheet(){
+  state.sheet.open = false;
+  sheet.classList.add('closing'); sheet.classList.remove('open');
+  scrim.classList.remove('show');
+  setTimeout(()=>{ sheet.classList.remove('closing'); if(state.sheet.view!=='receipt'){ views.form.hidden = views.receipt.hidden = true; views.menu.hidden = false; state.sheet.view='menu'; } }, 260);
+}
+/* discard guard: closing with a typed amount asks first */
+function requestClose(){
+  if(state.sheet.view==='form' && slotValue()>0 && !state.busy){
+    $('#guard-sub').textContent = tf('dyn.guardSub', {v: fmt(slotValue())+' '+t('cur')});
+    openDlg('#dlg-guard');
+  } else closeSheet();
+}
+$('#sheet-close').addEventListener('click', requestClose);
+scrim.addEventListener('click', requestClose);
+$('#g-stay').addEventListener('click', ()=> closeDlg('#dlg-guard'));
+$('#g-discard').addEventListener('click', ()=>{ state.slots=['0','0','0','0','0','0','0','0']; state.cursor=5; closeDlg('#dlg-guard'); closeSheet(); });
+
+/* drag-to-dismiss (direct manipulation, threshold per motion report §2.2) */
+let drag = null;
+sheet.addEventListener('pointerdown', e => {
+  if(e.target.closest('.keypad') || e.target.closest('button:not(.sheet-close)') || e.target.closest('input')) return;
+  if(!sheet.classList.contains('open')) return;
+  drag = {y0:e.clientY, dy:0}; sheet.setPointerCapture(e.pointerId);
+});
+sheet.addEventListener('pointermove', e => {
+  if(!drag) return;
+  drag.dy = Math.max(0, e.clientY - drag.y0);
+  if(drag.dy>4) sheet.style.transform = `translateY(${drag.dy}px)`;
+});
+sheet.addEventListener('pointerup', e => {
+  if(!drag) return;
+  const dy = drag.dy, vy = 0; drag = null;
+  sheet.style.transform = '';
+  if(dy > 96) requestClose();
+});
+
+/* ---------- NumericSurface: 6+2 slots, stable digits, position cursor ---------- */
+const POS_IDX = {ones:5};
+function slotValue(){
+  const intStr = state.slots.slice(0,6).join('').replace(/^0+/,'') || '0';
+  const decStr = state.slots.slice(6).join('');
+  return parseFloat(intStr + '.' + decStr);
+}
+function setSlotValue(v){
+  const [ip, dp='0'] = fmt(Math.max(0,v)).split('.');
+  const ints = (ip.replace(/,/g,'')).padStart(6,'0').slice(-6);
+  const decs = dp.padEnd(2,'0').slice(0,2);
+  state.slots = ints.split('').concat(decs.split(''));
+}
+function renderSlots(){
+  const g = $('#slotgrid');
+  const firstSig = state.slots.slice(0,6).findIndex(d => d!=='0');
+  let html = '';
+  for(let i=0;i<6;i++){
+    const dim = (i < (firstSig===-1?5:firstSig)) || (firstSig===-1);
+    html += `<span class="slot ${dim?'dim':''} ${state.cursor===i?'active':''}" data-slot="${i}">${state.slots[i]||'0'}<span class="cursor"></span></span>`;
+  }
+  html += `<span class="slot pt"><span class="d">.</span></span>`;
+  for(let i=6;i<8;i++){
+    const dim = state.slots[i]==='0';
+    html += `<span class="slot dec ${dim?'dim':''} ${state.cursor===i?'active':''}" data-slot="${i}">${state.slots[i]||'0'}<span class="cursor"></span></span>`;
+  }
+  g.innerHTML = html + `<span class="unitmark">${t('cur8')}</span>`;
+  $('#posname').textContent = POSNAMES[state.lang][state.cursor];
+}
+$('#slotgrid').addEventListener('click', e => {
+  const s = e.target.closest('.slot[data-slot]'); if(!s) return;
+  state.cursor = +s.dataset.slot; renderSlots();
+});
+/* optional swipe: literal finger-to-slot mapping (never mirrored) */
+let sw = null;
+$('#slotgrid').addEventListener('pointerdown', e => { sw = {x0:e.clientX, moved:false}; });
+$('#slotgrid').addEventListener('pointermove', e => {
+  if(!sw || Math.abs(e.clientX-sw.x0) < 10) return;
+  sw.moved = true;
+  const slots = $$('#slotgrid .slot[data-slot]');
+  for(const s of slots){
+    const r = s.getBoundingClientRect();
+    if(e.clientX >= r.left && e.clientX <= r.right){ state.cursor = +s.dataset.slot; renderSlots(); break; }
+  }
+});
+$('#slotgrid').addEventListener('pointerup', ()=> sw=null);
+$('#pos-prev').addEventListener('click', ()=>{ state.cursor = Math.max(0, state.cursor-1); renderSlots(); });
+$('#pos-next').addEventListener('click', ()=>{ state.cursor = Math.min(7, state.cursor+1); renderSlots(); });
+$('#keypad').addEventListener('click', e => {
+  const k = e.target.closest('.key'); if(!k || state.busy) return;
+  const d = k.dataset.k;
+  if(d==='.'){ state.cursor = 6; }
+  else if(d==='back'){
+    if(state.cursor===5){ state.slots = ['0'].concat(state.slots.slice(0,7)); state.slots.length=8; }
+    else state.slots[state.cursor]='0';
+  }
+  else {
+    if(state.cursor===5){ /* entry slot: deterministic one-slot shift */
+      for(let i=0;i<5;i++) state.slots[i]=state.slots[i+1];
+      state.slots[5]=d;
+    } else state.slots[state.cursor]=d;
+  }
+  renderSlots();
+});
+$$('.quickchips .chip').forEach(c => c.addEventListener('click', ()=>{
+  if(state.busy) return;
+  setSlotValue(slotValue() + (+c.dataset.add));
+  renderSlots();
+}));
+
+/* ---------- menu routing ---------- */
+$('#fab').addEventListener('click', ()=> openSheet('menu'));
+$('#qc-sale').addEventListener('click', ()=>{ resetForm(); setMode('sale'); openSheet('form','sale'); });
+$('#qc-expense').addEventListener('click', ()=>{ resetForm(); setMode('expense'); openSheet('form','expense'); });
+$('#qc-collect').addEventListener('click', ()=>{ resetForm(); setSlotValue(20); state.cursor=5; setMode('collect'); openSheet('form','collect'); });
+$$('#sheet-menu .menu-row:not(#qc-sale):not(#qc-expense):not(#qc-collect)').forEach(r => r.addEventListener('click', closeSheet));
+function setMode(m){
+  state.sheet.mode = m;
+  const lbl = $('#qc-save-label');
+  lbl.textContent = t(m==='sale'?'qc.save': m==='expense'?'qc.saveExp':'qc.saveCol');
+}
+function resetForm(){
+  state.slots=['0','0','0','0','0','0','0','0']; state.cursor=5; state.busy=false; state.failNext=false;
+  $('#qc-error').classList.remove('show');
+  $('#qc-save').classList.remove('busy');
+  $('#qc-save-label').textContent = t('qc.save');
+  views.form.hidden = false; views.receipt.hidden = true;
+}
+
+/* ---------- quiet completion (motion report §4, ms by ms) ---------- */
+$('#qc-save').addEventListener('click', ()=> runSave());
+function runSave(){
+  if(state.busy) return;
+  const v = slotValue();
+  if(v<=0){ $('#qc-error').textContent = t('dyn.errSale'); $('#qc-error').classList.add('show'); return; }
+  state.busy = true;
+  const btn = $('#qc-save'), lbl = $('#qc-save-label');
+  lbl.textContent = t('dyn.saving');
+  btn.classList.add('busy');
+  btn.setAttribute('aria-busy','true');
+  if(!rm()){ if(!$('.arc')){ const a=document.createElement('span'); a.className='arc'; lbl.before(a); } }
+  setTimeout(()=>{
+    if(state.failNext){
+      state.failNext = false; state.busy = false;
+      btn.classList.remove('busy'); btn.removeAttribute('aria-busy');
+      const arc=$('.arc'); if(arc) arc.remove();
+      lbl.textContent = t(state.sheet.mode==='expense'?'qc.saveExp': state.sheet.mode==='collect'?'qc.saveCol':'qc.save');
+      $('#qc-error').textContent = t(state.sheet.mode==='expense'?'dyn.errExp':'dyn.errSale');
+      $('#qc-error').classList.add('show');
+      announce(t('dyn.errSale'), 'assertive');
+      return; /* the amount stays on screen — nothing lost, nothing navigates */
+    }
+    finishSave(v);
+  }, 700);
+}
+function finishSave(v){
+  const mode = state.sheet.mode;
+  const prevCash = state.cash;
+  let closure='', sub='', newCash=prevCash, remain=0;
+  if(mode==='expense'){ newCash = prevCash - v; closure = tf('dyn.closeExp',{v:fmt(v),n:fmt(newCash)}); sub = t('dyn.subWallet'); }
+  else if(mode==='collect'){ newCash = prevCash + v; remain = Math.max(0, state.debt - v); state.debt = remain; closure = tf('dyn.closeCol',{v:fmt(v),r:fmt(remain)}); sub = t('dyn.subCol'); }
+  else { newCash = prevCash + v; closure = tf('dyn.closeSale',{v:fmt(v),n:fmt(newCash)}); sub = t('dyn.subWallet'); }
+  state.cash = newCash;
+  state.lastAction = {mode, v, prevCash, newCash};
+  $('#cash-val').textContent = fmt(newCash);
+  $('#fin-cash').textContent = fmt(newCash);
+  views.form.hidden = true; views.receipt.hidden = false;
+  state.sheet.view = 'receipt';
+  const arc=$('.arc'); if(arc) arc.remove();
+  $('#qc-save').classList.remove('busy'); $('#qc-save').removeAttribute('aria-busy');
+  $('#receipt-closure').innerHTML = closure.replace(/(\d[\d,]*\.\d{2})/g, `<bdi class="num" dir="ltr">$1</bdi>`);
+  $('#receipt-subline').textContent = sub;
+  announce(closure, 'polite');
+  const rcpt = views.receipt; rcpt.setAttribute('tabindex','-1'); rcpt.focus({preventScroll:true});
+  state.busy = false;
+}
+$('#receipt-done').addEventListener('click', ()=>{
+  closeSheet();
+  const fv = $('#fact-cash .fv');
+  if(fv && !rm()){ fv.classList.remove('located-highlight'); void fv.offsetWidth; fv.classList.add('located-highlight'); setTimeout(()=>fv.classList.remove('located-highlight'), 700); }
+  resetForm();
+});
+
+/* ---------- correction preview (preview → confirm → documented receipt) ---------- */
+function openDlg(sel){ const d=$(sel); d.classList.add('show'); d.setAttribute('aria-hidden','false'); const f=d.querySelector('button'); if(f) f.focus({preventScroll:true}); }
+function closeDlg(sel){ const d=$(sel); d.classList.remove('show'); d.setAttribute('aria-hidden','true'); }
+$('#receipt-undo').addEventListener('click', ()=>{
+  const a = state.lastAction; if(!a) return;
+  const ar = state.lang==='ar';
+  const w1 = ar ? `الكاش يرجع من ${fmt(a.newCash)} إلى ${fmt(a.prevCash)} (−${fmt(a.v)} د.أ)` : `Cash goes from ${fmt(a.newCash)} back to ${fmt(a.prevCash)} (−${fmt(a.v)} JOD)`;
+  const w2 = ar ? `يُلغى أثر ${a.mode==='expense'?'المصروف':a.mode==='collect'?'التحصيل':'البيع المباشر'} بقيمة ${fmt(a.v)} د.أ` : `The effect of the ${a.mode==='expense'?'expense':a.mode==='collect'?'collection':'direct sale'} of ${fmt(a.v)} JOD is cancelled`;
+  $('#dlg-correct [data-i18n="cp.w1"]').textContent = w1;
+  $('#dlg-correct [data-i18n="cp.w2"]').textContent = w2;
+  openDlg('#dlg-correct');
+});
+$('#cp-cancel').addEventListener('click', ()=> closeDlg('#dlg-correct'));
+$('#cp-execute').addEventListener('click', ()=>{
+  const a = state.lastAction; if(!a) return;
+  state.cash = a.prevCash;
+  $('#cash-val').textContent = fmt(a.prevCash);
+  $('#fin-cash').textContent = fmt(a.prevCash);
+  if(a.mode==='collect'){ state.debt = 20.00; }
+  closeDlg('#dlg-correct'); closeSheet(); resetForm();
+  $('#correction-note').hidden = false;
+  announce(tf('dyn.annCorrect',{n:fmt(a.prevCash)}), 'polite');
+});
+
+/* ---------- offline / sync truth ---------- */
+function setOffline(on, silent){
+  state.offline = on;
+  updateSyncUI();
+  if(!silent) announce(on ? t('dyn.offAnn') : t('dyn.syncedAnn'), 'polite');
+}
+function setSync(s){ state.sync=s; updateSyncUI(); }
+function updateSyncUI(){
+  const off = state.offline, sy = state.sync;
+  $('#offline-line').hidden = !off;
+  $('#fin-offline').hidden = !off;
+  $('#sync-line').hidden = !(sy==='syncing' && !off);
+  const g = $('#shead-home .dateline .glyph');
+  if(g){ g.className = 'glyph ' + (off ? 'slash' : sy==='syncing' ? 'sync' : 'double'); }
+}
+function announce(msg, politeness){
+  const lr = $('#liveregion');
+  lr.setAttribute('aria-live', politeness||'polite');
+  lr.textContent = '';
+  setTimeout(()=>{ lr.textContent = msg; }, 50);
+}
+
+/* ---------- review demos (buttons OUTSIDE the phone) ---------- */
+function ensureAppMode(){ if(state.mode!=='app'){ $('#seg-mode [data-mode="app"]').click(); } }
+$('#demo-sale').addEventListener('click', ()=>{
+  ensureAppMode(); if(state.sheet.open) { closeSheet(); }
+  resetForm(); setSlotValue(20); state.cursor=5;
+  setMode('sale'); openSheet('form','sale');
+  setTimeout(()=>{ if(state.sheet.view==='form') runSave(); }, 900);
+});
+$('#demo-fail').addEventListener('click', ()=>{
+  ensureAppMode(); if(state.sheet.open) { closeSheet(); }
+  resetForm(); setSlotValue(7.5); state.cursor=5;
+  state.failNext = true; setMode('sale'); openSheet('form','sale');
+  setTimeout(()=>{ if(state.sheet.view==='form') runSave(); }, 900);
+});
+$('#demo-guard').addEventListener('click', ()=>{
+  ensureAppMode(); if(state.sheet.open) { closeSheet(); }
+  resetForm(); setSlotValue(15); state.cursor=5;
+  setMode('sale'); openSheet('form','sale');
+  setTimeout(()=>{ if(state.sheet.view==='form') requestClose(); }, 1100);
+});
+$('#demo-sync').addEventListener('click', ()=>{
+  ensureAppMode();
+  setOffline(true, true);
+  setTimeout(()=>{ setSync('syncing'); }, 1000);
+  setTimeout(()=>{ setSync('synced'); setOffline(false, true); announce(t('dyn.syncedAnn'),'polite'); }, 2600);
+});
+$('#demo-skel').addEventListener('click', ()=>{
+  ensureAppMode();
+  if(state.screen!=='statement') setScreen('statement');
+  const sc = $('#scr-statement');
+  sc.classList.add('skeleton');
+  setTimeout(()=>{ sc.classList.remove('skeleton'); }, 1300);
+});
+
+/* statement back + period switcher (no-op beyond current week by contract) */
+$('#stmt-back').addEventListener('click', ()=> setScreen('finance'));
+$('#per-prev').addEventListener('click', ()=> announce(t('dyn.gapNote'), 'polite'));
+
+/* ---------- init ---------- */
+(function init(){
+  document.documentElement.style.setProperty('--pw', state.w+'px');
+  applyLang();
+  updateSyncUI();
+  $('#scr-home').classList.add('active');
+})();
+</script>
+</body>
+</html>
