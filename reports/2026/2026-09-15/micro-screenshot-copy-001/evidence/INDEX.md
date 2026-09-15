@@ -1,0 +1,145 @@
+# فهرس الأدلة — تدقيق نصوص واجهة لقطات Micro (micro-screenshot-copy-001)
+
+131 بطاقة تفصيلية (بطاقة واحدة لكل لقطة)، مرتبة بالفهرس. لكل بطاقة: اسم الملف الحرفي، الحالة الظاهرة، المسار المُطابَق (إن وُجد)، وسم الهوية، ورابط البطاقة.
+
+| الفهرس | اسم اللقطة (حرفي) | الحالة الظاهرة | المسار المُطابَق (Code Facts) | الهوية | البطاقة |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `01__مشروع_النخبة__home__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [001.md](cards/001.md) |
+| 2 | `01__مشروع_النخبة__home__light-320w__320xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [002.md](cards/002.md) |
+| 3 | `01__مشروع_النخبة__home__light-430w__430xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [003.md](cards/003.md) |
+| 4 | `01__مشروع_النخبة__home__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [004.md](cards/004.md) |
+| 5 | `02__ما_اسم_مشروعك؟__setup-step1__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [005.md](cards/005.md) |
+| 6 | `02__ما_اسم_مشروعك؟__setup-step1__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [006.md](cards/006.md) |
+| 7 | `03__وين_تحط_فلوسك؟__setup-step2__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [007.md](cards/007.md) |
+| 8 | `03__وين_تحط_فلوسك؟__setup-step2__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [008.md](cards/008.md) |
+| 9 | `04__شو_وضع_الدرج_هلق؟__setup-step3__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [009.md](cards/009.md) |
+| 10 | `04__شو_وضع_الدرج_هلق؟__setup-step3__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [010.md](cards/010.md) |
+| 11 | `05__شو_عندك_هلق؟__foundation__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [011.md](cards/011.md) |
+| 12 | `05__شو_عندك_هلق؟__foundation__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [012.md](cards/012.md) |
+| 13 | `06__العمل__orders__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [013.md](cards/013.md) |
+| 14 | `06__العمل__orders__light-430w__430xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [014.md](cards/014.md) |
+| 15 | `06__العمل__orders__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [015.md](cards/015.md) |
+| 16 | `07__تصميم_مخطط__orders-new-planned__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [016.md](cards/016.md) |
+| 17 | `07__تصميم_مخطط__orders-new-planned__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [017.md](cards/017.md) |
+| 18 | `08__طلب_من_عميل__draft-editor-new-customer__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [018.md](cards/018.md) |
+| 19 | `08__طلب_من_عميل__draft-editor__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [019.md](cards/019.md) |
+| 20 | `08__طلب_من_عميل__draft-editor__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [020.md](cards/020.md) |
+| 21 | `09__سجّل_ما_اتفقت_عليه__draft-agreement__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [021.md](cards/021.md) |
+| 22 | `09__سجّل_ما_اتفقت_عليه__draft-agreement__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [022.md](cards/022.md) |
+| 23 | `10__مجسم_شعار_من_الجبس__draft-cost__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [023.md](cards/023.md) |
+| 24 | `10__مجسم_شعار_من_الجبس__draft-cost__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [024.md](cards/024.md) |
+| 25 | `11__الطلب_غير_متاح_محليًا__order-detail-safe__dark__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [025.md](cards/025.md) |
+| 26 | `11__الطلب_غير_متاح_محليًا__order-detail-safe__light__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [026.md](cards/026.md) |
+| 27 | `12__مراجعة_التسليم__delivery-review-safe__dark__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [027.md](cards/027.md) |
+| 28 | `12__مراجعة_التسليم__delivery-review-safe__light__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [028.md](cards/028.md) |
+| 29 | `13__تسجيل_بيع_مباشر__direct-sale-new__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [029.md](cards/029.md) |
+| 30 | `13__تسجيل_بيع_مباشر__direct-sale-new__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [030.md](cards/030.md) |
+| 31 | `14__تصحيح_بيع_مباشر__direct-sale-safe__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [031.md](cards/031.md) |
+| 32 | `14__تصحيح_بيع_مباشر__direct-sale-safe__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [032.md](cards/032.md) |
+| 33 | `15__المواعيد__schedule__dark__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [033.md](cards/033.md) |
+| 34 | `15__المواعيد__schedule__light__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [034.md](cards/034.md) |
+| 35 | `16__الموعد_غير_متاح_محليًا__schedule-editor-safe__dark__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [035.md](cards/035.md) |
+| 36 | `16__الموعد_غير_متاح_محليًا__schedule-editor-safe__light__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [036.md](cards/036.md) |
+| 37 | `17__مالي__finance__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [037.md](cards/037.md) |
+| 38 | `17__مالي__finance__light-320w__320xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [038.md](cards/038.md) |
+| 39 | `17__مالي__finance__light-430w__430xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [039.md](cards/039.md) |
+| 40 | `17__مالي__finance__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [040.md](cards/040.md) |
+| 41 | `18__تسجيل_استثمار_المالك__finance-event__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [041.md](cards/041.md) |
+| 42 | `18__تسجيل_استثمار_المالك__finance-event__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [042.md](cards/042.md) |
+| 43 | `19__سحب_من_المشروع_لنفسك؟__owner-withdrawal__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [043.md](cards/043.md) |
+| 44 | `19__سحب_من_المشروع_لنفسك؟__owner-withdrawal__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [044.md](cards/044.md) |
+| 45 | `20__مال_المالك__owner-entitlement__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [045.md](cards/045.md) |
+| 46 | `20__مال_المالك__owner-entitlement__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [046.md](cards/046.md) |
+| 47 | `21__تحصيل_أو_التزام_قريب__g5-declaration__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [047.md](cards/047.md) |
+| 48 | `21__تحصيل_أو_التزام_قريب__g5-declaration__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [048.md](cards/048.md) |
+| 49 | `22__كشف_الفترة__statement__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [049.md](cards/049.md) |
+| 50 | `22__كشف_الفترة__statement__light-320w__320xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [050.md](cards/050.md) |
+| 51 | `22__كشف_الفترة__statement__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [051.md](cards/051.md) |
+| 52 | `23__آخر_ما_حدث__finance-activity__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [052.md](cards/052.md) |
+| 53 | `23__آخر_ما_حدث__finance-activity__light__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [053.md](cards/053.md) |
+| 54 | `24__لا_نص_للمشاركة__share-preview-default__dark__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [054.md](cards/054.md) |
+| 55 | `24__لا_نص_للمشاركة__share-preview-default__light__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [055.md](cards/055.md) |
+| 56 | `25__محافظ_الكاش__cash-wallets__dark__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [056.md](cards/056.md) |
+| 57 | `25__محافظ_الكاش__cash-wallets__light__390xFULL.png` | POPULATED | `—` | FILENAME_BASED_IDENTITY | [057.md](cards/057.md) |
+| 58 | `26__أين_يوجد_الكاش_الآن؟__wallet-new__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [058.md](cards/058.md) |
+| 59 | `26__أين_يوجد_الكاش_الآن؟__wallet-new__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [059.md](cards/059.md) |
+| 60 | `27__الدرج__wallet-ledger__dark__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [060.md](cards/060.md) |
+| 61 | `27__الدرج__wallet-ledger__light__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [061.md](cards/061.md) |
+| 62 | `28__رصيد_افتتاحي_هذه_المحفظة_معروف_أصلًا__opening-later__dark__390xFULL.png` | UNCLEAR | `—` | FILENAME_BASED_IDENTITY | [062.md](cards/062.md) |
+| 63 | `28__رصيد_افتتاحي_هذه_المحفظة_معروف_أصلًا__opening-later__light__390xFULL.png` | UNCLEAR | `—` | FILENAME_BASED_IDENTITY | [063.md](cards/063.md) |
+| 64 | `29__اضبط_كاش_الدرج__wallet-adjust__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [064.md](cards/064.md) |
+| 65 | `29__اضبط_كاش_الدرج__wallet-adjust__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [065.md](cards/065.md) |
+| 66 | `30__تحتاج_محافظتين_للتحويل__cash-transfer__dark__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [066.md](cards/066.md) |
+| 67 | `30__تحتاج_محافظتين_للتحويل__cash-transfer__light__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [067.md](cards/067.md) |
+| 68 | `31__وزّع_الكاش_غير_الموزع__cash-distribute__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [068.md](cards/068.md) |
+| 69 | `31__وزّع_الكاش_غير_الموزع__cash-distribute__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [069.md](cards/069.md) |
+| 70 | `32__عدّ_اللي_في_الدرج_فعلًا__cash-count__dark__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [070.md](cards/070.md) |
+| 71 | `32__عدّ_اللي_في_الدرج_فعلًا__cash-count__light__390xFULL.png` | EDITOR | `—` | FILENAME_BASED_IDENTITY | [071.md](cards/071.md) |
+| 72 | `33__جارٍ_فتح_الأثر__cash-reversal-safe__dark__390xFULL.png` | LOADING | `—` | FILENAME_BASED_IDENTITY | [072.md](cards/072.md) |
+| 73 | `33__جارٍ_فتح_الأثر__cash-reversal-safe__light__390xFULL.png` | LOADING | `—` | FILENAME_BASED_IDENTITY | [073.md](cards/073.md) |
+| 74 | `34__حصّل_من_مين_عليه_إلَي__collect__dark__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [074.md](cards/074.md) |
+| 75 | `34__حصّل_من_مين_عليه_إلَي__collect__light__390xFULL.png` | EMPTY | `—` | FILENAME_BASED_IDENTITY | [075.md](cards/075.md) |
+| 76 | `35__المواد_والمخزون__inventory__dark__390xFULL.png` | POPULATED | `/inventory` | MATCHED | [076.md](cards/076.md) |
+| 77 | `35__المواد_والمخزون__inventory__light__390xFULL.png` | POPULATED | `/inventory` | MATCHED | [077.md](cards/077.md) |
+| 78 | `36__أي_مادة_تسجّل؟__material-new__dark__390xFULL.png` | EDITOR | `/inventory/material/new` | MATCHED | [078.md](cards/078.md) |
+| 79 | `36__أي_مادة_تسجّل؟__material-new__light__390xFULL.png` | EDITOR | `/inventory/material/new` | MATCHED | [079.md](cards/079.md) |
+| 80 | `37__أكّد_رصيد_قماش_تغليف__material-confirm__dark__390xFULL.png` | EDITOR | `/inventory/material/:id/confirm` | MATCHED | [080.md](cards/080.md) |
+| 81 | `37__أكّد_رصيد_قماش_تغليف__material-confirm__light__390xFULL.png` | EDITOR | `/inventory/material/:id/confirm` | MATCHED | [081.md](cards/081.md) |
+| 82 | `38__استلم_شراء_مواد__movement-receipt__dark__390xFULL.png` | EDITOR | `/inventory/movement/receipt` | MATCHED | [082.md](cards/082.md) |
+| 83 | `38__استلم_شراء_مواد__movement-receipt__light__390xFULL.png` | EDITOR | `/inventory/movement/receipt` | MATCHED | [083.md](cards/083.md) |
+| 84 | `38b__استهلك_مادة__movement-consume__dark__390xFULL.png` | EDITOR | `/inventory/movement/consume` | MATCHED | [084.md](cards/084.md) |
+| 85 | `38b__استهلك_مادة__movement-consume__light__390xFULL.png` | EDITOR | `/inventory/movement/consume` | MATCHED | [085.md](cards/085.md) |
+| 86 | `38c__سجل_هدر_مادة__movement-waste__dark__390xFULL.png` | EDITOR | `/inventory/movement/waste` | MATCHED | [086.md](cards/086.md) |
+| 87 | `38c__سجل_هدر_مادة__movement-waste__light__390xFULL.png` | EDITOR | `/inventory/movement/waste` | MATCHED | [087.md](cards/087.md) |
+| 88 | `39__جارٍ_فتح_حركة_المادة__movement-reverse-safe__dark__390xFULL.png` | LOADING | `/inventory/movement/:id/reverse` | MATCHED | [088.md](cards/088.md) |
+| 89 | `39__جارٍ_فتح_حركة_المادة__movement-reverse-safe__light__390xFULL.png` | LOADING | `/inventory/movement/:id/reverse` | MATCHED | [089.md](cards/089.md) |
+| 90 | `40__منتجاتي_وخدماتي__catalog__dark__390xFULL.png` | POPULATED | `/catalog` | MATCHED | [090.md](cards/090.md) |
+| 91 | `40__منتجاتي_وخدماتي__catalog__light__390xFULL.png` | POPULATED | `/catalog` | MATCHED | [091.md](cards/091.md) |
+| 92 | `41__احسب_قبل_أن_تلتزم__tools__dark__390xFULL.png` | POPULATED | `/tools` | MATCHED | [092.md](cards/092.md) |
+| 93 | `41__احسب_قبل_أن_تلتزم__tools__light__390xFULL.png` | POPULATED | `/tools` | MATCHED | [093.md](cards/093.md) |
+| 94 | `42__حاسبة_التكلفة_والسعر__cost-calculator__dark__390xFULL.png` | EDITOR | `/tools/calculator` | MATCHED | [094.md](cards/094.md) |
+| 95 | `42__حاسبة_التكلفة_والسعر__cost-calculator__light__390xFULL.png` | EDITOR | `/tools/calculator` | MATCHED | [095.md](cards/095.md) |
+| 96 | `43__تقدير_المجسم__estimate-detail__dark__390xFULL.png` | DETAIL | `/tools/estimate/:id` | MATCHED | [096.md](cards/096.md) |
+| 97 | `43__تقدير_المجسم__estimate-detail__light__390xFULL.png` | DETAIL | `/tools/estimate/:id` | MATCHED | [097.md](cards/097.md) |
+| 98 | `44__فحص_سلامة_مالي__tools-integrity__dark__390xFULL.png` | EMPTY | `/tools/integrity` | MATCHED | [098.md](cards/098.md) |
+| 99 | `44__فحص_سلامة_مالي__tools-integrity__light__390xFULL.png` | EMPTY | `/tools/integrity` | MATCHED | [099.md](cards/099.md) |
+| 100 | `45__الأصول__assets__dark__390xFULL.png` | EMPTY | `/assets` | MATCHED | [100.md](cards/100.md) |
+| 101 | `45__الأصول__assets__light__390xFULL.png` | EMPTY | `/assets` | MATCHED | [101.md](cards/101.md) |
+| 102 | `46__شراء_للاستخدام_الطويل__asset-new__dark__390xFULL.png` | EDITOR | `/assets/new` | MATCHED | [102.md](cards/102.md) |
+| 103 | `46__شراء_للاستخدام_الطويل__asset-new__light__390xFULL.png` | EDITOR | `/assets/new` | MATCHED | [103.md](cards/103.md) |
+| 104 | `47__الأصل_غير_متاح_محليًا__asset-detail-safe__dark__390xFULL.png` | ERROR | `/assets/:id` | MATCHED | [104.md](cards/104.md) |
+| 105 | `47__الأصل_غير_متاح_محليًا__asset-detail-safe__light__390xFULL.png` | ERROR | `/assets/:id` | MATCHED | [105.md](cards/105.md) |
+| 106 | `48__القروض__loans__dark__390xFULL.png` | EMPTY | `/loans` | MATCHED | [106.md](cards/106.md) |
+| 107 | `48__القروض__loans__light__390xFULL.png` | EMPTY | `/loans` | MATCHED | [107.md](cards/107.md) |
+| 108 | `49__أعطيت_مالًا_يُعاد__loan-new__dark__390xFULL.png` | EDITOR | `/loans/new` | MATCHED | [108.md](cards/108.md) |
+| 109 | `49__أعطيت_مالًا_يُعاد__loan-new__light__390xFULL.png` | EDITOR | `/loans/new` | MATCHED | [109.md](cards/109.md) |
+| 110 | `50__القرض_غير_متاح_محليًا__loan-detail-safe__dark__390xFULL.png` | ERROR | `/loans/:id` | MATCHED | [110.md](cards/110.md) |
+| 111 | `50__القرض_غير_متاح_محليًا__loan-detail-safe__light__390xFULL.png` | ERROR | `/loans/:id` | MATCHED | [111.md](cards/111.md) |
+| 112 | `51__الموردون_والمشتريات__suppliers__dark__390xFULL.png` | EMPTY | `/suppliers` | MATCHED | [112.md](cards/112.md) |
+| 113 | `51__الموردون_والمشتريات__suppliers__light__390xFULL.png` | EMPTY | `/suppliers` | MATCHED | [113.md](cards/113.md) |
+| 114 | `52__سجل_شراء_مواد__supplier-purchase-new__dark__390xFULL.png` | EDITOR | `/suppliers/purchase/new` | MATCHED | [114.md](cards/114.md) |
+| 115 | `52__سجل_شراء_مواد__supplier-purchase-new__light__390xFULL.png` | EDITOR | `/suppliers/purchase/new` | MATCHED | [115.md](cards/115.md) |
+| 116 | `52b__شراء_المواد_غير_موجود__supplier-purchase-safe__dark__390xFULL.png` | ERROR | `/suppliers/purchase/:id` | MATCHED | [116.md](cards/116.md) |
+| 117 | `52b__شراء_المواد_غير_موجود__supplier-purchase-safe__light__390xFULL.png` | ERROR | `/suppliers/purchase/:id` | MATCHED | [117.md](cards/117.md) |
+| 118 | `53__شراء_المواد_غير_موجود__purchase-payment-safe__dark__390xFULL.png` | ERROR | `/suppliers/purchase/:id/payment` | MATCHED | [118.md](cards/118.md) |
+| 119 | `53__شراء_المواد_غير_موجود__purchase-payment-safe__light__390xFULL.png` | ERROR | `/suppliers/purchase/:id/payment` | MATCHED | [119.md](cards/119.md) |
+| 120 | `54__مين_عليه_إلَي،_وعليّ_لمين؟__parties__dark__390xFULL.png` | EMPTY | `/parties` | MATCHED | [120.md](cards/120.md) |
+| 121 | `54__مين_عليه_إلَي،_وعليّ_لمين؟__parties__light__390xFULL.png` | EMPTY | `/parties` | MATCHED | [121.md](cards/121.md) |
+| 122 | `55__الإعدادات__settings__dark__390xFULL.png` | POPULATED | `/settings` | MATCHED | [122.md](cards/122.md) |
+| 123 | `55__الإعدادات__settings__light__390xFULL.png` | POPULATED | `/settings` | MATCHED | [123.md](cards/123.md) |
+| 124 | `56__ملفك_وملف_مشروعك__profile__dark__390xFULL.png` | DETAIL | `/profile` | MATCHED | [124.md](cards/124.md) |
+| 125 | `56__ملفك_وملف_مشروعك__profile__light__390xFULL.png` | DETAIL | `/profile` | MATCHED | [125.md](cards/125.md) |
+| 126 | `57__هذه_الصفحة_ليست_جزءًا_من_هذا_الإصدار__not-found__dark__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [126.md](cards/126.md) |
+| 127 | `57__هذه_الصفحة_ليست_جزءًا_من_هذا_الإصدار__not-found__light__390xFULL.png` | ERROR | `—` | FILENAME_BASED_IDENTITY | [127.md](cards/127.md) |
+| 128 | `58__Micro_مقفل__app-lock-gate__dark__390xFULL.png` | WARNING | `—` | FILENAME_BASED_IDENTITY | [128.md](cards/128.md) |
+| 129 | `58__Micro_مقفل__app-lock-gate__light__390xFULL.png` | WARNING | `—` | FILENAME_BASED_IDENTITY | [129.md](cards/129.md) |
+| 130 | `59__شاشة_الإطلاق__splash__light__390xFULL.png` | LOADING | `—` | FILENAME_BASED_IDENTITY | [130.md](cards/130.md) |
+| 131 | `60__شاشة_الإطلاق__splash__dark__390xFULL.png` | LOADING | `—` | FILENAME_BASED_IDENTITY | [131.md](cards/131.md) |
+
+---
+
+## مراجع ثابتة
+- فرع اللقطات: `micro-brand-assets-motion-splash-resume-review-20260915` @ `7120763e44b34e202674f8f136e4fd187523c5a7`
+- مجلد اللقطات: `planning/micro-brand-assets-motion-splash-resume-2026-09/screenshots`
+- تقرير Code Facts: `Qays7753/Documents` @ `fa79ef75ea5730051f1339e5f11b51e46c39d152` → `reports/2026/2026-09-15/micro-product-facts-journey-001/micro-product-facts-journey-audit.md`
+- Micro المفحوص في Code Facts: `f21f777d3b4df874806061755dff5fc956ca4cf3`
