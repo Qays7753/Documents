@@ -399,10 +399,15 @@
 | C5 | تقادم جرد المستودع (docs/inventory) | الجدول «غير قابل للوصول» (F-077…F-083) صار كله غير صحيح: F-077/078/079/080/082 صارت **موصلة** من الواجهة، وF-081/F-083 **حُذفتا من الكود** أصلًا | `VERIFIED` |
 | C6 | تقادم code-facts-v1 | يقول «لا يوجد بيع في النظام» و29 مسارًا ومخطط 26؛ الكود: بيع مباشر منفذ، 56 مسارًا، مخطط 35 | `VERIFIED` |
 
+**حالة فتح الـPR (توثيق صادق):** فرع التقرير دُفع بنجاح إلى Documents، لكن إنشاء الـPR عبر API تعطّل بسبب توكن الوصول الدقيق (fine-grained PAT) الذي يملك صلاحية كتابة المحتويات (Contents: Write) ولا يملك صلاحية «Pull requests: Write» — الخطأ الموثق: HTTP 403 «Resource not accessible by personal access token» عبر REST وGraphQL معًا. لم يُنشأ أي PR ولن يُ ادّعى إنشاؤه. لإنشاء الـPR بنقرة واحدة:
+`https://github.com/Qays7753/Documents/compare/main...audit/micro-product-facts-journey-20260915?expand=1`
+
 **ملفات الحجة المرفقة:** [`baseline-commands.txt`](evidence/baseline-commands.txt) · [`repo-access-and-pr159.txt`](evidence/repo-access-and-pr159.txt) · [`route-index.md`](evidence/route-index.md)
 
 **قيود منهجية إضافية:** (1) عدد النقرات `NOT_MEASURED` في كل الرحلات إلا ما أثبته اختبار مقروء (التسليم: نقرة تنفيذ واحدة). (2) «تكرار الاستخدام» غير قابل للاستدلال — أي ترتيب أولويات يجدر به `OWNER_CONFIRMATION_REQUIRED`. (3) خمس متخصصات قراءة (قشرة/تنقل، مالية، مسارات عمل، أدوات، مراجع مستقل) بمنهجية قراءة ثابتة فقط؛ المراجع المستقل أعاد التحقق من عينة موسعة من الادعاءات ولم يجد ادعاءً غير مدعوم، لكن التغطية ليست إثباتًا رياضيًا لكل سطر. (4) صيغة المال الموثقة أعلاه مقروءة من `projectFinancialService.ts:392-424` ولم تُختبر رقميًا.
 
 AUDIT_COMPLETE — OWNER_DECISIONS_REQUIRED
 NO_MICRO_OR_SCREENSHOT_WRITES_PERFORMED
-DOCUMENTS_REPORT_PR_CREATED — MERGE_NOT_PERFORMED
+DOCUMENTS_REPORT_BRANCH_PUSHED — PR_CREATION_BLOCKED_TOKEN_SCOPE
+OWNER_ACTION_REQUIRED — CREATE_PR_VIA_COMPARE_URL_OR_GRANT_PULL_REQUESTS_WRITE
+
