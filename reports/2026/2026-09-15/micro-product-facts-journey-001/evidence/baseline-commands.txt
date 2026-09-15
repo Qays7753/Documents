@@ -1,0 +1,28 @@
+# Evidence: Micro repository baseline commands
+Recorded: 2026-09-15 (Asia/Amman)
+Repository: https://github.com/Qays7753/Micro (READ_ONLY)
+
+## $ git fetch origin --prune
+(no output — up to date)
+
+## $ git status --short --branch
+## main...origin/main
+
+## $ git log -1 --date=iso --format='%H%n%ad%n%s' origin/main
+f21f777d3b4df874806061755dff5fc956ca4cf3
+2026-09-15 11:01:58 +0000
+Merge Brand Activation and corrected Launch Splash
+
+## $ git branch -r --sort=-committerdate
+  origin/HEAD -> origin/main
+  origin/main
+  origin/jules-15390500015238590867-77e56821
+  origin/agent/group1-traceability-finalize
+  origin/task/direct-sale
+  origin/keep/DO-NOT-DELETE-main-mirror
+  origin/keep/DO-NOT-DELETE-founding-history
+  origin/keep/ORIGINAL-HISTORY-before-main-restart
+
+## Post-audit cleanliness check (after all analysis)
+## main...origin/main
+(no modified files — read-only respected)

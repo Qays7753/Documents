@@ -1,0 +1,28 @@
+# Evidence: PR #159 state + screenshots path + Documents repo access
+Recorded: 2026-09-15 (Asia/Amman) — via authenticated GitHub REST API (token supplied by owner for this audit; token NOT stored in any repo file)
+
+## PR #159 — GET /repos/Qays7753/Micro/pulls/159
+number: 159
+state: closed
+title: "Micro hardening, exact values, architecture, and UI closure"
+merged: true
+merged_at: 2026-09-13T08:52:12Z
+merge_commit_sha: c0469e265f24c70427eb7826dee717be117cff87
+=> VERIFIED MERGED (not assumed)
+
+## Screenshots folder — GET /repos/Qays7753/Documents/contents/planning/micro-brand-assets-motion-splash-resume-2026/screenshots?ref=main
+HTTP status: 404 (Not Found)
+planning/ directory on main contains only:
+- micro-standard-development
+- micro-standard-v2-execution-handoff-2026-09
+- zai-flash-comparative-review
+=> SCREENSHOT_SOURCE_UNVERIFIED — screenshots NOT inspected (audit boundary)
+
+## Documents repo — GET /repos/Qays7753/Documents
+full_name: Qays7753/Documents
+default_branch: main
+private: false
+permissions: { admin: true, maintain: true, push: true, triage: true, pull: true }
+default-branch head at branch creation: f919982c692e5ba78cf3284a4240c45f66be91c6 (2026-09-13 20:57:06 +0000, "Merge branch 'micro-standard-v2-reconciliation-promotion-20260914'")
+report path reports/2026/2026-09-15/micro-product-facts-journey-001/ did NOT exist before this audit (verified new path)
+=> WRITE ACCESS VERIFIED BEFORE ANY WRITE
