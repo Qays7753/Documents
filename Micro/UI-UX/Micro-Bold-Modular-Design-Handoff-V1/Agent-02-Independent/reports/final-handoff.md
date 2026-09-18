@@ -48,8 +48,11 @@
 
 ## 6. التسليم إلى مستودع Documents
 
-- الفرع: `reports/micro-bold-modular-agent-02` تحت `Micro/UI-UX/Micro-Bold-Modular-Design-Handoff-V1/Agent-02-Independent/` حصريًا.
-- الرفع والـPR تمّا وفق البروتوكول 12 دون المساس بأي محتوى آخر (روابط الـPR في الـMANIFEST).
+- الفرع: `reports/micro-bold-modular-agent-02` تحت `Micro/UI-UX/Micro-Bold-Modular-Design-Handoff-V1/Agent-02-Independent/` حصريًا — **رُفع بنجاح** (181 ملفًا) دون المساس بأي محتوى آخر.
+- **فتح الـPR برمجيًا مُنع بصلاحية التوكن** («Resource not accessible by personal access token» — التوكن يملك كتابة المحتويات دون إنشاء PRs) — موثق بشفافية.
+- **أصغر إجراء لإنهاء الـPR:** فتح الرابط الجاهز بنقرة واحدة:
+  `https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-agent-02?quick_pull=1`
+  أو منح التوكن صلاحية `Pull requests: write`.
 
 ## 7. أمن المعلومات
 

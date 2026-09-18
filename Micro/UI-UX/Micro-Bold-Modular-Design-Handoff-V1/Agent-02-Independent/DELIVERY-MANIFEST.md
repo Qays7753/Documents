@@ -83,15 +83,20 @@ agent-runs/agent-02-independent/
 - سبب البديل: بيئة التنفيذ لا تحمل صلاحية كتابة على هذا المستودع (حُاول عبر الاعتماد المتاح ولم يُقبل) — موثق في `reports/final-handoff.md`.
 
 ### مستودع Documents
-- رُفع الفرع `reports/micro-bold-modular-agent-02` ووُجد **Pull Request إلى `main`** دون دمج.
-- Commit SHA وروابط الـPR النهائية تُحدَّث في هذا القسم من نسخة Documents مباشرة بعد فتح الـPRين (§9).
+- **رُفع الفرع `reports/micro-bold-modular-agent-02` بنجاح** (181 ملفًا داخل المسار المعزول حصرًا، Secret Scan نظيف قبله).
+- فتح الـPR برمجيًا مُنع بصلاحية التوكن (كتابة محتويات دون إنشاء PRs — خطأ 403 موثق).
+- **رابط إنشاء الـPR بنقرة (جاهز):**
+  `https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-agent-02?quick_pull=1`
+- **بلا دمج ذاتي** — القرار للمالك.
 
-## 9. الروابط النهائية (تُستكمل عند فتح PRs)
+## 9. الروابط النهائية
 
-- PR المستودع الأساسي: *يُفتح من قبل المالك بعد الدفع (أو منح صلاحية)* — البundle جاهز.
-- PR Documents: `https://github.com/Qays7753/Documents/pull/…` (يُدرج الرابط الفعلي في نسخة Documents بعد الفتح).
-- Commit SHA النهائي (الأساس): هذا الـMANIFEST ضمن الـcommit الختامي للفرع.
-- Commit SHA النهائي (Documents): يُدرج في نسخة Documents.
+- **رابط مقارنة/إنشاء PR الأساس (بعد دفع المالك للفرع أو منح الصلاحية):** دفع `design/agent-02-independent` ثم المقارنة مع `main`.
+- **رابط إنشاء PR Documents (جاهز الآن بنقرة):** `https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-agent-02?quick_pull=1`
+- Branch Documents المرفوع: `reports/micro-bold-modular-agent-02`.
+- **Commit SHA النهائي (الأساس، فرع design/agent-02-independent):** `71f60e2dfc49e9b63cbaa0e55bb24db6273a05e7`
+- **Commit SHA النهائي (Documents، هذا الفرع):** يُحدَّد في Commit هذا الملف المرفوع (استخدم `git rev-parse HEAD` على الفرع).
+- الفرع كامل قابل للاستعادة من `exports/agent-02-independent.bundle` دون أي اعتماد خارجي.
 
 ## 10. قابلية التشغيل من طرف ثالث
 
