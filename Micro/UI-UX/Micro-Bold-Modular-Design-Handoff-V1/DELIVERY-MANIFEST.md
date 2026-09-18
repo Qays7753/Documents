@@ -11,10 +11,10 @@
 | Item | Value |
 |---|---|
 | Primary design repository | `https://github.com/Qays7753/Micro-Bold-Modular-Design-Handoff-V1` |
-| Primary branch (local, complete) | `design/autonomous-v1` @ `6efba95429054dfb6f1b902517cce4e0901f1c53` |
+| Primary branch (local, complete) | `design/autonomous-v1` @ `1ba6929f45f48b1c1e2058aa5501bb109ee3c49f` (final; includes blocker documentation) |
 | Primary pull request | **Not opened — token lacks write scope for that repo** (see Blocker) |
 | Documents repository | `https://github.com/Qays7753/Documents` |
-| Documents branch | `reports/micro-bold-modular-v1` (this delivery) |
+| Documents branch | `reports/micro-bold-modular-v1` — verified on remote; delivery content @ `0c4cc6c` |
 | Documents branch pushed | `reports/micro-bold-modular-v1` — pushed and verified on the remote |
 | Isolated destination root | `Micro/UI-UX/Micro-Bold-Modular-Design-Handoff-V1/` (nothing written outside it) |
 
@@ -25,7 +25,7 @@
 **B. Pull-request creation (blocked):** the token can push branches but its scope does not include the pull-requests permission (API returned `403 Resource not accessible by personal access token`). Both pull requests therefore need one owner click / one scope grant.
 
 **Smallest owner actions:**
-1. Documents PR (30 seconds): open **https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-v1** and click «Create pull request» (suggested title/body are in the branch's delivery context above), or grant the token `pull-requests: write`.
+1. Documents PR (30 seconds): open **https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-v1** and click «Create pull request» (suggested title/body are in the delivery commit message of `0c4cc6c`), or grant the token `pull-requests: write`.
 2. Primary PR: grant write access to `Qays7753/Micro-Bold-Modular-Design-Handoff-V1`, push the existing local `design/autonomous-v1` branch (commit `6efba95`), and open its PR to `main`.
 
 No design work is missing — only these two access actions.
