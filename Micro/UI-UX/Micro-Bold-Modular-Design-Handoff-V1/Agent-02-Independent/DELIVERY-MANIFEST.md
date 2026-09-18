@@ -95,7 +95,7 @@ agent-runs/agent-02-independent/
 - **رابط إنشاء PR Documents (جاهز الآن بنقرة):** `https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-agent-02?quick_pull=1`
 - Branch Documents المرفوع: `reports/micro-bold-modular-agent-02`.
 - **Commit SHA النهائي (الأساس، فرع design/agent-02-independent):** `71f60e2dfc49e9b63cbaa0e55bb24db6273a05e7`
-- **Commit SHA النهائي (Documents، هذا الفرع):** يُحدَّد في Commit هذا الملف المرفوع (استخدم `git rev-parse HEAD` على الفرع).
+- **Commit SHA النهائي (Documents، هذا الفرع):** هو Commit هذا الملف الأخير على الفرع.
 - الفرع كامل قابل للاستعادة من `exports/agent-02-independent.bundle` دون أي اعتماد خارجي.
 
 ## 10. قابلية التشغيل من طرف ثالث
