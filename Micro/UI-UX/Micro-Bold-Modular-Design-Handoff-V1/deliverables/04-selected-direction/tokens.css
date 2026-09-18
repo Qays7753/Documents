@@ -1,0 +1,61 @@
+/* Auto-generated from scripts/design_tokens.py — do not edit by hand.
+   C2 — Confident Bold · PROPOSAL pending owner approval.
+   Light is primary; dark equivalents are not a literal inversion (file 05 §9). */
+.app {
+  --canvas: #F3F5F7;
+  --surface: #FFFFFF;
+  --group: #EBEFF2;
+  --overlay: #FFFFFF;
+  --line: #D8DEE4;
+  --line-strong: #C2CBD3;
+  --ink: #101D2B;
+  --secondary: #48586A;
+  --tertiary: #5A6B7D;
+  --brand: #C24E28;
+  --brand-strong: #A33F1C;
+  --brand-deep: #67250D;
+  --brand-soft: #F9E9E1;
+  --brand-softer: #FCF3EF;
+  --trust: #14425E;
+  --trust-soft: #E3ECF3;
+  --positive: #186B47;
+  --positive-soft: #E3F0E9;
+  --negative: #AF2A22;
+  --negative-soft: #F7E7E5;
+  --attention: #8A580A;
+  --attention-soft: #F8EFDB;
+  --success: #14425E;
+  --success-soft: #E3ECF3;
+  --on-brand: #FFFFFF;
+  --on-trust: #FFFFFF;
+}
+body.dark .app {
+  --canvas: #0D1620;
+  --surface: #16222E;
+  --group: #1B2A38;
+  --overlay: #15212D;
+  --line: #2B3D4E;
+  --line-strong: #3B5064;
+  --ink: #EAF1F7;
+  --secondary: #B2C4D4;
+  --tertiary: #97ACBE;
+  --brand: #E77C51;
+  --brand-strong: #EE9070;
+  --brand-deep: #381202;
+  --brand-soft: #3A2114;
+  --brand-softer: #2B1A10;
+  --trust: #7FB4D8;
+  --trust-soft: #182A3A;
+  --positive: #71C799;
+  --positive-soft: #0F2E22;
+  --negative: #E88C82;
+  --negative-soft: #391712;
+  --attention: #DAA85B;
+  --attention-soft: #33270F;
+  --success: #7FB4D8;
+  --success-soft: #182A3A;
+  --on-brand: #331103;
+  --on-trust: #081722;
+  --on-fill: #0D1417;
+  --band: #10293B;
+}

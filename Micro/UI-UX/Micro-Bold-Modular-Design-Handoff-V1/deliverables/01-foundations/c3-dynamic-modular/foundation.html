@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foundation — C3 — Dynamic Modular — C3 — Dynamic Modular</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="c3.css">
+<style>
+    .doc{gap:14px;padding-bottom:44px}
+    .doc-head{padding:8px 4px 6px}
+    .doc-kicker{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--secondary);margin:0}
+    .doc-head h1{font-size:1.9rem;font-weight:700;margin:4px 0 8px}
+    .thesis{font-size:1.05rem;font-weight:600;margin:0 0 4px}
+    .thesis-en{font-size:.85rem;color:var(--secondary);margin:0 0 10px;direction:ltr;text-align:left}
+    .adjectives{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+    .adjectives span{background:var(--brand-soft);color:var(--brand-deep);font-weight:700;font-size:.85rem;padding:6px 14px;border-radius:999px}
+    .mood{font-size:.85rem;color:var(--secondary);margin:0}
+    .doc-sec{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 18px}
+    .doc-sec h2{font-size:1.05rem;font-weight:700;margin:0 0 10px}
+    .doc-sec h3{font-size:.95rem;font-weight:700;margin:16px 0 8px}
+    .doc-sec p{font-size:.92rem;margin:0 0 8px}
+    .doc-sec ul.rules,.srg ul{padding-right:18px;margin:6px 0;font-size:.9rem}
+    .doc-sec .note{font-size:.8rem;color:var(--secondary);font-weight:600}
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    th{text-align:right;padding:8px 8px;border-bottom:2px solid var(--line-strong);font-size:.75rem;color:var(--secondary)}
+    td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+    .sw{display:inline-block;width:26px;height:26px;border-radius:8px;vertical-align:middle;border:1px solid var(--line);margin-inline-end:6px}
+    code{font-family:var(--f-mono);font-size:.75rem;direction:ltr;unicode-bidi:isolate}
+    .ctable .mode-row td{background:var(--group);font-weight:700;font-size:.8rem}
+    .pass{color:var(--positive);font-weight:700}.fail{color:var(--negative);font-weight:700}
+    .tsample{font-size:1rem}
+    .comp-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+    .story{padding-right:18px;font-size:.92rem}.story li{margin-bottom:6px}
+    .srg{display:grid;grid-template-columns:1fr;gap:6px}
+    @media(min-width:480px){.srg{grid-template-columns:1fr 1fr 1fr}}
+    </style>
+</head>
+<body class="screen-foundation">
+<div class="app">
+  <header class="topzone">
+    <a class="logo" href="account-menu.html" aria-label="حسابي وإعدادات المشروع">
+      <span class="logo-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17V7l5 6 5-6v10"/></svg></span>
+      <span class="logo-word">Micro</span>
+    </a>
+    <div class="top-links">
+      <a class="top-link" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.6a1 1 0 0 0-.2-.6l-3.5-4.4a1 1 0 0 0-.8-.4H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg><span>النقل والتوصيل</span></a>
+      <a class="top-link" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>اسأل Micro</span></a>
+    </div>
+  </header>  <main class="content doc">
+    <header class="doc-head">
+      <p class="doc-kicker">FOUNDATION BOARD · BOLD MODULAR MICRO</p>
+      <h1>C3 — وحدات متحركة</h1>
+      <p class="thesis">أقصى تعبير مسموح: مناطق وحدة ملونة بضبط تعرّف المهمة والحالة، لغة حالة وتقدم بارزة، وواجهة تشعر أنها تعمل قبل أن تلمسها — بهوية واحدة رغم تمييز الوحدات.</p>
+      <p class="thesis-en">The maximum permitted expression: controlled color zones identify task and state, a prominent status/progress language, an interface that feels alive before touch — one identity despite module differentiation.</p>
+      <div class="adjectives"><span>نشيط</span><span>معبّر</span><span>منظّم</span><span>جريء</span><span>متجاوب</span></div>
+      <p class="mood">مبادئ مرجعية: أنظمة النقل الذكي في تمييز الحالة والتقدم (لا ألوانها)، لوحات تحكم العمليات الحية في المصانع المنظمة، ووضوح أزرار أجهزة القياس.</p>
+    </header>
+
+    <section class="doc-sec">
+      <h2>١ · أدوار اللون — فاتح وداكن</h2>
+      <table class="swatches"><thead><tr><th>فاتح</th><th>داكن</th><th>الدور</th><th>ممنوع الاستخدام</th></tr></thead>
+      <tbody><tr>
+      <td><span class="sw" style="background:#C4481E"></span><code>#C4481E</code></td>
+      <td><span class="sw" style="background:#E87C51"></span><code>#E87C51</code></td>
+      <td><b>الهوية والفعل</b><br><small>بدء وإنشاء وحظوات محددة</small></td>
+      <td><small>الربح أو النجاح العام</small></td></tr><tr>
+      <td><span class="sw" style="background:#275F8A"></span><code>#275F8A</code></td>
+      <td><span class="sw" style="background:#79ABD2"></span><code>#79ABD2</code></td>
+      <td><b>الثقة والمعلومات</b><br><small>سياق نشط، معلومات، نجاح تشغيلي</small></td>
+      <td><small>المال الموجب</small></td></tr><tr>
+      <td><span class="sw" style="background:#1C7146"></span><code>#1C7146</code></td>
+      <td><span class="sw" style="background:#74C89C"></span><code>#74C89C</code></td>
+      <td><b>نتيجة مالية موجبة</b><br><small>نتيجة موجبة مكتملة فقط</small></td>
+      <td><small>توست حفظ عام</small></td></tr><tr>
+      <td><span class="sw" style="background:#8C5A0A"></span><code>#8C5A0A</code></td>
+      <td><span class="sw" style="background:#D9A85B"></span><code>#D9A85B</code></td>
+      <td><b>غير مكتمل وانتباه</b><br><small>بيانات ناقصة، متأخر، مراجعة</small></td>
+      <td><small>زخرفة أو تنقل عادي</small></td></tr><tr>
+      <td><span class="sw" style="background:#B12B23"></span><code>#B12B23</code></td>
+      <td><span class="sw" style="background:#E78B82"></span><code>#E78B82</code></td>
+      <td><b>نتيجة سالبة وخطأ</b><br><small>خسارة مؤكدة، خطر، خطأ صريح</small></td>
+      <td><small>مصروف عادي بدون سياق</small></td></tr><tr>
+      <td><span class="sw" style="background:#F7F6F3"></span><code>#F7F6F3</code></td>
+      <td><span class="sw" style="background:#14161A"></span><code>#14161A</code></td>
+      <td><b>أرضية الصفحة</b><br><small>تنفس وقراءة مريحة</small></td>
+      <td><small>بيج يغرق الشاشة</small></td></tr><tr>
+      <td><span class="sw" style="background:#FFFFFF"></span><code>#FFFFFF</code></td>
+      <td><span class="sw" style="background:#1E2127"></span><code>#1E2127</code></td>
+      <td><b>سطح القراءة</b><br><small>نماذج وسجلات وتحليل</small></td>
+      <td><small>تحويل كل قسم لبطاقة بيضاء</small></td></tr><tr>
+      <td><span class="sw" style="background:#1C1F24"></span><code>#1C1F24</code></td>
+      <td><span class="sw" style="background:#F1F0EB"></span><code>#F1F0EB</code></td>
+      <td><b>الحبر الأساسي</b><br><small>نص وأرقام وأفعال عالية الالتزام</small></td>
+      <td><small>كتل سوداء ثقيلة</small></td></tr></tbody></table>
+      <p class="note">القيم مقترحة بانتظار موافقة المالك (اللون الأساسي، الأرضية، لون الثقة). الداكن ليس انعكاسًا حرفيًا؛ الألوان المشبعة عُدّلت للوهج والتباين.</p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٢ · جدول التباين المقيس</h2>
+      <table class="ctable"><thead><tr><th>الزوج</th><th>الاستخدام</th><th>المطلوب</th><th>النسبة</th><th>النتيجة</th></tr></thead>
+      <tbody><tr class="mode-row"><td colspan="5">C3 — Dynamic Modular — فاتح</td></tr><tr><td><code>#1C1F24 on #F7F6F3</code></td><td>النص الأساسي على الأرضية</td><td>4.5:1</td><td><b>15.29</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #FFFFFF</code></td><td>النص الأساسي على السطح</td><td>4.5:1</td><td><b>16.52</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #EFEEE9</code></td><td>النص الأساسي على مجموعة</td><td>4.5:1</td><td><b>14.22</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #F7F6F3</code></td><td>النص الثانوي على الأرضية</td><td>4.5:1</td><td><b>7.06</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #FFFFFF</code></td><td>النص الثانوي على السطح</td><td>4.5:1</td><td><b>7.63</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #EFEEE9</code></td><td>النص الثانوي على مجموعة</td><td>4.5:1</td><td><b>6.56</b></td><td class="pass">PASS</td></tr><tr><td><code>#606671 on #FFFFFF</code></td><td>بيانات مساعدة على السطح</td><td>4.5:1</td><td><b>5.78</b></td><td class="pass">PASS</td></tr><tr><td><code>#A63A14 on #FAE4DA</code></td><td>نص الهوية على حشوة طينية (رقاقة)</td><td>4.5:1</td><td><b>5.31</b></td><td class="pass">PASS</td></tr><tr><td><code>#FFFFFF on #C4481E</code></td><td>نص الزر الأساسي على التعبئة الطينية</td><td>4.5:1</td><td><b>4.89</b></td><td class="pass">PASS</td></tr><tr><td><code>#FFFFFF on #275F8A</code></td><td>نص زر/رقاقة الثقة على الأزرق</td><td>4.5:1</td><td><b>6.8</b></td><td class="pass">PASS</td></tr><tr><td><code>#275F8A on #FFFFFF</code></td><td>نص معلوماتي أزرق على سطح</td><td>4.5:1</td><td><b>6.8</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C7146 on #E4F1E9</code></td><td>حالة موجبة: نص على حشوة خضراء</td><td>4.5:1</td><td><b>5.16</b></td><td class="pass">PASS</td></tr><tr><td><code>#B12B23 on #F8E6E3</code></td><td>حالة سالبة: نص على حشوة حمراء</td><td>4.5:1</td><td><b>5.38</b></td><td class="pass">PASS</td></tr><tr><td><code>#8C5A0A on #F8EFDA</code></td><td>غير مكتمل/متأخر: نص على حشوة كهرمانية</td><td>4.5:1</td><td><b>5.12</b></td><td class="pass">PASS</td></tr><tr><td><code>#275F8A on #E7EFF5</code></td><td>نجاح تشغيلي: نص على حشوة</td><td>4.5:1</td><td><b>5.85</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C7146 on #FFFFFF</code></td><td>قيمة موجبة كبيرة على سطح (Hero)</td><td>3.0:1</td><td><b>6.0</b></td><td class="pass">PASS</td></tr><tr><td><code>#B12B23 on #FFFFFF</code></td><td>قيمة سالبة كبيرة على سطح (Hero)</td><td>3.0:1</td><td><b>6.48</b></td><td class="pass">PASS</td></tr><tr><td><code>#8C5A0A on #FFFFFF</code></td><td>حالة غير مكتملة كبيرة على سطح</td><td>3.0:1</td><td><b>5.86</b></td><td class="pass">PASS</td></tr><tr><td><code>#C4481E on #FFFFFF</code></td><td>أيقونة/رمز هوية على سطح</td><td>3.0:1</td><td><b>4.89</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C7146 on #FFFFFF</code></td><td>أيقونة حالة موجبة على سطح</td><td>3.0:1</td><td><b>6.0</b></td><td class="pass">PASS</td></tr><tr><td><code>#B12B23 on #FFFFFF</code></td><td>أيقونة حالة سالبة على سطح</td><td>3.0:1</td><td><b>6.48</b></td><td class="pass">PASS</td></tr><tr><td><code>#8C5A0A on #FFFFFF</code></td><td>أيقونة انتباه على سطح</td><td>3.0:1</td><td><b>5.86</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #FAE4DA</code></td><td>نص أساسي على حقل هوية فاتح</td><td>4.5:1</td><td><b>13.51</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #E7EFF5</code></td><td>نص أساسي على حقل ثقة فاتح</td><td>4.5:1</td><td><b>14.21</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #E4F1E9</code></td><td>نص أساسي على حقل موجب فاتح</td><td>4.5:1</td><td><b>14.21</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #F8E6E3</code></td><td>نص أساسي على حقل سالب فاتح</td><td>4.5:1</td><td><b>13.71</b></td><td class="pass">PASS</td></tr><tr><td><code>#1C1F24 on #F8EFDA</code></td><td>نص أساسي على حقل انتباه فاتح</td><td>4.5:1</td><td><b>14.44</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #FAE4DA</code></td><td>نص ثانوي على حقل هوية فاتح</td><td>4.5:1</td><td><b>6.24</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #E7EFF5</code></td><td>نص ثانوي على حقل ثقة فاتح</td><td>4.5:1</td><td><b>6.56</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #E4F1E9</code></td><td>نص ثانوي على حقل موجب فاتح</td><td>4.5:1</td><td><b>6.56</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #F8E6E3</code></td><td>نص ثانوي على حقل سالب فاتح</td><td>4.5:1</td><td><b>6.33</b></td><td class="pass">PASS</td></tr><tr><td><code>#4E545E on #F8EFDA</code></td><td>نص ثانوي على حقل انتباه فاتح</td><td>4.5:1</td><td><b>6.66</b></td><td class="pass">PASS</td></tr><tr class="mode-row"><td colspan="5">C3 — Dynamic Modular — داكن</td></tr><tr><td><code>#F1F0EB on #14161A</code></td><td>النص الأساسي على الأرضية</td><td>4.5:1</td><td><b>15.87</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #1E2127</code></td><td>النص الأساسي على السطح</td><td>4.5:1</td><td><b>14.13</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #242830</code></td><td>النص الأساسي على مجموعة</td><td>4.5:1</td><td><b>12.95</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #14161A</code></td><td>النص الثانوي على الأرضية</td><td>4.5:1</td><td><b>9.33</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #1E2127</code></td><td>النص الثانوي على السطح</td><td>4.5:1</td><td><b>8.31</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #242830</code></td><td>النص الثانوي على مجموعة</td><td>4.5:1</td><td><b>7.61</b></td><td class="pass">PASS</td></tr><tr><td><code>#9CA0AA on #1E2127</code></td><td>بيانات مساعدة على السطح</td><td>4.5:1</td><td><b>6.16</b></td><td class="pass">PASS</td></tr><tr><td><code>#EF9270 on #3A2115</code></td><td>نص الهوية على حشوة طينية (رقاقة)</td><td>4.5:1</td><td><b>6.4</b></td><td class="pass">PASS</td></tr><tr><td><code>#330F02 on #E87C51</code></td><td>نص الزر الأساسي على التعبئة الطينية</td><td>4.5:1</td><td><b>6.14</b></td><td class="pass">PASS</td></tr><tr><td><code>#081722 on #79ABD2</code></td><td>نص زر/رقاقة الثقة على الأزرق</td><td>4.5:1</td><td><b>7.41</b></td><td class="pass">PASS</td></tr><tr><td><code>#79ABD2 on #1E2127</code></td><td>نص معلوماتي أزرق على سطح</td><td>4.5:1</td><td><b>6.58</b></td><td class="pass">PASS</td></tr><tr><td><code>#74C89C on #102E21</code></td><td>حالة موجبة: نص على حشوة خضراء</td><td>4.5:1</td><td><b>7.31</b></td><td class="pass">PASS</td></tr><tr><td><code>#E78B82 on #38150F</code></td><td>حالة سالبة: نص على حشوة حمراء</td><td>4.5:1</td><td><b>6.56</b></td><td class="pass">PASS</td></tr><tr><td><code>#D9A85B on #33260E</code></td><td>غير مكتمل/متأخر: نص على حشوة كهرمانية</td><td>4.5:1</td><td><b>6.81</b></td><td class="pass">PASS</td></tr><tr><td><code>#79ABD2 on #182734</code></td><td>نجاح تشغيلي: نص على حشوة</td><td>4.5:1</td><td><b>6.22</b></td><td class="pass">PASS</td></tr><tr><td><code>#74C89C on #1E2127</code></td><td>قيمة موجبة كبيرة على سطح (Hero)</td><td>3.0:1</td><td><b>8.05</b></td><td class="pass">PASS</td></tr><tr><td><code>#E78B82 on #1E2127</code></td><td>قيمة سالبة كبيرة على سطح (Hero)</td><td>3.0:1</td><td><b>6.46</b></td><td class="pass">PASS</td></tr><tr><td><code>#D9A85B on #1E2127</code></td><td>حالة غير مكتملة كبيرة على سطح</td><td>3.0:1</td><td><b>7.45</b></td><td class="pass">PASS</td></tr><tr><td><code>#E87C51 on #1E2127</code></td><td>أيقونة/رمز هوية على سطح</td><td>3.0:1</td><td><b>5.71</b></td><td class="pass">PASS</td></tr><tr><td><code>#74C89C on #1E2127</code></td><td>أيقونة حالة موجبة على سطح</td><td>3.0:1</td><td><b>8.05</b></td><td class="pass">PASS</td></tr><tr><td><code>#E78B82 on #1E2127</code></td><td>أيقونة حالة سالبة على سطح</td><td>3.0:1</td><td><b>6.46</b></td><td class="pass">PASS</td></tr><tr><td><code>#D9A85B on #1E2127</code></td><td>أيقونة انتباه على سطح</td><td>3.0:1</td><td><b>7.45</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #3A2115</code></td><td>نص أساسي على حقل هوية فاتح</td><td>4.5:1</td><td><b>13.07</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #182734</code></td><td>نص أساسي على حقل ثقة فاتح</td><td>4.5:1</td><td><b>13.35</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #102E21</code></td><td>نص أساسي على حقل موجب فاتح</td><td>4.5:1</td><td><b>12.83</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #38150F</code></td><td>نص أساسي على حقل سالب فاتح</td><td>4.5:1</td><td><b>14.35</b></td><td class="pass">PASS</td></tr><tr><td><code>#F1F0EB on #33260E</code></td><td>نص أساسي على حقل انتباه فاتح</td><td>4.5:1</td><td><b>12.92</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #3A2115</code></td><td>نص ثانوي على حقل هوية فاتح</td><td>4.5:1</td><td><b>7.68</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #182734</code></td><td>نص ثانوي على حقل ثقة فاتح</td><td>4.5:1</td><td><b>7.85</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #102E21</code></td><td>نص ثانوي على حقل موجب فاتح</td><td>4.5:1</td><td><b>7.54</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #38150F</code></td><td>نص ثانوي على حقل سالب فاتح</td><td>4.5:1</td><td><b>8.43</b></td><td class="pass">PASS</td></tr><tr><td><code>#B7BAC2 on #33260E</code></td><td>نص ثانوي على حقل انتباه فاتح</td><td>4.5:1</td><td><b>7.59</b></td><td class="pass">PASS</td></tr><tr><td><code>#360F03 on #E87C51</code></td><td>رمز الشعار على حقل الهوية (داكن)</td><td>3.0:1</td><td><b>6.06</b></td><td class="pass">PASS</td></tr><tr><td><code>#E87C51 on #3A2115</code></td><td>تبويب نشط على حشوة الهوية (داكن C1/C3)</td><td>4.5:1</td><td><b>5.28</b></td><td class="pass">PASS</td></tr><tr><td><code>#14161A on #F1F0EB</code></td><td>تبويب نشط معكوس (داكن C2)</td><td>4.5:1</td><td><b>15.87</b></td><td class="pass">PASS</td></tr><tr><td><code>#10110D on #74C89C</code></td><td>رقاقة معبأة — نص على أخضر داكن</td><td>4.5:1</td><td><b>9.46</b></td><td class="pass">PASS</td></tr><tr><td><code>#10110D on #E78B82</code></td><td>رقاقة معبأة — نص على أحمر داكن</td><td>4.5:1</td><td><b>7.59</b></td><td class="pass">PASS</td></tr><tr><td><code>#10110D on #D9A85B</code></td><td>رقاقة معبأة — نص على كهرماني داكن</td><td>4.5:1</td><td><b>8.76</b></td><td class="pass">PASS</td></tr><tr><td><code>#10110D on #79ABD2</code></td><td>رقاقة معبأة — نص على أزرق داكن</td><td>4.5:1</td><td><b>7.73</b></td><td class="pass">PASS</td></tr></tbody></table>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٣ · سلّم الخطوط — نصوص عربية حقيقية</h2>
+      <table class="ttable"><thead><tr><th>الرمز</th><th>النموذج</th><th>الحجم</th><th>الوزن</th><th>العائلة</th></tr></thead>
+      <tbody><tr><td><code>hero-result</code></td><td class="tsample mono" style="font-size:2.75rem;font-weight:700">نتيجة المشروع</td><td>2.75rem (44px · قيمة البطل المالية)</td><td>700</td><td>mono</td></tr><tr><td><code>screen-title</code></td><td class="tsample " style="font-size:1.375rem;font-weight:700">عنوان الشاشة مثل المشروع الآن</td><td>1.375rem (22px · عنوان الصفحة)</td><td>700</td><td>sans</td></tr><tr><td><code>section-title</code></td><td class="tsample " style="font-size:1.0625rem;font-weight:700">ملخص اليوم</td><td>1.0625rem (17px · عنوان قسم)</td><td>700</td><td>sans</td></tr><tr><td><code>card-title</code></td><td class="tsample " style="font-size:1.0rem;font-weight:600">بيع — صينية كنافة</td><td>1.0rem (16px · عنوان عنصر)</td><td>600</td><td>sans</td></tr><tr><td><code>body</code></td><td class="tsample " style="font-size:1.0rem;font-weight:400">بعد تسجيل المبيعات والمصاريف والتكاليف</td><td>1.0rem (16px · نص أساسي)</td><td>400</td><td>sans</td></tr><tr><td><code>body-strong</code></td><td class="tsample " style="font-size:1.0rem;font-weight:600">أم محمد عليها 25.00 د.أ منذ 3 أيام</td><td>1.0rem (16px · نص مهم)</td><td>600</td><td>sans</td></tr><tr><td><code>secondary</code></td><td class="tsample " style="font-size:0.875rem;font-weight:500">منذ 12 دقيقة</td><td>0.875rem (14px · ثانوي (ليس حرجًا))</td><td>500</td><td>sans</td></tr><tr><td><code>meta</code></td><td class="tsample " style="font-size:0.8125rem;font-weight:500">عملية #142</td><td>0.8125rem (13px · بيانات مساعدة فقط)</td><td>500</td><td>sans</td></tr><tr><td><code>button</code></td><td class="tsample " style="font-size:1.0rem;font-weight:700">سجّل البيع</td><td>1.0rem (16px · زر)</td><td>700</td><td>sans</td></tr><tr><td><code>tab</code></td><td class="tsample " style="font-size:0.8125rem;font-weight:600">مشروعي الآن</td><td>0.8125rem (13px · تبويب)</td><td>600</td><td>sans</td></tr><tr><td><code>num-body</code></td><td class="tsample mono" style="font-size:1.0rem;font-weight:600">185.00 د.أ</td><td>1.0rem (16px · رقم في سطر)</td><td>600</td><td>mono</td></tr><tr><td><code>num-hero</code></td><td class="tsample mono" style="font-size:2.75rem;font-weight:700">+42.50 د.أ</td><td>2.75rem (44px · رقم البطل)</td><td>700</td><td>mono</td></tr></tbody></table>
+      <p class="note">IBM Plex Sans Arabic للواجهة + IBM Plex Mono للأرقام المالية (أرقام لاتينية tabular معزولة اتجاهيًا). لا تباعد أحرف عربي زخرفي. النص الشارح الحرج لا ينزل عن 14px.</p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٤ · هرم الأسطح وقواعد الكتل</h2>
+      <p>أرضية شبه محايدة + رؤوس أقسام بشرائط لهجة سياقية (العمل أزرق، المالية أخضر مزرق، أدواتي بنفسجي، السوق برونزي) — اللهجة على الرأس والحد فقط، الجسم محايد دائمًا.</p>
+      <p>كل منطقة تحمل لهجة واحدة مضبوطة: شريط علوي رقيق + رقاقة عنوان. الحالة تتكلم بأحجام ورموز وتقدم، لا بتعبئة كل شيء. لا قوس قزح: لهجة لكل سياق والباقي حبر وأبيض.</p>
+      <ul class="rules">
+        <li>أربع طبقات فقط: أرضية ← مجموعة ← سطح قراءة ← نافذة عائمة.</li>
+        <li>حقل لوني واحد مسيطر في الشاشة؛ الباقي أهدأ منه.</li>
+        <li>حقل قوي فقط إذا عرّف منطقة أو أعلن حالة أو وجّه انتباهًا أو دعم فعلًا أو أظهر تقدمًا أو بنى هوية.</li>
+        <li>التدرجات اختيارية بديلة، وليست أساس الهوية.</li>
+      </ul>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٥ · معالجة الأيقونات والأزرار</h2>
+      <p>عائلة واحدة بخط 1.8 مع أوعية حالة معبأة: التمييز بالحاوية والرمز معًا، والحالة دائمًا نص + رمز.</p>
+      <p>حركة وظيفية أوضح: أثر بصري مباشر للنجاح يربط العملية بالقيمة المتأثرة، وأشرطة تقدم تنبض بهدوء مرة واحدة — كلها تُلغى مع تفضيل تقليل الحركة.</p>
+      <div class="comp-row">
+        <button class="btn btn-primary">سجّل البيع</button>
+        <button class="btn btn-secondary">إلغاء</button>
+        <button class="btn btn-quiet">تراجع</button>
+        <span class="chip" data-tone="positive"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.3 2.3 4.7-4.9"/></svg><span>نتيجة موجبة</span></span>
+        <span class="chip" data-tone="attention"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 19.5h19L12 3z"/><path d="M12 10v4"/><path d="M12 17.3h.01"/></svg><span>غير مكتملة</span></span>
+        <span class="chip" data-tone="negative"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/></svg><span>نتيجة سالبة</span></span>
+        <span class="chip" data-tone="trust"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.3 2.3 4.7-4.9"/></svg><span>تم الحفظ</span></span>
+      </div>
+      <p class="note">كل أهداف اللمس المهمة 44–48px. الحالة الحرجة نص + رمز دائمًا. تركيز مرئي محدد في الأنماط.</p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٦ · مكوّنات التوقيع</h2>
+      <h3>Business Status Hero — الحالات الأربع</h3>
+          <section class="status-hero" data-state="positive" aria-label="وضع مشروعك اليوم">
+      <div class="hero-top"><span class="hero-label">وضع مشروعك اليوم</span><span class="hero-chip" data-tone="positive"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.3 2.3 4.7-4.9"/></svg><span>نتيجة موجبة</span></span></div>
+      <div class="hero-result"><span class="num">+42.50</span><span class="cur">د.أ</span></div>
+      <p class="hero-expl">بعد تسجيل المبيعات والمصاريف والتكاليف</p>
+      <div class="hero-figures"><div class="fig"><span class="fig-k">المبيعات</span><span class="fig-v"><span class="num">185.00</span><span class="cur">د.أ</span></span></div><div class="fig"><span class="fig-k">الكاش المسجل</span><span class="fig-v"><span class="num">136.00</span><span class="cur">د.أ</span></span></div><div class="fig"><span class="fig-k">لي عند العملاء</span><span class="fig-v"><span class="num">49.00</span><span class="cur">د.أ</span></span></div><div class="fig"><span class="fig-k">عليّ للموردين</span><span class="fig-v"><span class="num">22.00</span><span class="cur">د.أ</span></span></div></div>
+    </section>
+          <section class="status-hero" data-state="incomplete" aria-label="نتيجة مشروعك">
+      <div class="hero-top"><span class="hero-label">نتيجة مشروعك</span><span class="hero-chip" data-tone="attention"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 19.5h19L12 3z"/><path d="M12 10v4"/><path d="M12 17.3h.01"/></svg><span>النتيجة غير مكتملة</span></span></div>
+      <p class="hero-sub">مبيعات اليوم <span class="num">120.00</span><span class="cur">د.أ</span></p>
+      <p class="hero-reason">عمليتا بيع تحتاجان تسجيل التكلفة</p>
+      <div class="hero-figures"><div class="fig"><span class="fig-k">الكاش المسجل</span><span class="fig-v"><span class="num">92.00</span><span class="cur">د.أ</span></span></div><div class="fig"><span class="fig-k">لي عند العملاء</span><span class="fig-v"><span class="num">28.00</span><span class="cur">د.أ</span></span></div><div class="fig"><span class="fig-k">عليّ للموردين</span><span class="fig-v"><span class="num">15.50</span><span class="cur">د.أ</span></span></div></div>
+      <div class="hero-completion"><div class="progress" role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="10" aria-label="8 من 10 عمليات مكتملة التكلفة"><div class="progress-fill" style="--val:80%"></div></div><span class="progress-note">8 من 10 عمليات مكتملة التكلفة</span></div>
+      <button class="btn btn-primary hero-action" type="button">أكمل التكلفة</button>
+    </section>
+          <section class="status-hero" data-state="negative" aria-label="نتيجة مشروعك اليوم">
+      <div class="hero-top"><span class="hero-label">نتيجة مشروعك اليوم</span><span class="hero-chip" data-tone="negative"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/></svg><span>نتيجة سالبة</span></span></div>
+      <div class="hero-result"><span class="num">−18.75</span><span class="cur">د.أ</span></div>
+      <p class="hero-reason">تكلفة المواد أعلى من المعتاد هذا اليوم</p>
+      <div class="hero-figures"><div class="fig"><span class="fig-k">المبيعات</span><span class="fig-v"><span class="num">90.00</span><span class="cur">د.أ</span></span></div><div class="fig"><span class="fig-k">المصاريف والتكاليف</span><span class="fig-v"><span class="num">108.75</span><span class="cur">د.أ</span></span></div></div>
+      <button class="btn btn-primary hero-action" type="button">راجع التكاليف</button>
+    </section>
+          <section class="status-hero" data-state="empty" aria-label="وضع مشروعك اليوم">
+      <div class="hero-top"><span class="hero-label">وضع مشروعك اليوم</span><span class="hero-chip" data-tone="neutral"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>لا نشاط اليوم</span></span></div>
+    </section>
+      <h3>Micro Signal — حالة ← سبب ← فعل</h3>
+          <section class="micro-signal" data-kind="collection" aria-label="إشارة Micro">
+      <div class="signal-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
+      <div class="signal-body">
+        <p class="signal-status">عندك مبلغ يحتاج تحصيلًا</p>
+        <p class="signal-reason">أم محمد عليها <span class="num">25.00</span><span class="cur">د.أ</span> منذ 3 أيام</p>
+      </div>
+      <button class="btn btn-primary btn-signal" type="button">حصّل المبلغ</button>
+    </section>
+      <h3>Quick Action Bar</h3>
+          <section class="quick-actions" aria-label="إجراءات سريعة">
+      <a class="qa-item" href="sale-form.html"><span class="qa-ico qa-sale"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg></span><span class="qa-label">بيع</span></a>      <a class="qa-item" href="#"><span class="qa-ico qa-expense"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span><span class="qa-label">مصروف</span></a>      <a class="qa-item" href="#"><span class="qa-ico qa-order"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h4"/></svg></span><span class="qa-label">طلب</span></a>      <a class="qa-item" href="#"><span class="qa-ico qa-collect"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span><span class="qa-label">تحصيل</span></a>      <a class="qa-item" href="quick-actions.html"><span class="qa-ico qa-more"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="qa-label">المزيد</span></a>
+    </section>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٧ · قصة نجاح العملية (Success Impact)</h2>
+      
+      <ol class="story">
+        <li><b>استجابة فورية</b> — الزر يستجيب للمس فورًا (تكبير/انضغاط بسيط).</li>
+        <li><b>حالة حفظ</b> — «جارٍ التسجيل…» معطل مؤقتًا لمنع التكرار.</li>
+        <li><b>تأكيد بالمبلغ والوجهة</b> — «تم تسجيل البيع · 25.00 د.أ · أُضيف إلى درج المحل».</li>
+        <li><b>عودة للسياق</b> — «عرض العملية» يعيد للسياق المحدَّث.</li>
+        <li><b>إبراز القيمة المتأثرة</b> — الكاش المسجل الآن 161.00 يتوهج مرة واحدة.</li>
+      </ol>
+      <p class="note">الحركة إلزامية الإلغاء عند تفضيل «تقليل الحركة» — لا أرقام متحركة متأخرة، لا احتفالات، لا نبض متكرر.</p>
+      <div class="impact-card impact-flash" aria-label="عرض القيمة المتأثرة">
+        <span class="impact-k">الكاش المسجل الآن</span>
+        <span class="impact-v"><span class="num">161.00</span><span class="cur">د.أ</span></span>
+        <span class="impact-delta">+25.00</span>
+      </div>
+    </section>
+
+    <section class="doc-sec">
+      <h2>٨ · نقاط القوة والمخاطر والفرضيات</h2>
+      <div class="srg"><div><h3>ثلاث نقاط قوة</h3><ul><li>لغة الحالة والتقدم تجعل «وين وصلت» سؤالًا بصريًا مُجابًا فورًا.</li><li>اللهجات السياقية تبني خريطة ذهنية للمناطق دون قراءة عناوين.</li><li>الواجهة تبدو نشطة وفاعلة قبل أول تفاعل، بما يخدم إحساس السيطرة.</li></ul></div>
+      <div><h3>ثلاث مخاطر</h3><ul><li>التفتت: قد تبدو الوحدات تطبيقات مختلفة إن أفلت ضبط اللهجات.</li><li>ارتفاع الضجيج المعرفي على المستخدم محدود الخبرة عند أول استخدام.</li><li>خطر تراجع القراءة المالية الطويلة إن دخلت اللهجات جسم البيانات لا رأسها.</li></ul></div>
+      <div><h3>فرضيات تحتاج اختبارًا</h3><ul><li>هل يميز المستخدم الجديد الإجراء الأول خلال ثوانٍ رغم تعدد اللهجات؟</li><li>هل تُقرأ لهجات المناطق كتنظيم أم كزخرفة؟ يحتاج اختبار مهمة.</li><li>هل يؤثر بريق الحالة على دقة فهم «غير المكتمل» مقابل «الخسارة»؟</li></ul></div></div>
+    </section>
+  </main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

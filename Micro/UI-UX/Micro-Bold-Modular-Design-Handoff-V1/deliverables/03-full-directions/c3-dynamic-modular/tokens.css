@@ -1,0 +1,76 @@
+/* Auto-generated from scripts/design_tokens.py — do not edit by hand.
+   C3 — Dynamic Modular · PROPOSAL pending owner approval.
+   Light is primary; dark equivalents are not a literal inversion (file 05 §9). */
+.app {
+  --canvas: #F7F6F3;
+  --surface: #FFFFFF;
+  --group: #EFEEE9;
+  --overlay: #FFFFFF;
+  --line: #DEDCD3;
+  --line-strong: #C8C6BB;
+  --ink: #1C1F24;
+  --secondary: #4E545E;
+  --tertiary: #606671;
+  --brand: #C4481E;
+  --brand-strong: #A63A14;
+  --brand-deep: #631F09;
+  --brand-soft: #FAE4DA;
+  --brand-softer: #FCF0EB;
+  --trust: #275F8A;
+  --trust-soft: #E7EFF5;
+  --positive: #1C7146;
+  --positive-soft: #E4F1E9;
+  --negative: #B12B23;
+  --negative-soft: #F8E6E3;
+  --attention: #8C5A0A;
+  --attention-soft: #F8EFDA;
+  --success: #275F8A;
+  --success-soft: #E7EFF5;
+  --on-brand: #FFFFFF;
+  --on-trust: #FFFFFF;
+  --zone-work: #1E5F8E;
+  --zone-work-soft: #E5EEF5;
+  --zone-finance: #13647A;
+  --zone-finance-soft: #E2F0F3;
+  --zone-tools: #6A4D9E;
+  --zone-tools-soft: #EDE9F6;
+  --zone-market: #9A5F14;
+  --zone-market-soft: #F6EEDD;
+}
+body.dark .app {
+  --canvas: #14161A;
+  --surface: #1E2127;
+  --group: #242830;
+  --overlay: #1F232A;
+  --line: #333842;
+  --line-strong: #454B57;
+  --ink: #F1F0EB;
+  --secondary: #B7BAC2;
+  --tertiary: #9CA0AA;
+  --brand: #E87C51;
+  --brand-strong: #EF9270;
+  --brand-deep: #360F03;
+  --brand-soft: #3A2115;
+  --brand-softer: #2C1B10;
+  --trust: #79ABD2;
+  --trust-soft: #182734;
+  --positive: #74C89C;
+  --positive-soft: #102E21;
+  --negative: #E78B82;
+  --negative-soft: #38150F;
+  --attention: #D9A85B;
+  --attention-soft: #33260E;
+  --success: #79ABD2;
+  --success-soft: #182734;
+  --on-brand: #330F02;
+  --on-trust: #081722;
+  --on-fill: #10110D;
+  --zone-work: #6FAAD3;
+  --zone-work-soft: #182734;
+  --zone-finance: #5FB3C6;
+  --zone-finance-soft: #122C34;
+  --zone-tools: #A48BD6;
+  --zone-tools-soft: #262038;
+  --zone-market: #D5A254;
+  --zone-market-soft: #2F240F;
+}

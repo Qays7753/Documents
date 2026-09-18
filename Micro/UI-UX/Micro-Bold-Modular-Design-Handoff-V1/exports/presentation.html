@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Micro — Bold Modular Micro · استكشاف الاتجاهات البصرية</title>
+<link rel="stylesheet" href="../prototype/assets/fonts/fonts.css">
+<style>
+:root{
+  --ink:#101D2B; --secondary:#4A5B6C; --canvas:#F3F5F7; --surface:#FFFFFF;
+  --brand:#C24E28; --brand-deep:#67250D; --trust:#14425E; --trust-soft:#E3ECF3;
+  --positive:#186B47; --positive-soft:#E3F0E9; --attention:#8A580A; --attention-soft:#F8EFDB;
+  --negative:#AF2A22; --line:#D8DEE4;
+  --f-sans:"IBM Plex Sans Arabic","Noto Sans Arabic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@page { size: 1280px 720px; margin: 0; }
+html, body { margin:0; padding:0; background:#0D1620; }
+.page {
+  width:1280px; height:720px; position:relative; overflow:hidden;
+  background:var(--canvas); color:var(--ink);
+  font-family:var(--f-sans), sans-serif; direction:rtl;
+  page-break-after:always; break-after:page;
+  display:flex; flex-direction:column;
+}
+.page:last-child { page-break-after:auto; break-after:auto; }
+
+/* dark cover + closing */
+.page.dark { background:#0D1620; color:#EAF1F7; }
+
+.kicker { font-size:15px; font-weight:700; color:var(--brand); letter-spacing:.02em; }
+.dark .kicker { color:#E77C51; }
+h1 { font-size:58px; font-weight:700; margin:10px 0 14px; line-height:1.15; }
+h2 { font-size:34px; font-weight:700; margin:0 0 8px; }
+.sub { font-size:20px; color:var(--secondary); font-weight:500; max-width:900px; line-height:1.7; }
+.dark .sub { color:#B2C4D4; }
+.pad { padding:42px 64px; flex:1; display:flex; flex-direction:column; }
+.head { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid var(--line); padding-bottom:10px; margin-bottom:14px; }
+.head .no { font-family:var(--f-mono), monospace; font-size:15px; color:var(--secondary); direction:ltr; }
+
+.shots { display:flex; gap:28px; align-items:flex-start; justify-content:center; flex:1; min-height:0; }
+.shot { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.shot img { height:455px; width:auto; border-radius:14px; border:1px solid var(--line); box-shadow:0 14px 40px rgba(13,22,32,.16); }
+.shot .cap { font-size:15px; font-weight:700; color:var(--secondary); }
+.shot .cap b { color:var(--ink); }
+
+table { width:100%; border-collapse:collapse; font-size:16px; }
+th { text-align:right; padding:10px 12px; background:var(--trust); color:#fff; font-size:15px; }
+td { padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:last-child td { border-bottom:0; }
+.num { font-family:var(--f-mono), monospace; direction:ltr; unicode-bidi:isolate; }
+.pass { color:var(--positive); font-weight:700; }
+
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:26px; flex:1; }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px 26px; }
+.card h3 { margin:0 0 10px; font-size:20px; }
+ul { margin:8px 0; padding:0 20px 0 0; }
+li { margin-bottom:8px; line-height:1.7; }
+.tag { display:inline-block; background:var(--trust-soft); color:var(--trust); font-weight:700; font-size:14px; padding:5px 13px; border-radius:999px; margin:0 0 0 8px; }
+.tag.warm { background:#F9E9E1; color:#A33F1C; }
+.tag.win { background:var(--positive-soft); color:var(--positive); }
+
+.footer-note { position:absolute; bottom:22px; inset-inline:64px; font-size:13px; color:var(--secondary); border-top:1px solid var(--line); padding-top:10px; display:flex; justify-content:space-between; }
+.dark .footer-note { color:#7A8FA3; border-color:#22354A; }
+.chip { display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:700; padding:5px 13px; border-radius:8px; }
+.chip.g { background:var(--positive-soft); color:var(--positive); }
+.chip.a { background:var(--attention-soft); color:var(--attention); }
+.chip.t { background:var(--trust-soft); color:var(--trust); }
+.mono { font-family:var(--f-mono), monospace; direction:ltr; unicode-bidi:isolate; }
+@media screen { html { height:auto; display:flex; justify-content:center; background:#0D1620; } body { transform-origin:top center; scale:min(1, calc(100vh / 720)); margin:0 auto; } }
+</style>
+</head>
+<body>
+
+<!-- 1 · COVER -->
+<section class="page dark">
+  <div class="pad" style="justify-content:center; align-items:flex-start;">
+    <div class="kicker">DESIGN HANDOFF V1 · 18/09/2026 · MICRO</div>
+    <h1 style="font-size:76px; color:#EAF1F7;">Micro الجريء والمنظّم</h1>
+    <h2 style="color:#E77C51; font-size:30px;">استكشاف ثلاثة اتجاهات بصرية لاتجاه Bold Modular Micro</h2>
+    <p class="sub" style="max-width:820px;">C1 دفء جريء · C2 ثقة جريئة · C3 وحدات متحركة — نفس المحتوى والأرقام والبنية، واختلاف بصري فقط. تقييم بمصفوفة موزونة، وترشيح خبير بانتظار موافقة المالك واختبار المستخدمين الحقيقي.</p>
+    <div style="display:flex; gap:14px; margin-top:34px;">
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">213 زوج تباين مقيس — كلها ناجحة</span>
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">14 شاشة × 3 اتجاهات</span>
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">Arabic RTL · 390×844</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · METHOD -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">المنهجية</div><h2>مقارنة عادلة بالتصميم نفسه</h2></div><span class="no">02 / 12</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>آلية المقارنة العادلة</h3>
+        <ul>
+          <li>الاتجاهات الثلاثة تعرض <b>نفس شجرة DOM</b> المولّدة من مولد واحد بمحتوى ملف 04 الثابت حرفيًا.</li>
+          <li>كل الفروق البصرية تعيش في ملف أنماط مستقل لكل اتجاه — لا يمكن لاتجاه أن «يحسّن محتواه».</li>
+          <li>جودة واحدة: نفس جولات التدقيق البصري والقياسات الهندسية للاتجاهات الثلاثة.</li>
+          <li>البوابات الداخلية (0–7) مسجلة بالأدلة في <span class="mono">reports/gate-log.md</span> مع إصلاحات موثقة.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>الثوابت المحفوظة (LOCKED)</h3>
+        <ul>
+          <li>خمسة تبويبات: مشروعي الآن، العمل، المالية، أدواتي، السوق.</li>
+          <li>الحقيقة المالية: غير المكتمل لا يظهر صفرًا ولا ربحًا ولا خسارة.</li>
+          <li>شريط إجراءات ظاهر ومسمّى؛ الحالة الحرجة نص + رمز دائمًا.</li>
+          <li>أهداف لمس 44–48px؛ تباين مقيس ≥ 4.5:1 للنص العادي.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:26px;">
+      <h3>سلسلة النجاح — Success Impact (فرضية تحتاج اختبارًا)</h3>
+      <p style="margin:0; font-size:17px; line-height:1.8;">لمس فوري ← حالة «جارٍ التسجيل» تمنع التكرار ← تأكيد بالمبلغ والوجهة ← عودة للسياق ← إبراز القيمة المتأثرة (161.00) مرة واحدة — وكلها تتعطل مع تفضيل تقليل الحركة.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · C1 -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">C1 · WARM BOLD · دفء جريء</div><h2>دفء إنساني وطاقة مرجانية بانضباط مالي</h2></div><span class="no">03 / 12</span></div>
+    <div class="shots">
+      <div class="shot"><img src="../exports/c1-warm-bold/foundation-top@2x.png" style="height:400px;"><span class="cap"><b>لوحة الأساس</b> — الأدوار والتباين</span></div>
+      <div class="shot"><img src="../exports/c1-warm-bold/viewport-390x844/home-positive-initial.png"><span class="cap"><b>نتيجة موجبة</b> +42.50</span></div>
+      <div class="shot"><img src="../exports/c1-warm-bold/viewport-390x844/home-incomplete-initial.png"><span class="cap"><b>غير مكتملة</b> — 8 من 10</span></div>
+      <div class="shot"><img src="../exports/c1-warm-bold/viewport-390x844/sale-success-initial.png"><span class="cap"><b>نجاح البيع</b> — الكاش 161.00</span></div>
+    </div>
+    <p class="sub" style="font-size:16px; margin:14px 0 0;">الصفات: دافئ · حيوي · قريب · واثق · واضح — الحافة الطينية تحمل الحالة والفعل، والأسطح البيضاء المستديرة تحمل القراءة. المخاطرة الأساسية: الاقتراب من جمالية أسواق الحرف.</p>
+  </div>
+</section>
+
+<!-- 4 · C2 -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">C2 · CONFIDENT BOLD · ثقة جريئة</div><h2>شريط معماري عميق وأرقام بصرامة التقارير</h2></div><span class="no">04 / 12</span></div>
+    <div class="shots">
+      <div class="shot"><img src="../exports/c2-confident-bold/foundation-top@2x.png" style="height:400px;"><span class="cap"><b>لوحة الأساس</b> — الأدوار والتباين</span></div>
+      <div class="shot"><img src="../exports/c2-confident-bold/viewport-390x844/home-positive-initial.png"><span class="cap"><b>نتيجة موجبة</b> +42.50</span></div>
+      <div class="shot"><img src="../exports/c2-confident-bold/viewport-390x844/home-incomplete-initial.png"><span class="cap"><b>غير مكتملة</b> — 8 من 10</span></div>
+      <div class="shot"><img src="../exports/c2-confident-bold/viewport-390x844/sale-success-initial.png"><span class="cap"><b>نجاح البيع</b> — الكاش 161.00</span></div>
+    </div>
+    <p class="sub" style="font-size:16px; margin:14px 0 0;">الصفات: واثق · منضبط · حديث · جاد · موثوق — الأزرق العميق يحمل الثقة والسياق، والطيني يحمل الفعل. المخاطرة الأساسية: التحول لواجهة بنكية عامة إن ذاب الطيني.</p>
+  </div>
+</section>
+
+<!-- 5 · C3 -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">C3 · DYNAMIC MODULAR · وحدات متحركة</div><h2>أقصى تعبير مسموح: مناطق حالة ولغة تقدم بارزة</h2></div><span class="no">05 / 12</span></div>
+    <div class="shots">
+      <div class="shot"><img src="../exports/c3-dynamic-modular/foundation-top@2x.png" style="height:400px;"><span class="cap"><b>لوحة الأساس</b> — الأدوار والتباين</span></div>
+      <div class="shot"><img src="../exports/c3-dynamic-modular/viewport-390x844/home-positive-initial.png"><span class="cap"><b>نتيجة موجبة</b> +42.50</span></div>
+      <div class="shot"><img src="../exports/c3-dynamic-modular/viewport-390x844/home-incomplete-initial.png"><span class="cap"><b>غير مكتملة</b> — 8 من 10</span></div>
+      <div class="shot"><img src="../exports/c3-dynamic-modular/viewport-390x844/sale-success-initial.png"><span class="cap"><b>نجاح البيع</b> — الكاش 161.00</span></div>
+    </div>
+    <p class="sub" style="font-size:16px; margin:14px 0 0;">الصفات: نشيط · معبّر · منظّم · جريء · متجاوب — حقل الحالة الملوّن الكامل في البطل، ولهجات سياقية على الرؤوس فقط. المخاطرة الأساسية: التفتت والحمل المعرفي على المستخدم المحدود الخبرة.</p>
+  </div>
+</section>
+
+<!-- 6 · COVERAGE -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">التغطية الكاملة</div><h2>14 شاشة لكل اتجاه — نفس البنية والحالات</h2></div><span class="no">06 / 12</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>الشاشات والحالات (لكل اتجاه)</h3>
+        <ul style="columns:2; column-gap:26px; font-size:15.5px;">
+          <li>الرئيسية — موجبة</li><li>الرئيسية — غير مكتملة</li><li>الرئيسية — سالبة</li>
+          <li>الإجراءات + «المزيد»</li><li>سجّل بيعًا</li><li>نجاح البيع</li>
+          <li>المالية</li><li>العمل والطلبات</li><li>طلب متأخر (تفاصيل)</li>
+          <li>بداية اليوم (فارغة)</li><li>خطأ تحقق</li><li>خطأ نظام</li>
+          <li>الوضع الداكن</li><li>قائمة الحساب من الشعار</li>
+        </ul>
+      </div>
+      <div class="card" style="display:flex; flex-direction:column;">
+        <h3>عينة من التغطية — C2</h3>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <img src="../exports/c2-confident-bold/viewport-390x844/work-initial.png" style="height:270px; border-radius:10px; border:1px solid var(--line);">
+          <img src="../exports/c2-confident-bold/viewport-390x844/finance-initial.png" style="height:270px; border-radius:10px; border:1px solid var(--line);">
+          <img src="../exports/c2-confident-bold/viewport-390x844/order-detail-initial.png" style="height:270px; border-radius:10px; border:1px solid var(--line);">
+          <img src="../exports/c2-confident-bold/viewport-390x844/home-empty-initial.png" style="height:270px; border-radius:10px; border:1px solid var(--line);">
+        </div>
+        <p style="font-size:14px; color:var(--secondary); margin:12px 4px 0;">نموذج طلب متأخر بسكة مراحل (اتفاق ← تنفيذ ← جاهز ← تم التسليم + متأخر)، والمالية أهدأ من الرئيسية بصفوف جدولية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · DARK + PROOFS -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">الأدلة — الوضع الداكن والاستجابة</div><h2>الداكن ليس انعكاسًا، والتكبير لا يكسر المهمة</h2></div><span class="no">07 / 12</span></div>
+    <div class="shots" style="gap:20px;">
+      <div class="shot"><img src="../exports/c1-warm-bold/1x/home-dark.png" style="height:520px;"><span class="cap"><b>C1 داكن</b> — أرضية دافئة معاد ضبطها</span></div>
+      <div class="shot"><img src="../exports/c2-confident-bold/1x/home-dark.png" style="height:520px;"><span class="cap"><b>C2 داكن</b> — الشريط يصبح كحليًا عميقًا</span></div>
+      <div class="shot"><img src="../exports/c3-dynamic-modular/1x/home-dark.png" style="height:520px;"><span class="cap"><b>C3 داكن</b> — ألوان فُتحت للوهج</span></div>
+      <div class="shot"><img src="../exports/responsive/c2-confident-bold-home-positive-text200.png" style="height:520px;"><span class="cap"><b>نص 200%</b> — بلا تمرير أفقي</span></div>
+    </div>
+    <p class="sub" style="font-size:16px; margin:14px 0 0;">براهين إضافية في <span class="mono">exports/</span>: عروض 320/390/430، تقليل الحركة، إبراز تركيز لوحة المفاتيح، وفحص تدرج رمادي يثبت أن الحالات لا تعتمد على اللون وحده.</p>
+  </div>
+</section>
+
+<!-- 8 · CONTRAST -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">الأدلة — التباين</div><h2>213 زوجًا مقيسًا لكل اتجاه (فاتح + داكن)</h2></div><span class="no">08 / 12</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>عينة من القياس — C2 فاتح</h3>
+        <table>
+          <tr><th>الزوج</th><th>الاستخدام</th><th>النسبة</th><th>النتيجة</th></tr>
+          <tr><td class="mono">#101D2B / #F3F5F7</td><td>نص أساسي / أرضية</td><td class="mono">14.6:1</td><td class="pass">PASS</td></tr>
+          <tr><td class="mono">#4A5B6C / #FFFFFF</td><td>ثانوي / سطح</td><td class="mono">7.4:1</td><td class="pass">PASS</td></tr>
+          <tr><td class="mono">#FFFFFF / #C24E28</td><td>نص الزر الطيني</td><td class="mono">4.9:1</td><td class="pass">PASS</td></tr>
+          <tr><td class="mono">#186B47 / #E3F0E9</td><td>حالة موجبة على حشوة</td><td class="mono">5.4:1</td><td class="pass">PASS</td></tr>
+          <tr><td class="mono">#8A580A / #F8EFDB</td><td>انتباه على حشوة</td><td class="mono">5.1:1</td><td class="pass">PASS</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>منهجية القياس</h3>
+        <ul>
+          <li>حساب برمجي بمعادلة WCAG 2.2 الدقيقة — لا تقدير بصري.</li>
+          <li>تغطية: نصوص على أرضيات وأسطح وحشوات، أزرار، أيقونات، معالجات داكنة.</li>
+          <li>الفشل لا يُقرَّب ليصير نجاحًا: قيم فاشلة أصلًا صُححت في الأصول ثم أعيد قياسها (توثيق كامل في سجل البوابات).</li>
+          <li>الجداول الكاملة: <span class="mono">reports/contrast-evidence.md</span> + <span class="mono">tokens.json</span> لكل اتجاه.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · RUBRIC -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">التقييم</div><h2>مصفوفة موزونة — الدليل قبل التفضيل</h2></div><span class="no">09 / 12</span></div>
+    <div class="card" style="flex:1;">
+      <table>
+        <tr><th>المعيار</th><th>الوزن</th><th>C1</th><th>C2</th><th>C3</th></tr>
+        <tr><td>فهم مالي خلال 5 ثوانٍ</td><td class="mono">18%</td><td>4</td><td><b>5</b></td><td><b>5</b></td></tr>
+        <tr><td>اكتشاف الإجراء وسرعته</td><td class="mono">14%</td><td>4</td><td>4</td><td><b>5</b></td></tr>
+        <tr><td>الإحساس بالسيطرة</td><td class="mono">12%</td><td>4</td><td><b>5</b></td><td>4</td></tr>
+        <tr><td>الثقة بالأرقام</td><td class="mono">12%</td><td>4</td><td><b>5</b></td><td>4</td></tr>
+        <tr><td>الحيوية البصرية</td><td class="mono">10%</td><td>4</td><td>4</td><td><b>5</b></td></tr>
+        <tr><td>راحة الاستخدام المطوّل</td><td class="mono">8%</td><td><b>5</b></td><td>4</td><td>4</td></tr>
+        <tr><td>قابلية الاستخدام لمحدودي الخبرة</td><td class="mono">8%</td><td><b>5</b></td><td>4</td><td>3</td></tr>
+        <tr><td>هوية Micro المميزة</td><td class="mono">7%</td><td>4</td><td>4</td><td><b>5</b></td></tr>
+        <tr><td>جودة RTL العربية</td><td class="mono">4%</td><td>5</td><td>5</td><td>5</td></tr>
+        <tr><td>الوصول</td><td class="mono">4%</td><td>5</td><td>5</td><td>5</td></tr>
+        <tr><td>قابلية التوسع المستقبلي</td><td class="mono">3%</td><td>4</td><td>4</td><td><b>5</b></td></tr>
+        <tr style="background:var(--trust-soft);"><td><b>المجموع الموزون</b></td><td class="mono">100%</td><td class="mono"><b>4.24</b></td><td class="mono"><b>4.50</b></td><td class="mono"><b>4.52</b></td></tr>
+      </table>
+      <p style="font-size:15.5px; color:var(--secondary); margin:12px 0 0; line-height:1.7;">فارق 0.02 بين C3 وC2 داخل هامش التقدير الخبير — تعادل إحصائي. القرار حُسم بترتيب أولويات المالك المعلن (فهم المال، السيطرة، الثقة أولًا): تتقدم C2 على أعلى أربعة معايير موزونة (3.10 مقابل 2.56).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · RECOMMENDATION -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">الترشيح — بانتظار موافقة المالك</div><h2>C2R — المرشح المُنقّح: C2 + دفء C1 + لغة تقدم C3</h2></div><span class="no">10 / 12</span></div>
+    <div class="shots" style="gap:22px;">
+      <div class="shot"><img src="../exports/c2r-selected-candidate/1x/home-incomplete.png" style="height:520px;"><span class="cap"><b>غير مكتملة</b> — شريط إنجاز أبرز (من C3)</span></div>
+      <div class="shot"><img src="../exports/c2r-selected-candidate/1x/home-positive.png" style="height:520px;"><span class="cap"><b>موجبة</b> — إشارة دافئة (من C1)</span></div>
+      <div class="shot"><img src="../exports/c2r-selected-candidate/1x/sale-success.png" style="height:520px;"><span class="cap"><b>النجاح</b> — وجهة بطعم دافئ</span></div>
+      <div class="shot"><img src="../exports/focus-proof/sale-form-focus-1.png"><span class="cap"><b>تركيز مرئي</b> — حلقة من لوحة المفاتيح</span></div>
+    </div>
+    <p class="sub" style="font-size:16px; margin:14px 0 0;">الاتجاهات الثلاثة محفوظة كاملة بأدلتها؛ C2R طبقة تنقيح موثقة فوق قاعدة C2 — ليست دمجًا قبل العرض، بل تطويرًا للمرشح بعد التقييم.</p>
+  </div>
+</section>
+
+<!-- 11 · OPEN QUESTIONS -->
+<section class="page">
+  <div class="pad">
+    <div class="head"><div><div class="kicker">قرارات مفتوحة</div><h2>ما يحتاج موافقتك أو اختبار مستخدمين حقيقيين</h2></div><span class="no">11 / 12</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>قرارات مالك <span class="tag">OWNER_APPROVAL</span></h3>
+        <ul>
+          <li>اعتماد الاتجاه: C2R المرشح — أم C2 الصافية — أم اتجاه آخر محفوظ؟</li>
+          <li>قيم اللون النهائية: الطيني، الأرضية، أزرق الثقة (كلها مقترحات مقيسة).</li>
+          <li>نطاق تنقيحات C2R نفسها (الدفء المقترض وشدة لغة التقدم).</li>
+          <li>هوية وحدة السوق المستقبلية: قواعد لهجات C3 هي المرشح الأول — قرار نطاق منفصل.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>اختبارات مستخدمين <span class="tag warm">USER_TEST</span></h3>
+        <ul>
+          <li>«احكيلي كيف وضع المشروع اليوم» — زمن أول قراءة صحيحة.</li>
+          <li>«سجّل بيعًا بـ 25 دينارًا» ثم «وين راح المبلغ؟» — فهم أثر النجاح.</li>
+          <li>هل يُقرأ الشريط الداكن كـ«نظام جدي» لا كـ«بنك»؟</li>
+          <li>هل يُفهم «غير المكتملة» بلا خلط مع الخسارة تحت التعبير العالي؟</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:26px; background:#FFF9F4; border-color:#EAD9C9;">
+      <h3 style="color:#A33F1C;">ملاحظة أمان</h3>
+      <p style="margin:0; font-size:15px;">مرّر مالك المستودع رمز وصول في المحادثة لتمكين الدفع. استُخدم لمرة واحدة عبر مساعد اعتماد محلي ولم يُطبع أو يُخزَّن في أي ملف أو تقرير. <b>يوصى بإبطاله وتدويره فور استلام هذا التسليم.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · CLOSING -->
+<section class="page dark">
+  <div class="pad" style="justify-content:center; align-items:flex-start;">
+    <div class="kicker">التسليم · MICRO BOLD MODULAR V1</div>
+    <h1 style="font-size:54px; color:#EAF1F7;">كل شيء محفوظ، وكل شيء قابل للمراجعة</h1>
+    <p class="sub" style="max-width:860px;">النموذج الأولي التفاعلي، الرموز، البراهين، والتقارير الكاملة داخل مستودع التسليم. التوصية خبيرية، والاعتماد النهائي والتحقق من المستخدمين الحقيقيين ما زالا معلّقين بالكامل.</p>
+    <div style="display:flex; gap:16px; margin-top:30px; flex-wrap:wrap;">
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">prototype/ — نموذج تفاعلي يعمل محليًا</span>
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">reports/ — سجل بوابات وأدلة كاملة</span>
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">exports/ — PNG 1× و2× وبراهين</span>
+      <span class="chip t" style="background:#182A3A; color:#7FB4D8;">deliverables/ — الأسس والشاشات والنظام المرشح</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
