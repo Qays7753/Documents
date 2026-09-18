@@ -1,0 +1,116 @@
+{
+ "c1-warm-bold": {
+  "home-positive": {
+   "violations": [],
+   "passes": 37
+  },
+  "home-incomplete": {
+   "violations": [],
+   "passes": 39
+  },
+  "home-negative": {
+   "violations": [],
+   "passes": 37
+  },
+  "home-empty": {
+   "violations": [],
+   "passes": 34
+  },
+  "home-dark": {
+   "violations": [],
+   "passes": 37
+  },
+  "sale-form": {
+   "violations": [],
+   "passes": 43
+  },
+  "work": {
+   "violations": [],
+   "passes": 39
+  },
+  "finance": {
+   "violations": [],
+   "passes": 34
+  },
+  "tools": {
+   "violations": [],
+   "passes": 35
+  }
+ },
+ "c2-confident-bold": {
+  "home-positive": {
+   "violations": [],
+   "passes": 37
+  },
+  "home-incomplete": {
+   "violations": [],
+   "passes": 39
+  },
+  "home-negative": {
+   "violations": [],
+   "passes": 37
+  },
+  "home-empty": {
+   "violations": [],
+   "passes": 34
+  },
+  "home-dark": {
+   "violations": [],
+   "passes": 37
+  },
+  "sale-form": {
+   "violations": [],
+   "passes": 43
+  },
+  "work": {
+   "violations": [],
+   "passes": 39
+  },
+  "finance": {
+   "violations": [],
+   "passes": 34
+  },
+  "tools": {
+   "violations": [],
+   "passes": 35
+  }
+ },
+ "c3-dynamic-modular": {
+  "home-positive": {
+   "violations": [],
+   "passes": 37
+  },
+  "home-incomplete": {
+   "violations": [],
+   "passes": 39
+  },
+  "home-negative": {
+   "violations": [],
+   "passes": 37
+  },
+  "home-empty": {
+   "violations": [],
+   "passes": 34
+  },
+  "home-dark": {
+   "violations": [],
+   "passes": 37
+  },
+  "sale-form": {
+   "violations": [],
+   "passes": 43
+  },
+  "work": {
+   "violations": [],
+   "passes": 39
+  },
+  "finance": {
+   "violations": [],
+   "passes": 34
+  },
+  "tools": {
+   "violations": [],
+   "passes": 35
+  }
+ }
+}

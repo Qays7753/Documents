@@ -1,0 +1,68 @@
+/* ============================================================
+   chrome.css — شريط أدوات المعاينة (معدات تقييم محايدة)
+   ليس جزءًا من هوية أي اتجاه. عمداً محايد وبعيد عن C1/C2/C3.
+   ============================================================ */
+.chrome {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 100;
+  background: #1C222B;
+  color: #E7EDF3;
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  box-shadow: 0 1px 0 #2C3644 inset, 0 6px 18px rgba(10, 14, 20, 0.35);
+}
+.chrome-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  max-inline-size: 1080px;
+  margin-inline: auto;
+  padding: 8px 14px;
+}
+.chrome-brand { display: flex; align-items: center; gap: 8px; }
+.chrome-dot {
+  inline-size: 8px; block-size: 8px; border-radius: 50%;
+  background: #7CC4E4; box-shadow: 0 0 0 3px rgba(124, 196, 228, 0.25);
+}
+.chrome-title b { color: #fff; }
+.chrome-links { display: flex; gap: 2px; margin-inline-start: auto; flex-wrap: wrap; }
+.chrome-links a {
+  color: #AEBDCB; text-decoration: none; padding: 4px 9px; border-radius: 6px;
+  border: 1px solid transparent; font-weight: 600;
+}
+.chrome-links a:hover { color: #fff; background: #27303C; }
+.chrome-links a[aria-current="page"], .chrome-links a.on { color: #fff; background: #27303C; border-color: #3A4757; }
+.chrome-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cgroup { display: flex; background: #27303C; border: 1px solid #3A4757; border-radius: 8px; overflow: hidden; }
+.cbtn {
+  appearance: none; border: 0; background: transparent; color: #C6D2DD;
+  font: inherit; font-weight: 600; padding: 5px 10px; cursor: pointer; min-height: 30px;
+}
+.cbtn + .cbtn { border-inline-start: 1px solid #3A4757; }
+.cbtn[aria-pressed="true"] { background: #7CC4E4; color: #10222C; }
+.cbtn-scen { border-radius: 8px; background: #3A4757; }
+.cbtn-scen[aria-pressed="true"] { background: #E0B15C; color: #22190A; }
+.chrome-panel {
+  border-block-start: 1px solid #2C3644;
+  background: #20262F;
+  padding: 12px 14px 14px;
+  display: grid;
+  gap: 10px;
+  max-inline-size: 1080px;
+  margin-inline: auto;
+}
+.cpanel-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cpanel-label { color: #8FA0B0; font-weight: 700; min-inline-size: 96px; }
+.cpanel-note { color: #8FA0B0; margin: 0; padding-block-start: 4px; border-block-start: 1px dashed #3A4757; padding-block-start: 10px; }
+.chrome:focus-within .chrome-row { outline: none; }
+
+/* تكيّف شريط الأدوات على الجوال */
+@media (max-width: 640px) {
+  .chrome-row { padding: 6px 10px; }
+  .chrome-links { order: 3; margin-inline-start: 0; }
+  .chrome-brand { order: 1; }
+  .chrome-controls { order: 2; margin-inline-start: auto; }
+}

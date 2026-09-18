@@ -1,0 +1,1994 @@
+{
+ "c1-warm-bold": [
+  {
+   "fg": "#2B1A10",
+   "bg": "#FBF4EC",
+   "use": "[light] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 15.31,
+   "pass": true
+  },
+  {
+   "fg": "#2B1A10",
+   "bg": "#FFFFFF",
+   "use": "[light] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 16.69,
+   "pass": true
+  },
+  {
+   "fg": "#5E4B39",
+   "bg": "#FFFFFF",
+   "use": "[light] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 8.26,
+   "pass": true
+  },
+  {
+   "fg": "#74604B",
+   "bg": "#FFFFFF",
+   "use": "[light] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 5.97,
+   "pass": true
+  },
+  {
+   "fg": "#8F7355",
+   "bg": "#FFFFFF",
+   "use": "[light] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 4.42,
+   "pass": true
+  },
+  {
+   "fg": "#2B1408",
+   "bg": "#E5763C",
+   "use": "[light] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 5.79,
+   "pass": true
+  },
+  {
+   "fg": "#471C07",
+   "bg": "#E5763C",
+   "use": "[light] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 4.86,
+   "pass": true
+  },
+  {
+   "fg": "#A63812",
+   "bg": "#FFFFFF",
+   "use": "[light] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 6.57,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#C94E1F",
+   "use": "[light] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 4.57,
+   "pass": true
+  },
+  {
+   "fg": "#7C2E0C",
+   "bg": "#F9E2D2",
+   "use": "[light] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 7.47,
+   "pass": true
+  },
+  {
+   "fg": "#C94E1F",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 4.57,
+   "pass": true
+  },
+  {
+   "fg": "#155C86",
+   "bg": "#FFFFFF",
+   "use": "[light] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 7.22,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#1D6E9C",
+   "use": "[light] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 5.58,
+   "pass": true
+  },
+  {
+   "fg": "#114F73",
+   "bg": "#E1EDF5",
+   "use": "[light] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 7.38,
+   "pass": true
+  },
+  {
+   "fg": "#1D6E9C",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.58,
+   "pass": true
+  },
+  {
+   "fg": "#186638",
+   "bg": "#FFFFFF",
+   "use": "[light] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 7.01,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#217A4B",
+   "use": "[light] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 5.32,
+   "pass": true
+  },
+  {
+   "fg": "#14592F",
+   "bg": "#E3F2E6",
+   "use": "[light] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 7.24,
+   "pass": true
+  },
+  {
+   "fg": "#217A4B",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.32,
+   "pass": true
+  },
+  {
+   "fg": "#7A5A08",
+   "bg": "#FFFFFF",
+   "use": "[light] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 6.38,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#8F6A0B",
+   "use": "[light] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 4.96,
+   "pass": true
+  },
+  {
+   "fg": "#654906",
+   "bg": "#FAEFD2",
+   "use": "[light] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 7.31,
+   "pass": true
+  },
+  {
+   "fg": "#8F6A0B",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 4.96,
+   "pass": true
+  },
+  {
+   "fg": "#A01D16",
+   "bg": "#FFFFFF",
+   "use": "[light] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 7.83,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#B3261E",
+   "use": "[light] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 6.54,
+   "pass": true
+  },
+  {
+   "fg": "#8C1812",
+   "bg": "#FBE8E4",
+   "use": "[light] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 7.88,
+   "pass": true
+  },
+  {
+   "fg": "#B3261E",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.54,
+   "pass": true
+  },
+  {
+   "fg": "#F9EFE3",
+   "bg": "#20140E",
+   "use": "[dark] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 15.83,
+   "pass": true
+  },
+  {
+   "fg": "#F9EFE3",
+   "bg": "#2B1D14",
+   "use": "[dark] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 14.34,
+   "pass": true
+  },
+  {
+   "fg": "#D2BCA5",
+   "bg": "#2B1D14",
+   "use": "[dark] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 8.91,
+   "pass": true
+  },
+  {
+   "fg": "#AB9379",
+   "bg": "#2B1D14",
+   "use": "[dark] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 5.57,
+   "pass": true
+  },
+  {
+   "fg": "#9A7550",
+   "bg": "#2B1D14",
+   "use": "[dark] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 3.91,
+   "pass": true
+  },
+  {
+   "fg": "#2B1408",
+   "bg": "#E58A54",
+   "use": "[dark] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 6.71,
+   "pass": true
+  },
+  {
+   "fg": "#54230D",
+   "bg": "#E58A54",
+   "use": "[dark] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 4.99,
+   "pass": true
+  },
+  {
+   "fg": "#F5A268",
+   "bg": "#2B1D14",
+   "use": "[dark] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 7.95,
+   "pass": true
+  },
+  {
+   "fg": "#2B1408",
+   "bg": "#E5763C",
+   "use": "[dark] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 5.79,
+   "pass": true
+  },
+  {
+   "fg": "#F5C9A4",
+   "bg": "#452614",
+   "use": "[dark] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 8.94,
+   "pass": true
+  },
+  {
+   "fg": "#E5763C",
+   "bg": "#2B1D14",
+   "use": "[dark] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.42,
+   "pass": true
+  },
+  {
+   "fg": "#8CCAE8",
+   "bg": "#2B1D14",
+   "use": "[dark] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 9.1,
+   "pass": true
+  },
+  {
+   "fg": "#0A2432",
+   "bg": "#7CC4E4",
+   "use": "[dark] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 8.29,
+   "pass": true
+  },
+  {
+   "fg": "#A9D9EE",
+   "bg": "#1e313d",
+   "use": "[dark] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 8.87,
+   "pass": true
+  },
+  {
+   "fg": "#7CC4E4",
+   "bg": "#2B1D14",
+   "use": "[dark] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 8.44,
+   "pass": true
+  },
+  {
+   "fg": "#74D096",
+   "bg": "#2B1D14",
+   "use": "[dark] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 8.7,
+   "pass": true
+  },
+  {
+   "fg": "#0A2415",
+   "bg": "#5FBF85",
+   "use": "[dark] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 7.27,
+   "pass": true
+  },
+  {
+   "fg": "#9BE0B4",
+   "bg": "#1e3825",
+   "use": "[dark] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 8.32,
+   "pass": true
+  },
+  {
+   "fg": "#5FBF85",
+   "bg": "#2B1D14",
+   "use": "[dark] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.2,
+   "pass": true
+  },
+  {
+   "fg": "#E6C274",
+   "bg": "#2B1D14",
+   "use": "[dark] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 9.57,
+   "pass": true
+  },
+  {
+   "fg": "#241A04",
+   "bg": "#E3B95F",
+   "use": "[dark] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 9.29,
+   "pass": true
+  },
+  {
+   "fg": "#F1D68C",
+   "bg": "#3A2E10",
+   "use": "[dark] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 9.34,
+   "pass": true
+  },
+  {
+   "fg": "#E3B95F",
+   "bg": "#2B1D14",
+   "use": "[dark] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 8.82,
+   "pass": true
+  },
+  {
+   "fg": "#F4A396",
+   "bg": "#2B1D14",
+   "use": "[dark] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 8.17,
+   "pass": true
+  },
+  {
+   "fg": "#2B0B06",
+   "bg": "#F0988A",
+   "use": "[dark] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 8.29,
+   "pass": true
+  },
+  {
+   "fg": "#F7B8AD",
+   "bg": "#3C1D16",
+   "use": "[dark] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 9.0,
+   "pass": true
+  },
+  {
+   "fg": "#F0988A",
+   "bg": "#2B1D14",
+   "use": "[dark] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.42,
+   "pass": true
+  }
+ ],
+ "c2-confident-bold": [
+  {
+   "fg": "#0F242E",
+   "bg": "#F0F4F5",
+   "use": "[light] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 14.45,
+   "pass": true
+  },
+  {
+   "fg": "#0F242E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 16.0,
+   "pass": true
+  },
+  {
+   "fg": "#44606B",
+   "bg": "#FFFFFF",
+   "use": "[light] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 6.71,
+   "pass": true
+  },
+  {
+   "fg": "#5A747F",
+   "bg": "#FFFFFF",
+   "use": "[light] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 4.95,
+   "pass": true
+  },
+  {
+   "fg": "#66808B",
+   "bg": "#FFFFFF",
+   "use": "[light] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 4.18,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#0F5A66",
+   "use": "[light] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 7.85,
+   "pass": true
+  },
+  {
+   "fg": "#C3DEE3",
+   "bg": "#0F5A66",
+   "use": "[light] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 5.56,
+   "pass": true
+  },
+  {
+   "fg": "#A03E18",
+   "bg": "#FFFFFF",
+   "use": "[light] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 6.57,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#BE4A20",
+   "use": "[light] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 5.01,
+   "pass": true
+  },
+  {
+   "fg": "#8F3715",
+   "bg": "#F9E7DB",
+   "use": "[light] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 6.41,
+   "pass": true
+  },
+  {
+   "fg": "#BE4A20",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.01,
+   "pass": true
+  },
+  {
+   "fg": "#0C525C",
+   "bg": "#FFFFFF",
+   "use": "[light] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 8.83,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#0F6570",
+   "use": "[light] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 6.74,
+   "pass": true
+  },
+  {
+   "fg": "#0A4750",
+   "bg": "#E0EEF0",
+   "use": "[light] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 8.7,
+   "pass": true
+  },
+  {
+   "fg": "#0F6570",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.74,
+   "pass": true
+  },
+  {
+   "fg": "#15633E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 7.28,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#1D7A50",
+   "use": "[light] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 5.31,
+   "pass": true
+  },
+  {
+   "fg": "#115634",
+   "bg": "#E2F2E8",
+   "use": "[light] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 7.53,
+   "pass": true
+  },
+  {
+   "fg": "#1D7A50",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.31,
+   "pass": true
+  },
+  {
+   "fg": "#75530E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 7.0,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#8A6112",
+   "use": "[light] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 5.53,
+   "pass": true
+  },
+  {
+   "fg": "#614609",
+   "bg": "#FAF1D8",
+   "use": "[light] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 7.8,
+   "pass": true
+  },
+  {
+   "fg": "#8A6112",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.53,
+   "pass": true
+  },
+  {
+   "fg": "#A01D16",
+   "bg": "#FFFFFF",
+   "use": "[light] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 7.83,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#B3261E",
+   "use": "[light] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 6.54,
+   "pass": true
+  },
+  {
+   "fg": "#8C1812",
+   "bg": "#FBE9E6",
+   "use": "[light] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 7.94,
+   "pass": true
+  },
+  {
+   "fg": "#B3261E",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.54,
+   "pass": true
+  },
+  {
+   "fg": "#EEF5F7",
+   "bg": "#0B151A",
+   "use": "[dark] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 16.75,
+   "pass": true
+  },
+  {
+   "fg": "#EEF5F7",
+   "bg": "#13232A",
+   "use": "[dark] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 14.63,
+   "pass": true
+  },
+  {
+   "fg": "#B7C9D0",
+   "bg": "#13232A",
+   "use": "[dark] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 9.43,
+   "pass": true
+  },
+  {
+   "fg": "#8FA6AE",
+   "bg": "#13232A",
+   "use": "[dark] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 6.33,
+   "pass": true
+  },
+  {
+   "fg": "#54707B",
+   "bg": "#13232A",
+   "use": "[dark] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 3.06,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#12525E",
+   "use": "[dark] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 8.77,
+   "pass": true
+  },
+  {
+   "fg": "#BFDDE3",
+   "bg": "#12525E",
+   "use": "[dark] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 6.13,
+   "pass": true
+  },
+  {
+   "fg": "#F0A276",
+   "bg": "#13232A",
+   "use": "[dark] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 7.79,
+   "pass": true
+  },
+  {
+   "fg": "#2B0F04",
+   "bg": "#DE7B4B",
+   "use": "[dark] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 6.0,
+   "pass": true
+  },
+  {
+   "fg": "#F6C3A0",
+   "bg": "#3C2417",
+   "use": "[dark] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 9.08,
+   "pass": true
+  },
+  {
+   "fg": "#DE7B4B",
+   "bg": "#13232A",
+   "use": "[dark] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.41,
+   "pass": true
+  },
+  {
+   "fg": "#74CBD7",
+   "bg": "#13232A",
+   "use": "[dark] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 8.66,
+   "pass": true
+  },
+  {
+   "fg": "#06272C",
+   "bg": "#3FA3B2",
+   "use": "[dark] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 5.32,
+   "pass": true
+  },
+  {
+   "fg": "#A5DCE5",
+   "bg": "#153740",
+   "use": "[dark] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 8.45,
+   "pass": true
+  },
+  {
+   "fg": "#3FA3B2",
+   "bg": "#13232A",
+   "use": "[dark] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.45,
+   "pass": true
+  },
+  {
+   "fg": "#74D096",
+   "bg": "#13232A",
+   "use": "[dark] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 8.61,
+   "pass": true
+  },
+  {
+   "fg": "#062413",
+   "bg": "#5FBF85",
+   "use": "[dark] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 7.31,
+   "pass": true
+  },
+  {
+   "fg": "#9BE0B4",
+   "bg": "#16351F",
+   "use": "[dark] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 8.77,
+   "pass": true
+  },
+  {
+   "fg": "#5FBF85",
+   "bg": "#13232A",
+   "use": "[dark] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.13,
+   "pass": true
+  },
+  {
+   "fg": "#E4C175",
+   "bg": "#13232A",
+   "use": "[dark] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 9.36,
+   "pass": true
+  },
+  {
+   "fg": "#231A03",
+   "bg": "#DDB75F",
+   "use": "[dark] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 9.02,
+   "pass": true
+  },
+  {
+   "fg": "#F0D489",
+   "bg": "#372D0F",
+   "use": "[dark] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 9.38,
+   "pass": true
+  },
+  {
+   "fg": "#DDB75F",
+   "bg": "#13232A",
+   "use": "[dark] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 8.46,
+   "pass": true
+  },
+  {
+   "fg": "#F4A396",
+   "bg": "#13232A",
+   "use": "[dark] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 8.09,
+   "pass": true
+  },
+  {
+   "fg": "#2B0B06",
+   "bg": "#F0988A",
+   "use": "[dark] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 8.29,
+   "pass": true
+  },
+  {
+   "fg": "#F7B8AD",
+   "bg": "#371D16",
+   "use": "[dark] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 9.2,
+   "pass": true
+  },
+  {
+   "fg": "#F0988A",
+   "bg": "#13232A",
+   "use": "[dark] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.35,
+   "pass": true
+  }
+ ],
+ "c3-dynamic-modular": [
+  {
+   "fg": "#191410",
+   "bg": "#F5F3ED",
+   "use": "[light] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 16.47,
+   "pass": true
+  },
+  {
+   "fg": "#191410",
+   "bg": "#FFFFFF",
+   "use": "[light] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 18.28,
+   "pass": true
+  },
+  {
+   "fg": "#4F483A",
+   "bg": "#FFFFFF",
+   "use": "[light] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 9.05,
+   "pass": true
+  },
+  {
+   "fg": "#665F4E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 6.34,
+   "pass": true
+  },
+  {
+   "fg": "#17120D",
+   "bg": "#FFFFFF",
+   "use": "[light] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 18.6,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#5B2CC8",
+   "use": "[light] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 7.96,
+   "pass": true
+  },
+  {
+   "fg": "#D9CCF6",
+   "bg": "#5B2CC8",
+   "use": "[light] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 5.27,
+   "pass": true
+  },
+  {
+   "fg": "#5B22B8",
+   "bg": "#FFFFFF",
+   "use": "[light] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 8.88,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#6C2BD9",
+   "use": "[light] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 7.03,
+   "pass": true
+  },
+  {
+   "fg": "#4A1B99",
+   "bg": "#EFE8FB",
+   "use": "[light] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 9.23,
+   "pass": true
+  },
+  {
+   "fg": "#6C2BD9",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.03,
+   "pass": true
+  },
+  {
+   "fg": "#0A5F6A",
+   "bg": "#FFFFFF",
+   "use": "[light] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 7.35,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#0E7480",
+   "use": "[light] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 5.49,
+   "pass": true
+  },
+  {
+   "fg": "#085159",
+   "bg": "#E2F1F3",
+   "use": "[light] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 7.77,
+   "pass": true
+  },
+  {
+   "fg": "#0E7480",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.49,
+   "pass": true
+  },
+  {
+   "fg": "#186636",
+   "bg": "#FFFFFF",
+   "use": "[light] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 7.02,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#23804C",
+   "use": "[light] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 4.93,
+   "pass": true
+  },
+  {
+   "fg": "#14592D",
+   "bg": "#E4F2E6",
+   "use": "[light] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 7.27,
+   "pass": true
+  },
+  {
+   "fg": "#23804C",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 4.93,
+   "pass": true
+  },
+  {
+   "fg": "#755708",
+   "bg": "#FFFFFF",
+   "use": "[light] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 6.72,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#8F6A0B",
+   "use": "[light] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 4.96,
+   "pass": true
+  },
+  {
+   "fg": "#614505",
+   "bg": "#FAF0D5",
+   "use": "[light] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 7.83,
+   "pass": true
+  },
+  {
+   "fg": "#8F6A0B",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 4.96,
+   "pass": true
+  },
+  {
+   "fg": "#9E1F14",
+   "bg": "#FFFFFF",
+   "use": "[light] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 7.89,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#BB2A1D",
+   "use": "[light] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 6.07,
+   "pass": true
+  },
+  {
+   "fg": "#8C1810",
+   "bg": "#FBE9E5",
+   "use": "[light] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 7.94,
+   "pass": true
+  },
+  {
+   "fg": "#BB2A1D",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.07,
+   "pass": true
+  },
+  {
+   "fg": "#0A5F6A",
+   "bg": "#FFFFFF",
+   "use": "[light] نص منطقة zone-work على السطح",
+   "min": 4.5,
+   "ratio": 7.35,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#0E7480",
+   "use": "[light] نص على تعبئة zone-work",
+   "min": 4.5,
+   "ratio": 5.49,
+   "pass": true
+  },
+  {
+   "fg": "#7F300E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص منطقة zone-tools على السطح",
+   "min": 4.5,
+   "ratio": 9.01,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#9A3B12",
+   "use": "[light] نص على تعبئة zone-tools",
+   "min": 4.5,
+   "ratio": 6.98,
+   "pass": true
+  },
+  {
+   "fg": "#8C1A51",
+   "bg": "#FFFFFF",
+   "use": "[light] نص منطقة zone-market على السطح",
+   "min": 4.5,
+   "ratio": 8.82,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#A81E5F",
+   "use": "[light] نص على تعبئة zone-market",
+   "min": 4.5,
+   "ratio": 6.96,
+   "pass": true
+  },
+  {
+   "fg": "#F5F1E6",
+   "bg": "#14110D",
+   "use": "[dark] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 16.68,
+   "pass": true
+  },
+  {
+   "fg": "#F5F1E6",
+   "bg": "#1E1A14",
+   "use": "[dark] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 15.34,
+   "pass": true
+  },
+  {
+   "fg": "#C8BEA8",
+   "bg": "#1E1A14",
+   "use": "[dark] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 9.39,
+   "pass": true
+  },
+  {
+   "fg": "#9E937D",
+   "bg": "#1E1A14",
+   "use": "[dark] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 5.71,
+   "pass": true
+  },
+  {
+   "fg": "#F0EAD9",
+   "bg": "#1E1A14",
+   "use": "[dark] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 14.41,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#6D3BD8",
+   "use": "[dark] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 6.43,
+   "pass": true
+  },
+  {
+   "fg": "#E9E2FC",
+   "bg": "#6D3BD8",
+   "use": "[dark] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 5.13,
+   "pass": true
+  },
+  {
+   "fg": "#BBA1F7",
+   "bg": "#1E1A14",
+   "use": "[dark] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 7.88,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#7C4EE0",
+   "use": "[dark] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 5.22,
+   "pass": true
+  },
+  {
+   "fg": "#D2C1FA",
+   "bg": "#2C1F4E",
+   "use": "[dark] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 9.02,
+   "pass": true
+  },
+  {
+   "fg": "#7C4EE0",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 3.32,
+   "pass": true
+  },
+  {
+   "fg": "#7FD3DD",
+   "bg": "#1E1A14",
+   "use": "[dark] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 10.11,
+   "pass": true
+  },
+  {
+   "fg": "#04262A",
+   "bg": "#2FB3C0",
+   "use": "[dark] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 6.33,
+   "pass": true
+  },
+  {
+   "fg": "#A7E3EA",
+   "bg": "#123640",
+   "use": "[dark] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 9.11,
+   "pass": true
+  },
+  {
+   "fg": "#2FB3C0",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.87,
+   "pass": true
+  },
+  {
+   "fg": "#7BD39A",
+   "bg": "#1E1A14",
+   "use": "[dark] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 9.58,
+   "pass": true
+  },
+  {
+   "fg": "#062413",
+   "bg": "#5FBF85",
+   "use": "[dark] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 7.31,
+   "pass": true
+  },
+  {
+   "fg": "#9BE0B4",
+   "bg": "#17351F",
+   "use": "[dark] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 8.76,
+   "pass": true
+  },
+  {
+   "fg": "#5FBF85",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.65,
+   "pass": true
+  },
+  {
+   "fg": "#E6C274",
+   "bg": "#1E1A14",
+   "use": "[dark] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 10.17,
+   "pass": true
+  },
+  {
+   "fg": "#231A03",
+   "bg": "#DDB75F",
+   "use": "[dark] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 9.02,
+   "pass": true
+  },
+  {
+   "fg": "#F1D68C",
+   "bg": "#372D0F",
+   "use": "[dark] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 9.54,
+   "pass": true
+  },
+  {
+   "fg": "#DDB75F",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 9.08,
+   "pass": true
+  },
+  {
+   "fg": "#F4A396",
+   "bg": "#1E1A14",
+   "use": "[dark] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 8.68,
+   "pass": true
+  },
+  {
+   "fg": "#2B0B06",
+   "bg": "#F0988A",
+   "use": "[dark] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 8.29,
+   "pass": true
+  },
+  {
+   "fg": "#F7B8AD",
+   "bg": "#371D16",
+   "use": "[dark] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 9.2,
+   "pass": true
+  },
+  {
+   "fg": "#F0988A",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.88,
+   "pass": true
+  },
+  {
+   "fg": "#7FD3DD",
+   "bg": "#1E1A14",
+   "use": "[dark] نص منطقة zone-work على السطح",
+   "min": 4.5,
+   "ratio": 10.11,
+   "pass": true
+  },
+  {
+   "fg": "#04262A",
+   "bg": "#2FB3C0",
+   "use": "[dark] نص على تعبئة zone-work",
+   "min": 4.5,
+   "ratio": 6.33,
+   "pass": true
+  },
+  {
+   "fg": "#DFA87E",
+   "bg": "#1E1A14",
+   "use": "[dark] نص منطقة zone-tools على السطح",
+   "min": 4.5,
+   "ratio": 8.28,
+   "pass": true
+  },
+  {
+   "fg": "#26110A",
+   "bg": "#D08A5C",
+   "use": "[dark] نص على تعبئة zone-tools",
+   "min": 4.5,
+   "ratio": 6.4,
+   "pass": true
+  },
+  {
+   "fg": "#EC93BE",
+   "bg": "#1E1A14",
+   "use": "[dark] نص منطقة zone-market على السطح",
+   "min": 4.5,
+   "ratio": 7.82,
+   "pass": true
+  },
+  {
+   "fg": "#2B0A1C",
+   "bg": "#E26AA8",
+   "use": "[dark] نص على تعبئة zone-market",
+   "min": 4.5,
+   "ratio": 5.9,
+   "pass": true
+  }
+ ],
+ "selected-direction": [
+  {
+   "fg": "#191410",
+   "bg": "#F5F3ED",
+   "use": "[light] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 16.47,
+   "pass": true
+  },
+  {
+   "fg": "#191410",
+   "bg": "#FFFFFF",
+   "use": "[light] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 18.28,
+   "pass": true
+  },
+  {
+   "fg": "#4F483A",
+   "bg": "#FFFFFF",
+   "use": "[light] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 9.05,
+   "pass": true
+  },
+  {
+   "fg": "#665F4E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 6.34,
+   "pass": true
+  },
+  {
+   "fg": "#17120D",
+   "bg": "#FFFFFF",
+   "use": "[light] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 18.6,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#5B2CC8",
+   "use": "[light] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 7.96,
+   "pass": true
+  },
+  {
+   "fg": "#D9CCF6",
+   "bg": "#5B2CC8",
+   "use": "[light] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 5.27,
+   "pass": true
+  },
+  {
+   "fg": "#5B22B8",
+   "bg": "#FFFFFF",
+   "use": "[light] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 8.88,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#5B2CC8",
+   "use": "[light] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 7.96,
+   "pass": true
+  },
+  {
+   "fg": "#4A1B99",
+   "bg": "#EFE8FB",
+   "use": "[light] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 9.23,
+   "pass": true
+  },
+  {
+   "fg": "#5B2CC8",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.96,
+   "pass": true
+  },
+  {
+   "fg": "#0A5F6A",
+   "bg": "#FFFFFF",
+   "use": "[light] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 7.35,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#0E7480",
+   "use": "[light] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 5.49,
+   "pass": true
+  },
+  {
+   "fg": "#085159",
+   "bg": "#E2F1F3",
+   "use": "[light] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 7.77,
+   "pass": true
+  },
+  {
+   "fg": "#0E7480",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.49,
+   "pass": true
+  },
+  {
+   "fg": "#186636",
+   "bg": "#FFFFFF",
+   "use": "[light] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 7.02,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#23804C",
+   "use": "[light] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 4.93,
+   "pass": true
+  },
+  {
+   "fg": "#14592D",
+   "bg": "#E4F2E6",
+   "use": "[light] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 7.27,
+   "pass": true
+  },
+  {
+   "fg": "#23804C",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 4.93,
+   "pass": true
+  },
+  {
+   "fg": "#755708",
+   "bg": "#FFFFFF",
+   "use": "[light] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 6.72,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#8F6A0B",
+   "use": "[light] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 4.96,
+   "pass": true
+  },
+  {
+   "fg": "#614505",
+   "bg": "#FAF0D5",
+   "use": "[light] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 7.83,
+   "pass": true
+  },
+  {
+   "fg": "#8F6A0B",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 4.96,
+   "pass": true
+  },
+  {
+   "fg": "#9E1F14",
+   "bg": "#FFFFFF",
+   "use": "[light] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 7.89,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#BB2A1D",
+   "use": "[light] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 6.07,
+   "pass": true
+  },
+  {
+   "fg": "#8C1810",
+   "bg": "#FBE9E5",
+   "use": "[light] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 7.94,
+   "pass": true
+  },
+  {
+   "fg": "#BB2A1D",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.07,
+   "pass": true
+  },
+  {
+   "fg": "#0A5F6A",
+   "bg": "#FFFFFF",
+   "use": "[light] نص منطقة zone-work على السطح",
+   "min": 4.5,
+   "ratio": 7.35,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#0E7480",
+   "use": "[light] نص على تعبئة zone-work",
+   "min": 4.5,
+   "ratio": 5.49,
+   "pass": true
+  },
+  {
+   "fg": "#7F300E",
+   "bg": "#FFFFFF",
+   "use": "[light] نص منطقة zone-tools على السطح",
+   "min": 4.5,
+   "ratio": 9.01,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#9A3B12",
+   "use": "[light] نص على تعبئة zone-tools",
+   "min": 4.5,
+   "ratio": 6.98,
+   "pass": true
+  },
+  {
+   "fg": "#8C1A51",
+   "bg": "#FFFFFF",
+   "use": "[light] نص منطقة zone-market على السطح",
+   "min": 4.5,
+   "ratio": 8.82,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#A81E5F",
+   "use": "[light] نص على تعبئة zone-market",
+   "min": 4.5,
+   "ratio": 6.96,
+   "pass": true
+  },
+  {
+   "fg": "#A03E18",
+   "bg": "#FFFFFF",
+   "use": "[light] نص الكنكة الدافئة على السطح",
+   "min": 4.5,
+   "ratio": 6.57,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#BE4A20",
+   "use": "[light] نص على تعبئة الكنكة الدافئة",
+   "min": 4.5,
+   "ratio": 5.01,
+   "pass": true
+  },
+  {
+   "fg": "#8F3715",
+   "bg": "#F9E7DB",
+   "use": "[light] نص على تعبئة الكنكة الناعمة",
+   "min": 4.5,
+   "ratio": 6.41,
+   "pass": true
+  },
+  {
+   "fg": "#BE4A20",
+   "bg": "#FFFFFF",
+   "use": "[light] تعبئة الكنكة مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.01,
+   "pass": true
+  },
+  {
+   "fg": "#F5F1E6",
+   "bg": "#14110D",
+   "use": "[dark] نص أساسي على الخلفية",
+   "min": 4.5,
+   "ratio": 16.68,
+   "pass": true
+  },
+  {
+   "fg": "#F5F1E6",
+   "bg": "#1E1A14",
+   "use": "[dark] نص أساسي على السطح",
+   "min": 4.5,
+   "ratio": 15.34,
+   "pass": true
+  },
+  {
+   "fg": "#C8BEA8",
+   "bg": "#1E1A14",
+   "use": "[dark] نص ثانوي على السطح",
+   "min": 4.5,
+   "ratio": 9.39,
+   "pass": true
+  },
+  {
+   "fg": "#9E937D",
+   "bg": "#1E1A14",
+   "use": "[dark] نص خافت على السطح",
+   "min": 4.5,
+   "ratio": 5.71,
+   "pass": true
+  },
+  {
+   "fg": "#F0EAD9",
+   "bg": "#1E1A14",
+   "use": "[dark] حد الضوابط على السطح",
+   "min": 3.0,
+   "ratio": 14.41,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#6D3BD8",
+   "use": "[dark] نص البطل الأساسي على حقل البطل",
+   "min": 4.5,
+   "ratio": 6.43,
+   "pass": true
+  },
+  {
+   "fg": "#E9E2FC",
+   "bg": "#6D3BD8",
+   "use": "[dark] نص البطل الثانوي على حقل البطل",
+   "min": 4.5,
+   "ratio": 5.13,
+   "pass": true
+  },
+  {
+   "fg": "#BBA1F7",
+   "bg": "#1E1A14",
+   "use": "[dark] نص brand على السطح",
+   "min": 4.5,
+   "ratio": 7.88,
+   "pass": true
+  },
+  {
+   "fg": "#FFFFFF",
+   "bg": "#7C4EE0",
+   "use": "[dark] نص على تعبئة brand",
+   "min": 4.5,
+   "ratio": 5.22,
+   "pass": true
+  },
+  {
+   "fg": "#D2C1FA",
+   "bg": "#2C1F4E",
+   "use": "[dark] نص على تعبئة brand الناعمة",
+   "min": 4.5,
+   "ratio": 9.02,
+   "pass": true
+  },
+  {
+   "fg": "#7C4EE0",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة brand مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 3.32,
+   "pass": true
+  },
+  {
+   "fg": "#7FD3DD",
+   "bg": "#1E1A14",
+   "use": "[dark] نص trust على السطح",
+   "min": 4.5,
+   "ratio": 10.11,
+   "pass": true
+  },
+  {
+   "fg": "#04262A",
+   "bg": "#2FB3C0",
+   "use": "[dark] نص على تعبئة trust",
+   "min": 4.5,
+   "ratio": 6.33,
+   "pass": true
+  },
+  {
+   "fg": "#A7E3EA",
+   "bg": "#123640",
+   "use": "[dark] نص على تعبئة trust الناعمة",
+   "min": 4.5,
+   "ratio": 9.11,
+   "pass": true
+  },
+  {
+   "fg": "#2FB3C0",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة trust مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 6.87,
+   "pass": true
+  },
+  {
+   "fg": "#7BD39A",
+   "bg": "#1E1A14",
+   "use": "[dark] نص positive على السطح",
+   "min": 4.5,
+   "ratio": 9.58,
+   "pass": true
+  },
+  {
+   "fg": "#062413",
+   "bg": "#5FBF85",
+   "use": "[dark] نص على تعبئة positive",
+   "min": 4.5,
+   "ratio": 7.31,
+   "pass": true
+  },
+  {
+   "fg": "#9BE0B4",
+   "bg": "#17351F",
+   "use": "[dark] نص على تعبئة positive الناعمة",
+   "min": 4.5,
+   "ratio": 8.76,
+   "pass": true
+  },
+  {
+   "fg": "#5FBF85",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة positive مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.65,
+   "pass": true
+  },
+  {
+   "fg": "#E6C274",
+   "bg": "#1E1A14",
+   "use": "[dark] نص attention على السطح",
+   "min": 4.5,
+   "ratio": 10.17,
+   "pass": true
+  },
+  {
+   "fg": "#231A03",
+   "bg": "#DDB75F",
+   "use": "[dark] نص على تعبئة attention",
+   "min": 4.5,
+   "ratio": 9.02,
+   "pass": true
+  },
+  {
+   "fg": "#F1D68C",
+   "bg": "#372D0F",
+   "use": "[dark] نص على تعبئة attention الناعمة",
+   "min": 4.5,
+   "ratio": 9.54,
+   "pass": true
+  },
+  {
+   "fg": "#DDB75F",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة attention مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 9.08,
+   "pass": true
+  },
+  {
+   "fg": "#F4A396",
+   "bg": "#1E1A14",
+   "use": "[dark] نص negative على السطح",
+   "min": 4.5,
+   "ratio": 8.68,
+   "pass": true
+  },
+  {
+   "fg": "#2B0B06",
+   "bg": "#F0988A",
+   "use": "[dark] نص على تعبئة negative",
+   "min": 4.5,
+   "ratio": 8.29,
+   "pass": true
+  },
+  {
+   "fg": "#F7B8AD",
+   "bg": "#371D16",
+   "use": "[dark] نص على تعبئة negative الناعمة",
+   "min": 4.5,
+   "ratio": 9.2,
+   "pass": true
+  },
+  {
+   "fg": "#F0988A",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة negative مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 7.88,
+   "pass": true
+  },
+  {
+   "fg": "#7FD3DD",
+   "bg": "#1E1A14",
+   "use": "[dark] نص منطقة zone-work على السطح",
+   "min": 4.5,
+   "ratio": 10.11,
+   "pass": true
+  },
+  {
+   "fg": "#04262A",
+   "bg": "#2FB3C0",
+   "use": "[dark] نص على تعبئة zone-work",
+   "min": 4.5,
+   "ratio": 6.33,
+   "pass": true
+  },
+  {
+   "fg": "#DFA87E",
+   "bg": "#1E1A14",
+   "use": "[dark] نص منطقة zone-tools على السطح",
+   "min": 4.5,
+   "ratio": 8.28,
+   "pass": true
+  },
+  {
+   "fg": "#26110A",
+   "bg": "#D08A5C",
+   "use": "[dark] نص على تعبئة zone-tools",
+   "min": 4.5,
+   "ratio": 6.4,
+   "pass": true
+  },
+  {
+   "fg": "#EC93BE",
+   "bg": "#1E1A14",
+   "use": "[dark] نص منطقة zone-market على السطح",
+   "min": 4.5,
+   "ratio": 7.82,
+   "pass": true
+  },
+  {
+   "fg": "#2B0A1C",
+   "bg": "#E26AA8",
+   "use": "[dark] نص على تعبئة zone-market",
+   "min": 4.5,
+   "ratio": 5.9,
+   "pass": true
+  },
+  {
+   "fg": "#F0A276",
+   "bg": "#1E1A14",
+   "use": "[dark] نص الكنكة الدافئة على السطح",
+   "min": 4.5,
+   "ratio": 8.35,
+   "pass": true
+  },
+  {
+   "fg": "#2B0F04",
+   "bg": "#DE7B4B",
+   "use": "[dark] نص على تعبئة الكنكة الدافئة",
+   "min": 4.5,
+   "ratio": 6.0,
+   "pass": true
+  },
+  {
+   "fg": "#F6C3A0",
+   "bg": "#3C2417",
+   "use": "[dark] نص على تعبئة الكنكة الناعمة",
+   "min": 4.5,
+   "ratio": 9.08,
+   "pass": true
+  },
+  {
+   "fg": "#DE7B4B",
+   "bg": "#1E1A14",
+   "use": "[dark] تعبئة الكنكة مقابل السطح (حدود مكون)",
+   "min": 3.0,
+   "ratio": 5.8,
+   "pass": true
+  }
+ ]
+}

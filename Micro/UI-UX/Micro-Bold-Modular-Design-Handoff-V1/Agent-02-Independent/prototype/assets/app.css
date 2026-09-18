@@ -1,0 +1,229 @@
+/* ============================================================
+   app.css — الهيكل البنيوي المشترك فقط (بدون أي هوية بصرية)
+   كل الخصائص البصرية (ألوان/خطوط/حركات/حدود) تعيش في styles.css
+   الخاص بكل اتجاه حتى لا تمسح الفروقات بين الاتجاهات.
+   ============================================================ */
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html[data-text="200"] { font-size: 200%; }
+body { margin: 0; min-block-size: 100vh; }
+img, svg { max-inline-size: 100%; }
+
+/* قفزة الوصول */
+.skip-link {
+  position: fixed; inset-block-start: -60px; inset-inline-start: 12px; z-index: 999;
+  padding: 10px 16px; border-radius: 8px; background: #1C222B; color: #fff;
+  text-decoration: none; font-family: "IBM Plex Sans Arabic", sans-serif;
+  transition: inset-block-start 0.2s ease;
+}
+.skip-link:focus { inset-block-start: 12px; }
+
+/* مسرح عرض الجهاز */
+.stage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px 16px 48px;
+  min-block-size: calc(100vh - 60px);
+}
+.phone {
+  inline-size: 390px;
+  block-size: min(844px, calc(100vh - 40px));
+  max-inline-size: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.phone[data-vp="320"] { inline-size: 320px; }
+.phone[data-vp="430"] { inline-size: 430px; }
+
+@media (max-width: 560px) {
+  .stage { padding: 0; }
+  .phone { inline-size: 100% !important; block-size: 100dvh; border-radius: 0 !important; }
+}
+
+/* هيكل التطبيق */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  flex: 1;
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+}
+
+/* الشاشات */
+.screens {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-block-size: 0;
+  scrollbar-width: thin;
+  display: block;
+}
+.screen { display: none; padding: 4px 16px 20px; }
+.screen.is-active { display: block; }
+
+/* الشعار والمنطقة العلوية */
+.topzone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 16px 6px;
+}
+.tz-start, .tz-end { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+/* بنية عامة */
+.ctx-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-block: 10px 12px; }
+.rows { display: grid; gap: 2px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-block-size: 46px; padding: 9px 2px; flex-wrap: wrap; }
+.row-btn { inline-size: 100%; text-align: start; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; }
+.row-k { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.row-v { display: inline-flex; align-items: baseline; gap: 6px; white-space: normal; text-align: end; flex-wrap: wrap; justify-content: flex-end; }
+.row-hint { color: var(--c-ink3); font-size: 0.78em; }
+.row-sub { padding-inline-start: 18px; }
+
+/* الأرقام: عزل اتجاهي + رقمي جدولي */
+.num {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: var(--font-num, "IBM Plex Mono", ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
+}
+.cur { white-space: nowrap; }
+
+/* الأيقونات — ميكانيكا الحجم فقط، الوزن واللون من الاتجاه */
+.icon { inline-size: 1.25em; block-size: 1.25em; flex: none; vertical-align: -0.28em; }
+.icon-flip { transform: scaleX(-1); }
+
+/* ميكانيكا الأوراق والحوار */
+.scrim {
+  position: absolute; inset: 0; z-index: 40;
+  background: rgba(15, 18, 24, 0.5);
+}
+.sheet {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 50;
+  max-block-size: 92%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sheet[hidden] { display: none; }
+.sheet-tall { max-block-size: 96%; }
+.sheet-body { overflow-y: auto; padding: 4px 18px 22px; }
+.sheet-grab { margin: 8px auto 0; inline-size: 44px; block-size: 4px; border-radius: 99px; background: rgba(127, 127, 127, 0.35); flex: none; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 18px 6px; }
+.sheet-actions { display: flex; gap: 10px; margin-block-start: 18px; }
+.sheet-actions-col { flex-direction: column; }
+.syserr {
+  position: absolute; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.syserr[hidden] { display: none; }
+.toast-region {
+  position: absolute; inset-inline: 16px; inset-block-end: 96px; z-index: 70;
+  display: grid; justify-items: center; pointer-events: none;
+}
+.toast {
+  max-inline-size: 100%;
+  padding: 10px 16px; border-radius: 10px;
+  background: #1C222B; color: #fff; font-size: 13px;
+  box-shadow: 0 8px 24px rgba(10, 14, 20, 0.4);
+}
+
+/* شريط الإجراءات + التنقل: ميكانيكا التموضع */
+.qab { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px 8px; }
+.qab-btn { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; gap: 5px; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; min-block-size: 56px; justify-content: center; min-inline-size: min-content; }
+.tabbar { display: flex; flex-wrap: wrap; padding: 6px 6px calc(8px + env(safe-area-inset-bottom, 0px)); }
+.tab { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; gap: 4px; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; min-block-size: 56px; justify-content: center; padding-block: 6px; min-inline-size: min-content; }
+.tab span { white-space: normal; line-height: 1.3; max-inline-size: 100%; }
+
+/* النماذج: ميكانيكا */
+.field { display: grid; gap: 7px; margin-block-end: 16px; border: 0; padding: 0; margin-inline: 0; }
+.field-label { font-size: 0.86rem; font-weight: 600; display: block; }
+.amount-wrap { display: flex; align-items: baseline; gap: 8px; }
+.amount-input { inline-size: 100%; min-inline-size: 0; flex: 1 1 auto; font-family: var(--font-num, monospace); direction: ltr; text-align: start; }
+.segmented { display: flex; flex-wrap: wrap; }
+.seg-btn { flex: 1; border: 0; background: none; cursor: pointer; font: inherit; padding: 11px 8px; min-block-size: 44px; }
+.select { inline-size: 100%; font: inherit; min-block-size: 48px; padding: 10px 12px; }
+.static-chip { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 10px 14px; }
+.sheet-close { border: 0; background: none; cursor: pointer; padding: 8px; color: inherit; display: inline-flex; min-inline-size: 44px; min-block-size: 44px; align-items: center; justify-content: center; }
+
+/* مفاتيح عامة */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; font: inherit; border: 0; text-decoration: none; min-block-size: 48px; padding: 12px 20px; flex: 1; }
+.link-more { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; font: inherit; cursor: pointer; padding: 10px 4px; margin-block-start: 4px; }
+.switch { border: 0; cursor: pointer; padding: 0; background: none; }
+.switch-knob { display: block; }
+.setting-row { display: flex; align-items: center; justify-content: space-between; min-block-size: 48px; }
+
+/* قوائم وسطور تشغيلية */
+.recent-list, .orders, .prod-list, .menu-list, .more-grid, .market-list { list-style: none; margin: 0; padding: 0; }
+.op, .prod { display: flex; align-items: center; gap: 10px; padding-block: 10px; flex-wrap: wrap; }
+.op-body, .prod-body { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.order { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; inline-size: 100%; text-align: start; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; padding: 12px 2px; }
+.order-main { display: grid; gap: 3px; min-width: 0; }
+.order-side { display: grid; gap: 6px; justify-items: end; }
+.more-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.more-item { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 10px; border: 0; cursor: pointer; font: inherit; background: none; min-block-size: 104px; justify-content: center; }
+.menu-item { display: flex; align-items: center; gap: 12px; inline-size: 100%; padding: 14px 4px; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; text-align: start; }
+.menu-item .chev { margin-inline-start: auto; }
+.searchbox { display: flex; align-items: center; gap: 9px; margin-block: 4px 16px; padding: 0 12px; min-block-size: 48px; }
+.searchbox input { inline-size: 100%; border: 0; background: none; font: inherit; min-block-size: 46px; outline: none; }
+.chips-row { display: flex; gap: 8px; flex-wrap: wrap; margin-block-end: 14px; }
+.chip { border: 0; cursor: pointer; font: inherit; padding: 7px 14px; min-block-size: 36px; }
+.fin-links { display: flex; gap: 10px; justify-content: space-evenly; padding-block-start: 4px; flex-wrap: wrap; }
+.sheet-actions { display: flex; gap: 10px; margin-block-start: 18px; flex-wrap: wrap; }
+.signal { flex-wrap: wrap; }
+.signal-body { flex: 1 1 auto; min-width: 0; }
+.attention-item, .fin-signal { flex-wrap: wrap; }
+.attention-body { flex: 1 1 auto; min-width: 0; }
+.hero-figs { flex-wrap: wrap; }
+.impact-v { flex-wrap: wrap; }
+.more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+
+/* سكة حالة الطلب */
+.rail { display: inline-flex; align-items: center; gap: 0; flex-wrap: wrap; row-gap: 4px; }
+.rail-step { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; max-inline-size: 100%; }
+.rail-detail { justify-content: space-between; inline-size: 100%; margin-block: 12px 6px; }
+
+/* عناصر مساعدة */
+.sr-only {
+  position: absolute; inline-size: 1px; block-size: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+[hidden] { display: none !important; }
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* تركيز واضح افتراضي — كل اتجاه يعززه بهويته */
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* إبراز القيمة المتأثرة (Success Impact) */
+@keyframes micro-flash {
+  0% { background: transparent; }
+  18% { background: var(--flash, rgba(224, 177, 92, 0.55)); }
+  100% { background: transparent; }
+}
+.is-flashed { animation: micro-flash 1.6s ease-out 1; }
+html[data-motion="reduced"] .is-flashed { animation: none; }

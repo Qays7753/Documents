@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-direction="{{DIR_ID}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Foundation Board — {{DIR_LABEL}}</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/board.css">
+<style id="tokens">
+{{TOKENS_CSS}}
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="board app" data-theme="light">
+<header class="board-head">
+  <p class="board-kicker">Foundation Board · Agent 02 — Independent</p>
+  <h1 class="board-title">{{DIR_LABEL}}</h1>
+  <p class="board-thesis">{{THESIS}}</p>
+  <ul class="board-adjectives" aria-label="الصفات الخمس">
+    {{ADJECTIVES}}
+  </ul>
+  <p class="board-mood"><b>مراجع المزاج (مبادئ لا صور):</b> {{MOOD}}</p>
+  <div class="board-tools">
+    <button type="button" class="board-toggle" data-btheme="light" aria-pressed="true">فاتح</button>
+    <button type="button" class="board-toggle" data-btheme="dark" aria-pressed="false">داكن</button>
+    <a class="board-toggle board-link" href="index.html">النموذج التفاعلي ←</a>
+  </div>
+</header>
+
+<main class="board-grid">
+
+  <section class="bsec">
+    <h2>1 · الأدوار اللونية</h2>
+    <p class="bsec-note">كل لون مقيد بوظيفته وممنوعات استخدامه وفق ملف 05.</p>
+    <div class="swatches">
+      {{SWATCHES}}
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>2 · قياسات التباين (WCAG 2.2)</h2>
+    <p class="bsec-note">قياس آلي لكل زوج تشغيلي — الحد: نص 4.5:1، كبير/حدود 3:1.</p>
+    <div class="table-wrap">
+      <table class="ctable">
+        <thead><tr><th>المقدمة</th><th>الخلفية</th><th>الاستخدام</th><th>النسبة</th></tr></thead>
+        <tbody>{{CONTRAST_ROWS}}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>3 · سلم الخطوط (عربي فعلي)</h2>
+    <div class="type-scale">
+      <div class="ts-row"><span class="ts-label">Hero Amount · 2.5rem / 700</span><p class="ts ts-hero"><span class="num">+42.50</span> <span class="cur">د.أ</span></p></div>
+      <div class="ts-row"><span class="ts-label">Screen Title · 1.25rem / 700</span><p class="ts ts-h1">حلويات ليان</p></div>
+      <div class="ts-row"><span class="ts-label">Section Title · 1rem / 700</span><p class="ts ts-h2">ملخص اليوم</p></div>
+      <div class="ts-row"><span class="ts-label">Body · 0.95rem / 400</span><p class="ts ts-body">بعد تسجيل المبيعات والمصاريف والتكاليف، تظهر نتيجة مشروعك اليوم بشكل واضح وموثوق، دون أي مصطلحات محاسبية.</p></div>
+      <div class="ts-row"><span class="ts-label">Caption · 0.8rem / 600</span><p class="ts ts-cap">أم محمد عليها 25.00 د.أ منذ 3 أيام</p></div>
+      <div class="ts-row"><span class="ts-label">Tab · 0.68rem / 700</span><p class="ts ts-tab">مشروعي الآن</p></div>
+      <div class="ts-row"><span class="ts-label">رقم مالي Tabular · {{NUMNOTE}}</span><p class="ts ts-num"><span class="num">185.00</span> <span class="cur">د.أ</span> · <span class="num">−18.75</span> · <span class="num">17/09/2026</span> · عملية <span class="num">#142</span></p></div>
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>4 · هرم الأسطح (4 مستويات)</h2>
+    <div class="surface-demo">
+      <div class="sd sd-canvas"><span>1 · Canvas — بيئة الصفحة</span></div>
+      <div class="sd sd-group"><span>2 · Group — أرضية قسم مفتوح</span></div>
+      <div class="sd sd-surface"><span>3 · Surface — سطح القراءة</span></div>
+      <div class="sd sd-overlay"><span>4 · Overlay — ورقة/حوار</span></div>
+    </div>
+    <p class="bsec-note">لا بطاقة داخل بطاقة؛ الظلال للحواريات والارتفاع الحقيقي، والحدود والفصل النغمي يبنيان البنية.</p>
+  </section>
+
+  <section class="bsec">
+    <h2>5 · منطق الكتل اللونية</h2>
+    <p class="bsec-note">{{BLOCKLOGIC}}</p>
+    <div class="block-demo">
+      <div class="hero-inner" data-hero="positive" style="animation:none">
+        <p class="hero-chip"><svg class="icon" aria-hidden="true"><use href="#i-trendup"/></svg><span>نتيجة موجبة</span></p>
+        <p class="hero-label">وضع مشروعك اليوم</p>
+        <p class="hero-amount"><span class="num">+42.50</span> <span class="cur">د.أ</span></p>
+        <p class="hero-note">بعد تسجيل المبيعات والمصاريف والتكاليف</p>
+      </div>
+      <div class="hero-inner" data-hero="incomplete" style="animation:none">
+        <p class="hero-chip"><svg class="icon" aria-hidden="true"><use href="#i-dash"/></svg><span>النتيجة غير مكتملة</span></p>
+        <p class="hero-label">نتيجة مشروعك</p>
+        <p class="hero-sub"><span class="hero-sub-v"><span class="num">120.00</span> <span class="cur">د.أ</span></span><span class="hero-sub-k">مبيعات اليوم</span></p>
+        <p class="hero-note">عمليتا بيع تحتاجان تسجيل التكلفة</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>6 · معالجة الأيقونات (عائلة واحدة)</h2>
+    <p class="bsec-note">{{ICONNOTE}}</p>
+    <div class="icon-row">
+      <span class="icon-cell"><svg class="icon"><use href="#i-tag"/></svg>بيع</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-receipt"/></svg>مصروف</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-package"/></svg>طلب</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-handcoins"/></svg>تحصيل</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-banknote"/></svg>الكاش</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-users"/></svg>الدين</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-trendup"/></svg>النتيجة</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-coins"/></svg>التكلفة</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-wallet"/></svg>محفظة</span>
+      <span class="icon-cell"><svg class="icon icon-flip"><use href="#i-truck"/></svg>مورد</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-calendar"/></svg>موعد</span>
+      <span class="icon-cell"><svg class="icon"><use href="#i-package"/></svg>تسليم</span>
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>7 · الأزرار والضوابط</h2>
+    <div class="ctrl-demo">
+      <button type="button" class="btn btn-primary">سجّل البيع</button>
+      <button type="button" class="btn btn-ghost">إلغاء</button>
+      <button type="button" class="btn btn-quiet">حاول مرة ثانية</button>
+      <div class="segmented" style="max-inline-size:280px"><button type="button" class="seg-btn is-active">مدفوع كاملًا</button><button type="button" class="seg-btn">على الحساب</button></div>
+      <div class="switch" role="switch" aria-checked="true" style="position:relative"><span class="switch-knob"></span></div>
+    </div>
+    <p class="bsec-note">الهدف الأدنى 44–48px للضوابط المهمة، وتغذية لمس فورية عند الضغط.</p>
+  </section>
+
+  <section class="bsec">
+    <h2>8 · الحالات الحرجة (نص + إشارة غير لونية)</h2>
+    <div class="states-demo">
+      <span class="fin-state" data-state="positive"><svg class="icon" aria-hidden="true"><use href="#i-trendup"/></svg>نتيجة موجبة</span>
+      <span class="fin-state" data-state="negative"><svg class="icon" aria-hidden="true"><use href="#i-trenddown"/></svg>نتيجة سالبة</span>
+      <span class="fin-state" data-state="incomplete"><svg class="icon" aria-hidden="true"><use href="#i-dash"/></svg>النتيجة غير مكتملة</span>
+      <span class="order-late"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>متأخر يومًا واحدًا</span>
+      <span class="row-state ok">مفعّل</span>
+      <span class="field-error" style="display:inline-flex">المبلغ لازم يكون أكبر من صفر</span>
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>9 · Micro Signal</h2>
+    <div class="signal" style="animation:none; margin:0">
+      <div class="signal-body">
+        <p class="signal-status">عندك مبلغ يحتاج تحصيلًا</p>
+        <p class="signal-reason">أم محمد عليها <span class="num">25.00</span> <span class="cur">د.أ</span> منذ 3 أيام</p>
+      </div>
+      <button type="button" class="signal-action"><svg class="icon" aria-hidden="true"><use href="#i-handcoins"/></svg><span>حصّل المبلغ</span></button>
+    </div>
+  </section>
+
+  <section class="bsec">
+    <h2>10 · Quick Action Bar</h2>
+    <nav class="qab" style="position:static; margin:0" aria-label="إجراءات سريعة">
+      <button type="button" class="qab-btn qab-sale"><svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg><span>بيع</span></button>
+      <button type="button" class="qab-btn"><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg><span>مصروف</span></button>
+      <button type="button" class="qab-btn"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg><span>طلب</span></button>
+      <button type="button" class="qab-btn"><svg class="icon" aria-hidden="true"><use href="#i-handcoins"/></svg><span>تحصيل</span></button>
+      <button type="button" class="qab-btn"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg><span>المزيد</span></button>
+    </nav>
+  </section>
+
+  <section class="bsec">
+    <h2>11 · Success Impact — قصة الحركة</h2>
+    <ol class="storyboard">
+      <li><b>1 · ضغط فوري</b><span>تغذية لمس لحظية على زر «سجّل البيع».</span></li>
+      <li><b>2 · حفظ</b><span>حالة تقدم تمنع التكرار العرضي (غزل + تعطيل الزر).</span></li>
+      <li><b>3 · تأكيد بالأرقام</b><span>«تم تسجيل البيع — 25.00 د.أ — أُضيف إلى درج المحل».</span></li>
+      <li><b>4 · عودة للسياق</b><span>إغلاق الورقة والعودة إلى الرئيسية.</span></li>
+      <li><b>5 · إبراز القيمة المتأثرة</b><span>ومضة قصيرة على الكاش والمبيعات المحدثة — دون Count-up.</span></li>
+    </ol>
+    <p class="bsec-note">الحركة تعبّر عن السببية وتتوقف كليًا مع تفضيل Reduced Motion.</p>
+  </section>
+
+  <section class="bsec">
+    <h2>12 · الوضع الداكن</h2>
+    <p class="bsec-note">ليس انعكاسًا حرفيًا: ألوان معدلة للوهج والتباين، والأدوار الدلالية باقية مميزة. جرّب زر «داكن» أعلى اللوحة.</p>
+    <div class="dark-note">
+      <p><b>العلاقة الفاتح/داكن:</b> {{DARKNOTE}}</p>
+    </div>
+  </section>
+
+  <section class="bsec bsec-wide">
+    <h2>13 · نقاط القوة والمخاطر</h2>
+    <div class="sr-grid">
+      <div><h3>نقاط القوة</h3><ul>{{STRENGTHS}}</ul></div>
+      <div><h3>المخاطر والفرضيات</h3><ul>{{RISKS}}</ul></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* مكتبة الأيقونات مصغرة للوحة */
+(function(){
+  var s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  s.setAttribute('style','display:none'); s.setAttribute('aria-hidden','true');
+  var icons = {
+    'i-tag':'<path d="M12.6 2.6L21 11a2 2 0 0 1 0 2.8l-7.2 7.2a2 2 0 0 1-2.8 0L2.6 12.6A2 2 0 0 1 2 11.2V4a2 2 0 0 1 2-2h7.2a2 2 0 0 1 1.4.6z"/><circle cx="7.5" cy="7.5" r="1"/>',
+    'i-receipt':'<path d="M5 3h14v18l-2.3-1.8L14.4 21l-2.4-1.8L9.6 21l-2.3-1.8L5 21V3z"/><path d="M9 8h6M9 12h6"/>',
+    'i-package':'<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+    'i-handcoins':'<path d="M11 14h5a2 2 0 0 1 0 4h-1"/><path d="M13 3a3 3 0 0 1 2.6 4.5A3 3 0 1 1 13 3z"/><path d="M11 14l-3.5-3.5a1.8 1.8 0 0 0-2.6 2.6L8 16.5c1.2 1.2 2.4 2.5 4 2.5h6"/>',
+    'i-banknote':'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>',
+    'i-users':'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 21c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16.5 5.5a3 3 0 0 1 0 6M18 14.7c2.1.7 3.5 2.7 3.5 5.3"/>',
+    'i-trendup':'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    'i-trenddown':'<path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/>',
+    'i-dash':'<circle cx="12" cy="12" r="9"/><path d="M7.5 12h9"/>',
+    'i-coins':'<circle cx="8.5" cy="8.5" r="5.5"/><path d="M18.1 10.4A5.5 5.5 0 1 1 10.4 18"/><path d="M8.5 6.5v4M6.5 8.5h4"/>',
+    'i-wallet':'<path d="M3 7a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v2"/><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 13.5h5"/>',
+    'i-truck':'<path d="M14 17V6a1 1 0 0 0-1-1H2v11h2"/><path d="M14 9h3.6L21 12.4V17h-2"/><circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/><path d="M8.5 17.5h7"/>',
+    'i-calendar':'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    'i-clock':'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>',
+    'i-more':'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+    'i-check':'<path d="M20 6L9 17l-5-5"/>',
+    'i-sparkles':'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/>'
+  };
+  Object.keys(icons).forEach(function(id){
+    var sym = document.createElementNS('http://www.w3.org/2000/svg','symbol');
+    sym.setAttribute('id',id); sym.setAttribute('viewBox','0 0 24 24');
+    sym.setAttribute('fill','none'); sym.setAttribute('stroke','currentColor');
+    sym.setAttribute('stroke-width','2'); sym.setAttribute('stroke-linecap','round'); sym.setAttribute('stroke-linejoin','round');
+    sym.innerHTML = icons[id];
+    s.appendChild(sym);
+  });
+  document.body.prepend(s);
+})();
+
+document.querySelectorAll('.board-toggle[data-btheme]').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.body.setAttribute('data-theme', b.dataset.btheme);
+    document.querySelectorAll('.board-toggle[data-btheme]').forEach(function(x){ x.setAttribute('aria-pressed', String(x===b)); });
+  });
+});
+</script>
+</body>
+</html>

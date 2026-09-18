@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Micro Bold Modular — تقرير مراجعة الاتجاهات · Agent 02</title>
+<link rel="icon" href="data:,">
+<style>
+@font-face { font-family:'IBM Plex Sans Arabic'; font-style:normal; font-weight:400; src:url('../prototype/assets/fonts/ibm-plex-sans-arabic-arabic-400.woff2') format('woff2'); }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-style:normal; font-weight:500; src:url('../prototype/assets/fonts/ibm-plex-sans-arabic-arabic-500.woff2') format('woff2'); }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-style:normal; font-weight:600; src:url('../prototype/assets/fonts/ibm-plex-sans-arabic-arabic-600.woff2') format('woff2'); }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-style:normal; font-weight:700; src:url('../prototype/assets/fonts/ibm-plex-sans-arabic-arabic-700.woff2') format('woff2'); }
+@font-face { font-family:'Noto Kufi Arabic'; font-style:normal; font-weight:700; src:url('../prototype/assets/fonts/noto-kufi-arabic-arabic-700.woff2') format('woff2'); }
+@font-face { font-family:'Noto Kufi Arabic'; font-style:normal; font-weight:800; src:url('../prototype/assets/fonts/noto-kufi-arabic-arabic-800.woff2') format('woff2'); }
+@font-face { font-family:'IBM Plex Mono'; font-style:normal; font-weight:400; src:url('../prototype/assets/fonts/ibm-plex-mono-latin-400.woff2') format('woff2'); }
+@font-face { font-family:'IBM Plex Mono'; font-style:normal; font-weight:600; src:url('../prototype/assets/fonts/ibm-plex-mono-latin-600.woff2') format('woff2'); }
+
+@page { size: 720px 1020px; margin: 0; }
+:root {
+  --paper:#F7F4EE; --ink:#191410; --ink2:#4F483A; --line:#DDD5C4;
+  --violet:#5B2CC8; --violet-soft:#EFE8FB; --teal:#0E7480; --warm:#BE4A20;
+}
+html, body { margin:0; padding:0; width:720px; background:#F7F4EE; color:var(--ink);
+  font-family:'IBM Plex Sans Arabic', sans-serif; font-size:15px; line-height:1.8; }
+@media screen { html { height:auto; display:flex; justify-content:center; background:#2A2520; } body { margin:20px auto; transform-origin: top center; } }
+
+.num { direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Mono', monospace; font-size:0.92em; }
+
+/* ---------- الغلاف ---------- */
+.cover { width:720px; height:1020px; box-sizing:border-box; break-after:page; overflow:hidden;
+  background:var(--ink); color:#F5F1E6; position:relative;
+  display:flex; flex-direction:column; justify-content:center; padding:64px; }
+.cover .grid-bg { position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(90deg, rgba(245,241,230,0.05) 0 1px, transparent 1px 36px),
+    repeating-linear-gradient(0deg, rgba(245,241,230,0.04) 0 1px, transparent 1px 36px); }
+.cover .violet-block { position:absolute; inset-block-start:0; inset-inline-start:0; inline-size:190px; block-size:14px; background:var(--violet); }
+.cover .teal-block { position:absolute; inset-block-start:0; inset-inline-end:64px; inline-size:64px; block-size:14px; background:var(--teal); }
+.cover .warm-block { position:absolute; inset-block-end:0; inset-inline-end:0; inline-size:120px; block-size:10px; background:var(--warm); }
+.cover-tag { font-family:'IBM Plex Mono', monospace; font-size:12px; color:#B8AA8F; direction:ltr; text-align:right; letter-spacing:0.02em; }
+.cover h1 { font-family:'Noto Kufi Arabic', sans-serif; font-weight:800; font-size:52px; line-height:1.35; margin:18px 0 10px; }
+.cover h1 .hl { color:#A88BF0; }
+.cover .sub { font-size:19px; color:#D8CFBE; max-inline-size:56ch; line-height:1.9; margin:0 0 28px; }
+.cover .badges { display:flex; flex-wrap:wrap; gap:10px; }
+.cover .badge { border:1px solid rgba(245,241,230,0.35); border-radius:8px; padding:7px 14px; font-size:13px; font-weight:600; }
+.cover .badge.v { background:var(--violet); border-color:var(--violet); color:#fff; }
+.cover .meta { position:absolute; inset-block-end:64px; inset-inline:64px; display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#B8AA8F; }
+.cover .stamp { position:absolute; inset-block-start:56px; inset-inline-end:56px; border:3px solid var(--violet); color:#A88BF0; border-radius:12px; padding:8px 18px; font-weight:700; font-size:14px; transform:rotate(3deg); background:rgba(91,44,200,0.12); }
+
+/* ---------- المحتوى المتدفق ---------- */
+.main-content { padding:56px 60px 44px; }
+.chapter-header { break-after:avoid; break-inside:avoid; margin-block-start:26px; }
+.chapter-header:first-child { margin-block-start:0; }
+.sec-tag { font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--teal); direction:ltr; text-align:right; }
+.sec-title { font-family:'Noto Kufi Arabic', sans-serif; font-weight:800; font-size:25px; margin:4px 0 6px; line-height:1.4; }
+.divider { block-size:4px; inline-size:44px; background:var(--violet); border-radius:2px; margin-block-end:14px; }
+p.body-text { margin:0 0 12px; color:var(--ink2); }
+p.body-text b { color:var(--ink); }
+.card { break-inside:avoid; border:1.5px solid var(--ink); border-radius:12px; padding:18px 20px; margin-block-end:14px; background:#fff; box-shadow:4px 4px 0 var(--line); }
+.card h3 { font-family:'Noto Kufi Arabic', sans-serif; font-size:17px; margin:0 0 8px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.shot { break-inside:avoid; border:1.5px solid var(--ink); border-radius:12px; overflow:hidden; background:#fff; box-shadow:4px 4px 0 var(--line); }
+.shot img { inline-size:100%; display:block; }
+.shot .cap { padding:8px 12px; font-size:12px; font-weight:700; border-block-start:1px solid var(--line); display:flex; justify-content:space-between; }
+.shot .cap .cnum { font-family:'IBM Plex Mono', monospace; color:var(--teal); direction:ltr; }
+table.t { width:100%; border-collapse:collapse; font-size:12.5px; break-inside:avoid; background:#fff; }
+table.t th { background:var(--ink); color:#F5F1E6; padding:8px 10px; text-align:start; font-weight:700; }
+table.t td { border:1px solid var(--line); padding:7px 10px; }
+table.t td.c { text-align:center; }
+.ok { color:#186636; font-weight:700; }
+.kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-block:14px; }
+.kpi { break-inside:avoid; border:1.5px solid var(--ink); border-radius:10px; background:#fff; padding:12px; text-align:center; box-shadow:3px 3px 0 var(--line); }
+.kpi b { display:block; font-family:'Noto Kufi Arabic'; font-size:24px; color:var(--violet); }
+.kpi span { font-size:11.5px; color:var(--ink2); }
+ul.tight { margin:0; padding-inline-start:20px; }
+ul.tight li { margin-block-end:7px; color:var(--ink2); }
+ul.tight li b { color:var(--ink); }
+blockquote { margin:14px 0; padding:14px 18px; background:var(--violet-soft); border-inline-start:5px solid var(--violet); border-radius:8px; break-inside:avoid; }
+.note { font-size:12.5px; color:var(--ink2); }
+
+/* ---------- الخاتمة ---------- */
+.ending { width:720px; height:1020px; box-sizing:border-box; break-before:page; overflow:hidden;
+  background:var(--ink); color:#F5F1E6; display:flex; flex-direction:column; justify-content:center; padding:64px; position:relative; }
+.ending h2 { font-family:'Noto Kufi Arabic'; font-size:34px; margin:0 0 18px; }
+.ending .run { border:1px solid rgba(245,241,230,0.35); border-radius:12px; padding:20px; background:rgba(245,241,230,0.05); }
+.ending code { font-family:'IBM Plex Mono', monospace; direction:ltr; display:inline-block; background:rgba(245,241,230,0.12); padding:2px 10px; border-radius:6px; font-size:12.5px; }
+.ending .foot { position:absolute; inset-block-end:56px; inset-inline:64px; display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:11px; color:#B8AA8F; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="grid-bg"></div>
+  <div class="violet-block"></div><div class="teal-block"></div><div class="warm-block"></div>
+  <div class="stamp">توصية مبدئية — بانتظار المالك</div>
+  <div class="cover-tag">MICRO · BOLD MODULAR DESIGN HANDOFF V1 · AGENT-02-INDEPENDENT</div>
+  <h1>ثلاثة اتجاهات جريئة.<br>محتوى واحد لا يتغيّر.<br><span class="hl">توصية واحدة بالأدلة.</span></h1>
+  <p class="sub">تقرير مراجعة كامل لتنفيذ مستقل ثانٍ لاتجاهات C1 Warm Bold وC2 Confident Bold وC3 Dynamic Modular — من لوحات الأسس والبوابات الداخلية إلى التقييم الموزون وتطوير الاتجاه الموصى به إلى نظام تصميم مرشح.</p>
+  <div class="badges">
+    <span class="badge v">التوصية: C3 — Dynamic Modular</span>
+    <span class="badge">تباين 248/248</span>
+    <span class="badge">axe: 0 مخالفات</span>
+    <span class="badge">Lighthouse A11y: 100</span>
+    <span class="badge">18/18 تخطيط سليم</span>
+  </div>
+  <div class="meta"><span>2026-09-18</span><span>design/agent-02-independent</span></div>
+</div>
+
+<div class="main-content">
+
+  <div class="chapter-header">
+    <div class="sec-tag">01 · EXECUTIVE SUMMARY</div>
+    <div class="sec-title">الملخص التنفيذي</div>
+    <div class="divider"></div>
+  </div>
+  <p class="body-text">نفّذ الـAgent الثاني تنفيذًا مستقلًا كاملًا لمسار <b>Micro Bold Modular Design Direction</b> انطلاقًا من فرع <span class="num">main</span> للمستودع المرجعي، دون الاطلاع على أي مخرجات للـAgent الأول، ودون المساس بأي مسار يخصه. شمل التنفيذ ثلاثة اتجاهات بصرية متكافئة (<b>C1 Warm Bold</b> و<b>C2 Confident Bold</b> و<b>C3 Dynamic Modular</b>) مبنية من قالب HTML واحد يضمن تطابق النصوص والأرقام والمقاسات والحالات وبنية المعلومات حرفيًا، بحيث تتمايز الهويات البصرية وحدها — وهو جوهر المقارنة العادلة الذي يفرضه الملف 07.</p>
+  <p class="body-text">عبر سبع بوابات داخلية موثقة، أنتج الفريق نموذجًا تفاعليًا واحدًا يعمل دون خادم ولا بيانات حقيقية، مع شريط أدوات معاينة محايد يتيح للمُقيِّم التبديل بين المظهر الفاتح والداكن، وعروض <span class="num">320/390/430</span>، ونص <span class="num">200%</span>، والحركة المخفَّضة، والسيناريوهات المالية كاملة (موجبة/سالبة/غير مكتملة/فارغة) وطلب متأخر وفشل حفظ. كل الأرقام من Fixtures الملف 04، وكل مسار غير مكتمل موسوم صراحة داخل الواجهة.</p>
+  <div class="kpi-row">
+    <div class="kpi"><b>248</b><span>زوجًا لونيًا مقاسًا ≥ WCAG</span></div>
+    <div class="kpi"><b>0</b><span>مخالفات axe-core</span></div>
+    <div class="kpi"><b>100</b><span>Lighthouse Accessibility</span></div>
+    <div class="kpi"><b>78</b><span>لقطة أدلة موثقة</span></div>
+  </div>
+
+  <div class="chapter-header">
+    <div class="sec-tag">02 · THE THREE DIRECTIONS</div>
+    <div class="sec-title">الاتجاهات الثلاثة</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="card">
+    <h3>C1 — Warm Bold · «الجريء الدافئ»</h3>
+    <p class="body-text" style="margin:0">تيراكوتا حيوية تقود الهوية وتمنح طاقة البدء، فوق حياد دافئ بلا غرق بيجي، مع ثقة زرقاء منضبطة. حقل البطل الملون بلون الحالة يجيب «كيف وضع مشروعي؟» فورًا. <b>حصل على 4.46</b> في مصفوفة التقييم — الأقوى في الراحة والقرب من قليلي الخبرة.</p>
+  </div>
+  <div class="grid3">
+    <div class="shot"><img src="../screenshots/C1-Warm-Bold-01-home-positive.png" alt=""><div class="cap"><span>الرئيسية — موجبة</span><span class="cnum">01</span></div></div>
+    <div class="shot"><img src="../screenshots/C1-Warm-Bold-02-home-incomplete.png" alt=""><div class="cap"><span>غير مكتملة</span><span class="cnum">02</span></div></div>
+    <div class="shot"><img src="../screenshots/C1-Warm-Bold-05-home-positive-dark.png" alt=""><div class="cap"><span>الوضع الداكن</span><span class="cnum">05</span></div></div>
+  </div>
+
+  <div class="card" style="margin-block-start:14px">
+    <h3>C2 — Confident Bold · «الجريء الواثق»</h3>
+    <p class="body-text" style="margin:0">أزرق-تيل عميق يحمل الثقة والسياق النشط، ولون علامة دافئ يحمل حصرًا طاقة الإنشاء والبدء، على أسطح بيضاء منضبطة ببنية معمارية (شريط حالة + خطوط بداية). <b>حصل على 4.25</b> — الأعلى ثقة بالأرقام وقابلية للتوسع، والأضعف في حيوية الأب «الجريء».</p>
+  </div>
+  <div class="grid3">
+    <div class="shot"><img src="../screenshots/C2-Confident-Bold-01-home-positive.png" alt=""><div class="cap"><span>الرئيسية — موجبة</span><span class="cnum">01</span></div></div>
+    <div class="shot"><img src="../screenshots/C2-Confident-Bold-03-home-negative.png" alt=""><div class="cap"><span>نتيجة سالبة</span><span class="cnum">03</span></div></div>
+    <div class="shot"><img src="../screenshots/C2-Confident-Bold-11-sale-success.png" alt=""><div class="cap"><span>نجاح البيع</span><span class="cnum">11</span></div></div>
+  </div>
+
+  <div class="card" style="margin-block-start:14px">
+    <h3>C3 — Dynamic Modular · «الديناميكي المركّب» <span style="color:var(--violet)">★ الموصى به</span></h3>
+    <p class="body-text" style="margin:0">بنية مكشوطة بحدود حبر وظلال إزاحة للتفاعلي فقط، كتل حالة قوية، ولهجات سياقية منضبطة (تيل للعمل، صدأ للأدوات، أرجواني للسوق)، وخط Noto Kufi للعناوين. واجهة تبدو نشطة قبل أول لمسة. <b>حصل على 4.57 — الأعلى</b>، وهو الأقرب وفاءً للاتجاه الأب «C يقود التكوين».</p>
+  </div>
+  <div class="grid3">
+    <div class="shot"><img src="../screenshots/C3-Dynamic-Modular-01-home-positive.png" alt=""><div class="cap"><span>الرئيسية — موجبة</span><span class="cnum">01</span></div></div>
+    <div class="shot"><img src="../screenshots/C3-Dynamic-Modular-02-home-incomplete.png" alt=""><div class="cap"><span>غير مكتملة</span><span class="cnum">02</span></div></div>
+    <div class="shot"><img src="../screenshots/C3-Dynamic-Modular-13-work-late.png" alt=""><div class="cap"><span>العمل — طلب متأخر</span><span class="cnum">13</span></div></div>
+  </div>
+
+  <div class="chapter-header">
+    <div class="sec-tag">03 · EVIDENCE-BASED EVALUATION</div>
+    <div class="sec-title">التقييم الموزون (الملف 08)</div>
+    <div class="divider"></div>
+  </div>
+  <p class="body-text">اجتازت الاتجاهات الثلاثة شروط الرفض التسعة (الحقيقة المالية، ظهور الإجراء، سلامة RTL، التباين، فهم عدم الاكتمال، إشارة غير لونية، عدم حجب التنقل). ثم طُبقت المصفوفة الموزونة بدليل من المخرجات لكل درجة — بما فيها معايرتان مستقلتان بنموذج رؤية على الشاشات الحرجة وشاشات المالية خصيصًا.</p>
+  <table class="t">
+    <thead><tr><th>المعيار</th><th>الوزن</th><th class="c">C1</th><th class="c">C2</th><th class="c">C3</th></tr></thead>
+    <tbody>
+      <tr><td>الفهم المالي خلال 5 ثوانٍ</td><td class="c">18%</td><td class="c">5</td><td class="c">4</td><td class="c">5</td></tr>
+      <tr><td>اكتشاف الإجراء وسرعته</td><td class="c">14%</td><td class="c">5</td><td class="c">4.5</td><td class="c">5</td></tr>
+      <tr><td>الإحساس بالسيطرة</td><td class="c">12%</td><td class="c">4</td><td class="c">4</td><td class="c">4.5</td></tr>
+      <tr><td>الثقة بالأرقام</td><td class="c">12%</td><td class="c">3.5</td><td class="c">5</td><td class="c">4</td></tr>
+      <tr><td>الحيوية البصرية</td><td class="c">10%</td><td class="c">4</td><td class="c">4</td><td class="c">5</td></tr>
+      <tr><td>الراحة والاستخدام الممتد</td><td class="c">8%</td><td class="c">4.5</td><td class="c">3.5</td><td class="c">3.5</td></tr>
+      <tr><td>قابلية الاستخدام لقليلي الخبرة</td><td class="c">8%</td><td class="c">5</td><td class="c">4</td><td class="c">4</td></tr>
+      <tr><td>هوية Micro المميزة</td><td class="c">7%</td><td class="c">4</td><td class="c">4</td><td class="c">5</td></tr>
+      <tr><td>جودة العربية RTL</td><td class="c">4%</td><td class="c">5</td><td class="c">5</td><td class="c">5</td></tr>
+      <tr><td>الوصول</td><td class="c">4%</td><td class="c">5</td><td class="c">5</td><td class="c">5</td></tr>
+      <tr><td>قابلية التوسع</td><td class="c">3%</td><td class="c">4</td><td class="c">4.5</td><td class="c">4.5</td></tr>
+      <tr><td><b>المجموع المرجح</b></td><td class="c">—</td><td class="c"><b>4.46</b></td><td class="c"><b>4.25</b></td><td class="c"><b>4.57</b></td></tr>
+    </tbody>
+  </table>
+  <blockquote><b>لماذا فاز C3؟</b> يتصدر المعايير الأعلى وزنًا (فهم فوري + اكتشاف إجراء) مع أفضل تتبع بصري للمصدر (معايرة مستقلة: 5/5)، وهو التعبير الأكثر وفاءً للاتجاه الأب المعتمد «Bold Modular Micro — C يقود التكوين». الفارق عن C1 (0.11) ضمن هامش التقدير، لذلك تُوثَّق نقاط ضعفه ومخاطره واحتواؤها قبل أي اعتماد.</blockquote>
+
+  <div class="chapter-header">
+    <div class="sec-tag">04 · SELECTED DIRECTION REFINEMENT</div>
+    <div class="sec-title">الاتجاه الموصى به بعد التطوير</div>
+    <div class="divider"></div>
+  </div>
+  <p class="body-text">طُوّر C3 إلى نظام تصميم مرشح دون دمج هويات: <b>استعارتان مُتحكمتان</b> — دفء C1 (روح A) في لحظات النجاح عبر «الكنكة الدافئة» المتوهجة حول ختم النجاح وفي ومضة إبراز القيمة المتأثرة، وانضباط C2 (روح B) في سياقات القراءة عبر حدود أهدأ (<span class="num">1.5px</span>) وتنفس أوسع للبطاقات. مع تركيز معزز بحلقة بنفسجية وهالة ناعمة.</p>
+  <div class="grid3">
+    <div class="shot"><img src="../screenshots/Selected-01-home-positive.png" alt=""><div class="cap"><span>النسخة المطورة</span><span class="cnum">S-01</span></div></div>
+    <div class="shot"><img src="../screenshots/Selected-07-sale-success.png" alt=""><div class="cap"><span>نجاح بختم دافئ</span><span class="cnum">S-07</span></div></div>
+    <div class="shot"><img src="../screenshots/Selected-10-design-system.png" alt=""><div class="cap"><span>معرض النظام المرشح</span><span class="cnum">S-10</span></div></div>
+  </div>
+
+  <div class="chapter-header">
+    <div class="sec-tag">05 · EVIDENCE &amp; TESTS</div>
+    <div class="sec-title">الأدلة والاختبارات المنفذة</div>
+    <div class="divider"></div>
+  </div>
+  <table class="t">
+    <thead><tr><th>الاختبار</th><th>الأداة</th><th>النتيجة</th></tr></thead>
+    <tbody>
+      <tr><td>قياس التباين لكل زوج تشغيلي</td><td>سكربت WCAG 2.2 مستقل</td><td class="ok">248/248 ≥ الحدود (فاتح+داكن)</td></tr>
+      <tr><td>الفحص الآلي للوصول</td><td>axe-core 4 عبر Playwright</td><td class="ok">0 مخالفات · 1005 فحصًا ناجحًا · 27 صفحة</td></tr>
+      <tr><td>جودة الوصول الشاملة</td><td>Lighthouse 12.8.2</td><td class="ok">Accessibility 100/100 ×3 اتجاهات</td></tr>
+      <tr><td>سلامة التخطيط والاستجابة</td><td>فحوص هندسية Playwright</td><td class="ok">18/18 — بلا تمرير أفقي عند 320 مع نص 200%</td></tr>
+      <tr><td>أهداف اللمس</td><td>قياس صناديق العناصر</td><td class="ok">≥ 44px لكل الضوابط المهمة</td></tr>
+      <tr><td>الوصول بخمس ثوانٍ</td><td>هندسي + مراجعة VLM مستقلة</td><td class="ok">البطل داخل أول 60% · جواب فوري</td></tr>
+      <tr><td>مراجعة RTL</td><td>تدقيق خصائص + معاينة بصرية</td><td class="ok">90 خاصية منطقية · 0 فيزيائية · عزل أرقام كامل</td></tr>
+      <tr><td>أخطاء الكونسول</td><td>Playwright console capture</td><td class="ok">صفر عبر كل الصفحات</td></tr>
+    </tbody>
+  </table>
+  <p class="note">أدوات لم تتوفر: Figma MCP (لا يوجد في البيئة — الحل المعتمد رسميًا: HTML تفاعلي). كل سكربت قابل للتكرار مرفق في <span class="num">design-source/build/</span>.</p>
+
+  <div class="chapter-header">
+    <div class="sec-tag">06 · OPEN DECISIONS</div>
+    <div class="sec-title">ما يحتاج قرار المالك واختبار المستخدم</div>
+    <div class="divider"></div>
+  </div>
+  <div class="grid2">
+    <div class="card" style="margin:0">
+      <h3>قرارات تنتظر المالك</h3>
+      <ul class="tight">
+        <li><b>لون العلامة:</b> اعتماد البنفسجي المقترح أو العودة للتراكوتا كهوية مع بنية C3.</li>
+        <li><b>Kufi للعناوين</b> كبديل العائلة الواحد المصرح به.</li>
+        <li><b>معجم علامات المناطق</b> (شريط لهجة + تبويب ملون لكل منطقة).</li>
+        <li><b>نتيجة اليوم بعد بيع بلا تكلفة مسجلة</b> — قرار نمذجة مالية.</li>
+        <li><b>المحتوى المساند</b> (أسماء الطلبات والمواعيد الإضافية).</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3>فرضيات تنتظر مستخدمًا حقيقيًا</h3>
+      <ul class="tight">
+        <li>فهم علامات المناطق دون شرح.</li>
+        <li>إجهاد القراءة: جلسة مالية <span class="num">15+</span> دقيقة على الحدود المكشوطة.</li>
+        <li>هل تُقرأ فيزياء الضغط «الختمية» كحيوية أم خشونة؟</li>
+        <li>Kufi للعناوين عند كبار السن.</li>
+        <li>مهام الملف 08 الست: «احكيلي كيف وضع المشروع اليوم…».</li>
+      </ul>
+    </div>
+  </div>
+  <p class="body-text" style="margin-block-start:14px">القيود المعروفة موثقة بالكامل في <span class="num">accessibility/known-limitations.md</span>: مسارات المصروف/الطلب/التحصيل «عرض مفاهيمي»، الأداء <span class="num">68–70</span> في بيئة القياس بخطوط ذاتية الاستضافة، وعدم توفر صلاحية دفع مستقلة للمستودع الأساسي من البيئة (الفرع كامل + bundle قابل للاستعادة + تعليمات دفع دقيقة جاهزة).</p>
+
+</div>
+
+<div class="ending">
+  <div class="grid-bg" style="position:absolute;inset:0;background:repeating-linear-gradient(90deg, rgba(245,241,230,0.05) 0 1px, transparent 1px 36px),repeating-linear-gradient(0deg, rgba(245,241,230,0.04) 0 1px, transparent 1px 36px);"></div>
+  <h2>شغّل النموذج بنفسك</h2>
+  <div class="run">
+    <p style="margin:0 0 10px">افتح <code>prototype/index.html</code> مباشرة في أي متصفح حديث — النموذج يعمل كملفات ثابتة دون خادم. أو من مجلد <code>prototype/</code>:</p>
+    <p style="margin:0 0 10px"><code>python3 -m http.server 8080</code> ثم <code>http://localhost:8080</code></p>
+    <p style="margin:0">داخل كل اتجاه: بدّل المظهر والعرض والنص والحركة والسيناريوهات من شريط أدوات المعاينة العلوي. كل الأدلة الخام والتقارير وTokens في مجلد <code>agent-runs/agent-02-independent/</code>.</p>
+  </div>
+  <p style="margin-block-start:22px; color:#D8CFBE; max-inline-size:60ch">هذه توصية خبير مبدئية مبنية على أدلة قابلة للتكرار. القرار النهائي للمالك، والصلاحية الكاملة للنتيجة تثبت فقط باختبار مستخدم حقيقي.</p>
+  <div class="foot"><span>AGENT-02-INDEPENDENT · 2026-09-18</span><span>BOLD MODULAR MICRO</span></div>
+</div>
+
+</body>
+</html>

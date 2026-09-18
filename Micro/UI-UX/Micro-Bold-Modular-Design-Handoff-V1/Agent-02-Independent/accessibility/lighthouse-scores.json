@@ -1,0 +1,20 @@
+{
+ "c1-warm-bold": {
+  "performance": 70,
+  "accessibility": 100,
+  "best-practices": 100,
+  "seo": 100
+ },
+ "c2-confident-bold": {
+  "performance": 70,
+  "accessibility": 100,
+  "best-practices": 100,
+  "seo": 100
+ },
+ "c3-dynamic-modular": {
+  "performance": 68,
+  "accessibility": 100,
+  "best-practices": 100,
+  "seo": 100
+ }
+}

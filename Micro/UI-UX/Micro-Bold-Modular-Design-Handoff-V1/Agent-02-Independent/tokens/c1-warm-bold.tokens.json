@@ -1,0 +1,552 @@
+{
+  "direction": "c1-warm-bold",
+  "label": "C1 — Warm Bold",
+  "modes": {
+    "light": {
+      "canvas": "#FBF4EC",
+      "surface": "#FFFFFF",
+      "surface2": "#F7EBDD",
+      "group": "#F3E5D3",
+      "ink": "#2B1A10",
+      "ink2": "#5E4B39",
+      "ink3": "#74604B",
+      "border": "#E7D6C1",
+      "borderStrong": "#8F7355",
+      "brand": {
+        "fill": "#C94E1F",
+        "onfill": "#FFFFFF",
+        "text": "#A63812",
+        "soft": "#F9E2D2",
+        "onsoft": "#7C2E0C",
+        "border": "#C94E1F"
+      },
+      "trust": {
+        "fill": "#1D6E9C",
+        "onfill": "#FFFFFF",
+        "text": "#155C86",
+        "soft": "#E1EDF5",
+        "onsoft": "#114F73",
+        "border": "#1D6E9C"
+      },
+      "positive": {
+        "fill": "#217A4B",
+        "onfill": "#FFFFFF",
+        "text": "#186638",
+        "soft": "#E3F2E6",
+        "onsoft": "#14592F",
+        "border": "#217A4B"
+      },
+      "attention": {
+        "fill": "#8F6A0B",
+        "onfill": "#FFFFFF",
+        "text": "#7A5A08",
+        "soft": "#FAEFD2",
+        "onsoft": "#654906",
+        "border": "#8F6A0B"
+      },
+      "negative": {
+        "fill": "#B3261E",
+        "onfill": "#FFFFFF",
+        "text": "#A01D16",
+        "soft": "#FBE8E4",
+        "onsoft": "#8C1812",
+        "border": "#B3261E"
+      },
+      "hero": {
+        "fill": "#E5763C",
+        "on": "#2B1408",
+        "on2": "#471C07"
+      }
+    },
+    "dark": {
+      "canvas": "#20140E",
+      "surface": "#2B1D14",
+      "surface2": "#35241A",
+      "group": "#3B2819",
+      "ink": "#F9EFE3",
+      "ink2": "#D2BCA5",
+      "ink3": "#AB9379",
+      "border": "#4C3423",
+      "borderStrong": "#9A7550",
+      "brand": {
+        "fill": "#E5763C",
+        "onfill": "#2B1408",
+        "text": "#F5A268",
+        "soft": "#47271411",
+        "onsoft": "#F5C9A4",
+        "border": "#B96A3F"
+      },
+      "trust": {
+        "fill": "#7CC4E4",
+        "onfill": "#0A2432",
+        "text": "#8CCAE8",
+        "soft": "#1D334116",
+        "onsoft": "#A9D9EE",
+        "border": "#3F7396"
+      },
+      "positive": {
+        "fill": "#5FBF85",
+        "onfill": "#0A2415",
+        "text": "#74D096",
+        "soft": "#1D3A2612",
+        "onsoft": "#9BE0B4",
+        "border": "#3E7A56"
+      },
+      "attention": {
+        "fill": "#E3B95F",
+        "onfill": "#241A04",
+        "text": "#E6C274",
+        "soft": "#3A2E10",
+        "onsoft": "#F1D68C",
+        "border": "#8A6E2E"
+      },
+      "negative": {
+        "fill": "#F0988A",
+        "onfill": "#2B0B06",
+        "text": "#F4A396",
+        "soft": "#3C1D16",
+        "onsoft": "#F7B8AD",
+        "border": "#9C4A3C"
+      },
+      "hero": {
+        "fill": "#E58A54",
+        "on": "#2B1408",
+        "on2": "#54230D"
+      }
+    }
+  },
+  "pairs": [
+    {
+      "fg": "#2B1A10",
+      "bg": "#FBF4EC",
+      "use": "[light] نص أساسي على الخلفية",
+      "min": 4.5,
+      "ratio": 15.31,
+      "pass": true
+    },
+    {
+      "fg": "#2B1A10",
+      "bg": "#FFFFFF",
+      "use": "[light] نص أساسي على السطح",
+      "min": 4.5,
+      "ratio": 16.69,
+      "pass": true
+    },
+    {
+      "fg": "#5E4B39",
+      "bg": "#FFFFFF",
+      "use": "[light] نص ثانوي على السطح",
+      "min": 4.5,
+      "ratio": 8.26,
+      "pass": true
+    },
+    {
+      "fg": "#74604B",
+      "bg": "#FFFFFF",
+      "use": "[light] نص خافت على السطح",
+      "min": 4.5,
+      "ratio": 5.97,
+      "pass": true
+    },
+    {
+      "fg": "#8F7355",
+      "bg": "#FFFFFF",
+      "use": "[light] حد الضوابط على السطح",
+      "min": 3.0,
+      "ratio": 4.42,
+      "pass": true
+    },
+    {
+      "fg": "#2B1408",
+      "bg": "#E5763C",
+      "use": "[light] نص البطل الأساسي على حقل البطل",
+      "min": 4.5,
+      "ratio": 5.79,
+      "pass": true
+    },
+    {
+      "fg": "#471C07",
+      "bg": "#E5763C",
+      "use": "[light] نص البطل الثانوي على حقل البطل",
+      "min": 4.5,
+      "ratio": 4.86,
+      "pass": true
+    },
+    {
+      "fg": "#A63812",
+      "bg": "#FFFFFF",
+      "use": "[light] نص brand على السطح",
+      "min": 4.5,
+      "ratio": 6.57,
+      "pass": true
+    },
+    {
+      "fg": "#FFFFFF",
+      "bg": "#C94E1F",
+      "use": "[light] نص على تعبئة brand",
+      "min": 4.5,
+      "ratio": 4.57,
+      "pass": true
+    },
+    {
+      "fg": "#7C2E0C",
+      "bg": "#F9E2D2",
+      "use": "[light] نص على تعبئة brand الناعمة",
+      "min": 4.5,
+      "ratio": 7.47,
+      "pass": true
+    },
+    {
+      "fg": "#C94E1F",
+      "bg": "#FFFFFF",
+      "use": "[light] تعبئة brand مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 4.57,
+      "pass": true
+    },
+    {
+      "fg": "#155C86",
+      "bg": "#FFFFFF",
+      "use": "[light] نص trust على السطح",
+      "min": 4.5,
+      "ratio": 7.22,
+      "pass": true
+    },
+    {
+      "fg": "#FFFFFF",
+      "bg": "#1D6E9C",
+      "use": "[light] نص على تعبئة trust",
+      "min": 4.5,
+      "ratio": 5.58,
+      "pass": true
+    },
+    {
+      "fg": "#114F73",
+      "bg": "#E1EDF5",
+      "use": "[light] نص على تعبئة trust الناعمة",
+      "min": 4.5,
+      "ratio": 7.38,
+      "pass": true
+    },
+    {
+      "fg": "#1D6E9C",
+      "bg": "#FFFFFF",
+      "use": "[light] تعبئة trust مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 5.58,
+      "pass": true
+    },
+    {
+      "fg": "#186638",
+      "bg": "#FFFFFF",
+      "use": "[light] نص positive على السطح",
+      "min": 4.5,
+      "ratio": 7.01,
+      "pass": true
+    },
+    {
+      "fg": "#FFFFFF",
+      "bg": "#217A4B",
+      "use": "[light] نص على تعبئة positive",
+      "min": 4.5,
+      "ratio": 5.32,
+      "pass": true
+    },
+    {
+      "fg": "#14592F",
+      "bg": "#E3F2E6",
+      "use": "[light] نص على تعبئة positive الناعمة",
+      "min": 4.5,
+      "ratio": 7.24,
+      "pass": true
+    },
+    {
+      "fg": "#217A4B",
+      "bg": "#FFFFFF",
+      "use": "[light] تعبئة positive مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 5.32,
+      "pass": true
+    },
+    {
+      "fg": "#7A5A08",
+      "bg": "#FFFFFF",
+      "use": "[light] نص attention على السطح",
+      "min": 4.5,
+      "ratio": 6.38,
+      "pass": true
+    },
+    {
+      "fg": "#FFFFFF",
+      "bg": "#8F6A0B",
+      "use": "[light] نص على تعبئة attention",
+      "min": 4.5,
+      "ratio": 4.96,
+      "pass": true
+    },
+    {
+      "fg": "#654906",
+      "bg": "#FAEFD2",
+      "use": "[light] نص على تعبئة attention الناعمة",
+      "min": 4.5,
+      "ratio": 7.31,
+      "pass": true
+    },
+    {
+      "fg": "#8F6A0B",
+      "bg": "#FFFFFF",
+      "use": "[light] تعبئة attention مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 4.96,
+      "pass": true
+    },
+    {
+      "fg": "#A01D16",
+      "bg": "#FFFFFF",
+      "use": "[light] نص negative على السطح",
+      "min": 4.5,
+      "ratio": 7.83,
+      "pass": true
+    },
+    {
+      "fg": "#FFFFFF",
+      "bg": "#B3261E",
+      "use": "[light] نص على تعبئة negative",
+      "min": 4.5,
+      "ratio": 6.54,
+      "pass": true
+    },
+    {
+      "fg": "#8C1812",
+      "bg": "#FBE8E4",
+      "use": "[light] نص على تعبئة negative الناعمة",
+      "min": 4.5,
+      "ratio": 7.88,
+      "pass": true
+    },
+    {
+      "fg": "#B3261E",
+      "bg": "#FFFFFF",
+      "use": "[light] تعبئة negative مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 6.54,
+      "pass": true
+    },
+    {
+      "fg": "#F9EFE3",
+      "bg": "#20140E",
+      "use": "[dark] نص أساسي على الخلفية",
+      "min": 4.5,
+      "ratio": 15.83,
+      "pass": true
+    },
+    {
+      "fg": "#F9EFE3",
+      "bg": "#2B1D14",
+      "use": "[dark] نص أساسي على السطح",
+      "min": 4.5,
+      "ratio": 14.34,
+      "pass": true
+    },
+    {
+      "fg": "#D2BCA5",
+      "bg": "#2B1D14",
+      "use": "[dark] نص ثانوي على السطح",
+      "min": 4.5,
+      "ratio": 8.91,
+      "pass": true
+    },
+    {
+      "fg": "#AB9379",
+      "bg": "#2B1D14",
+      "use": "[dark] نص خافت على السطح",
+      "min": 4.5,
+      "ratio": 5.57,
+      "pass": true
+    },
+    {
+      "fg": "#9A7550",
+      "bg": "#2B1D14",
+      "use": "[dark] حد الضوابط على السطح",
+      "min": 3.0,
+      "ratio": 3.91,
+      "pass": true
+    },
+    {
+      "fg": "#2B1408",
+      "bg": "#E58A54",
+      "use": "[dark] نص البطل الأساسي على حقل البطل",
+      "min": 4.5,
+      "ratio": 6.71,
+      "pass": true
+    },
+    {
+      "fg": "#54230D",
+      "bg": "#E58A54",
+      "use": "[dark] نص البطل الثانوي على حقل البطل",
+      "min": 4.5,
+      "ratio": 4.99,
+      "pass": true
+    },
+    {
+      "fg": "#F5A268",
+      "bg": "#2B1D14",
+      "use": "[dark] نص brand على السطح",
+      "min": 4.5,
+      "ratio": 7.95,
+      "pass": true
+    },
+    {
+      "fg": "#2B1408",
+      "bg": "#E5763C",
+      "use": "[dark] نص على تعبئة brand",
+      "min": 4.5,
+      "ratio": 5.79,
+      "pass": true
+    },
+    {
+      "fg": "#F5C9A4",
+      "bg": "#452614",
+      "use": "[dark] نص على تعبئة brand الناعمة",
+      "min": 4.5,
+      "ratio": 8.94,
+      "pass": true
+    },
+    {
+      "fg": "#E5763C",
+      "bg": "#2B1D14",
+      "use": "[dark] تعبئة brand مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 5.42,
+      "pass": true
+    },
+    {
+      "fg": "#8CCAE8",
+      "bg": "#2B1D14",
+      "use": "[dark] نص trust على السطح",
+      "min": 4.5,
+      "ratio": 9.1,
+      "pass": true
+    },
+    {
+      "fg": "#0A2432",
+      "bg": "#7CC4E4",
+      "use": "[dark] نص على تعبئة trust",
+      "min": 4.5,
+      "ratio": 8.29,
+      "pass": true
+    },
+    {
+      "fg": "#A9D9EE",
+      "bg": "#1e313d",
+      "use": "[dark] نص على تعبئة trust الناعمة",
+      "min": 4.5,
+      "ratio": 8.87,
+      "pass": true
+    },
+    {
+      "fg": "#7CC4E4",
+      "bg": "#2B1D14",
+      "use": "[dark] تعبئة trust مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 8.44,
+      "pass": true
+    },
+    {
+      "fg": "#74D096",
+      "bg": "#2B1D14",
+      "use": "[dark] نص positive على السطح",
+      "min": 4.5,
+      "ratio": 8.7,
+      "pass": true
+    },
+    {
+      "fg": "#0A2415",
+      "bg": "#5FBF85",
+      "use": "[dark] نص على تعبئة positive",
+      "min": 4.5,
+      "ratio": 7.27,
+      "pass": true
+    },
+    {
+      "fg": "#9BE0B4",
+      "bg": "#1e3825",
+      "use": "[dark] نص على تعبئة positive الناعمة",
+      "min": 4.5,
+      "ratio": 8.32,
+      "pass": true
+    },
+    {
+      "fg": "#5FBF85",
+      "bg": "#2B1D14",
+      "use": "[dark] تعبئة positive مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 7.2,
+      "pass": true
+    },
+    {
+      "fg": "#E6C274",
+      "bg": "#2B1D14",
+      "use": "[dark] نص attention على السطح",
+      "min": 4.5,
+      "ratio": 9.57,
+      "pass": true
+    },
+    {
+      "fg": "#241A04",
+      "bg": "#E3B95F",
+      "use": "[dark] نص على تعبئة attention",
+      "min": 4.5,
+      "ratio": 9.29,
+      "pass": true
+    },
+    {
+      "fg": "#F1D68C",
+      "bg": "#3A2E10",
+      "use": "[dark] نص على تعبئة attention الناعمة",
+      "min": 4.5,
+      "ratio": 9.34,
+      "pass": true
+    },
+    {
+      "fg": "#E3B95F",
+      "bg": "#2B1D14",
+      "use": "[dark] تعبئة attention مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 8.82,
+      "pass": true
+    },
+    {
+      "fg": "#F4A396",
+      "bg": "#2B1D14",
+      "use": "[dark] نص negative على السطح",
+      "min": 4.5,
+      "ratio": 8.17,
+      "pass": true
+    },
+    {
+      "fg": "#2B0B06",
+      "bg": "#F0988A",
+      "use": "[dark] نص على تعبئة negative",
+      "min": 4.5,
+      "ratio": 8.29,
+      "pass": true
+    },
+    {
+      "fg": "#F7B8AD",
+      "bg": "#3C1D16",
+      "use": "[dark] نص على تعبئة negative الناعمة",
+      "min": 4.5,
+      "ratio": 9.0,
+      "pass": true
+    },
+    {
+      "fg": "#F0988A",
+      "bg": "#2B1D14",
+      "use": "[dark] تعبئة negative مقابل السطح (حدود مكون)",
+      "min": 3.0,
+      "ratio": 7.42,
+      "pass": true
+    }
+  ]
+}
