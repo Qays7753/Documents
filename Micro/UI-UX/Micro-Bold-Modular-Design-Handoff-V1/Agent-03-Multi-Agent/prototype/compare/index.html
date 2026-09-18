@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقارنة الاتجاهات — Micro Bold Modular</title>
+<style>
+:root { --ink:#1F1C19; --ink2:#63594F; --canvas:#F4F3F0; --surface:#fff; --brand:#D96A45; --trust:#1F5E8C; --divider:#E6E2DA; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"IBM Plex Sans Arabic", Tahoma, sans-serif; background:var(--canvas); color:var(--ink); padding:20px 14px 50px; }
+.wrap { max-width:1400px; margin-inline:auto; }
+h1 { font-size:22px; }
+p.sub { color:var(--ink2); font-size:14px; margin:4px 0 16px; }
+.row { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px; }
+label { font-size:13px; font-weight:700; color:var(--ink2); display:block; margin-bottom:4px; }
+select { min-height:44px; border:1.5px solid #8B8478; border-radius:10px; background:#fff; font-family:inherit; font-size:14px; padding:4px 10px; }
+.frames { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:14px; }
+.frame-card { background:var(--surface); border:1px solid var(--divider); border-radius:16px; padding:12px; }
+.frame-card h2 { font-size:15px; margin:2px 4px 8px; display:flex; gap:8px; align-items:center; }
+.dot { width:13px; height:13px; border-radius:4px; }
+.frame-card iframe { width:100%; height:720px; border:0; border-radius:14px; background:#fff; }
+@media (max-width:760px){ .frame-card iframe { height:600px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>مقارنة الاتجاهات الثلاثة</h1>
+<p class="sub">المحتوى والأرقام والحالات متطابقة عبر الاتجاهات — الاختلاف بصري فقط (عدالة المقارنة، ملف 06). بدّل الحالة والشاشة والوضع لكل الاتجاهات معًا.</p>
+<div class="row">
+  <div><label for="scr">الشاشة</label>
+    <select id="scr">
+      <option value="home.html">مشروعي الآن</option>
+      <option value="work.html">العمل</option>
+      <option value="finance.html">المالية</option>
+      <option value="tools.html">أدواتي</option>
+      <option value="market.html">السوق</option>
+      <option value="products.html">منتجاتي وخدماتي</option>
+      <option value="order.html">طلب متأخر</option>
+      <option value="sale.html">تسجيل بيع</option>
+    </select></div>
+  <div><label for="st">الحالة</label>
+    <select id="st">
+      <option value="">(افتراضي — موجبة)</option>
+      <option value="incomplete">غير مكتملة</option>
+      <option value="negative">سالبة</option>
+      <option value="empty">فارغة</option>
+      <option value="form">نموذج بيع</option>
+      <option value="validation">خطأ تحقق</option>
+      <option value="success">نجاح الحفظ</option>
+      <option value="system-error">خطأ نظام</option>
+    </select></div>
+  <div><label for="th">الوضع</label>
+    <select id="th"><option value="light">نهاري</option><option value="dark">ليلي</option></select></div>
+  <div><label for="w">العرض</label>
+    <select id="w"><option>320</option><option selected>390</option><option>430</option></select></div>
+</div>
+<div class="frames">
+  <div class="frame-card"><h2><span class="dot" style="background:#D96A45"></span>C1 — Warm Bold</h2><iframe id="f1" title="C1"></iframe></div>
+  <div class="frame-card"><h2><span class="dot" style="background:#174E77"></span>C2 — Confident Bold</h2><iframe id="f2" title="C2"></iframe></div>
+  <div class="frame-card"><h2><span class="dot" style="background:#6E3B85"></span>C3 — Dynamic Modular</h2><iframe id="f3" title="C3"></iframe></div>
+</div>
+</div>
+<script>
+(function(){
+  function src(dir){
+    var p = [];
+    if (document.getElementById("st").value) p.push("state="+document.getElementById("st").value);
+    if (document.getElementById("th").value === "dark") p.push("theme=dark");
+    return dir + "/" + document.getElementById("scr").value + (p.length?"?"+p.join("&"):"");
+  }
+  function apply(){
+    ["f1","f2","f3"].forEach(function(id,i){
+      var f = document.getElementById(id);
+      f.style.maxWidth = document.getElementById("w").value + "px";
+      f.src = src(["c1-warm-bold","c2-confident-bold","c3-dynamic-modular"][i]);
+    });
+  }
+  ["scr","st","th","w"].forEach(function(id){ document.getElementById(id).addEventListener("change", apply); });
+  apply();
+})();
+</script>
+</body>
+</html>

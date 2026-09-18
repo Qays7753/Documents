@@ -1,0 +1,1960 @@
+{
+  "palettes": {
+    "c1-warm-bold": {
+      "light": {
+        "canvas": "#FAF6F1",
+        "surface": "#FFFFFF",
+        "group": "#F4ECE3",
+        "ink": "#231A14",
+        "ink2": "#6D5E52",
+        "inkFaint": "#7A6A5C",
+        "brand.fill": "#D96A45",
+        "brand.deep": "#A03A1D",
+        "onBrand": "#2B130A",
+        "trust": "#1F5E8C",
+        "trustTint": "#E3EEF6",
+        "pos": "#1E6E42",
+        "posTint": "#E6F2EA",
+        "posOn": "#0F3320",
+        "neg": "#B32318",
+        "negTint": "#FBEAE7",
+        "negOn": "#3A0C07",
+        "att": "#8A5300",
+        "attTint": "#FAEEDA",
+        "attOn": "#2E1D00",
+        "focus": "#A03A1D",
+        "fieldBorder": "#937F6C",
+        "navSurface": "#FFFFFF"
+      },
+      "dark": {
+        "canvas": "#1E1712",
+        "surface": "#291F18",
+        "group": "#33271E",
+        "ink": "#F4EBE1",
+        "ink2": "#C4B2A3",
+        "inkFaint": "#A08D7E",
+        "brand.fill": "#E58254",
+        "brand.deep": "#F09A6F",
+        "onBrand": "#2B130A",
+        "trust": "#7FB3DA",
+        "trustTint": "#22333F",
+        "pos": "#6FC492",
+        "posTint": "#1B3226",
+        "posOn": "#DFF3E6",
+        "neg": "#F09A8C",
+        "negTint": "#3B1D17",
+        "negOn": "#FBE7E3",
+        "att": "#E5B96A",
+        "attTint": "#332711",
+        "attOn": "#F8ECD2",
+        "focus": "#E58254",
+        "fieldBorder": "#83705B",
+        "navSurface": "#241B15"
+      }
+    },
+    "c2-confident-bold": {
+      "light": {
+        "white": "#FFFFFF",
+        "canvas": "#F5F6F8",
+        "surface": "#FFFFFF",
+        "group": "#EDF0F3",
+        "ink": "#16202B",
+        "ink2": "#5B6B7A",
+        "inkFaint": "#5D6F80",
+        "brand.fill": "#D96A45",
+        "brand.deep": "#A03A1D",
+        "onBrand": "#2B130A",
+        "trust": "#174E77",
+        "trust.fill": "#174E77",
+        "trustDeep": "#0F3A5C",
+        "trustTint": "#E4EDF5",
+        "pos": "#1E6E42",
+        "posTint": "#E6F2EA",
+        "posOn": "#0F3320",
+        "neg": "#B32318",
+        "negTint": "#FBEAE7",
+        "negOn": "#3A0C07",
+        "att": "#8A5300",
+        "attTint": "#FAEEDA",
+        "attOn": "#2E1D00",
+        "focus": "#174E77",
+        "fieldBorder": "#8593A1",
+        "navSurface": "#FFFFFF"
+      },
+      "dark": {
+        "white": "#FFFFFF",
+        "canvas": "#131A21",
+        "surface": "#1B242D",
+        "group": "#232E39",
+        "ink": "#EAF0F5",
+        "ink2": "#AEBECB",
+        "inkFaint": "#8DA0B0",
+        "brand.fill": "#E58254",
+        "brand.deep": "#F09A6F",
+        "onBrand": "#2B130A",
+        "trust": "#6FA8D6",
+        "trust.fill": "#2C5E88",
+        "trustDeep": "#9CC3E2",
+        "trustTint": "#1D3245",
+        "pos": "#6FC492",
+        "posTint": "#1B3226",
+        "posOn": "#DFF3E6",
+        "neg": "#F09A8C",
+        "negTint": "#3B1D17",
+        "negOn": "#FBE7E3",
+        "att": "#E5B96A",
+        "attTint": "#332711",
+        "attOn": "#F8ECD2",
+        "focus": "#6FA8D6",
+        "fieldBorder": "#5F7285",
+        "navSurface": "#18202A"
+      }
+    },
+    "c3-dynamic-modular": {
+      "light": {
+        "workText": "#FFFFFF",
+        "financeText": "#FFFFFF",
+        "toolsText": "#FFFFFF",
+        "marketText": "#FFFFFF",
+        "canvas": "#F4F3F0",
+        "surface": "#FFFFFF",
+        "group": "#ECEAE5",
+        "ink": "#1F1C19",
+        "ink2": "#63594F",
+        "inkFaint": "#73675E",
+        "brand.fill": "#D96A45",
+        "brand.deep": "#A03A1D",
+        "onBrand": "#2B130A",
+        "trust": "#1F5E8C",
+        "trustTint": "#E3EEF6",
+        "work": "#6E3B85",
+        "workTint": "#F0E8F5",
+        "finance": "#0E6B6B",
+        "financeTint": "#E2F1F1",
+        "tools": "#44515E",
+        "toolsTint": "#EBEDF0",
+        "market": "#9C4460",
+        "marketTint": "#F7E8ED",
+        "pos": "#1E6E42",
+        "posTint": "#E6F2EA",
+        "posOn": "#0F3320",
+        "neg": "#B32318",
+        "negTint": "#FBEAE7",
+        "negOn": "#3A0C07",
+        "att": "#8A5300",
+        "attTint": "#FAEEDA",
+        "attOn": "#2E1D00",
+        "focus": "#1F1C19",
+        "fieldBorder": "#8B8478",
+        "navSurface": "#FFFFFF"
+      },
+      "dark": {
+        "workText": "#1F1C19",
+        "financeText": "#1F1C19",
+        "toolsText": "#1F1C19",
+        "marketText": "#1F1C19",
+        "canvas": "#1A1815",
+        "surface": "#24211D",
+        "group": "#2C2823",
+        "ink": "#F1EDE6",
+        "ink2": "#BCB2A5",
+        "inkFaint": "#9F9184",
+        "brand.fill": "#E58254",
+        "brand.deep": "#F09A6F",
+        "onBrand": "#2B130A",
+        "trust": "#7FB3DA",
+        "trustTint": "#20313C",
+        "work": "#C49AD8",
+        "workTint": "#2F2138",
+        "finance": "#6FC4C4",
+        "financeTint": "#123030",
+        "tools": "#A9B4C0",
+        "toolsTint": "#23272C",
+        "market": "#E094AB",
+        "marketTint": "#361C24",
+        "pos": "#6FC492",
+        "posTint": "#1B3226",
+        "posOn": "#DFF3E6",
+        "neg": "#F09A8C",
+        "negTint": "#3B1D17",
+        "negOn": "#FBE7E3",
+        "att": "#E5B96A",
+        "attTint": "#332711",
+        "attOn": "#F8ECD2",
+        "focus": "#E58254",
+        "fieldBorder": "#7A6E5F",
+        "navSurface": "#201D19"
+      }
+    }
+  },
+  "results": {
+    "c1-warm-bold": {
+      "direction": "c1-warm-bold",
+      "light": [
+        {
+          "pair": "ink on canvas (body)",
+          "fg": "#231A14",
+          "bg": "#FAF6F1",
+          "ratio": 15.88,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on surface (body)",
+          "fg": "#231A14",
+          "bg": "#FFFFFF",
+          "ratio": 17.08,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on group (body)",
+          "fg": "#231A14",
+          "bg": "#F4ECE3",
+          "ratio": 14.6,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on surface (secondary)",
+          "fg": "#6D5E52",
+          "bg": "#FFFFFF",
+          "ratio": 6.23,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on canvas (secondary)",
+          "fg": "#6D5E52",
+          "bg": "#FAF6F1",
+          "ratio": 5.79,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on group (secondary)",
+          "fg": "#6D5E52",
+          "bg": "#F4ECE3",
+          "ratio": 5.32,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on surface (timestamps 12.5px)",
+          "fg": "#7A6A5C",
+          "bg": "#FFFFFF",
+          "ratio": 5.19,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on canvas",
+          "fg": "#7A6A5C",
+          "bg": "#FAF6F1",
+          "ratio": 4.83,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (button text)",
+          "fg": "#2B130A",
+          "bg": "#D96A45",
+          "ratio": 5.08,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on surface (brand text)",
+          "fg": "#A03A1D",
+          "bg": "#FFFFFF",
+          "ratio": 6.74,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on canvas (brand text)",
+          "fg": "#A03A1D",
+          "bg": "#FAF6F1",
+          "ratio": 6.26,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on brand.fill? (never used)",
+          "fg": "#A03A1D",
+          "bg": "#D96A45",
+          "ratio": 1.96,
+          "req": 99,
+          "pass": true
+        },
+        {
+          "pair": "trust on surface (link/nav text)",
+          "fg": "#1F5E8C",
+          "bg": "#FFFFFF",
+          "ratio": 6.91,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on canvas",
+          "fg": "#1F5E8C",
+          "bg": "#FAF6F1",
+          "ratio": 6.42,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on trustTint",
+          "fg": "#1F5E8C",
+          "bg": "#E3EEF6",
+          "ratio": 5.87,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on surface",
+          "fg": "#1E6E42",
+          "bg": "#FFFFFF",
+          "ratio": 6.24,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on posTint",
+          "fg": "#1E6E42",
+          "bg": "#E6F2EA",
+          "ratio": 5.43,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "posOn on posTint (dark ink on tint chip)",
+          "fg": "#0F3320",
+          "bg": "#E6F2EA",
+          "ratio": 12.05,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on surface",
+          "fg": "#B32318",
+          "bg": "#FFFFFF",
+          "ratio": 6.62,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on negTint",
+          "fg": "#B32318",
+          "bg": "#FBEAE7",
+          "ratio": 5.69,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "negOn on negTint (dark ink on tint chip)",
+          "fg": "#3A0C07",
+          "bg": "#FBEAE7",
+          "ratio": 14.59,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on surface",
+          "fg": "#8A5300",
+          "bg": "#FFFFFF",
+          "ratio": 6.33,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on attTint",
+          "fg": "#8A5300",
+          "bg": "#FAEEDA",
+          "ratio": 5.52,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "attOn on attTint (dark ink on tint chip)",
+          "fg": "#2E1D00",
+          "bg": "#FAEEDA",
+          "ratio": 14.17,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero number, large)",
+          "fg": "#2B130A",
+          "bg": "#D96A45",
+          "ratio": 5.08,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on brand.fill (hero focus outline, light)",
+          "fg": "#231A14",
+          "bg": "#D96A45",
+          "ratio": 4.96,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "fieldBorder on surface (>=3 ui)",
+          "fg": "#937F6C",
+          "bg": "#FFFFFF",
+          "ratio": 3.82,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on surface (focus ring >=3)",
+          "fg": "#A03A1D",
+          "bg": "#FFFFFF",
+          "ratio": 6.74,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on canvas (focus ring >=3)",
+          "fg": "#A03A1D",
+          "bg": "#FAF6F1",
+          "ratio": 6.26,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on navSurface (nav label)",
+          "fg": "#231A14",
+          "bg": "#FFFFFF",
+          "ratio": 17.08,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on navSurface (inactive tab)",
+          "fg": "#6D5E52",
+          "bg": "#FFFFFF",
+          "ratio": 6.23,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "brand.fill on navSurface (active tab icon, ui)",
+          "fg": "#D96A45",
+          "bg": "#FFFFFF",
+          "ratio": 3.44,
+          "req": 3.0,
+          "pass": true
+        }
+      ],
+      "dark": [
+        {
+          "pair": "ink on canvas (body)",
+          "fg": "#F4EBE1",
+          "bg": "#1E1712",
+          "ratio": 15.02,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on surface (body)",
+          "fg": "#F4EBE1",
+          "bg": "#291F18",
+          "ratio": 13.67,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on group (body)",
+          "fg": "#F4EBE1",
+          "bg": "#33271E",
+          "ratio": 12.29,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on surface (secondary)",
+          "fg": "#C4B2A3",
+          "bg": "#291F18",
+          "ratio": 7.86,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on canvas (secondary)",
+          "fg": "#C4B2A3",
+          "bg": "#1E1712",
+          "ratio": 8.63,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on group (secondary)",
+          "fg": "#C4B2A3",
+          "bg": "#33271E",
+          "ratio": 7.07,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on surface (timestamps 12.5px)",
+          "fg": "#A08D7E",
+          "bg": "#291F18",
+          "ratio": 5.07,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on canvas",
+          "fg": "#A08D7E",
+          "bg": "#1E1712",
+          "ratio": 5.57,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (button text)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on surface (brand text)",
+          "fg": "#F09A6F",
+          "bg": "#291F18",
+          "ratio": 7.33,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on canvas (brand text)",
+          "fg": "#F09A6F",
+          "bg": "#1E1712",
+          "ratio": 8.05,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on brand.fill? (never used)",
+          "fg": "#F09A6F",
+          "bg": "#E58254",
+          "ratio": 1.25,
+          "req": 99,
+          "pass": true
+        },
+        {
+          "pair": "trust on surface (link/nav text)",
+          "fg": "#7FB3DA",
+          "bg": "#291F18",
+          "ratio": 7.18,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on canvas",
+          "fg": "#7FB3DA",
+          "bg": "#1E1712",
+          "ratio": 7.89,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on trustTint",
+          "fg": "#7FB3DA",
+          "bg": "#22333F",
+          "ratio": 5.8,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on surface",
+          "fg": "#6FC492",
+          "bg": "#291F18",
+          "ratio": 7.66,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on posTint",
+          "fg": "#6FC492",
+          "bg": "#1B3226",
+          "ratio": 6.52,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "posOn on posTint (dark ink on tint chip)",
+          "fg": "#DFF3E6",
+          "bg": "#1B3226",
+          "ratio": 11.82,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on surface",
+          "fg": "#F09A8C",
+          "bg": "#291F18",
+          "ratio": 7.45,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on negTint",
+          "fg": "#F09A8C",
+          "bg": "#3B1D17",
+          "ratio": 7.06,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "negOn on negTint (dark ink on tint chip)",
+          "fg": "#FBE7E3",
+          "bg": "#3B1D17",
+          "ratio": 12.84,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on surface",
+          "fg": "#E5B96A",
+          "bg": "#291F18",
+          "ratio": 8.81,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on attTint",
+          "fg": "#E5B96A",
+          "bg": "#332711",
+          "ratio": 7.98,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "attOn on attTint (dark ink on tint chip)",
+          "fg": "#F8ECD2",
+          "bg": "#332711",
+          "ratio": 12.45,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero number, large)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero focus outline, dark)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "fieldBorder on surface (>=3 ui)",
+          "fg": "#83705B",
+          "bg": "#291F18",
+          "ratio": 3.4,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on surface (focus ring >=3)",
+          "fg": "#E58254",
+          "bg": "#291F18",
+          "ratio": 5.87,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on canvas (focus ring >=3)",
+          "fg": "#E58254",
+          "bg": "#1E1712",
+          "ratio": 6.45,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on navSurface (nav label)",
+          "fg": "#F4EBE1",
+          "bg": "#241B15",
+          "ratio": 14.34,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on navSurface (inactive tab)",
+          "fg": "#C4B2A3",
+          "bg": "#241B15",
+          "ratio": 8.24,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "brand.fill on navSurface (active tab icon, ui)",
+          "fg": "#E58254",
+          "bg": "#241B15",
+          "ratio": 6.16,
+          "req": 3.0,
+          "pass": true
+        }
+      ],
+      "failures": []
+    },
+    "c2-confident-bold": {
+      "direction": "c2-confident-bold",
+      "light": [
+        {
+          "pair": "ink on canvas (body)",
+          "fg": "#16202B",
+          "bg": "#F5F6F8",
+          "ratio": 15.22,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on surface (body)",
+          "fg": "#16202B",
+          "bg": "#FFFFFF",
+          "ratio": 16.46,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on group (body)",
+          "fg": "#16202B",
+          "bg": "#EDF0F3",
+          "ratio": 14.39,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on surface (secondary)",
+          "fg": "#5B6B7A",
+          "bg": "#FFFFFF",
+          "ratio": 5.48,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on canvas (secondary)",
+          "fg": "#5B6B7A",
+          "bg": "#F5F6F8",
+          "ratio": 5.07,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on group (secondary)",
+          "fg": "#5B6B7A",
+          "bg": "#EDF0F3",
+          "ratio": 4.79,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on surface (timestamps 12.5px)",
+          "fg": "#5D6F80",
+          "bg": "#FFFFFF",
+          "ratio": 5.18,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on canvas",
+          "fg": "#5D6F80",
+          "bg": "#F5F6F8",
+          "ratio": 4.79,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (button text)",
+          "fg": "#2B130A",
+          "bg": "#D96A45",
+          "ratio": 5.08,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on surface (brand text)",
+          "fg": "#A03A1D",
+          "bg": "#FFFFFF",
+          "ratio": 6.74,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on canvas (brand text)",
+          "fg": "#A03A1D",
+          "bg": "#F5F6F8",
+          "ratio": 6.23,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on brand.fill? (never used)",
+          "fg": "#A03A1D",
+          "bg": "#D96A45",
+          "ratio": 1.96,
+          "req": 99,
+          "pass": true
+        },
+        {
+          "pair": "trust on surface (link/nav text)",
+          "fg": "#174E77",
+          "bg": "#FFFFFF",
+          "ratio": 8.78,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on canvas",
+          "fg": "#174E77",
+          "bg": "#F5F6F8",
+          "ratio": 8.12,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on trustTint",
+          "fg": "#174E77",
+          "bg": "#E4EDF5",
+          "ratio": 7.41,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on surface",
+          "fg": "#1E6E42",
+          "bg": "#FFFFFF",
+          "ratio": 6.24,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on posTint",
+          "fg": "#1E6E42",
+          "bg": "#E6F2EA",
+          "ratio": 5.43,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "posOn on posTint (dark ink on tint chip)",
+          "fg": "#0F3320",
+          "bg": "#E6F2EA",
+          "ratio": 12.05,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on surface",
+          "fg": "#B32318",
+          "bg": "#FFFFFF",
+          "ratio": 6.62,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on negTint",
+          "fg": "#B32318",
+          "bg": "#FBEAE7",
+          "ratio": 5.69,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "negOn on negTint (dark ink on tint chip)",
+          "fg": "#3A0C07",
+          "bg": "#FBEAE7",
+          "ratio": 14.59,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on surface",
+          "fg": "#8A5300",
+          "bg": "#FFFFFF",
+          "ratio": 6.33,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on attTint",
+          "fg": "#8A5300",
+          "bg": "#FAEEDA",
+          "ratio": 5.52,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "attOn on attTint (dark ink on tint chip)",
+          "fg": "#2E1D00",
+          "bg": "#FAEEDA",
+          "ratio": 14.17,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero number, large)",
+          "fg": "#2B130A",
+          "bg": "#D96A45",
+          "ratio": 5.08,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on brand.fill (hero focus outline, light)",
+          "fg": "#16202B",
+          "bg": "#D96A45",
+          "ratio": 4.78,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "fieldBorder on surface (>=3 ui)",
+          "fg": "#8593A1",
+          "bg": "#FFFFFF",
+          "ratio": 3.14,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on surface (focus ring >=3)",
+          "fg": "#174E77",
+          "bg": "#FFFFFF",
+          "ratio": 8.78,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on canvas (focus ring >=3)",
+          "fg": "#174E77",
+          "bg": "#F5F6F8",
+          "ratio": 8.12,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on navSurface (nav label)",
+          "fg": "#16202B",
+          "bg": "#FFFFFF",
+          "ratio": 16.46,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on navSurface (inactive tab)",
+          "fg": "#5B6B7A",
+          "bg": "#FFFFFF",
+          "ratio": 5.48,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "brand.fill on navSurface (active tab icon, ui)",
+          "fg": "#D96A45",
+          "bg": "#FFFFFF",
+          "ratio": 3.44,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "white on trust.fill (hero text/chip bg, filter chip)",
+          "fg": "#FFFFFF",
+          "bg": "#174E77",
+          "ratio": 8.78,
+          "req": 4.5,
+          "pass": true
+        }
+      ],
+      "dark": [
+        {
+          "pair": "ink on canvas (body)",
+          "fg": "#EAF0F5",
+          "bg": "#131A21",
+          "ratio": 15.27,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on surface (body)",
+          "fg": "#EAF0F5",
+          "bg": "#1B242D",
+          "ratio": 13.67,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on group (body)",
+          "fg": "#EAF0F5",
+          "bg": "#232E39",
+          "ratio": 12.02,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on surface (secondary)",
+          "fg": "#AEBECB",
+          "bg": "#1B242D",
+          "ratio": 8.25,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on canvas (secondary)",
+          "fg": "#AEBECB",
+          "bg": "#131A21",
+          "ratio": 9.21,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on group (secondary)",
+          "fg": "#AEBECB",
+          "bg": "#232E39",
+          "ratio": 7.25,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on surface (timestamps 12.5px)",
+          "fg": "#8DA0B0",
+          "bg": "#1B242D",
+          "ratio": 5.83,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on canvas",
+          "fg": "#8DA0B0",
+          "bg": "#131A21",
+          "ratio": 6.5,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (button text)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on surface (brand text)",
+          "fg": "#F09A6F",
+          "bg": "#1B242D",
+          "ratio": 7.15,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on canvas (brand text)",
+          "fg": "#F09A6F",
+          "bg": "#131A21",
+          "ratio": 7.98,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on brand.fill? (never used)",
+          "fg": "#F09A6F",
+          "bg": "#E58254",
+          "ratio": 1.25,
+          "req": 99,
+          "pass": true
+        },
+        {
+          "pair": "trust on surface (link/nav text)",
+          "fg": "#6FA8D6",
+          "bg": "#1B242D",
+          "ratio": 6.17,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on canvas",
+          "fg": "#6FA8D6",
+          "bg": "#131A21",
+          "ratio": 6.89,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on trustTint",
+          "fg": "#6FA8D6",
+          "bg": "#1D3245",
+          "ratio": 5.17,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on surface",
+          "fg": "#6FC492",
+          "bg": "#1B242D",
+          "ratio": 7.47,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on posTint",
+          "fg": "#6FC492",
+          "bg": "#1B3226",
+          "ratio": 6.52,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "posOn on posTint (dark ink on tint chip)",
+          "fg": "#DFF3E6",
+          "bg": "#1B3226",
+          "ratio": 11.82,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on surface",
+          "fg": "#F09A8C",
+          "bg": "#1B242D",
+          "ratio": 7.26,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on negTint",
+          "fg": "#F09A8C",
+          "bg": "#3B1D17",
+          "ratio": 7.06,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "negOn on negTint (dark ink on tint chip)",
+          "fg": "#FBE7E3",
+          "bg": "#3B1D17",
+          "ratio": 12.84,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on surface",
+          "fg": "#E5B96A",
+          "bg": "#1B242D",
+          "ratio": 8.59,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on attTint",
+          "fg": "#E5B96A",
+          "bg": "#332711",
+          "ratio": 7.98,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "attOn on attTint (dark ink on tint chip)",
+          "fg": "#F8ECD2",
+          "bg": "#332711",
+          "ratio": 12.45,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero number, large)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero focus outline, dark)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "fieldBorder on surface (>=3 ui)",
+          "fg": "#5F7285",
+          "bg": "#1B242D",
+          "ratio": 3.17,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on surface (focus ring >=3)",
+          "fg": "#6FA8D6",
+          "bg": "#1B242D",
+          "ratio": 6.17,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on canvas (focus ring >=3)",
+          "fg": "#6FA8D6",
+          "bg": "#131A21",
+          "ratio": 6.89,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on navSurface (nav label)",
+          "fg": "#EAF0F5",
+          "bg": "#18202A",
+          "ratio": 14.29,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on navSurface (inactive tab)",
+          "fg": "#AEBECB",
+          "bg": "#18202A",
+          "ratio": 8.62,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "brand.fill on navSurface (active tab icon, ui)",
+          "fg": "#E58254",
+          "bg": "#18202A",
+          "ratio": 5.98,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "white on trust.fill (hero text/chip bg, filter chip)",
+          "fg": "#FFFFFF",
+          "bg": "#2C5E88",
+          "ratio": 6.85,
+          "req": 4.5,
+          "pass": true
+        }
+      ],
+      "failures": []
+    },
+    "c3-dynamic-modular": {
+      "direction": "c3-dynamic-modular",
+      "light": [
+        {
+          "pair": "ink on canvas (body)",
+          "fg": "#1F1C19",
+          "bg": "#F4F3F0",
+          "ratio": 15.28,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on surface (body)",
+          "fg": "#1F1C19",
+          "bg": "#FFFFFF",
+          "ratio": 16.96,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on group (body)",
+          "fg": "#1F1C19",
+          "bg": "#ECEAE5",
+          "ratio": 14.1,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on surface (secondary)",
+          "fg": "#63594F",
+          "bg": "#FFFFFF",
+          "ratio": 6.84,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on canvas (secondary)",
+          "fg": "#63594F",
+          "bg": "#F4F3F0",
+          "ratio": 6.16,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on group (secondary)",
+          "fg": "#63594F",
+          "bg": "#ECEAE5",
+          "ratio": 5.69,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on surface (timestamps 12.5px)",
+          "fg": "#73675E",
+          "bg": "#FFFFFF",
+          "ratio": 5.48,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on canvas",
+          "fg": "#73675E",
+          "bg": "#F4F3F0",
+          "ratio": 4.94,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (button text)",
+          "fg": "#2B130A",
+          "bg": "#D96A45",
+          "ratio": 5.08,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on surface (brand text)",
+          "fg": "#A03A1D",
+          "bg": "#FFFFFF",
+          "ratio": 6.74,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on canvas (brand text)",
+          "fg": "#A03A1D",
+          "bg": "#F4F3F0",
+          "ratio": 6.07,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on brand.fill? (never used)",
+          "fg": "#A03A1D",
+          "bg": "#D96A45",
+          "ratio": 1.96,
+          "req": 99,
+          "pass": true
+        },
+        {
+          "pair": "trust on surface (link/nav text)",
+          "fg": "#1F5E8C",
+          "bg": "#FFFFFF",
+          "ratio": 6.91,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on canvas",
+          "fg": "#1F5E8C",
+          "bg": "#F4F3F0",
+          "ratio": 6.23,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on trustTint",
+          "fg": "#1F5E8C",
+          "bg": "#E3EEF6",
+          "ratio": 5.87,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on surface",
+          "fg": "#1E6E42",
+          "bg": "#FFFFFF",
+          "ratio": 6.24,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on posTint",
+          "fg": "#1E6E42",
+          "bg": "#E6F2EA",
+          "ratio": 5.43,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "posOn on posTint (dark ink on tint chip)",
+          "fg": "#0F3320",
+          "bg": "#E6F2EA",
+          "ratio": 12.05,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on surface",
+          "fg": "#B32318",
+          "bg": "#FFFFFF",
+          "ratio": 6.62,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on negTint",
+          "fg": "#B32318",
+          "bg": "#FBEAE7",
+          "ratio": 5.69,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "negOn on negTint (dark ink on tint chip)",
+          "fg": "#3A0C07",
+          "bg": "#FBEAE7",
+          "ratio": 14.59,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on surface",
+          "fg": "#8A5300",
+          "bg": "#FFFFFF",
+          "ratio": 6.33,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on attTint",
+          "fg": "#8A5300",
+          "bg": "#FAEEDA",
+          "ratio": 5.52,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "attOn on attTint (dark ink on tint chip)",
+          "fg": "#2E1D00",
+          "bg": "#FAEEDA",
+          "ratio": 14.17,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero number, large)",
+          "fg": "#2B130A",
+          "bg": "#D96A45",
+          "ratio": 5.08,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on brand.fill (hero focus outline, light)",
+          "fg": "#1F1C19",
+          "bg": "#D96A45",
+          "ratio": 4.92,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "fieldBorder on surface (>=3 ui)",
+          "fg": "#8B8478",
+          "bg": "#FFFFFF",
+          "ratio": 3.7,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on surface (focus ring >=3)",
+          "fg": "#1F1C19",
+          "bg": "#FFFFFF",
+          "ratio": 16.96,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on canvas (focus ring >=3)",
+          "fg": "#1F1C19",
+          "bg": "#F4F3F0",
+          "ratio": 15.28,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on navSurface (nav label)",
+          "fg": "#1F1C19",
+          "bg": "#FFFFFF",
+          "ratio": 16.96,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on navSurface (inactive tab)",
+          "fg": "#63594F",
+          "bg": "#FFFFFF",
+          "ratio": 6.84,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "brand.fill on navSurface (active tab icon, ui)",
+          "fg": "#D96A45",
+          "bg": "#FFFFFF",
+          "ratio": 3.44,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on work module (plate/topzone/focus)",
+          "fg": "#FFFFFF",
+          "bg": "#6E3B85",
+          "ratio": 7.99,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on finance module",
+          "fg": "#FFFFFF",
+          "bg": "#0E6B6B",
+          "ratio": 6.3,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on tools module",
+          "fg": "#FFFFFF",
+          "bg": "#44515E",
+          "ratio": 8.13,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on market module",
+          "fg": "#FFFFFF",
+          "bg": "#9C4460",
+          "ratio": 6.16,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "work on surface",
+          "fg": "#6E3B85",
+          "bg": "#FFFFFF",
+          "ratio": 7.99,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "work on workTint",
+          "fg": "#6E3B85",
+          "bg": "#F0E8F5",
+          "ratio": 6.69,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "finance on surface",
+          "fg": "#0E6B6B",
+          "bg": "#FFFFFF",
+          "ratio": 6.3,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "finance on financeTint",
+          "fg": "#0E6B6B",
+          "bg": "#E2F1F1",
+          "ratio": 5.42,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "tools on surface",
+          "fg": "#44515E",
+          "bg": "#FFFFFF",
+          "ratio": 8.13,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "tools on toolsTint",
+          "fg": "#44515E",
+          "bg": "#EBEDF0",
+          "ratio": 6.93,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "market on surface",
+          "fg": "#9C4460",
+          "bg": "#FFFFFF",
+          "ratio": 6.16,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "market on marketTint",
+          "fg": "#9C4460",
+          "bg": "#F7E8ED",
+          "ratio": 5.2,
+          "req": 4.5,
+          "pass": true
+        }
+      ],
+      "dark": [
+        {
+          "pair": "ink on canvas (body)",
+          "fg": "#F1EDE6",
+          "bg": "#1A1815",
+          "ratio": 15.18,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on surface (body)",
+          "fg": "#F1EDE6",
+          "bg": "#24211D",
+          "ratio": 13.73,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink on group (body)",
+          "fg": "#F1EDE6",
+          "bg": "#2C2823",
+          "ratio": 12.54,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on surface (secondary)",
+          "fg": "#BCB2A5",
+          "bg": "#24211D",
+          "ratio": 7.67,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on canvas (secondary)",
+          "fg": "#BCB2A5",
+          "bg": "#1A1815",
+          "ratio": 8.48,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on group (secondary)",
+          "fg": "#BCB2A5",
+          "bg": "#2C2823",
+          "ratio": 7.0,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on surface (timestamps 12.5px)",
+          "fg": "#9F9184",
+          "bg": "#24211D",
+          "ratio": 5.23,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "inkFaint on canvas",
+          "fg": "#9F9184",
+          "bg": "#1A1815",
+          "ratio": 5.78,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (button text)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on surface (brand text)",
+          "fg": "#F09A6F",
+          "bg": "#24211D",
+          "ratio": 7.29,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on canvas (brand text)",
+          "fg": "#F09A6F",
+          "bg": "#1A1815",
+          "ratio": 8.06,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "brand.deep on brand.fill? (never used)",
+          "fg": "#F09A6F",
+          "bg": "#E58254",
+          "ratio": 1.25,
+          "req": 99,
+          "pass": true
+        },
+        {
+          "pair": "trust on surface (link/nav text)",
+          "fg": "#7FB3DA",
+          "bg": "#24211D",
+          "ratio": 7.15,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on canvas",
+          "fg": "#7FB3DA",
+          "bg": "#1A1815",
+          "ratio": 7.9,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "trust on trustTint",
+          "fg": "#7FB3DA",
+          "bg": "#20313C",
+          "ratio": 5.98,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on surface",
+          "fg": "#6FC492",
+          "bg": "#24211D",
+          "ratio": 7.62,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "pos on posTint",
+          "fg": "#6FC492",
+          "bg": "#1B3226",
+          "ratio": 6.52,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "posOn on posTint (dark ink on tint chip)",
+          "fg": "#DFF3E6",
+          "bg": "#1B3226",
+          "ratio": 11.82,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on surface",
+          "fg": "#F09A8C",
+          "bg": "#24211D",
+          "ratio": 7.41,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "neg on negTint",
+          "fg": "#F09A8C",
+          "bg": "#3B1D17",
+          "ratio": 7.06,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "negOn on negTint (dark ink on tint chip)",
+          "fg": "#FBE7E3",
+          "bg": "#3B1D17",
+          "ratio": 12.84,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on surface",
+          "fg": "#E5B96A",
+          "bg": "#24211D",
+          "ratio": 8.76,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "att on attTint",
+          "fg": "#E5B96A",
+          "bg": "#332711",
+          "ratio": 7.98,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "attOn on attTint (dark ink on tint chip)",
+          "fg": "#F8ECD2",
+          "bg": "#332711",
+          "ratio": 12.45,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero number, large)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "onBrand on brand.fill (hero focus outline, dark)",
+          "fg": "#2B130A",
+          "bg": "#E58254",
+          "ratio": 6.38,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "fieldBorder on surface (>=3 ui)",
+          "fg": "#7A6E5F",
+          "bg": "#24211D",
+          "ratio": 3.22,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on surface (focus ring >=3)",
+          "fg": "#E58254",
+          "bg": "#24211D",
+          "ratio": 5.84,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "focus on canvas (focus ring >=3)",
+          "fg": "#E58254",
+          "bg": "#1A1815",
+          "ratio": 6.46,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "ink on navSurface (nav label)",
+          "fg": "#F1EDE6",
+          "bg": "#201D19",
+          "ratio": 14.38,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "ink2 on navSurface (inactive tab)",
+          "fg": "#BCB2A5",
+          "bg": "#201D19",
+          "ratio": 8.03,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "brand.fill on navSurface (active tab icon, ui)",
+          "fg": "#E58254",
+          "bg": "#201D19",
+          "ratio": 6.12,
+          "req": 3.0,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on work module (plate/topzone/focus)",
+          "fg": "#1F1C19",
+          "bg": "#C49AD8",
+          "ratio": 7.24,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on finance module",
+          "fg": "#1F1C19",
+          "bg": "#6FC4C4",
+          "ratio": 8.37,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on tools module",
+          "fg": "#1F1C19",
+          "bg": "#A9B4C0",
+          "ratio": 8.06,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "moduleText on market module",
+          "fg": "#1F1C19",
+          "bg": "#E094AB",
+          "ratio": 7.26,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "work on surface",
+          "fg": "#C49AD8",
+          "bg": "#24211D",
+          "ratio": 6.84,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "work on workTint",
+          "fg": "#C49AD8",
+          "bg": "#2F2138",
+          "ratio": 6.42,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "finance on surface",
+          "fg": "#6FC4C4",
+          "bg": "#24211D",
+          "ratio": 7.91,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "finance on financeTint",
+          "fg": "#6FC4C4",
+          "bg": "#123030",
+          "ratio": 6.95,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "tools on surface",
+          "fg": "#A9B4C0",
+          "bg": "#24211D",
+          "ratio": 7.61,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "tools on toolsTint",
+          "fg": "#A9B4C0",
+          "bg": "#23272C",
+          "ratio": 7.14,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "market on surface",
+          "fg": "#E094AB",
+          "bg": "#24211D",
+          "ratio": 6.86,
+          "req": 4.5,
+          "pass": true
+        },
+        {
+          "pair": "market on marketTint",
+          "fg": "#E094AB",
+          "bg": "#361C24",
+          "ratio": 6.67,
+          "req": 4.5,
+          "pass": true
+        }
+      ],
+      "failures": []
+    }
+  }
+}

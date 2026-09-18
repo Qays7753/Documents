@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light" data-direction="c1-warm-bold">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foundation Board — C1 — Warm Bold · Micro Bold Modular (Agent-03)</title>
+<style>
+/* ============================================================
+   MICRO — C1 Warm Bold (Agent-03) · IBM Plex Sans Arabic
+   Digits: uniform-width by default (tabular) — verified in font.
+   RTL logical properties only. No letter-spacing on Arabic.
+   ============================================================ */
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("../../prototype/assets/fonts/IBMPlexSansArabic-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("../../prototype/assets/fonts/IBMPlexSansArabic-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("../../prototype/assets/fonts/IBMPlexSansArabic-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("../../prototype/assets/fonts/IBMPlexSansArabic-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+:root {
+  --canvas: #FAF6F1; --surface: #FFFFFF; --group: #F4ECE3; --group2: #F8F1E9;
+  --ink: #231A14; --ink2: #6D5E52; --ink-faint: #7A6A5C;
+  --brand: #D96A45; --brand-deep: #A03A1D; --on-brand: #2B130A;
+  --trust: #1F5E8C; --trust-tint: #E3EEF6;
+  --pos: #1E6E42; --pos-tint: #E6F2EA; --pos-on: #0F3320;
+  --neg: #B32318; --neg-tint: #FBEAE7; --neg-on: #3A0C07;
+  --att: #8A5300; --att-tint: #FAEEDA; --att-on: #2E1D00;
+  --focus: #A03A1D; --field-border: #937F6C; --nav-surface: #FFFFFF;
+  --divider: #EFE6DB; --overlay: rgba(35, 26, 20, .44);
+  --r-card: 20px; --r-control: 14px; --r-chip: 999px; --r-field: 14px;
+  --shadow-sheet: 0 -12px 40px rgba(35, 26, 20, .18);
+  --stroke: 2;
+}
+[data-theme="dark"] {
+  --canvas: #1E1712; --surface: #291F18; --group: #33271E; --group2: #2E231B;
+  --ink: #F4EBE1; --ink2: #C4B2A3; --ink-faint: #A08D7E;
+  --brand: #E58254; --brand-deep: #F09A6F; --on-brand: #2B130A;
+  --trust: #7FB3DA; --trust-tint: #22333F;
+  --pos: #6FC492; --pos-tint: #1B3226; --pos-on: #DFF3E6;
+  --neg: #F09A8C; --neg-tint: #3B1D17; --neg-on: #FBE7E3;
+  --att: #E5B96A; --att-tint: #332711; --att-on: #F8ECD2;
+  --focus: #E58254; --field-border: #83705B; --nav-surface: #241B15;
+  --divider: #3D3027; --overlay: rgba(10, 6, 3, .6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: "IBM Plex Sans Arabic", Tahoma, sans-serif;
+  background: var(--canvas); color: var(--ink);
+  font-size: 0.96875rem; line-height: 1.6; min-height: 100dvh;
+}
+bdi { unicode-bidi: isolate; }
+.num { font-variant-numeric: tabular-nums; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: var(--stroke); stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.icon--sm { width: 18px; height: 18px; }
+.icon--lg { width: 26px; height: 26px; }
+
+/* ---------- shell ---------- */
+.phone { max-width: 430px; margin-inline: auto; min-height: 100dvh; display: flex; flex-direction: column; background: var(--canvas); position: relative; }
+.topzone { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 16px 8px; }
+.logo-btn { display: flex; align-items: center; gap: 8px; background: none; border: 0; cursor: pointer; padding: 6px; border-radius: 12px; color: var(--ink); font-family: inherit; }
+.logo-mark { width: 34px; height: 34px; fill: var(--brand); stroke: none; }
+.logo-mark .lg1, .logo-mark .lg3 { fill: var(--on-brand); }
+.logo-mark .lg2 { fill: var(--on-brand); opacity: .82; }
+.logo-word { font-size: 0.9375rem; font-weight: 700; color: var(--ink); }
+.top-actions { display: flex; gap: 6px; }
+.top-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-chip); color: var(--ink2); font-family: inherit; font-size: 0.8125rem; font-weight: 500; cursor: pointer; }
+.top-chip .icon { width: 15px; height: 15px; color: var(--trust); }
+.content { flex: 1; padding: 4px 16px 96px; display: flex; flex-direction: column; gap: 16px; }
+
+/* ---------- project context ---------- */
+.project-context { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding-inline: 4px 2px; }
+.project-name { font-size: 1.125rem; font-weight: 700; }
+.project-period { font-size: 0.8125rem; color: var(--ink2); }
+
+/* ---------- HERO — warm terracotta field, dark ink (5.90:1 base rule) ---------- */
+.hero { background: var(--brand); color: var(--on-brand); border-radius: var(--r-card); padding: 20px 18px 18px; position: relative; overflow: hidden; }
+.hero::after { content: ""; position: absolute; inset-inline-start: -40px; inset-block-end: -60px; width: 170px; height: 170px; border-radius: 50%; background: rgba(43, 19, 10, .07); }
+.hero__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; position: relative; }
+.hero__label { font-size: 0.875rem; font-weight: 500; opacity: .92; }
+.state-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: var(--r-chip); font-size: 0.8125rem; font-weight: 700; background: var(--surface); }
+.state-chip .icon { width: 14px; height: 14px; }
+.state-chip--pos { color: var(--pos); background: var(--pos-tint); }
+.state-chip--neg { color: var(--neg); background: var(--neg-tint); }
+.state-chip--att { color: var(--att); background: var(--att-tint); }
+.state-chip--ink { color: var(--ink); background: var(--group); }
+.hero__result { font-size: 2.75rem; font-weight: 700; line-height: 1.15; margin-top: 8px; position: relative; }
+.hero__explain { font-size: 0.875rem; opacity: .88; margin-top: 4px; position: relative; max-width: 30ch; }
+.hero__reason { font-size: 1.125rem; font-weight: 700; line-height: 1.5; margin-top: 10px; position: relative; }
+.hero__meter { display: flex; align-items: center; gap: 3px; margin-top: 12px; position: relative; }
+.meter__seg { width: 18px; height: 8px; border-radius: 4px; background: rgba(43, 19, 10, .18); }
+.meter__seg--on { background: var(--on-brand); }
+.meter__count { font-size: 0.8125rem; font-weight: 600; margin-inline-start: 10px; }
+.hero__supporting { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; position: relative; }
+.hero__supporting .s-label { font-size: 0.84375rem; opacity: .88; }
+.hero__supporting .s-value { font-size: 1.25rem; font-weight: 700; }
+.hero__mini { display: flex; gap: 22px; margin-top: 12px; position: relative; flex-wrap: wrap; }
+.hero__mini .m { display: flex; flex-direction: column; gap: 1px; }
+.hero__mini .m-label { font-size: 0.78125rem; opacity: .85; }
+.hero__mini .m-value { font-size: 1.0625rem; font-weight: 700; }
+.hero__actions { margin-top: 16px; display: flex; gap: 10px; position: relative; }
+.hero--neg { background: var(--surface); color: var(--ink); border: 2px solid var(--neg); border-inline-start: 6px solid var(--neg); }
+.hero--neg::after { display: none; }
+.hero--neg .hero__result { color: var(--neg); }
+.hero--neg .hero__reason { color: var(--ink); }
+.hero--neg .hero__label { color: var(--ink2); }
+.hero--neg .hero__mini .m-value { color: var(--ink); }
+.hero--neg .hero__mini .m-label { color: var(--ink2); }
+
+/* ---------- Micro Signal: tint only, never fill ---------- */
+.signal { background: var(--att-tint); border: 1px solid color-mix(in srgb, var(--att) 28%, transparent); border-radius: var(--r-card); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+.signal__icon { width: 40px; height: 40px; border-radius: var(--r-chip); background: var(--surface); color: var(--att); display: grid; place-items: center; flex: none; }
+.signal__body { flex: 1; min-width: 0; }
+.signal__status { font-size: 0.96875rem; font-weight: 700; color: var(--att-on); }
+.signal__reason { font-size: 0.875rem; color: var(--ink); margin-top: 2px; }
+.signal__action { margin-top: 10px; }
+
+/* ---------- Quick Action Bar — weight is ink, not chrome ---------- */
+.qab { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; background: var(--surface); border: 1px solid var(--divider); border-radius: 18px; padding: 10px 8px; }
+.qab__btn { display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 62px; justify-content: center; background: none; border: 0; cursor: pointer; font-family: inherit; color: var(--ink); border-radius: var(--r-control); padding: 6px 4px; }
+.qab__icon { width: 40px; height: 40px; border-radius: var(--r-chip); display: grid; place-items: center; background: var(--group); color: var(--ink); }
+.qab__label { font-size: 0.8125rem; font-weight: 600; }
+.qab__btn--primary .qab__icon { background: var(--brand); color: var(--on-brand); }
+.qab__btn--more .qab__icon { background: var(--group); color: var(--ink2); }
+
+/* ---------- sections & rows ---------- */
+.section { display: flex; flex-direction: column; gap: 10px; }
+.section__title { font-size: 0.9375rem; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.section__title .icon { color: var(--brand-deep); width: 18px; height: 18px; }
+.section__link { font-size: 0.8125rem; font-weight: 600; color: var(--trust); text-decoration: none; margin-inline-start: auto; padding: 4px 6px; border-radius: 8px; }
+.metric-list { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-card); overflow: hidden; }
+.metric-row { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 0; background: none; width: 100%; text-align: start; cursor: pointer; font-family: inherit; }
+.metric-row + .metric-row { border-top: 1px solid var(--divider); }
+.metric-row__icon { width: 38px; height: 38px; border-radius: 13px; background: var(--group2); color: var(--ink2); display: grid; place-items: center; flex: none; }
+.metric-row__label { font-size: 0.90625rem; font-weight: 600; color: var(--ink); }
+.metric-row__hint { font-size: 0.78125rem; color: var(--ink2); }
+.metric-row__value { margin-inline-start: auto; font-size: 1.0625rem; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.metric-row__value .cur { font-size: 0.8125rem; color: var(--ink2); font-weight: 500; }
+.metric-row__chev { color: var(--ink-faint); margin-inline-start: 2px; }
+.metric-row--due .metric-row__icon { color: var(--trust); }
+
+/* attention card (delayed order) */
+.attention-card { background: var(--surface); border: 1px solid var(--divider); border-inline-start: 4px solid var(--neg); border-radius: var(--r-card); padding: 14px 16px; }
+.attention-card__top { display: flex; align-items: center; gap: 8px; }
+.attention-card__title { font-size: 0.9375rem; font-weight: 700; }
+.attention-card__sub { font-size: 0.84375rem; color: var(--ink2); margin-top: 2px; }
+.late-chip { display: inline-flex; align-items: center; gap: 5px; margin-inline-start: auto; color: var(--neg); background: var(--neg-tint); border-radius: var(--r-chip); padding: 3px 10px; font-size: 0.8125rem; font-weight: 700; }
+.late-chip .icon { width: 13px; height: 13px; }
+.attention-card__actions { display: flex; gap: 8px; margin-top: 12px; }
+
+/* activity rows */
+.activity-row { display: flex; align-items: center; gap: 12px; padding: 12px 4px; }
+.activity-row + .activity-row { border-top: 1px solid var(--divider); }
+.activity-row__icon { width: 36px; height: 36px; border-radius: var(--r-chip); background: var(--group2); color: var(--ink2); display: grid; place-items: center; flex: none; }
+.activity-row__title { font-size: 0.90625rem; font-weight: 600; }
+.activity-row__time { font-size: 0.78125rem; color: var(--ink-faint); }
+.activity-row__value { margin-inline-start: auto; font-weight: 700; font-size: 0.9375rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 0.8125rem; font-weight: 700; color: var(--att); background: var(--att-tint); border-radius: var(--r-chip); padding: 2px 8px; margin-inline-start: 6px; }
+
+/* ---------- bottom navigation ---------- */
+.bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; background: var(--nav-surface); border-top: 1px solid var(--divider); display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); max-width: 430px; margin-inline: auto; }
+.tab { display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: 52px; justify-content: center; background: none; border: 0; cursor: pointer; font-family: inherit; color: var(--ink2); border-radius: var(--r-control); padding: 2px 4px; }
+.tab .icon { width: 22px; height: 22px; }
+.tab__label { font-size: 0.75rem; font-weight: 600; }
+.tab--active { color: var(--brand-deep); }
+.tab--active .tab__wrap { background: var(--group); border-radius: var(--r-chip); padding: 3px 14px; }
+.tab--active .icon { stroke-width: calc(var(--stroke) + 0.4); }
+
+/* ---------- buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 20px; border-radius: var(--r-chip); font-family: inherit; font-size: 0.9375rem; font-weight: 700; cursor: pointer; border: 0; text-decoration: none; }
+.btn .icon { width: 18px; height: 18px; }
+.btn--primary { background: var(--brand); color: var(--on-brand); }
+.btn--ink { background: var(--ink); color: var(--canvas); }
+.btn--secondary { background: var(--group); color: var(--ink); }
+.btn--ghost { background: transparent; color: var(--brand-deep); border: 1.5px solid color-mix(in srgb, var(--brand-deep) 45%, transparent); }
+.btn--text { background: none; color: var(--trust); padding-inline: 8px; min-height: 44px; }
+.btn--sm { min-height: 44px; font-size: 0.875rem; padding: 8px 16px; }
+.btn--block { width: 100%; }
+.btn-row { display: flex; gap: 10px; }
+.btn-row .btn { flex: 1; }
+
+/* ---------- forms ---------- */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field__label { font-size: 0.84375rem; font-weight: 600; color: var(--ink2); }
+.field__input, .field__select { min-height: 50px; border: 1.5px solid var(--field-border); border-radius: var(--r-field); background: var(--surface); color: var(--ink); font-family: inherit; font-size: 0.96875rem; padding: 10px 14px; width: 100%; }
+.field__input:focus-visible, .field__select:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; }
+.field--error .field__input { border-color: var(--neg); background: var(--neg-tint); }
+.field-error { display: flex; align-items: flex-start; gap: 6px; color: var(--neg); font-size: 0.84375rem; font-weight: 600; }
+.field-error .icon { width: 16px; height: 16px; margin-top: 2px; }
+.amount-field { position: relative; }
+.amount-field .field__input { font-size: 1.875rem; font-weight: 700; padding-block: 16px; font-variant-numeric: tabular-nums; direction: ltr; text-align: right; padding-inline-start: 64px; }
+.amount-field .cur-mark { position: absolute; inset-inline-start: 16px; top: 50%; transform: translateY(-50%); font-size: 0.9375rem; font-weight: 600; color: var(--ink2); }
+.choice-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.choice { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 16px; border-radius: var(--r-chip); border: 1.5px solid var(--field-border); background: var(--surface); font-family: inherit; font-size: 0.875rem; font-weight: 600; color: var(--ink2); cursor: pointer; }
+.choice--on { border-color: var(--brand); background: var(--group2); color: var(--ink); }
+.choice--on .choice__dot { background: var(--brand); }
+.choice__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--field-border); }
+.impact-preview { background: var(--group2); border: 1px dashed color-mix(in srgb, var(--brand-deep) 40%, transparent); border-radius: var(--r-control); padding: 13px 16px; }
+.impact-preview__title { font-size: 0.84375rem; font-weight: 700; color: var(--brand-deep); display: flex; align-items: center; gap: 6px; }
+.impact-preview__body { font-size: 0.90625rem; color: var(--ink); margin-top: 4px; }
+
+/* ---------- sale success / impact ---------- */
+.success-card { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-card); padding: 22px 18px; text-align: center; }
+.success-card__badge { width: 58px; height: 58px; border-radius: 50%; background: var(--trust-tint); color: var(--trust); border: 2px solid var(--trust); display: grid; place-items: center; margin-inline: auto; }
+.success-card__badge .icon { width: 30px; height: 30px; }
+.success-card__status { font-size: 1.1875rem; font-weight: 700; margin-top: 10px; }
+.success-card__amount { font-size: 2.375rem; font-weight: 700; color: var(--ink); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.success-card__dest { font-size: 0.90625rem; color: var(--ink2); margin-top: 2px; }
+.success-impact { margin-top: 16px; background: var(--trust-tint); border: 2px solid var(--trust); border-radius: var(--r-control); padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.success-impact__label { font-size: 0.84375rem; font-weight: 600; color: var(--ink); }
+.success-impact__value { font-size: 1.5rem; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.success-impact--flash { animation: impact-flash 1.6s ease-out 1; }
+@keyframes impact-flash { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--trust) 55%, transparent); } 60% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--trust) 0%, transparent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.success-ref { margin-top: 12px; font-size: 0.8125rem; color: var(--ink2); }
+
+/* ---------- error / empty ---------- */
+.error-card { background: var(--surface); border: 1px solid var(--divider); border-inline-start: 4px solid var(--neg); border-radius: var(--r-card); padding: 18px; }
+.error-card__title { font-size: 1.0625rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.error-card__title .icon { color: var(--neg); }
+.error-card__body { font-size: 0.90625rem; color: var(--ink2); margin-top: 6px; }
+.empty-card { background: var(--surface); border: 1px dashed var(--field-border); border-radius: var(--r-card); padding: 34px 22px; text-align: center; }
+.empty-card__icon { width: 60px; height: 60px; border-radius: 50%; background: var(--group); color: var(--ink2); display: grid; place-items: center; margin-inline: auto; }
+.empty-card__title { font-size: 1.125rem; font-weight: 700; margin-top: 12px; }
+.empty-card__desc { font-size: 0.90625rem; color: var(--ink2); margin-top: 6px; max-width: 26ch; margin-inline: auto; }
+.empty-card__note { font-size: 0.8125rem; color: var(--ink-faint); margin-top: 10px; }
+
+/* ---------- order steps ---------- */
+.order-steps { display: flex; gap: 4px; }
+.ostep { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding-top: 4px; position: relative; }
+.ostep::before { content: ""; position: absolute; top: 9px; inset-inline-start: calc(-50% + 12px); width: calc(100% - 24px); height: 2.5px; background: var(--divider); border-radius: 2px; }
+.ostep:first-child::before { display: none; }
+.ostep__dot { width: 15px; height: 15px; border-radius: 50%; background: var(--surface); border: 2.5px solid var(--field-border); position: relative; z-index: 1; }
+.ostep--done .ostep__dot { background: var(--trust); border-color: var(--trust); }
+.ostep--done::before { background: var(--trust); }
+.ostep--current .ostep__dot { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 22%, transparent); }
+.ostep--late .ostep__dot { border-color: var(--neg); background: var(--neg); }
+.ostep__label { font-size: 0.75rem; font-weight: 600; color: var(--ink2); white-space: nowrap; }
+.ostep--current .ostep__label { color: var(--ink); font-weight: 700; }
+.ostep--late .ostep__label { color: var(--neg); font-weight: 700; }
+
+.amount-list { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-card); overflow: hidden; }
+.amount-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; font-size: 0.90625rem; }
+.amount-row + .amount-row { border-top: 1px solid var(--divider); }
+.amount-row__label { color: var(--ink2); font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.amount-row__value { font-weight: 700; font-variant-numeric: tabular-nums; }
+.amount-row--total { background: var(--group2); }
+.amount-row--total .amount-row__value { font-size: 1.03125rem; }
+.amount-row--remaining .amount-row__value { color: var(--trust); }
+
+/* ---------- sheets / dialogs ---------- */
+.backdrop { position: fixed; inset: 0; background: var(--overlay); z-index: 50; display: none; }
+.backdrop--open { display: block; }
+.sheet { position: fixed; inset-inline: 0; bottom: 0; z-index: 51; background: var(--surface); border-radius: 26px 26px 0 0; box-shadow: var(--shadow-sheet); padding: 10px 18px calc(20px + env(safe-area-inset-bottom)); max-width: 430px; margin-inline: auto; transform: translateY(102%); visibility: hidden; transition: transform .28s cubic-bezier(.2,.8,.25,1), visibility 0s .28s; max-height: 78dvh; overflow-y: auto; }
+.sheet--open { transform: translateY(0); visibility: visible; transition: transform .28s cubic-bezier(.2,.8,.25,1), visibility 0s; }
+.sheet__handle { width: 44px; height: 5px; border-radius: 3px; background: var(--divider); margin-inline: auto; margin-block-end: 12px; }
+.sheet__title { font-size: 1.0625rem; font-weight: 700; margin-block-end: 12px; }
+.menu-row { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; background: none; border: 0; border-radius: var(--r-control); cursor: pointer; font-family: inherit; padding: 8px 10px; text-align: start; }
+.menu-row__icon { width: 40px; height: 40px; border-radius: 13px; background: var(--group); color: var(--brand-deep); display: grid; place-items: center; flex: none; }
+.menu-row__title { font-size: 0.9375rem; font-weight: 700; color: var(--ink); }
+.menu-row__sub { font-size: 0.78125rem; color: var(--ink2); }
+.menu-row__chev { margin-inline-start: auto; color: var(--ink-faint); }
+.stub-note { background: var(--group); border-radius: var(--r-control); padding: 14px 16px; font-size: 0.875rem; color: var(--ink2); display: flex; gap: 10px; align-items: flex-start; }
+.stub-note .icon { color: var(--trust); flex: none; }
+
+/* ---------- search ---------- */
+.search-row { display: flex; gap: 8px; align-items: center; background: var(--surface); border: 1.5px solid var(--field-border); border-radius: var(--r-chip); padding: 4px 6px 4px 14px; }
+.search-row .icon { color: var(--ink2); width: 19px; height: 19px; }
+.search-row input { flex: 1; border: 0; background: none; font-family: inherit; font-size: 0.9375rem; color: var(--ink); min-height: 42px; }
+.search-row input:focus-visible { outline: none; }
+.search-row:focus-within { outline: 3px solid var(--focus); outline-offset: 1px; }
+.filter-chip { min-height: 44px; padding: 8px 16px; border-radius: var(--r-chip); background: var(--group); border: 0; font-family: inherit; font-size: 0.84375rem; font-weight: 600; color: var(--ink2); cursor: pointer; white-space: nowrap; }
+.filter-chip--on { background: var(--ink); color: var(--canvas); }
+
+/* ---------- order/work lists ---------- */
+.order-card { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-card); padding: 14px 16px; }
+.order-card__top { display: flex; align-items: center; gap: 10px; }
+.order-card__name { font-size: 0.96875rem; font-weight: 700; }
+.order-card__item { font-size: 0.84375rem; color: var(--ink2); margin-top: 2px; }
+.stage-chip { display: inline-flex; align-items: center; gap: 5px; border-radius: var(--r-chip); padding: 3px 11px; font-size: 0.8125rem; font-weight: 700; margin-inline-start: auto; }
+.stage-chip .icon { width: 13px; height: 13px; }
+.stage-chip--agreement { background: var(--trust-tint); color: var(--trust); }
+.stage-chip--executing { background: var(--group); color: var(--ink); }
+.stage-chip--ready { background: var(--att-tint); color: var(--att); }
+.stage-chip--delivered { background: var(--trust-tint); color: var(--trust); }
+.stage-chip--late { background: var(--neg-tint); color: var(--neg); }
+
+/* ---------- finance ---------- */
+.fin-hero { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-card); padding: 18px; }
+.fin-hero__period { font-size: 0.8125rem; color: var(--ink2); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.fin-hero__value { font-size: 2.125rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--pos); margin-top: 4px; }
+.fin-hero__value--neg { color: var(--neg); }
+.insight-card { display: flex; gap: 12px; align-items: flex-start; background: var(--trust-tint); border-radius: var(--r-card); padding: 14px 16px; }
+.insight-card .signal__icon { background: var(--surface); color: var(--trust); }
+.insight-card__status { font-size: 0.90625rem; font-weight: 700; color: var(--ink); }
+.insight-card__body { font-size: 0.84375rem; color: var(--ink2); margin-top: 2px; }
+
+/* ---------- tools ---------- */
+.tool-group { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--r-card); overflow: hidden; }
+.tool-group__title { font-size: 0.8125rem; font-weight: 700; color: var(--ink2); padding: 12px 16px 6px; display: flex; align-items: center; gap: 7px; }
+.tool-row { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 54px; padding: 8px 16px; background: none; border: 0; font-family: inherit; cursor: pointer; text-align: start; }
+.tool-row + .tool-row { border-top: 1px solid var(--divider); }
+.tool-row__icon { color: var(--ink2); }
+.tool-row__title { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
+.tool-row__sub { font-size: 0.78125rem; color: var(--ink2); }
+.switch { margin-inline-start: auto; width: 56px; height: 34px; border-radius: 15px; background: var(--field-border); border: 0; position: relative; cursor: pointer; transition: background .2s; flex: none; }
+.switch::after { content: ""; position: absolute; top: 3px; inset-inline-start: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--surface); transition: inset-inline-start .2s; }
+.switch--on { background: var(--trust); }
+.switch--on::after { inset-inline-start: 25px; }
+
+/* ---------- market ---------- */
+.market-hero { background: var(--group); border-radius: var(--r-card); padding: 26px 20px; text-align: center; }
+.market-hero .icon { width: 40px; height: 40px; color: var(--brand-deep); }
+.market-hero__title { font-size: 1.25rem; font-weight: 700; margin-top: 10px; }
+.market-hero__sub { font-size: 0.90625rem; color: var(--ink2); margin-top: 6px; }
+.promise-row { display: flex; gap: 12px; align-items: flex-start; padding: 13px 4px; }
+.promise-row + .promise-row { border-top: 1px solid var(--divider); }
+.promise-row__icon { width: 36px; height: 36px; border-radius: var(--r-chip); background: var(--group2); color: var(--trust); display: grid; place-items: center; flex: none; }
+.promise-row__title { font-size: 0.90625rem; font-weight: 700; }
+.promise-row__body { font-size: 0.84375rem; color: var(--ink2); }
+.not-now { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8125rem; font-weight: 700; color: var(--att); background: var(--att-tint); border-radius: var(--r-chip); padding: 4px 12px; }
+
+/* ---------- products ---------- */
+.prod-row { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: var(--surface); border: 1px solid var(--divider); }
+.prod-row + .prod-row { border-top: 0; border-radius: 0; }
+.prod-row:first-child { border-start-start-radius: var(--r-card); border-start-end-radius: var(--r-card); }
+.prod-row:last-child { border-end-start-radius: var(--r-card); border-end-end-radius: var(--r-card); border-bottom: 1px solid var(--divider); }
+.prod-row__icon { width: 38px; height: 38px; border-radius: 13px; background: var(--group); color: var(--ink2); display: grid; place-items: center; flex: none; }
+.type-chip { font-size: 0.8125rem; font-weight: 700; border-radius: var(--r-chip); padding: 2px 10px; }
+.type-chip--product { background: var(--trust-tint); color: var(--trust); }
+.type-chip--service { background: var(--att-tint); color: var(--att); }
+
+/* ---------- state visibility (params) ---------- */
+[data-screen-state] { display: none; }
+[data-screen-state].is-active { display: flex; flex-direction: column; gap: 16px; }
+.is-hidden { display: none !important; }
+
+/* ---------- focus ---------- */
+:focus { outline: none; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+.hero :focus-visible, .btn--primary:focus-visible { outline-color: var(--ink); }
+[data-theme="dark"] .hero :focus-visible { outline-color: var(--on-brand); }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .success-impact--flash { box-shadow: 0 0 0 3px var(--trust); }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .sheet { transform: translateY(0); }
+  .sheet:not(.sheet--open) { transform: translateY(102%); }
+}
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation: none !important; transition: none !important; }
+.reduce-motion .success-impact--flash { box-shadow: 0 0 0 3px var(--trust); }
+
+.btn--hero { background: var(--ink); color: var(--canvas); }
+
+/* ---------- 200% text-resize adaptation (D-110) ---------- */
+.topzone { flex-wrap: wrap; }
+.top-actions { flex-wrap: wrap; }
+.hero__meter { flex-wrap: wrap; }
+.hero__supporting { flex-wrap: wrap; }
+.hero__mini { flex-wrap: wrap; }
+.metric-row { flex-wrap: wrap; }
+.activity-row { flex-wrap: wrap; }
+.amount-row { flex-wrap: wrap; }
+.attention-card__top { flex-wrap: wrap; }
+.order-card__top { flex-wrap: wrap; }
+.qab { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qab__label { overflow-wrap: break-word; }
+html.zoom-200 .qab { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+html.zoom-200 .bottomnav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+html.zoom-200 .tab__label { overflow-wrap: break-word; }
+
+html.zoom-200 .content { padding-bottom: 190px; }
+
+.insight-card { position: relative; border-inline-start: 4px solid var(--trust); }
+
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:#EFEDE8; padding:28px 16px 70px; }
+.board { max-width:960px; margin-inline:auto; display:flex; flex-direction:column; gap:22px; }
+.board-head { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.board-head h1 { font-size:26px; }
+.theme-toggle { min-height:44px; padding:8px 18px; border-radius:12px; border:2px solid var(--ink); background:var(--surface); font-family:inherit; font-weight:700; cursor:pointer; color:var(--ink); }
+.board section.blk { background:var(--surface); border:1px solid var(--divider); border-radius:var(--r-card); padding:20px 22px; display:flex; flex-direction:column; gap:14px; }
+.board h2.bt { font-size:16px; font-weight:700; color:var(--brand-deep); border-inline-start:5px solid var(--brand); padding-inline-start:10px; }
+.board p, .board li { font-size:14.5px; line-height:1.8; }
+.thesis { font-size:17px; font-weight:700; }
+.meta { color:var(--ink2); }
+.swatches { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.swatch { border-radius:14px; padding:10px 12px; font-size:12px; border:1px solid var(--divider); }
+.swatch .chip { height:44px; border-radius:10px; margin-bottom:6px; border:1px solid rgba(0,0,0,.12); }
+.swatch b { font-size:12.5px; }
+.ct { width:100%; border-collapse:collapse; font-size:12.5px; }
+.ct th, .ct td { padding:6px 8px; text-align:start; border-bottom:1px solid var(--divider); }
+.ct th { color:var(--ink2); font-size:12px; }
+.ct .sw { display:inline-block; width:13px; height:13px; border-radius:4px; margin-inline-end:6px; vertical-align:-2px; }
+.ct .pass { color:var(--pos); font-weight:700; } .ct .fail { color:var(--neg); font-weight:700; }
+.spec-row { display:flex; flex-direction:column; gap:6px; border-bottom:1px dashed var(--divider); padding-block:10px; }
+.spec-row .lbl { font-size:12px; color:var(--ink2); font-weight:600; }
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+.iconrow { display:flex; gap:14px; flex-wrap:wrap; }
+.iconrow .ic { display:flex; flex-direction:column; align-items:center; gap:5px; font-size:11.5px; color:var(--ink2); min-width:64px; }
+.iconrow .ic .bx { width:52px; height:52px; border-radius:14px; background:var(--group); display:grid; place-items:center; color:var(--ink); }
+
+</style>
+</head>
+<body>
+<div class="board">
+<header class="board-head">
+  <h1>Foundation Board — C1 — Warm Bold</h1>
+  <button class="theme-toggle" onclick="var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark')">تبديل نهاري/ليلي</button>
+  <span class="meta">Micro Bold Modular · Agent-03 · المرحلة A</span>
+</header>
+
+<section class="blk">
+  <h2 class="bt">الأطروحة والصفات</h2>
+  <p class="thesis">أقرب اتجاه للمشاريع المنزلية والحرفية دون ريفية أو حنين: تيراكوتا حي يقود الهوية، كتلاً معيارية مستديرة تحفظ الجدية المالية.</p>
+  <p><b>الصفات الخمس:</b> دافئ · جريء · قريب · جدي · حي</p>
+  <p class="meta"><b>مرجع المزاج (مبدأ لا لقطة):</b> مطبخ منظم صباحًا لا دفتر حسابات قديم؛ طاقة قرار لا طاقة سوق شعبي.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">أدوار اللوحة (نهاري · ليلي)</h2>
+  <div class="swatches"><div class="swatch"><div class="chip" style="background:#D96A45"></div>
+        <b>Brand Warm — هوية وطاقة الإنشاء</b><br><span class="meta">#D96A45 · #E58254</span></div><div class="swatch"><div class="chip" style="background:#A03A1D"></div>
+        <b>Brand Deep — نص الهوية والأزرار الثانوية</b><br><span class="meta">#A03A1D · #F09A6F</span></div><div class="swatch"><div class="chip" style="background:#1F5E8C"></div>
+        <b>Trust Blue — معلومات وسياق نشط</b><br><span class="meta">#1F5E8C · #7FB3DA</span></div><div class="swatch"><div class="chip" style="background:#1E6E42"></div>
+        <b>Positive Green — نتيجة موجبة مكتملة فقط</b><br><span class="meta">#1E6E42 · #6FC492</span></div><div class="swatch"><div class="chip" style="background:#B32318"></div>
+        <b>Negative Red — نتيجة سالبة/خطر</b><br><span class="meta">#B32318 · #F09A8C</span></div><div class="swatch"><div class="chip" style="background:#8A5300"></div>
+        <b>Attention Amber — نقص وانتباه</b><br><span class="meta">#8A5300 · #E5B96A</span></div><div class="swatch"><div class="chip" style="background:#FAF6F1"></div>
+        <b>Canvas — بيئة الصفحة</b><br><span class="meta">#FAF6F1 · #1E1712</span></div><div class="swatch"><div class="chip" style="background:#FFFFFF"></div>
+        <b>Surface — سطح القراءة</b><br><span class="meta">#FFFFFF · #291F18</span></div><div class="swatch"><div class="chip" style="background:#F4ECE3"></div>
+        <b>Group — تون تجميع</b><br><span class="meta">#F4ECE3 · #33271E</span></div><div class="swatch"><div class="chip" style="background:#231A14"></div>
+        <b>Ink — نص وأرقام</b><br><span class="meta">#231A14 · #F4EBE1</span></div></div>
+  <p class="meta">قاعدة الحبر الداكن فوق التعبئات الدافئة إلزامية (قياس مقيس)؛ الأخضر للنتيجة الموجبة المكتملة فقط؛ الأزرق ليس مالًا موجبًا.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">جداول التباين المقيسة — نهاري</h2>
+  <table class='ct'><tr><th>الزوج</th><th>أمامية</th><th>خلفية</th><th>النسبة</th><th>المطلوب</th><th>النتيجة</th></tr>
+<tr><td>ink on canvas (body)</td><td><span class='sw' style='background:#231A14'></span>#231A14</td><td><span class='sw' style='background:#FAF6F1;border:1px solid #999'></span>#FAF6F1</td><td><b>15.88:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on surface (body)</td><td><span class='sw' style='background:#231A14'></span>#231A14</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>17.08:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on group (body)</td><td><span class='sw' style='background:#231A14'></span>#231A14</td><td><span class='sw' style='background:#F4ECE3;border:1px solid #999'></span>#F4ECE3</td><td><b>14.6:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on surface (secondary)</td><td><span class='sw' style='background:#6D5E52'></span>#6D5E52</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.23:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on canvas (secondary)</td><td><span class='sw' style='background:#6D5E52'></span>#6D5E52</td><td><span class='sw' style='background:#FAF6F1;border:1px solid #999'></span>#FAF6F1</td><td><b>5.79:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on group (secondary)</td><td><span class='sw' style='background:#6D5E52'></span>#6D5E52</td><td><span class='sw' style='background:#F4ECE3;border:1px solid #999'></span>#F4ECE3</td><td><b>5.32:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>inkFaint on surface (timestamps 12.5px)</td><td><span class='sw' style='background:#7A6A5C'></span>#7A6A5C</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>5.19:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>inkFaint on canvas</td><td><span class='sw' style='background:#7A6A5C'></span>#7A6A5C</td><td><span class='sw' style='background:#FAF6F1;border:1px solid #999'></span>#FAF6F1</td><td><b>4.83:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>onBrand on brand.fill (button text)</td><td><span class='sw' style='background:#2B130A'></span>#2B130A</td><td><span class='sw' style='background:#D96A45;border:1px solid #999'></span>#D96A45</td><td><b>5.08:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>brand.deep on surface (brand text)</td><td><span class='sw' style='background:#A03A1D'></span>#A03A1D</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.74:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>brand.deep on canvas (brand text)</td><td><span class='sw' style='background:#A03A1D'></span>#A03A1D</td><td><span class='sw' style='background:#FAF6F1;border:1px solid #999'></span>#FAF6F1</td><td><b>6.26:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>trust on surface (link/nav text)</td><td><span class='sw' style='background:#1F5E8C'></span>#1F5E8C</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.91:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>trust on canvas</td><td><span class='sw' style='background:#1F5E8C'></span>#1F5E8C</td><td><span class='sw' style='background:#FAF6F1;border:1px solid #999'></span>#FAF6F1</td><td><b>6.42:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>trust on trustTint</td><td><span class='sw' style='background:#1F5E8C'></span>#1F5E8C</td><td><span class='sw' style='background:#E3EEF6;border:1px solid #999'></span>#E3EEF6</td><td><b>5.87:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>pos on surface</td><td><span class='sw' style='background:#1E6E42'></span>#1E6E42</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.24:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>pos on posTint</td><td><span class='sw' style='background:#1E6E42'></span>#1E6E42</td><td><span class='sw' style='background:#E6F2EA;border:1px solid #999'></span>#E6F2EA</td><td><b>5.43:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>posOn on posTint (dark ink on tint chip)</td><td><span class='sw' style='background:#0F3320'></span>#0F3320</td><td><span class='sw' style='background:#E6F2EA;border:1px solid #999'></span>#E6F2EA</td><td><b>12.05:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>neg on surface</td><td><span class='sw' style='background:#B32318'></span>#B32318</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.62:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>neg on negTint</td><td><span class='sw' style='background:#B32318'></span>#B32318</td><td><span class='sw' style='background:#FBEAE7;border:1px solid #999'></span>#FBEAE7</td><td><b>5.69:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>negOn on negTint (dark ink on tint chip)</td><td><span class='sw' style='background:#3A0C07'></span>#3A0C07</td><td><span class='sw' style='background:#FBEAE7;border:1px solid #999'></span>#FBEAE7</td><td><b>14.59:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>att on surface</td><td><span class='sw' style='background:#8A5300'></span>#8A5300</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.33:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>att on attTint</td><td><span class='sw' style='background:#8A5300'></span>#8A5300</td><td><span class='sw' style='background:#FAEEDA;border:1px solid #999'></span>#FAEEDA</td><td><b>5.52:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>attOn on attTint (dark ink on tint chip)</td><td><span class='sw' style='background:#2E1D00'></span>#2E1D00</td><td><span class='sw' style='background:#FAEEDA;border:1px solid #999'></span>#FAEEDA</td><td><b>14.17:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>onBrand on brand.fill (hero number, large)</td><td><span class='sw' style='background:#2B130A'></span>#2B130A</td><td><span class='sw' style='background:#D96A45;border:1px solid #999'></span>#D96A45</td><td><b>5.08:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on brand.fill (hero focus outline, light)</td><td><span class='sw' style='background:#231A14'></span>#231A14</td><td><span class='sw' style='background:#D96A45;border:1px solid #999'></span>#D96A45</td><td><b>4.96:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>fieldBorder on surface (>=3 ui)</td><td><span class='sw' style='background:#937F6C'></span>#937F6C</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>3.82:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>focus on surface (focus ring >=3)</td><td><span class='sw' style='background:#A03A1D'></span>#A03A1D</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.74:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>focus on canvas (focus ring >=3)</td><td><span class='sw' style='background:#A03A1D'></span>#A03A1D</td><td><span class='sw' style='background:#FAF6F1;border:1px solid #999'></span>#FAF6F1</td><td><b>6.26:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on navSurface (nav label)</td><td><span class='sw' style='background:#231A14'></span>#231A14</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>17.08:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on navSurface (inactive tab)</td><td><span class='sw' style='background:#6D5E52'></span>#6D5E52</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>6.23:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>brand.fill on navSurface (active tab icon, ui)</td><td><span class='sw' style='background:#D96A45'></span>#D96A45</td><td><span class='sw' style='background:#FFFFFF;border:1px solid #999'></span>#FFFFFF</td><td><b>3.44:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+</table>
+  <h2 class="bt" style="margin-top:10px">ليلي</h2>
+  <table class='ct'><tr><th>الزوج</th><th>أمامية</th><th>خلفية</th><th>النسبة</th><th>المطلوب</th><th>النتيجة</th></tr>
+<tr><td>ink on canvas (body)</td><td><span class='sw' style='background:#F4EBE1'></span>#F4EBE1</td><td><span class='sw' style='background:#1E1712;border:1px solid #999'></span>#1E1712</td><td><b>15.02:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on surface (body)</td><td><span class='sw' style='background:#F4EBE1'></span>#F4EBE1</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>13.67:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on group (body)</td><td><span class='sw' style='background:#F4EBE1'></span>#F4EBE1</td><td><span class='sw' style='background:#33271E;border:1px solid #999'></span>#33271E</td><td><b>12.29:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on surface (secondary)</td><td><span class='sw' style='background:#C4B2A3'></span>#C4B2A3</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>7.86:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on canvas (secondary)</td><td><span class='sw' style='background:#C4B2A3'></span>#C4B2A3</td><td><span class='sw' style='background:#1E1712;border:1px solid #999'></span>#1E1712</td><td><b>8.63:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on group (secondary)</td><td><span class='sw' style='background:#C4B2A3'></span>#C4B2A3</td><td><span class='sw' style='background:#33271E;border:1px solid #999'></span>#33271E</td><td><b>7.07:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>inkFaint on surface (timestamps 12.5px)</td><td><span class='sw' style='background:#A08D7E'></span>#A08D7E</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>5.07:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>inkFaint on canvas</td><td><span class='sw' style='background:#A08D7E'></span>#A08D7E</td><td><span class='sw' style='background:#1E1712;border:1px solid #999'></span>#1E1712</td><td><b>5.57:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>onBrand on brand.fill (button text)</td><td><span class='sw' style='background:#2B130A'></span>#2B130A</td><td><span class='sw' style='background:#E58254;border:1px solid #999'></span>#E58254</td><td><b>6.38:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>brand.deep on surface (brand text)</td><td><span class='sw' style='background:#F09A6F'></span>#F09A6F</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>7.33:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>brand.deep on canvas (brand text)</td><td><span class='sw' style='background:#F09A6F'></span>#F09A6F</td><td><span class='sw' style='background:#1E1712;border:1px solid #999'></span>#1E1712</td><td><b>8.05:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>trust on surface (link/nav text)</td><td><span class='sw' style='background:#7FB3DA'></span>#7FB3DA</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>7.18:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>trust on canvas</td><td><span class='sw' style='background:#7FB3DA'></span>#7FB3DA</td><td><span class='sw' style='background:#1E1712;border:1px solid #999'></span>#1E1712</td><td><b>7.89:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>trust on trustTint</td><td><span class='sw' style='background:#7FB3DA'></span>#7FB3DA</td><td><span class='sw' style='background:#22333F;border:1px solid #999'></span>#22333F</td><td><b>5.8:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>pos on surface</td><td><span class='sw' style='background:#6FC492'></span>#6FC492</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>7.66:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>pos on posTint</td><td><span class='sw' style='background:#6FC492'></span>#6FC492</td><td><span class='sw' style='background:#1B3226;border:1px solid #999'></span>#1B3226</td><td><b>6.52:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>posOn on posTint (dark ink on tint chip)</td><td><span class='sw' style='background:#DFF3E6'></span>#DFF3E6</td><td><span class='sw' style='background:#1B3226;border:1px solid #999'></span>#1B3226</td><td><b>11.82:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>neg on surface</td><td><span class='sw' style='background:#F09A8C'></span>#F09A8C</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>7.45:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>neg on negTint</td><td><span class='sw' style='background:#F09A8C'></span>#F09A8C</td><td><span class='sw' style='background:#3B1D17;border:1px solid #999'></span>#3B1D17</td><td><b>7.06:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>negOn on negTint (dark ink on tint chip)</td><td><span class='sw' style='background:#FBE7E3'></span>#FBE7E3</td><td><span class='sw' style='background:#3B1D17;border:1px solid #999'></span>#3B1D17</td><td><b>12.84:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>att on surface</td><td><span class='sw' style='background:#E5B96A'></span>#E5B96A</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>8.81:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>att on attTint</td><td><span class='sw' style='background:#E5B96A'></span>#E5B96A</td><td><span class='sw' style='background:#332711;border:1px solid #999'></span>#332711</td><td><b>7.98:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>attOn on attTint (dark ink on tint chip)</td><td><span class='sw' style='background:#F8ECD2'></span>#F8ECD2</td><td><span class='sw' style='background:#332711;border:1px solid #999'></span>#332711</td><td><b>12.45:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>onBrand on brand.fill (hero number, large)</td><td><span class='sw' style='background:#2B130A'></span>#2B130A</td><td><span class='sw' style='background:#E58254;border:1px solid #999'></span>#E58254</td><td><b>6.38:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>onBrand on brand.fill (hero focus outline, dark)</td><td><span class='sw' style='background:#2B130A'></span>#2B130A</td><td><span class='sw' style='background:#E58254;border:1px solid #999'></span>#E58254</td><td><b>6.38:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>fieldBorder on surface (>=3 ui)</td><td><span class='sw' style='background:#83705B'></span>#83705B</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>3.4:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>focus on surface (focus ring >=3)</td><td><span class='sw' style='background:#E58254'></span>#E58254</td><td><span class='sw' style='background:#291F18;border:1px solid #999'></span>#291F18</td><td><b>5.87:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>focus on canvas (focus ring >=3)</td><td><span class='sw' style='background:#E58254'></span>#E58254</td><td><span class='sw' style='background:#1E1712;border:1px solid #999'></span>#1E1712</td><td><b>6.45:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink on navSurface (nav label)</td><td><span class='sw' style='background:#F4EBE1'></span>#F4EBE1</td><td><span class='sw' style='background:#241B15;border:1px solid #999'></span>#241B15</td><td><b>14.34:1</b></td><td>4.5:1</td><td class='pass'>PASS</td></tr>
+<tr><td>ink2 on navSurface (inactive tab)</td><td><span class='sw' style='background:#C4B2A3'></span>#C4B2A3</td><td><span class='sw' style='background:#241B15;border:1px solid #999'></span>#241B15</td><td><b>8.24:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+<tr><td>brand.fill on navSurface (active tab icon, ui)</td><td><span class='sw' style='background:#E58254'></span>#E58254</td><td><span class='sw' style='background:#241B15;border:1px solid #999'></span>#241B15</td><td><b>6.16:1</b></td><td>3.0:1</td><td class='pass'>PASS</td></tr>
+</table>
+  <p class="meta">قياس WCAG 2.x (1.4.3/1.4.11) لكل زوج تشغيلي في الوضعين. لا تقريب نسبة فاشلة إلى ناجحة.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">سلم الطباعة — أمثلة عربية فعلية</h2>
+  <div class="spec-row"><span class="lbl">رقم الهيرو — 44px/700</span><p class="hero__result num" style="color:var(--ink)"><bdi dir="ltr">+42.50</bdi> <span style="font-size:20px">د.أ</span></p></div><div class="spec-row"><span class="lbl">عنوان شاشة — 18px/700</span><p style="font-size:18px;font-weight:700">حلويات ليان — مشروعي الآن</p></div><div class="spec-row"><span class="lbl">عنوان وحدة — 15px/700</span><p style="font-size:15px;font-weight:700">الاستحقاقات — لي عند العملاء</p></div><div class="spec-row"><span class="lbl">متن — 15.5px/400</span><p style="font-size:15.5px">بعد تسجيل المبيعات والمصاريف والتكاليف، تظهر نتيجة مشروعك بشكل كامل وواضح.</p></div><div class="spec-row"><span class="lbl">ثانوي — 13px/400</span><p style="font-size:13px;color:var(--ink2)">أم محمد عليها 25.00 د.أ منذ 3 أيام — بانتظار التحصيل</p></div>
+  <p class="meta">IBM Plex Sans Arabic (محلي woff2) — أرقام لاتينية موحدة العرض افتراضيًا، معزولة bidi. لا تباعد أحرف عربي. الحد الأدنى للنص الحرج 13px.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">الأسطح والعمق (4 مستويات)</h2>
+  <div class="grid2">
+    <div style="background:var(--canvas);border:1px dashed var(--field-border);border-radius:14px;padding:14px"><b>1 · Canvas</b><p class="meta">بيئة الصفحة — لا يحمل نصًا حرجًا مباشرًا.</p></div>
+    <div style="background:var(--group);border-radius:14px;padding:14px"><b>2 · Group</b><p class="meta">تجميع توني مفتوح — مقسّمات للصفوف المتجانسة.</p></div>
+    <div style="background:var(--surface);border:1px solid var(--divider);border-radius:14px;padding:14px"><b>3 · Reading</b><p class="meta">قراءة ونماذج — حواف بلا ظل.</p></div>
+    <div style="background:var(--surface);border:1px solid var(--divider);border-radius:14px;padding:14px;box-shadow:0 14px 34px rgba(0,0,0,.18)"><b>4 · Overlay</b><p class="meta">الأوراق والحوار — المستوى الوحيد المسموح له ظل.</p></div>
+  </div>
+</section>
+
+<section class="blk">
+  <h2 class="bt">منطق الكتلة اللونية (Color Blocking)</h2>
+  <p><b>Fill كامل:</b> الهيرو وزر الفعل الأساسي وحقل المبلغ فقط. <b>Tint:</b> الإشارة والمقاييس وشرائح الحالة. <b>Border:</b> أسطح القراءة والسجلات. <b>الإشارة لا تستخدم Fill أبدًا.</b></p>
+  <p class="meta">ميزانية الطاقة: تعبئة مشبعة = 3 نقاط، تينت = 2، لمسة = 1؛ الرئيسية 5-6، المالية 3-4، السجلات 1-2. حقل مهيمن واحد في initial viewport — قوة QAB وزنية (حبر) لا كرومية.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">عائلة الأيقونات (12 مفهومًا مطلوبًا)</h2>
+  <div class="iconrow"><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8h12l1.5 11.5a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>بيع</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v10"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg></span>مصروف</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h8a1 1 0 0 1 1 1v15l-5-3-5 3V5a1 1 0 0 1 1-1z"/><path d="M9.5 8.5h5"/><path d="M9.5 11.5h5"/></svg></span>طلب</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 13a4 4 0 1 0 4-7"/><path d="M9 13v-1.5"/><path d="M9 13h1.5"/><path d="M15 6h-4 4z"/><path d="M4 20c1.5-2 3.5-3 6-3"/></svg></span>تحصيل</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7h18v10H3z"/><path d="M3 7l2-3h14l2 3"/><path d="M12 14.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg></span>الكاش</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5h10"/><path d="M7 5v6a5 5 0 0 0 10 0V5"/><path d="M12 16v3"/><path d="M9 19h6"/></svg></span>الدين</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 1 9-9"/><path d="M12 12l4-4"/><path d="M12 3V1.5"/><path d="M3 12H1.5"/><path d="M21 12h1.5"/></svg></span>النتيجة</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 10.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M15 19.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M12 7.5v9"/></svg></span>التكلفة</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7a2 2 0 0 1 2-2h11v2"/><path d="M4 7v10a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H4z"/><path d="M16.5 13.5h.01"/></svg></span>محفظة</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h11v9H3z"/><path d="M14 9h4l3 3v3h-7"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"/><path d="M17.5 19a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"/></svg></span>مورد</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 6h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/><path d="M8 3.5V7"/><path d="M16 3.5V7"/><path d="M4.5 11h15"/><path d="M8.5 15h3"/></svg></span>موعد</div><div class="ic"><span class="bx"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8.5 12 5l8 3.5v7L12 19l-8-3.5v-7z"/><path d="M4 8.5 12 12l8-3.5"/><path d="M12 12v7"/></svg></span>تسليم</div></div>
+  <p class="meta">عائلة واحدة (Lucide-style stroke) — مرآة للاتجاهية فقط، وزن أثقل + حاوية للتبويب النشط والفعل الأساسي.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">التسلسل الهرمي للأزرار والتحكم</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <button class="btn btn--primary"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8h12l1.5 11.5a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>سجّل بيعًا</button>
+    <button class="btn btn--secondary">حصّل المبلغ</button>
+    <button class="btn btn--ghost">راجع الطلبات</button>
+    <button class="btn btn--text">تراجع</button>
+  </div>
+  <p class="meta">عقد اللمس 44–48px · مؤشر تركيز 3px بتباين ≥3:1 مقيس · حالة الضغط فورية.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">عائلة الحالات الحرجة (نص + إشارة ثانية دائمًا)</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <span class="state-chip state-chip--pos"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg>نتيجة موجبة</span>
+    <span class="state-chip state-chip--neg"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14"/><path d="m18 13-6 6-6-6"/></svg>نتيجة سالبة</span>
+    <span class="state-chip state-chip--att"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4a6 6 0 0 0-6 6v3.5L4.5 16v1h15v-1L18 13.5V10a6 6 0 0 0-6-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>النتيجة غير مكتملة</span>
+    <span class="late-chip"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M12 7.5V12l3.5 2.5"/></svg>متأخر يومًا واحدًا</span>
+    <span class="stage-chip stage-chip--delivered"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 13 4.5 4.5L19 7.5"/></svg>تم التسليم</span>
+    <span class="tag"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4a6 6 0 0 0-6 6v3.5L4.5 16v1h15v-1L18 13.5V10a6 6 0 0 0-6-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>خطأ تحقق</span>
+  </div>
+  <p class="meta">اللون ليس أبدًا الوسيلة الوحيدة (IX-D05) — أيقونة + نص + وزن/حد لكل حالة.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">نماذج المكوّنات المميزة</h2>
+  <div class="grid2">
+    <div>
+      <p class="meta" style="margin-bottom:6px">Business Status Hero (موجبة — التجهيز A)</p>
+      <section class="hero">
+        <div class="hero__head"><span class="hero__label">وضع مشروعك اليوم</span>
+        <span class="state-chip state-chip--pos"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg>نتيجة موجبة</span></div>
+        <p class="hero__result num"><bdi dir="ltr">+42.50</bdi> <span style="font-size:20px">د.أ</span></p>
+        <p class="hero__explain">بعد تسجيل المبيعات والمصاريف والتكاليف</p>
+      </section>
+    </div>
+    <div>
+      <p class="meta" style="margin-bottom:6px">Business Status Hero (غير مكتملة — التجهيز B، بلا رقم)</p>
+      <section class="hero">
+        <div class="hero__head"><span class="hero__label">نتيجة مشروعك</span>
+        <span class="state-chip state-chip--att"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4a6 6 0 0 0-6 6v3.5L4.5 16v1h15v-1L18 13.5V10a6 6 0 0 0-6-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>النتيجة غير مكتملة</span></div>
+        <p class="hero__reason">عمليتا بيع تحتاجان تسجيل التكلفة</p>
+        <div class="hero__meter"><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg meter__seg--on"></span><span class="meter__seg"></span><span class="meter__seg"></span><span class="meter__count num">8 من 10</span></div>
+        <div class="hero__supporting"><span class="s-label">مبيعات اليوم:</span><span class="s-value num"><bdi dir="ltr">120.00</bdi> <span class="cur">د.أ</span></span></div>
+      </section>
+    </div>
+    <div>
+      <p class="meta" style="margin-bottom:6px">Micro Signal (تينت فقط — حالة ← سبب ← فعل)</p>
+      <section class="signal">
+        <span class="signal__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4a6 6 0 0 0-6 6v3.5L4.5 16v1h15v-1L18 13.5V10a6 6 0 0 0-6-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span>
+        <div class="signal__body">
+          <p class="signal__status">عندك مبلغ يحتاج تحصيلًا</p>
+          <p class="signal__reason">أم محمد عليها <bdi dir="ltr">25.00</bdi> د.أ منذ 3 أيام</p>
+          <div class="signal__action"><button class="btn btn--secondary btn--sm">حصّل المبلغ</button></div>
+        </div>
+      </section>
+    </div>
+    <div>
+      <p class="meta" style="margin-bottom:6px">Quick Action Bar (وزن حبري، بيع أساسي)</p>
+      <section class="qab"><button class="qab__btn qab__btn--primary"><span class="qab__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8h12l1.5 11.5a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span class="qab__label">بيع</span></button><button class="qab__btn"><span class="qab__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v10"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg></span><span class="qab__label">مصروف</span></button><button class="qab__btn"><span class="qab__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h8a1 1 0 0 1 1 1v15l-5-3-5 3V5a1 1 0 0 1 1-1z"/><path d="M9.5 8.5h5"/><path d="M9.5 11.5h5"/></svg></span><span class="qab__label">طلب</span></button><button class="qab__btn"><span class="qab__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 13a4 4 0 1 0 4-7"/><path d="M9 13v-1.5"/><path d="M9 13h1.5"/><path d="M15 6h-4 4z"/><path d="M4 20c1.5-2 3.5-3 6-3"/></svg></span><span class="qab__label">تحصيل</span></button><button class="qab__btn qab__btn--more"><span class="qab__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h.01"/><path d="M12 12h.01"/><path d="M19 12h.01"/></svg></span><span class="qab__label">المزيد</span></button></section>
+    </div>
+  </div>
+</section>
+
+<section class="blk">
+  <h2 class="bt">Success Impact — القصة المتسلسلة</h2>
+  <div class="grid2">
+    <div class="impact-preview"><p class="impact-preview__title"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 1 9-9"/><path d="M12 12l4-4"/><path d="M12 3V1.5"/><path d="M3 12H1.5"/><path d="M21 12h1.5"/></svg>شو رح يصير؟</p>
+    <p class="impact-preview__body">رح تزيد المبيعات <bdi dir="ltr">25.00</bdi> د.أ، وينضاف المبلغ إلى درج المحل.</p></div>
+    <div class="success-card">
+      <span class="success-card__badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 13 4.5 4.5L19 7.5"/></svg></span>
+      <p class="success-card__status">تم تسجيل البيع</p>
+      <p class="success-card__amount num"><bdi dir="ltr">25.00</bdi> <span style="font-size:16px">د.أ</span></p>
+      <p class="success-card__dest">أُضيف المبلغ إلى درج المحل</p>
+      <div class="success-impact"><span class="success-impact__label">الكاش المسجل الآن</span>
+      <span class="success-impact__value num"><bdi dir="ltr">161.00</bdi> <span style="font-size:14px">د.أ</span></span></div>
+      <p class="success-ref">عملية #142 · تراجع</p>
+    </div>
+  </div>
+  <p class="meta">تسلسل إلزامي: رد فعل فوري ← حالة حفظ تمنع التكرار ← تأكيد بالمبلغ والوجهة ← عودة للسياق ← إبراز القيمة المتأثرة. بلا confetti/عدّاد/نبض. الحركة تخضع لـreduced-motion.</p>
+</section>
+
+<section class="blk">
+  <h2 class="bt">علاقة النهاري والليلي</h2>
+  <p>ليل دافئ: قاعدة بنية-فحمية عميقة، تيراكوتا أفتح للنظر بلا وهج، حليب فاتح للنص، والأدوار الدلالية معاد قياسها كاملة.</p>
+  <p class="meta">ليس انعكاسًا حرفيًا: التشبع مخفوف، الأدوار الدلالية الثمانية مميزة، وكل الأزواج أعيد قياسها (الجدول أعلاه).</p>
+</section>
+</div>
+</body>
+</html>
