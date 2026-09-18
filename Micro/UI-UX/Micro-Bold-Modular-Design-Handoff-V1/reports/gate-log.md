@@ -81,4 +81,4 @@ Refined candidate system + proofs: 320/390/430 responsive, 200% text, dark mode,
 
 ## Gate 7 — Final handoff — **PASS** (2026-09-18)
 
-Final reports, manifest, exports, PR, and Documents mirror completed per file 12. See `reports/final-handoff.md` and `DELIVERY-MANIFEST.md`.
+Final reports, manifest, exports, and the Documents mirror (branch `reports/micro-bold-modular-v1`, pushed and verified) completed per file 12. Two access actions remain owner-side: opening the Documents PR from the pushed branch (compare URL recorded in the manifest) and pushing/PR-ing the primary branch once write access is granted — the complete work sits on local `design/autonomous-v1` @ `6efba95`. See `reports/final-handoff.md` and the `DELIVERY-MANIFEST.md` in the mirror.

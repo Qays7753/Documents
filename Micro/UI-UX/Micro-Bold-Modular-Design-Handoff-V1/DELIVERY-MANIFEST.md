@@ -12,13 +12,27 @@
 |---|---|
 | Primary design repository | `https://github.com/Qays7753/Micro-Bold-Modular-Design-Handoff-V1` |
 | Primary branch (local, complete) | `design/autonomous-v1` @ `6efba95429054dfb6f1b902517cce4e0901f1c53` |
-| Primary pull request | **Not opened — blocked** (see below) |
+| Primary pull request | **Not opened — token lacks write scope for that repo** (see Blocker) |
 | Documents repository | `https://github.com/Qays7753/Documents` |
 | Documents branch | `reports/micro-bold-modular-v1` (this delivery) |
-| Documents pull request | Opened to `main` — see the pull-request tab of this branch (not merged) |
+| Documents branch pushed | `reports/micro-bold-modular-v1` — pushed and verified on the remote |
 | Isolated destination root | `Micro/UI-UX/Micro-Bold-Modular-Design-Handoff-V1/` (nothing written outside it) |
 
-## ⚠ Blocker — primary repository push
+## ⚠ Blockers — two precise owner actions
+
+**A. Primary repository push (blocked):** the supplied write token authenticates as `Qays7753` but its fine-grained scope does **not** include `Micro-Bold-Modular-Design-Handoff-V1` (push returned `403 Permission denied`). Per the file-12 fallback rule, all unaffected work was completed and mirrored here, and the blocker is documented rather than worked around.
+
+**B. Pull-request creation (blocked):** the token can push branches but its scope does not include the pull-requests permission (API returned `403 Resource not accessible by personal access token`). Both pull requests therefore need one owner click / one scope grant.
+
+**Smallest owner actions:**
+1. Documents PR (30 seconds): open **https://github.com/Qays7753/Documents/compare/main...reports/micro-bold-modular-v1** and click «Create pull request» (suggested title/body are in the branch's delivery context above), or grant the token `pull-requests: write`.
+2. Primary PR: grant write access to `Qays7753/Micro-Bold-Modular-Design-Handoff-V1`, push the existing local `design/autonomous-v1` branch (commit `6efba95`), and open its PR to `main`.
+
+No design work is missing — only these two access actions.
+
+---
+
+## Original blocker note (retained for the record)
 
 The supplied write token authenticates as `Qays7753` but its fine-grained scope does **not** include `Micro-Bold-Modular-Design-Handoff-V1` (push attempt returned `403 Permission denied`). Per the file-12 fallback rule, all unaffected work was completed and mirrored here, and the blocker is documented rather than worked around.
 

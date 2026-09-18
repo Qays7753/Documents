@@ -47,7 +47,7 @@ See `deliverables/05-design-system-candidate/DESIGN-SYSTEM-CANDIDATE.md` §6 (to
 
 - All work committed on `design/autonomous-v1` with milestone commits; `main` untouched; no secrets or customer data committed (verified: token never written to any file — see §6).
 - The Micro production repository was never accessed or modified.
-- The Documents mirror follows file 12 exactly: branch `reports/micro-bold-modular-v1`, isolated root `Micro/UI-UX/Micro-Bold-Modular-Design-Handoff-V1/`, PR to `main` without merge.
+- The Documents mirror follows file 12: branch `reports/micro-bold-modular-v1` (pushed and verified on the remote), isolated root `Micro/UI-UX/Micro-Bold-Modular-Design-Handoff-V1/`, nothing else touched. The token could not create pull requests (scope) nor push the primary repo (scope); both one-click owner actions are recorded in the mirror's `DELIVERY-MANIFEST.md`, including the compare URL for the Documents PR.
 
 ## 6. Security note
 
